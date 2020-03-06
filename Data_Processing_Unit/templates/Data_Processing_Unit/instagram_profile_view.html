@@ -1,0 +1,226 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+<DOCTYPE html>
+
+    {% load static %}
+
+<html>
+
+	<body>
+		{% block system_content_block %}
+		<!-- code bwtween  -->
+		<div class="container-fluid bg-white">
+
+            </div>
+			<div class="row pt-5 pb-5  border border-white">
+				<div class="col-md-3">
+
+                    <div id="profile_image" class="" style="height: 100%;width: 100%">
+                                <img src="{{ person.profile_picture_url }}" height="300px" width="300px" style="border-radius:50%;border:2px solid black;"/>
+                             </div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Name:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Instgaram account:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">instagram followers:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">instagram following:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Suspicious :</span>		</li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.fullname }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">.{{ person.author_account }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.followed_by }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.follow }}</strong></li>
+						<li class="list-inline-item p-2">	<strong class="text-dark">{{ analysis_instance.suspicious }}</strong></li>
+					</ul>
+					</div>
+					</div>
+
+
+
+
+
+
+				</div>
+
+
+
+
+					<div class="col-md-4">
+					<div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Profile ID</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Business Account</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Joined Recently</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Is Varified</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Fake </span>		</li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.person_id }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.is_business_account }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.is_joined_recently }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.is_verified }}</strong></li>
+						<li class="list-inline-item p-2">	<strong class="text-dark">{{ analysis_instance.fake_profile }}</strong></li>
+					</ul>
+					</div>
+					</div>
+
+
+
+
+
+
+				</div>
+
+
+
+			</div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9"><div class="profile_summary border border-success  ml-2" style="border-radius:0px 20px 0px 20px!important;border:4px solid !important " style="position:absolute;top:-50px">
+					<div class="p-2">
+						<p class="text-dark font-weight-bold text-center">{{ person.profile_summary }}</p>
+					</div>
+				</div></div>
+        </div>
+
+
+			<!-- third row  -->
+			<div class="row mt-5">
+
+
+				<!-- start of cards  -->
+
+
+
+
+
+
+
+
+
+
+			</div>
+			<!-- end third row  -->
+
+
+
+			<!-- fifth row  -->
+			<div class="recent_Instagram Posts row mt-5 mb-5 pb-5">
+				<div class="col-md-12 text-center pb-5 ">
+						<p class="btn" style="font-size: 25px!important; background-color: #0E2355;color:white" >Most Interacted Posts   </p>
+				</div>
+
+
+                {% for post in person.posts %}
+				  <div class="col-md-2 mt-1 mb-1 ">
+				 <div class="card border border-primary" style="border-radius:25px 25px 25px 25px">
+
+
+
+
+
+                     <div class="card-body">
+                                <div class="  float-right" style="border-radius: 50%;height: 60;width: 60;justify-content: center;align-items: center;display: flex;">
+                                    <i class="fab fa-instagram float-right pull-right  text-dark  mt-0 pt-0"></i>
+
+							</div>
+
+							<p class="card-text  text-black " style="font-size:11px;font-weight: bold;">{{ post.caption }}</p>
+                          <img src="{{ post.display_url }}"  style="height:150px!important; width:100%!important">
+							 <a href="{{ post.post_link }}" class="btn btn-primary btn-sm">view on instagram</a>
+						</div>
+
+
+					</div>
+
+				</div>
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+			</div>
+
+
+
+
+
+
+			<!-- code between  -->
+			<div class="row fixed-bottom">
+				<div class="col-md-12 text-center bg-dark" style="background-color: black;">
+					<p class="text-dark font-weight-bold ">Osint.com.pk</p>
+				</div>
+			</div>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<!-- Bootstrap tooltips -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+			<!-- Bootstrap core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<!-- MDB core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/series-label.js"></script>
+			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+			<script src="https://code.highcharts.com/modules/export-data.js"></script>
+{% endblock system_content_block %}
+		</body>
+	</html>

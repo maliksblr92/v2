@@ -1,0 +1,887 @@
+<!-- Styles -->
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title></title>
+<!-- bootstrap cdns  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://www.highcharts.com/media/com_demo/css/highslide.css" />
+
+<!-- tailewind css -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.4/tailwind.min.css" integrity="sha256-bCQF5OufWlWM/MW9mCb/eDibvff1W8BNq9ZK69C8FSI=" crossorigin="anonymous" />
+  <!-- map style  -->
+  <style>
+#chartdiv1 {
+  width: 100%;
+  height: 600px;
+max-width:100%;
+
+
+}
+
+
+
+html {
+  height: 100%;
+    min-height: 100%;
+  scrollbar-face-color: #646464;
+  scrollbar-base-color: #646464;
+  scrollbar-3dlight-color: #646464;
+  scrollbar-highlight-color: #646464;
+  scrollbar-track-color: #000;
+  scrollbar-arrow-color: #000;
+  scrollbar-shadow-color: #646464;
+  scrollbar-dark-shadow-color: #646464;
+ overflow-y: hidden;
+}
+
+::-webkit-scrollbar { width: 8px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #666; }
+::-webkit-scrollbar-track {  background-color: #646464;}
+::-webkit-scrollbar-track-piece { background-color: #000;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #646464;}}
+::-webkit-resizer { background-color: #666;}
+body {
+
+ height: 100%;
+    min-height: 100%;
+      max-height: 100%;
+
+
+}
+container-fluid{
+     height: 100%;
+    min-height: 100%;
+      max-height: 100%;
+}
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+
+
+
+.container {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+a:hover{
+    color:#47c78a!important;
+    font-size:25px!important;
+}
+tr:hover{
+    color:#47c78a!important;
+    font-size:25px!important;
+}
+
+
+
+table,
+thead,
+tr,
+tbody,
+th,
+td {
+  text-align: center;
+}
+.table,th{
+    border:0.5px solid black!important;
+}
+.table td {
+  text-align: center;
+    padding-top: 0px!important;
+     padding-bottom: 0px!important;
+        border:0.5px solid black!important;
+}
+</style>
+
+</head>
+
+<!-- HTML -->
+
+
+<body  >
+
+
+
+
+<div class="container-fluid  bg-gray-900 " >
+
+<div class="row">
+<div class="col-md-3 m-0 p-0 ">
+<div class="row">
+    <!-- twitter card  -->
+
+
+    <!-- twitter card  -->
+<div class="col-md-12 " style="height: 50%">
+<!-- table 1 -->
+<div class="card ">
+<div class="card-header      text-center "style="background-color:#0E2355">
+<span class=" text-white  "style="font-size:20px;font-weight:bold">World Top Trends  </span>
+</div>
+<div class="card-body p-0 m-0  " style="background-color: #212529;">
+<!-- table -->
+<div class="table-wrapper-scroll-y my-custom-scrollbar"  style="height: 380px;overflow: scroll;">
+        <table class="table  table-fixed ">
+          <thead class="m-0 p-0">
+    <tr class="text-dark font-weight-bold m-0 p-0 " >
+
+                <th scope="col" style="width: 75%;" class="text-white font-weight-bold" style="font-size: 18px;">Hastag</th>
+                <th scope="col" style="width: 25%;" class="text-white font-weight-bold" align="right" style="font-size: 18px;">Count</th>
+
+    </tr>
+  </thead>
+            <tbody  class="text-white font-weight-bold " id="renderWorldTwitter" >
+
+
+
+
+             </tbody>
+
+
+  </table>
+
+
+</div>
+<!-- table end  -->
+</div>
+<div class="card-footer bg-gray-900 " id="renderWorldTwitterUpdateTime">
+<span class="float-right font-weight-bold"style="color:#dd6b20;"><i class="fas fa-sync text-primary fa-spin"></i>  Syncing Server  </span>
+</div>
+</div>
+
+
+
+<!-- end hashtag table  -->
+</div>
+<!-- end twitter card  -->
+
+
+
+
+
+
+
+
+    <!-- twitter card  -->
+<div class="col-md-12 mt-2">
+<div class="card ">
+<div class="card-header      text-center "style="background-color:#0E2355">
+<span class=" text-white  "style="font-size:20px;font-weight:bold"> Top Trends <span id="CountryName"style="font-size:20px;font-weight:bold;color:#dd6b20;;"></span>  </span>
+</div>
+<div class="card-body p-0 m-0 "  style="background-color: #212529;">
+<!-- table -->
+<div class="table-wrapper-scroll-y my-custom-scrollbar"  style="height: 380px;overflow: scroll;">
+        <table class="table table-hover table-fixed ">
+          <thead class="m-0 p-0">
+    <tr class="text-dark font-weight-bold m-0 p-0 " >
+
+      <th scope="col" style="width: 75%;" class="text-white font-weight-bold" style="font-size: 18px;">Hastag</th>
+      <th scope="col" style="width: 25%;" class="text-white font-weight-bold" align="right" style="font-size: 18px;">Count</th>
+
+    </tr>
+  </thead>
+            <tbody  class="text-white font-weight-bold " id="renderCountryTwitter" >
+
+
+
+
+             </tbody>
+
+
+  </table>
+
+
+</div>
+<!-- table end  -->
+</div>
+<div class="card-footer bg-gray-900 " id="renderCountryTwitterUpdateTime">
+<span class="float-right font-weight-bold"style="color:#dd6b20;"> <i class="fas fa-sync text-primary fa-spin"></i>  Syncing Server  </span>
+</div>
+</div>
+
+
+<!-- end hashtag table  -->
+</div>
+<!-- end twitter card  -->
+
+
+
+</div>
+
+</div>
+<div class="col-md-6 m-0  text-center ">
+		<div class="row ">
+
+
+      <div class="col-md-12 ">
+
+        <div class="row pl-1 pr-1 pb-0 pt-0 ">
+          <div class="col-md-12 text-center  "style="background-color:#0E2355;height:50px;">
+
+            <p class=" text-white d-flex flex-row justify-content-center align-items-center  pt-0" style="font-size: 37px;font-weight: bold;">OwlSense Monitoring Engine </p>
+          </div>
+        </div>
+        <div class="m-0 p-0 " id="chartdiv1"></div>
+      </div>
+
+    </div>
+
+<div class="row mt-0">
+ <div class="col-md-12 text-center d-flex justify-content-center align-items-center "style=" background-color:#0E2355;height:50px">
+     <span class="text-white font-weight-bold "  style="font-size:  20px;">Extraction By Date</span>
+ </div>
+</div>
+
+    <div class="row ">
+     <div class="col-md-12 m-0 p-1 "style="">
+
+<div id="container1" style="height: 280px;" class="m-0 p-0 " ></div>
+
+      </div>
+    </div>
+</div>
+<div class="col-md-3 m-0 p-0 ">
+
+<!-- Card -->
+<div class="card ">
+
+  <div class="card-header   text-center" style="background-color:#0E2355">
+<span class=" text-white  "style="font-size:20px;font-weight:bold">Extraction By Sources  </span>
+</div>
+
+  <!-- Card content -->
+  <div class="card-body m-0 p-0 " >
+
+
+<figure class="highcharts-figure" >
+    <div id="barchart" style="height: 380px;"></div>
+    <p class="highcharts-description">
+
+    </p>
+
+
+</figure>
+  </div>
+
+  <div class="card-footer bg-gray-900 ">
+<span class="float-right font-weight-bold "style="color:#dd6b20;"> <i class=" fas fa-sync text-white fa-spin"></i>  Syncing Server  </span>
+</div>
+
+
+</div>
+<!-- Card -->
+
+
+
+
+
+
+<!-- Card -->
+<div class="card mt-2">
+
+  <div class="card-header text-center" style="background-color:#0E2355">
+<span class=" text-white  "style="font-size:20px;font-weight:bold">
+Average Extraction Time   </span>
+</div>
+
+  <!-- Card content -->
+  <div class="card-body m-0 p-0 " >
+
+
+ <div id="chart1" class="m-0 p-0 " style="height: 380px;"></div>
+  </div>
+
+
+  <div class="card-footer bg-gray-900 ">
+<span class="float-right  font-weight-bold"style="color:#dd6b20;"> <i class="fas fa-sync text-white fa-spin"></i>  Syncing Server  </span>
+</div>
+
+</div>
+<!-- Card -->
+
+
+
+</div>
+</div>
+
+
+</div>
+
+<!-- bootstrap jquery cdns  -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+      <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/modules/series-label.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!-- Additional files for the Highslide popup effect -->
+<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
+<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<!-- Chart code -->
+<script>
+ $(document).ready(function(){
+
+function getTrendsByWorldWide(){
+    console.log("worldwide called ");
+    $('#renderWorldTwitter').empty().append('');
+    $.get("{% url 'Data_Processing_Unit:twitter_trends_worldwide'%}",function(data, status){
+
+
+
+
+
+
+//response = $.parseJSON(this.data);
+$(function() {
+$.each(data,function(i, v) {
+$.each(v,function( ind , val1) {
+
+
+for(var x=0;x<val1.length;x++){
+ var count = val1[x]["tweet count"];
+   var tag = val1[x].Tag;
+
+
+   $('#renderWorldTwitter').append('<tr><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0   " style="font-size: 14px;"><a href="http://192.168.18.19:8000/tags?tag='+tag.replace('#','')+'" style="color:white" target="_blank">' +tag+ '</a></td><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0 ">'+count+'</td></tr>')
+
+}
+var newDate = new Date().toLocaleString();
+var updateSyncTime='<span class="float-right text-info"> <i class="fas fa-sync text-white fa-spin mr-2"></i>Last Sync : '+newDate+'</span>'
+
+ $('#renderWorldTwitterUpdateTime').empty().append(updateSyncTime);
+
+});
+});
+
+
+});
+});
+
+}
+
+setTimeout(getTrendsByWorldWide(),6000);
+
+
+
+
+function gettrendsByCountry(country_i='pakistan'){
+    console.log("country sent "+country_i)
+    $('#CountryName').empty().append('Pakistan');
+$('#renderCountryTwitter').empty().append('');
+$.get("{% url 'Data_Processing_Unit:twitter_trends_country' country='fake' %}".replace(/fake/, country_i), function(data, status){
+
+$(function() {
+$.each(data,function(i, v) {
+$.each(v,function( ind , val) {
+
+console.log(val);
+for(let x=0;x<val.length;x++){
+ let count1 = val[x]["tweet count"];
+
+
+
+   let tag1 = val[x].Tag;
+   $('#renderCountryTwitter').append('<tr><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0   " style="font-size: 14px;"> <a href="http://192.168.18.19:8000/tags?tag='+tag1.replace('#','')+'" style="color:white" target="_blank">' +tag1+ '</a></td><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0 ">'+count1+'</td></tr>')
+
+
+}
+let newDate = new Date().toLocaleString();
+let updateSyncTime='<span class="float-right text-info"> <i class="fas fa-sync text-white fa-spin mr-2"></i>Last Sync : '+newDate+'</span>'
+  $('#renderCountryTwitterUpdateTime').empty().append(updateSyncTime);
+
+
+});
+});
+
+
+});
+});
+}
+
+
+gettrendsByCountry();
+
+
+ });
+
+
+
+
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv1", am4maps.MapChart);
+
+// Set map definition
+chart.geodata = am4geodata_worldLow;
+
+// Set projection
+chart.projection = new am4maps.projections.Orthographic();
+chart.panBehavior = "rotateLongLat";
+chart.deltaLatitude = -20;
+chart.padding(50,50,50,50);
+chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#aadaff");
+chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 1;
+// limits vertical rotation
+chart.adapter.add("deltaLatitude", function(delatLatitude){
+    return am4core.math.fitToRange(delatLatitude, -90, 90);
+})
+
+// Create map polygon series
+var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+
+// Make map load polygon (like country names) data from GeoJSON
+polygonSeries.useGeodata = true;
+
+// Configure series
+var polygonTemplate = polygonSeries.mapPolygons.template;
+polygonTemplate.tooltipText = "{name}";
+polygonTemplate.fill = am4core.color("#47c78a");
+polygonTemplate.stroke = am4core.color("white");
+polygonTemplate.strokeWidth = 0.9;
+``
+var graticuleSeries = chart.series.push(new am4maps.GraticuleSeries());
+graticuleSeries.mapLines.template.line.stroke = am4core.color("#ffffff");
+graticuleSeries.mapLines.template.line.strokeOpacity = 0.08;
+
+graticuleSeries.fitExtent = false;
+
+
+//var polygonTemplate = polygonSeries.mapPolygons.template;
+polygonTemplate.events.on("hit", function(ev) {
+  // zoom to an object
+  //ev.target.series.chart.zoomToMapObject(ev.target);
+
+  // get object info
+  console.log(ev.target.dataItem.dataContext.name);
+
+  var country = ev.target.dataItem.dataContext.name;
+
+
+
+
+
+
+
+function gettrendsByCountry(country_i=country){
+    console.log("country sent "+country_i)
+    $('#CountryName').empty().append(country_i);
+$('#renderCountryTwitter').empty().append('');
+$.get("{% url 'Data_Processing_Unit:twitter_trends_country' country='fake' %}".replace(/fake/, country_i), function(data, status){
+
+$(function() {
+$.each(data,function(i, v) {
+$.each(v,function( ind , val) {
+
+console.log(val);
+for(let x=0;x<val.length;x++){
+ let count1 = val[x]["tweet count"];
+
+
+   let tag1 = val[x].Tag;
+   $('#renderCountryTwitter').append('<tr><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0   " style="font-size: 14px;"> <a href="http://192.168.18.19:8000/tags?tag='+tag1.replace('#','')+'" style="color:white" target="_blank">' +tag1+ '</a></td><td class="font-weight-bold pl-0 ml-0 pr-0 mr-0 ">'+count1+'</td></tr>')
+
+
+}
+let newDate = new Date().toLocaleString();
+let updateSyncTime='<span class="float-right text-info"> <i class="fas fa-sync text-white fa-spin mr-2"></i>Last Sync : '+newDate+'</span>'
+  $('#renderCountryTwitterUpdateTime').empty().append(updateSyncTime);
+
+
+});
+});
+
+
+});
+});
+}
+gettrendsByCountry(country);
+console.log("country called");
+
+
+
+//start of second request
+
+
+
+});
+
+chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.1;
+chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#ffffff");
+
+// Create hover state and set alternative fill color
+var hs = polygonTemplate.states.create("hover");
+hs.properties.fill = chart.colors.getIndex(0).brighten(-0.5);
+
+let animation;
+setTimeout(function(){
+  animation = chart.animate({property:"deltaLongitude", to:100000}, 20000000);
+}, 3000)
+
+chart.seriesContainer.events.on("down", function(){
+if(animation){
+  animation.stop();
+}
+})
+
+}); // end am4core.ready()
+
+
+</script>
+
+
+
+<!--  -->
+
+<!-- script for bar chart start  -->
+
+
+<script>
+  // Build the chart
+Highcharts.chart('chart1', {
+    colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+  chart: {
+    backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+            stops: [
+                [0, '#2a2a2b'],
+                [1, '#3e3e40']
+            ]
+        },
+
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+
+  title: {
+    text: ''
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        color:'#ffffff',
+        enabled: true,
+
+        itemStyle: {
+            color: '#ffffff'
+        },
+        itemHoverStyle: {
+            color: '#ffffff'
+        },
+        itemHiddenStyle: {
+            color: '#ffffff'
+        },
+        title: {
+            style: {
+                color: '#ffffff',
+
+            }
+
+        }
+      },
+      showInLegend: true
+    }
+  },
+
+  legend: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        itemStyle: {
+            color: '#f0ad4e'
+        },
+        itemHoverStyle: {
+            color: '#FFF'
+        },
+        itemHiddenStyle: {
+            color: '#606063'
+        },
+        title: {
+            style: {
+                color: '#ffffff'
+            }
+        }
+    },
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+
+    data: [{
+      name: 'Twitter',
+      y: {{ ess_time_usage.twitter }},
+      sliced: true,
+      selected: true
+    }, {
+      name: 'Facebook',
+      y: {{ ess_time_usage.facebook }}
+    }, {
+      name: 'Instagram',
+      y: {{ ess_time_usage.instagram }}
+    }, {
+      name: 'LinkedIn',
+      y: {{ ess_time_usage.linkedin }}
+    }, {
+      name: 'Other',
+      y: {{ ess_time_usage.other }}
+    }]
+  }]
+});
+</script>
+    <!-- chart 1 script end  -->
+
+
+
+<script>
+
+  Highcharts.chart('barchart', {
+     colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+    chart: {
+        type: 'column',
+        backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+            stops: [
+                [0, '#2a2a2b'],
+                [1, '#3e3e40']
+            ],
+
+        },
+
+    },
+    title: {
+        text: 'Articles Feteched ',
+
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+            'Source',
+
+
+        ],
+         labels: {
+            style: {
+                color: 'white'
+            }
+        },
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ''
+        }
+    },
+    /*tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:white;padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },*/
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        },
+
+    },
+    legend: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        itemStyle: {
+            color: '#f0ad4e'
+        },
+        itemHoverStyle: {
+            color: '#FFF'
+        },
+        itemHiddenStyle: {
+            color: '#606063'
+        },
+        title: {
+            style: {
+                color: '#C0C0C0'
+            }
+        }
+    },
+    series: [{
+        name: 'Facebook',
+        data: [{{ fetched_by_category.facebook_count }}, ]
+
+    }, {
+        name: 'Twitter',
+        data: [{{ fetched_by_category.twitter_count }},]
+
+    }, {
+        name: 'Instagram',
+        data: [{{ fetched_by_category.instagram_count }}, ]
+
+    },
+        {
+        name: 'LinkedIn',
+        data: [{{ fetched_by_category.linkedin_count }}, ]
+
+    },{
+        name: 'News',
+        data: [{{ fetched_by_category.news_count }}, ]
+
+    }]
+});
+</script>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("container1", {
+	animationEnabled: true,
+backgroundColor:'#212529',
+	title:{
+		text: "",
+        fontColor:'',
+
+
+	},
+	axisY: {
+		title: "Articles Fetched ",
+    titleFontColor: "white",
+		valueFormatString: "0",
+		suffix: "",
+          labelFontColor: "white",
+
+		stripLines: [{
+			value: 1,
+			label: "Average",
+            style:{
+			    fontColor:'white',
+            },
+
+		}]
+	},
+axisX: {
+    title: "Dates ",
+    titleFontColor: "white",
+          labelFontColor: "white",
+
+	},
+	data: [{
+		yValueFormatString: "#,### Articles",
+		xValueFormatString: "DD",
+
+
+		type: "spline",
+
+		linePionts:'red',
+        dataPoints: [
+
+            {% for point in fetched_by_date %}
+
+		    { x: new Date({{ point.date }}), y:{{ point.total_count }} ,color: "yellow"},
+            {% endfor %}
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
+    </script>
+
+    <!-- script for bar chart end  -->
+</body>
+</html>
+
+
+<!--
+<script>
+  var chart = Highcharts.chart('barchart', {
+
+    title: {
+        text: 'Bar Chart'
+    },
+
+    subtitle: {
+        text: 'Plain'
+    },
+
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+
+    series: [{
+        type: 'column',
+        colorByPoint: true,
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+        showInLegend: true
+    }]
+
+});
+
+
+$('#plain').click(function () {
+    chart.update({
+        chart: {
+            inverted: false,
+            polar: false
+        },
+        subtitle: {
+            text: 'Plain'
+        }
+    });
+});
+
+
+
+</script> -->

@@ -1,0 +1,470 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+
+
+
+    {% block system_header_block %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.4/tailwind.min.css" integrity="sha256-bCQF5OufWlWM/MW9mCb/eDibvff1W8BNq9ZK69C8FSI=" crossorigin="anonymous" />
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+    {% endblock %}
+
+
+
+
+<body>
+
+
+
+{% block system_content_block %}
+
+<div class="container-fluid">
+<div class="row">
+
+</div>
+        <div class="row mb-5 mt-5">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        <p class="font-weight-bold" >Add Instagram Authror Target</p>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="float-left ">
+                                    <img id="profile_image" src="instagram_profile_avatar.jpg" height="200px" width="200px" style="border-radius: 10px;" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+
+                                <div class="col-12 mt-3">
+                                    <label class="sr-only" for="author_type"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author Type:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_type"
+                                            name="author_type" value="instagram_person" placeholder=""
+                                            readonly="readonly" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_id"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author ID:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_id"
+                                            name="author_id" placeholder="" required="required /">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_name"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author Name:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_name"
+                                            name="author_name" placeholder="" required="required /">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_url"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author URL:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_url"
+                                            name="author_url" placeholder="" required="required /">
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+
+
+
+
+
+
+
+
+
+<div class="row  p-3">
+    <div class="col-md-6  pr-5 pl-5">
+
+            <p class=" "style="font-size:24px">Smart Search</p>
+
+
+
+
+            <label class="sr-only" for="author_account"></label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text font-weight-bold  text-white"
+                        style="width:150px;background-color:#006390">Author Account</div>
+                </div>
+                <input type="text" class="form-control " id="author_account"
+                    name="author_account" required="required" />
+            </div>
+            <button class="btn btn-sm btn-success float-right mb-2" id="smart_serach">Smart
+                Search</button>
+
+    </div>
+    <div class="col-md-6 ">
+
+            <div class="row">
+                <div class="col-md-12 pr-5 pl-5">
+                    <label class="sr-only" for="expired_on"></label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text font-weight-bold  text-white"
+                                style="width:150px;background-color:#006390">Expired On</div>
+                        </div>
+                        <input type="text" id="datepicker-13" class="form-control  "
+                            name="expired_on" placeholder="" required="required" />
+                    </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12 pr-5 pl-5">
+                        <label class="sr-only" for="interval"></label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text font-weight-bold  text-white"
+                                        style="width:150px;background-color:#006390" ">Interval</div>
+                                    </div>
+                                    <select class="custom-select mr-sm-2 form-control "
+                                      id="interval" >
+
+
+                                    </select>
+                                </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 flex-row d-flex justify-content-around align-items-center">
+
+                            <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" type="checkbox" id="is_expired">
+                                <label class="form-check-label badge text-white  p-2" id="is_expired_label"
+                                    for="is_expired" style="background-color:#006390">
+                                    Is Expired
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" type="checkbox" id="need_screenshots">
+                                <label class="form-check-label badge text-white  p-2" id="need_screenshots_label"
+                                    for="need_screenshots"style="background-color:#006390">
+                                    Need Screenshots
+                                </label>
+                            </div>
+                            </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+                </div>
+                <div class="card-header">
+                    <button class="btn btn-success   float-right " type="submit" id="submitBTN">Submit
+                        Target</button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-12 m-0 p-5 ">
+            <div class="card ">
+                <div class="card-header text-center">
+                    <p class="font-weight-bold" >All Instagram Authror Targets</p>
+                </div>
+                <div class="card-body m-0 p-0 ">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">SR-#</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">GTR</th>
+                                <th scope="col">Author ID</th>
+                                <th scope="col">Author Account</th>
+                                <th scope="col">Author Name</th>
+                                <th scope="col">Author URL</th>
+                                <th scope="col">Expired On</th>
+                                <th scope="col">is Enabled </th>
+                                <th scope="col">is Expired </th>
+                                <th scope="col">ScreenShots</th>
+
+                                <th scope="col">Created On </th>
+                                <th scope="col">Interval </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="isntagram_author_table">
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted">
+                    2 days ago
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- bootstrap modal -->
+    <!-- Button trigger modal -->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker-13").datepicker();
+            $("#datepicker-13").datepicker("show");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#is_expired').on('click', function () {
+                var status = $('#is_expired').is(':checked')
+                if (status == true) {
+                    $('#is_expired_label').css('background-color','green');
+                } else {
+                    $('#is_expired_label').css('background-color','#006390');
+                }
+            });
+
+
+
+
+            $('#need_screenshots').on('click', function () {
+                var status = $('#need_screenshots').is(':checked')
+                if (status == true) {
+                    $('#need_screenshots_label').css('background-color','green');
+                } else {
+                    $('#need_screenshots_label').css('background-color','#006390');
+                }
+            });
+
+
+            $('#smart_serach').on('click', function () {
+                $('#smart_serach_icon').show();
+                var author_account_name = $('#author_account').val();
+                if (author_account_name == '') {
+                    console.log("author_account has no value ");
+                } else {
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        url: 'http://192.168.18.20:8000/core/smart_search/' +
+                            author_account_name + '/instagram/',
+                        success: function (data) {
+                            console.log(data);
+                            $('#author_name').val(data.Profile.full_name);
+                           $('#author_id').val(data.Profile.id)
+                           var id=$('#author_account').val()
+                            $('#profile_image').attr('src', data.Profile.profile_image_url);
+                            var base_url=' https://www.instagram.com/'+id;
+                            $('#author_url').val(base_url);
+
+                        },
+
+                        error: function () {
+
+                        },
+
+                    })
+                }
+
+            })
+
+            //submit form
+
+            $('#submitBTN').on('click', function (e) {
+
+                var author_account_name = $('#author_account').val();
+                if (author_account_name == '') {
+                    console.log("author_account has no value ");
+                } else {
+
+                    let author_type = $('#author_type').val();
+                    let author_name = $('#author_name').val();
+                    let author_id = $('#author_id').val();
+                    let author_account = $('#author_account').val();
+                    let author_url = $('#author_url').val();
+                    let expired_on = $('#datepicker-13').val();
+                    let interval = $('#interval').val();
+                    let is_expired = $('#is_expired').is(':checked')
+                    let need_screenshots = $('#need_screenshots').is(':checked')
+
+                    console.log(author_type, author_name, author_id, author_account, author_url,
+                        expired_on, interval, is_expired, need_screenshots);
+                    fetch({% url 'OSINT_System_Core:add_instagram_target' %}, {
+                          'method': 'POST',
+      'credentials': 'include',
+      'headers': new Headers({
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest'
+      }),
+                            body: JSON.stringify({
+                                author_type: author_type,
+                                author_name: author_name,
+                                author_id: author_id,
+                                author_account: author_account,
+                                author_url: author_url,
+                                expired_on: expired_on,
+                                need_screenshots: need_screenshots,
+                                periodic_interval: interval,
+                            }),
+                        })
+                        .then((info) => {
+                            console.log(info.status);
+                        })
+
+                }
+            });
+
+
+
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $.get('http://192.168.18.20:8000/core/add_instagram_target/', function (data) {
+                var array = data.instagram_target_form.intervals;
+                $.each(array, function (key, value) {
+                    $('#interval').append($("<option></option>").attr("value", value[0]).text(
+                        value[1]));
+                });
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.get('http://192.168.18.20:8000/core/get_instagram_targets', function (data) {
+
+
+                $.each(data, function (key, value) {
+                    $('#isntagram_author_table').append('<tr><th scope="row">' + key +
+                        '</th><th scope="row">' + value.id + '</th>'+ '</th><th scope="row">' + value.global_target_reff_id +
+                        '</th><th scope="row">' + value.author_id +
+                        '</th><th scope="row">' + value.author_account +
+                        '</th><th scope="row">' + value.author_name +
+                        '</th><th scope="row">' + value.author_url +
+                        '</th><th scope="row">' + value.expired_on +
+                        '</th><th scope="row">' + value.is_enabled +
+                        '</th><th scope="row">' + value.is_expired +
+                        '</th><th scope="row">' + value.need_screenshots +
+                        '</th><th scope="row">' + value.created_on +
+                        '</th><th scope="row">' + value.periodic_interval + '</th></tr>');
+                });
+            })
+        });
+    </script>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+</body>
+</html>

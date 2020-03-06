@@ -1,0 +1,713 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+{% load static %}
+
+
+    {% block system_header_block %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.1.4/tailwind.min.css" integrity="sha256-bCQF5OufWlWM/MW9mCb/eDibvff1W8BNq9ZK69C8FSI=" crossorigin="anonymous" />
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+    {% endblock %}
+
+
+
+
+<body>
+
+
+
+{% block system_content_block %}
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 p-5  d-flex flex-row justify-content-around align-items-center ">
+        <a href="{% url 'OSINT_System_Core:target_author_facebook' %}"> <i class="fab fa-facebook-square fa-5x text-primary" id="facebook_page"></i></a>
+        <a href="{% url 'OSINT_System_Core:target_author_instagram' %}">  <i class="fab fa-instagram fa-3x" style="color:#DD2A7B" id="instagram_page"></i></a>
+          <a href={% url 'OSINT_System_Core:target_author_twitter' %}> <i class="fab fa-twitter-square text-primary fa-3x" style="color:#00ACEE"id="twitter_page"></i></a>
+         <a href="{% url 'OSINT_System_Core:target_author_linkedin' %}"> <i class="fab fa-linkedin text-info fa-3x" id="instagram_page"></i></a>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+        <div class="row mb-5 mt-5">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        <p class="font-weight-bold" >Add Facebook Authror Target</p>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="float-left ">
+                                    {% csrf_token %}
+                                    <img id="profile_image" src="{% static 'OSINT_System_Core/instagram_profile_avatar.jpg' %}" height="200px" width="200px" style="border-radius: 10px;" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+
+                                <div class="col-12 mt-3">
+                                    <label class="sr-only" for="author_type"></label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author Type:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_type"
+                                            name="author_type" value="facebook_person" placeholder=""
+                                            readonly="readonly" />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_id"></label>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author ID:</div>
+                                        </div>
+                                        <input type="number" class="form-control " id="author_id"
+                                            name="author_id" placeholder="" required="required /">
+
+                                    </div>
+                                    <div class="m-0 p-0 mb-2">
+                                        <span class="alert alert-danger font-weight-bold p-1 mb-1 " style="font-size:12px;margin-left:150px" id="author_id_err"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_name"></label>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author Name:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_name"
+                                            name="author_name" placeholder="" required="required /">
+                                    </div>
+                                    <div class="m-0 p-0 mb-2">
+                                        <span class="alert alert-danger font-weight-bold p-1 mb-1 " style="font-size:12px;margin-left:150px" id="author_name_err"></span>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <label class="sr-only" for="author_url"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text font-weight-bold  text-white"
+                                                style="width:150px;background-color:#006390">Author URL:</div>
+                                        </div>
+                                        <input type="text" class="form-control " id="author_url"
+                                            name="author_url" placeholder="" required="required /">
+                                    </div>
+                                    <div class="m-0 p-0 mb-2">
+                                        <span class="alert alert-danger font-weight-bold p-1 mb-1 " style="font-size:12px;margin-left:150px" id="author_url_err"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <span class="alert alert-info font-weight-bold "style="font-size:18px" id="smart_search_err"></span>
+    </div>
+</div>
+
+
+
+<div class="row  p-3">
+    <div class="col-md-6  pr-5 pl-5">
+
+            <p class=" "style="font-size:24px">Smart Search</p>
+
+
+
+
+            <label class="sr-only" for="author_account"></label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text font-weight-bold  text-white"
+                        style="width:150px;background-color:#006390">Author Account</div>
+                </div>
+                <input type="text" class="form-control " id="author_account"
+                    name="author_account" required="required" />
+            </div>
+            <span class="alert alert-danger font-weight-bold p-1 mb-1 " style="font-size:12px;margin-left:150px" id="author_account_err"></span> <button class="btn  btn-info float-right mb-2" id="smart_serach"><i class="fas fa-sync fa-spin  text-white mr-2  " id="load_icon"></i>Smart
+                Search</button>
+
+    </div>
+    <div class="col-md-6 ">
+
+            <div class="row">
+                <div class="col-md-12 pr-5 pl-5">
+                    <label class="sr-only" for="expired_on"></label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text font-weight-bold  text-white"
+                                style="width:150px;background-color:#006390">Expired On</div>
+                        </div>
+                        <input type="date" id="datepicker-13" class="form-control  "
+                            name="expired_on" placeholder="" required="required" />
+                    </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12 pr-5 pl-5">
+                        <label class="sr-only" for="interval"></label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text font-weight-bold  text-white"
+                                        style="width:150px;background-color:#006390" ">Interval</div>
+                                    </div>
+                                    <select class="custom-select mr-sm-2 form-control "
+                                      id="interval" >
+
+
+                                    </select>
+                                </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 flex-row d-flex justify-content-around align-items-center">
+
+                            <!-- <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" type="checkbox" id="is_expired">
+                                <label class="form-check-label badge text-white  p-2" id="is_expired_label"
+                                    for="is_expired" style="background-color:#006390">
+                                    Is Expired
+                                </label>
+                            </div> -->
+
+
+
+                            <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" type="checkbox" id="need_screenshots">
+                                <label class="form-check-label badge text-white  p-2" id="need_screenshots_label"
+                                    for="need_screenshots"style="background-color:#006390">
+                                    Need Screenshots
+                                </label>
+                            </div>
+                            </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+                </div>
+                <div class="card-header">
+                    <button class="btn btn-secondary   float-left " type="submit" id="clearBTN">Clear Form
+                        Target</button>  <button class="btn btn-success   float-right " type="submit" id="submitBTN">Submit
+                        Target</button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-12 m-0 p-5 ">
+            <div class="card ">
+                <div class="card-header text-center">
+                    <p class="font-weight-bold" >All Facebook Authror Targets</p>
+                </div>
+                <div class="card-body m-0 p-0 ">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">SR-#</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">GTR</th>
+                                <th scope="col">Author ID</th>
+                                <th scope="col">Author Account</th>
+                                <th scope="col">Author Name</th>
+                                <th scope="col">Author URL</th>
+                                <th scope="col">Expired On</th>
+                                <th scope="col">is Enabled </th>
+                                <th scope="col">is Expired </th>
+                                <th scope="col">ScreenShots</th>
+
+                                <th scope="col">Created On </th>
+                                <th scope="col">Interval </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="isntagram_author_table">
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted">
+                    <i class="fas fa-spinner fa-spin mr-2 text-danger"></i> <span class="text-primary font-weight-bold "style="font-size:15px" id="table_last_sync">  </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- bootstrap modal -->
+    <!-- Button trigger modal -->
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script>
+
+    </script>
+<script>
+$('#clearBTN').on('click',function(){})
+</script>
+    <script>
+        //start settings for app
+
+$('#load_icon').hide();
+$('#smart_search_err').hide();
+$('#author_id_err').hide();
+$('#author_name_err').hide();
+$('#author_url_err').hide();
+$('#author_account_err').hide();
+
+clearForm();
+
+//end start settings
+
+//function change border coolors after submission
+function chnageBorderColorsGreen(){
+    $('#author_type').removeClass(' has-error');
+    $('#author_type').addClass('has-success');
+
+
+    $('#author_id').removeClass(' has-error');
+    $('#author_id').addClass('has-success');
+
+
+
+    $('#author_name').removeClass(' has-error');
+    $('#author_name').addClass('has-success');
+
+
+    $('#author_account').removeClass(' has-error');
+    $('#author_account').addClass('has-success');
+
+
+    $('#author_url').removeClass(' has-error');
+    $('#author_url').addClass('has-success');
+
+
+    $('#expired_on').removeClass(' has-error');
+    $('#expired_on').addClass('has-success');
+
+
+    $('#interval').removeClass(' has-error');
+    $('#interval').addClass('has-success');
+
+
+}
+
+function chnageBorderColorsRed(){
+    $('#author_type').addClass(' has-error');
+    $('#author_type').removeClass('has-success');
+
+
+    $('#author_id').addClass(' has-error');
+    $('#author_id').removeClass('has-success');
+
+
+
+    $('#author_name').addClass(' has-error');
+    $('#author_name').removeClass('has-success');
+
+
+    $('#author_account').addClass(' has-error');
+    $('#author_account').removeClass('has-success');
+
+
+    $('#author_url').addClass(' has-error');
+    $('#author_url').removeClass('has-success');
+
+
+    $('#expired_on').addClass(' has-error');
+    $('#expired_on').removeClass('has-success');
+
+
+    $('#interval').addClass(' has-error');
+    $('#interval').removeClass('has-success');
+
+
+}
+
+
+//end
+
+
+//form validation function
+function validateForm(){
+                     let isvalid=true;
+                    let author_type = $('#author_type').val();
+                    let author_name = $('#author_name').val();
+                    let author_id = $('#author_id').val();
+                    let author_account = $('#author_account').val();
+                    let author_url = $('#author_url').val();
+                    let expired_on = $('#datepicker-13').val();
+                    let interval = $('#interval').val();
+                    let need_screenshots = $('#need_screenshots').is(':checked');
+
+
+
+
+                    if(author_id==''){
+                        isvalid=false;
+                        $('#author_id').removeClass('has-success');
+                        $('#author_id').addClass('has-error');
+                        console.log("author_id is null");
+                        $('#author_id_err').show();
+                        $('#author_id_err').empty().append('Author id is required ');
+                        $('#author_id_err').fadeOut(5000);
+                    }
+                    if(author_name==''){
+                        isvalid=false;
+                        $('#author_name').removeClass('has-success');
+                        $('#author_name').addClass('has-error');
+                        console.log("author_name is null");
+                        $('#author_name_err').show();
+                        $('#author_name_err').empty().append('Author name is required ');
+                        $('#author_name_err').fadeOut(5000);
+                    }
+                    if(author_url==''){
+                        isvalid=false;
+                        $('#author_url').removeClass('has-success');
+                        $('#author_url').addClass('has-error');
+                        console.log("author_url is null");
+                        $('#author_url_err').show();
+                        $('#author_url_err').empty().append('Author URL is required ');
+                        $('#author_url_err').fadeOut(5000);
+                    }
+
+                    if(author_account==''){
+                        isvalid=false;
+                        $('#author_account').removeClass('has-success');
+                        $('#author_account').addClass('has-error');
+                        console.log("author_account is null");
+                        $('#author_account_err').show();
+                        $('#author_account_err').empty().append('Author account is required ');
+                        $('#author_account_err').fadeOut(5000);
+                    }
+                    if(expired_on==''){
+                        isvalid=false;
+                        $('#expired_one').removeClass('has-success');
+                        $('#expired_one').addClass('has-error');
+                        console.log("expired_on is null");
+                    }
+
+                    return isvalid
+
+
+        }
+//end form validation fucntion
+
+//clear form data function code
+function clearForm(){
+            $('#author_name').val('');
+            $('#author_id').val('');
+            $('#author_account').val('');
+            $('#author_url').val('');
+           // $('#expired_on').val('01/01/2020');
+            $("#need_screenshots").prop("checked", false);
+			$("#interval").val('0');
+			$('#profile_image').attr('src','{% static 'OSINT_System_Core/instagram_profile_avatar.jpg' %}')
+            console.log("form cleaned ");
+
+        }
+
+//clear form data
+$('#clearBTN').on('click',function(){
+            clearForm();
+        })
+
+//end clear form data function code
+
+
+//populate table function
+
+
+function populateTable () {
+            $.get('{% url 'OSINT_System_Core:get_facebook_target' %}', function (data) {
+
+
+                $.each(data, function (key, value) {
+                    $('#isntagram_author_table').append('<tr><th scope="row">' + key +
+                        '</th><th scope="row">' + value.id + '</th>'+ '</th><th scope="row">' + value.global_target_reff_id +
+                        '</th><th scope="row">' + value.author_id +
+                        '</th><th scope="row">' + value.author_account +
+                        '</th><th scope="row">' + value.author_name +
+                        '</th><th scope="row">' + value.author_url +
+                        '</th><th scope="row">' + value.expired_on +
+                        '</th><th scope="row">' + value.is_enabled +
+                        '</th><th scope="row">' + value.is_expired +
+                        '</th><th scope="row">' + value.need_screenshots +
+                        '</th><th scope="row">' + value.created_on +
+                        '</th><th scope="row">' + value.periodic_interval + '</th></tr>');
+                });
+            })
+        }
+
+//end poopulate table
+
+
+
+        $(document).ready(function () {
+
+            $('#is_expired').on('click', function () {
+                var status = $('#is_expired').is(':checked')
+                if (status == true) {
+                    $('#is_expired_label').css('background-color','green');
+                } else {
+                    $('#is_expired_label').css('background-color','#006390');
+                }
+            });
+
+
+
+
+            $('#need_screenshots').on('click', function () {
+                var status = $('#need_screenshots').is(':checked')
+                if (status == true) {
+                    $('#need_screenshots_label').css('background-color','green');
+                } else {
+                    $('#need_screenshots_label').css('background-color','#006390');
+                }
+            });
+
+
+
+            //start search code
+            $('#smart_serach').on('click', function () {
+
+                var author_account_name = $('#author_account').val();
+                if (author_account_name == '') {
+                    console.log("author_account has no value ");
+                    $('#author_account_err').show();
+                        $('#author_account_err').empty().append('Author account is required ');
+                        $('#author_account_err').fadeOut(5000);
+                } else {
+                    console.log("smart search request made  ");
+                    $('#load_icon').show();
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'json',
+                        url: '{% url 'OSINT_System_Core:smart_search' 'arg1' 'facebook' %}'.replace('arg1',author_account_name),
+                        success: function (data) {
+                            console.log("smart_search_submission_data = "+data);
+                            $('#author_name').val(data.profile.full_name);
+                           $('#author_id').val(data.profile.id)
+                           var id=$('#author_account').val()
+                            $('#profile_image').attr('src', data.profile.profile_image_url);
+                            var base_url='https://www.facebook.com/'+id;
+                            $('#author_url').val(base_url);
+                            $('#load_icon').hide();
+                            $('#smart_search_err').show();
+                           $('#smart_search_err').empty().append('Smart search is Successfull ');
+                           $('#smart_search_err').fadeOut(3000);
+                        },
+
+                        error: function () {
+                            clearForm();
+                            $('#load_icon').hide();
+                            $('#smart_search_err').show();
+                           $('#smart_search_err').empty().append('Smart search Failed ...try Again ');
+                           $('#smart_search_err').fadeOut(3000);
+                        },
+
+                    })
+                }
+
+            })
+//end smart search
+
+
+
+
+
+
+
+            //submit form
+
+            $('#submitBTN').on('click', function (e) {
+
+                var author_account_name = $('#author_account').val();
+                const valid=validateForm();
+                console.log(valid);
+                if (valid == false ) {
+                    console.log("form not validated  ");
+                } else {
+                    chnageBorderColorsGreen();
+                    let author_type = $('#author_type').val();
+                    let author_name = $('#author_name').val();
+                    let author_id = $('#author_id').val();
+                    let author_account = $('#author_account').val();
+                    let author_url = $('#author_url').val();
+                    let expired_on = $('#datepicker-13').val();
+                      expired_on  = expired_on.replace("-", "/");
+                       expired_on  = expired_on.replace("-", "/");
+
+                      var  dateAr = expired_on.split('/');
+                       expired_on = dateAr[1] + '/' + dateAr[2] + '/' + dateAr[0];
+                        console.log("date : "+expired_on)
+                    let interval = $('#interval').val();
+                 //   let is_expired = $('#is_expired').is(':checked')
+                    let need_screenshots = $('#need_screenshots').is(':checked')
+                    let csrf_tokken = $('input[name="csrfmiddlewaretoken"]').attr('value')
+                    console.log("form_submission_data = "+author_type, author_name, author_id, author_account, author_url,
+                        expired_on, interval, need_screenshots);
+                    fetch('{% url 'OSINT_System_Core:add_facebook_target' %}', {
+                        'method': 'POST',
+      'credentials': 'include',
+      'headers': new Headers({
+        'X-CSRFToken': csrf_tokken,
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }),
+                            body: JSON.stringify({
+                                author_type: author_type,
+                                name: author_name,
+                                id: author_id,
+                                account: author_account,
+                                url: author_url,
+                                expired_on: expired_on,
+                                need_screenshots: need_screenshots,
+                                periodic_interval: interval,
+                            }),
+                        })
+                        .then((info) => {
+							console.log(info.status);
+							if(info.status=='200'){
+								clearForm();
+						populateTable();
+                            $('#smart_search_err').show();
+                           $('#smart_search_err').empty().append('New Facebook Author Target  Successfull Added ');
+                           $('#smart_search_err').fadeOut(3000);
+							}
+							else{
+								$('#smart_search_err').show();
+                           $('#smart_search_err').empty().append('Submission Failed .....Try Again  ');
+                           $('#smart_search_err').fadeOut(3000);
+							}
+                        })
+
+
+                }
+
+            });
+
+
+
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $.get('{% url 'OSINT_System_Core:add_facebook_target' %}', function (data) {
+                var array = data.facebook_target_form.intervals;
+              //  console.log(array)
+                $.each(array, function (key, value) {
+                    $('#interval').append($("<option></option>").attr("value", value[0]).text(
+                        value[1]));
+                });
+            })
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $.get('{% url 'OSINT_System_Core:get_facebook_target' %}', function (data) {
+
+
+                $.each(data, function (key, value) {
+                    $('#isntagram_author_table').append('<tr><th scope="row">' + key +
+                        '</th><th scope="row">' + value.id + '</th>'+ '</th><th scope="row">' + value.global_target_reff_id +
+                        '</th><th scope="row">' + value.author_id +
+                        '</th><th scope="row">' + value.author_account +
+                        '</th><th scope="row">' + value.author_name +
+                        '</th><th scope="row">' + value.author_url +
+                        '</th><th scope="row">' + value.expired_on +
+                        '</th><th scope="row">' + value.is_enabled +
+                        '</th><th scope="row">' + value.is_expired +
+                        '</th><th scope="row">' + value.need_screenshots +
+                        '</th><th scope="row">' + value.created_on +
+                        '</th><th scope="row">' + value.periodic_interval + '</th></tr>');
+                });
+            })
+        });
+    </script>
+    <script>
+        var dt = new Date();
+        document.getElementById("table_last_sync").innerHTML = dt.toLocaleString();
+        </script>
+
+
+{% endblock %}
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!doctype html>
+{% extends 'OSINT_System_Core/system_base.html' %}
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+
+  <body>
+
+  {% block system_content_block %}
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://www.amcharts.com/lib/4/geodata/worldHigh.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+
+
+
+
+    <script>
+    //chart # 5 //pco
+
+        //fetch('http://localhost:3001/ajax_loaded_pyramid_chart').then((res)=>res.json()).then((data)=>{
+        var chart_values = { facebook: 100, twitter: 85, linkedin: 55, news: 24, instagram: 46 };
+
+        am4core.ready(function () {
+            console.log("ajax_loaded");
+            console.log(chart_values);
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var chart = am4core.create("chart_5", am4charts.SlicedChart);
+            chart.paddingBottom = 30;
+            chart.data = [{
+                "name": "Facebook ",
+                "value": chart_values.facebook,
+            }, {
+                "name": "Twitter ",
+                "value": chart_values.twitter,
+            }, {
+                "name": "Linked In ",
+                "value": chart_values.linkedin,
+            }, {
+                "name": "News ",
+                "value": chart_values.news,
+            }, {
+                "name": "Instagram ",
+                "value": chart_values.instagram,
+            },];
+
+            var series = chart.series.push(new am4charts.PyramidSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.valueIs = "height";
+
+        });
+    </script>
+    <script>
+          var chart_6 = { facebook: 100, twitter: 85, linkedin: 55, news: 24, instagram: 46 };
+    am4core.ready(function() {
+
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // Create chart instance
+    var chart = am4core.create("chart_6", am4charts.XYChart);
+
+    // Add data
+    chart.data = [{
+                "name": "Facebook ",
+                "value": chart_6.facebook,
+            }, {
+                "name": "Twitter ",
+                "value": chart_6.twitter,
+            }, {
+                "name": "Linked In ",
+                "value": chart_6.linkedin,
+            }, {
+                "name": "News ",
+                "value": chart_6.news,
+            }, {
+                "name": "Instagram ",
+                "value": chart_6.instagram,
+            },];
+
+    // Create axes
+
+    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "name";
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 30;
+
+    categoryAxis.renderer.labels.template.fontSize = 9;
+    categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+      if (target.dataItem && target.dataItem.index & 2 == 2) {
+        return dy + 25;
+      }
+      return dy;
+    });
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.categoryX = "name";
+    series.name = "value";
+
+    series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+    series.columns.template.fillOpacity = .5;
+    series.columns.template.width = am4core.percent(50);
+
+    var columnTemplate = series.columns.template;
+    columnTemplate.strokeWidth = 0;
+    columnTemplate.strokeOpacity = 1;
+
+    }); // end am4core.ready()
+    </script>
+
+
+    <script>
+    //chart # 7 //rpo
+
+        //fetch('http://localhost:3001/ajax_loaded_pyramid_chart').then((res)=>res.json()).then((data)=>{
+        var chart_values = { facebook: 100, twitter: 85, linkedin: 55, news: 24, instagram: 46 };
+
+        am4core.ready(function () {
+            console.log("ajax_loaded");
+            console.log(chart_values);
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var chart = am4core.create("chart_7", am4charts.SlicedChart);
+            chart.paddingBottom = 30;
+            chart.data = [{
+                "name": "Facebook ",
+                "value": chart_values.facebook,
+            }, {
+                "name": "Twitter ",
+                "value": chart_values.twitter,
+            }, {
+                "name": "Linked In ",
+                "value": chart_values.linkedin,
+            }, {
+                "name": "News ",
+                "value": chart_values.news,
+            }, {
+                "name": "Instagram ",
+                "value": chart_values.instagram,
+            },];
+
+            var series = chart.series.push(new am4charts.PyramidSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.valueIs = "height";
+
+        });
+    </script>
+    <script>
+          var chart_8 = { facebook: 100, twitter: 85, linkedin: 55, news: 24, instagram: 46 };
+    am4core.ready(function() {
+
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // Create chart instance
+    var chart = am4core.create("chart_8", am4charts.XYChart);
+
+    // Add data
+    chart.data = [{
+                "name": "Facebook ",
+                "value": chart_8.facebook,
+            }, {
+                "name": "Twitter ",
+                "value": chart_8.twitter,
+            }, {
+                "name": "Linked In ",
+                "value": chart_8.linkedin,
+            }, {
+                "name": "News ",
+                "value": chart_8.news,
+            }, {
+                "name": "Instagram ",
+                "value": chart_8.instagram,
+            },];
+
+    // Create axes
+
+    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "name";
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 30;
+
+    categoryAxis.renderer.labels.template.fontSize = 9;
+    categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
+      if (target.dataItem && target.dataItem.index & 2 == 2) {
+        return dy + 25;
+      }
+      return dy;
+    });
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.categoryX = "name";
+    series.name = "value";
+
+    series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
+    series.columns.template.fillOpacity = .5;
+    series.columns.template.width = am4core.percent(50);
+
+    var columnTemplate = series.columns.template;
+    columnTemplate.strokeWidth = 0;
+    columnTemplate.strokeOpacity = 1;
+
+    }); // end am4core.ready()
+    </script>
+
+    <script>
+        // fetch('http://localhost:3001/ajax_loaded_pyramid_chart').then((res)=>res.json()).then((data)=>{
+        var chart_values = { facebook: 100, twitter: 85, linkedin: 55, news: 24, instagram: 46 };
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            // Create chart instance
+            var chart = am4core.create("radial_histogram", am4charts.PieChart);
+
+            // Add data
+            chart.data = [{
+                "country": "Facebook ",
+                "values": chart_values.facebook,
+            }, {
+                "country": "Twitter ",
+                "values": chart_values.twitter,
+            }, {
+                "country": "Linked In ",
+                "values": chart_values.linkedin,
+            }, {
+                "country": "News ",
+                "values": chart_values.news,
+            }, {
+                "country": "Instagram ",
+                "values": chart_values.instagram,
+            },];
+            // Set inner radius
+            chart.innerRadius = am4core.percent(100);
+
+            // Add and configure Series
+            var pieSeries = chart.series.push(new am4charts.PieSeries());
+            pieSeries.dataFields.value = "values";
+            pieSeries.dataFields.category = "country";
+            pieSeries.slices.template.stroke = am4core.color("#fff");
+            pieSeries.slices.template.strokeWidth = 2;
+            pieSeries.slices.template.strokeOpacity = 1;
+            pieSeries.fontSize = 12;
+
+
+            // This creates initial animation
+            pieSeries.hiddenState.properties.opacity = 1;
+            pieSeries.hiddenState.properties.endAngle = -90;
+            pieSeries.hiddenState.properties.startAngle = -90;
+
+        }); // end am4core.ready()
+    //});
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // fetch('http://localhost:3001/ajax_loaded_pyramid_chart').then((res)=>res.json()).then((data)=>{
+        var sector = {
+            "sector": [
+                { "name": "Facebook", "size": 6.6 },
+                { "name": "Twitter", "size": 0.6 },
+                { "name": "Linkedin", "size": 23.6 },
+                { "name": "Instagram", "size": 2.6 },
+                { "name": "News", "size": 4.5 },
+            ]
+        }
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            /**
+             * Define data for each year
+             */
+            var chartData = {
+                "1995": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },
+                ],
+                "1996": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "1997": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "1998": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "1999": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2000": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2001": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2002": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2003": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2004": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2005": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2006": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2007": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2008": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2009": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2010": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2011": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2012": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2013": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+                "2014": [
+                    { "sector": "Facebook", "size": 6.6 },
+                    { "sector": "Twitter", "size": 0.6 },
+                    { "sector": "Linkedin", "size": 23.2 },
+                    { "sector": "Instagram", "size": 2.2 },
+                    { "sector": "News", "size": 4.5 },],
+            };
+
+            // Create chart instance
+            var chart = am4core.create("yearly", am4charts.PieChart);
+
+            // Add data
+            chart.data = [
+                { "sector": "Facebook", "size": 6.6 },
+                { "sector": "Twitter", "size": 0.6 },
+                { "sector": "Linkedin", "size": 23.2 },
+                { "sector": "Instagram", "size": 2.2 },
+                { "sector": "News", "size": 4.5 },];
+
+            // Add label
+            chart.innerRadius = 50;
+            var label = chart.seriesContainer.createChild(am4core.Label);
+            label.text = "1995";
+            label.horizontalCenter = "middle";
+            label.verticalCenter = "middle";
+            label.fontSize = 35;
+
+            // Add and configure Series
+            var pieSeries = chart.series.push(new am4charts.PieSeries());
+            pieSeries.dataFields.value = "size";
+            pieSeries.dataFields.category = "sector";
+
+            // Animate chart data
+            var currentYear = 1995;
+            function getCurrentData() {
+                label.text = currentYear;
+                var data = chartData[currentYear];
+                currentYear++;
+                if (currentYear > 2014)
+                    currentYear = 1995;
+                return data;
+            }
+
+            function loop() {
+                //chart.allLabels[0].text = currentYear;
+                var data = getCurrentData();
+                for (var i = 0; i < data.length; i++) {
+                    chart.data[i].size = data[i].size;
+                }
+                chart.invalidateRawData();
+                chart.setTimeout(loop, 1000);
+            }
+
+            loop();
+
+        }); // end am4core.ready()
+    </script>
+
+    <!-- Chart code -->
+    <script>
+        // fetch('http://localhost:3001/ajax_loaded_pyramid_chart').then((res)=>res.json()).then((data)=>{
+        var platform = { social: 100, news: 85, search: 55, blogs: 509, images: 322, vedios: 214, pages: 204, };
+
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            var chart = am4core.create("barchart1", am4charts.XYChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            chart.data = [
+                {
+                    platform: "Social",
+                    visits: platform.social,
+                    "href": "https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg"
+                },
+                {
+                    platform: "News",
+                    visits: platform.news,
+                },
+                {
+                    platform: "Search",
+                    visits: platform.search,
+                },
+                {
+                    platform: "Blogs",
+                    visits: platform.blogs,
+                },
+                {
+                    platform: "Images",
+                    visits: platform.images,
+                },
+                {
+                    platform: "Vedios",
+                    visits: platform.vedios,
+                },
+                {
+                    platform: "Pages",
+                    visits: platform.pages,
+                },
+
+            ];
+
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.dataFields.category = "platform";
+            categoryAxis.renderer.minGridDistance = 40;
+            categoryAxis.fontSize = 11;
+            categoryAxis.renderer.labels.template.dy = 5;
+
+
+
+            var image = new am4core.Image();
+            image.horizontalCenter = "middle";
+            image.width = 40;
+            image.height = 40;
+            image.strokeWidth = 2;
+            image.verticalCenter = "middle";
+            image.adapter.add("href", (href, target) => {
+                let category = target.dataItem.category;
+                if (category == 'Social') {
+                   // return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                    //return 'blade href here ';
+                }
+                if (category == 'News') {
+                   // return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                if (category == 'Search') {
+                  //  return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                if (category == 'Blogs') {
+                  //  return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                if (category == 'Vedios') {
+                  //  return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                if (category == 'Pages') {
+                  //  return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                if (category == 'Images') {
+                   // return " https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg";
+                }
+                return href;
+            })
+
+
+            categoryAxis.dataItems.template.bullet = image;
+
+
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.min = 0;
+            valueAxis.renderer.minGridDistance = 30;
+            valueAxis.renderer.baseGrid.disabled = true;
+
+
+            var series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.categoryX = "platform";
+            series.dataFields.valueY = "visits";
+            series.columns.template.tooltipText = "{valueY.value}";
+            series.columns.template.tooltipY = 0;
+            series.columns.template.strokeOpacity = 0;
+
+            // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+            series.columns.template.adapter.add("fill", function (fill, target) {
+                return chart.colors.getIndex(target.dataItem.index);
+            });
+
+        }); // end am4core.ready()
+    //});
+    </script>
+
+
+
+    <!-- Chart code -->
+    <script>
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            /**
+             * Chart design taken from Samsung health app
+             */
+
+            var chart = am4core.create("barchart2", am4charts.XYChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            chart.paddingBottom = 30;
+
+            chart.data = [{
+                "name": "Twitter",
+                "steps": 45688,
+                "href": "{% static 'OSINT_System_Core/social.png' %}"
+            }, {
+                "name": "Facebook",
+                "steps": 35781,
+                "href": "{% static 'OSINT_System_Core/news.png' %}"
+            }, {
+                "name": "Instagram",
+                "steps": 25464,
+                "href": "{% static 'OSINT_System_Core/instaram.jpeg' %}"
+            }, {
+                "name": "Linkedin",
+                "steps": 18788,
+                "href": "{% static 'OSINT_System_Core/blogs.png' %}"
+            }, {
+                "name": "Tumblr",
+                "steps": 15465,
+                "href": "{% static 'OSINT_System_Core/vedios.png' %}"
+            }, {
+                "name": "Youtube",
+                "steps": 11561,
+                "href": "{% static 'OSINT_System_Core/news1.png' %}"
+            }, {
+                "name": "Dailymotion",
+                "steps": 11561,
+                "href": "{% static 'OSINT_System_Core/dailymotion.png' %}"
+            }];
+
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "name";
+            categoryAxis.renderer.grid.template.strokeOpacity = 0;
+            categoryAxis.renderer.minGridDistance = 10;
+            categoryAxis.renderer.labels.template.dy = 35;
+            categoryAxis.renderer.tooltip.dy = 35;
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.renderer.inside = true;
+            valueAxis.renderer.labels.template.fillOpacity = 0.3;
+            valueAxis.renderer.grid.template.strokeOpacity = 0;
+            valueAxis.min = 0;
+            valueAxis.cursorTooltipEnabled = false;
+            valueAxis.renderer.baseGrid.strokeOpacity = 0;
+
+            var series = chart.series.push(new am4charts.ColumnSeries);
+            series.dataFields.valueY = "steps";
+            series.dataFields.categoryX = "name";
+            series.tooltipText = "{valueY.value}";
+            series.tooltip.pointerOrientation = "vertical";
+            series.tooltip.dy = - 6;
+            series.columnsContainer.zIndex = 100;
+
+            var columnTemplate = series.columns.template;
+            columnTemplate.width = am4core.percent(50);
+            columnTemplate.maxWidth = 66;
+            columnTemplate.column.cornerRadius(60, 60, 10, 10);
+            columnTemplate.strokeOpacity = 0;
+
+            series.heatRules.push({ target: columnTemplate, property: "fill", dataField: "valueY", min: am4core.color("#e5dc36"), max: am4core.color("#5faa46") });
+            series.mainContainer.mask = undefined;
+
+            var cursor = new am4charts.XYCursor();
+            chart.cursor = cursor;
+            cursor.lineX.disabled = true;
+            cursor.lineY.disabled = true;
+            cursor.behavior = "none";
+
+            var bullet = columnTemplate.createChild(am4charts.CircleBullet);
+            bullet.circle.radius = 30;
+            bullet.valign = "bottom";
+            bullet.align = "center";
+            bullet.isMeasured = true;
+            bullet.mouseEnabled = false;
+            bullet.verticalCenter = "bottom";
+            bullet.interactionsEnabled = false;
+
+            var hoverState = bullet.states.create("hover");
+            var outlineCircle = bullet.createChild(am4core.Circle);
+            outlineCircle.adapter.add("radius", function (radius, target) {
+                var circleBullet = target.parent;
+                return circleBullet.circle.pixelRadius + 10;
+            })
+
+            var image = bullet.createChild(am4core.Image);
+            image.width = 60;
+            image.height = 60;
+            image.horizontalCenter = "middle";
+            image.verticalCenter = "middle";
+            image.propertyFields.href = "href";
+
+            image.adapter.add("mask", function (mask, target) {
+                var circleBullet = target.parent;
+                return circleBullet.circle;
+            })
+
+            var previousBullet;
+            chart.cursor.events.on("cursorpositionchanged", function (event) {
+                var dataItem = series.tooltipDataItem;
+
+                if (dataItem.column) {
+                    var bullet = dataItem.column.children.getIndex(1);
+
+                    if (previousBullet && previousBullet != bullet) {
+                        previousBullet.isHover = false;
+                    }
+
+                    if (previousBullet != bullet) {
+
+                        var hs = bullet.states.getKey("hover");
+                        hs.properties.dy = -bullet.parent.pixelHeight + 30;
+                        bullet.isHover = true;
+
+                        previousBullet = bullet;
+                    }
+                }
+            })
+
+        }); // end am4core.ready()
+    </script>
+
+
+    <script>
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            /**
+             * Chart design taken from Samsung health app
+             */
+
+            var chart = am4core.create("monthly_bar_chart", am4charts.XYChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            chart.data = [{
+                "date": "2018-01-01",
+                "steps": 4561
+            }, {
+                "date": "2018-01-02",
+                "steps": 5687
+            }, {
+                "date": "2018-01-03",
+                "steps": 6348
+            }, {
+                "date": "2018-01-04",
+                "steps": 4878
+            }, {
+                "date": "2018-01-05",
+                "steps": 9867
+            }, {
+                "date": "2018-01-06",
+                "steps": 7561
+            }, {
+                "date": "2018-01-07",
+                "steps": 1287
+            }, {
+                "date": "2018-01-08",
+                "steps": 3298
+            }, {
+                "date": "2018-01-09",
+                "steps": 5697
+            }, {
+                "date": "2018-01-10",
+                "steps": 4878
+            }, {
+                "date": "2018-01-11",
+                "steps": 8788
+            }, {
+                "date": "2018-01-12",
+                "steps": 9560
+            }, {
+                "date": "2018-01-13",
+                "steps": 11687
+            }, {
+                "date": "2018-01-14",
+                "steps": 5878
+            }, {
+                "date": "2018-01-15",
+                "steps": 9789
+            }, {
+                "date": "2018-01-16",
+                "steps": 3987
+            }, {
+                "date": "2018-01-17",
+                "steps": 5898
+            }, {
+                "date": "2018-01-18",
+                "steps": 9878
+            }, {
+                "date": "2018-01-19",
+                "steps": 13687
+            }, {
+                "date": "2018-01-20",
+                "steps": 6789
+            }, {
+                "date": "2018-01-21",
+                "steps": 4531
+            }, {
+                "date": "2018-01-22",
+                "steps": 5856
+            }, {
+                "date": "2018-01-23",
+                "steps": 5737
+            }, {
+                "date": "2018-01-24",
+                "steps": 9987
+            }, {
+                "date": "2018-01-25",
+                "steps": 16457
+            }, {
+                "date": "2018-01-26",
+                "steps": 7878
+            }, {
+                "date": "2018-01-27",
+                "steps": 6845
+            }, {
+                "date": "2018-01-28",
+                "steps": 4659
+            }, {
+                "date": "2018-01-29",
+                "steps": 7892
+            }, {
+                "date": "2018-01-30",
+                "steps": 7362
+            }, {
+                "date": "2018-01-31",
+                "steps": 3268
+            }];
+
+            chart.dateFormatter.inputDateFormat = "YYYY-MM-dd";
+            chart.zoomOutButton.disabled = true;
+
+            var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+            dateAxis.renderer.grid.template.strokeOpacity = 0;
+            dateAxis.renderer.minGridDistance = 10;
+            dateAxis.dateFormats.setKey("day", "d");
+            dateAxis.tooltip.hiddenState.properties.opacity = 1;
+            dateAxis.tooltip.hiddenState.properties.visible = true;
+
+
+            dateAxis.tooltip.adapter.add("x", function (x, target) {
+                return am4core.utils.spritePointToSvg({ x: chart.plotContainer.pixelX, y: 0 }, chart.plotContainer).x + chart.plotContainer.pixelWidth / 2;
+            })
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.renderer.inside = true;
+            valueAxis.renderer.labels.template.fillOpacity = 0.3;
+            valueAxis.renderer.grid.template.strokeOpacity = 0;
+            valueAxis.min = 0;
+            valueAxis.cursorTooltipEnabled = false;
+
+            // goal guides
+            var axisRange = valueAxis.axisRanges.create();
+            axisRange.value = 6000;
+            axisRange.grid.strokeOpacity = 0.1;
+            axisRange.label.text = "Goal";
+            axisRange.label.align = "right";
+            axisRange.label.verticalCenter = "bottom";
+            axisRange.label.fillOpacity = 0.8;
+
+            valueAxis.renderer.gridContainer.zIndex = 1;
+
+            var axisRange2 = valueAxis.axisRanges.create();
+            axisRange2.value = 12000;
+            axisRange2.grid.strokeOpacity = 0.1;
+            axisRange2.label.text = "2x goal";
+            axisRange2.label.align = "right";
+            axisRange2.label.verticalCenter = "bottom";
+            axisRange2.label.fillOpacity = 0.8;
+
+            var series = chart.series.push(new am4charts.ColumnSeries);
+            series.dataFields.valueY = "steps";
+            series.dataFields.dateX = "date";
+            series.tooltipText = "{valueY.value}";
+            series.tooltip.pointerOrientation = "vertical";
+            series.tooltip.hiddenState.properties.opacity = 1;
+            series.tooltip.hiddenState.properties.visible = true;
+            series.tooltip.adapter.add("x", function (x, target) {
+                return am4core.utils.spritePointToSvg({ x: chart.plotContainer.pixelX, y: 0 }, chart.plotContainer).x + chart.plotContainer.pixelWidth / 2;
+            })
+
+            var columnTemplate = series.columns.template;
+            columnTemplate.width = 30;
+            columnTemplate.column.cornerRadiusTopLeft = 20;
+            columnTemplate.column.cornerRadiusTopRight = 20;
+            columnTemplate.strokeOpacity = 0;
+
+            columnTemplate.adapter.add("fill", function (fill, target) {
+                var dataItem = target.dataItem;
+                if (dataItem.valueY > 6000) {
+                    return chart.colors.getIndex(0);
+                }
+                else {
+                    return am4core.color("#a8b3b7");
+                }
+            })
+
+            var cursor = new am4charts.XYCursor();
+            cursor.behavior = "panX";
+            chart.cursor = cursor;
+            cursor.lineX.disabled = true;
+
+            chart.events.on("datavalidated", function () {
+                dateAxis.zoomToDates(new Date(2018, 0, 21), new Date(2018, 1, 1), false, true);
+            });
+
+            var middleLine = chart.plotContainer.createChild(am4core.Line);
+            middleLine.strokeOpacity = 1;
+            middleLine.stroke = am4core.color("#000000");
+            middleLine.strokeDasharray = "2,2";
+            middleLine.align = "center";
+            middleLine.zIndex = 1;
+            middleLine.adapter.add("y2", function (y2, target) {
+                return target.parent.pixelHeight;
+            })
+
+            cursor.events.on("cursorpositionchanged", updateTooltip);
+            dateAxis.events.on("datarangechanged", updateTooltip);
+
+            function updateTooltip() {
+                dateAxis.showTooltipAtPosition(0.5);
+                series.showTooltipAtPosition(0.5, 0);
+                series.tooltip.validate(); // otherwise will show other columns values for a second
+            }
+
+
+            var label = chart.plotContainer.createChild(am4core.Label);
+            label.text = "Pan chart to change date";
+            label.x = 90;
+            label.y = 50;
+
+        }); // end am4core.ready()
+
+    </script>
+    <script>
+    am4core.ready(function() {
+
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // Create chart instance
+    var chart = am4core.create("chart_1", am4charts.PieChart);
+
+
+    // Add data
+     chart.data = [{
+                "name": "Facebook ",
+                "value": chart_values.facebook,
+            }, {
+                "name": "Twitter ",
+                "value": chart_values.twitter,
+            }, {
+                "name": "Linked In ",
+                "value": chart_values.linkedin,
+            }, {
+                "name": "News ",
+                "value": chart_values.news,
+            }, {
+                "name": "Instagram ",
+                "value": chart_values.instagram,
+            },];
+
+    // Add and configure Series
+    var pieSeries = chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "value";
+    pieSeries.dataFields.category = "name";
+    pieSeries.slices.template.stroke = am4core.color("#fff");
+    pieSeries.slices.template.strokeWidth = 2;
+    pieSeries.slices.template.strokeOpacity = 1;
+    pieSeries.fontSize = 10;
+
+    // This creates initial animation
+    pieSeries.hiddenState.properties.opacity = 1;
+    pieSeries.hiddenState.properties.endAngle = -90;
+    pieSeries.hiddenState.properties.startAngle = -90;
+
+    }); // end am4core.ready()
+    </script>
+
+
+    <div class="container-fluid bg-dark">
+        <div class="row p-3">
+            <div class="col-md-6 m-0 p-0 ">
+
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="card m-0 p-0">
+                            <div class="card-header">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Today
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Today</a>
+                                        <a class="dropdown-item" href="#">Yesterday</a>
+                                        <a class="dropdown-item" href="#">This Month</a>
+                                        <a class="dropdown-item" href="#">Last Month</a>
+                                        <a class="dropdown-item" href="#">This Year</a>
+                                        <a class="dropdown-item" href="#">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-md-6 m-0 p-0 ">
+
+                                      <div id="chart_1" class="m-0 p-0 " style="height: 250px;width:100%"></div>
+                                    </div>
+                                    <div class="col-md-6 m-0 p-0 ">
+                                        <div id="radial_histogram" class="m-0 p-0" style="height: 250px;width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-6">
+
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="card m-0 p-0">
+                            <div class="card-header">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        OFF
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Today</a>
+                                        <a class="dropdown-item" href="#">Yesterday</a>
+                                        <a class="dropdown-item" href="#">This Month</a>
+                                        <a class="dropdown-item" href="#">Last Month</a>
+                                        <a class="dropdown-item" href="#">This Year</a>
+                                        <a class="dropdown-item" href="#">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body m-0 p-0">
+                                <div class="row">
+                                    <div class="col-md-12 m-0 p-0 ">
+                                        <div id="yearly" style="height: 290px;width:100%"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    <!-- -->
+    <div class="row p-3">
+            <div class="col-md-6 m-0 p-0 ">
+
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="card m-0 p-0">
+                            <div class="card-header">
+                                SEND TO PCO ONLY
+                            </div>
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-md-6 m-0 p-0 ">
+
+                                      <div id="chart_5" class="m-0 p-0 " style="height: 250px;width:100%"></div>
+                                    </div>
+                                    <div class="col-md-6 m-0 p-0 ">
+                                        <div id="chart_6" class="m-0 p-0" style="height: 250px;width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-6">
+
+
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="card m-0 p-0">
+                            <div class="card-header">
+                               SEND TO RPO ONLY
+                            </div>
+                            <div class="card-body ">
+                                <div class="row">
+                                    <div class="col-md-6 m-0 p-0 ">
+
+                                      <div id="chart_7" class="m-0 p-0 " style="height: 250px;width:100%"></div>
+                                    </div>
+                                    <div class="col-md-6 m-0 p-0 ">
+                                        <div id="chart_8" class="m-0 p-0" style="height: 250px;width:100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        <!-- -->
+
+        <div class="row p-3">
+            <div class="col-md-6 m-0 p-0 ">
+                <div class="card m-0 p-0 ">
+                    <div class="card-header">Extracted and Selected Of All Websites</div>
+                    <div class="card-body m-0 p-0 ">
+                        <div class=" m-0 p-0 " id="barchart1" style="height: 300px;">
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Extracted and Selected Of All Social </div>
+                    <div class="card-body m-0 p-0">
+                        <div class="m-0 p-0" id="barchart2" style="height: 300px;">
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Extracted and Selected Of All Websites</div>
+                    <div class="card-body m-0 p-0 ">
+
+                        <div id="monthly_bar_chart" style="height: 400px;width:100%;"></div>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+
+    </div>
+
+  {% endblock system_content_block %}
+</body>
+</html>

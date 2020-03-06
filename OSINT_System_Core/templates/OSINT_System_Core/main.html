@@ -1,0 +1,36 @@
+{% extends 'OSINT_System_Core/application_base.html' %}
+
+{% block application_header_block %}
+<!--   to add any liberaries to the application block use this block to reflect only on the application level-->
+
+{% endblock application_header_block %}
+
+
+{% block application_content_block %}
+
+    <h1>this is the content of the public data acqutisition application</h1>
+            <h3>this is the content of the public data acqutisition application</h3>
+
+    <script>
+
+    var es = new ReconnectingEventSource('/events/');
+
+es.addEventListener('message', function (e) {
+    console.log('in messege')
+    console.log(e.data);
+}, false);
+
+es.addEventListener('artical_trend', function (e) {
+    console.log('artical trend')
+    console.log(e.data);
+}, false);
+
+
+es.addEventListener('stream-reset', function (e) {
+    // ... client fell behind, reinitialize ...
+}, false);
+
+
+    </script>
+
+{% endblock %}
