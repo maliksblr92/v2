@@ -1,5 +1,7 @@
 from Public_Data_Acquisition_Unit.mongo_models import *
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
+from OSINT_System_Core.publisher import publish
+
 import logging
 
 import datetime
@@ -210,6 +212,9 @@ class Acquistion_Manager(object):
         if (time_now > expiry_time):
             task.target_reff.make_me_expire()
             task.delete()
+
+
+            publish({'server_name': 'OCS', 'node_id': 1, 'messege_type': 'control, awais'})
             print('######################################### expired task deleted #####################################')
 
 #.........................................................Query Functions...............................................

@@ -20,63 +20,6 @@ from mongoengine import signals
 #connect('OSINT_System')
 client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
-class Mongo_Lookup(object):
-
-    """
-    this class is to perform operations which are normally not supported by mongoengine packege
-
-    """
-    client = None
-
-    def __init__(self):
-        cli = connect(db='OSINT_System', host='192.168.18.20', port=27017)
-        self.client = cli['OSINT_System']
-    def __repr__(self):
-        return self.client.name
-
-    def find_object_by_id(self,object_id):
-        """
-        this method will query the given id in all the collection currently exist in mongodb and return the
-        object of that id or return None if match not found
-        :param object_id:
-        :return:
-        """
-
-        collection_names = self.client.collection_names()
-        for collection in collection_names:
-
-
-            #res = self.client.get_collection(collection).find({'_id': object_id})
-            try:
-                model_name = self.parse_collection_name_to_model_name(collection)
-                model_class_ref = self.str_to_class(model_name)
-                res = model_class_ref.objects(id=object_id)
-
-                if (res.count() > 0):
-                    return res[0]
-
-            except Exception as e:
-                print(e)
-
-        return None
-
-    def str_to_class(self,class_name):
-        return getattr(sys.modules[__name__], class_name)
-
-    def parse_collection_name_to_model_name(self,collection_name):
-
-        stru = collection_name.split('_')
-        new_stru = []
-
-        for w in stru:
-            t = w.capitalize()
-            if(len(t)>1):
-                t = t+'_'
-
-            new_stru.append(t)
-
-        return (''.join(new_stru)).strip('_')
-
 
 class Keybase_KMS(Document):
 
@@ -127,23 +70,24 @@ class Keybase_KMS(Document):
         self.save()
 
 
-
-class Keybase_Include_KMS(Document):
+class Keybase_Included_KMS(Document):
     """
     this model is to keep record that which portfolio or case has used or included
     this keybase document,
 
     """
 
-    keybase = ReferenceField(Keybase_KMS)
-    archive_reference = DynamicField()
+    alpha_reference = ReferenceField(Keybase_KMS)
+    beta_reference = DynamicField()
+    beta_path = ListField()
+
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
     def __str__(self):
-        return self.keybase.title+' reference type'+str(type(self.archive_reference))
+        return self.alpha_reference.title+' reference type'+str(type(self.beta_reference))
 
     def __repr__(self):
-        return self.keybase.title+' reference type'+str(type(self.archive_reference))
+        return self.alpha_reference.title+' reference type'+str(type(self.beta_reference))
 
 
 class Keybase_Matched_KMS(Document):
@@ -151,13 +95,37 @@ class Keybase_Matched_KMS(Document):
     this model is to keep record of all the osint-intell matched with this keybase document
 
     """
-    keybase = ReferenceField(Keybase_KMS)
-    intell_reference = DynamicField()
-    intell_path = ListField()
+    alpha_reference = ReferenceField(Keybase_KMS)
+    beta_reference = DynamicField()
+    beta_path = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
     def __str__(self):
-        return self.keybase.title+' matched '+str(self.intell_reference)
+        return self.alpha_reference.title+' matched '+str(self.beta_reference)
 
     def __repr__(self):
-        return self.keybase.title+' matched '+str(self.intell_reference)
+        return self.alpha_reference.title+' matched '+str(self.beta_reference)
+
+    def resolve_intell_reference(self,step_before=0):
+
+        """
+        this method is used to actually get the value of the intell reference placed in the collection
+        :param km_object:
+        :param step_before:
+        :return:
+
+        """
+
+        try:
+
+            km_json = self.beta_reference.to_mongo()
+            path_list = self.beta_path
+            #print(len(path_list)-step_before)
+
+            for i in range(0,len(path_list)-step_before):
+                km_json = km_json[path_list[i]]
+
+            return km_json
+        except Exception as e:
+          print(e)
+          return None

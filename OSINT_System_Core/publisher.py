@@ -98,6 +98,14 @@ class Rabbit_Publisher(object):
 
         return False
 
+
+
+pub = Rabbit_Publisher(username='ocs', password='rapidev', exchange='control_exchange')
+def publish(data):
+
+    #data = {'server_name':'OCS','node_id':1,'messege_type':'control, awais'}
+    pub.publish(data)
+
 #if __name__ == '__main__':
 #    pub = Rabbit_Publisher(username='ocs',password='rapidev',exchange='control_exchange')
 #    data = {'server_name':'OCS','node_id':1,'messege_type':'control, awais'}
