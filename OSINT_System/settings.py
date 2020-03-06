@@ -32,11 +32,11 @@ ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.27'
 
 #mongoDb setting variables for public access
-db='OSINT_System'
-host='192.168.18.20'
-port=27017
-user = ''
-password = ''
+#db='OSINT_System'
+#host='192.168.18.20'
+#port=27017
+#user = ''
+#password = ''
 
 
 
