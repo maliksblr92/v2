@@ -77,7 +77,7 @@ class Keybase_Included_KMS(Document):
 
     """
 
-    alpha_reference = ReferenceField(Keybase_KMS)
+    alpha_reference = ReferenceField(Keybase_KMS,reverse_delete_rule=CASCADE)
     beta_reference = DynamicField()
     beta_path = ListField()
 
@@ -95,7 +95,7 @@ class Keybase_Matched_KMS(Document):
     this model is to keep record of all the osint-intell matched with this keybase document
 
     """
-    alpha_reference = ReferenceField(Keybase_KMS)
+    alpha_reference = ReferenceField(Keybase_KMS,reverse_delete_rule=CASCADE)
     beta_reference = DynamicField()
     beta_path = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())

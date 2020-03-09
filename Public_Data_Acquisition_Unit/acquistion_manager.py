@@ -1,7 +1,9 @@
 from Public_Data_Acquisition_Unit.mongo_models import *
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
 from OSINT_System_Core.publisher import publish
-
+from Public_Data_Acquisition_Unit.ess_api_controller import *
+from Public_Data_Acquisition_Unit.mongo_models import *
+from OSINT_System_Core.Data_Sharing import Mongo_Lookup
 import logging
 
 import datetime
@@ -35,7 +37,7 @@ class Acquistion_Manager(object):
                 if(interval > 0):
                     #print('in here')
                     Periodic_Targets(gtr,target,datetime.datetime.utcnow() + datetime.timedelta(minutes=interval)).save()
-
+                    publish(' {0} is added to periodic targets'+format(target), message_type='info', module_name=__name__)
             return True
         except Exception as e:
             print(e)
@@ -69,7 +71,8 @@ class Acquistion_Manager(object):
             return True
 
         else:
-            print('unable to add bulk target few arguments are missing ')
+
+            publish('unable to add bulk target few arguments are missing ', message_type='alert', module_name=__name__)
             return False
 
 
@@ -93,10 +96,10 @@ class Acquistion_Manager(object):
             print(kwargs['username'])
             response = appropriate_ess_method(kwargs['username'])
             print(response)
-
+            publish('periodic target added successfully', message_type='info', module_name=__name__)
             return True
         except Exception as e:
-            print(e)
+            publish(str(e), message_type='alert', module_name=__name__)
             return False
         pass
 
@@ -126,33 +129,33 @@ class Acquistion_Manager(object):
             elif (gtr.target_type == 'search'):
                 pass
             else:
-                print('target type not defined')
+                publish('target type not defined',message_type='alert',module_name=__name__)
 
         elif (gtr.website.name == 'Twitter'):
             if (gtr.target_type == 'profile'):
-                return Twitter_Profile
+                return (Twitter_Profile,ess.ess_add_facebook_person_target)
             elif (gtr.target_type == 'search'):
                 pass
             else:
-                print('target type not defined')
+                publish('target type not defined',message_type='alert',module_name=__name__)
 
         elif (gtr.website.name == 'Instagram'):
             if (gtr.target_type == 'profile'):
-                pass
+                return (Instagram_Profile,ess.ess_add_facebook_person_target)
             elif (gtr.target_type == 'search'):
                 pass
             else:
-                print('target type not defined')
+                publish('target type not defined',message_type='alert',module_name=__name__)
 
         elif (gtr.website.name == 'Linkedin'):
             if (gtr.target_type == 'profile'):
-                pass
+                return (Linkedin_Profile, ess.ess_add_facebook_person_target)
             elif (gtr.target_type == 'search'):
                 pass
             else:
-                print('target type not defined')
+                publish('target type not defined',message_type='alert',module_name=__name__)
         else:
-            print('website type not defined')
+            publish('website type not defined',message_type='alert',module_name=__name__)
 
     def get_dataobject_by_gtr(self,gtr):
         appropriate_class,_ = self.get_appropriate_method(gtr)
@@ -271,3 +274,77 @@ class Acquistion_Manager(object):
                     all_expired_objects_list.append(obj)
 
         return all_expired_objects_list
+
+    def fetch_smart_search(self,username,search_site):
+        try:
+            response = ess.ess_add_smart_serach_target(username,search_site)
+
+            return response
+        except Exception as e:
+            print(e)
+
+    def target_internet_survey(self,name,email,phone,address):
+        return ess.target_internet_survey(name,email,phone,address)
+
+    def dynamic_crawling(self,url,attribute_list,ip_address=False):
+        return ess.dynamic_crawling(url,attribute_list,ip_address)
+
+    def get_all_fetched_targets(self):
+
+        responses = []
+
+        GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+        for gtr in GTRs:
+            obj = Facebook_Profile.objects(GTR=gtr.id)
+            if(len(obj) <= 0):
+                obj = Twitter_Profile.objects(GTR=gtr.id)
+                if (len(obj) <= 0):
+                    obj = Instagram_Person.objects(GTR=gtr.id)
+                    if (len(obj) <= 0):
+                        obj = Linkedin_Person.objects(GTR=gtr.id)
+                        if (len(obj) <= 0):
+                            obj = Linkedin_Company.objects(GTR=gtr.id)
+                            if (len(obj) <= 0):
+                                pass
+                            else:
+                                responses.append([obj[0],self.get_target_instance_by_GTR(gtr.id),self.get_social_site_instance_by_GTR(gtr.id)])
+                        else:
+                            responses.append([obj[0],self.get_target_instance_by_GTR(gtr.id),self.get_social_site_instance_by_GTR(gtr.id)])
+                    else:
+                        responses.append([obj[0],self.get_target_instance_by_GTR(gtr.id),self.get_social_site_instance_by_GTR(gtr.id)])
+                else:
+                    responses.append([obj[0],self.get_target_instance_by_GTR(gtr.id),self.get_social_site_instance_by_GTR(gtr.id)])
+            else:
+                responses.append([obj[0],self.get_target_instance_by_GTR(gtr.id),self.get_social_site_instance_by_GTR(gtr.id)])
+
+
+        return responses
+
+    def get_fetched_targets(self,top=50):
+        responses = []
+
+        ml = Mongo_Lookup()
+        GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+        for gtr in GTRs:
+            obj_resp = ml.find_object_by_id(gtr.id)
+            obj_targ = self.get_appropriate_method(gtr)
+
+            responses.append([obj_resp,obj_targ])
+
+        return responses[:top]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

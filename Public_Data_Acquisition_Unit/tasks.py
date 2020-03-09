@@ -16,7 +16,7 @@ def data_acquistion_manager_task(**kwargs):
 def periodic_interval_targets_task():
 
     acq.target_polling()
-    publish({'server_name': 'OCS', 'node_id': 1, 'messege_type': 'celery worker'})
+    publish({'server_name': 'OCS', 'module_name': __name__, 'messege_type': 'info','arguments':{'name':'awais'},'messege':'this is the messege'})
     #print('..............................Acquistion Unit Periodic Task Executed..........................')
 
 
