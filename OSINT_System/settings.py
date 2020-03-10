@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'Public_Data_Acquisition_Unit.apps.PublicDataAcquisitionUnitConfig',
     'System_Log_Management_Unit.apps.SystemLogManagementUnitConfig',
     'User_Accounts_Management_Unit.apps.UserAccountsManagementUnitConfig',
+    'Target_Management_System',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -227,6 +228,7 @@ HUEY = RedisHuey('my-app')
 
 
 STATIC_URL ='/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 
 """
 
