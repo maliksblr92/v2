@@ -1,5 +1,5 @@
-{% extends 'OSINT_System_Core/project_base.html' %}
-{% block page_title%}TSO Dashboard{%endblock%}
+{% extends 'OSINT_System_Core/project_base.html' %} {% load static %}
+{% block page_title %}TSO Dashboard{% endblock %}
 <!-- left sidebar -->
 {% block leftsidebar %}
 <div class="col-lg-2 col-sm-12 col-xs-12 ">
@@ -29,19 +29,13 @@
     <div class="col-lg-12 pt-3 pb-3">
       <!-- first button left  -->
       <div class="left_buttons m-2">
-        <div
-          class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper"
-        >
+        <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
           <div class="  w-25 custom_center   h-100 ">
-            <img src="../fetch icon.svg" class="left_buttons_icons" />
+            <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons" />
           </div>
 
           <div class="  w-25 custom_center  h-100 ">
-            <span
-              class="text text-white font-weight-bold  left_buttons_text "
-              style="font-size:1vw;"
-              >FETCH</span
-            >
+            <span class="text text-white font-weight-bold  left_buttons_text " style="font-size:1vw;">VIEW</span>
           </div>
         </div>
       </div>
@@ -49,19 +43,13 @@
 
       <!-- first button left  -->
       <div class="left_buttons m-2">
-        <div
-          class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper"
-        >
+        <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
           <div class="  w-25 custom_center  h-100 ">
-            <img src="../analyze icon.svg" class="left_buttons_icons" />
+            <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons" />
           </div>
 
           <div class="  w-25 custom_center  h-100 ">
-            <span
-              class="text text-white font-weight-bold left_buttons_text "
-              style="font-size:1vw;"
-              >ANALYZE</span
-            >
+            <span class="text text-white font-weight-bold left_buttons_text " style="font-size:1vw;">ANALYZE</span>
           </div>
         </div>
       </div>
@@ -69,19 +57,13 @@
 
       <!-- first button left  -->
       <div class="left_buttons m-2">
-        <div
-          class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper"
-        >
+        <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
           <div class="  w-25 custom_center   h-100 ">
-            <img src="../search icon.svg" class="left_buttons_icons" />
+            <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons" />
           </div>
 
           <div class="  w-25 custom_center   h-100 ">
-            <span
-              class="text text-white font-weight-bold left_buttons_text "
-              style="font-size:1vw;"
-              >SEARCH</span
-            >
+            <span class="text text-white font-weight-bold left_buttons_text " style="font-size:1vw;">SEARCH</span>
           </div>
         </div>
       </div>
@@ -89,19 +71,13 @@
 
       <!-- first button left  -->
       <div class="left_buttons m-2">
-        <div
-          class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper"
-        >
+        <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
           <div class="  w-25 custom_center  h-100 ">
-            <img src="../generate icon.svg" class="left_buttons_icons" />
+            <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons" />
           </div>
 
           <div class="  w-25 custom_center  h-100 ">
-            <span
-              class="text text-white font-weight-bold left_buttons_text"
-              style="font-size:1vw;"
-              >GENERATE</span
-            >
+            <span class="text text-white font-weight-bold left_buttons_text" style="font-size:1vw;">GENERATE</span>
           </div>
         </div>
       </div>
@@ -118,13 +94,8 @@
   <!-- row 1 start -->
   <div class="row ">
     <div class="col-lg-12 w-100">
-      <div
-        class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper "
-      >
-        <input
-          class="form-control input_rightside"
-          placeholder="enter name here"
-        />
+      <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">
+        <input class="form-control input_rightside" placeholder="enter name here" />
       </div>
     </div>
   </div>
@@ -133,19 +104,14 @@
   <!-- start row 2 -->
   <div class="row ">
     <div class="col-lg-12 w-100 ">
-      <div
-        class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent"
-      >
+      <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">
         <div class="text-white  target_mark_text">
-          <div
-            class="h-100 w-100 text-white w-100 h-100 p-1  "
-            style="font-size:10px;overflow:hidden"
-          >
+          <div class="h-100 w-100 text-white w-100 h-100 p-1  " style="font-size:10px;overflow:hidden">
             sadasdads
           </div>
         </div>
         <div class="  ml-2  target_mark_icon">
-          <img src="./used_assets/target mark.svg" height="60" width="60" />
+          <img src="{% static 'images/target_mark.svg' %}" height="60" width="60" />
         </div>
       </div>
     </div>
@@ -154,26 +120,14 @@
   <!-- start row 3 -->
   <div class="row mt-2">
     <div class="col-lg-12 ">
-      <div
-        class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper "
-      >
+      <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">
         <div class="text-white   right_globe_icon ">
-          <div
-            class="h-100 w-100  text-white w-100 h-100 p-1 custom_center "
-            style="font-size:10px;"
-          >
-            <img
-              src="./used_assets/glob icon.svg"
-              class=""
-              height="40"
-              width="40"
-            />
+          <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">
+            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40" />
           </div>
         </div>
         <div class=" text-white  globe_icon_text_wrapper">
-          <div
-            class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text"
-          >
+          <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">
             sadasdadsasdasdsadadasdassadasdsadadasd asdasdsadsad asdasdsadsad
           </div>
         </div>
@@ -185,17 +139,10 @@
   <!-- start row 4 -->
   <div class="row mt-2">
     <div class="col-lg-12 ">
-      <div
-        class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper "
-      >
+      <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">
         <div class="progress ">
-          <div
-            class="progress-bar progress-bar-secondary custom_progress"
-            role="progressbar"
-            aria-valuenow="60"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          >
+          <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"
+            aria-valuemin="0" aria-valuemax="100">
             60% Complete (warning)
           </div>
         </div>
