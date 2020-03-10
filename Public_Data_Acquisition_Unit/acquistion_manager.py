@@ -1,4 +1,4 @@
-from Public_Data_Acquisition_Unit.mongo_models import *
+from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
 from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.ess_api_controller import *
@@ -28,7 +28,8 @@ class Acquistion_Manager(object):
 
         try:
             gtr = self.get_gtr(self.get_website_by_id(website_id),target_type_index)
-            appropriate_class, _ = self.get_appropriate_method(gtr)
+            appropriate_class, _ , _ = self.get_appropriate_method(gtr)
+            print(appropriate_class)
             ac_object = appropriate_class()
             target = ac_object.create(gtr,kwargs)
 
@@ -36,8 +37,15 @@ class Acquistion_Manager(object):
                 interval = kwargs['periodic_interval']
                 if(interval > 0):
                     #print('in here')
-                    Periodic_Targets(gtr,target,datetime.datetime.utcnow() + datetime.timedelta(minutes=interval)).save()
-                    publish(' {0} is added to periodic targets'+format(target), message_type='info', module_name=__name__)
+                    pt = Periodic_Targets()
+                    pt.GTR = gtr
+                    pt.target_reff = target
+                    pt.re_invoke_time =  datetime.datetime.utcnow() + datetime.timedelta(minutes=interval)
+                    pt.save()
+                    publish(' {0} is added to periodic targets'.format(target), message_type='info', module_name=__name__)
+
+
+            self.add_crawling_target(gtr,0)
             return True
         except Exception as e:
             print(e)
@@ -76,7 +84,7 @@ class Acquistion_Manager(object):
             return False
 
 
-    def add_periodic_target(self, gtr):
+    def add_crawling_target(self, gtr,ctr):
 
         """
         this is simplified method to add a task to crawler , user only need to pass the gtr of the target rest is been taken care of .
@@ -86,17 +94,61 @@ class Acquistion_Manager(object):
         :return:
         """
         try:
-            appropriate_class, appropriate_ess_method = self.get_appropriate_method(gtr)
+            appropriate_class, appropriate_ess_method, _ = self.get_appropriate_method(gtr)
             kwargs = appropriate_class.objects(GTR=gtr.id)[0].to_mongo()
             print(kwargs)
             """
             user needs to pass this kwargs and gtr to submit a task to ess,
             kwargs is taken from the database and gtr is the only thing which periodic database need to provide
             """
-            print(kwargs['username'])
-            response = appropriate_ess_method(kwargs['username'])
-            print(response)
-            publish('periodic target added successfully', message_type='info', module_name=__name__)
+            print(gtr.target_type)
+
+            if(gtr.target_type == 'keybase_crawling'):
+                response = None #appropriate_ess_method(kwargs['url'],kwargs['ip'],kwargs['domain'],kwargs['pictures'],kwargs['videos'],kwargs['headings'],kwargs['paragraphs'],kwargs['links'],gtr,ctr)
+                print(response)
+                publish('keybase target added successfully', message_type='info', module_name=__name__)
+
+            elif (gtr.target_type == 'dynamic_crawling'):
+
+
+                ip=domain=pictures=videos=headings=paragraphs=links = False
+
+
+
+                #if 'url' in kwargs: url = kwargs['url']
+                if 'ip' in kwargs: ip = kwargs['ip']
+                if 'domain' in kwargs: domain = kwargs['domain']
+                if 'pictures' in kwargs: pictures = kwargs['pictures']
+                if 'videos' in kwargs: videos = kwargs['videos']
+                if 'headings' in kwargs: headings = kwargs['headings']
+                if 'paragraphs' in kwargs: paragraphs = kwargs['paragraphs']
+                if 'links' in kwargs: links = kwargs['links']
+
+
+
+                response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr,ctr)
+                print(response)
+                publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
+            else:
+
+                #ess_api needs basic arguments for adding a target
+
+                username = kwargs['username']
+                category = gtr.website.name.lower()
+                entity_type = gtr.target_type
+
+                GTR = gtr.id
+                CTR = ctr
+
+                print(username,category,entity_type,GTR,CTR)
+
+                response = appropriate_ess_method(username,category,entity_type,GTR,CTR)
+                print(response)
+                publish('crawling target added successfully', message_type='info', module_name=__name__)
+
+
+
+
             return True
         except Exception as e:
             publish(str(e), message_type='alert', module_name=__name__)
@@ -121,11 +173,11 @@ class Acquistion_Manager(object):
         #gtr = Global_Target_Reference.objects(id=gtr)
         if(gtr.website.name == 'Facebook'):
             if(gtr.target_type == 'profile'):
-                return (Facebook_Profile,ess.ess_add_facebook_person_target)
+                return (Facebook_Profile,ess.add_target,Facebook_Profile_Response_TMS)
             elif (gtr.target_type == 'page'):
-                pass
+                return (Facebook_Page,ess.add_target,Facebook_Page_Response_TMS)
             elif (gtr.target_type == 'group'):
-                pass
+                return (Facebook_Group,ess.add_target,Facebook_Group_Response_TMS)
             elif (gtr.target_type == 'search'):
                 pass
             else:
@@ -133,7 +185,7 @@ class Acquistion_Manager(object):
 
         elif (gtr.website.name == 'Twitter'):
             if (gtr.target_type == 'profile'):
-                return (Twitter_Profile,ess.ess_add_facebook_person_target)
+                return (Twitter_Profile,ess.add_target,Twitter_Response_TMS)
             elif (gtr.target_type == 'search'):
                 pass
             else:
@@ -141,7 +193,7 @@ class Acquistion_Manager(object):
 
         elif (gtr.website.name == 'Instagram'):
             if (gtr.target_type == 'profile'):
-                return (Instagram_Profile,ess.ess_add_facebook_person_target)
+                return (Instagram_Profile,ess.add_target,Instagram_Response_TMS)
             elif (gtr.target_type == 'search'):
                 pass
             else:
@@ -149,8 +201,15 @@ class Acquistion_Manager(object):
 
         elif (gtr.website.name == 'Linkedin'):
             if (gtr.target_type == 'profile'):
-                return (Linkedin_Profile, ess.ess_add_facebook_person_target)
-            elif (gtr.target_type == 'search'):
+                return (Linkedin_Profile, ess.add_target,Linkedin_Profile_Response_TMS)
+            elif (gtr.target_type == 'company'):
+                return (Linkedin_Company, ess.add_target,Linkedin_Company_Response_TMS)
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'custom'):
+            if (gtr.target_type == 'dynamic_crawling'):
+                return (Dynamic_Crawling, ess.dynamic_crawling,None)
+            elif (gtr.target_type == 'keybase_crawling'):
                 pass
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
@@ -182,10 +241,10 @@ class Acquistion_Manager(object):
         return Global_Target_Reference.objects(id=gtr_id)[0]
 
     def get_periodic_target_list(self):
-        return Periodic_Targets.objects( )
+        return Periodic_Targets.objects()
 
-    def do_invoke_target(self,gtr):
-        self.add_periodic_target(gtr)
+    def do_invoke_target(self,gtr,ctr):
+        self.add_crawling_target(gtr,ctr)
 
     def target_polling(self):
 
@@ -199,14 +258,14 @@ class Acquistion_Manager(object):
                 # then invoke the task
                 #ap_cls,_ = self.get_appropriate_method(task.GTR)
                 #target = ap_cls.objects(GTR=task.GTR.id)[0]
-                task.revoke_time = datetime.datetime.utcnow() + datetime.timedelta(minutes=task.target_reff.periodic_interval)
+                task.re_invoke_time = datetime.datetime.utcnow() + datetime.timedelta(minutes=task.target_reff.periodic_interval)
+                task.CTR = task.CTR+1
                 task.save()
-                self.do_invoke_target(task.GTR)
+                self.do_invoke_target(task.GTR,task.CTR)
                 print('*************************************Task Reinvoked {0}*****************************'.format(task.target_reff.name))
 
             self.remove_expired_targets(task)
         print('..................................Task Polling Survey Completed..................................')
-        pass
 
     def remove_expired_targets(self,task):
         time_now = datetime.datetime.utcnow()
@@ -286,11 +345,12 @@ class Acquistion_Manager(object):
     def target_internet_survey(self,name,email,phone,address):
         return ess.target_internet_survey(name,email,phone,address)
 
-    def dynamic_crawling(self,url,attribute_list,ip_address=False):
-        return ess.dynamic_crawling(url,attribute_list,ip_address)
+    def dynamic_crawling(self,url,ip_address,domain,pictures,videos,heading,paragraphs,links,GTR,CTR):
+        return ess.dynamic_crawling(url,ip_address,domain,pictures,videos,heading,paragraphs,links,GTR,CTR)
 
     def get_all_fetched_targets(self):
-
+        pass
+        """
         responses = []
 
         GTRs = Global_Target_Reference.objects.all().order_by('-id')
@@ -320,6 +380,7 @@ class Acquistion_Manager(object):
 
 
         return responses
+        """
 
     def get_fetched_targets(self,top=50):
         responses = []

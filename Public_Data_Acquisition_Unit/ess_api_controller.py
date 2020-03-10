@@ -324,7 +324,7 @@ class Ess_Api_Controller(object):
 
     def target_internet_survey(self,name,email,phone,address):
         try:
-            add_target_url = 'social/twitter/worldtrends/'
+            add_target_url = 'target_internet_survey/'
             payload = {'name': name,'email':email,'phone':phone,'address':address}
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
@@ -333,10 +333,11 @@ class Ess_Api_Controller(object):
             print(e)
             return {'response': 'ess replied null'}
 
-    def dynamic_crawling(self,url,attribute_list,ip_address):
+    def dynamic_crawling(self,url,ip_address,domain,pictures,videos,heading,paragraphs,links,GTR,CTR):
         try:
-            add_target_url = 'social/twitter/worldtrends/'
-            payload = {'url': url,'attribute_list':attribute_list,'ip_address':ip_address}
+            add_target_url = 'generic/'
+            payload = {'url': url,'ip_address':ip_address,'domain':domain,'pictures':pictures,'videos':videos,'heading':heading,'paragraphs':paragraphs,'links':links,'GTR':GTR,'CTR':CTR}
+
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
@@ -354,6 +355,79 @@ class Ess_Api_Controller(object):
         except Exception as e:
             print(e)
             return {'response': 'ess replied null'}
+
+    def news_crawling(self,top = 10,news_site='bbc'):
+        try:
+            add_target_url = 'news_crawler/'
+            payload = {'number_of_headlines':top,'channel_name':news_site}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def instagram_target_identification(self,query):
+        try:
+            add_target_url = 'instagram_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def facebook_target_identification(self,query):
+        try:
+            add_target_url = 'facebook_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def linkedin_target_identification(self,query):
+        try:
+            add_target_url = 'linkedin_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def twitter_target_identification(self,query):
+        try:
+            add_target_url = 'twitter_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def reddit_target_identification(self,query):
+        try:
+            add_target_url = 'reddit_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 
 
 if __name__== "__main__":
