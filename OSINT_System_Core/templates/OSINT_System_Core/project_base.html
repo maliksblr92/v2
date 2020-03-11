@@ -7,8 +7,6 @@
   <title>{% block page_title%}{%endblock%}</title>
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
   <link rel="stylesheet" href="{% static 'font-awesome/css/all.min.css' %}" />
-  <!-- loading css with link does not evaluate static tag -->
-  <link rel="stylesheet" href="{% static 'OSINT_System_Core/css/style.css' %}" />
   {% comment %}
   <!-- including style.css so that it should be evaluated by django -->
   <!-- <style>
@@ -18,6 +16,8 @@
   {% block head_dep %} {% endblock %}
   {% block head_styles %}
   {% endblock %}
+  <!-- loading css with link does not evaluate static tag -->
+  <link rel="stylesheet" href="{% static 'OSINT_System_Core/css/style.css' %}" />
 </head>
 
 <body>
@@ -83,6 +83,11 @@
     </div>
     {% endblock %}
     <!-- end header -->
+
+    <!-- small navbar below header -->
+    {% block smallnavbar %}
+    {% endblock %}
+    <!-- end of navbar below header -->
     <!-- start body -->
     <div class="row mt-5">
       <!-- left sidebar -->
