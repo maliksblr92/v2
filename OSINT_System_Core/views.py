@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from django.http import HttpResponse,HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
-from Public_Data_Acquisition_Unit.data_acquistion_manager import Acquistion_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from django.shortcuts import reverse,render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -43,7 +43,7 @@ from rest_framework.status import (
 # Create your views here.
 
 #processing_manager = Processing_Manager()
-acq_manager = Acquistion_Manager()
+acq = Acquistion_Manager()
 #coreDb = Coredb_Manager()
 log_manager = System_Log_Manager()
 
@@ -504,6 +504,29 @@ class Supported_Social_Site_List(APIView):
         print(serializer.data)
         return JsonResponse(serializer.data,safe=False)
 """
+
+
+
+#...................................................Views for General Query Functions.(LATEST)..................................
+
+class Crawler_Internet_Connection(View):
+    #permission_classes = (IsAuthenticated,)
+
+    def get(self, request,*args,**kwargs):
+
+        resp = acq.crawler_internet_connection()
+        return JsonResponse(resp,safe=False)
+
+
+class Microcrawler_Status(View):
+    # permission_classes = (IsAuthenticated,)
+    resp = acq.mircocrawler_status()
+    def get(self, request, *args, **kwargs):
+
+        resp = acq.mircocrawler_status()
+        return JsonResponse(resp, safe=False)
+
+
 
 
 #...................................................Views for SmartSearches ...................................................

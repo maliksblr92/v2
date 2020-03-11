@@ -22,13 +22,13 @@ connect(db='OSINT_System', host='192.168.18.20', port=27017)
 # connect('OSINT_Core')
 
 class Raw_Data(Document):
-    GTR = IntField()
+    GTR = StringField()
     CTR = IntField()
     data = DictField()
 
 
 class Change_Record(Document):
-    GTR = IntField()
+    GTR = StringField()
     CTR = IntField()
     recent_CTR = IntField()
     # attribute_keylist = DictField()
@@ -99,7 +99,7 @@ class Twitter_Search(Document):
 
 
 class Twitter_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     author_account = LongField()
     name = StringField(max_length=50)
     location = StringField()
@@ -127,7 +127,7 @@ class Twitter_Response_TMS(Document):
 
 
 class Linkedin_Profile_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     target_type = StringField()
     name = StringField()
     headline = StringField()
@@ -153,11 +153,11 @@ class Linkedin_Profile_Response_TMS(Document):
 
 
 class Linkedin_Company_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     target_type = StringField()
     name = StringField()
     image_url = StringField()
-    websites = ListField()
+    websites = StringField()
     target_update_count = LongField()
     description = StringField()
     company_size = StringField()
@@ -202,7 +202,7 @@ class Instagram_Posts(EmbeddedDocument):
 
 
 class Instagram_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     target_type = StringField()
     biography = StringField()
     external_url = URLField()
@@ -244,11 +244,14 @@ class Facebook_Posts(EmbeddedDocument):
     headline = StringField()
     post_text = StringField()
     complete_time = DateTimeField()
-    likes = IntField()
-    comments = IntField()
-    shares = IntField()
-    picture_directory = StringField()
+    reactions_statistics = IntField()
+    comments_statistics = IntField()
+    shares_statistics = IntField()
+    picture_directory = ListField()
     sentiment = StringField()
+    video_directory = ListField()
+    reactions = DictField()
+    comments = ListField()
 
 
 class Page_Posts(EmbeddedDocument):
@@ -274,8 +277,9 @@ class Page_Posts(EmbeddedDocument):
 
 
 class Facebook_Profile_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     name = StringField()
+    username = StringField()
     author_id = IntField()
     target_type = StringField()
     # author_account = StringField()
@@ -287,7 +291,7 @@ class Facebook_Profile_Response_TMS(Document):
     contact_information = ListField()
     web_links = DictField()
     general_information = DictField()
-    relationship = ListField()
+    relationship = StringField()
     family = ListField()
     events = ListField()
     friends = ListField()
@@ -297,10 +301,10 @@ class Facebook_Profile_Response_TMS(Document):
     def pre_save(cls, sender, document, **kwargs):
         print('.........................................MongoSignal..............................................')
 
-    comments = DictField()
-    mentions = ListField()
+    # comments= DictField()
+    # mentions= ListField()
     close_associates = ListField()
-    pictures = ListField()
+    # pictures= ListField()
     check_ins = ListField()
     interests = DictField()
     profile_overview_summary = StringField()
@@ -317,7 +321,7 @@ class Facebook_Profile_Response_TMS(Document):
 
 
 class Facebook_Page_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     target_update_count = LongField()
     username = StringField()
     name = StringField()
@@ -348,7 +352,7 @@ class Facebook_Page_Response_TMS(Document):
 
 
 class Facebook_Group_Response_TMS(Document):
-    GTR = IntField()
+    GTR = StringField()
     target_update_count = LongField()
     username = StringField()
     name = StringField()

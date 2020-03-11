@@ -428,7 +428,30 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def microcrawler_status(self):
+        try:
+            add_target_url = 'crawler_status/'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
 
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+
+    def crawler_internet_connection(self):
+        try:
+            add_target_url = 'crawler_internet/'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
 
 if __name__== "__main__":
     print('i have been called')

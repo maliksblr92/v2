@@ -30,6 +30,9 @@ class Add_Target(View):
         website_id = kwargs['website_id']
         target_type_index = kwargs['target_type_index']
 
+        #different target types has different kwargs pass the depending on the target_type with basic arguemtns
+
+
         acq.add_target(website_id,target_type_index,username='username',user_id='user_id')
         publish('target created successfully',message_type='notification')
 
@@ -72,6 +75,5 @@ class Dyanamic_Crawling(View):
 class Target_Fetched(View):
     def get(self):
         pass
-
 
 
