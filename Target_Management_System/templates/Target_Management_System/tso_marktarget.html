@@ -1,0 +1,231 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_marktarget.css' %}">
+{% endblock %}
+
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive ">
+            <a href="{% static 'tms/marktarget/' %}" class="btn secondnavitems "> MARK</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% static 'tms/fetchtarget/' %}" class="btn secondnavitems "> FETCH</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% static 'tms/identifytarget/' %}" class="btn secondnavitems "> IDENTIFY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% static 'tms/internetsurvey/' %}" class="btn secondnavitems "> SURVEY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% static 'tms/dynamiccrawling/' %}" class="btn secondnavitems "> CRAWLING</a>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+<!-- style="background-color:#012847; border-radius:15px 15px 0 0;" -->
+
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+                <div class="row">
+                    <div class="mydiv col-md-12 glowing_border " style="height:500px;border-radius:15px 15px 0px 0px;">
+                        <div class="row">
+                            <div class="col-md-12 markTargetDiv ">
+                                <!-- First Row of the Main COntent-->
+                                <div class="row">
+                                    <!-- Div for Mark Target Section-->
+                                    <div class="col-md-7 topcontentbar" style="border-radius: 15px 0 0 0;">
+                                        <h5 class=" myH5"> Mark Target</h5>
+                                    </div>
+                                    <div class="col-md-5"
+                                        style="background-color:#243F52;padding-left:1.5rem; border-radius:0px 15px 0 0;">
+                                        <!--Social media icons-->
+                                        <div class="row">
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <a href="#"><i style="color:white; opacity:0.8;"
+                                                        class="fab fa-reddit-square fa-2x"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i>
+                                            </div>
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;"
+                                                    class="fab fa-twitter-square fa-2x"></i>
+                                            </div>
+                                        </div>
+                                        <!--END OF SOCIAL MEDIA -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- This is The Form Section below top-section-->
+                            <div class="row">
+                                <div class="col-md-4 mt-5 ">
+                                    <div class="mt-5">
+                                        <img class="ml-5" style="height:150px; width:150px;"
+                                            src="{% static 'images/testimonial.png' %}" alt="">
+                                    </div>
+                                </div>
+                                <!-- END OF col-md4 LEFT DIV-->
+
+                                <!-- FORM DIV  RIGHT SIDE-->
+                                <div class="col-md-8">
+                                    <!--FORMS-->
+                                    <form style="padding-bottom:10px;">
+                                        <div class="form-group ml-5">
+                                            <div class="input-group    mt-5 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em; border:1px solid #707070;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author account </span>
+                                                </div>
+                                                <input
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px;border:1px solid #707070; "
+                                                    type="text" class="myselectinput form-control "
+                                                    placeholder="Please Enter your number"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button type="button"
+                                                        style="font-size:13px;background: linear-gradient(90deg, rgba(148,148,148,35%) 0%, rgba(194,194,194,40%) 50%, rgba(148,148,148,35%) 100%);"
+                                                        class="btn btn-secondary ">SMART SEARCH</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author Type </span>
+                                                </div>
+                                                <select
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                    class="custom-select myselectinput" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author ID </span>
+                                                </div>
+                                                <input
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                    type="text" class="form-control myselectinput"
+                                                    placeholder="Please Enter your number"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            </div>
+
+                                            <!--NEW DIV-->
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1emID;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author Name </span>
+                                                </div>
+                                                <input
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                    type="text" class="form-control  myselectinput"
+                                                    placeholder="Please Enter your number"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            </div>
+
+                                            <!--AUTHUR URL-->
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author URL </span>
+                                                </div>
+                                                <input
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                    type="text" class="form-control  myselectinput"
+                                                    placeholder="Please Enter your number"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                                            </div>
+
+                                            <!-- DATE AND TIME 2 column div -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- EXPIRED ON SECTION-->
+                                                    <div class="input-group   mt-1 mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                      opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Expire on </span>
+                                                        </div>
+                                                        <input class="form-control myselectinput" id="date"
+                                                            style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                            name="date" placeholder="MM/DD/YYY" type="text" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <!--INTERVAL SECTION-->
+                                                    <div class="input-group   mt-1 mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                      opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Interval </span>
+                                                        </div>
+                                                        <select
+                                                            style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                            class="custom-select myselectinput" id="inputGroupSelect01">
+                                                            <option selected>on time only</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end of 2 column div for date and time-->
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
+                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Screenshoots </span>
+                                                </div>
+                                                <input
+                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                    type="text" class="form-control myselectinput"
+                                                    placeholder="Yes or No" aria-label="Recipient's username"
+                                                    aria-describedby="basic-addon2">
+
+                                            </div>
+                                        </div>
+                                        <!-- TWO BUTTON BOTTOM-->
+                                        <div class="row d-flex flex-row">
+                                            <div class="col-md-12 ml-5 ">
+                                                <!--LEFT BUTTON-->
+                                                <button type="button" class="btn btn-secondary mainbutton">CLEAR
+                                                    FORM</button>
+                                                <button type="button" style="float:right; "
+                                                    class="btn btn-secondary mainbutton mr-5">Submit</button>
+                                            </div>
+                                        </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
