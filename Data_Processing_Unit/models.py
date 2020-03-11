@@ -121,13 +121,12 @@ class Twitter_Response_TMS(Document):
     behaviour = StringField()
     common_words = ListField()
     sentiments = ListField()
-    topic = ListField()
     emotions = ListField()
     posting_time_charts = ListField()
     tweets = ListField(EmbeddedDocumentField(Person_Tweets))
 
 
-class Linkedin_Response_TMS(Document):
+class Linkedin_Profile_Response_TMS(Document):
     GTR = IntField()
     target_type = StringField()
     name = StringField()
@@ -148,9 +147,18 @@ class Linkedin_Response_TMS(Document):
     experience = DictField()
     interests = ListField()
     accomplishments = DictField()
-    field_of_interest = StringField()
+    field_of_interest = ListField()
     experience_education_graph = ListField()
+    linked_to = ListField()
 
+
+class Linkedin_Company_Response_TMS(Document):
+    GTR = IntField()
+    target_type = StringField()
+    name = StringField()
+    image_url = StringField()
+    websites = ListField()
+    target_update_count = LongField()
     description = StringField()
     company_size = StringField()
     industry = StringField()
@@ -160,6 +168,7 @@ class Linkedin_Response_TMS(Document):
     specialties = StringField()
     number_of_employees = IntField()
     jobs = DictField()
+    linked_to = ListField()
 
 
 """
@@ -213,7 +222,6 @@ class Instagram_Response_TMS(Document):
     behaviour = StringField()
     common_words = ListField()
     sentiments = ListField()
-    topic = ListField()
     emotions = ListField()
 
     posts = ListField(EmbeddedDocumentField(Instagram_Posts))
@@ -224,8 +232,48 @@ class Instagram_Response_TMS(Document):
 
 
 # signals.pre_save.connect(Instagram_Person.pre_save, sender=Instagram_Person)
+class Facebook_Posts(EmbeddedDocument):
+    post_id = IntField()
+    author_name = StringField()
+    auther_id = IntField()
+    author_url = StringField()
+    author_media_directory = StringField()
+    post_link = URLField()
+    entity_type = StringField()
+    associated_links = ListField()
+    headline = StringField()
+    post_text = StringField()
+    complete_time = DateTimeField()
+    likes = IntField()
+    comments = IntField()
+    shares = IntField()
+    picture_directory = StringField()
+    sentiment = StringField()
 
-class Facebook_Response_TMS(Document):
+
+class Page_Posts(EmbeddedDocument):
+    post_id = LongField()
+    author_username = StringField()
+    author_name = StringField()
+    media_directory = StringField()
+    tags = ListField()
+    post_link = URLField()
+    associated_links = ListField()
+    headline = StringField()
+    timestamp = DateTimeField()
+    content_type = DictField()
+    post_text = StringField()
+    picture_links = ListField()
+    video_links = ListField()
+    reactions_statistics = IntField()
+    comments_statistics = IntField()
+    shares_statistics = IntField()
+    reactions = DictField()
+    comments = ListField()
+    sentiment = StringField()
+
+
+class Facebook_Profile_Response_TMS(Document):
     GTR = IntField()
     name = StringField()
     author_id = IntField()
@@ -241,9 +289,14 @@ class Facebook_Response_TMS(Document):
     general_information = DictField()
     relationship = ListField()
     family = ListField()
-    life_events_timeline = ListField()
+    events = ListField()
     friends = ListField()
-    posts = ListField()
+    posts = ListField(EmbeddedDocumentField(Facebook_Posts))
+
+    @classmethod
+    def pre_save(cls, sender, document, **kwargs):
+        print('.........................................MongoSignal..............................................')
+
     comments = DictField()
     mentions = ListField()
     close_associates = ListField()
@@ -258,10 +311,71 @@ class Facebook_Response_TMS(Document):
     sentiments = ListField()
     behaviour = StringField()
     common_words = ListField()
-    sentiments = ListField()
-    topic = ListField()
     emotions = ListField()
     target_update_count = LongField()
+    linked_to = ListField()
+
+
+class Facebook_Page_Response_TMS(Document):
+    GTR = IntField()
+    target_update_count = LongField()
+    username = StringField()
+    name = StringField()
+    target_type = StringField()
+    owner = StringField()
+    scope = StringField()
+    facebook_type = StringField()
+    statistics = DictField()
+    page_info = ListField()
+    contact_information = ListField()
+    additional_info = ListField()
+    countries_involved = ListField()
+    page_history = ListField()
+    ads_status = StringField()
+    liked_pages = ListField()
+    page_posts = ListField(EmbeddedDocumentField(Page_Posts))
+
+    @classmethod
+    def pre_save(cls, sender, document, **kwargs):
+        print('.........................................MongoSignal..............................................')
+
+    posting_time_charts = ListField()
+    sentiments = ListField()
+    behaviour = StringField()
+    common_words = ListField()
+    close_associates = ListField()
+    linked_to = ListField()
+
+
+class Facebook_Group_Response_TMS(Document):
+    GTR = IntField()
+    target_update_count = LongField()
+    username = StringField()
+    name = StringField()
+    target_type = StringField()
+    description = StringField()
+    group_privacy = StringField()
+    group_visibility = StringField()
+    group_category = StringField()
+    group_posting_stats = DictField()
+    group_members_stats = DictField()
+    group_creator = DictField()
+    group_timestamp = DateTimeField()
+    group_history = ListField()
+    group_rules = ListField()
+    group_admins = ListField()
+    group_moderators = ListField()
+    num_admins = IntField()
+    num_moderators = IntField()
+    events = ListField()
+    page_members = ListField()
+    close_associates = ListField()
+    posts = ListField()
+    posting_time_charts = ListField()
+    sentiments = ListField()
+    behaviour = StringField()
+    common_words = ListField()
+    linked_to = ListField()
 
 
 """
