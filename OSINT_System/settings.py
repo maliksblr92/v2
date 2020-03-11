@@ -32,17 +32,21 @@ ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.27'
 
 #mongoDb setting variables for public access
-db='OSINT_System'
-host='192.168.18.20'
-port=27017
-user = ''
-password = ''
+#db='OSINT_System'
+#host='192.168.18.20'
+#port=27017
+#user = ''
+#password = ''
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'Portfolio_Management_System.apps.PortfolioManagementSystemConfig',
+    'Case_Management_System.apps.CaseManagementSystemConfig',
+    'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
+    'Target_Management_System.apps.TargetManagementSystemConfig',
     'corsheaders',
     'channels',
     'django_eventstream',

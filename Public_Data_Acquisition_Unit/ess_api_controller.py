@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 
 #ESS_IP = settings.ESS_IP
-ESS_SERVER_BASE_URL = 'http://192.168.18.19:8000/crawler/' #ip of the serve or its url
+ESS_SERVER_BASE_URL = 'http://192.168.18.19:8000/' #ip of the serve or its url
 ESS_API_TOKEN = ''  #api token here
 ESS_SERVER_PORT = '8000'
 ESS_SERVER_USER = 'rapidev'
@@ -289,8 +289,8 @@ class Ess_Api_Controller(object):
 
     def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook'):
         try:
-            add_target_url = 'social/'+search_site+'/smartsearch/'
-            payload = {'username': username}
+            add_target_url = '/smart_search/'
+            payload = {'username': username,'category':search_site}
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
@@ -320,6 +320,114 @@ class Ess_Api_Controller(object):
         except Exception as e:
             print(e)
             return {'response': 'ess replied null'}
+
+
+    def target_internet_survey(self,name,email,phone,address):
+        try:
+            add_target_url = 'target_internet_survey/'
+            payload = {'name': name,'email':email,'phone':phone,'address':address}
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+        except Exception as e:
+            print(e)
+            return {'response': 'ess replied null'}
+
+    def dynamic_crawling(self,url,ip_address,domain,pictures,videos,heading,paragraphs,links,GTR,CTR):
+        try:
+            add_target_url = 'generic/'
+            payload = {'url': url,'ip_address':ip_address,'domain':domain,'pictures':pictures,'videos':videos,'heading':heading,'paragraphs':paragraphs,'links':links,'GTR':GTR,'CTR':CTR}
+
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+        except Exception as e:
+            print(e)
+            return {'response': 'ess replied null'}
+
+    def add_target(self,username,category,entity_type,GTR,CTR):
+        try:
+            add_target_url = 'target/'
+            payload = {'username':username,'category':category,'entity_type':entity_type,'GTR':GTR,'CTR':CTR}
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+        except Exception as e:
+            print(e)
+            return {'response': 'ess replied null'}
+
+    def news_crawling(self,top = 10,news_site='bbc'):
+        try:
+            add_target_url = 'news_crawler/'
+            payload = {'number_of_headlines':top,'channel_name':news_site}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def instagram_target_identification(self,query):
+        try:
+            add_target_url = 'instagram_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def facebook_target_identification(self,query):
+        try:
+            add_target_url = 'facebook_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def linkedin_target_identification(self,query):
+        try:
+            add_target_url = 'linkedin_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def twitter_target_identification(self,query):
+        try:
+            add_target_url = 'twitter_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def reddit_target_identification(self,query):
+        try:
+            add_target_url = 'reddit_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 
 
 if __name__== "__main__":
