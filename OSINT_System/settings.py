@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from huey import RedisHuey
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -31,41 +32,39 @@ ALLOWED_HOSTS = ['*']
 ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.27'
 
-#mongoDb setting variables for public access
-#db='OSINT_System'
-#host='192.168.18.20'
-#port=27017
+# mongoDb setting variables for public access
+# db='OSINT_System'
+# host='192.168.18.20'
+# port=27017
 #user = ''
 #password = ''
-
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'Portfolio_Management_System.apps.PortfolioManagementSystemConfig',
-    'Case_Management_System.apps.CaseManagementSystemConfig',
-    'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
-    'Target_Management_System.apps.TargetManagementSystemConfig',
-    'corsheaders',
-    'channels',
-    'django_eventstream',
-    'background_task',
-    'rest_framework',
-    'OSINT_System_Core.apps.OsintSystemCoreConfig',
-    'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
-    'Data_Processing_Unit.apps.DataProcessingUnitConfig',
-    'Public_Data_Acquisition_Unit.apps.PublicDataAcquisitionUnitConfig',
-    'System_Log_Management_Unit.apps.SystemLogManagementUnitConfig',
-    'User_Accounts_Management_Unit.apps.UserAccountsManagementUnitConfig',
-    'Target_Management_System',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'channels',
+    'background_task',
+    'django_eventstream',
     'huey.contrib.djhuey',
+    'User_Accounts_Management_Unit.apps.UserAccountsManagementUnitConfig',
+    'OSINT_System_Core.apps.OsintSystemCoreConfig',
+    'Public_Data_Acquisition_Unit.apps.PublicDataAcquisitionUnitConfig',
+    'Data_Processing_Unit.apps.DataProcessingUnitConfig',
+    'System_Log_Management_Unit.apps.SystemLogManagementUnitConfig',
+    'Target_Management_System.apps.TargetManagementSystemConfig',
+    'Portfolio_Management_System.apps.PortfolioManagementSystemConfig',
+    'Case_Management_System.apps.CaseManagementSystemConfig',
+    'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
+    'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +84,7 @@ ROOT_URLCONF = 'OSINT_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -186,7 +184,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -221,7 +218,6 @@ LOGGING = {
 }
 
 
-from huey import RedisHuey
 #from redis import ConnectionPool
 
 #pool = ConnectionPool(host='my.redis.host', port=6379, max_connections=20)
@@ -231,7 +227,7 @@ HUEY = RedisHuey('my-app')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-STATIC_URL ='/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 
 """
@@ -249,4 +245,3 @@ TEMPLATE_LOADERS = (
 'django.template.loaders.app_directories.Loader',)
 
 """
-
