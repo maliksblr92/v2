@@ -20,4 +20,10 @@ def periodic_interval_targets_task():
     #print('..............................Acquistion Unit Periodic Task Executed..........................')
 
 
+@periodic_task(run_every=(crontab()),name='periodic_interval_targets_task')
+def periodic_general_task():
+    pass
+
+    #get news request here
+    #get top trends request here
 
