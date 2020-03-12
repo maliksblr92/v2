@@ -12,19 +12,19 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive ">
-            <a href="{% static 'tms/marktarget/' %}" class="btn secondnavitems "> MARK</a>
+            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% static 'tms/fetchtarget/' %}" class="btn secondnavitems "> FETCH</a>
+            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-            <a href="{% static 'tms/identifytarget/' %}" class="btn secondnavitems "> IDENTIFY</a>
+            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% static 'tms/internetsurvey/' %}" class="btn secondnavitems "> SURVEY</a>
+            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-            <a href="{% static 'tms/dynamiccrawling/' %}" class="btn secondnavitems "> CRAWLING</a>
+            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
         </div>
     </div>
     <div class="col-md-2"></div>
@@ -100,11 +100,13 @@
                                                     style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px;border:1px solid #707070; "
                                                     type="text" class="myselectinput form-control "
                                                     placeholder="Please Enter your number"
-                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                                    id="author-account">
                                                 <div class="input-group-append">
                                                     <button type="button"
                                                         style="font-size:13px;background: linear-gradient(90deg, rgba(148,148,148,35%) 0%, rgba(194,194,194,40%) 50%, rgba(148,148,148,35%) 100%);"
-                                                        class="btn btn-secondary ">SMART SEARCH</button>
+                                                        class="btn btn-secondary" id="fb-smartsearch">SMART
+                                                        SEARCH</button>
                                                 </div>
                                             </div>
 
@@ -228,4 +230,25 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block foot_script %}
+<script>
+    let smartsearch = $('#fb-smartsearch')
+    smartsearch.click((event) => {
+        let author_account = $('#author-account').val()
+        let data = {
+            'author_account': author_account,
+            'search_site': 'facebook'
+        }
+        $.ajax({
+            dataType: "json",
+            url: "/tms/smartsearch/",
+            data: data,
+            success: (response) => {
+                console.log(response)
+            }
+        })
+
+    })
+</script>
 {% endblock %}
