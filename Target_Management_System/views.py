@@ -20,6 +20,7 @@ class Add_Target(View):
         social_sites = acq.get_all_social_sites()
         news_sites = acq.get_all_news_sites()
         blog_sites = acq.get_all_blog_sites()
+        print(social_sites,news_sites,blog_sites)
         pass
 
     def post(self,request,*args,**kwargs):
