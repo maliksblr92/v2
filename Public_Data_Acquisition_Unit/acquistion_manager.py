@@ -48,7 +48,7 @@ class Acquistion_Manager(object):
 
 
             self.add_crawling_target(gtr,0)
-            return True
+            return target
         except Exception as e:
             print(e)
             return False
