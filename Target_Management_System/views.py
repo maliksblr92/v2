@@ -73,7 +73,7 @@ class Dyanamic_Crawling(View):
 
 
 class Target_Fetched(View):
-    def get(self):
-        pass
-
+    def get(self,request):
+        obj = acq.get_fetched_targets(30)
+        print(obj)
 

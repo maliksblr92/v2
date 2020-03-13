@@ -7,6 +7,7 @@ from bson import ObjectId
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse,HttpResponseRedirect
+from OSINT_System_Core.Data_Sharing import Portfolio_Link,Portfolio_Include
 
 from Portfolio_Management_System.models import *
 
@@ -67,6 +68,15 @@ class Add_Extras(View):
         if extra_type == 'description': obj.add_description(prime_value)
 
 
+class Link_Portfolio(View):
+
+    def get(self,request,*args,**kwargs):
+
+        #get these two method , path of resource and portfolio object id
+
+        alpha_obj = ObjectId("5e6b3352b6d5b24ef35a01b7")
+        beta_path = [ObjectId("5e6b2ab3a071de651c404a7d"),'general_information']
+        Portfolio_Link.create(ObjectId("5e6b3352b6d5b24ef35a01b7"),beta_path)
 
 
 

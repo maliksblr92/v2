@@ -3,7 +3,7 @@ import sys
 # Create your models here.
 from mongoengine import *
 
-
+from Portfolio_Management_System.models import *
 from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from Keybase_Management_System.models import *
@@ -112,6 +112,7 @@ class Data_Share(object):
             if (self.resolve_intell_reference(beta_object, beta_path_list) is not None):
 
                 alpha_object = self.get_object_by_id(alpha_object_id)
+                print(alpha_object)
                 km = self.gamma_class_ref(alpha_object, beta_object, beta_path_list).save()
                 return km
             else:
@@ -136,7 +137,7 @@ class Data_Share(object):
             return None
 
     def get_object_by_id(self,object_id):
-        return self.alpha_class_ref.objects(id=object_id)[0]
+        return self.alpha_class_ref.objects(id=object_id).first()
 
     def resolve_intell_reference(self,beta_reference,beta_path,step_before=0):
 
@@ -205,11 +206,50 @@ class Keybase_Include(object):
 #extende below class to create support for case and portfolios
 
 
-class Portfolio_include(object):
-    pass
+class Portfolio_Include(object):
+    """
+        just create a class same like this to create a new attatching resouce and update following tow fields
 
-class Portfolio_link(object):
-    pass
+        alpha_class_ref and gamma_class_ref
+        """
+
+    alpha_class_ref = Portfolio_PMS
+    gamma_class_ref = Portfolio_Included_PMS
+    ds = Data_Share(alpha_class_ref, gamma_class_ref)
+
+    @staticmethod
+    def create(alpha_object_id, beta_path_list):
+
+        try:
+
+            return Portfolio_Include.ds.create(alpha_object_id, beta_path_list)
+
+        except Exception as e:
+            print(e)
+            return None
+
+class Portfolio_Link(object):
+    """
+            just create a class same like this to create a new attatching resouce and update following tow fields
+
+            alpha_class_ref and gamma_class_ref
+            """
+
+    alpha_class_ref = Portfolio_PMS
+    gamma_class_ref = Portfolio_Linked_PMS
+    ds = Data_Share(alpha_class_ref, gamma_class_ref)
+
+    @staticmethod
+    def create(alpha_object_id, beta_path_list):
+
+        try:
+
+            return Portfolio_Link.ds.create(alpha_object_id, beta_path_list)
+
+        except Exception as e:
+            print(e)
+            return None
+
 
 class Case_Include(object):
     pass
