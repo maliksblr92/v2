@@ -106,7 +106,8 @@
                                                     placeholder="Please Enter your text"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
-                                                    <button type="button" class="btn btn-secondary searchbutton">SMART
+                                                    <button type="button" x-target-name="{{platform.name|lower}}"
+                                                        class="btn btn-secondary searchbutton smartsearch">SMART
                                                         SEARCH</button>
                                                 </div>
                                             </div>
@@ -249,13 +250,17 @@
 
 {% block foot_script %}
 <script>
-    let smartsearch = $('#fb-smartsearch')
+    let smartsearch = $('.smartsearch')
     // smart search 
     smartsearch.click((event) => {
-        let author_account = $('#author-account').val()
+        // console.log(event.target)
+        let website = event.target.getAttribute('x-target-name')
+        let author_account = event.target.parentElement.parentElement.querySelector('input').value
+        console.log(website, author_account)
+        // let author_account = $('#author-account').val()
         let data = {
             'author_account': author_account,
-            'search_site': 'facebook'
+            'search_site': website
         }
         $.ajax({
             dataType: "json",
