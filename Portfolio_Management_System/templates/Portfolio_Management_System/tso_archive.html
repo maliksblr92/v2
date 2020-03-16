@@ -1,0 +1,439 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_archive.css' %}" /> {% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 ">
+        <div class="row border second_nav_row">
+            <div class="col-md-3 m-0 p-0  ">
+                <a class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white">Create</a>
+            </div>
+            <div class="col-md-3 border-top m-0 p-0  ">
+                <a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white">Overview</a>
+            </div>
+            <div class="col-md-3  border-top m-0 p-0  ">
+                <a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white">Link </a>
+            </div>
+            <div class="col-md-3 m-0 p-0  ">
+                <a class="btn   nav-link  second_nav_btn w-100 h-100 text-white active">Archive</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row">
+    <div class="col-md-12  m-0 p-0">
+        <div class="w-100 h-100 ">
+            <div class="card-header main_card_header m-0 p-0 ">
+                <p class="card_header_text">Profile Archive </p>
+            </div>
+            <div class="card-body main_card">
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                </div>
+                <!-- row 1 end of small cards   -->
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                </div>
+                <!-- row 1 end of small cards   -->
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                </div>
+                <!-- row 1 end of small cards   -->
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-3  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class="small_card_inputs m-1 "></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                                <div class="small_card_inputs m-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                </div>
+                <!-- row 1 end of small cards   -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
