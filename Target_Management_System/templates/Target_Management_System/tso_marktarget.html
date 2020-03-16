@@ -33,144 +33,132 @@
 <!-- style="background-color:#012847; border-radius:15px 15px 0 0;" -->
 
 {% block belly %}
-<div class="row middlecontentdiv">
-    <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
-                <div class="row">
-                    <div class="mydiv col-md-12 glowing_border " style="height:500px;border-radius:15px 15px 0px 0px;">
-                        <div class="row">
-                            <div class="col-md-12 markTargetDiv ">
-                                <!-- First Row of the Main COntent-->
-                                <div class="row">
-                                    <!-- Div for Mark Target Section-->
-                                    <div class="col-md-7 topcontentbar" style="border-radius: 15px 0 0 0;">
-                                        <h5 class=" myH5"> Mark Target</h5>
-                                    </div>
-                                    <div class="col-md-5"
-                                        style="background-color:#243F52;padding-left:1.5rem; border-radius:0px 15px 0 0;">
-                                        <!--Social media icons-->
-                                        <div class="row" role="tablist">
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="#reddit" role="tab" data-toggle="tab"><i
-                                                        style="color:white; opacity:0.8;"
-                                                        class="fab fa-reddit-square fa-2x"></i>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="#linkedin" role="tab" data-toggle="tab">
-                                                    <i style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"
-                                                        data-toggle="tab"></i></a>
-                                            </div>
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="#instagram" role="tab" data-toggle="tab"><i
-                                                        style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"
-                                                        data-toggle="tab"></i></a>
-                                            </div>
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="#facebook" role="tab" data-toggle="tab"><i
-                                                        style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"
-                                                        data-toggle="tab"></i></a>
-                                            </div>
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="#twitter" role="tab" data-toggle="tab"><i
-                                                        style="color:white; opacity:0.8;"
-                                                        class="fab fa-twitter-square fa-2x" data-toggle="tab"></i></a>
-                                            </div>
-                                        </div>
-                                        <!--END OF SOCIAL MEDIA -->
-                                    </div>
-                                </div>
-                            </div>
+<div class="row ">
+    <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
+        <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
+    </div>
+    <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
+        <!-- TOP MANU BAR -->
+        <nav>
+            <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-reddit-square fa-2x"></i></a>
 
-                            <!-- This is The Form Section below top-section-->
-                            <div class="row">
+                <a class="nav-item nav-link" id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i></a>
+
+                <a class="nav-item nav-link" id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
+                    <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i></a>
+
+                <a class="nav-item nav-link active" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
+                    <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
+
+                <a class="nav-item nav-link" id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
+
+            </div>
+        </nav>
+
+        <!-- END OF TOP MANU BAR -->
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+
+            <div class="row ">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
+                    <!-- this is content -->
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        {% for platform in data.social %}
+                        <div class="tab-pane fade {% if platform.name|lower == 'facebook' %}active show{% endif %}"
+                            id="{{platform.name|lower}}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <!-- Each content tab #1 for keywords-->
+
+                            <div class="row formbg ml-5">
                                 <div class="col-md-4 mt-5 ">
                                     <div class="mt-5">
                                         <img class="ml-5" style="height:150px; width:150px;"
                                             src="{% static 'images/testimonial.png' %}" alt="">
                                     </div>
                                 </div>
+
                                 <!-- END OF col-md4 LEFT DIV-->
 
                                 <!-- FORM DIV  RIGHT SIDE-->
                                 <div class="col-md-8">
+
                                     <!--FORMS-->
-                                    {% for platform in data.social %}
-                                    <form role="tabpanel" style="padding-bottom:10px;" id="{{platform.name|lower}}"
-                                        class=" tab-pane {% if forloop.counter == 1 %}show active{% endif %}">
-                                        <div class="form-group ml-5">
+
+                                    <form style="padding-bottom:10px;">
+                                        <div class="form-group ">
+
                                             <div class="input-group    mt-5 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em; border:1px solid #707070;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author account </span>
+
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                            opacity:0.9; padding:5px 9px 0 10px;">Author Account
+                                                    </span>
                                                 </div>
-                                                <input
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px;border:1px solid #707070; "
-                                                    type="text" class="myselectinput form-control "
-                                                    placeholder="Please Enter your number"
-                                                    aria-label="Recipient's username" aria-describedby="basic-addon2"
-                                                    id="author-account">
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Please Enter your text"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
-                                                    <button type="button"
-                                                        style="font-size:13px;background: linear-gradient(90deg, rgba(148,148,148,35%) 0%, rgba(194,194,194,40%) 50%, rgba(148,148,148,35%) 100%);"
-                                                        class="btn btn-secondary" id="fb-smartsearch">SMART
+                                                    <button type="button" class="btn btn-secondary searchbutton">SMART
                                                         SEARCH</button>
                                                 </div>
                                             </div>
 
                                             <div class="input-group   mt-1 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author Type </span>
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">Author Type
+                                                    </span>
                                                 </div>
                                                 <select
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    class="custom-select myselectinput" id="inputGroupSelect01">
-                                                    {% for crawltype in platform.target_type%}
-                                                    <option value="{{forloop.counter0}}">{{crawltype}}</option>
+                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                    class="custom-select newinput">
+                                                    {% for choice in platform.target_type %}
+                                                    <option value={{forloop.counter0}}>{{choice}}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
 
-                                            <div class="input-group   mt-1 mb-3">
+                                            <div class="input-group   mt-4 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author ID </span>
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author ID
+                                                    </span>
                                                 </div>
-                                                <input
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    type="text" class="form-control myselectinput"
+                                                <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
-                                            <!--NEW DIV-->
-                                            <div class="input-group   mt-1 mb-3">
+                                            <!--for author name-->
+                                            <div class="input-group   mt-4 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1emID;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author Name </span>
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author Name
+                                                    </span>
                                                 </div>
-                                                <input
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    type="text" class="form-control  myselectinput"
-                                                    placeholder="Please Enter your number"
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Please Enter your text"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
                                             <!--AUTHUR URL-->
-                                            <div class="input-group   mt-1 mb-3">
+                                            <div class="input-group   mt-4 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Author URL </span>
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author URL
+                                                    </span>
                                                 </div>
-                                                <input
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    type="text" class="form-control  myselectinput"
+                                                <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
-                                                    aria-label="Recipient's username" aria-describedby="basic-addon2"
-                                                    value="">
-
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
                                             <!-- DATE AND TIME 2 column div -->
@@ -179,25 +167,30 @@
                                                     <!-- EXPIRED ON SECTION-->
                                                     <div class="input-group   mt-1 mb-3">
                                                         <div class="input-group-prepend">
-                                                            <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                      opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Expire on </span>
+                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Expire on
+                                                            </span>
                                                         </div>
-                                                        <input class="form-control myselectinput" id="date"
-                                                            style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                            name="date" placeholder="MM/DD/YYY" type="text" />
+                                                        <input class="form-control newinputdesign"
+                                                            style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                            name="date" placeholder="MM/DD/YYY" type="text">
                                                     </div>
+
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <!--INTERVAL SECTION-->
                                                     <div class="input-group   mt-1 mb-3">
                                                         <div class="input-group-prepend">
-                                                            <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                      opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Interval </span>
+
+                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Interval
+                                                            </span>
                                                         </div>
                                                         <select
-                                                            style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                            class="custom-select myselectinput" id="inputGroupSelect01">
-                                                            <option selected>on time only</option>
+                                                            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                            class="custom-select newinput">
+                                                            <option selected="">on time only</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
                                                             <option value="3">Three</option>
@@ -205,42 +198,55 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- end of 2 column div for date and time-->
-                                            <div class="input-group   mt-1 mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                  opacity:0.9; padding:5px 9px 0 10px;" class="input-group-text">Screenshoots </span>
-                                                </div>
-                                                <input
-                                                    style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    type="text" class="form-control myselectinput"
-                                                    placeholder="Yes or No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2">
 
+                                            <!-- end of 2 column div for date and time-->
+
+                                            <div class="input-group   mt-2 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Screenshots
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Yes/ No" aria-label="Recipient's username"
+                                                    aria-describedby="basic-addon2">
                                             </div>
                                         </div>
+
                                         <!-- TWO BUTTON BOTTOM-->
+
                                         <div class="row d-flex flex-row">
                                             <div class="col-md-12 ml-5 ">
                                                 <!--LEFT BUTTON-->
-                                                <button type="button" class="btn btn-secondary mainbutton">CLEAR
+                                                <button type="button" class="btn btn-secondary searchbutton">CLEAR
                                                     FORM</button>
+
                                                 <button type="button" style="float:right; "
-                                                    class="btn btn-secondary mainbutton mr-5">Submit</button>
+                                                    class="btn btn-secondary searchbutton mr-5">Submit</button>
                                             </div>
                                         </div>
+
+                                    </form>
                                 </div>
-                                </form>
-                                {% endfor %}
+
                             </div>
+                            <!-- end of the first reddit tab #1 -->
                         </div>
+                        {% endfor %}
                     </div>
+
+                    <!-- let me check -->
+
+                    <!-- end of content -->
                 </div>
             </div>
+
+            <!-- END OF second row-->
         </div>
     </div>
 </div>
 {% endblock %}
+
 {% block foot_script %}
 <script>
     let smartsearch = $('#fb-smartsearch')
@@ -264,7 +270,6 @@
     let addtargetform = $("#addtarget")
     addtargetform.submit((event) => {
         event.preventDefault()
-
     })
 </script>
 {% endblock %}
