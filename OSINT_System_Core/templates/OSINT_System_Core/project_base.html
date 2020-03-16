@@ -129,6 +129,29 @@
             </div>
           </div>
         </div>
+        <!-- start footer script -->
+        <script>
+          let footerRES = new ReconnectingEventSource('/events/')
+          footerRES.addEventListener('message', (event) => {
+            const control_msg = JSON.parse(event.data)
+            console.log(control_msg)
+          })
+          //footer graphs
+          //internet speed of crawl server
+          $.ajax({
+            dataTyp: 'json',
+            url: '',
+            'success': (intspeed) => {
+              console.log(intspeed)
+            }
+          })
+          //crawl server state
+          $.getJSON('', (state) => {
+            //update the graphs
+            console.log(state)
+          })
+        </script>
+        <!-- end of footer script -->
         {% endblock %}
         <!-- end footer -->
       </div>

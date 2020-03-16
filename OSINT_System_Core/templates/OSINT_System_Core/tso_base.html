@@ -85,6 +85,15 @@
     </div>
   </div>
 </div>
+<!-- left sidebar script -->
+<script>
+  let leftRES = new ReconnectingEventSource('/events/')
+  leftRES.addEventListener('notification', (event) => {
+    const notification_data = JSON.parse(event.data)
+    console.log(notification_data)
+  })
+</script>
+<!-- end of left sidebar script -->
 {% endblock %}
 <!-- end left sidebar -->
 {% block belly %} {% endblock %}
@@ -181,5 +190,14 @@
 
   <!-- end row 5 -->
 </div>
+<!-- start of rigt sidebar script -->
+<script>
+  let rightRES = new ReconnectingEventSource('/events/')
+  rightRES.addEventListener('alert', (event) => {
+    const alert_data = JSON.parse(event.data)
+    console.log(alert_data)
+  })
+</script>
+<!-- end of right sidebar script -->
 {% endblock %}
 <!-- end right sidebar -->
