@@ -1,0 +1,178 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_fetchtarget.css' %}">
+{% endblock %}
+
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
+            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+                <div class="row">
+                    <div class="mydiv col-md-12 glowing_border "
+                        style="height:550px;border-radius:15px 15px 15px 15px;">
+                        <div class="row">
+                            <div class="col-md-12 markTargetDiv ">
+                                <!-- FIrst Row of the Main COntent-->
+                                <div class="row">
+                                    <!-- DIv for Mark Target Section-->
+                                    <div class="col-md-10 topcontentbar  " style="border-radius:15px 0 0 0;">
+                                        <h5 class=" myH5"> Target Fetch View</h5>
+                                    </div>
+                                    <div class="col-md-2"
+                                        style="background-color:#243F52;padding-left:1.5rem; border-top-right-radius:15px;">
+                                        <!--RIGHT SECTION FOR icons-->
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
+                                                <a href="#"><i style="color:white; opacity:0.8;"
+                                                        class="fas fa-list-ul fa-2x"></i> </a>
+                                            </div>
+                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;"
+                                                    class="fas fa-grip-vertical fa-2x"></i>
+                                            </div>
+                                        </div>
+                                        <!--END OF GRID AND TILE VIEW RIGHT section -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- This is The Form Section below top-section-->
+                            <div class="row ml-4 mt-4 mr-4">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <!-- Just like card 1-->
+                                        <div class="col-md-6">
+                                            <!-- inside CaRD DIV-->
+                                            <div class="row mr-2">
+                                                <div class="col-md-2  glowing_border"
+                                                    style="height:200px;border-radius:15px 0px 0px 15px;">
+                                                </div>
+                                                <!-- Div Right part-->
+                                                <div class="col-md-10 glowing_border"
+                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img class=""
+                                                                style="height:120px; width:120px; margin-top:50%;"
+                                                                src="{% static 'images/testimonial.png' %}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="width:140px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END OF CARD 1-->
+
+                                        <!-- Just like card 1-->
+                                        <div class="col-md-6">
+                                            <!-- inside CaRD DIV-->
+                                            <div class="row">
+                                                <div class="col-md-2  glowing_border"
+                                                    style="height:200px;border-radius:15px 0px 0px 15px;">
+                                                </div>
+                                                <!-- Div Right part-->
+                                                <div class="col-md-10 glowing_border"
+                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img class=""
+                                                                style="height:120px; width:120px; margin-top:50%;"
+                                                                src="{% static 'images/testimonial.png' %}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="width:140px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END OF CARD 1-->
+                                    </div>
+                                    <!-- Second row-->
+                                    <div class="row mt-4">
+                                        <!-- Just like card 1-->
+                                        <div class="col-md-6">
+                                            <!-- inside CaRD DIV-->
+                                            <div class="row mr-2">
+                                                <div class="col-md-2  glowing_border"
+                                                    style="height:200px;border-radius:15px 0px 0px 15px;">
+                                                </div>
+                                                <!-- Div Right part-->
+                                                <div class="col-md-10 glowing_border"
+                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img class=""
+                                                                style="height:120px; width:120px; margin-top:50%;"
+                                                                src="{% static 'images/testimonial.png' %}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="width:140px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END OF CARD 1-->
+                                        <!-- Just like card 1-->
+                                        <div class="col-md-6">
+                                            <!-- inside CaRD DIV-->
+                                            <div class="row">
+                                                <div class="col-md-2  glowing_border"
+                                                    style="height:200px;border-radius:15px 0px 0px 15px;">
+                                                </div>
+                                                <!-- Div Right part-->
+                                                <div class="col-md-10 glowing_border"
+                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img class=""
+                                                                style="height:120px; width:120px; margin-top:50%;"
+                                                                src="{% static 'images/testimonial.png' %}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="width:140px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END OF CARD 1-->
+                                    </div>
+                                    <!-- END of second row-->
+                                </div>
+                            </div>
+                            <!--my code above-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
