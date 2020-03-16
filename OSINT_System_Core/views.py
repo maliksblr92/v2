@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
-from Public_Data_Acquisition_Unit.data_acquistion_manager import Acquistion_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from django.shortcuts import reverse, render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -44,7 +44,7 @@ from rest_framework.status import (
 # Create your views here.
 
 #processing_manager = Processing_Manager()
-acq_manager = Acquistion_Manager()
+acq = Acquistion_Manager()
 #coreDb = Coredb_Manager()
 log_manager = System_Log_Manager()
 
@@ -69,34 +69,49 @@ class Main(View):
         tasks.add.schedule((4, 5), eta=eta)
 
         return render(request, 'OSINT_System_Core/main.html', {})
-# ...........................................Views for Target Forms.............................................
+# ...........................................Views for Target Forms.......
 
 
 class Target_Author_Instagram(View):
     def get(self, request):
-        return render(request, 'OSINT_System_Core/target_submission_instagram.html', {})
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_instagram.html',
+            {})
 
 
 class Target_Author_Facebook(View):
     def get(self, request):
-        return render(request, 'OSINT_System_Core/target_submission_facebook.html', {})
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_facebook.html',
+            {})
 
 
 class Target_Author_Twitter(View):
     def get(self, request):
-        return render(request, 'OSINT_System_Core/target_submission_twitter.html', {})
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_twitter.html',
+            {})
 
 
 class Target_Author_Linkedin(View):
     def get(self, request):
-        return render(request, 'OSINT_System_Core/target_submission_linkedin.html', {})
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_linkedin.html',
+            {})
 
 
 class Target_Headlines_Main(View):
     def get(self, request):
         #send_event('test', 'message', {'text': 'hello world'})
 
-        return render(request, 'OSINT_System_Core/sources_target_headlines_main.html', {})
+        return render(
+            request,
+            'OSINT_System_Core/sources_target_headlines_main.html',
+            {})
 
 
 """
@@ -492,9 +507,9 @@ class Dashboard(APIView):
         return render(request,'OSINT_System_Core/dashboard.html',{})
 
 class Supported_Social_Site_List(APIView):
-    
+
     #list of all the supported sites in OSINT CORE
-    
+
 
     def get(self,request,format = None):
         sss = Supported_Socail_Sites.objects.all()
@@ -505,7 +520,29 @@ class Supported_Social_Site_List(APIView):
 """
 
 
-# ...................................................Views for SmartSearches ...................................................
+# ...................................................Views for SmartSearch
+
+# ...................................................Views for General Que
+
+class Crawler_Internet_Connection(View):
+    #permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+
+        resp = acq.crawler_internet_connection()
+        return JsonResponse(resp, safe=False)
+
+
+class Microcrawler_Status(View):
+    # permission_classes = (IsAuthenticated,)
+    resp = acq.mircocrawler_status()
+    def get(self, request, *args, **kwargs):
+
+        resp = acq.mircocrawler_status()
+        return JsonResponse(resp, safe=False)
+
+
+# ...................................................Views for SmartSearch
 
 class Smart_Search(APIView):
     #permission_classes = (IsAuthenticated,)
@@ -513,11 +550,12 @@ class Smart_Search(APIView):
     def get(self, request, *args, **kwargs):
 
         resp = tasks.fetch_smart_search(
-            username=kwargs['author_account'], search_site=kwargs['search_site'])
+            username=kwargs['author_account'],
+            search_site=kwargs['search_site'])
         return JsonResponse(resp, safe=False)
 
 
-# ...................................................Views for Graphs ...................................................
+# ...................................................Views for Graphs ....
 
 
 class Overview_Pie_Chart(APIView):
@@ -637,7 +675,7 @@ class Dispatcher(View):
                    'GTR': GTR, 'author_account': author_account})
         return HttpResponse('success')
 
-# ...........................................Normal Functions .............................................
+# ...........................................Normal Functions ............
 
 
 def convert_expired_on_to_datetime(expired_on):
@@ -649,6 +687,7 @@ def convert_expired_on_to_datetime(expired_on):
 def test_view(request):
     if request.method == 'GET':
         return render(request, 'OSINT_System_Core/project_base.html')
+
 
 def test_view1(request):
     if request.method == 'GET':

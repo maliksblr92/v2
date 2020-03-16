@@ -4,6 +4,8 @@ from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.ess_api_controller import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from OSINT_System_Core.Data_Sharing import Mongo_Lookup
+from bson import ObjectId
+
 import logging
 
 import datetime
@@ -46,7 +48,7 @@ class Acquistion_Manager(object):
 
 
             self.add_crawling_target(gtr,0)
-            return True
+            return target
         except Exception as e:
             print(e)
             return False
@@ -210,9 +212,17 @@ class Acquistion_Manager(object):
             if (gtr.target_type == 'dynamic_crawling'):
                 return (Dynamic_Crawling, ess.dynamic_crawling,None)
             elif (gtr.target_type == 'keybase_crawling'):
-                pass
+                return (Keybase_Crawling, None ,None)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'Reddit'):
+            if (gtr.target_type == 'profile'):
+                return (Reddit_Profile,ess.add_target,None)
+            elif (gtr.target_type == 'subreddit'):
+                return (Reddit_Subreddit, ess.add_target ,None)
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
 
@@ -262,7 +272,7 @@ class Acquistion_Manager(object):
                 task.CTR = task.CTR+1
                 task.save()
                 self.do_invoke_target(task.GTR,task.CTR)
-                print('*************************************Task Reinvoked {0}*****************************'.format(task.target_reff.name))
+                print('*************************************Task Reinvoked {0}*****************************'.format(task.target_reff))
 
             self.remove_expired_targets(task)
         print('..................................Task Polling Survey Completed..................................')
@@ -389,14 +399,39 @@ class Acquistion_Manager(object):
         GTRs = Global_Target_Reference.objects.all().order_by('-id')
 
         for gtr in GTRs:
-            obj_resp = ml.find_object_by_id(gtr.id)
-            obj_targ = self.get_appropriate_method(gtr)
-
-            responses.append([obj_resp,obj_targ])
-
-        return responses[:top]
 
 
+            appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+            #obj_amt = appropriate_model_targ()
+            #obj_amr = appropriate_model_resp()
+
+            if(appropriate_model_resp is not None):
+
+                #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                if(resp is not None):
+                    targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+
+                    responses.append([resp, targ])
+
+
+                #resp = Facebook_Profile.objects(GTR=gtr.id)
+                #targ = Facebook_Profile.objects(GTR=gtr.id)
+
+
+
+
+
+
+        return responses
+
+
+    def crawler_internet_connection(self):
+        return ess.crawler_internet_connection()
+
+    def mircocrawler_status(self):
+        return ess.microcrawler_status()
 
 
 

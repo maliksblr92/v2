@@ -38,6 +38,12 @@ supported_sites_content = [{
      'website_type':'fake',
      'target_type':['keybase_crawling','dynamic_crawling']
 
+}},{'website':
+    {'name':'Reddit',
+     'url':'',
+     'website_type':'social',
+     'target_type':['profile','subreddit']
+
     }
 }]
 

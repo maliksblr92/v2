@@ -115,7 +115,6 @@ class Keybase_Matched_KMS(Document):
         :return:
 
         """
-
         try:
 
             km_json = self.beta_reference.to_mongo()
