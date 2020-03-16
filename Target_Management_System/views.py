@@ -5,9 +5,8 @@ from django.http import JsonResponse
 from django.views import View
 from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
-
+from bson import ObjectId
 from django.http import HttpResponse,HttpResponseRedirect
-
 
 acq = Acquistion_Manager()
 
@@ -28,13 +27,13 @@ class Add_Target(View):
         #get the all the values for kwargs and pass the the add target function they can change
         #depending upon the target type
 
-        website_id = kwargs['website_id']
-        target_type_index = kwargs['target_type_index']
+        website_id = ObjectId("5e56497b52431ac05ab76c12")
+        target_type_index = 0
 
         #different target types has different kwargs pass the depending on the target_type with basic arguemtns
 
 
-        acq.add_target(website_id,target_type_index,username='username',user_id='user_id')
+        acq.add_target(website_id,target_type_index,username='arooma.shah',user_id='12121212')
         publish('target created successfully',message_type='notification')
 
 

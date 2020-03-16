@@ -7,6 +7,12 @@ def on_messege_recived(data,**kwargs):
     :param data:
     :return:
     """
-    print(data)
-    send_event('notifications', 'notification', {'GTR': '545454', 'author_account': 'ayesha.khan22'})
+    if(data['message_type'] == 'info' or data['message_type'] == 'error' or data['message_type'] == 'warnning'):
+        send_event('messages', 'message', data)
+    elif(data['message_type='] == 'control' or data['message_type'] == 'alert'):
+        send_event('alerts', 'alert', data)
+    elif(data['message_type='] == 'system'):
+        send_event('notifications', 'notification', data)
+    else:
+        send_event('messages', 'message', data)
 
