@@ -87,11 +87,14 @@
 </div>
 <!-- left sidebar script -->
 <script>
-  let leftRES = new ReconnectingEventSource('/events/')
-  leftRES.addEventListener('notification', (event) => {
-    const notification_data = JSON.parse(event.data)
-    console.log(notification_data)
-  })
+  // start of jquery ready function
+  document.addEventListener('DOMContentLoaded', function () {
+    let leftRES = new ReconnectingEventSource('/events/')
+    leftRES.addEventListener('notifications', (event) => {
+      const notification_data = JSON.parse(event.data)
+      console.log(notification_data)
+    })
+  }) // end of jquery ready
 </script>
 <!-- end of left sidebar script -->
 {% endblock %}
@@ -192,11 +195,14 @@
 </div>
 <!-- start of rigt sidebar script -->
 <script>
-  let rightRES = new ReconnectingEventSource('/events/')
-  rightRES.addEventListener('alert', (event) => {
-    const alert_data = JSON.parse(event.data)
-    console.log(alert_data)
-  })
+  // jquery ready function
+  document.addEventListener('DOMContentLoaded', function () {
+    let rightRES = new ReconnectingEventSource('/events/')
+    rightRES.addEventListener('alerts', (event) => {
+      const alert_data = JSON.parse(event.data)
+      console.log(alert_data)
+    })
+  }) // end of jquery ready
 </script>
 <!-- end of right sidebar script -->
 {% endblock %}

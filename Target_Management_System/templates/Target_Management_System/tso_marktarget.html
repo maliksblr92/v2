@@ -250,31 +250,34 @@
 
 {% block foot_script %}
 <script>
-    let smartsearch = $('.smartsearch')
-    // smart search 
-    smartsearch.click((event) => {
-        // console.log(event.target)
-        let website = event.target.getAttribute('x-target-name')
-        let author_account = event.target.parentElement.parentElement.querySelector('input').value
-        console.log(website, author_account)
-        // let author_account = $('#author-account').val()
-        let data = {
-            'author_account': author_account,
-            'search_site': website
-        }
-        $.ajax({
-            dataType: "json",
-            url: "/tms/smartsearch/",
-            data: data,
-            success: (response) => {
-                console.log(response)
+    //start of document ready
+    document.addEventListener('DOMContentLoaded', function () {
+        let smartsearch = $('.smartsearch')
+        // smart search 
+        smartsearch.click((event) => {
+            // console.log(event.target)
+            let website = event.target.getAttribute('x-target-name')
+            let author_account = event.target.parentElement.parentElement.querySelector('input').value
+            console.log(website, author_account)
+            // let author_account = $('#author-account').val()
+            let data = {
+                'author_account': author_account,
+                'search_site': website
             }
+            $.ajax({
+                dataType: "json",
+                url: "/tms/smartsearch/",
+                data: data,
+                success: (response) => {
+                    console.log(response)
+                }
+            })
         })
-    })
-    // add target form
-    let addtargetform = $("#addtarget")
-    addtargetform.submit((event) => {
-        event.preventDefault()
-    })
+        // add target form
+        let addtargetform = $("#addtarget")
+        addtargetform.submit((event) => {
+            event.preventDefault()
+        })
+    }) // document ready
 </script>
 {% endblock %}
