@@ -1,4 +1,5 @@
-{% extends 'OSINT_System_Core/project_base.html' %} {% load static %}
+{% extends 'OSINT_System_Core/project_base.html' %}
+{% load static %}
 {% block page_title %}TSO Dashboard{% endblock %}
 <!-- left sidebar -->
 {% block leftsidebar %}
@@ -8,17 +9,19 @@
       <!-- start of bars -->
 
       <div class="left_nav text-white">
-        <p class="left_nav_text w-100 h-100 d-block">
-          This is sample dynamic text This is sample dynamic text This is sample
-          dynamic text This is sample dynamic text This is sample dynamic text
-          This is sample dynamic text This is sample dynamic text This is sample
-          dynamic text This is sample dynamic text This is sample dynamic text
-          This is sample dynamic text This is sample dynamic text This is sample
-          dynamic text This is sample dynamic text This is sample dynamic text
-          This is sample dynamic text This is sample dynamic text This is sample
-          dynamic text This is sample dynamic text This is sample dynamic text
-          This is sample dynamic text This is sample dynamic text This is sample
-          dynamic text This is sample dynamic text
+        <p class="left_nav_text w-100 h-100 d-block" id="notification-box">
+          This is sample dynamic text This is sample dynamic text This
+          is sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text This is
+          sample dynamic text This is sample dynamic text
         </p>
       </div>
       <!-- end of bars -->
@@ -88,13 +91,15 @@
 <!-- left sidebar script -->
 <script>
   // start of jquery ready function
-  document.addEventListener('DOMContentLoaded', function () {
-    let leftRES = new ReconnectingEventSource('/events/')
-    leftRES.addEventListener('notifications', (event) => {
-      const notification_data = JSON.parse(event.data)
-      console.log(notification_data)
-    })
-  }) // end of jquery ready
+  document.addEventListener("DOMContentLoaded", function () {
+    let leftRES = new ReconnectingEventSource("/events/");
+    leftRES.addEventListener("notification", event => {
+      const notification_data = JSON.parse(event.data);
+      console.log(notification_data);
+      let notification_box = $("#notification-box");
+      notification_box.text(notification_data["text"]);
+    });
+  }); // end of jquery ready
 </script>
 <!-- end of left sidebar script -->
 {% endblock %}
@@ -140,7 +145,8 @@
         </div>
         <div class=" text-white  globe_icon_text_wrapper">
           <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">
-            sadasdadsasdasdsadadasdassadasdsadadasd asdasdsadsad asdasdsadsad
+            sadasdadsasdasdsadadasdassadasdsadadasd asdasdsadsad
+            asdasdsadsad
           </div>
         </div>
       </div>
@@ -167,8 +173,9 @@
       <div class="alert_1_wrapper">
         <div class="text-danger font-weight-bold  p-2 alert_1_text_header ">
           Alert:
-          <div class="text-white  alert_1_text_wrapper">
-            asdsadsadsadaasdasdasddsad asdsadsadsadaasdasdasddsadasdsad
+          <div class="text-white  alert_1_text_wrapper" id="new-alert">
+            asdsadsadsadaasdasdasddsad
+            asdsadsadsadaasdasdasddsadasdsad
           </div>
         </div>
       </div>
@@ -183,8 +190,9 @@
       <div class=" alert_2_wrapper h-100  ml-auto mr-auto">
         <div class="text-danger font-weight-bold alert_2_text_header  ">
           Alert:
-          <div class="text-white  alert_2_text_wrapper">
-            asdsadsadsadaasdasdasddsad asdsadsadsadaasdasdasddsadasdsad
+          <div class="text-white  alert_2_text_wrapper" id="prev-alert">
+            asdsadsadsadaasdasdasddsad
+            asdsadsadsadaasdasdasddsadasdsad
           </div>
         </div>
       </div>
@@ -196,13 +204,17 @@
 <!-- start of rigt sidebar script -->
 <script>
   // jquery ready function
-  document.addEventListener('DOMContentLoaded', function () {
-    let rightRES = new ReconnectingEventSource('/events/')
-    rightRES.addEventListener('alerts', (event) => {
-      const alert_data = JSON.parse(event.data)
-      console.log(alert_data)
-    })
-  }) // end of jquery ready
+  document.addEventListener("DOMContentLoaded", function () {
+    let rightRES = new ReconnectingEventSource("/events/");
+    rightRES.addEventListener("alert", event => {
+      const alert_data = JSON.parse(event.data);
+      console.log(alert_data);
+      const alert1 = $('#new-alert')
+      const alert2 = $('#prev-alert')
+      alert1.text(alert_data['new'])
+      alert2.text(alert_data['prev1'])
+    });
+  }); // end of jquery ready
 </script>
 <!-- end of right sidebar script -->
 {% endblock %}
