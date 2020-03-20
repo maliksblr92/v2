@@ -135,8 +135,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
-                                                    id="{{platform.name}}-authoruserid"
-                                                    name="{{platform.name}}_authoruserid"
+                                                    id="{{platform.name|lower}}-authoruserid"
+                                                    name="{{platform.name|lower}}_authoruserid"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -149,8 +149,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your text"
-                                                    id="{{platform.name}}-authorusername"
-                                                    name="{{platform.name}}_authorusername"
+                                                    id="{{platform.name|lower}}-authorusername"
+                                                    name="{{platform.name|lower}}_authorusername"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -163,8 +163,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
-                                                    id="{{platform.name}}-authoruserurl"
-                                                    name="{{platform.name}}_authoruserurl"
+                                                    id="{{platform.name|lower}}-authoruserurl"
+                                                    name="{{platform.name|lower}}_authoruserurl"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -181,8 +181,8 @@
                                                         <input class="form-control newinputdesign"
                                                             style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
                                                             name="date" placeholder="MM/DD/YYY" type="text"
-                                                            id="{{platform.name}}-expirydate"
-                                                            name="{{platform.name}}_expirydate">
+                                                            id="{{platform.name|lower}}-expirydate"
+                                                            name="{{platform.name|lower}}_expirydate">
                                                     </div>
 
                                                 </div>
@@ -199,8 +199,8 @@
                                                         <select
                                                             style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
                                                             class="custom-select newinput"
-                                                            id="{{platform.name}}-interval"
-                                                            name="{{platform.name}}_interval">
+                                                            id="{{platform.name|lower}}-interval"
+                                                            name="{{platform.name|lower}}_interval">
                                                             <option selected="">on time only</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -220,8 +220,9 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Yes/ No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2" id="{{platform.name}}-screenshot"
-                                                    name="{{platform.name}}_screenshot">
+                                                    aria-describedby="basic-addon2"
+                                                    id="{{platform.name|lower}}-screenshot"
+                                                    name="{{platform.name|lower}}_screenshot">
                                             </div>
                                         </div>
 
@@ -283,6 +284,27 @@
                 data: data,
                 success: (response) => {
                     console.log(response)
+                    $(`#${website}-authoruserid`).val(response['author_userid'])
+                    $(`#${website}-authorusername`).val(response['author_username'])
+                    switch (website) {
+                        case 'reddit':
+                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${response['author_url']}`)
+                            break;
+                        case 'linkedin':
+                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${response['author_url']}`)
+                            break;
+                        case 'instagram':
+                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${response['author_url']}`)
+                            break;
+                        case 'facebook':
+                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${response['author_url']}`)
+                            break;
+                        case 'twitter':
+                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${response['author_url']}`)
+                            break;
+                        default:
+                            break;
+                    }
                 }
             })
         })
