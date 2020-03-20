@@ -92,7 +92,7 @@
 
                                     <!--FORMS-->
 
-                                    <form style="padding-bottom:10px;">
+                                    <form style="padding-bottom:10px;" id="{{platform.name | lower}}-form">
                                         <div class="form-group ">
 
                                             <div class="input-group    mt-5 mb-3">
@@ -126,7 +126,7 @@
                                                     {% endfor %}
                                                 </select>
                                             </div>
-
+                                            <!-- author user id -->
                                             <div class="input-group   mt-4 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
@@ -135,6 +135,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
+                                                    id="{{platform.name}}-authoruserid"
+                                                    name="{{platform.name}}_authoruserid"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -147,6 +149,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your text"
+                                                    id="{{platform.name}}-authorusername"
+                                                    name="{{platform.name}}_authorusername"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -159,6 +163,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
+                                                    id="{{platform.name}}-authoruserurl"
+                                                    name="{{platform.name}}_authoruserurl"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -174,7 +180,9 @@
                                                         </div>
                                                         <input class="form-control newinputdesign"
                                                             style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                            name="date" placeholder="MM/DD/YYY" type="text">
+                                                            name="date" placeholder="MM/DD/YYY" type="text"
+                                                            id="{{platform.name}}-expirydate"
+                                                            name="{{platform.name}}_expirydate">
                                                     </div>
 
                                                 </div>
@@ -190,7 +198,9 @@
                                                         </div>
                                                         <select
                                                             style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                            class="custom-select newinput">
+                                                            class="custom-select newinput"
+                                                            id="{{platform.name}}-interval"
+                                                            name="{{platform.name}}_interval">
                                                             <option selected="">on time only</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -210,7 +220,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Yes/ No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2">
+                                                    aria-describedby="basic-addon2" id="{{platform.name}}-screenshot"
+                                                    name="{{platform.name}}_screenshot">
                                             </div>
                                         </div>
 
@@ -219,8 +230,10 @@
                                         <div class="row d-flex flex-row">
                                             <div class="col-md-12 ml-5 ">
                                                 <!--LEFT BUTTON-->
-                                                <button type="button" class="btn btn-secondary searchbutton">CLEAR
-                                                    FORM</button>
+                                                <button type="button"
+                                                    class="btn btn-secondary searchbutton clearform-btn"
+                                                    x-parent-form="{{platform.name|lower}}-form">
+                                                    CLEAR FORM</button>
 
                                                 <button type="button" style="float:right; "
                                                     class="btn btn-secondary searchbutton mr-5">Submit</button>
@@ -273,6 +286,15 @@
                 }
             })
         })
+        // clear form btn functionality
+        let clearformbtn = $('.clearform-btn')
+        clearformbtn.click(event => {
+            // console.log('clear form clicked')
+            let pf = event.target.getAttribute('x-parent-form')
+            // console.log(pf)
+            $(`#${pf}`).trigger('reset')
+        })
+
         // add target form
         let addtargetform = $("#addtarget")
         addtargetform.submit((event) => {
