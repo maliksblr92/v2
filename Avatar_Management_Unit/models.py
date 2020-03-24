@@ -4,7 +4,9 @@ from django.db import models
 from mongoengine import *
 
 # -------------------------------------------------------- connection ------------------------------------------------------
-connect("OSINT", host="192.168.0.0", port="")
+disconnect('default')
+#CONNECT TO MONGO DB
+connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
 
 SOCIAL_MEDIA_TYPE = (
@@ -157,7 +159,7 @@ class Avatar(Document):
 # ----------------------------------------------------------- Avatar Actions -----------------------------------------------
 
 
-
+"""
 class AvatarAction(Document):
     avatar_id = UUIDField()
     avatar_time = DateTimeField()
@@ -185,3 +187,4 @@ class Like(Reaction):
 class Share(Reaction):
     text = StringField(max_length=200)
 
+"""

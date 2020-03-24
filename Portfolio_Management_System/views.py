@@ -38,7 +38,7 @@ class Delete_Portfolio(View):
         if(Portfolio_PMS.delete_portfolio(portfolio_id)):
             return HttpResponse('sucess')
         else:
-            publish(str(e), module_name=__name__, message_type='alert')
+            #publish(str(e), module_name=__name__, message_type='alert')
             return HttpResponse('unsucessfull')
 
 
