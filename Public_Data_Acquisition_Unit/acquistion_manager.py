@@ -433,9 +433,20 @@ class Acquistion_Manager(object):
     def mircocrawler_status(self):
         return ess.microcrawler_status()
 
+    def fetch_news(self,top=10, GTR_ID=1):
+        # fetch data from ess server
 
+        news_sites = ['ary', 'bbc', 'geo', 'dawn', 'abp', 'ndtv', 'indiatoday', 'zee']
 
-
+        try:
+            for news in news_sites:
+                print(
+                    '.......................................fetching News now working on  {0}...........................'.format(
+                        news))
+                response = ess.news_crawling(top, news)
+                print(response)
+        except Exception as e:
+            print(e)
 
 
 
