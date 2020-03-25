@@ -32,7 +32,7 @@ urlpatterns = [
     path('dpu/', include('Data_Processing_Unit.urls')),
     path('data_acquisition/', include('Public_Data_Acquisition_Unit.urls')),
     path('system_log/', include('System_Log_Management_Unit.urls')),
-    path('', include('User_Accounts_Management_Unit.urls')),
+    path('accounts/', include('User_Accounts_Management_Unit.urls')),
     path('tms/', include('Target_Management_System.urls')),
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),

@@ -289,7 +289,7 @@
           class="col-md-4 m-0 p-0  vh-100    d-flex flex-column justify-content-center align-items-center vh-100 "
           id="form_parent"
         >
-          <form action="/" method="POST">
+          <form action="/accounts/login/" method="POST">
             {% csrf_token %}
             <br />
             <br />
@@ -322,6 +322,9 @@
               <div
                 class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5"
               >
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
                 <input type="submit" class="submit" class="mt-2" value="" />
               </div>
             </div>

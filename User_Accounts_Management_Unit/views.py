@@ -1,12 +1,12 @@
-from django.http import HttpResponse,HttpResponseRedirect
-from django.contrib.auth.models import User,Group
-from django.contrib.auth import login,logout,authenticate
-from django.shortcuts import reverse,render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.models import User, Group
+from django.contrib.auth import login, logout, authenticate
+from django.shortcuts import reverse, render, redirect
 from django.views import View
 from django.conf import settings
 
 
-#imports for djangorestframework
+# imports for djangorestframework
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -19,11 +19,11 @@ from rest_framework.status import (
 from rest_framework.response import Response
 
 
-
 from django.contrib.auth import authenticate
 
 UIS_IP = settings.UIS_IP
 # Create your views here.
+
 
 @csrf_exempt
 @api_view(["POST"])
@@ -32,16 +32,17 @@ def do_login(request):
     username = request.data.get("username")
     password = request.data.get("password")
     if username is None or password is None:
-        return Response({'error': 'Please provide both username and password'},status=HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Please provide both username and password'}, status=HTTP_400_BAD_REQUEST)
 
     user = authenticate(username=username, password=password)
 
     if not user:
-        return Response({'error': 'Invalid Credentials'},status=HTTP_404_NOT_FOUND)
+        return Response({'error': 'Invalid Credentials'}, status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
 
-    login(request,user)
+    login(request, user)
     return Response({'token': token.key}, status=HTTP_200_OK)
+
 
 @csrf_exempt
 @api_view(["GET"])
@@ -52,23 +53,24 @@ def do_logout(request):
     except Exception as e:
         print(e)
 
-    return Response('logged out',status=HTTP_200_OK)
-
+    return Response('logged out', status=HTTP_200_OK)
 
 
 class User_Login(View):
-    #function to handle the get request
-    def get(self,request):
-        return render(request,'User_Accounts_Management_Unit/login.html',{})
+    # function to handle the get request
+    def get(self, request):
+        return render(request, 'User_Accounts_Management_Unit/login.html', {})
 
-    def post(self,request):
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
-        if(username is not None or password is not None):
+    def post(self, request):
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        if(username is not None and password is not None):
             user = authenticate(request, username=username, password=password)
             # if user is not authenticated
             if (user is not None):
                 login(request, user)
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
                 return HttpResponseRedirect(reverse('OSINT_System_Core:dashboard'))
             else:
                 return HttpResponse('invalid credintial')
@@ -78,8 +80,7 @@ class User_Login(View):
 
 
 class User_Logout(View):
-    def get(self,request):
+    def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse('User_Accounts_Management_Unit:user_login'))
-
 
