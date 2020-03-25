@@ -8,7 +8,7 @@
 {% block smallnavbar %}
 <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex" style="">
+    <div class="col-md-8 d-flex">
         <div class="col-md-1">
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
@@ -43,7 +43,8 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
                     <!-- FORM start -->
-                    <form class="justify-content-center">
+                    <form class="justify-content-center" method="POST" action="/tms/survey/">
+                        {% csrf_token %}
                         <div class="form-group justify-content-center text-center ">
                             <div style="width:70%;" class="container input1">
                                 <!-- textfield 1 -->
@@ -54,8 +55,7 @@
                           opacity:0.9; padding:7px 9px 0 10px;">Name Lookup </span>
                                     </div>
                                     <input type="text" class="form-control  myselectinput"
-                                        placeholder="Please enter name here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                        placeholder="Please enter name here" name="target_name">
                                 </div>
                                 <!--Tetfield 2 -->
                                 <!--Tetfield 4 -->
@@ -64,8 +64,8 @@
                                         <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
                        opacity:0.9; padding:7px 9px 0 10px;">Email Lookup </span>
                                     </div>
-                                    <input type="text" class="form-control  myselectinput" placeholder="Please enter "
-                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <input type="text" class="form-control  myselectinput"
+                                        placeholder="Please enter Email here" name="target_email">
                                 </div>
                                 <!--Tetfield 3 -->
                                 <div class="input-group   mt-4 mb-3">
@@ -74,8 +74,7 @@
                           opacity:0.9; padding:7px 9px 0 10px;">Phone number </span>
                                     </div>
                                     <input type="number" class="form-control  myselectinput"
-                                        placeholder="Please enter number here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                        placeholder="Please enter Phone number here" name="target_phone">
                                 </div>
                                 <!--Tetfield 2 -->
                                 <!--Tetfield 3 -->
@@ -85,11 +84,10 @@
                         opacity:0.9; padding:7px 9px 0 10px;">Address Lookup </span>
                                     </div>
                                     <input type="text" class="form-control  myselectinput"
-                                        placeholder="Please enter Address here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                        placeholder="Please enter Address here" name="target_address">
                                 </div>
                                 <!--Tetfield 2 -->
-                                <button type="button" style="float:right"
+                                <button type="submit" style="float:right"
                                     class="btn btn-secondary mainbutton">SEARCH</button>
                             </div>
                         </div>

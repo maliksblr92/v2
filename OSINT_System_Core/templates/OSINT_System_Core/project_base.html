@@ -134,10 +134,10 @@
           // jquery ready function
           document.addEventListener('DOMContentLoaded', function () {
             let footerRES = new ReconnectingEventSource('/events/')
-            console.log(footerRES)
+            // console.log(footerRES)
             footerRES.addEventListener('message', (event) => {
               const control_msg = JSON.parse(event.data)
-              console.log(control_msg)
+              // console.log(control_msg)
               const control_msg_box = $('#control-msg-box')
               control_msg_box.text(control_msg['text'])
             })
