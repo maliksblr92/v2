@@ -520,7 +520,7 @@ class Supported_Social_Site_List(APIView):
 """
 
 
-# ...................................................Views for SmartSearch
+
 
 # ...................................................Views for General Que
 
