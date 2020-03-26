@@ -32,12 +32,14 @@ def do_login(request):
     username = request.data.get("username")
     password = request.data.get("password")
     if username is None or password is None:
-        return Response({'error': 'Please provide both username and password'}, status=HTTP_400_BAD_REQUEST)
+        return Response(
+            {'error': 'Please provide both username and password'}, status=HTTP_400_BAD_REQUEST)
 
     user = authenticate(username=username, password=password)
 
     if not user:
-        return Response({'error': 'Invalid Credentials'}, status=HTTP_404_NOT_FOUND)
+        return Response({'error': 'Invalid Credentials'},
+                        status=HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
 
     login(request, user)
@@ -57,21 +59,41 @@ def do_logout(request):
 
 
 class User_Login(View):
-    # function to handle the get request
+    """
+    USER Login View
+    """
+
     def get(self, request):
+        """
+        get handler for login view
+        """
         return render(request, 'User_Accounts_Management_Unit/login.html', {})
 
     def post(self, request):
+        """
+        post handler for login view
+        """
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
         if(username is not None and password is not None):
             user = authenticate(request, username=username, password=password)
             # if user is not authenticated
-            if (user is not None):
+            if user is not None:
                 login(request, user)
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
-                return HttpResponseRedirect(reverse('OSINT_System_Core:dashboard'))
+                elif request.user.groups.filter(name='tso').exists():
+                    return HttpResponseRedirect(
+                        reverse('OSINT_System_Core:tso-dashboard'))
+                elif request.user.groups.filter(name='tmo').exists():
+                    return HttpResponseRedirect(
+                        reverse('OSINT_System_Core:tmo-dashboard'))
+                elif request.user.groups.filter(name='rdo').exists():
+                    return HttpResponseRedirect(
+                        reverse('OSINT_System_Core:rdo-dashboard'))
+                elif request.user.groups.filter(name='pao').exists():
+                    return HttpResponseRedirect(
+                        reverse('OSINT_System_Core:pao-dashboard'))
             else:
                 return HttpResponse('invalid credintial')
 
@@ -82,5 +104,5 @@ class User_Login(View):
 class User_Logout(View):
     def get(self, request):
         logout(request)
-        return HttpResponseRedirect(reverse('User_Accounts_Management_Unit:user_login'))
-
+        return HttpResponseRedirect(
+            reverse('User_Accounts_Management_Unit:user_login'))

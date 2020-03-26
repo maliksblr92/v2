@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 from Data_Processing_Unit.tasks import fetch_instagram_person, fetch_twitter_tweets
 from datetime import timedelta
 from Data_Processing_Unit import tasks
-
+from .mixins import RequireLoginMixin, IsTSO, IsTMO, IsRDO, IsPAO
 
 #from OSINT_System_Core.models import Supported_Socail_Sites
 #from OSINT_System_Core.serializers import Supported_Socail_Sites_Serializer
@@ -535,7 +535,7 @@ class Crawler_Internet_Connection(View):
 
 class Microcrawler_Status(View):
     # permission_classes = (IsAuthenticated,)
-    resp = acq.mircocrawler_status()
+    # resp = acq.mircocrawler_status()
     def get(self, request, *args, **kwargs):
 
         resp = acq.mircocrawler_status()
@@ -691,4 +691,24 @@ def test_view(request):
 
 def test_view1(request):
     if request.method == 'GET':
-        return render(request, 'OSINT_System_Core/tso_base.html')
+        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+
+
+class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+
+
+class TMO_Dashboard(RequireLoginMixin, IsTMO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/tmo_dashboard.html')
+
+
+class RDO_Dashboard(RequireLoginMixin, IsRDO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/rdo_dashboard.html')
+
+
+class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/pao_dashboard.html')

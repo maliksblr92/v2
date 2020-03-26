@@ -20,7 +20,10 @@ urlpatterns = [
          name='article_stat_overview'),
     path('article_stat_slo', views.Article_Stat_Slo.as_view(),
          name='article_stat_slo'),
-    path('my_article_stat', views.My_Article_Stat.as_view(), name='my_article_stat'),
+    path(
+        'my_article_stat',
+        views.My_Article_Stat.as_view(),
+        name='my_article_stat'),
     path('ticket_stat', views.Ticket_State.as_view(), name='ticket_stat'),
     path('fetch_stat', views.Fetch_State.as_view(), name='fetch_stat'),
     path('extracted_article', views.Extracted_Article.as_view(),
@@ -52,7 +55,10 @@ urlpatterns = [
          views.Dispatcher.as_view(), name='dispatcher'),
     #path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
-    path('test1', views.test_view1, name="tso-base")
+    path('tsodash', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
+    path('tmodash', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
+    path('rdodash', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
+    path('paodash', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
