@@ -102,10 +102,10 @@ class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
     def post(self, request, *args, **kwargs):
 
         print(request.POST)
-        name = request.POST['target_name']
-        email = request.POST['target_email']
-        phone = request.POST['target_phone']
-        address = request.POST['target_address']
+        name = request.POST.get('name_lookup', None)
+        email = request.POST.get('email_lookup', None)
+        phone = request.POST.get('phone_lookup', None)
+        address = request.POST.get('address_lookup', None)
         print(name, email, phone, address)
         # pass values to the user and wait for the response and show to the
         # same view

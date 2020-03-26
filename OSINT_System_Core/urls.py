@@ -55,10 +55,10 @@ urlpatterns = [
          views.Dispatcher.as_view(), name='dispatcher'),
     #path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
-    path('tsodash', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
-    path('tmodash', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
-    path('rdodash', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
-    path('paodash', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
+    path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
+    path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
+    path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
+    path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
