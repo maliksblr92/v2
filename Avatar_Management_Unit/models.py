@@ -41,7 +41,7 @@ ACTION_STATUS = (
 class Work(EmbeddedDocument):
     title = StringField(max_length=300)
     start_date = DateField()
-    end_data = DateField()
+    end_date = DateField()
     location = StringField(max_length=300)
     description = StringField(max_length=500)
     company = StringField(max_length=100)
@@ -161,7 +161,7 @@ class Avatar_AMS(Document):
 
     def add_work(self,title,start_date,end_date,location,description,company):
 
-        work = Work(title,start_date,end_date,location,description,company)
+        work = Work(title=title,start_date=start_date,end_date=end_date,location=location,description=description,company=company)
         self.works.append(work)
         self.evaluate_health()
 
@@ -225,6 +225,11 @@ class Avatar_AMS(Document):
         for account in social_accounts:
             if (account.social_media_type == account_type):
                 return account
+
+    @staticmethod
+    def get_all_social_accounts(avatar):
+        return avatar.social_media_accounts
+
 # ----------------------------------------------------------- Avatar Actions -----------------------------------------------
 
 
@@ -233,7 +238,7 @@ class Action_Schedule_AMS(Document):
 
     title = StringField()
     description = StringField()
-    account_credentials = ListField()
+    account_credentials = DynamicField() #ListField() # 0 : social_media_type, 1 : username
     data = DictField()
 
     type = StringField(choices=ACTION_TYPE)

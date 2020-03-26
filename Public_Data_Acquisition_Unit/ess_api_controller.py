@@ -453,5 +453,59 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+#................................................API For Avatar Actions................................................
+
+    def action_post(self,text,social_media,username,password):
+        try:
+            add_target_url = 'avatar/post/'
+            payload = {'text':text,'social_media':social_media,'email':username,'password':password}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def action_comment(self,text,post_url,social_media,username,password):
+        try:
+            add_target_url = 'avatar/comment/'
+            payload = {'text':text,'social_media':social_media,'target_post':post_url,'email':username,'password':password}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def action_reaction(self,reaction,post_url,social_media,username,password):
+        try:
+            add_target_url = 'avatar/reaction/'
+            payload = {'Reaction':reaction,'social_media':social_media,'target_post':post_url,'email':username,'password':password}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+
+    def action_share(self,text,post_url,social_media,username,password):
+        try:
+            add_target_url = 'avatar/comment/'
+            payload = {'text':text,'social_media':social_media,'target_post':post_url,'email':username,'password':password}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+
+
+
 if __name__== "__main__":
     print('i have been called')
