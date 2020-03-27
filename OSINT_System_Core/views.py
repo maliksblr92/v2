@@ -11,6 +11,14 @@ from Data_Processing_Unit import tasks
 
 from rest_framework.views import APIView
 from django.http import JsonResponse
+
+#imports for the find objects view
+
+from Keybase_Management_System.models import Keybase_KMS
+from Portfolio_Management_System.models import Portfolio_PMS
+from Avatar_Management_Unit.models import Avatar_AMS
+
+
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
@@ -675,6 +683,26 @@ class Dispatcher(View):
                    'GTR': GTR, 'author_account': author_account})
         return HttpResponse('success')
 
+#...........................................View For Object Search(awais)
+
+class Find_Object(View):
+
+    def get(self,request,*args,**kwargs):
+
+        type = kwargs['type']
+        query = kwargs['query']
+
+        if(type == 'portfolio'):
+            resp = Portfolio_PMS.find_object(query)
+        elif(type == 'keybase'):
+            resp = Keybase_KMS.find_object(query)
+        elif(type == 'avatar'):
+            resp = Avatar_AMS.find_object(query)
+        else:
+            print('invalid choice')
+
+        print(resp)
+        return HttpResponse(resp)
 # ...........................................Normal Functions ............
 
 
@@ -682,6 +710,7 @@ def convert_expired_on_to_datetime(expired_on):
     expired_onn = expired_on + ' 13:55:26'
     expired_onnn = datetime.datetime.strptime(expired_onn, '%m/%d/%Y %H:%M:%S')
     return expired_onnn
+
 
 
 def test_view(request):

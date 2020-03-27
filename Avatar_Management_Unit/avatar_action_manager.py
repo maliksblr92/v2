@@ -22,7 +22,7 @@ class Avatar_Action(object):
 
 
     def post(self,text,image=''):
-        ess.action_post(text,self.social_media,self.username,self.password)
+        resp = ess.action_post(text,self.social_media,self.username,self.password)
 
     def comment(self,text,target_post_url):
         ess.action_comment(text,target_post_url,self.social_media,self.username,self.password)
@@ -43,7 +43,7 @@ class Perform_Action(object):
     def __init__(self):
         pass
 
-
+    # expire the action depending upon the response from the server ESS
 
     def action_polling(self):
         actions = Action_Schedule_AMS.get_all_active_actions()

@@ -97,6 +97,17 @@ class Portfolio_PMS(Document):
             publish(str(e), module_name=__name__, message_type='alert')
             return False
 
+    meta = {'indexes': [
+        {'fields': ['$name', "$description"],
+         'default_language': 'english',
+         'weights': {'name': 10, 'description': 2}
+         }
+    ]}
+
+    @staticmethod
+    def find_object(query):
+        return Portfolio_PMS.objects.search_text(query)
+
 class Portfolio_Included_PMS(Document):
     """
         this model is to keep record that which portfolio or case has used or included

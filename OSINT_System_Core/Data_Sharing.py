@@ -8,6 +8,7 @@ from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from Keybase_Management_System.models import *
 from mongoengine import signals
+disconnect('default')
 #connect('OSINT_System')
 #client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
 

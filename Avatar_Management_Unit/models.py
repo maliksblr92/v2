@@ -230,6 +230,16 @@ class Avatar_AMS(Document):
     def get_all_social_accounts(avatar):
         return avatar.social_media_accounts
 
+    meta = {'indexes': [
+        {'fields': ['$first_name', "$last_name"],
+         'default_language': 'english',
+         'weights': {'first_name': 10, 'last_name': 2}
+         }
+    ]}
+
+    @staticmethod
+    def find_object(query):
+        return Avatar_AMS.objects.search_text(query)
 # ----------------------------------------------------------- Avatar Actions -----------------------------------------------
 
 
