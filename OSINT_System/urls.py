@@ -36,4 +36,5 @@ urlpatterns = [
     path('tms/', include('Target_Management_System.urls')),
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),
+    path('cms/', include('Case_Management_System.urls')),
 ]
