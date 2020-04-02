@@ -33,7 +33,7 @@ for(var i = 0; i < 5; i++){
 }
 
 
-chart.dataSource.parser = new am4core.JSONParser();
+//chart.dataSource.parser = new am4core.JSONParser();
 console.log('{{ data }}')
 //chart.data = data;
 
@@ -122,6 +122,10 @@ icon.verticalCenter = "middle";
 icon.width = 60;
 icon.height = 60;
 
+networkSeries.data = JSON.parse('{{ data | escapejs }}');
+
+
+/*
 networkSeries.data = [
    {
       "name":"Joey",
@@ -182,7 +186,7 @@ networkSeries.data = [
       ]
    }
 ];
-
+*/
 
 }); // end am4core.ready()
 </script>
