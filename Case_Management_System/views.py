@@ -9,19 +9,28 @@ n_series_data = []
 
 data = {
     "quiz": {
-        "sport": {
+        "maths": {
             "q1": {
-                "question": "Which one is correct team name in NBA?",
+                "question": "5 + 7 = ?",
                 "options": [
-                    "New York Bulls",
-                    "Los Angeles Kings",
-                    "Golden State Warriros",
-                    "Huston Rocket"
+                    "10",
+                    "11",
+                    "12",
+                    "13"
                 ],
-                "answer": "Huston Rocket"
+                "answer": "12"
+            },
+            "q2": {
+                "question": "12 - 8 = ?",
+                "options": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                "answer": "4"
             }
-        },
-
+        }
     }
 }
 
@@ -53,7 +62,7 @@ def convert_json_to_network_series(data,n=1):
         if(not isinstance(v,dict)):
 
             if(not isinstance(v,list)):
-                node = {'name':k,'value':size,'children':[{'name':v,'value':size-1}]}
+                node = {'name':k,'value':size,'children':[{'name':v,'value':size-1}],'collapsed':'true','fixed':'true'}
             else:
                 temp_childs = []
                 for val in v :
