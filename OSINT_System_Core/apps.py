@@ -4,7 +4,7 @@ from django.apps import AppConfig
 class OsintSystemCoreConfig(AppConfig):
     name = 'OSINT_System_Core'
     def ready(self):
-        pass
+        print(f'{self.name} -> initialized')
         """
         print('...................{0}...........Initiated .................'.format(self.name))
         from OSINT_System_Core.digger_control import Digger

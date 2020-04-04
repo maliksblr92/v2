@@ -104,7 +104,7 @@
             <div class="row">
               <div class="col-lg-2 m-0 p-3">
                 <div class="custom_center footer_div_1 ">
-                  <div class="text-center  text-white " style="font-size: 10px;">
+                  <div class="text-center  text-white " style="font-size: 10px;" id="control-msg-box">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Eos tenetur facilis doloremque.
                   </div>
@@ -131,25 +131,31 @@
         </div>
         <!-- start footer script -->
         <script>
-          let footerRES = new ReconnectingEventSource('/events/')
-          footerRES.addEventListener('message', (event) => {
-            const control_msg = JSON.parse(event.data)
-            console.log(control_msg)
-          })
-          //footer graphs
-          //internet speed of crawl server
-          $.ajax({
-            dataTyp: 'json',
-            url: '',
-            'success': (intspeed) => {
-              console.log(intspeed)
-            }
-          })
-          //crawl server state
-          $.getJSON('', (state) => {
-            //update the graphs
-            console.log(state)
-          })
+          // jquery ready function
+          document.addEventListener('DOMContentLoaded', function () {
+            let footerRES = new ReconnectingEventSource('/events/')
+            // console.log(footerRES)
+            footerRES.addEventListener('message', (event) => {
+              const control_msg = JSON.parse(event.data)
+              // console.log(control_msg)
+              const control_msg_box = $('#control-msg-box')
+              control_msg_box.text(control_msg['text'])
+            })
+            //footer graphs
+            //internet speed of crawl server
+            // $.ajax({
+            //   dataTyp: 'json',
+            //   url: '',
+            //   'success': (intspeed) => {
+            //     console.log(intspeed)
+            //   }
+            // })
+            // //crawl server state
+            // $.getJSON('', (state) => {
+            //   //update the graphs
+            //   console.log(state)
+            // })
+          }) // end of jquery ready function
         </script>
         <!-- end of footer script -->
         {% endblock %}
@@ -165,16 +171,17 @@
   <!-- end of container fluid -->
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
-  <script src="{% static 'popper/js/popper.min.js' %}"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
-  <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
-  <script src="{% static 'amchart/js/core.js' %}"></script>
-  <script src="{% static 'amchart/js/charts.js' %}"></script>
-  <script src="{% static 'amchart/js/themes/dark.js' %}"></script>
-  <script src="{% static 'amchart/js/themes/animated.js' %}"></script>
-  <script src="{% static 'OSINT_System_Core/js/oss_core_chart.js' %}"></script>
+  <script defer src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
+  <script defer src="{% static 'popper/js/popper.min.js' %}"></script>
+  <script defer src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script defer src="{% static 'django_eventstream/json2.js' %}"></script>
+  <script defer src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
+  <script defer src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
+  <script defer src="{% static 'amchart/js/core.js' %}"></script>
+  <script defer src="{% static 'amchart/js/charts.js' %}"></script>
+  <script defer src="{% static 'amchart/js/themes/dark.js' %}"></script>
+  <script defer src="{% static 'amchart/js/themes/animated.js' %}"></script>
+  <script defer src="{% static 'OSINT_System_Core/js/oss_core_chart.js' %}"></script>
   {% block foot_dep %} {% endblock %}
   {% block foot_script %} {% endblock %}
 </body>
