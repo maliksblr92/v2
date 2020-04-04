@@ -6,8 +6,8 @@ from django.views import View
 from OSINT_System_Core.publisher import publish
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
-
-
+from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS
+from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
 
@@ -28,7 +28,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         data = {
             'social': json.loads(social_sites.to_json()),
             'news': json.loads(news_sites.to_json()),
-            'blogs': json.loads(blog_sites.to_json())
+            'blogs': json.loads(blog_sites.to_json()),
+            'intervals':PERIODIC_INTERVALS
         }
         print(data)
         return render(request,
@@ -43,12 +44,28 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
         # get the all the values for kwargs and pass the the add target function they can change
         # depending upon the target type
-        print(request.POST)
-        # website_id = kwargs['website_id']
-        # target_type_index = kwargs['target_type_index']
+        #<QueryDict: {'csrfmiddlewaretoken': ['Egw4i8ivl698nS7BzlKQkGGUue93nN6jEWHKEOwnRI5bsrp329nu2sCwAiDlGUi0'], 'facebook_autheruseraccount': ['awais'], 'facebook_authortype': ['0'], 'facebook_authoruserid': ['abcdef123'], 'facebook_authorusername': ['sharif ahmad'], 'facebook_authoruserurl': ['http://www.facebook.com/sharifahmad2061'], 'date': [''], 'facebook_interval': ['15'], 'facebook_screenshot': ['1']}
 
-        # acq.add_target(website_id, target_type_index,
-        #                username='username', user_id='user_id')
+
+
+        print(request.POST)
+        website_id = ObjectId(request.POST['website_id'])
+        target_type_index = int(request.POST['facebook_authortype'])
+        username = request.POST['facebook_autheruseraccount']
+        user_id = request.POST['facebook_authoruserid']
+        name = request.POST['facebook_authorusername']
+        url = request.POST['facebook_authoruserurl']
+        expire_on = request.POST['facebook_expirydate']
+        interval = int(request.POST['facebook_interval'])
+        screen_shot = False
+
+        if ('facebook_screenshot' in request.POST):
+            screen_shot = request.POST['facebook_screenshot']
+            if(screen_shot == '1'):
+                screen_shot = True
+
+        print(website_id,target_type_index,username,user_id)
+        acq.add_target(website_id, target_type_index,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
         # publish('target created successfully', message_type='notification')
         return redirect('/tms/marktarget')
 
@@ -58,17 +75,17 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 class Smart_Search(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):
-        username = request.GET['author_account'][0]
-        search_site = request.GET['search_site'][0]
+        username = request.GET['author_account']
+        search_site = request.GET['search_site']
+
+        print(username,search_site)
+        resp = acq.fetch_smart_search(username=username,search_site=search_site)
         # print(kwargs)
         resp = {
             'author_userid': 'abcdef123',
             'author_username': 'sharif ahmad',
             'author_url': 'sharifahmad2061'
         }
-        # resp = acq.fetch_smart_search(
-        #     username=username,
-        #     search_site=search_site)
         return JsonResponse(resp, safe=False)
 
 
