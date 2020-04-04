@@ -22,7 +22,7 @@ import os
 
 from OSINT_System_Core.rabbit_thread import Rabbit_Consumer
 consumer = Rabbit_Consumer(1)
-consumer.start()
+#consumer.start()
 
 
 urlpatterns = [
@@ -36,4 +36,5 @@ urlpatterns = [
     path('tms/', include('Target_Management_System.urls')),
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),
+    path('cms/', include('Case_Management_System.urls')),
 ]
