@@ -46,6 +46,9 @@ class Keybase_KMS(Document):
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     expire_on = DateTimeField(default=datetime.datetime.utcnow()+ datetime.timedelta(days=30))
 
+
+
+
     def __str__(self):
         return self.title
 
@@ -68,6 +71,17 @@ class Keybase_KMS(Document):
         self.hashtags = hashtags
 
         self.save()
+
+    meta = {'indexes': [
+        {'fields': ['$title', "$topic"],
+         'default_language': 'english',
+         'weights': {'title': 10, 'topic': 2}
+         }
+    ]}
+
+    @staticmethod
+    def find_object(query):
+        return Keybase_KMS.objects.search_text(query)
 
 
 class Keybase_Included_KMS(Document):

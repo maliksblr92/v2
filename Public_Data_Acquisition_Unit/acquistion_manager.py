@@ -440,9 +440,7 @@ class Acquistion_Manager(object):
 
         try:
             for news in news_sites:
-                print(
-                    '.......................................fetching News now working on  {0}...........................'.format(
-                        news))
+                print('.......................................fetching News now working on  {0}...........................'.format(news))
                 response = ess.news_crawling(top, news)
                 print(response)
         except Exception as e:
