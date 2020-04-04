@@ -4,7 +4,11 @@ from channels.http import AsgiHandler
 from channels.auth import AuthMiddlewareStack
 import django_eventstream
 
-urlpatterns = [
-    url(r'^events/', AuthMiddlewareStack(URLRouter(django_eventstream.routing.urlpatterns)), {'channels': ['notifications']}),
-    url(r'', AsgiHandler),
-]
+urlpatterns = [url(r'^events/',
+                   AuthMiddlewareStack(URLRouter(django_eventstream.routing.urlpatterns)),
+                   {'channels': ['notifications',
+                                 'messages',
+                                 'alerts']}),
+               url(r'',
+                   AsgiHandler),
+               ]

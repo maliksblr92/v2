@@ -8,7 +8,7 @@
 {% block smallnavbar %}
 <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex" style="">
+    <div class="col-md-8 d-flex">
         <div class="col-md-1">
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
@@ -36,68 +36,115 @@
         <h4 class="topheading">Internet Survey</h4>
     </div>
     <!-- end of top row -->
+
     <!-- inside main container -->
-    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-        <div class="insidearea">
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  mymainbg  ">
+        <div class="">
             <!-- RPW FOR SOCIAL MEDIA -->
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-                    <!-- FORM start -->
-                    <form class="justify-content-center">
-                        <div class="form-group justify-content-center text-center ">
-                            <div style="width:70%;" class="container input1">
-                                <!-- textfield 1 -->
-                                <!--Tetfield 4 -->
-                                <div class="input-group   mt-4 mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:7px 9px 0 10px;">Name Lookup </span>
-                                    </div>
-                                    <input type="text" class="form-control  myselectinput"
-                                        placeholder="Please enter name here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+
+            <!-- Second row-->
+            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                <!-- FORM start -->
+
+                <form class="justify-content-center targetform formbg  pt-3 pb-5" method="POST" action="/tms/survey/">
+                    {% csrf_token %}
+                    <div class="form-group justify-content-center text-center  ">
+                        <div style="width:80%;" class="container input1">
+                            <!-- textfield 1 -->
+                            <!--Tetfield 4 -->
+                            <div class="input-group   mt-4 mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">Name Lookup
+                                    </span>
                                 </div>
-                                <!--Tetfield 2 -->
-                                <!--Tetfield 4 -->
-                                <div class="input-group   mt-4 mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Email Lookup </span>
-                                    </div>
-                                    <input type="text" class="form-control  myselectinput" placeholder="Please enter "
-                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control newinputdesign"
+                                    placeholder="Please enter name here" name="name_lookup">
+                            </div>
+
+                            <!--Tetfield 2 -->
+
+                            <!--Tetfield 4 -->
+                            <div class="input-group   mt-4 mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                    opacity:0.9; padding:7px 9px 0 10px;">Email Lookup
+                                    </span>
                                 </div>
-                                <!--Tetfield 3 -->
-                                <div class="input-group   mt-4 mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:7px 9px 0 10px;">Phone number </span>
-                                    </div>
-                                    <input type="number" class="form-control  myselectinput"
-                                        placeholder="Please enter number here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                <input type="text" class="form-control  newinputdesign"
+                                    placeholder="Please enter your email" name="email_lookup">
+                            </div>
+
+                            <!--Tetfield 3 -->
+                            <div class="input-group   mt-4 mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">Phone number
+                                    </span>
                                 </div>
-                                <!--Tetfield 2 -->
-                                <!--Tetfield 3 -->
-                                <div class="input-group   mt-4 mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
-                        opacity:0.9; padding:7px 9px 0 10px;">Address Lookup </span>
-                                    </div>
-                                    <input type="text" class="form-control  myselectinput"
-                                        placeholder="Please enter Address here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                <input type="number" class="form-control  newinputdesign"
+                                    placeholder="Please enter number here" name="phone_lookup">
+                            </div>
+
+                            <!--Tetfield 2 -->
+
+                            <!--Tetfield 3 -->
+                            <div class="input-group   mt-4 mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                     opacity:0.9; padding:7px 9px 0 10px;">Address Lookup
+                                    </span>
                                 </div>
-                                <!--Tetfield 2 -->
-                                <button type="button" style="float:right"
-                                    class="btn btn-secondary mainbutton">SEARCH</button>
+                                <input type="text" class="form-control  newinputdesign"
+                                    placeholder="Please enter Address here" name="address_lookup">
+                            </div>
+
+                            <!--Tetfield 2 -->
+
+                            <button type="submit" style="float:right" class="btn btn-secondary searchbutton">
+                                SEARCH
+                            </button>
+
+                            <!-- new result section-->
+                            <div class="container  d-flex justify-content-center">
+                                <div class="container">
+                                    <h3 class="myresult">Results</h3>
+                                    <div class="row othercontainer">
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright ">
+                                            Hello row 1 Hello row 1
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright ">
+                                            Hello row 2 Hello row 2
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
+                                            Hello row 3 Hello row 3
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
+                                            Hello row 4 Hello row 4
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
+                                            Hello row 5 Hello row 5
+                                        </div>
+
+                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                            Hello row 6 Hello row 6
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </form>
-                    <!--FORM END-->
-                </div>
+                    </div>
+                </form>
+
+                <!--FORM END-->
             </div>
-            <!-- Second row-->
+
+            <!-- below form  -->
+
             <!-- END OF second row-->
         </div>
     </div>

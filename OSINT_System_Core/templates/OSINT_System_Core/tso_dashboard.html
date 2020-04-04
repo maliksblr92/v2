@@ -1,10 +1,38 @@
-{% extends 'OSINT_System_Core/tso_base.html' %} {% block belly %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 d-flex" style="">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+      <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+      <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+      <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+      <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+      <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
 <div class="row">
   <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
     <div class="row">
-      <div
-        class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div"
-      >
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
         <p class="text-white charts_header">Social Media</p>
       </div>
       <div class="col-lg-11 col-sm-12  glowing_border chart_container">
@@ -14,9 +42,7 @@
   </div>
   <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
     <div class="row">
-      <div
-        class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div"
-      >
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
         <p class="text-white charts_header">Social Media</p>
       </div>
       <div class="col-lg-11 col-sm-12 glowing_border chart_container">
@@ -28,9 +54,7 @@
 <div class="row">
   <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
     <div class="row">
-      <div
-        class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div"
-      >
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
         <p class="text-white charts_header">Social Media</p>
       </div>
       <div class="col-lg-11 col-sm-12 glowing_border chart_container">
@@ -40,9 +64,7 @@
   </div>
   <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
     <div class="row">
-      <div
-        class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div"
-      >
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
         <p class="text-white custom_center    charts_header">
           Social Media
         </p>
@@ -53,5 +75,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}

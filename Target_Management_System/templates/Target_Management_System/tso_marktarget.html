@@ -92,7 +92,9 @@
 
                                     <!--FORMS-->
 
-                                    <form style="padding-bottom:10px;">
+                                    <form style="padding-bottom:10px;" id="{{platform.name | lower}}-form"
+                                        action="/tms/marktarget/" method="POST">
+                                        {% csrf_token %}
                                         <div class="form-group ">
 
                                             <div class="input-group    mt-5 mb-3">
@@ -102,8 +104,9 @@
                             opacity:0.9; padding:5px 9px 0 10px;">Author Account
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
+                                                <input type="text" class="form-control newinputdesign"
                                                     placeholder="Please Enter your text"
+                                                    name="{{platform.name|lower}}_autheruseraccount"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button type="button" x-target-name="{{platform.name|lower}}"
@@ -120,13 +123,14 @@
                                                 </div>
                                                 <select
                                                     style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                    class="custom-select newinput">
+                                                    class="custom-select newinput"
+                                                    name="{{platform.name|lower}}_authortype">
                                                     {% for choice in platform.target_type %}
                                                     <option value={{forloop.counter0}}>{{choice}}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
-
+                                            <!-- author user id -->
                                             <div class="input-group   mt-4 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
@@ -135,6 +139,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
+                                                    id="{{platform.name|lower}}-authoruserid"
+                                                    name="{{platform.name|lower}}_authoruserid"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -147,6 +153,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your text"
+                                                    id="{{platform.name|lower}}-authorusername"
+                                                    name="{{platform.name|lower}}_authorusername"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -159,6 +167,8 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Please Enter your number"
+                                                    id="{{platform.name|lower}}-authoruserurl"
+                                                    name="{{platform.name|lower}}_authoruserurl"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
 
@@ -174,7 +184,9 @@
                                                         </div>
                                                         <input class="form-control newinputdesign"
                                                             style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                            name="date" placeholder="MM/DD/YYY" type="text">
+                                                            name="date" placeholder="MM/DD/YYY" type="text"
+                                                            id="{{platform.name|lower}}-expirydate"
+                                                            name="{{platform.name|lower}}_expirydate">
                                                     </div>
 
                                                 </div>
@@ -190,7 +202,9 @@
                                                         </div>
                                                         <select
                                                             style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                            class="custom-select newinput">
+                                                            class="custom-select newinput"
+                                                            id="{{platform.name|lower}}-interval"
+                                                            name="{{platform.name|lower}}_interval">
                                                             <option selected="">on time only</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -210,7 +224,9 @@
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
                                                     placeholder="Yes/ No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2">
+                                                    aria-describedby="basic-addon2"
+                                                    id="{{platform.name|lower}}-screenshot"
+                                                    name="{{platform.name|lower}}_screenshot">
                                             </div>
                                         </div>
 
@@ -219,10 +235,12 @@
                                         <div class="row d-flex flex-row">
                                             <div class="col-md-12 ml-5 ">
                                                 <!--LEFT BUTTON-->
-                                                <button type="button" class="btn btn-secondary searchbutton">CLEAR
-                                                    FORM</button>
+                                                <button type="button"
+                                                    class="btn btn-secondary searchbutton clearform-btn"
+                                                    x-parent-form="{{platform.name|lower}}-form">
+                                                    CLEAR FORM</button>
 
-                                                <button type="button" style="float:right; "
+                                                <button type="submit" style="float:right; "
                                                     class="btn btn-secondary searchbutton mr-5">Submit</button>
                                             </div>
                                         </div>
@@ -250,31 +268,64 @@
 
 {% block foot_script %}
 <script>
-    let smartsearch = $('.smartsearch')
-    // smart search 
-    smartsearch.click((event) => {
-        // console.log(event.target)
-        let website = event.target.getAttribute('x-target-name')
-        let author_account = event.target.parentElement.parentElement.querySelector('input').value
-        console.log(website, author_account)
-        // let author_account = $('#author-account').val()
-        let data = {
-            'author_account': author_account,
-            'search_site': website
-        }
-        $.ajax({
-            dataType: "json",
-            url: "/tms/smartsearch/",
-            data: data,
-            success: (response) => {
-                console.log(response)
+    //start of document ready
+    document.addEventListener('DOMContentLoaded', function () {
+        let smartsearch = $('.smartsearch')
+        // smart search 
+        smartsearch.click((event) => {
+            // console.log(event.target)
+            let website = event.target.getAttribute('x-target-name')
+            let author_account = event.target.parentElement.parentElement.querySelector('input').value
+            // console.log(website, author_account)
+            // let author_account = $('#author-account').val()
+            let data = {
+                'author_account': author_account,
+                'search_site': website
             }
+            $.ajax({
+                dataType: "json",
+                url: "/tms/smartsearch/",
+                data: data,
+                success: (response) => {
+                    // console.log(response)
+                    $(`#${website}-authoruserid`).val(response['author_userid'])
+                    $(`#${website}-authorusername`).val(response['author_username'])
+                    switch (website) {
+                        case 'reddit':
+                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${response['author_url']}`)
+                            break;
+                        case 'linkedin':
+                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${response['author_url']}`)
+                            break;
+                        case 'instagram':
+                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${response['author_url']}`)
+                            break;
+                        case 'facebook':
+                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${response['author_url']}`)
+                            break;
+                        case 'twitter':
+                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${response['author_url']}`)
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
         })
-    })
-    // add target form
-    let addtargetform = $("#addtarget")
-    addtargetform.submit((event) => {
-        event.preventDefault()
-    })
+        // clear form btn functionality
+        let clearformbtn = $('.clearform-btn')
+        clearformbtn.click(event => {
+            // console.log('clear form clicked')
+            let pf = event.target.getAttribute('x-parent-form')
+            // console.log(pf)
+            $(`#${pf}`).trigger('reset')
+        })
+
+        // add target form
+        // let addtargetform = $("#addtarget")
+        // addtargetform.submit((event) => {
+        //     event.preventDefault()
+        // })
+    }) // document ready
 </script>
 {% endblock %}
