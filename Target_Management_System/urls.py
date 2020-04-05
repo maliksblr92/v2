@@ -16,6 +16,10 @@ urlpatterns = [
         views.Identify_Target.as_view(),
         name="tms_identifytarget"),
     path(
+        'identifytarget_request/',
+        views.Identify_Target_Request.as_view(),
+        name="tms_identifytarget_request"),
+    path(
         'survey/',
         views.Target_Internet_Survey.as_view(),
         name="tms_internetsurvey"),

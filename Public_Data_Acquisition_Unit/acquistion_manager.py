@@ -447,8 +447,17 @@ class Acquistion_Manager(object):
             print(e)
 
 
+    def identify_target(self,query,website):
 
+        resp = None
 
+        if website =='facebook': resp = ess.facebook_target_identification(query)
+        if website == 'instagram': resp = ess.instagram_target_identification(query)
+        if website == 'twitter': resp = ess.twitter_target_identification(query)
+        if website == 'linkedin': resp = ess.linkedin_target_identification(query)
+        if website == 'reddit': resp = ess.reddit_target_identification(query)
+
+        return resp
 
 
 

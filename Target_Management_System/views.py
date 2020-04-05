@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,reverse
 import json
 # Create your views here.
 from django.http import JsonResponse
@@ -66,7 +66,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
         print(website_id,target_type_index,username,user_id)
         acq.add_target(website_id, target_type_index,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
-        # publish('target created successfully', message_type='notification')
+        #publish('target created successfully', message_type='notification')
         return redirect('/tms/marktarget')
 
 
@@ -91,9 +91,10 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
 
 class Target_Fetched(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
-        return render(request,
-                      'Target_Management_System/tso_targetfetchview.html',
-                      {'app': 'target'})
+
+        resp = acq.get_fetched_targets()
+        print(resp)
+        return render(request,'Target_Management_System/tso_targetfetchview.html',{'targets':resp})
 
     def post(self, request, *args, **kwargs):
         pass
@@ -102,12 +103,28 @@ class Target_Fetched(RequireLoginMixin, IsTSO, View):
 class Identify_Target(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
         return render(request,
-                      'Target_Management_System/tso_identifytarget.html',
-                      {'app': 'target'})
+                      'Target_Management_System/tso_identifytarget.html',{})
 
     def post(self, request, *args, **kwargs):
         pass
 
+class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
+    def get(self, request, *args, **kwargs):
+
+
+        print(request.GET)
+        query = request.GET['query']
+        website = request.GET['website']
+
+        print(query,website)
+        resp = acq.identify_target(query,website)
+        #check here if resp is not none and remove the dummy reponse
+        resp = {
+            'author_userid': 'abcdef123',
+            'author_username': 'sharif ahmad',
+            'author_url': 'sharifahmad2061'
+        }
+        return JsonResponse(resp, safe=False)
 
 class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
 
