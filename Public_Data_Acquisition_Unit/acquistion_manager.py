@@ -289,6 +289,8 @@ class Acquistion_Manager(object):
             publish({'server_name': 'OCS', 'node_id': 1, 'messege_type': 'control, awais'})
             print('######################################### expired task deleted #####################################')
 
+    def get_custom_webiste_id(self):
+        return Supported_Website.objects(name='custom').first().id
 #.........................................................Query Functions...............................................
 
     def get_all_supported_sites(self):

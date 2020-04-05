@@ -136,22 +136,20 @@ class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
     def post(self, request, *args, **kwargs):
 
         print(request.POST)
-        name = request.POST.get('name_lookup', None)
-        email = request.POST.get('email_lookup', None)
-        phone = request.POST.get('phone_lookup', None)
-        address = request.POST.get('address_lookup', None)
+        name = request.POST.get('name_lookup', '')
+        email = request.POST.get('email_lookup', '')
+        phone = request.POST.get('phone_lookup', '')
+        address = request.POST.get('address_lookup','')
         print(name, email, phone, address)
         # pass values to the user and wait for the response and show to the
         # same view
-        # resp = acq.target_internet_survey(name, email, phone, address)
-        # can return httpresponse to same page and get a new query and do the
-        # process again
-        # print(resp)
+        resp = acq.target_internet_survey(name, email, phone, address)
 
+        print(resp)
+
+        #pass the response to front end and show it to user
         # return JsonResponse(resp, safe=False)
-        return render(request,
-                      'Target_Management_System/tso_internetsurvey.html',
-                      {'app': 'target'})
+        return render(request,'Target_Management_System/tso_internetsurvey.html',{})
 
 
 class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
@@ -162,11 +160,37 @@ class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
                       {'app': 'target'})
 
     def post(self, request, *args, **kwargs):
-        url = None
-        ip_address = None
-        attribute_list = None
 
+
+        website_id = acq.get_custom_webiste_id()
+        target_type_index = 1
+        page_url = request.POST.get('page_url',False)
+
+        links =bool(request.POST.get('links',False))
+        headings =bool(request.POST.get('headings',False))
+        paragraphs =bool(request.POST.get('paragraphs',False))
+        pictures =bool(request.POST.get('pictures',False))
+        videos =bool(request.POST.get('videos',False))
+        ip =bool(request.POST.get('page_url',False))
+
+
+        print(request.POST)
+        #print(links,headings,paragraphs,pictures,videos,ip)
         # pass the above values to the ess api handler and submit
+
+        acq.add_target(
+            website_id=website_id,
+            target_type_index=target_type_index,
+            title='Crawling Target',
+            url=page_url,
+            links=links,
+            headings=headings,
+            paragraphs=paragraphs,
+            pictures=pictures,
+            videos=videos,
+            ip=ip
+        )
+        return HttpResponseRedirect(reverse('Target_Management_System:tms_dynamiccrawling'))
 
 
 class Test_View(View):

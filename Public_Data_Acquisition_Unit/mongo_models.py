@@ -1050,6 +1050,7 @@ class Dynamic_Crawling(Document):
                 if 'headings' in kwargs: self.headings = kwargs['headings']
                 if 'paragraphs' in kwargs: self.paragraphs = kwargs['paragraphs']
                 if 'links' in kwargs: self.links = kwargs['links']
+                if 'pictures' in kwargs: self.pictures = kwargs['pictures']
 
                 self.GTR = GTR
                 self.target_type = GTR.target_type
