@@ -193,6 +193,18 @@ class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
         return HttpResponseRedirect(reverse('Target_Management_System:tms_dynamiccrawling'))
 
 
+class Created_Targets(RequireLoginMixin, IsTSO, View):
+
+    def get(self, request, *args, **kwargs):
+
+
+        resp,_ = acq.targets_added_all_time()
+
+        return render(request,'Target_Management_System/tso_targetscreated.html',{'targets':resp})
+
+
+
+
 class Test_View(View):
     def get(self, request, *args, **kwargs):
         print('send event about to be called')

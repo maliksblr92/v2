@@ -227,7 +227,7 @@ class Acquistion_Manager(object):
             publish('website type not defined',message_type='alert',module_name=__name__)
 
     def get_dataobject_by_gtr(self,gtr):
-        appropriate_class,_ = self.get_appropriate_method(gtr)
+        appropriate_class,_,_= self.get_appropriate_method(gtr)
         # now we have the actual method
         #now find the gtr id in this method to get the object
 
@@ -238,7 +238,9 @@ class Acquistion_Manager(object):
         object_list = []
         for gtr in gtr_list:
             obj = self.get_dataobject_by_gtr(gtr)
-            object_list.append(obj)
+            if(obj is not None):
+                object_list.append(obj)
+
         return object_list
 
     def add_facebook_target(self,gtr,kwargs):

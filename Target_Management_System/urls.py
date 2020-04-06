@@ -15,10 +15,7 @@ urlpatterns = [
         'identifytarget/',
         views.Identify_Target.as_view(),
         name="tms_identifytarget"),
-    path(
-        'identifytarget_request/',
-        views.Identify_Target_Request.as_view(),
-        name="tms_identifytarget_request"),
+
     path(
         'survey/',
         views.Target_Internet_Survey.as_view(),
@@ -27,8 +24,10 @@ urlpatterns = [
         'crawl/',
         views.Dyanamic_Crawling.as_view(),
         name="tms_dynamiccrawling"),
+    path('targets_created/', views.Created_Targets.as_view(), name="tms_targetscreated"),
     # ajax urls
     path('smartsearch/', views.Smart_Search.as_view(), name='tms_smartsearch'),
     path('test/', views.Test_View.as_view(), name="sendevent"),
-    path('test1/', views.Test_View1.as_view(), name="alertevent")
+    path('test1/', views.Test_View1.as_view(), name="alertevent"),
+    path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
 ]
