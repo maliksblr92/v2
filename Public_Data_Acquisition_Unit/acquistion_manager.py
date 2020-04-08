@@ -227,7 +227,7 @@ class Acquistion_Manager(object):
             publish('website type not defined',message_type='alert',module_name=__name__)
 
     def get_dataobject_by_gtr(self,gtr):
-        appropriate_class,_ = self.get_appropriate_method(gtr)
+        appropriate_class,_,_= self.get_appropriate_method(gtr)
         # now we have the actual method
         #now find the gtr id in this method to get the object
 
@@ -238,7 +238,9 @@ class Acquistion_Manager(object):
         object_list = []
         for gtr in gtr_list:
             obj = self.get_dataobject_by_gtr(gtr)
-            object_list.append(obj)
+            if(obj is not None):
+                object_list.append(obj)
+
         return object_list
 
     def add_facebook_target(self,gtr,kwargs):
@@ -289,6 +291,8 @@ class Acquistion_Manager(object):
             publish({'server_name': 'OCS', 'node_id': 1, 'messege_type': 'control, awais'})
             print('######################################### expired task deleted #####################################')
 
+    def get_custom_webiste_id(self):
+        return Supported_Website.objects(name='custom').first().id
 #.........................................................Query Functions...............................................
 
     def get_all_supported_sites(self):
@@ -447,8 +451,17 @@ class Acquistion_Manager(object):
             print(e)
 
 
+    def identify_target(self,query,website):
 
+        resp = None
 
+        if website =='facebook': resp = ess.facebook_target_identification(query)
+        if website == 'instagram': resp = ess.instagram_target_identification(query)
+        if website == 'twitter': resp = ess.twitter_target_identification(query)
+        if website == 'linkedin': resp = ess.linkedin_target_identification(query)
+        if website == 'reddit': resp = ess.reddit_target_identification(query)
+
+        return resp
 
 
 

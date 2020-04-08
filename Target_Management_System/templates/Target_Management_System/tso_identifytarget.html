@@ -48,104 +48,39 @@
             <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
                 <!-- FORM start -->
 
-                <form class="targetform justify-content-center pt-3 pb-3 formbg" method="POST"
+                <form class="targetform justify-content-center pt-3 pb-3 formbg" id="indentifyForm" method="POST"
                     action="/tms/identifytarget/">
+                    {% csrf_token %}
                     <div class="form-group justify-content-center text-center ">
                         <div style="width:90%;" class="container input1">
-                            <!-- textfield 1 -->
-                            <div class="input-group   mt-1 mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                    opacity:0.9; padding:5px 9px 0 10px;">Author Type
-                                    </span>
-                                </div>
-                                <select
-                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                    class="custom-select newinput" id="inputGroupSelect01">
-                                    <option selected="">Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
 
-                            <!--Tetfield 2 -->
-                            <div class="input-group   mt-4 mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                    opacity:0.9; padding:7px 9px 0 10px;">Author ID
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control  newinputdesign"
-                                    placeholder="Please Enter your number" aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2">
-                            </div>
+
 
                             <!--Tetfield 3 -->
                             <div class="input-group   mt-4 mb-3">
                                 <div class="input-group-prepend">
                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                    opacity:0.9; padding:7px 9px 0 10px;">Author Name
+                    opacity:0.9; padding:7px 9px 0 10px;">Query
                                     </span>
                                 </div>
-                                <input type="text" class="form-control  newinputdesign"
-                                    placeholder="Please Enter your text" aria-label="Recipient's username"
+                                <input type="text" class="form-control  newinputdesign" id = "hid_query" name="query"
+                                    placeholder="Please Enter Target Description" aria-label="Recipient's username"
                                     aria-describedby="basic-addon2">
+
+                                <input type="hidden" id="hid_website" name="website" value="ss">
+
                             </div>
 
-                            <!--Tetfield 4 -->
-                            <div class="input-group   mt-4 mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                    opacity:0.9; padding:7px 9px 0 10px;">Author URL
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control  newinputdesign"
-                                    placeholder="Please enter URL here" aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2">
-                            </div>
 
-                            <!-- TWO Section divided into 2--Tetfields  -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- EXPIRED ON SECTION-->
-                                    <div class="input-group   mt-1 mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:5px 9px 0 10px;">Expire on
-                                            </span>
-                                        </div>
-                                        <input class="form-control newinputdesign" id="date"
-                                            style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                            name="date" placeholder="MM/DD/YYY" type="text">
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <!--INTERVAL SECTION-->
-                                    <div class="input-group   mt-1 mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:5px 9px 0 10px;">Interval
-                                            </span>
-                                        </div>
-                                        <select
-                                            style="font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                            class="custom-select myselectinput" id="inputGroupSelect01">
-                                            <option selected="">on time only</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                </div>
+
+
+
                             </div>
 
                             <!-- end of 2 divided textfield-->
 
-                            <button type="button" style="float:right" class="btn btn-secondary searchbutton  mb-3">
-                                submit
-                            </button>
+
                         </div>
                     </div>
                 </form>
@@ -160,7 +95,7 @@
 
                 <div class="bg-info clearfix iconlabel mb-3">
                     <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-facebook fa-1x mt-2  ml-4  ">
-                        Facebook</i><button type="button" class="btn btn-secondary searchbtn float-right">
+                        Facebook</i><button type="button" class="btn btn-secondary searchbtn float-right" onclick="myFunction('facebook')">
                         Search
                     </button>
                 </div>
@@ -253,7 +188,7 @@
 
                 <div class="bg-info clearfix iconlabel mt-3 mb-3">
                     <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-instagram fa-1x mt-2  ml-4  ">
-                        Instagram</i><button type="button" class="btn btn-secondary searchbtn float-right">
+                        Instagram</i><button type="button" class="btn btn-secondary searchbtn float-right" onclick="myFunction('instagram')">
                         Search
                     </button>
                 </div>
@@ -347,7 +282,7 @@
                 <div class="bg-info clearfix iconlabel mt-3 mb-3">
                     <i style="color:white; opacity:0.8;font-size:14px; "
                         class="fab fa-twitter-square fa-1x mt-2  ml-4  ">
-                        Twitter</i><button type="button" class="btn btn-secondary searchbtn float-right">
+                        Twitter</i><button type="button" class="btn btn-secondary searchbtn float-right" onclick="myFunction('twitter')">
                         Search
                     </button>
                 </div>
@@ -440,7 +375,7 @@
 
                 <div class="bg-info clearfix iconlabel mt-3 mb-3">
                     <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-linkedin fa-1x mt-2  ml-4  ">
-                        LinkedIn</i><button type="button" class="btn btn-secondary searchbtn float-right">
+                        LinkedIn</i><button type="button" class="btn btn-secondary searchbtn float-right" onclick="myFunction('linkedin')">
                         Search
                     </button>
                 </div>
@@ -534,7 +469,7 @@
                 <div class="bg-info clearfix iconlabel mt-3 mb-3">
                     <i style="color:white; opacity:0.8;font-size:14px; "
                         class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
-                        Reddit</i><button type="button" class="btn btn-secondary searchbtn float-right">
+                        Reddit</i><button type="button" class="btn btn-secondary searchbtn float-right" onclick="myFunction('reddit')">
                         Search
                     </button>
                 </div>
@@ -628,4 +563,33 @@
         </div>
     </div>
 </div>
+
+    <script>
+function myFunction(website) {
+    //document.getElementById("hid_website").value = value
+    var query = document.getElementById("hid_query").value
+
+
+    $.ajax({
+                dataType: "json",
+                url: "/tms/identifytarget_request/",
+                data: {
+                'query': query,
+                'website': website
+            },
+                success: (response) => {
+                    console.log(response)
+
+
+                }
+    })
+
+
+
+  //document.getElementById("indentifyForm").submit();
+}
+</script>
+
+
+
 {% endblock %}
