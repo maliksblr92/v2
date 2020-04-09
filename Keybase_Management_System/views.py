@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 
 
 # Create your views here.
@@ -12,15 +12,15 @@ km = Keybase_Manager()
 
 class Create_Keybase(View):
 
-    def get(self,request):
-        pass
+    def get(self,request, *args, **kwargs):
+        return render(request, 'Keybase_Management_System/creation.html')
 
-    def post(self,request):
-
+    def post(self,request, *args, **kwargs):
+        print(request.POST)
         #provide the following keward arguments to create a keybase
-        km.create_keybase(login_user_id='',title='',topic='',phrases=[],keywords=[],mentions=[],hashtags=[])
+        # km.create_keybase(login_user_id='',title='',topic='',phrases=[],keywords=[],mentions=[],hashtags=[])
 
-        return None
+        return JsonResponse({'success':200})
 
 class Delete_Keybase(View):
 
@@ -53,13 +53,22 @@ class Edit_Keybase(View):
 class Keybase_Archive(View):
 
 
-    def get(self,request,**kwargs):
-        if('start_date' in kwargs and 'end_date' in kwargs):
+    def get(self, request, *args, **kwargs):
+        if ('start_date' in kwargs and 'end_date' in kwargs):
             objects = km.get_keybases_by_date_range(kwargs['start_date'],kwargs['end_date'])
         else:
             objects = km.get_all_keybases()
-
-        return objects
+        # print(objects)
+        objects = {}
+        objects['keywords'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['titles'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['topics'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['tags'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['mentions'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['phrases'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        objects['dates'] = ['hello', 'there', 'how', 'are', 'you', 'is', 'everything', 'good']
+        
+        return render(request, 'Keybase_Management_System/archive.html', {'ctx': objects})
 
 
 class View_Keybase(View):

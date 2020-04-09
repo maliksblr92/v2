@@ -1,0 +1,1219 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/archive.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-4 col-lg-4 col-xl-4"></div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
+            <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIEVE</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xl-4"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
+        <!-- TOP MANU BAR -->
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="false">KEYWORDS</a>
+
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">TAGS</a>
+
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">TOPICS</a>
+
+                <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
+                    aria-controls="nav-about" aria-selected="false">TITLE</a>
+
+                <a class="nav-item nav-link" id="nav-mention-tab" data-toggle="tab" href="#nav-mention" role="tab"
+                    aria-controls="nav-mention" aria-selected="false">MENTIONS</a>
+
+                <a class="nav-item nav-link" id="nav-phrase-tab" data-toggle="tab" href="#nav-phrase" role="tab"
+                    aria-controls="nav-phrase" aria-selected="false">PHRASE</a>
+
+                <a class="nav-item nav-link active" id="nav-dates-tab" data-toggle="tab" href="#nav-dates" role="tab"
+                    aria-controls="nav-dates" aria-selected="true">DATES</a>
+            </div>
+        </nav>
+
+        <!-- END OF TOP MANU BAR -->
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+
+            <div class="row formbg ml-5">
+                <div class="col-md-11 col-lg-11 col-xl-11 col-sm-11">
+                    <!-- this is content -->
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <!-- Each content tab #1 for keywords-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Keywords
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Keywords
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Keywords
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Keywords
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- START OF SECOND TAB---- TAGS TAB -->
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <!-- Each content tab #2 for Tags-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Tags
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Tags
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- START of 3rd Tab -- TOPICS TAB -->
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <!-- Each content tab #3 for topics-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topic
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Topics
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start of 4th Tab-- Title Tab -->
+                        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                            <!-- Each content tab #1 for keywords-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Title
+                                                </span>
+                                                <span class="rightlabel">Keywords
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start of 5th Tab-- MENTION -->
+                        <div class="tab-pane fade" id="nav-mention" role="tabpanel" aria-labelledby="nav-mention">
+                            <!-- Each content tab #1 for keywords-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mentions
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mentions
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Mention
+                                                </span>
+                                                <span class="rightlabel">mention
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END OF 5th Tab-->
+                        <!-- Phrase tab -->
+                        <div class="tab-pane fade" id="nav-phrase" role="tabpanel" aria-labelledby="nav-phrase-tab">
+                            <!-- Each content tab #1 for keywords-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Phrase
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end of 6th tab-- Phrase tab -->
+                        <!-- Dates Tabs -->
+                        <div class="tab-pane fade active show" id="nav-dates" role="tabpanel"
+                            aria-labelledby="nav-dates-tab">
+                            <!-- Each content tab #1 for keywords-->
+                            <div class="row mt-2">
+                                <!-- divide the section into 3 columns -->
+                                <div class="col-md-4 col-lg-4 col-xl-4 columnnumberone">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Crearted
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">
+                                                    Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                    <div class="container">
+                                        <div class="input-group mt-2 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!-- number 2 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 3 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 4 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Dates
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- number 5 -->
+                                        <div class="input-group mt-3 mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="keybaseLabel">Date
+                                                </span>
+                                                <span class="rightlabel">Created
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--END of last tabs -->
+                    </div>
+
+                    <!-- let me check -->
+
+                    <!-- end of content -->
+                </div>
+                <div class="col-md-1 col-lg-1 com-xl-1 col-sm-1 d-flex align-items-center">
+                    <!-- Three verticle button -->
+                    <div class="ml-4 d-flex flex-column align-items-end">
+                        <span class="editbutton"><i style="color: white; opacity: 0.8;" class="fas fa-edit fa-2x"></i>
+                        </span>
+
+                        <span class="editbutton"><i style="color: white; opacity: 0.8;"
+                                class="fa fa-plus-circle fa-2x"></i>
+                        </span>
+
+                        <span class="editbutton"><i style="color: white; opacity: 0.8;"
+                                class="fas fa-trash-alt fa-2x"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END OF second row-->
+        </div>
+    </div>
+</div>
+{% endblock %}
