@@ -182,7 +182,7 @@ class Global_Target_Reference(Document):
 
     @staticmethod
     def targets_added_all_time():
-        return Global_Target_Reference.objects
+        return Global_Target_Reference.objects.order_by('-created_on')
 
     @staticmethod
     def targets_added_today():
@@ -247,6 +247,13 @@ class Facebook_Target(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+
+    @staticmethod
+    def get_all_targets():
+        return Facebook_Target.objects.order_by('created_on')
+
+
 
 class Reddit_Target(Document):
 
@@ -1050,6 +1057,7 @@ class Dynamic_Crawling(Document):
                 if 'headings' in kwargs: self.headings = kwargs['headings']
                 if 'paragraphs' in kwargs: self.paragraphs = kwargs['paragraphs']
                 if 'links' in kwargs: self.links = kwargs['links']
+                if 'pictures' in kwargs: self.pictures = kwargs['pictures']
 
                 self.GTR = GTR
                 self.target_type = GTR.target_type
