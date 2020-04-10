@@ -203,6 +203,19 @@ class Created_Targets(RequireLoginMixin, IsTSO, View):
         return render(request,'Target_Management_System/tso_targetscreated.html',{'targets':resp})
 
 
+class Explore_Target(RequireLoginMixin,IsTSO,View):
+
+    def get(self,request,*args,**kwargs):
+
+        gtr_id = ObjectId('5e6f1b447da8f74c619f703a')
+        data_object = acq.get_data_response_object_by_gtr_id(gtr_id)
+
+        print(data_object)
+        data_object = data_object.to_mongo()
+
+
+        return render(request,'Target_Management_System/explore_target.html',{'data_object':data_object})
+
 
 
 class Test_View(View):
