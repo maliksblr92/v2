@@ -203,7 +203,7 @@ class Created_Targets(RequireLoginMixin, IsTSO, View):
         return render(request,'Target_Management_System/tso_targetscreated.html',{'targets':resp})
 
 
-class Explore_Target(RequireLoginMixin,IsTSO,View):
+class Facebook_Target_Response(RequireLoginMixin,IsTSO,View):
 
     def get(self,request,*args,**kwargs):
 
@@ -214,7 +214,7 @@ class Explore_Target(RequireLoginMixin,IsTSO,View):
         data_object = data_object.to_mongo()
 
 
-        return render(request,'Target_Management_System/explore_target.html',{'data_object':data_object})
+        return render(request,'Target_Management_System/facebook_target_response.html',{'person':data_object})
 
 
 

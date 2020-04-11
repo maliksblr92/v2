@@ -9,6 +9,13 @@ def mongoid(obj, attribute):
 
 
 @register.filter(name='data_type')
-def data_type(obj,attribute):
-    print(obj)
-    return type(obj)
+def data_type(obj):
+
+    if(isinstance(obj,(list))):
+        return 'list'
+
+    elif(isinstance(obj,dict)):
+        return 'dict'
+
+    else:
+        return 'var'
