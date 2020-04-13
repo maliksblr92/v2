@@ -25,6 +25,7 @@ urlpatterns = [
         views.Dyanamic_Crawling.as_view(),
         name="tms_dynamiccrawling"),
     path('targets_created/', views.Created_Targets.as_view(), name="tms_targetscreated"),
+    path('facebook_target_response/', views.Facebook_Target_Response.as_view(), name="facebook_target_response"),
     # ajax urls
     path('smartsearch/', views.Smart_Search.as_view(), name='tms_smartsearch'),
     path('test/', views.Test_View.as_view(), name="sendevent"),

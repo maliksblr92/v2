@@ -226,6 +226,18 @@ class Acquistion_Manager(object):
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
 
+    def get_data_response_object_by_gtr_id(self,gtr_id):
+
+        gtr = self.get_gtr_by_id(gtr_id)
+        _, _,appropriate_class = self.get_appropriate_method(gtr)
+
+        print(gtr.id)
+        dataobject = appropriate_class.objects(GTR=str(gtr_id)).first()
+        return dataobject
+
+
+
+
     def get_dataobject_by_gtr(self,gtr):
         appropriate_class,_,_= self.get_appropriate_method(gtr)
         # now we have the actual method
