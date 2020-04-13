@@ -1,0 +1,128 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'OSINT_System_Core/ahmed_templates/main_base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  <!-- put pages content here  -->
+  <div class="col-lg-8">
+
+
+
+
+   
+
+      <div class="row">
+          
+        <div class="col-lg-12 ">
+          <div class="row">
+          
+            <div class="col-lg-12  glowing_border chart_container  " style="border-radius: 15px;margin-top: 10px;">
+              <div id="map" class="m-0 p-3  height_width_100"  style="width:100%;height: 450px"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- start of footer  -->
+        <div class="row footer_wrapper ">
+
+            <div class="col-lg-12 glowing_border" style="border-radius:5px;">
+              <div class="row">
+                <div class="col-lg-2 m-0 p-1">
+                  <div class="custom_center footer_div_1 ">
+                    <div class="text-center  text-white " style="font-size: 10px;">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos tenetur facilis doloremque.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 m-0 p-1 ">
+                  <div id="chart_5" class="m-0 p-0 ">
+                  </div>
+                </div>
+                <div class="col-lg-6  m-0 p-1 ">
+                  <div class="row">
+                    <div class="col-lg-4 ">
+                      <div id="chart_6" class="m-0 p-0">
+                      </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                      <div id="chart_7" class="m-0 p-0">
+                      </div>
+                    </div>
+                    <div class="col-lg-4 ">
+                      <div id="chart_8" class="m-0 p-0">
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+  
+          </div>
+          <!-- end footer  -->
+        </div>
+  
+        <!-- end content  -->
+
+
+
+
+
+    <script type="text/javascript" src="{% static 'ahmed/main/js/slim.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/main/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/main/js/bootstrap.min.js'%}"></script>
+  
+  
+    <!-- index 1 js Resources -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="{% static 'ahmed/main/js/footer_charts.js'%}"></script>
+    <!-- index 1 js Resources -->
+    <script type="text/javascript" src="{% static 'ahmed/main/js/heat_map.js'%}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/main/js/realworld.10000.js'%}"></script>
+    <script>
+
+        var map = L.map('map').setView([-37.87, 175.475], 12);
+
+        var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+        var heat = L.heatLayer(addressPoints).addTo(map);
+
+    </script>
+{% endblock %}

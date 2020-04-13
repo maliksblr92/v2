@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:09 GMT -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>BIG VIEW</title>
+    <meta property="og:title" content="BIG VIEW" />
+    <meta property="og:description" content="A sample embeddable dashboard to visualize COVID-19 spread timeline and affected regions." />
+    <meta property="og:url" content="index.html" />
+    <meta property="og:site_name" content="amCharts" />
+    <meta property="og:image" content="screenshot.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css" integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/4/core.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+ 
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/charts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/maps.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/dark.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/animated.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/worldLow.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/countries2.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" media="all" href="{% static 'ahmed/dashboard/css/jquery.dataTables.min.css' %}" />
+    <link rel="stylesheet" media="all" href="{% static 'ahmed/dashboard/css/select.dataTables.min.css' %}" />
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/dataTables.select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/world_timeline.js' %}"></script>
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/total_timeline.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" media="all" href="{% static 'ahmed/dashboard/css/dark.css' %}" />
+    <script type="text/javascript" src="{% static 'ahmed/dashboard/js/app.js' %}"></script>
+
+    <!-- toatsr -->
+    <link rel="stylesheet" type="text/css"  href="{% static 'ahmed/dashboard/css/toastr.min.css' %}"/>
+  
+    <style type="text/css">
+        #items {
+        padding-bottom: 100px;
+        }
+        #info {
+        position: absolute;
+        background: #444;
+        box-sizing: border border-warning-box;
+        padding: 5px;
+        bottom: 0;
+        margin-right: 20px;
+        margin-bottom: 0px;
+        }
+        p {
+        margin: 5px;
+        }
+        a {
+        color: #fff;
+        }
+        </style>
+        <style type="text/css">
+        .custom_center_row{
+        display: flex!important;
+        flex-direction: row!important;
+        justify-content: center!important;
+        align-items: center!important;
+        }
+        .custom_center_col{
+        display: flex!important;
+        flex-direction: column!important;
+        justify-content: center!important;
+        align-items: center!important;
+        }
+        .custom_center{
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
+        }
+        .vertical_text{
+        writing-mode: vertical-lr;
+        }
+        </style>
+        <style type="text/css">
+        .card1_text{
+        font-size:20px;
+        }
+        .card1_col1{
+        border-right:1px solid white;
+        /*   background-color: #fde7f9;
+        background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);*/
+        border-radius: 10px 0px 0px 10px;
+        }
+    
+        .card_headers{
+        border-radius:10px 10px 0px 0px; 
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+       }
+        .card1_row{
+        border-radius: 10px;
+        }
+        </style>
+        <style type="text/css">
+        .card2_text{
+        font-size:20px;
+        }
+        .card2_col1{
+        border-right:1px solid white;
+        /*   background-color: #fde7f9;
+        background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);*/
+        border-radius: 10px 0px 0px 10px;
+        }
+        .card2_row{
+        border-radius: 10px;
+        }
+        
+        </style>
+        <style type="text/css">
+        .recent_trends_img{
+        height: 60px;width: 100%;
+        }
+        .recent_trends_post{
+       
+        border-radius:5px;
+        height: 50px;
+        }
+        </style>
+        <style type="text/css">
+        .social_posts_img{
+        height: 50px;width: 100%;
+        }
+        .social_posts_post{
+        font-size: 10px;
+        border-radius:5px;
+        height: 45px;
+        }
+        </style>
+        <style type="text/css">
+        html {
+        --scrollbarBG: #CFD8DC;
+        --thumbBG: #90A4AE;
+        }
+        ::-webkit-scrollbar {
+        width: 7px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+        ::-webkit-scrollbar-track {
+        background: var(--scrollbarBG);
+        }
+        ::-webkit-scrollbar-thumb {
+        background-color: var(--thumbBG) ;
+        border-radius: 6px;
+        border: 3px solid var(--scrollbarBG);
+        }
+        </style>
+        <style type="text/css">
+          .header{
+        border:1px solid black ;
+    height: auto;
+     background: rgb(74,103,121);
+    background: linear-gradient(90deg, rgba(74,103,121,1) 67%, rgba(128,138,173,1) 100%, rgba(0,212,255,1) 100%);
+    -webkit-clip-path: polygon(0% 15%, 7% 15%, 7% 0, 93% 0, 93% 15%, 100% 15%, 100% 85%, 93% 85%, 93% 100%, 7% 100%, 7% 85%, 0% 85%);
+    clip-path: polygon(0% 15%, 7% 15%, 7% 0, 93% 0, 93% 15%, 100% 15%, 100% 85%, 93% 85%, 93% 100%, 7% 100%, 7% 85%, 0% 85%);
+    
+    
+    
+      }
+    
+    
+       .footer{
+        border:1px solid black ;
+    height: auto;
+     background: rgb(74,103,121);
+    background: linear-gradient(90deg, rgba(74,103,121,1) 67%, rgba(128,138,173,1) 100%, rgba(0,212,255,1) 100%);
+    -webkit-clip-path: polygon(0% 15%, 7% 15%, 7% 0, 93% 0, 93% 15%, 100% 15%, 100% 85%, 93% 85%, 93% 100%, 7% 100%, 7% 85%, 0% 85%);
+    clip-path: polygon(0% 15%, 7% 15%, 7% 0, 93% 0, 93% 15%, 100% 15%, 100% 85%, 93% 85%, 93% 100%, 7% 100%, 7% 85%, 0% 85%);
+    
+    
+    
+      }
+      #refesh_world_wide_trends_btn{
+        height: 25px;
+        width: auto;
+        font-size: 10px;;
+      }
+        </style>
+      </head>
+      <body
+      >
+
+{% block content %}
+
+
+{% endblock  %}
+
+
+
+     <script type="text/javascript" src="{% static 'ahmed/dashboard/charts/worldwide_hastags.js' %}"></script>
+     <script type="text/javascript" src="{% static 'ahmed/dashboard/charts/barchart_1.js' %}"></script>
+     <script type="text/javascript" src="{% static 'ahmed/dashboard/charts/donut_chart.js' %}"></script>
+
+       
+      </body>
+      <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:46 GMT -->
+    </html>
