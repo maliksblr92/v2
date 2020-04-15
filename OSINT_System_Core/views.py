@@ -741,3 +741,30 @@ class RDO_Dashboard(RequireLoginMixin, IsRDO, View):
 class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
     def get(self, request, *args, **kwargs):
         return render(request, 'OSINT_System_Core/pao_dashboard.html')
+
+
+
+
+
+
+
+
+
+# ahmed start
+class Dashboard(APIView):
+    #permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+
+        return render(request,'OSINT_System_Core/ahmed_templates/dashboard.html',{})
+
+def main(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main.html',{})
+
+def main_1(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main_1.html',{})
+def mainHeatMap(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main_heatmap.html',{})
+def newsMonitor(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/news_monitoring.html',{})
+# ahmed end 

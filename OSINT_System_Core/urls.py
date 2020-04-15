@@ -59,6 +59,15 @@ urlpatterns = [
     path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
     path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
     path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
+
+     #ahmed start
+    path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
+    path('main/', views.main, name='main'),
+    path('main_1/', views.main_1, name='main_1'),
+    path('main/heatmap/', views.mainHeatMap, name='mainHeatMap'),
+    path('newsmonitoring/', views.newsMonitor, name='newsMonitor'),
+    
+    #ahmed end 
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
