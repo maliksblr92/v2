@@ -154,9 +154,17 @@ class Add_Social_Account(View):
             print(e)
             return HttpResponse(e)
 
+
+class Avatar_Archive(View):
+
+    def get(self,request):
+        avatars = Avatar_AMS.get_all_avatars()
+        return None
+
+
 #.............................................Views For Avatar Actions.................................................
 
-class Schedule_Action_Post(View):
+class Schedule_Action(View):
 
     def get(self, request, *args, **kwargs):
 
@@ -177,7 +185,7 @@ class Schedule_Action_Post(View):
             account_credentials = Avatar_AMS.get_social_account(a, account_type)
             type = 'post'
 
-            #temp variables
+
 
             text = 'post text'
             reaction = 'love'
@@ -195,3 +203,14 @@ class Schedule_Action_Post(View):
         except Exception as e:
             print(e)
             return HttpResponse(e)
+
+class Actions_Archive(View):
+
+    def get(self,request):
+
+        active_actions = Action_Schedule_AMS.get_all_active_actions()
+        expired_actions = Action_Schedule_AMS.get_all_expired_actions()
+
+        actions = Action_Schedule_AMS.get_all_actions()
+
+        return None

@@ -194,6 +194,9 @@ class Avatar_AMS(Document):
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
 
+    def get_avatar_health(self):
+        return self.health
+
     @staticmethod
     def get_all_avatars():
         return Avatar_AMS.objects()
@@ -280,7 +283,9 @@ class Action_Schedule_AMS(Document):
     def get_all_active_actions():
         return Action_Schedule_AMS.objects(expired=False)
 
-
+    @staticmethod
+    def get_all_actions():
+        return Action_Schedule_AMS.objects()
 
 
 
