@@ -1,20 +1,21 @@
 from django.urls import path
 from OSINT_System_Core import views
-#from rest_framework.urlpatterns import format_suffix_patterns
+
+# from rest_framework.urlpatterns import format_suffix_patterns
 
 app_name = 'OSINT_System_Core'
 
 urlpatterns = [
     path('', views.Main.as_view(), name='main_page'),
-    #path('target_author_main/',views.Target_Author_Main.as_view(),name = 'target_author_main'),
+    # path('target_author_main/',views.Target_Author_Main.as_view(),name = 'target_author_main'),
     path('target_headlines_main/', views.Target_Headlines_Main.as_view(),
          name='target_headlines_main'),
-    #path('supported_site_list/',views.Supported_Social_Site_List.as_view(),name = 'supported_site_list'),
+    # path('supported_site_list/',views.Supported_Social_Site_List.as_view(),name = 'supported_site_list'),
     # path('add_news_target/',views.News_Target.as_view(),name='add_news_target'),
-    #path('add_instagram_target/', views.Add_Instagram_Target.as_view(), name='add_instagram_target'),
-    #path('add_twitter_target/', views.Add_Twitter_Target.as_view(), name='add_twitter_target'),
-    #path('add_facebook_target/', views.Add_Facebook_Target.as_view(), name='add_facebook_target'),
-    #path('add_linkedin_target/', views.Add_Linkedin_Target.as_view(), name='add_linkedin_target'),
+    # path('add_instagram_target/', views.Add_Instagram_Target.as_view(), name='add_instagram_target'),
+    # path('add_twitter_target/', views.Add_Twitter_Target.as_view(), name='add_twitter_target'),
+    # path('add_facebook_target/', views.Add_Facebook_Target.as_view(), name='add_facebook_target'),
+    # path('add_linkedin_target/', views.Add_Linkedin_Target.as_view(), name='add_linkedin_target'),
 
     path('article_stat_overview', views.Article_Stat_Overview.as_view(),
          name='article_stat_overview'),
@@ -53,12 +54,21 @@ urlpatterns = [
          name='target_author_linkedin'),
     path('dispatcher/<str:GTR>/<str:author_account>',
          views.Dispatcher.as_view(), name='dispatcher'),
-    #path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
+    # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
     path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
     path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
     path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
     path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
+
+    # ahmed start
+    path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
+    path('main/', views.main, name='main'),
+    path('main_1/', views.main_1, name='main_1'),
+    path('main/heatmap/', views.mainHeatMap, name='mainHeatMap'),
+    path('newsmonitoring/', views.newsMonitor, name='newsMonitor'),
+
+    # ahmed end
 ]
 
-#urlpatterns = format_suffix_patterns(urlpatterns)
+# urlpatterns = format_suffix_patterns(urlpatterns)
