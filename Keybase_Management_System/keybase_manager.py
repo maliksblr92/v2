@@ -93,6 +93,12 @@ class Keybase_Manager(object):
 
     def get_all_keybases(self):
         return Keybase_KMS.objects()
+    
+    def get_all_keybases_by_user(self, user_id):
+        # req_fields = ['id', 'login_user_id', 'title', 'topic', 'keywords', 'mentions', 'phrases', 'hashtags']
+        return Keybase_KMS.objects.filter(login_user_id=user_id).all_fields()
+        # .exclude('expire_on').exclude('updated_on').exclude('created_on').exclude('is_enabled').exclude('is_expired')
+        # .only('login_user_id', 'title', 'topic', 'keywords', 'mentions', 'phrases', 'hashtags')
 
     def get_keybase_included_all(self):
         return Keybase_Included_KMS.objects()

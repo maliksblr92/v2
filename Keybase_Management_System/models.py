@@ -18,7 +18,7 @@ from Public_Data_Acquisition_Unit.mongo_models import *
 
 from mongoengine import signals
 #connect('OSINT_System')
-client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
+client = connect(db='OSINT_System',host='127.0.0.1', port=27017)
 
 
 class Keybase_KMS(Document):
@@ -35,6 +35,7 @@ class Keybase_KMS(Document):
     keywords = ListField()
     mentions = ListField()
     phrases = ListField()
+    hashtags = ListField()
 
     #matched_references = DynamicField()
     #linked_references = DynamicField()
