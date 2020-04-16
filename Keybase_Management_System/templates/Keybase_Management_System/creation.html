@@ -1,0 +1,191 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title%}Keybase Create{%endblock%}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-4 col-lg-4 col-xl-4"></div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+            <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xl-4"></div>
+</div>
+{% endblock %}
+
+{% block belly %}
+<div class="row  ">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <h4 class="topheading">Keybase Creation</h4>
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+            <div class="row formbg ml-5">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                    <!-- FORM start -->
+                    <form class="justify-content-center" id="kms-create-form">
+                        {% csrf_token %}
+                        <div class="form-group justify-content-center text-center ">
+                            <div style="width:100%;" class="container input1">
+                                <!-- textfield 1 -->
+                                <!-- title -->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Title</span>
+                                    </div>
+                                    {% if ctx.title %}
+                                    <input type="text" id="title" class="form-control newinputdesign"
+                                        placeholder=" enter text here" name="title" value="{{ctx.title}}">
+                                    {% else %}
+                                    <input type="text" name="title" id="title" class="form-control newinputdesign"
+                                        placeholder="enter title here">
+                                    {% endif %}
+                                </div>
+
+                                <!--Tetfield 2 -->
+                                <!-- Topic -->
+                                <div class="input-group   mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Topic
+                                        </span>
+                                    </div>
+                                    {% if ctx.topic %}
+                                    <input type="text" class="form-control  newinputdesign" placeholder="Please enter"
+                                        name="topic" value="{{ctx.topic}}">
+                                    {% else %}
+                                    <input type="text" name="topic" id="topic" class="form-control newinputdesign"
+                                        placeholder="enter topic here">
+                                    {% endif %}
+                                </div>
+                                <!-- textfield 3 -->
+                                <!-- keywords -->
+
+                                <div class="input-group   mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Keywords</span>
+                                    </div>
+                                    <input id="keywords" name="keywords" type="text"
+                                        class="form-control  newinputdesign" placeholder=" enter text here">
+                                </div>
+
+                                <!--KEYWORDS TEGS SECTION-->
+
+                                <div class="tegscontainer" id="forkeywords">
+                                    <!-- tags will be here-->
+                                    {% for keyword in ctx.keywords %}
+                                    <span class="eachtag">
+                                        {{keyword}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+
+                                <!--Mentions SECTION-->
+                                <div class="input-group   mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Mentions
+                                        </span>
+                                    </div>
+                                    <input type="text" id="mentions" name="mentions"
+                                        class="form-control  newinputdesign" placeholder=" enter text here"
+                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="tegscontainer" id="formentions">
+                                    {% for mention in ctx.mentions %}
+                                    <span class="eachtag">
+                                        {{mention}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+
+                                <!--HASHTAGS TEGS SECTION-->
+                                <div class="input-group   mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Tags
+                                        </span>
+                                    </div>
+                                    <input type="text" id="tags" name="tags" class="form-control  newinputdesign"
+                                        placeholder=" enter text here" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                </div>
+                                <div class="tegscontainer" id="fortags">
+                                    {% for hashtag in ctx.hashtags %}
+                                    <span class="eachtag">
+                                        {{hashtag}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+
+                                <!--PHRASES SECTION-->
+                                <div class="input-group mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text newlabeldesign">Phrase
+                                        </span>
+                                    </div>
+                                    <input id="phrase" name="phrases" type="text" class="form-control  newinputdesign"
+                                        placeholder=" enter text here" aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2">
+                                </div>
+                                <div class="tegscontainer" id="forphrases">
+                                    {% for phrase in ctx.phrases %}
+                                    <span class="eachtag">
+                                        {{phrase}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+
+                                <!--DATE SECTION-->
+
+                                <div class="input-group   mt-2 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">Expire on
+                                        </span>
+                                    </div>
+                                    <div class="datepicker date input-group ">
+                                        <input style="width:50%;" class="form-control  newinputdesign" type="text"
+                                            placeholder="Choose a reservation date" id="reservationDate" name="date">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text px-4"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--SUBMIT BUTTON  -->
+                                <button type="button" style="float:right;" id="kms-form-submit"
+                                    class="btn btn-secondary searchbutton mr-1 mb-3">
+                                    Submit
+                                </button>
+
+                                <!-- TWO Section divided into 2--Tetfields  -->
+                            </div>
+                        </div>
+                    </form>
+                    <!--FORM END-->
+                </div>
+            </div>
+            <!-- Second row-->
+            <!-- END OF second row-->
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block foot_dep %}
+<script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
+<script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+{% endblock %}
