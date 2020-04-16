@@ -71,8 +71,8 @@
                                         {% for listitem in value|slice:"0:5" %}
                                         {% for key_in, value_in in listitem.items %}
                                         <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend">
-                                                <input type="hidden" value="{{key}}">
+                                            <div class="input-group-prepend pilleditdel">
+                                                <input type="hidden" value="{{key_in}}">
                                                 <span class="keybaseLabel">{{key}}</span>
                                                 <span class="rightlabel">{{value_in|join:", "}}</span>
                                             </div>
@@ -84,16 +84,12 @@
                                 <div class="col-md-4 col-lg-4 col-xl-4">
                                     <div class="container">
                                         {% for listitem in value|slice:"5:10" %}
-                                        {% for key, value in listitem.items %}
+                                        {% for key_in, value_in in listitem.items %}
                                         <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend">
-                                                <input type="hidden" value="{{key}}">
+                                            <div class="input-group-prepend pilleditdel">
+                                                <input type="hidden" value="{{key_in}}">
                                                 <span class="keybaseLabel">{{key}}</span>
-                                                {% if value|length > 1 %}
-                                                <span class="rightlabel">{{value|join:", "}}</span>
-                                                {% else %}
-                                                <span class="rightlable">{{value}}</span>
-                                                {% endif %}
+                                                <span class="rightlabel">{{value_in|join:", "}}</span>
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -115,11 +111,11 @@
                         <span class="editbutton"><i style="color: white; opacity: 0.8;" class="fas fa-edit fa-2x"></i>
                         </span>
 
-                        <span class="editbutton"><i style="color: white; opacity: 0.8;"
+                        <span class="addbutton"><i style="color: white; opacity: 0.8;"
                                 class="fa fa-plus-circle fa-2x"></i>
                         </span>
 
-                        <span class="editbutton"><i style="color: white; opacity: 0.8;"
+                        <span class="deletebutton"><i style="color: white; opacity: 0.8;"
                                 class="fas fa-trash-alt fa-2x"></i>
                         </span>
                     </div>

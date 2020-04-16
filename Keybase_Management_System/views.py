@@ -57,16 +57,29 @@ class Delete_Keybase(View):
 class Edit_Keybase(View):
 
     def get(self, request, *args, **kwargs):
-        keybase = km.get_keybase_object_by_id(kwargs['keybase_id'])
-        return HttpResponseRedirect()
+        document_id = request.GET.get('docId')
+        # print(document_id)
+        keybase = km.get_keybase_object_by_id(document_id)
+        # print(keybase)
+        ctx = json.loads(keybase.to_json())
+        print(ctx)
+        return render(request, 'Keybase_Management_System/creation.html', {'ctx':ctx})
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
 
         #to update a keybase provide the object_id as first positional argument and then pass the updated values as keyword arguments
+        document_id = request.GET.get('docId')
+        resp = km.update_keybase(
+            document_id,
+            title=request.POST.get('title'),
+            topic=request.POST.get('topic'),
+            keywords=request.POST.getlist('keywords[]'),
+            mentions=request.POST.getlist('mentions[]'),
+            hashtags=request.POST.getlist('tags[]'),
+            phrases=request.POST.getlist('phrases[]')
+        )
 
-        km.create_keybase(kwargs['keybase_id'],title='new title',keywords=[])
-
-        return None
+        return JsonResponse({'success':200})
 
 class Keybase_Archive(RequireLoginMixin, View):
 

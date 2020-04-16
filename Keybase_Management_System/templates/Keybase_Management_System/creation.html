@@ -41,26 +41,37 @@
                         <div class="form-group justify-content-center text-center ">
                             <div style="width:100%;" class="container input1">
                                 <!-- textfield 1 -->
-
+                                <!-- title -->
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Title</span>
                                     </div>
-                                    <input type="text" id="title" class="form-control  newinputdesign"
-                                        placeholder=" enter text here" name="title">
+                                    {% if ctx.title %}
+                                    <input type="text" id="title" class="form-control newinputdesign"
+                                        placeholder=" enter text here" name="title" value="{{ctx.title}}">
+                                    {% else %}
+                                    <input type="text" name="title" id="title" class="form-control newinputdesign"
+                                        placeholder="enter title here">
+                                    {% endif %}
                                 </div>
 
                                 <!--Tetfield 2 -->
-
+                                <!-- Topic -->
                                 <div class="input-group   mt-2 mb-2">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Topic
                                         </span>
                                     </div>
+                                    {% if ctx.topic %}
                                     <input type="text" class="form-control  newinputdesign" placeholder="Please enter"
-                                        name="topic">
+                                        name="topic" value="{{ctx.topic}}">
+                                    {% else %}
+                                    <input type="text" name="topic" id="topic" class="form-control newinputdesign"
+                                        placeholder="enter topic here">
+                                    {% endif %}
                                 </div>
                                 <!-- textfield 3 -->
+                                <!-- keywords -->
 
                                 <div class="input-group   mt-2 mb-2">
                                     <div class="input-group-prepend">
@@ -74,12 +85,15 @@
 
                                 <div class="tegscontainer" id="forkeywords">
                                     <!-- tags will be here-->
+                                    {% for keyword in ctx.keywords %}
+                                    <span class="eachtag">
+                                        {{keyword}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
                                 </div>
 
-                                <!--KEYWORDS TEGS SECTION-->
-
-                                <!-- textfield 4 -->
-
+                                <!--Mentions SECTION-->
                                 <div class="input-group   mt-2 mb-2">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Mentions
@@ -89,16 +103,16 @@
                                         class="form-control  newinputdesign" placeholder=" enter text here"
                                         aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 </div>
-
-                                <!--KEYWORDS TEGS SECTION-->
-
                                 <div class="tegscontainer" id="formentions">
+                                    {% for mention in ctx.mentions %}
+                                    <span class="eachtag">
+                                        {{mention}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
                                 </div>
 
-                                <!--KEYWORDS TEGS SECTION-->
-
-                                <!-- textfield 5 -->
-
+                                <!--HASHTAGS TEGS SECTION-->
                                 <div class="input-group   mt-2 mb-2">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Tags
@@ -108,17 +122,17 @@
                                         placeholder=" enter text here" aria-label="Recipient's username"
                                         aria-describedby="basic-addon2">
                                 </div>
-
-                                <!--KEYWORDS TEGS SECTION-->
-
                                 <div class="tegscontainer" id="fortags">
+                                    {% for hashtag in ctx.hashtags %}
+                                    <span class="eachtag">
+                                        {{hashtag}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
                                 </div>
 
-                                <!--KEYWORDS TEGS SECTION-->
-
-                                <!-- textfield 4 -->
-
-                                <div class="input-group   mt-2 mb-2">
+                                <!--PHRASES SECTION-->
+                                <div class="input-group mt-2 mb-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text newlabeldesign">Phrase
                                         </span>
@@ -127,13 +141,16 @@
                                         placeholder=" enter text here" aria-label="Recipient's username"
                                         aria-describedby="basic-addon2">
                                 </div>
-
-                                <!--KEYWORDS TEGS SECTION-->
-
-                                <div class="tegscontainer" id="forphrase">
+                                <div class="tegscontainer" id="forphrases">
+                                    {% for phrase in ctx.phrases %}
+                                    <span class="eachtag">
+                                        {{phrase}}
+                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
+                                    </span>
+                                    {% endfor %}
                                 </div>
 
-                                <!--KEYWORDS TEGS SECTION-->
+                                <!--DATE SECTION-->
 
                                 <div class="input-group   mt-2 mb-2">
                                     <div class="input-group-prepend">
@@ -149,7 +166,7 @@
                                     </div>
                                 </div>
 
-                                <!--Tetfield  -->
+                                <!--SUBMIT BUTTON  -->
                                 <button type="button" style="float:right;" id="kms-form-submit"
                                     class="btn btn-secondary searchbutton mr-1 mb-3">
                                     Submit
