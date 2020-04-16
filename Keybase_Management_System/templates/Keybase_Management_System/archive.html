@@ -56,50 +56,47 @@
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
         <div class="">
             <!-- RPW FOR SOCIAL MEDIA -->
-
             <div class="row formbg ml-5">
                 <div class="col-md-11 col-lg-11 col-xl-11 col-sm-11">
                     <!-- this is content -->
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         {% for key, value in ctx.items %}
-                        <div class="tab-pane fade {% if forloop.counter == 1 %}active show{% endif %}" id="nav-{{key}}"
+                        <div class="tab-pane fade {% if key == 'keywords' %}active show{% endif %}" id="nav-{{key}}"
                             role="tabpanel">
                             <!-- Each content tab #1 for keywords-->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- divide the section into 2 columns -->
                                 <div class="col-md-4 col-lg-4 col-xl-4">
                                     <div class="container">
                                         {% for listitem in value|slice:"0:5" %}
+                                        {% for key_in, value_in in listitem.items %}
                                         <div class="input-group mt-2 mb-2">
                                             <div class="input-group-prepend">
-                                                <span class="keybaseLabel">{{listitem}}</span>
-                                                <span class="rightlabel">Created</span>
+                                                <input type="hidden" value="{{key}}">
+                                                <span class="keybaseLabel">{{key}}</span>
+                                                <span class="rightlabel">{{value_in|join:", "}}</span>
                                             </div>
                                         </div>
+                                        {% endfor %}
                                         {% endfor %}
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-lg-4 col-xl-4">
                                     <div class="container">
                                         {% for listitem in value|slice:"5:10" %}
+                                        {% for key, value in listitem.items %}
                                         <div class="input-group mt-2 mb-2">
                                             <div class="input-group-prepend">
-                                                <span class="keybaseLabel">{{listitem}}</span>
-                                                <span class="rightlabel">Created</span>
+                                                <input type="hidden" value="{{key}}">
+                                                <span class="keybaseLabel">{{key}}</span>
+                                                {% if value|length > 1 %}
+                                                <span class="rightlabel">{{value|join:", "}}</span>
+                                                {% else %}
+                                                <span class="rightlable">{{value}}</span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-4 col-xl-4">
-                                    <div class="container">
-                                        {% for listitem in value|slice:"10:15" %}
-                                        <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend">
-                                                <span class="keybaseLabel">{{listitem}}</span>
-                                                <span class="rightlabel">Created</span>
-                                            </div>
-                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -133,4 +130,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block foot_dep %}
+<script defer src="{% static 'Keybase_Management_System/js/archive.js' %}"></script>
 {% endblock %}
