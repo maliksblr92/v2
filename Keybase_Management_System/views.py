@@ -6,7 +6,7 @@ from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 
-from OSINT_System_Core.mixins import RequireLoginMixin
+from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 
 # Create your views here.
 
@@ -117,3 +117,29 @@ class View_Keybase(View):
         keybase = km.get_keybase_object_by_id(kwargs['keybase_id'])
 
         return objects
+
+
+class DeleteKeybaseProperty(RequireLoginMixin, IsTSO, View):
+    """
+    deletes a property of keybase
+    """
+
+    def post(self, request, *args, **kwargs):
+        """
+        post handler
+        """
+        doc_id = request.POST.get('docId')
+        prop_to_delete = request.POST.get('propToDelete')
+        if prop_to_delete == 'titles':
+            resp = km.update_keybase(doc_id, title=None)
+        elif prop_to_delete == 'topics':
+            resp = km.update_keybase(doc_id, topic=None)
+        elif prop_to_delete == 'keywords':
+            resp = km.update_keybase(doc_id, keywords=None)
+        elif prop_to_delete == 'mentions':
+            resp = km.update_keybase(doc_id, mentions=None)
+        elif prop_to_delete == 'tags':
+            resp = km.update_keybase(doc_id, hashtags=None)
+        elif prop_to_delete == 'phrases':
+            resp = km.update_keybase(doc_id, phrases=None)
+        return JsonResponse({'success':200})

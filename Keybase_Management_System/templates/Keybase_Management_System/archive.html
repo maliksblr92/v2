@@ -60,6 +60,7 @@
                 <div class="col-md-11 col-lg-11 col-xl-11 col-sm-11">
                     <!-- this is content -->
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        {% csrf_token %}
                         {% for key, value in ctx.items %}
                         <div class="tab-pane fade {% if key == 'keywords' %}active show{% endif %}" id="nav-{{key}}"
                             role="tabpanel">

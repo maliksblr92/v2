@@ -148,8 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log(result);
                 },
             });
+            $("#kms-create-form").trigger("reset");
         }
-        $("#kms-create-form").trigger("reset");
         // event.preventDefault();
     });
 });

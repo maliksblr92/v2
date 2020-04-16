@@ -8,7 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     let delbtn = $(".deletebutton");
     let editbtn = $(".editbutton");
-    delbtn.click((event) => {});
+    delbtn.click((event) => {
+        const docIdVar = $(".pill-selected > input[type=hidden]").val();
+        if (docIdVar) {
+            const propToDeleteVar = $(".pill-selected > .keybaseLabel").text();
+            console.log(propToDeleteVar);
+            $.ajax({
+                url: "/kms/delprop/",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    csrfmiddlewaretoken: $(
+                        "input[name=csrfmiddlewaretoken]"
+                    ).val(),
+                    docId: docIdVar,
+                    propToDelete: propToDeleteVar,
+                },
+                success: (result) => {
+                    console.log(result);
+                    $(".pill-selected").parent().remove();
+                },
+            });
+        }
+    });
     editbtn.click((event) => {
         const docId = $(".pill-selected > input[type=hidden]").val();
         console.log(docId);
