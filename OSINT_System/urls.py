@@ -28,7 +28,7 @@ consumer = Rabbit_Consumer(1)
 urlpatterns = [
     path('core/', include('OSINT_System_Core.urls')),
     path('admin/', admin.site.urls),
-    path('avatar_management/', include('Avatar_Management_Unit.urls')),
+    path('amu/', include('Avatar_Management_Unit.urls')),
     path('dpu/', include('Data_Processing_Unit.urls')),
     path('data_acquisition/', include('Public_Data_Acquisition_Unit.urls')),
     path('system_log/', include('System_Log_Management_Unit.urls')),

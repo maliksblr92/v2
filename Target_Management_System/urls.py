@@ -29,5 +29,5 @@ urlpatterns = [
     path('smartsearch/', views.Smart_Search.as_view(), name='tms_smartsearch'),
     path('test/', views.Test_View.as_view(), name="sendevent"),
     path('test1/', views.Test_View1.as_view(), name="alertevent"),
-    path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
+    path('identifytarget_request/', views.Identify_Target_Request.as_view(), name="tms_identifytarget_request"),
 ]

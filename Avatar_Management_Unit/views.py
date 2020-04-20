@@ -10,9 +10,9 @@ import datetime
 
 class Create_Avatar(View):
 
-    def get(self,request,*args,**kwargs):
-
-        return HttpResponse('on Create avatar')
+    def get(self, request, *args, **kwargs):
+        ctx = {'hello':'a'}
+        return render(request, 'Avatar_Management_Unit/avatar.html', {'ctx': ctx})
 
     def post(self,request):
         a = Avatar_AMS()
