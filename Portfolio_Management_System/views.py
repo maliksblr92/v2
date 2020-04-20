@@ -8,9 +8,10 @@ from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse, HttpResponseRedirect
 from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include
-
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Portfolio_Management_System.models import *
 
+acq = Acquistion_Manager()
 
 class Create_Portfolio(View):
 
@@ -64,14 +65,16 @@ class Add_Extras(View):
 
     def post(self, request):
         portfolio_id = ObjectId("5e6b3352b6d5b24ef35a01b7")  # id from request
-        extra_type = 'address'
-        prime_value = 'any value from form'  # value to append to the list
+        extra_type = 'social_target'
+        prime_value = acq.get_gtr_by_id(ObjectId("5e9d781b6725fb528fdf35f4"))  # value to append to the list
 
         obj = Portfolio_PMS.get_object_by_id(portfolio_id)
         if extra_type == 'address':
             obj.add_address(prime_value)
         if extra_type == 'social_target':
             obj.add_social_target(prime_value)
+
+
         if extra_type == 'portfolio':
             obj.add_portfolios(prime_value)
         if extra_type == 'description':

@@ -22,6 +22,9 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         social_sites = acq.get_all_social_sites()
         news_sites = acq.get_all_news_sites()
         blog_sites = acq.get_all_blog_sites()
+
+        if 'portfolio_id' in kwargs :request.session['selected_portfolio_id'] = kwargs['portfolio_id']
+        #print(kwargs['portfolio_id'])
         # print(social_sites.to_json())
         # data = serializers.serialize('json', social_sites.to_json(), fields=(
         #     'name', 'url', 'website_type', 'target_type'))
@@ -29,7 +32,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'social': json.loads(social_sites.to_json()),
             'news': json.loads(news_sites.to_json()),
             'blogs': json.loads(blog_sites.to_json()),
-            'intervals':PERIODIC_INTERVALS
+            'intervals':PERIODIC_INTERVALS,
         }
         print(data)
         return render(request,
@@ -59,13 +62,16 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         interval = int(request.POST['facebook_interval'])
         screen_shot = False
 
+        portfolio_id = None
+        if 'selected_portfolio_id' in request.session :portfolio_id = request.session.get('selected_portfolio_id')
+        print(portfolio_id)
         if ('facebook_screenshot' in request.POST):
             screen_shot = request.POST['facebook_screenshot']
             if(screen_shot == '1'):
                 screen_shot = True
 
         print(website_id,target_type_index,username,user_id)
-        acq.add_target(website_id, target_type_index,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
+        acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
         #publish('target created successfully', message_type='notification')
         return redirect('/tms/marktarget')
 

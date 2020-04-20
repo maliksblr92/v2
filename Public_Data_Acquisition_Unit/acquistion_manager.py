@@ -4,6 +4,7 @@ from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.ess_api_controller import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from OSINT_System_Core.Data_Sharing import Mongo_Lookup
+from Portfolio_Management_System.models import Portfolio_PMS
 from bson import ObjectId
 
 import logging
@@ -26,7 +27,7 @@ class Acquistion_Manager(object):
         gtr.create(website_reff,target_type_index)
         return gtr
 
-    def add_target(self,website_id,target_type_index,**kwargs):
+    def add_target(self,website_id,target_type_index,portfolio_id=None,**kwargs):
 
         try:
             gtr = self.get_gtr(self.get_website_by_id(website_id),target_type_index)
@@ -34,6 +35,11 @@ class Acquistion_Manager(object):
             print(appropriate_class)
             ac_object = appropriate_class()
             target = ac_object.create(gtr,kwargs)
+
+            print(portfolio_id)
+            if(portfolio_id is not None):
+                obj = Portfolio_PMS.objects(id=ObjectId(portfolio_id)).first()
+                obj.add_social_target(target)
 
             if('periodic_interval' in kwargs):
                 interval = kwargs['periodic_interval']
