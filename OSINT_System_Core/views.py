@@ -712,7 +712,6 @@ def convert_expired_on_to_datetime(expired_on):
     return expired_onnn
 
 
-
 def test_view(request):
     if request.method == 'GET':
         return render(request, 'OSINT_System_Core/project_base.html')
@@ -741,12 +740,6 @@ class RDO_Dashboard(RequireLoginMixin, IsRDO, View):
 class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
     def get(self, request, *args, **kwargs):
         return render(request, 'OSINT_System_Core/pao_dashboard.html')
-
-
-
-
-
-
 
 
 
