@@ -453,6 +453,19 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def add_keybase_target(self,keywords,GTR,CTR):
+
+        try:
+            add_target_url = 'keybase/'
+            payload = {'keywords':keywords,'GTR':GTR,'CTR':CTR}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 #................................................API For Avatar Actions................................................
 
     def action_post(self,text,social_media,username,password):

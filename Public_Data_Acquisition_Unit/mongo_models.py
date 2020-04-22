@@ -960,9 +960,12 @@ class Keybase_Crawling(Document):
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='keybase_crawling')
 
     title = StringField()
     keybase_ref = DynamicField()
+
+
 
     def __str__(self):
         return str(self.keybase_ref.title)
@@ -1023,6 +1026,7 @@ class Dynamic_Crawling(Document):
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='dynamic_crawling')
 
     title = StringField()
     url = StringField()

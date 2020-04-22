@@ -33,45 +33,45 @@
 {% block belly %}
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-        <h4 class="topheading">Already Created Targets</h4>
+        <h4 class="topheading">Keybase Crawling</h4>
     </div>
     <!-- end of top row -->
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-       <table class="table" style="color: white">
-  <thead>
-    <tr>
-      <th scope="col">Website</th>
-      <th scope="col">Target_Type</th>
-      <th scope="col">Title</th>
-      <th scope="col">Status</th>
-        <th scope="col">Expire On</th>
-        <th scope="col">Action</th>
 
-    </tr>
-  </thead>
-  <tbody>
-  {% for target in targets %}
-    <tr>
-      <th scope="row">{{target.GTR}}</th>
-      <td>{{target.target_type}}</td>
-      <td> {% if target.username %}
-          {{ target.username }}
-      {% elif target.title%}
-          {{ target.title }}
+<form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
+{% csrf_token %}
 
-          {% else %}
-          untitled
-          {% endif %}
-      </td>
-      <td>{{ target.is_expired }}</td>
-        <td>{{target.expired_on}}</td>
-      <td>Include|Delete</td>
-    </tr>
-{% endfor %}
-  </tbody>
-</table>
-</table>
+<label>title</label>
+<input type="text" name="title">
+
+  <label for="cars">Choose a Keybase</label>
+  <select id="keybase" name="keybase">
+     {% for keybase in keybases %}
+      <option value="{{ keybase.id }}">{{ keybase }}</option>
+    {% endfor %}
+  </select>
+
+ <select
+            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+            class="custom-select newinput"
+            id="interval"
+            name="interval">
+            {% for interval in intervals %}
+                <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+
+            {% endfor %}
+
+</select>
+
+   <!-- EXPIRED ON SECTION-->
+    <label>Expire on</label>
+    <input type="date" id="expire_on" name="expire_on">
+
+    <input type="submit">
+</form>
+
+
     </div>
 </div>
 {% endblock %}>

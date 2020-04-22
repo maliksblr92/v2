@@ -1,6 +1,8 @@
 from Keybase_Management_System.models import *
 from OSINT_System_Core.publisher import publish
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 
+acq = Acquistion_Manager()
 
 class Keybase_Manager(object):
 
@@ -31,7 +33,10 @@ class Keybase_Manager(object):
 
             kb = Keybase_KMS()
             kb.create(login_user_id,title,topic,phrases,keywords,mentions,hashtags,kwargs)
+
+
             publish('keybase created successfully', message_type='control', module_name=__name__)
+
 
             return kb
 

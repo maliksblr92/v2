@@ -10,9 +10,9 @@ from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS
 from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
-
+from Keybase_Management_System.keybase_manager import Keybase_Manager
 acq = Acquistion_Manager()
-
+km = Keybase_Manager()
 
 class Add_Target(RequireLoginMixin, IsTSO, View):
 
@@ -158,6 +158,38 @@ class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
         return render(request,'Target_Management_System/tso_internetsurvey.html',{})
 
 
+class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
+
+    def get(self, request, *args, **kwargs):
+
+        keybases = km.get_all_keybases()
+        return render(request,
+                      'Target_Management_System/keybase_crawling.html',
+                      {'keybases':keybases,'intervals':PERIODIC_INTERVALS,})
+
+
+    def post(self,request):
+
+        print(request.POST)
+        title = request.POST.get('title',None)
+        website_id = acq.get_custom_webiste_id()
+        target_type = 0
+
+        keybase_id = request.POST.get('keybase',None)
+        interval = int(request.POST.get('interval',None))
+        expire_date = request.POST.get('expire_on',None)
+
+        keybase_ref = km.get_keybase_object_by_id(keybase_id)
+
+        if(expire_date is not None):
+            expire_on = convert_expired_on_to_datetime(expire_date)
+
+
+        acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval)
+
+        return HttpResponseRedirect(reverse('Target_Management_System:tms_keybase_crawling'))
+
+
 class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):
@@ -238,3 +270,10 @@ class Test_View1(View):
         send_event('notifications', 'alert', {
             'new': 'alert1', 'prev1': 'alert2', 'prev2': 'alert3'})
         return JsonResponse({'alert_event_called': 1})
+
+
+def convert_expired_on_to_datetime(expired_on):
+    import datetime
+    expired_onn = expired_on + ' 13:55:26'
+    expired_onnn = datetime.datetime.strptime(expired_onn, '%Y-%m-%d %H:%M:%S')
+    return expired_onnn

@@ -103,6 +103,8 @@ class Acquistion_Manager(object):
         """
         try:
             appropriate_class, appropriate_ess_method, _ = self.get_appropriate_method(gtr)
+
+
             kwargs = appropriate_class.objects(GTR=gtr.id)[0].to_mongo()
             print(kwargs)
             """
@@ -112,7 +114,12 @@ class Acquistion_Manager(object):
             print(gtr.target_type)
 
             if(gtr.target_type == 'keybase_crawling'):
-                response = None #appropriate_ess_method(kwargs['url'],kwargs['ip'],kwargs['domain'],kwargs['pictures'],kwargs['videos'],kwargs['headings'],kwargs['paragraphs'],kwargs['links'],gtr,ctr)
+                keybase = appropriate_class.objects(GTR=gtr.id)[0]
+                keywords = keybase.keybase_ref.keywords + keybase.keybase_ref.mentions+keybase.keybase_ref.phrases+keybase.keybase_ref.hashtags
+
+                print(keywords)
+
+                response = appropriate_ess_method(keywords,gtr,ctr)
                 print(response)
                 publish('keybase target added successfully', message_type='info', module_name=__name__)
 
@@ -138,7 +145,7 @@ class Acquistion_Manager(object):
                 print(response)
                 publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
             else:
-
+                #for normal profile targets
                 #ess_api needs basic arguments for adding a target
 
                 username = kwargs['username']
@@ -218,7 +225,7 @@ class Acquistion_Manager(object):
             if (gtr.target_type == 'dynamic_crawling'):
                 return (Dynamic_Crawling, ess.dynamic_crawling,None)
             elif (gtr.target_type == 'keybase_crawling'):
-                return (Keybase_Crawling, None ,None)
+                return (Keybase_Crawling,ess.add_keybase_target ,None)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
