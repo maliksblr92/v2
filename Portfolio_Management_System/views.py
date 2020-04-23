@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.views import View
+from django.http import JsonResponse
+import json
 from bson import ObjectId
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
@@ -92,3 +94,13 @@ class Link_Portfolio(View):
             ObjectId("5e6b2ab3a071de651c404a7d"),
             'general_information']
         Portfolio_Link.create(ObjectId("5e6b3352b6d5b24ef35a01b7"), beta_path)
+
+class Search_Portfolio(View):
+    def get(self,request):
+
+        print(request.GET['query'])
+        data = Portfolio_PMS.find_object(request.GET['query'])
+        resp = {'resp': list(data)}
+        print(resp)
+
+        return JsonResponse(resp, safe=False)

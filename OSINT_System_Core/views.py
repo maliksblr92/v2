@@ -4,7 +4,7 @@ from Data_Processing_Unit.tasks import fetch_instagram_person, fetch_twitter_twe
 from datetime import timedelta
 from Data_Processing_Unit import tasks
 from .mixins import RequireLoginMixin, IsTSO, IsTMO, IsRDO, IsPAO
-
+from bson import ObjectId
 #from OSINT_System_Core.models import Supported_Socail_Sites
 #from OSINT_System_Core.serializers import Supported_Socail_Sites_Serializer
 #from OSINT_System_Core.core_db_manager import Coredb_Manager
@@ -42,7 +42,7 @@ from rest_framework import viewsets, response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
+from OSINT_System_Core.Data_Sharing import Keybase_Match,Portfolio_Link,Portfolio_Include,Keybase_Include
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
@@ -55,7 +55,9 @@ from rest_framework.status import (
 acq = Acquistion_Manager()
 #coreDb = Coredb_Manager()
 log_manager = System_Log_Manager()
-
+pl = Portfolio_Link()
+pi = Portfolio_Include()
+km = Keybase_Match()
 
 #FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
 
@@ -689,21 +691,49 @@ class Find_Object(View):
 
     def get(self,request,*args,**kwargs):
 
-        type = kwargs['type']
-        query = kwargs['query']
+        print(request.GET)
+        type = request.GET['type']
+        query = request.GET['query']
+
 
         if(type == 'portfolio'):
             resp = Portfolio_PMS.find_object(query)
+            return render(request,'OSINT_System_Core/find_object.html',{'objects':resp})
         elif(type == 'keybase'):
             resp = Keybase_KMS.find_object(query)
+            return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
         elif(type == 'avatar'):
             resp = Avatar_AMS.find_object(query)
+            return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
         else:
             print('invalid choice')
 
-        print(resp)
-        return HttpResponse(resp)
-# ...........................................Normal Functions ............
+
+        return HttpResponse('')
+
+
+class Link_Object(View):
+    def get(self,request):
+        print(request.GET)
+        alpha_id = ObjectId(request.GET['alpha_id'])
+        beta_path_list = [ObjectId(request.GET['beta_id'])]
+
+        type = request.GET['type']
+        if (type == 'portfolio'):
+            resp = pl.create(alpha_id,beta_path_list)
+            if(resp is not None):
+                return HttpResponse('sucess')
+        elif (type == 'keybase'):
+            #resp = Keybase_KMS.find_object(query)
+            return HttpResponse('sucess')
+        elif (type == 'avatar'):
+            #resp = Avatar_AMS.find_object(query)
+            return HttpResponse('sucess')
+        else:
+
+            return HttpResponse('failed')
+        return HttpResponse('failed')
+# .........................................Normal Functions ............
 
 
 def convert_expired_on_to_datetime(expired_on):
@@ -740,6 +770,11 @@ class RDO_Dashboard(RequireLoginMixin, IsRDO, View):
 class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
     def get(self, request, *args, **kwargs):
         return render(request, 'OSINT_System_Core/pao_dashboard.html')
+
+
+
+
+
 
 
 

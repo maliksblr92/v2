@@ -54,6 +54,9 @@ urlpatterns = [
          name='target_author_linkedin'),
     path('dispatcher/<str:GTR>/<str:author_account>',
          views.Dispatcher.as_view(), name='dispatcher'),
+    path('find_object/',views.Find_Object.as_view(), name='find_object'),
+    path('link_object/',views.Link_Object.as_view(), name='link_object'),
+
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
     path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
