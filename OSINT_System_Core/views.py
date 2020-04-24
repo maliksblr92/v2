@@ -1,20 +1,28 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User,Group
-from Data_Processing_Unit.tasks import fetch_instagram_person,fetch_twitter_tweets
+from django.contrib.auth.models import User, Group
+from Data_Processing_Unit.tasks import fetch_instagram_person, fetch_twitter_tweets
 from datetime import timedelta
 from Data_Processing_Unit import tasks
-
-
+from .mixins import RequireLoginMixin, IsTSO, IsTMO, IsRDO, IsPAO
+from bson import ObjectId
 #from OSINT_System_Core.models import Supported_Socail_Sites
 #from OSINT_System_Core.serializers import Supported_Socail_Sites_Serializer
 #from OSINT_System_Core.core_db_manager import Coredb_Manager
 
 from rest_framework.views import APIView
 from django.http import JsonResponse
-from django.http import HttpResponse,HttpResponseRedirect
+
+#imports for the find objects view
+
+from Keybase_Management_System.models import Keybase_KMS
+from Portfolio_Management_System.models import Portfolio_PMS
+from Avatar_Management_Unit.models import Avatar_AMS
+
+
+from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
-from Public_Data_Acquisition_Unit.data_acquistion_manager import Acquistion_Manager
-from django.shortcuts import reverse,render
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+from django.shortcuts import reverse, render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -24,16 +32,18 @@ from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
 from django_eventstream import send_event
-import time,os
+import time
+import os
 
-#djangorestframework moduels below
+# djangorestframework moduels below
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-from rest_framework import viewsets,response
+from rest_framework import viewsets, response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
+from OSINT_System_Core.Data_Sharing import Keybase_Match,Portfolio_Link,Portfolio_Include,Keybase_Include,Mongo_Lookup
+from Public_Data_Acquisition_Unit.mongo_models import Share_Resource as Share_Resource_M
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
@@ -43,19 +53,19 @@ from rest_framework.status import (
 # Create your views here.
 
 #processing_manager = Processing_Manager()
-acq_manager = Acquistion_Manager()
+acq = Acquistion_Manager()
 #coreDb = Coredb_Manager()
 log_manager = System_Log_Manager()
-
+pl = Portfolio_Link()
+pi = Portfolio_Include()
+km = Keybase_Match()
 
 #FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
 
 
-
-
 class Main(View):
-    def get(self,request):
-        #response = fetch_instagram_profile('author','atifaslam')   #author or post
+    def get(self, request):
+        # response = fetch_instagram_profile('author','atifaslam')   #author or post
         #response =  acq_manager.ess_add_facebook_person_target('prince.nuada.16','closeAssociates')
         #response = acq_manager.ess_add_instagram_target('author','atifaslam')
         #response = acq_manager.ess_add_linkedin_person_target()
@@ -63,39 +73,56 @@ class Main(View):
 
         #response = acq_manager.ess_add_twitter_phrase_target('PSL')
         #response = fetch_twitter_tweets('refferencing','itsaadee')
-        #return JsonResponse(response,safe=False)
-        #print(processing_manager.fetch_news())
+        # return JsonResponse(response,safe=False)
+        # print(processing_manager.fetch_news())
 
         eta = datetime.datetime.now() + datetime.timedelta(seconds=40)
         tasks.add.schedule((4, 5), eta=eta)
 
-        return render(request,'OSINT_System_Core/main.html',{})
-#...........................................Views for Target Forms.............................................
+        return render(request, 'OSINT_System_Core/main.html', {})
+# ...........................................Views for Target Forms.......
+
+
 class Target_Author_Instagram(View):
-    def get(self,request):
-        return render(request,'OSINT_System_Core/target_submission_instagram.html',{})
+    def get(self, request):
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_instagram.html',
+            {})
+
 
 class Target_Author_Facebook(View):
-    def get(self,request):
-        return render(request,'OSINT_System_Core/target_submission_facebook.html',{})
+    def get(self, request):
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_facebook.html',
+            {})
+
 
 class Target_Author_Twitter(View):
-    def get(self,request):
-        return render(request,'OSINT_System_Core/target_submission_twitter.html',{})
+    def get(self, request):
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_twitter.html',
+            {})
+
 
 class Target_Author_Linkedin(View):
-    def get(self,request):
-        return render(request,'OSINT_System_Core/target_submission_linkedin.html',{})
+    def get(self, request):
+        return render(
+            request,
+            'OSINT_System_Core/target_submission_linkedin.html',
+            {})
 
 
 class Target_Headlines_Main(View):
-    def get(self,request):
+    def get(self, request):
         #send_event('test', 'message', {'text': 'hello world'})
 
-        return render(request,'OSINT_System_Core/sources_target_headlines_main.html',{})
-
-
-
+        return render(
+            request,
+            'OSINT_System_Core/sources_target_headlines_main.html',
+            {})
 
 
 """
@@ -448,8 +475,6 @@ class Add_Linkedin_Target(APIView):
 """
 
 
-
-
 """
 
 class Get_Facebook_Targets(APIView):
@@ -493,9 +518,9 @@ class Dashboard(APIView):
         return render(request,'OSINT_System_Core/dashboard.html',{})
 
 class Supported_Social_Site_List(APIView):
-    
+
     #list of all the supported sites in OSINT CORE
-    
+
 
     def get(self,request,format = None):
         sss = Supported_Socail_Sites.objects.all()
@@ -506,22 +531,42 @@ class Supported_Social_Site_List(APIView):
 """
 
 
-#...................................................Views for SmartSearches ...................................................
+
+
+# ...................................................Views for General Que
+
+class Crawler_Internet_Connection(View):
+    #permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+
+        resp = acq.crawler_internet_connection()
+        return JsonResponse(resp, safe=False)
+
+
+class Microcrawler_Status(View):
+    # permission_classes = (IsAuthenticated,)
+    # resp = acq.mircocrawler_status()
+    def get(self, request, *args, **kwargs):
+
+        resp = acq.mircocrawler_status()
+        return JsonResponse(resp, safe=False)
+
+
+# ...................................................Views for SmartSearch
 
 class Smart_Search(APIView):
     #permission_classes = (IsAuthenticated,)
 
-    def get(self, request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
 
-        resp = tasks.fetch_smart_search(username=kwargs['author_account'],search_site=kwargs['search_site'])
-        return JsonResponse(resp,safe=False)
-
-
-
-#...................................................Views for Graphs ...................................................
+        resp = tasks.fetch_smart_search(
+            username=kwargs['author_account'],
+            search_site=kwargs['search_site'])
+        return JsonResponse(resp, safe=False)
 
 
-
+# ...................................................Views for Graphs ....
 
 
 class Overview_Pie_Chart(APIView):
@@ -550,6 +595,7 @@ class Extracted_All_Social_Sites(APIView):
 
 class Sent_To_Pco(APIView):
     permission_classes = (IsAuthenticated,)
+
     def get(self, request):
         res = log_manager.send_to_pco()
         return JsonResponse(res, safe=False)
@@ -557,85 +603,230 @@ class Sent_To_Pco(APIView):
 
 class Overview_Rpo(APIView):
     permission_classes = (IsAuthenticated,)
+
     def get(self, request):
         res = log_manager.send_to_rpo()
         return JsonResponse(res, safe=False)
 
+
 class Article_Stat_Overview(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.article_stat_overview()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Article_Stat_Slo(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.article_stat_for_slo()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class My_Article_Stat(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.my_article_stat()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Ticket_State(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.article_stat_overview()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Fetch_State(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.fetch_stat()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Extracted_Article(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.extracted_article()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Processed_Article(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.processed_article()
-        return JsonResponse(res,safe=False)
+        return JsonResponse(res, safe=False)
+
 
 class Article_Trend(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self,request):
+    def get(self, request):
         res = log_manager.article_trend()
-        return JsonResponse(res,safe=False)
-
-
-
-
+        return JsonResponse(res, safe=False)
 
 
 class Dispatcher(View):
 
     def get(self, request, *args, **kwargs):
 
-        print('...........................In Disipatcher...................................')
+        print(
+            '...........................In Disipatcher...................................')
         GTR = kwargs['GTR']
         author_account = kwargs['author_account']
 
-        send_event('notifications', 'notification', {'GTR': GTR,'author_account':author_account})
+        send_event('notifications', 'notification', {
+                   'GTR': GTR, 'author_account': author_account})
         return HttpResponse('success')
 
-#...........................................Normal Functions .............................................
+#...........................................View For Object Search(awais)
+
+class Find_Object(View):
+
+    def get(self,request,*args,**kwargs):
+
+        print(request.GET)
+        type = request.GET['type']
+        query = request.GET['query']
+
+
+        if(type == 'portfolio'):
+            resp = Portfolio_PMS.find_object(query)
+            return render(request,'OSINT_System_Core/find_object.html',{'objects':resp})
+        elif(type == 'keybase'):
+            resp = Keybase_KMS.find_object(query)
+            return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
+        elif(type == 'avatar'):
+            resp = Avatar_AMS.find_object(query)
+            return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
+        else:
+            print('invalid choice')
+
+
+        return HttpResponse('')
+
+
+class Link_Object(View):
+    def get(self,request):
+        print(request.GET)
+        alpha_id = ObjectId(request.GET['alpha_id'])
+        beta_path_list = [ObjectId(request.GET['beta_id'])]
+
+        type = request.GET['type']
+        if (type == 'portfolio'):
+            resp = pl.create(alpha_id,beta_path_list)
+            if(resp is not None):
+                return HttpResponse('resource linked sucessfully ')
+        elif (type == 'keybase'):
+            #resp = Keybase_KMS.find_object(query)
+            return HttpResponse('resource linked sucessfully ')
+        elif (type == 'avatar'):
+            #resp = Avatar_AMS.find_object(query)
+            return HttpResponse('resource linked sucessfully ')
+        else:
+
+            return HttpResponse('given type is either empty or invalid')
+        return HttpResponse('this resource is already linked with this '+type)
+
+class Share_Resource(View):
+    ml = Mongo_Lookup()
+
+
+
+    def get(self,request):
+        print(request.GET)
+        group_typ = request.GET.get('user_group',None)
+        message = request.GET.get('message',None)
+        resource_id = request.GET.get('resource_id',None)
+
+        if(group_typ and message and resource_id):
+            resource_obj = self.ml.find_object_by_id(ObjectId(resource_id))
+            if(resource_obj is not None):
+                try:
+                    obj = Share_Resource_M(user_id=request.user.id,
+                                         username=request.user.username,
+                                         share_with=[group_typ],
+                                         message=message,
+                                         resource_ref = resource_obj,
+
+
+
+                                         )
+
+                    obj.save()
+                    return HttpResponse('resource shared successfully')
+                except Exception as e:
+                    print(e)
+                    return HttpResponse(e)
+            else:
+                return HttpResponse('unable to locate object of given resource')
+        else:
+            return HttpResponse('input parameters are left empty or invalid')
+        return HttpResponse('unable to share resource')
+
+
+# .........................................Normal Functions ............
+
 
 def convert_expired_on_to_datetime(expired_on):
     expired_onn = expired_on + ' 13:55:26'
     expired_onnn = datetime.datetime.strptime(expired_onn, '%m/%d/%Y %H:%M:%S')
     return expired_onnn
+
+
+def test_view(request):
+    if request.method == 'GET':
+        return render(request, 'OSINT_System_Core/project_base.html')
+
+
+def test_view1(request):
+    if request.method == 'GET':
+        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+
+
+class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+
+
+class TMO_Dashboard(RequireLoginMixin, IsTMO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/tmo_dashboard.html')
+
+
+class RDO_Dashboard(RequireLoginMixin, IsRDO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/rdo_dashboard.html')
+
+
+class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'OSINT_System_Core/pao_dashboard.html')
+
+
+
+# ahmed start
+class Dashboard(APIView):
+    #permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+
+        return render(request,'OSINT_System_Core/ahmed_templates/dashboard.html',{})
+
+def main(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main.html',{})
+
+def main_1(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main_1.html',{})
+def mainHeatMap(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/main_heatmap.html',{})
+def newsMonitor(request):
+    return render(request,'OSINT_System_Core/ahmed_templates/news_monitoring.html',{})
+# ahmed end 

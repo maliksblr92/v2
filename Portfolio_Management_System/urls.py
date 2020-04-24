@@ -4,6 +4,7 @@ app_name = 'Portfolio_Management_System'
 
 urlpatterns = [
 
-    # path('target_response/',views.Target_Response.as_view(),name='target_response'),
+    path('search_portfolio/',views.Search_Portfolio.as_view(),name='search_portfolio'),
+    # path('test/', views.test_view, name='test')
 
 ]

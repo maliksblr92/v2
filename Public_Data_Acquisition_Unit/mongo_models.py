@@ -1,6 +1,6 @@
 from mongoengine import *
 import datetime
-
+from OSINT_System_Core.publisher import publish
 
 DATABASE = ''
 USERNAME = ''
@@ -109,7 +109,8 @@ LINKEDIN_PROFILE_TYPE = (
 WEBSITE_TYPE = (
     ('social', ('Social Website')),
     ('news', ('News Website')),
-    ('blog', ('Blog Website'))
+    ('blog', ('Blog Website')),
+    ('fake', ('Inforced_Crawling'))
 )
 
 NEWS_SITES = (
@@ -181,7 +182,7 @@ class Global_Target_Reference(Document):
 
     @staticmethod
     def targets_added_all_time():
-        return Global_Target_Reference.objects
+        return Global_Target_Reference.objects.order_by('-created_on')
 
     @staticmethod
     def targets_added_today():
@@ -208,6 +209,53 @@ class Global_Target_Reference(Document):
 #.....................................................................BASE DOCUMENT SECTION STARTED...........................................................
 
 class Facebook_Target(Document):
+
+
+    GTR = ReferenceField(Global_Target_Reference) # GTR should be unique for each facebook target
+    is_expired = BooleanField(default=False)
+    is_enabled = BooleanField(default=True)
+    need_screenshots = BooleanField(default=False)
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    expired_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+
+    meta = {'allow_inheritance': True}
+
+    #def __init__(self):
+    #    super().__init__()
+
+    def initialize_basic(self,kwargs):
+
+        # initializing default attributes
+
+        if 'is_expired' in kwargs: self.is_expired = kwargs['is_expired']
+        if 'is_enabled' in kwargs: self.is_enabled = kwargs['is_enabled']
+        if 'need_screenshots' in kwargs: self.need_screenshots = kwargs['need_screenshots']
+        if 'created_on' in kwargs: self.created_on = kwargs['created_on']
+        if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
+        if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
+        if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+
+    """
+    define all the function related to all the targets of facebook in the bellow section of this class
+    """
+    def am_i_expired(self):
+        return self.is_expired
+
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
+
+
+    @staticmethod
+    def get_all_targets():
+        return Facebook_Target.objects.order_by('created_on')
+
+
+
+class Reddit_Target(Document):
 
 
     GTR = ReferenceField(Global_Target_Reference) # GTR should be unique for each facebook target
@@ -395,35 +443,139 @@ class Facebook_Profile(Facebook_Target):
 
     def create(self, GTR, kwargs):
         #super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
 
-        if ('user_id' in kwargs or 'username' in kwargs):
-            # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
-            # above condition confirms that username or user_id must be there to create a profile target
-
-            if 'user_id' in kwargs: self.user_id = kwargs['user_id']
-            if 'username' in kwargs: self.username = kwargs['username']
-            if 'name' in kwargs: self.name = kwargs['name']
-            if 'url' in kwargs: self.url = kwargs['url']
-            # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
 
 
-            self.GTR = GTR
-            self.target_type = GTR.target_type
-            super().initialize_basic(kwargs)
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
 
-            self.save()
-
-            return self
-        else:
-            #raise Exception('unable to create a facebook profile, username or user_id is not provided')
-            print('unable to create a facebook profile, username or user_id is not provided')
-            return None
-
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control', module_name=__name__)
+                return self
+            else:
+                #raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                #print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a facebook profile, username or user_id is not provided', message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
     """
     define all the function related to all the profile targets of facebook in the bellow section of this class
     
     """
 
+
+class Facebook_Page(Facebook_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a facebook page, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
+
+    """
+
+class Facebook_Group(Facebook_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a facebook Group, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
+
+    """
 class Facebook_Search(Facebook_Target):
 
 
@@ -444,28 +596,31 @@ class Facebook_Search(Facebook_Target):
 
     def create(self, GTR, **kwargs):
         # super().__init__(GTR)
+        try:
+            if ('search_phrase' in kwargs or 'search_keywords' in kwargs or 'hashtags' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
 
-        if ('search_phrase' in kwargs or 'search_keywords' in kwargs or 'hashtags' in kwargs):
-            # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
-            # above condition confirms that username or user_id must be there to create a profile target
+                if 'search_phrase' in kwargs: self.search_phrase = kwargs['search_phrase']
+                if 'search_keywords' in kwargs: self.search_keywords = kwargs['search_keywords']
+                if 'hashtags' in kwargs: self.hashtags = kwargs['hashtags']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
 
-            if 'search_phrase' in kwargs: self.search_phrase = kwargs['search_phrase']
-            if 'search_keywords' in kwargs: self.search_keywords = kwargs['search_keywords']
-            if 'hashtags' in kwargs: self.hashtags = kwargs['hashtags']
-            if 'url' in kwargs: self.url = kwargs['url']
-            # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
 
-            self.GTR = GTR
-            self.target_type = GTR.target_type
-            super().initialize_basic(kwargs)
+                self.save()
+                publish('target for {0} created successfully'.format('facebook search'), message_type='control',module_name=__name__)
+                return self.id
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a facebook search, username or user_id is not provided', message_type='warning', module_name=__name__)
+                return None
 
-            self.save()
-
-            return self.id
-        else:
-            # raise Exception('unable to create a facebook profile, username or user_id is not provided')
-            print('unable to create a facebook search, search phrase or keyword is not provided')
-            return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
 
     def convert_list_to_string(self,list):
 
@@ -477,10 +632,112 @@ class Facebook_Search(Facebook_Target):
 
     """
     define all the function related to all the profile targets of facebook in the bellow section of this class
+    
+    """
+
+#.....................................................................Reddit Target Section...............................
+
+class Reddit_Profile(Reddit_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a reddit profile, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
 
+class Reddit_Subreddit(Reddit_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
 
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a reddit subreddit, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of reddit in the bellow section of this class
+
+    """
 
 #.....................................................................Twitter Targets Sections...........................................................
 
@@ -503,28 +760,32 @@ class Twitter_Profile(Twitter_Target):
     def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
-        if ('user_id' in kwargs or 'username' in kwargs):
-            # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
-            # above condition confirms that username or user_id must be there to create a profile target
+        try:
 
-            if 'user_id' in kwargs: self.user_id = kwargs['user_id']
-            if 'username' in kwargs: self.username = kwargs['username']
-            if 'name' in kwargs: self.name = kwargs['name']
-            if 'url' in kwargs: self.url = kwargs['url']
-            # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
 
-            self.GTR = GTR
-            self.target_type = GTR.target_type
-            super().initialize_basic(kwargs)
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
 
-            self.save()
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
 
-            return self.id
-        else:
-            # raise Exception('unable to create a facebook profile, username or user_id is not provided')
-            print('unable to create a facebook profile, username or user_id is not provided')
-            return None
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
+                return self.id
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a twitter profile, username or user_id is not provided', message_type='warning', module_name=__name__)
+                return None
 
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
     """
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
@@ -551,28 +812,30 @@ class Instagram_Profile(Instagram_Target):
     def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
-        if ('user_id' in kwargs or 'username' in kwargs):
-            # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
-            # above condition confirms that username or user_id must be there to create a profile target
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
 
-            if 'user_id' in kwargs: self.user_id = kwargs['user_id']
-            if 'username' in kwargs: self.username = kwargs['username']
-            if 'name' in kwargs: self.name = kwargs['name']
-            if 'url' in kwargs: self.url = kwargs['url']
-            # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
 
-            self.GTR = GTR
-            self.target_type = GTR.target_type
-            super().initialize_basic(kwargs)
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
 
-            self.save()
-
-            return self.id
-        else:
-            # raise Exception('unable to create a facebook profile, username or user_id is not provided')
-            print('unable to create a facebook profile, username or user_id is not provided')
-            return None
-
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
+                return self.id
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a instagram profile, username or user_id is not provided', message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
     """
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
@@ -585,7 +848,7 @@ class Linkedin_Profile(Linkedin_Target):
     name = StringField(default='null')
     url = StringField(default='null')
     target_type = StringField(default='null')
-    profile_type = StringField(default='person')
+    #profile_type = StringField(default='person')
     # def __init__(self):
     #    super().__init__()
 
@@ -598,38 +861,249 @@ class Linkedin_Profile(Linkedin_Target):
     def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
-        if ('user_id' in kwargs or 'username' in kwargs):
-            # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
-            # above condition confirms that username or user_id must be there to create a profile target
+        try:
 
-            if 'user_id' in kwargs: self.user_id = kwargs['user_id']
-            if 'username' in kwargs: self.username = kwargs['username']
-            if 'name' in kwargs: self.name = kwargs['name']
-            if 'profile_type' in kwargs: self.profile_type = kwargs['profile_type']
-            if 'url' in kwargs: self.url = kwargs['url']
-            # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
 
-            self.GTR = GTR
-            self.target_type = GTR.target_type
-            super().initialize_basic(kwargs)
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'profile_type' in kwargs: self.profile_type = kwargs['profile_type']
+                if 'url' in kwargs: self.url = kwargs['url']
+                #if 'target_type' in kwargs : self.target_type = kwargs['target_type']
 
-            self.save()
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
 
-            return self.id
-        else:
-            # raise Exception('unable to create a facebook profile, username or user_id is not provided')
-            print('unable to create a facebook profile, username or user_id is not provided')
-            return None
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
+                return self.id
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
+                return None
+
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
 
     """
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
 
+
+class Linkedin_Company(Linkedin_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+    #profile_type = StringField(default='person')
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+
+        try:
+
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                #if 'profile_type' in kwargs: self.profile_type = kwargs['profile_type']
+                if 'url' in kwargs: self.url = kwargs['url']
+                #if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
+                return self.id
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
+                return None
+
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
+
+    """
+
+#.....................................................................Custom Targets Sections...........................................................
+
+class Keybase_Crawling(Document):
+
+    GTR = ReferenceField(Global_Target_Reference)  # GTR should be unique for each facebook target
+    is_expired = BooleanField(default=False)
+    is_enabled = BooleanField(default=True)
+    need_screenshots = BooleanField(default=False)
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    expired_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='keybase_crawling')
+
+    title = StringField()
+    keybase_ref = DynamicField()
+
+
+
+    def __str__(self):
+        return str(self.keybase_ref.title)
+
+    def __repr__(self):
+        return str(self.keybase_ref.title)
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+
+        try:
+
+            if ('keybase_ref' in kwargs or 'title' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'title' in kwargs: self.title = kwargs['title']
+                if 'keybase_ref' in kwargs: self.keybase_ref = kwargs['keybase_ref']
+
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                self.initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.title), message_type='control',module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a dynamic crawling target, url or title is not provided', message_type='warning', module_name=__name__)
+                return None
+
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    def initialize_basic(self,kwargs):
+
+        # initializing default attributes
+
+        if 'is_expired' in kwargs: self.is_expired = kwargs['is_expired']
+        if 'is_enabled' in kwargs: self.is_enabled = kwargs['is_enabled']
+        if 'need_screenshots' in kwargs: self.need_screenshots = kwargs['need_screenshots']
+        if 'created_on' in kwargs: self.created_on = kwargs['created_on']
+        if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
+        if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
+        if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+
+
+
+class Dynamic_Crawling(Document):
+
+    GTR = ReferenceField(Global_Target_Reference)  # GTR should be unique for each facebook target
+    is_expired = BooleanField(default=False)
+    is_enabled = BooleanField(default=True)
+    need_screenshots = BooleanField(default=False)
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    expired_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='dynamic_crawling')
+
+    title = StringField()
+    url = StringField()
+    ip = BooleanField()
+    domain = BooleanField()
+    pictures = BooleanField()
+    videos = BooleanField()
+    headings = BooleanField()
+    paragraphs = BooleanField()
+    links = BooleanField()
+
+    def __str__(self):
+        return str(self.title)
+
+    def __repr__(self):
+        return str(self.title)
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+
+        try:
+
+            if ('url' in kwargs or 'title' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'title' in kwargs: self.title = kwargs['title']
+                if 'url' in kwargs: self.url = kwargs['url']
+                if 'ip' in kwargs: self.ip = kwargs['ip']
+                if 'domain' in kwargs: self.domain = kwargs['domain']
+                if 'videos' in kwargs: self.videos = kwargs['videos']
+                if 'headings' in kwargs: self.headings = kwargs['headings']
+                if 'paragraphs' in kwargs: self.paragraphs = kwargs['paragraphs']
+                if 'links' in kwargs: self.links = kwargs['links']
+                if 'pictures' in kwargs: self.pictures = kwargs['pictures']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                self.initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.title), message_type='control',module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a dynamic crawling target, url or title is not provided', message_type='warning', module_name=__name__)
+                return None
+
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    def initialize_basic(self,kwargs):
+
+        # initializing default attributes
+
+        if 'is_expired' in kwargs: self.is_expired = kwargs['is_expired']
+        if 'is_enabled' in kwargs: self.is_enabled = kwargs['is_enabled']
+        if 'need_screenshots' in kwargs: self.need_screenshots = kwargs['need_screenshots']
+        if 'created_on' in kwargs: self.created_on = kwargs['created_on']
+        if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
+        if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
+        if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+
+    """
+    define all the function related to all the targets of facebook in the bellow section of this class
+    """
+    def am_i_expired(self):
+        return self.is_expired
+
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
 #.....................................................................Periodic Targets Models...........................................................
 
 class Periodic_Targets(Document):
     GTR = ReferenceField(Global_Target_Reference)
+    CTR = IntField(default=0)
     target_reff = DynamicField()
     re_invoke_time = DateTimeField(default=datetime.datetime.utcnow())
 
@@ -643,4 +1117,28 @@ class Periodic_Targets(Document):
     @staticmethod
     def get_all_periodic_task():
         return Periodic_Targets.objects
+
+class Share_Resource(Document):
+
+    share_with = ListField()
+    seen = BooleanField(default=False)
+    processed = BooleanField(default=False)
+    user_id = IntField()
+    username = StringField()
+
+
+    resource_ref = DynamicField()
+    message = StringField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+    @staticmethod
+    def get_pao_resources():
+        return Share_Resource.objects(share_with='pao')
+
+    @staticmethod
+    def get_rdo_resources():
+        return Share_Resource.objects(share_with='rdo')
 

@@ -18,28 +18,31 @@ supported_sites_content = [{
 {'name':'Twitter',
  'url':'www.twitter.com',
  'website_type':'social',
- 'target_type':['profile',
-                'page',
-                'group'
-                ]
+ 'target_type':['profile']
 
 }},{'website':
         {'name': 'Instagram',
          'url': 'www.instagram.com',
          'website_type': 'social',
-         'target_type': ['profile',
-                         'page',
-                         'group'
-                         ]
+         'target_type': ['profile']
 
 }},{'website':
     {'name':'Linkedin',
      'url':'www.linkedin.com',
      'website_type':'social',
-     'target_type':['profile',
-                    'page',
-                    'group'
-                    ]
+     'target_type':['profile','company']
+
+}},{'website':
+    {'name':'custom',
+     'url':'',
+     'website_type':'fake',
+     'target_type':['keybase_crawling','dynamic_crawling']
+
+}},{'website':
+    {'name':'Reddit',
+     'url':'',
+     'website_type':'social',
+     'target_type':['profile','subreddit']
 
     }
 }]
