@@ -1118,3 +1118,27 @@ class Periodic_Targets(Document):
     def get_all_periodic_task():
         return Periodic_Targets.objects
 
+class Share_Resource(Document):
+
+    share_with = ListField()
+    seen = BooleanField(default=False)
+    processed = BooleanField(default=False)
+    user_id = IntField()
+    username = StringField()
+
+
+    resource_ref = DynamicField()
+    message = StringField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+    @staticmethod
+    def get_pao_resources():
+        return Share_Resource.objects(share_with='pao')
+
+    @staticmethod
+    def get_rdo_resources():
+        return Share_Resource.objects(share_with='rdo')
+

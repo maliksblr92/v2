@@ -268,4 +268,3 @@ class Case_Include(object):
 
 class Case_Link(object):
     pass
-

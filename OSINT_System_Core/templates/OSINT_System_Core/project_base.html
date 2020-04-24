@@ -203,6 +203,7 @@
 
 <div class="row">
     <div class="col-md-8">
+        <label>Search Object</label>
          <input type="text" name="search" id="txtSearch" onkeyup="searchOpen()" />
 
 
@@ -222,20 +223,90 @@
 
 </div>
 
-    <div class="row" id="search_result">
+    <div class="row" >
+<div class="col-md-12" id="search_result">
 
 
+</div>
+
+    </div>
+          <div class="row" >
+<div class="col-md-12">
+<div class="alert alert-light" id="response" role="alert">
+
+
+</div>
+
+</div>
     </div>
 
       </div>
       <div class="modal-footer">
 
-        <button type="button" class="btn btn-primary">link</button>
+
       </div>
     </div>
   </div>
 </div>
+<!-- Modal End-->
 
+  <!-- Modal -->
+<div class="modal fade" id="share_resource" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share Resource</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div class="row">
+    <div class="col-md-7">
+
+
+ <div class="form-group">
+  <label for="comment">Message</label>
+  <textarea class="form-control" rows="5" id="share_message"></textarea>
+</div>
+
+    </div>
+    <div class="col-md-5">
+
+        <label for="cars">Share With:</label>
+    <select id="group_type">
+  <option value="tso">Target Selection Officer</option>
+  <option value="tmo">Target Monitoring Officer</option>
+  <option value="pao">Processing & Analysis Officer</option>
+  <option value="rdo">Reporting and Documentation Officer</option>
+</select>
+    </div>
+
+
+
+</div>
+
+    <div class="row" id="search_result">
+
+
+    </div>
+           <div class="row" >
+
+<div class="alert alert-light" id="share_response" role="alert">h
+</div>
+    </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" onclick="submit_share()" class="btn btn-primary">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
     function searchOpen() {
     var type = $('#type').val()
@@ -255,7 +326,31 @@
     });
 }
 
+function submit_share() {
 
+console.log("in submit share")
+var user_group = $('#group_type').val()
+    var resource_id = $('#btn_link').attr("data-id")
+    var message = $('#share_message').val()
+
+        //var beta_id = $('.btn_link').attr('data-id')
+ console.log(resource_id)
+
+
+    var data = {
+        resource_id: resource_id,message:message,user_group:user_group
+    };
+    $.ajax({
+        url: '{% url 'OSINT_System_Core:share_resource' %}',
+        data: data,
+        'success': (resp) => {
+
+                $('#share_response').text(resp)
+                 console.log(resp)
+               },
+
+    });
+}
 function submit_link(alpha_id) {
 
 console.log("i m clicked")
@@ -273,7 +368,7 @@ console.log("i m clicked")
         data: data,
         'success': (resp) => {
 
-
+                $('#response').text(resp)
                  console.log(resp)
                },
 

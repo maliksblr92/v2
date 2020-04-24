@@ -42,7 +42,8 @@ from rest_framework import viewsets, response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from OSINT_System_Core.Data_Sharing import Keybase_Match,Portfolio_Link,Portfolio_Include,Keybase_Include
+from OSINT_System_Core.Data_Sharing import Keybase_Match,Portfolio_Link,Portfolio_Include,Keybase_Include,Mongo_Lookup
+from Public_Data_Acquisition_Unit.mongo_models import Share_Resource as Share_Resource_M
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
@@ -722,17 +723,55 @@ class Link_Object(View):
         if (type == 'portfolio'):
             resp = pl.create(alpha_id,beta_path_list)
             if(resp is not None):
-                return HttpResponse('sucess')
+                return HttpResponse('resource linked sucessfully ')
         elif (type == 'keybase'):
             #resp = Keybase_KMS.find_object(query)
-            return HttpResponse('sucess')
+            return HttpResponse('resource linked sucessfully ')
         elif (type == 'avatar'):
             #resp = Avatar_AMS.find_object(query)
-            return HttpResponse('sucess')
+            return HttpResponse('resource linked sucessfully ')
         else:
 
-            return HttpResponse('failed')
-        return HttpResponse('failed')
+            return HttpResponse('given type is either empty or invalid')
+        return HttpResponse('this resource is already linked with this '+type)
+
+class Share_Resource(View):
+    ml = Mongo_Lookup()
+
+
+
+    def get(self,request):
+        print(request.GET)
+        group_typ = request.GET.get('user_group',None)
+        message = request.GET.get('message',None)
+        resource_id = request.GET.get('resource_id',None)
+
+        if(group_typ and message and resource_id):
+            resource_obj = self.ml.find_object_by_id(ObjectId(resource_id))
+            if(resource_obj is not None):
+                try:
+                    obj = Share_Resource_M(user_id=request.user.id,
+                                         username=request.user.username,
+                                         share_with=[group_typ],
+                                         message=message,
+                                         resource_ref = resource_obj,
+
+
+
+                                         )
+
+                    obj.save()
+                    return HttpResponse('resource shared successfully')
+                except Exception as e:
+                    print(e)
+                    return HttpResponse(e)
+            else:
+                return HttpResponse('unable to locate object of given resource')
+        else:
+            return HttpResponse('input parameters are left empty or invalid')
+        return HttpResponse('unable to share resource')
+
+
 # .........................................Normal Functions ............
 
 
