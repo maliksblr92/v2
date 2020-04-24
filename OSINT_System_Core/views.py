@@ -812,11 +812,6 @@ class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
 
 
 
-
-
-
-
-
 # ahmed start
 class Dashboard(APIView):
     #permission_classes = (IsAuthenticated,)
