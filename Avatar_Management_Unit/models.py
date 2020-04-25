@@ -6,7 +6,7 @@ import datetime
 # -------------------------------------------------------- connection ------------------------------------------------------
 disconnect('default')
 #CONNECT TO MONGO DB
-connect(db='OSINT_System',host='192.168.18.102', port=27017)
+connect(db='OSINT_System',host='127.0.0.1', port=27017)
 
 
 SOCIAL_MEDIA_TYPE = (
@@ -45,7 +45,7 @@ class Work(EmbeddedDocument):
     location = StringField(max_length=300)
     description = StringField(max_length=500)
     company = StringField(max_length=100)
-
+    current = BooleanField(required=True)
 
 
 
@@ -107,6 +107,8 @@ class Avatar_AMS(Document):
     phone_number = StringField(max_length=20)
     profile_image = ImageField()
     cover_image = ImageField()
+    address = StringField(min_length=10)
+    nationality = StringField(min_length=5)
 
     works= ListField(default=[])
     educations = ListField(default=[])
@@ -156,14 +158,25 @@ class Avatar_AMS(Document):
         if 'email' in kwargs: self.email = kwargs['email']
         if 'profile_image' in kwargs: self.profile_image = kwargs['profile_image']
         if 'cover_image' in kwargs: self.cover_image = kwargs['cover_image']
+        if 'address' in kwargs: self.address = kwargs['address']
+        if 'nationality' in kwargs: self.nationality = kwargs['nationality']
 
         self.evaluate_health()
 
-    def add_work(self,title,start_date,end_date,location,description,company):
+    def add_work(self, title, company, location, description,
+                 start_date, end_date, is_current):
 
-        work = Work(title=title,start_date=start_date,end_date=end_date,location=location,description=description,company=company)
+        work = Work(
+            title=title,
+            start_date=start_date,
+            end_date=end_date,
+            location=location,
+            description=description,
+            company=company,
+            current=is_current)
         self.works.append(work)
         self.evaluate_health()
+        self.correct_current_job(work)
 
     def add_education(self,institute,degree,grades,field_of_study,start_date,end_date):
 
@@ -240,6 +253,18 @@ class Avatar_AMS(Document):
     @staticmethod
     def find_object(query):
         return Avatar_AMS.objects.search_text(query)
+    
+    def correct_current_job(self, correct_current_job_id):
+        """
+        This method is for the case when multiple jobs were added for an avatar
+        and 1 of them was current job, now another new current job is added,
+        which means the previous current job has to be converted to past job.
+        """
+        pass
+
+    @staticmethod
+    def get_all_avatars_id_and_names():
+        return Avatar_AMS.objects().fields(first_name=1, last_name=1)
 # ----------------------------------------------------------- Avatar Actions -----------------------------------------------
 
 

@@ -25,35 +25,34 @@
 {% block belly %}
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
-        <!-- TOP MANU BAR -->
+        <!-- Sub Menu Bar for app specific menu -->
         <nav>
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                <a class="nav-item nav-link active" id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo"
                     role="tab">Personal
                     Information</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab">Work
+                <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab">Work
                     Details</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                <a class="nav-item nav-link" id="nav-interest-tab" data-toggle="tab" href="#nav-interest"
                     role="tab">Interest</a>
-                <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab">Life
+                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events" role="tab">Life
                     Events</a>
             </div>
         </nav>
-        <!-- END OF TOP MANU BAR -->
+        <!-- end of sub menu -->
     </div>
     <!-- end of top row -->
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
         <div class="">
-            <!-- RPW FOR SOCIAL MEDIA -->
             <div class="row formbg ml-3">
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
                     <!-- this is content -->
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                        <div class="tab-pane fade active show" id="nav-home" role="tabpanel">
-                            <!-- Each content tab #1 for keywords-->
+                        <div class="tab-pane fade active show" id="nav-pinfo" role="tabpanel">
+                            <!-- a nav for personal information tab -->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
                                     <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
@@ -78,73 +77,106 @@
                                     </div>
                                     <!-- end of left img section -->
                                 </div>
+                                <!-- end of left side redundant navigation -->
+                                <!-- Personal information form-->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <!-- HEre we will have Personal information form-->
-                                    <!--FORMS-->
-                                    <form style="padding-bottom:10px;">
+                                    <form id="personal-info-form" style="padding-bottom:10px;">
+                                        {% csrf_token %}
                                         <div class="form-group ">
-                                            <div class="input-group    mt-5 mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                         opacity:0.9; padding:5px 9px 0 10px;">Author Account
-                                                    </span>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group mt-5 mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                             opacity:0.9; padding:5px 9px 0 10px;">First Name
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" name="pinfo-fname" id="pinfo-fname"
+                                                            class="form-control newinputdesign"
+                                                            placeholder="First Name">
+                                                    </div>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-secondary searchbutton">SMART
-                                                        SEARCH</button>
+                                                <div class="col-md-6">
+                                                    <div class="input-group mt-5 mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="newlabeldesign">Last Name</span>
+                                                        </div>
+                                                        <input type="text" name="pinfo-lname" id="pinfo-lname"
+                                                            class="form-control newinputdesign" placeholder="Last Name">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="input-group   mt-1 mb-3">
+                                            <!-- email -->
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:5px 9px 0 10px;">Author Type
+                           opacity:0.9; padding:5px 9px 0 10px;">Email
                                                     </span>
                                                 </div>
-                                                <select
-                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                    class="custom-select newinput" id="inputGroupSelect01">
-                                                    <option selected="">Choose...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
+                                                <input type="email" name="pinfo-email" id="pinfo-email"
+                                                    class="form-control newinputdesign" placeholder="Email Please"
+                                                    required>
                                             </div>
-                                            <div class="input-group   mt-4 mb-3">
+                                            <!-- end of email -->
+                                            <!-- phone number -->
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:7px 9px 0 10px;">Full name
+                           opacity:0.9; padding:7px 9px 0 10px;">Phone Number
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your Full Name">
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="pinfo-phone" id="pinfo-phone" placeholder="Phone Number">
                                             </div>
+                                            <!-- end of phone number -->
                                             <!--for Nationality-->
-                                            <div class="input-group   mt-4 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                            opacity:0.9; padding:7px 9px 0 10px;"> Nationality
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="pinfo-nationality" placeholder="Nationality">
                                             </div>
                                             <!--Address-->
-                                            <div class="input-group   mt-4 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                            opacity:0.9; padding:7px 9px 0 10px;">Address
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="pinfo-address" placeholder="Permanent Address">
                                             </div>
-                                            <!-- DATE AND TIME 2 column div -->
+                                            <!-- religious views -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Religious Views
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    placeholder="Religious Views" name="pinfo-religious">
+                                            </div>
+                                            <!-- end of religious views -->
+                                            <!-- marital status -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign">
+                                                        marital status
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="pinfo-marital-status" id="pinfo-married"
+                                                    class="form-control newinputdesign"
+                                                    placeholder="single - married - in a relationship">
+                                            </div>
+                                            <!-- end of marital status -->
+                                            <!-- dob and gender 2 column div -->
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <!-- EXPIRED ON SECTION-->
-                                                    <div class="input-group   mt-1 mb-3">
+                                                    <!-- DOB ON SECTION-->
+                                                    <div class="input-group mt-1 mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                  opacity:0.9; padding:5px 9px 0 10px;">DOB
@@ -152,46 +184,39 @@
                                                         </div>
                                                         <input class="form-control newinputdesign" id="date"
                                                             style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                            name="date" placeholder="MM/DD/YYY" type="text">
+                                                            name="pinfo-dob" placeholder="MM/DD/YYY" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <!--INTERVAL SECTION-->
-                                                    <div class="input-group   mt-1 mb-3">
+                                                    <!--Gender SECTION-->
+                                                    <div class="input-group mt-1 mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                  opacity:0.9; padding:5px 9px 0 10px;">Gender
                                                             </span>
                                                         </div>
-                                                        <select
+                                                        <select name="pinfo-gender"
                                                             style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
                                                             class="custom-select newinput" id="inputGroupSelect01">
-                                                            <option selected="">Male</option>
-                                                            <option value="1">Female</option>
-                                                            <option value="2">Other</option>
+                                                            <option selected value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                            <option value="other">Other</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- end of 2 column div for date and time-->
-                                            <div class="input-group   mt-2 mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:7px 9px 0 10px;">Username
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter text...">
-                                            </div>
+                                            <!-- end of 2 column div for dob and gender-->
                                         </div>
                                         <!-- TWO BUTTON BOTTOM-->
                                         <div class="row d-flex flex-row">
-                                            <div class="col-md-12 ml-5 ">
+                                            <div class="col-md-12 ml-5">
                                                 <!--LEFT BUTTON-->
-                                                <button type="button" class="btn btn-secondary searchbutton">Clear
+                                                <button type="button" class="btn btn-secondary searchbutton"
+                                                    id="pinfo-clear-btn">Clear
                                                 </button>
-                                                <button type="button" style="float:right; "
-                                                    class="btn btn-secondary searchbutton mr-5">Submit</button>
+                                                <button type="submit" style="float:right;"
+                                                    class="btn btn-secondary searchbutton mr-5"
+                                                    id="pinfo-submit-btn">Submit</button>
                                             </div>
                                         </div>
                                     </form>
@@ -202,10 +227,10 @@
                                 <div class="progress-bar bg-info progress-bar-striped" style="width:30%"></div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel">
-                            <!-- Each content tab #2 for Tags-->
+                        <div class="tab-pane fade" id="nav-work" role="tabpanel">
+                            <!-- a nav for work details tab -->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
                                     <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
@@ -225,99 +250,110 @@
                                                 </div>
                                             </nav>
                                         </div>
-                                        <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
-                                                Edit</a></p>
+                                        <p style="text-align: center; margin-top:10%;">
+                                            <a class="CreateBtn" href="#">Edit</a>
+                                        </p>
                                     </div>
                                     <!-- end of left img section -->
                                 </div>
+                                <!-- end of left side redundant navigation -->
                                 <!-- Work Details form-->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form style="padding-bottom:10px;">
+                                    <form style="padding-bottom:10px;" id="work-details-form">
+                                        {% csrf_token %}
                                         <div class="form-group ">
-                                            <div class="input-group    mt-5 mb-3">
+                                            <!-- avatar -->
+                                            <div class="input-group mt-4 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                         opacity:0.9; padding:5px 9px 0 10px;">Job title
+                                                    <span class="newlabeldesign">Avatar</span>
+                                                </div>
+                                                <select name="wd-avatar" class="newinput custom-select amu-work-select">
+                                                    {% for avatar in avatars %}
+                                                    <option value="{{avatar.0}}"
+                                                        {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <!-- job title -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign amu-work-input-font">Job title
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
+                                                    placeholder="Job Title ..." name="wd-job-title" required>
                                             </div>
+                                            <!-- company -->
                                             <div class="input-group   mt-1 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:5px 9px 0 10px;">Company
+                                                    <span class="newlabeldesign amu-work-input-font">Company
                                                     </span>
                                                 </div>
-                                                <input type="text" name="work-company" id="work-company"
-                                                    class="form-control newinputdesign"
-                                                    placeholder="Enter Company Name">
+                                                <input type="text" name="wd-company" class="form-control newinputdesign"
+                                                    placeholder="Company Name ..." required>
                                             </div>
                                             <!--for Description-->
-                                            <div class="input-group   mt-4 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:7px 9px 0 10px;"> Description
+                                                    <span class="newlabeldesign amu-work-input-font"> Description
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
+                                                <input type="text" class="form-control newinputdesign"
+                                                    placeholder="Description Please ..." name="wd-desc">
                                             </div>
                                             <!--Address-->
-                                            <div class="input-group   mt-4 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:7px 9px 0 10px;">Address
+                                                    <span class="newlabeldesign amu-work-input-font">Address
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Please Enter your text">
+                                                    placeholder="Address Please ..." name="wd-address">
                                             </div>
                                             <!-- DATE AND TIME 2 column div -->
-                                            <div class="row">
+                                            <div class="row mt-1 mb-3">
                                                 <div class="col-md-6">
                                                     <!-- EXPIRED ON SECTION-->
-                                                    <div class="input-group   mt-1 mb-3">
+                                                    <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                 opacity:0.9; padding:5px 9px 0 10px;">Started
+                                                            <span class="newlabeldesign amu-work-input-font">Started
                                                             </span>
                                                         </div>
                                                         <input class="form-control newinputdesign" id="work-start-date"
-                                                            name="work-start-date" placeholder="MM/DD/YYY" type="text">
+                                                            name="wd-start-date" placeholder="MM/DD/YYYY" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!--INTERVAL SECTION-->
-                                                    <div class="input-group   mt-1 mb-3">
+                                                    <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                 opacity:0.9; padding:5px 9px 0 10px;">Ended
+                                                            <span class="newlabeldesign amu-work-input-font">Ended
                                                             </span>
                                                         </div>
                                                         <input class="form-control newinputdesign" id="work-end-date"
-                                                            name="work-end-date" placeholder="MM/DD/YYY" type="text">
+                                                            name="wd-end-date" placeholder="MM/DD/YYYY" type="text">
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- end of 2 column div for date and time-->
-                                            <div class="input-group   mt-2 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                           opacity:0.9; padding:7px 9px 0 10px;">Current
+                                                    <span class="newlabeldesign amu-work-input-font">Current
                                                     </span>
                                                 </div>
                                                 <input type="checkbox" class="form-control newinputdesign"
-                                                    name="work-current-job">
+                                                    name="wd-current-job">
                                             </div>
                                         </div>
                                         <!-- TWO BUTTON BOTTOM-->
                                         <div class="row d-flex flex-row">
                                             <div class="col-md-12 ml-5 ">
                                                 <!--LEFT BUTTON-->
-                                                <button type="button" class="btn btn-secondary searchbutton">Clear
+                                                <button type="button" class="btn btn-secondary searchbutton"
+                                                    id="wd-clear-btn">Clear
                                                 </button>
-                                                <button type="button" style="float:right; "
+                                                <button type="submit" style="float:right; "
                                                     class="btn btn-secondary searchbutton mr-5">Submit</button>
                                             </div>
                                         </div>
@@ -329,10 +365,10 @@
                                 <div class="progress-bar bg-info progress-bar-striped" style="width:50%"></div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel">
-                            <!-- Each content tab #3 for topics-->
+                        <div class="tab-pane fade" id="nav-interest" role="tabpanel">
+                            <!-- a nav for interests tab -->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
                                     <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
@@ -357,6 +393,8 @@
                                     </div>
                                     <!-- end of left img section -->
                                 </div>
+                                <!-- end of left side redundant navigation -->
+                                <!-- interests form -->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
                                     <div class="input-group   mt-2 mb-2">
                                         <div class="input-group-prepend">
@@ -418,16 +456,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- END of Personal information form-->
+                                <!-- end of interests form -->
                             </div>
                             <div class="progress">
                                 <div class="progress-bar bg-info progress-bar-striped" style="width:70%"></div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-about" role="tabpanel">
-                            <!-- Each content tab #1 for keywords-->
+                        <div class="tab-pane fade" id="nav-events" role="tabpanel">
+                            <!-- a nav for life events tab -->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
                                     <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
@@ -452,6 +490,8 @@
                                     </div>
                                     <!-- end of left img section -->
                                 </div>
+                                <!-- end of left side redundant navigation -->
+                                <!-- life events, education, skills form -->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
                                     <div class="row mt-2 ">
                                         <div class="col-md-12 col-lg-12 col-xl-12  ">
@@ -654,16 +694,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- END of Personal information form-->
+                                <!-- end of life events, education, skills form-->
                             </div>
                             <div class="progress">
                                 <div class="progress-bar bg-info progress-bar-striped" style="width:80%"></div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-bio" role="tabpanel">
-                            <!-- Each content tab #1 for keywords-->
+                            <!--  -->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
                                     <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
@@ -688,6 +728,7 @@
                                     </div>
                                     <!-- end of left img section -->
                                 </div>
+                                <!-- end of left side redundant navigation -->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
                                     <form action="">
                                         <div class="input-group   mt-2 mb-3">
@@ -1005,4 +1046,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block foot_dep %}
+<script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script>
 {% endblock %}
