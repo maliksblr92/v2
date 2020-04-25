@@ -23,11 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
     });
 
-    //personal details form clear
-    $("#pinfo-clear-btn").click(() => {
-        $("personal-info-form").trigger("reset");
-    });
-
     //work details form submit
     $("#work-details-form").submit((event) => {
         fdata = {};
@@ -51,10 +46,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         $("#work-details-form").trigger("reset");
         event.preventDefault();
-    });
-
-    // work details form clear
-    $("wd-clear-btn").click(() => {
-        $("#work-details-form").trigger("reset");
     });
 });
