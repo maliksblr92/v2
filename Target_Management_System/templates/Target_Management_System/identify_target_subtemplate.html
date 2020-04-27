@@ -1,0 +1,38 @@
+{% load static %}
+
+ <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+
+                    {% for user in users %}
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-link text-white chain_icon"></i>
+                                </div>
+                                <div class="w-100 h-50">
+                                    <button class="btn btn-sm" type="button" onclick="">T</button>
+
+                                </div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{{ user.profile_url }}" class="  profile_card_avatar" />
+                            </div>
+
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <div class=""><p>{{ user.id }}</p></div>
+                                <div class=""><p>{{ user.username }}</p></div>
+                                <div class=""><p>{{ user.fullname }}</p></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    {% endfor %}
+
+                </div>
+                <!-- row 1 end of small cards   -->

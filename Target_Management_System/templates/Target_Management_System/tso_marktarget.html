@@ -85,7 +85,7 @@
                             <div class="row formbg ml-5">
                                 <div class="col-md-4 mt-5 ">
                                     <div class="mt-5">
-                                        <img class="ml-5" style="height:150px; width:150px;"
+                                        <img id="profile_image" class="ml-5" style="height:150px; width:150px;"
                                             src="{% static 'images/testimonial.png' %}" alt="">
                                     </div>
                                 </div>
@@ -187,16 +187,10 @@
                                     opacity:0.9; padding:5px 9px 0 10px;">Expire on
                                                             </span>
                                                         </div>
-                                                        <input class="form-control newinputdesign glyphicon glyphicon-calendar"
-                                                            style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
+                                                        <input type="date" id="{{platform.name|lower}}-expirydate" name="{{platform.name|lower}}_expirydate">
 
-                                                            id="{{platform.name|lower}}-expirydate"
-                                                            name="{{platform.name|lower}}_expirydate">
                                                     </div>
- <script>
-        $('#{{platform.name|lower}}-expirydate').datetimepicker({format: 'yyyy-mm-dd hh:ss'
-        });
-    </script>
+
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -309,21 +303,22 @@
                     // console.log(response)
                     $(`#${website}-authoruserid`).val(response['author_userid'])
                     $(`#${website}-authorusername`).val(response['author_username'])
+                    document.getElementById("profile_image").src = response['profile_url']
                     switch (website) {
                         case 'reddit':
-                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${response['author_url']}`)
+                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${author_account}`)
                             break;
                         case 'linkedin':
-                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${response['author_url']}`)
+                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${author_account}`)
                             break;
                         case 'instagram':
-                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${response['author_url']}`)
+                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${author_account}`)
                             break;
                         case 'facebook':
-                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${response['author_url']}`)
+                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${author_account}`)
                             break;
                         case 'twitter':
-                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${response['author_url']}`)
+                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${author_account}`)
                             break;
                         default:
                             break;
