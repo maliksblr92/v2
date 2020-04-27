@@ -65,6 +65,10 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         portfolio_id = None
         if 'selected_portfolio_id' in request.session :portfolio_id = request.session.get('selected_portfolio_id')
         print(portfolio_id)
+
+        if (expire_on is not None):
+            expire_on = convert_expired_on_to_datetime(expire_on)
+
         if ('facebook_screenshot' in request.POST):
             screen_shot = request.POST['facebook_screenshot']
             if(screen_shot == '1'):
@@ -85,14 +89,18 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
         search_site = request.GET['search_site']
 
         print(username,search_site)
+
         resp = acq.fetch_smart_search(username=username,search_site=search_site)
         # print(kwargs)
-        resp = {
-            'author_userid': 'abcdef123',
-            'author_username': 'sharif ahmad',
-            'author_url': 'sharifahmad2061'
-        }
-        return JsonResponse(resp, safe=False)
+        if (not 'response' in resp):
+            print(resp)
+            resp = {
+                'author_userid': resp['data']['id'],
+                'author_username': resp['data']['full_name'],
+                'author_url': 'sharifahmad2061',
+                'profile_url':resp['data']['profile_image_url']
+            }
+            return JsonResponse(resp, safe=False)
 
 
 class Target_Fetched(RequireLoginMixin, IsTSO, View):
@@ -111,9 +119,6 @@ class Identify_Target(RequireLoginMixin, IsTSO, View):
         return render(request,
                       'Target_Management_System/tso_identifytarget.html',{})
 
-    def post(self, request, *args, **kwargs):
-        pass
-
 class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
 
@@ -124,13 +129,20 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
 
         print(query,website)
         resp = acq.identify_target(query,website)
-        #check here if resp is not none and remove the dummy reponse
-        resp = {
-            'author_userid': 'abcdef123',
-            'author_username': 'sharif ahmad',
-            'author_url': 'sharifahmad2061'
-        }
-        return JsonResponse(resp, safe=False)
+        #print(resp)
+
+        users = []
+        if(not 'response' in resp):
+
+            if(website == 'instagram'):
+                data = resp['data']['users']
+                for item in data:
+                    #print(item)
+                    user = {'username': item['user']['username'],'fullname': item['user']['full_name'],'userid': '','profile_url':item['user']['profile_pic_url']}
+                    users.append(user)
+
+        print(users)
+        return render(request,'Target_Management_System/identify_target_subtemplate.html',{'users':users})
 
 class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
 
