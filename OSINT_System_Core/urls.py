@@ -70,7 +70,6 @@ urlpatterns = [
     path('main_1/', views.main_1, name='main_1'),
     path('main/heatmap/', views.mainHeatMap, name='mainHeatMap'),
     path('newsmonitoring/', views.newsMonitor, name='newsMonitor'),
-
     # ahmed end
 ]
 
