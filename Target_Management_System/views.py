@@ -69,10 +69,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         if (expire_on is not None):
             expire_on = convert_expired_on_to_datetime(expire_on)
 
-        if ('facebook_screenshot' in request.POST):
-            screen_shot = request.POST['facebook_screenshot']
-            if(screen_shot == '1'):
-                screen_shot = True
+
 
         print(website_id,target_type_index,username,user_id)
         acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
