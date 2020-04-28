@@ -8,11 +8,16 @@ def on_messege_recived(data,**kwargs):
     :return:
     """
     if(data['message_type'] == 'info' or data['message_type'] == 'error' or data['message_type'] == 'warnning'):
+
+        print(data)
         send_event('messages', 'message', data)
-    elif(data['message_type='] == 'control' or data['message_type'] == 'alert'):
+    elif(data['message_type'] == 'control' or data['message_type'] == 'alert'):
+        print(data)
         send_event('alerts', 'alert', data)
-    elif(data['message_type='] == 'system'):
+    elif(data['message_type'] == 'notification'):
+        print(data)
         send_event('notifications', 'notification', data)
     else:
+        print(data)
         send_event('messages', 'message', data)
 

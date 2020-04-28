@@ -517,8 +517,79 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    #...................................Tools Api's.................................
 
+    def fake_identitity_generator(self,nationality,gender,age):
+        try:
+            add_target_url = 'identitygenerator/'
+            payload = {'nationality':nationality,'gender':gender,'age':age}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
 
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def dark_web_search(self,query):
+        try:
+            add_target_url = 'darksearch'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def amazon_data_scraper(self,query):
+        try:
+            add_target_url = 'amazon'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def daraz_data_scraper(self,query):
+        try:
+            add_target_url = 'daraz'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def google_scholar_data_scraper(self,query):
+        try:
+            add_target_url = 'scholar'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def google_patents_data_scraper(self,query):
+        try:
+            add_target_url = 'patents'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
 
 if __name__== "__main__":
     print('i have been called')
