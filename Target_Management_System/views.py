@@ -35,7 +35,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'blogs': json.loads(blog_sites.to_json()),
             'intervals':PERIODIC_INTERVALS,
         }
-        print(data)
+        #print(data)
+        #publish('target created successfully', message_type='notification')
         return render(request,
                       'Target_Management_System/tso_marktarget.html',
                       {'app': 'target',
@@ -76,7 +77,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
         print(website_id,target_type_index,username,user_id)
         acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
-        #publish('target created successfully', message_type='notification')
+        publish('target created successfully', message_type='notification')
         return redirect('/tms/marktarget')
 
 

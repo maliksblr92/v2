@@ -757,7 +757,7 @@ class Twitter_Profile(Twitter_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -809,7 +809,7 @@ class Instagram_Profile(Instagram_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -858,7 +858,7 @@ class Linkedin_Profile(Linkedin_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:

@@ -58,6 +58,7 @@ class Acquistion_Manager(object):
             return target
         except Exception as e:
             print(e)
+            publish(e, message_type='error', module_name=__name__)
             return False
 
     def add_bulk_targts(self,website_id,target_type_index,prime_argument_list,expired_on,periodic_interval):

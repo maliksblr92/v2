@@ -43,7 +43,7 @@ class Rabbit_Publisher(object):
                 self.channel = self._connection.channel()
                 self.channel.exchange_declare(exchange=self.EXCHANGE, exchange_type=self.EXCHANGE_TYPE,durable=False, auto_delete=False)
                 self.channel.confirm_delivery()
-                print('.....................................RabbitMq Connected To Exchange : {0}.......................'.format(self.EXCHANGE))
+                #print('.....................................RabbitMq Connected To Exchange : {0}.......................'.format(self.EXCHANGE))
         except pika.exceptions.ProbableAuthenticationError as e :
             print('.....................................RabbitMq Not Connected.............................................')
             print(e)
@@ -100,15 +100,15 @@ class Rabbit_Publisher(object):
 
 
 
-pub = Rabbit_Publisher(username='ocs', password='rapidev', exchange='control_exchange')
+
 
 SERVER_NAME = 'OCS'
 
 def publish(message,module_name =__name__,message_type='info',**kwargs):
-
+    pub = Rabbit_Publisher(username='ocs', password='rapidev', exchange='control_exchange')
     #publish({'server_name': 'OCS', 'module_name': __name__, 'messege_type': 'info','arguments':{'name':'awais'},'messege':'this is the messege'})
     pub.publish({'server_name': SERVER_NAME, 'module_name':module_name, 'message_type': message_type,'arguments':kwargs,'messege':message})
-    print(message)
+
 
 #def publish_control(message,module_name = __name__):
 #    publish({'server_name': SERVER_NAME, 'module_name': module_name, 'messege_type': 'control','arguments':{},'messege':message})

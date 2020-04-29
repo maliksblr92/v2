@@ -85,7 +85,7 @@
                             <div class="row formbg ml-5">
                                 <div class="col-md-4 mt-5 ">
                                     <div class="mt-5">
-                                        <img id="profile_image" class="ml-5" style="height:150px; width:150px;"
+                                        <img id="{{ platform.name|lower }}-profile_image" class="ml-5" style="height:150px; width:150px;"
                                             src="{% static 'images/testimonial.png' %}" alt="">
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@
                     // console.log(response)
                     $(`#${website}-authoruserid`).val(response['author_userid'])
                     $(`#${website}-authorusername`).val(response['author_username'])
-                    document.getElementById("profile_image").src = response['profile_url']
+                    document.getElementById(`${website}-profile_image`).src = response['profile_url']
                     switch (website) {
                         case 'reddit':
                             $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${author_account}`)
