@@ -93,6 +93,12 @@ class SocialMediaAccount(EmbeddedDocument):
     password = StringField()
 
 
+class Marriage(EmbeddedDocument):
+    spouse = StringField(required=True)
+    location = StringField()
+    wedding_date = DateField(required=True)
+    divorce_date = DateField()
+
 class Avatar_AMS(Document):
     health = IntField(min_value=0, max_value=100, default=0)
 
@@ -117,6 +123,7 @@ class Avatar_AMS(Document):
     locations = ListField(default=[])
     life_events = ListField(default=[])
     social_media_accounts = ListField(default=[])
+    marriages = EmbeddedDocumentListField(Marriage)
 
 
     def __str__(self):
@@ -178,9 +185,16 @@ class Avatar_AMS(Document):
         self.correct_current_job(work)
         self.evaluate_health()
 
-    def add_education(self,institute,degree,grades,field_of_study,start_date,end_date):
+    def add_education(self, institute, degree, grades,
+                      field_of_study, start_date, end_date):
 
-        education = Education(institute,degree,grades,field_of_study,start_date,end_date)
+        education = Education(
+            institute,
+            degree,
+            grades,
+            field_of_study,
+            start_date,
+            end_date)
         self.educations.append(education)
         self.evaluate_health()
 
@@ -191,16 +205,16 @@ class Avatar_AMS(Document):
         self.evaluate_health()
 
     def add_interests(self, hobbies, movies, songs):
-        print(self.interests.hobbies)
-        if self.interests:
-            self.interests.hobbies.append(hobbies)
-            self.interests.movies.append(movies)
-            self.interests.songs.append(songs)
-        else:
-            self.interests = Interest()
-            self.interests.hobbies.append(hobbies)
-            self.interests.movies.append(movies)
-            self.interests.songs.append(songs)
+        # print(self.interests.hobbies)
+        # if self.interests:
+        #     self.interests.hobbies.append(hobbies)
+        #     self.interests.movies.append(movies)
+        #     self.interests.songs.append(songs)
+        # else:
+        #     self.interests = Interest()
+        #     self.interests.hobbies.append(hobbies)
+        #     self.interests.movies.append(movies)
+        #     self.interests.songs.append(songs)
 
         #self.save()
         self.evaluate_health()
@@ -215,6 +229,10 @@ class Avatar_AMS(Document):
         social_account = SocialMediaAccount(social_media_type,username,password)
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
+    
+    def add_marriage(self, spouse, location, wedding_date, divorce_date):
+        marriage = Marriage(spouse, location, wedding_date, divorce_date)
+        self.marriages.append(marriage)
 
     @staticmethod
     def get_all_avatars():

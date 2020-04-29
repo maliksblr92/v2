@@ -146,13 +146,48 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
     });
 
-    //life events form submit
-    $("#life-events-form").submit((event) => {
+    //education form submit
+    $("#education-form").submit((event) => {
+        console.log("education form submit");
         fdata = {};
-        $.each($("#life-events-form input"), (index, el) => {
+        $.each($("#education-form input"), (index, el) => {
             fdata[$(el).attr("name")] = $(el).val();
         });
+        fdata["le-ef-avatar"] = $(
+            "select[name=le-avatar] option:selected"
+        ).val();
         console.log(fdata);
+        $("education-form").trigger("reset");
         event.preventDefault();
+        $.ajax({
+            url: "/amu/addeducation/",
+            method: "POST",
+            data: fdata,
+            success: (result) => {
+                console.log(result);
+            },
+        });
+    });
+
+    //marriage form submit
+    $("marriage-form").submit((event) => {
+        fdata = {};
+        $.each($("#marriage-form input"), (index, el) => {
+            fdata[$(el).attr("name")] = $(el).val();
+        });
+        fdata["le-m-avatar"] = $(
+            "select[name=le-avatar] option:selected"
+        ).val();
+        console.log(fdata);
+        $("marriage-form").trigger("reset");
+        event.preventDefault();
+        $.ajax({
+            url: "/amu/addmarriage/",
+            method: "POST",
+            data: fdata,
+            success: (result) => {
+                console.log(result);
+            },
+        });
     });
 });

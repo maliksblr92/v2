@@ -134,30 +134,46 @@ class Add_Work(View):
             print(e)
             return JsonResponse({'error': e})
 
+
 class Add_Education(View):
 
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('on Create avatar')
-
-    def post(self, request):
-
-        avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
-        institute = 'the gramar school'
-        degree = 'matric'
-        grades = 'a'
-        field_of_study = ''
-        start_date = ''
-        end_date = ''
-
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        avatar_id = request.POST.get('le-ef-avatar')
+        degree = request.POST.get('le-ef-degree')
+        institute = request.POST.get('le-ef-institute')
+        if request.POST.get('le-ef-grade') != '':
+            grade = request.POST.get('le-ef-grade')
+        else:
+            grade = None
+        if request.POST.get('le-ef-fieldofstudy') != '':
+            field_of_study = request.POST.get('le-ef-fieldofstudy')
+        else:
+            field_of_study = None
+        start_date = datetime.datetime.strptime(
+            request.POST.get('le-ef-start-date'), '%m/%d/%Y')
+        if request.POST.get('le-ef-end-date') != '':
+            end_date = datetime.datetime.strptime(
+                request.POST.get('le-ef-end-date'), '%m/%d/%Y')
+        else:
+            end_date = None
+        print(avatar_id, degree, institute, grade, field_of_study, start_date, end_date)
         try:
-            a = Avatar_AMS.get_object_by_id(avatar_id)
-            if(a is not None):
-                a.add_education(institute,degree,grades,field_of_study,start_date,end_date)
-
-            return HttpResponse('work added')
+            print('pre error')
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            print('no error')
+            if(amu_obj is not None):
+                amu_obj.add_education(
+                    institute,
+                    degree,
+                    grade,
+                    field_of_study,
+                    start_date,
+                    end_date)
+            return JsonResponse({'success': 200})
         except Exception as e:
             print(e)
-            return HttpResponse(e)
+            return JsonResponse({'error': str(e)})
 
 class Add_Skill(View):
 
@@ -194,22 +210,20 @@ class Add_Interest(View):
 
         # print(avatar_id, hobbies, movies, songs)
 
-        try:
-            a = Avatar_AMS.get_object_by_id(avatar_id)
-            if(a is not None):
-                a.add_interests(hobbies, movies, songs)
+        # try:
+        #     a = Avatar_AMS.get_object_by_id(avatar_id)
+        #     if(a is not None):
+        #         a.add_interests(hobbies, movies, songs)
 
-            return JsonResponse({'success': 200})
-        except Exception as e:
-            print(e)
-            return HttpResponse(e)
+        #     return JsonResponse({'success': 200})
+        # except Exception as e:
+        #     print(e)
+        #     return JsonResponse({'error':str(e)})
 
 class Add_Life_Event(View):
 
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('on Create avatar')
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
 
         avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
 
@@ -248,6 +262,34 @@ class Add_Social_Account(View):
             print(e)
             return HttpResponse(e)
 
+
+class Avatar_Archive(View):
+
+    def get(self,request):
+        avatars = Avatar_AMS.get_all_avatars()
+        return None
+
+
+class Add_Marriage(View):
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        avatar_id = request.POST.get('le-m-avatar')
+        spouse = request.POST.get('le-m-spouse')
+        if request.POST.get('le-m-location') != '':
+            location = request.POST.get('le-m-location')
+        else:
+            location = None
+        wedding_date = datetime.datetime.strptime(request.POST.get('le-m-wedding-date'), '%m/%d/%Y')
+        if request.POST.get('le-m-divorce-date') != '':
+            divorce_date = datetime.datetime.strptime(request.POST.get('le-m-divorce-date'), '%m/%d/%Y')
+        else:
+            divorce_date = None
+        try:
+            avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            avatar_obj.add_marriage(spouse, location, wedding_date, divorce_date)
+            return JsonResponse({'success': 200})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
 #.............................................Views For Avatar Actions.................................................
 
 class Schedule_Action_Post(View):

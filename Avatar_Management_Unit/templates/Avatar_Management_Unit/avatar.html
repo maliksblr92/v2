@@ -504,16 +504,31 @@
                                 <!-- end of left side redundant navigation -->
                                 <!-- life events, education, skills form -->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form id="life-events-form">
-                                        {% csrf_token %}
-                                        <div class="row mt-2 ">
-                                            <!-- 1st education section -->
+                                    <div class="row mt-2 ">
+                                        <!-- avatar -->
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Avatar</span>
+                                            </div>
+                                            <select name="le-avatar" class="newinput custom-select amu-work-select">
+                                                {% for avatar in avatars %}
+                                                <option value="{{avatar.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- 1st education section -->
+                                        <form id="education-form">
+                                            {% csrf_token %}
                                             <div class="col-md-12 col-lg-12 col-xl-12">
+                                                <!-- banner for education form -->
                                                 <div class="bg-info clearfix avatorleft mb-3">
                                                     <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
                                                         class="fas fa-university fa-1x mt-2 ml-4">
                                                         Education</i>
                                                 </div>
+                                                <!-- degree -->
                                                 <div class="input-group mt-2 mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
@@ -521,18 +536,41 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" class="form-control newinputdesign"
-                                                        placeholder="Degree Name ..." name="le-d1-degree">
+                                                        placeholder="Degree Name ..." name="le-ef-degree" required>
                                                 </div>
+                                                <!-- institute -->
                                                 <div class="input-group mt-1 mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                           opacity:0.9; padding:5px 9px 0 10px;">institute
                                                         </span>
                                                     </div>
-                                                    <input type="text" name="le-d1-institute"
+                                                    <input type="text" name="le-ef-institute"
                                                         class="form-control newinputdesign"
-                                                        placeholder="Institue Please ...">
+                                                        placeholder="Institue Please ..." required>
                                                 </div>
+                                                <!-- grades and Field of Study -->
+                                                <div class="row mt-1 mb-3">
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend"><span
+                                                                    class="newlabeldesign">Grade</span></div>
+                                                            <input type="text" name="le-ef-grade"
+                                                                class="form-control newinputdesign"
+                                                                placeholder="Grades ...">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend"><span
+                                                                    class="newlabeldesign">Field of Study</span></div>
+                                                            <input type="text" name="le-ef-fieldofstudy"
+                                                                class="form-control newinputdesign"
+                                                                placeholder="Field Of Study ...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- dates -->
                                                 <div class="row">
                                                     <!-- degree 1 start date SECTION-->
                                                     <div class="col-md-6">
@@ -543,8 +581,8 @@
                                                                 </span>
                                                             </div>
                                                             <input class="form-control newinputdesign" id="date"
-                                                                name="le-d1-start-date" placeholder="MM/DD/YYYY"
-                                                                type="text">
+                                                                name="le-ef-start-date" placeholder="MM/DD/YYYY"
+                                                                type="text" required>
                                                         </div>
                                                     </div>
                                                     <!-- degree 1 end date SECTION-->
@@ -555,77 +593,34 @@
                                 opacity:0.9; padding:5px 9px 0 10px;">Ended
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="le-d1-end-date"
+                                                            <input type="text" name="le-ef-end-date"
                                                                 class="form-control newinputdesign"
                                                                 placeholder="MM/DD/YYYY">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- end of 1st education section -->
-                                            <!-- 2nd education section -->
-                                            <div class="col-md-12 col-lg-12 col-xl-12 mt-3">
-                                                <div class="bg-info clearfix avatorleft mb-3">
-                                                    <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
-                                                        class="fas fa-university fa-1x mt-2  ml-4  ">
-                                                        Education</i>
-                                                </div>
-                                                <div class="input-group    mt-2 mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                        opacity:0.9; padding:5px 9px 0 10px;">Degree
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" class="form-control newinputdesign"
-                                                        placeholder="Degree Please ..." name="le-d2-degree">
-                                                </div>
-                                                <div class="input-group   mt-1 mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:5px 9px 0 10px;">institute
-                                                        </span>
-                                                    </div>
-                                                    <input type="text" name="le-d2-institute"
-                                                        class="form-control newinputdesign"
-                                                        placeholder="Institute Please ...">
-                                                </div>
+                                                <!-- clear and submit button -->
                                                 <div class="row">
-                                                    <!-- degree 2 start date SECTION-->
-                                                    <div class="col-md-6">
-                                                        <div class="input-group   mt-1 mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                opacity:0.9; padding:5px 9px 0 10px;">Started
-                                                                </span>
-                                                            </div>
-                                                            <input class="form-control newinputdesign"
-                                                                name="le-d2-start-date" placeholder="MM/DD/YYYY"
-                                                                type="text">
-                                                        </div>
-                                                    </div>
-                                                    <!-- degree 2 end date SECTION-->
-                                                    <div class="col-md-6">
-                                                        <div class="input-group   mt-1 mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                opacity:0.9; padding:5px 9px 0 10px;">Ended
-                                                                </span>
-                                                            </div>
-                                                            <input type="text" name="le-d2-end-date"
-                                                                class="form-control newinputdesign"
-                                                                placeholder="MM/DD/YYYY">
-                                                        </div>
-                                                    </div>
+                                                    <div class="col-md-6 text-center"><button type="reset"
+                                                            class="btn btn-secondary searchbutton">Clear</button></div>
+                                                    <div class="col-md-6 text-center"><button type="submit"
+                                                            id="le-ef-submit"
+                                                            class="btn btn-secondary searchbutton">Submit</button></div>
                                                 </div>
                                             </div>
-                                            <!-- end of 2nd education section -->
-                                            <!-- marriage section -->
-                                            <div class="col-md-12 col-lg-12 col-xl-12   mt-3">
+                                        </form>
+                                        <!-- end of 1st education section -->
+                                        <!-- marriage section -->
+                                        <form id="marriage-form">
+                                            {% csrf_token %}
+                                            <div class="col-md-12 col-lg-12 col-xl-12 mt-3">
+                                                <!-- banner for form -->
                                                 <div class="bg-info clearfix avatorleft mb-3">
                                                     <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
                                                         class="fas fa-ring fa-1x mt-2 ml-4">
                                                         Marriage</i>
                                                 </div>
+                                                <!-- married to -->
                                                 <div class="input-group mt-2 mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
@@ -633,9 +628,10 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" class="form-control newinputdesign"
-                                                        placeholder="Spouse Name ..." name="le-m-spouse">
+                                                        placeholder="Spouse Name ..." name="le-m-spouse" required>
                                                 </div>
-                                                <div class="input-group   mt-1 mb-3">
+                                                <!-- location -->
+                                                <div class="input-group mt-1 mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                           opacity:0.9; padding:5px 9px 0 10px;">Location
@@ -645,6 +641,7 @@
                                                         class="form-control newinputdesign"
                                                         placeholder="wedding destination ...">
                                                 </div>
+                                                <!-- dates -->
                                                 <div class="row">
                                                     <!-- Wedding Date SECTION-->
                                                     <div class="col-md-6">
@@ -656,7 +653,7 @@
                                                             </div>
                                                             <input class="form-control newinputdesign"
                                                                 name="le-m-wedding-date" placeholder="MM/DD/YYY"
-                                                                type="text">
+                                                                type="text" required>
                                                         </div>
                                                     </div>
                                                     <!-- Divorce Date SECTION-->
@@ -673,20 +670,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- end of marriage section -->
-                                            <!-- clear and submit button -->
-                                            <div class="row d-flex flex-row mt-3">
-                                                <div class="col-md-12 ml-5 ">
-                                                    <button type="reset" class="btn btn-secondary searchbutton">Clear
-                                                    </button>
-                                                    <button type="submit" style="float:right;"
-                                                        class="btn btn-secondary searchbutton mr-5">Submit</button>
+                                                <!-- clear and submit button -->
+                                                <div class="row">
+                                                    <div class="col-md-6 text-center"><button type="reset"
+                                                            class="btn btn-secondary searchbutton">Clear</button></div>
+                                                    <div class="col-md-6 text-center"><button type="submit"
+                                                            id="le-m-submit"
+                                                            class="btn btn-secondary searchbutton">Submit</button></div>
                                                 </div>
                                             </div>
-                                            <!-- end of clear and submit button div -->
-                                        </div>
-                                    </form>
+                                            <!-- end of marriage section -->
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- end of life events, education, skills form-->
                             </div>
