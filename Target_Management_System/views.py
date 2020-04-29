@@ -53,14 +53,16 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
 
         print(request.POST)
+        plateform = request.POST['platform']
+
         website_id = ObjectId(request.POST['website_id'])
-        target_type_index = int(request.POST['facebook_authortype'])
-        username = request.POST['facebook_autheruseraccount']
-        user_id = request.POST['facebook_authoruserid']
-        name = request.POST['facebook_authorusername']
-        url = request.POST['facebook_authoruserurl']
-        expire_on = request.POST['facebook_expirydate']
-        interval = int(request.POST['facebook_interval'])
+        target_type_index = int(request.POST[plateform+'_authortype'])
+        username = request.POST[plateform+'_autheruseraccount']
+        user_id = request.POST[plateform+'_authoruserid']
+        name = request.POST[plateform+'_authorusername']
+        url = request.POST[plateform+'_authoruserurl']
+        expire_on = request.POST[plateform+'_expirydate']
+        interval = int(request.POST[plateform+'_interval'])
         screen_shot = False
 
         portfolio_id = None
