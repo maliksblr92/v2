@@ -185,20 +185,21 @@ class Add_Interest(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse('on Create avatar')
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
+        # print(request.POST)
+        avatar_id = request.POST.get('i-avatar')
+        hobbies = request.POST.getlist('hobbies[]')
+        movies = request.POST.getlist('movies[]')
+        songs = request.POST.getlist('songs[]')
 
-        avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
-
-        category = 'arts'
-        name = 'painting'
-        link = 'www.url.com'
+        # print(avatar_id, hobbies, movies, songs)
 
         try:
             a = Avatar_AMS.get_object_by_id(avatar_id)
             if(a is not None):
-                a.add_interests(category,name,link)
+                a.add_interests(hobbies, movies, songs)
 
-            return HttpResponse('interst added')
+            return JsonResponse({'success': 200})
         except Exception as e:
             print(e)
             return HttpResponse(e)

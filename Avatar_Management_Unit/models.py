@@ -68,9 +68,9 @@ class Skill(EmbeddedDocument):
 
 
 class Interest(EmbeddedDocument):
-    category = ListField(StringField(max_length=100))
-    name = StringField()
-    link = StringField()
+    hobbies = ListField(StringField())
+    movies = ListField(StringField())
+    songs = ListField(StringField())
 
 
 
@@ -113,7 +113,7 @@ class Avatar_AMS(Document):
     works= ListField(default=[])
     educations = ListField(default=[])
     skills = ListField(default=[])
-    interests = ListField(default=[])
+    interests = EmbeddedDocumentField(Interest)
     locations = ListField(default=[])
     life_events = ListField(default=[])
     social_media_accounts = ListField(default=[])
@@ -175,8 +175,8 @@ class Avatar_AMS(Document):
             company=company,
             current=is_current)
         self.works.append(work)
-        self.evaluate_health()
         self.correct_current_job(work)
+        self.evaluate_health()
 
     def add_education(self,institute,degree,grades,field_of_study,start_date,end_date):
 
@@ -190,9 +190,18 @@ class Avatar_AMS(Document):
         self.skills.append(skill)
         self.evaluate_health()
 
-    def add_interests(self,category,name,link):
-        interest = Interest(category,name,link)
-        self.interests.append(interest)
+    def add_interests(self, hobbies, movies, songs):
+        print(self.interests.hobbies)
+        if self.interests:
+            self.interests.hobbies.append(hobbies)
+            self.interests.movies.append(movies)
+            self.interests.songs.append(songs)
+        else:
+            self.interests = Interest()
+            self.interests.hobbies.append(hobbies)
+            self.interests.movies.append(movies)
+            self.interests.songs.append(songs)
+
         #self.save()
         self.evaluate_health()
 

@@ -399,64 +399,69 @@
                                 </div>
                                 <!-- end of left side redundant navigation -->
                                 <!-- interests form -->
-                                <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <div class="input-group   mt-2 mb-2">
+                                <div class="col-md-9 col-lg-9 col-xl-9" id="interests-form">
+                                    <!-- csrf_token -->
+                                    {% csrf_token %}
+                                    <!-- avatar -->
+                                    <div class="input-group mt-4 mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="newlabeldesign">Avatar</span>
+                                        </div>
+                                        <select name="i-avatar" class="newinput custom-select amu-interest-select">
+                                            {% for avatar in avatars %}
+                                            <option value="{{avatar.0}}"
+                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <!-- hobbies -->
+                                    <div class="input-group mt-2 mb-2">
                                         <div class="input-group-prepend">
                                             <span class="newlabeldesign">Hobbies
                                             </span>
                                         </div>
-                                        <input id="keywords" name="keywords" type="text"
-                                            class="form-control  newinputdesign" placeholder=" enter text here">
+                                        <input id="i-hobbies" type="text" class="form-control newinputdesign"
+                                            placeholder="Hobbies Please ...">
                                     </div>
-                                    <div class="tegscontainer" id="letsdo">
-                                        <!-- tags will be here-->
-                                        <span class="eachtag">
+                                    <div class="tegscontainer" id="i-hobbies-container">
+                                        <!-- <span class="eachtag">
                                             tag
                                             <i style="color:white; opacity:0.8;"
                                                 class="meraicon fas fa-times fa-1x"></i>
-                                        </span>
+                                        </span> -->
                                     </div>
-                                    <!-- second hobbies -->
-                                    <div class="input-group   mt-2 mb-2">
+                                    <!-- movies -->
+                                    <div class="input-group mt-2 mb-2">
                                         <div class="input-group-prepend">
                                             <span class="newlabeldesign">Movies
                                             </span>
                                         </div>
-                                        <input id="keywords" name="keywords" type="text"
-                                            class="form-control  newinputdesign" placeholder=" enter text here">
+                                        <input id="i-movies" type="text" class="form-control newinputdesign"
+                                            placeholder="Movies Please ...">
                                     </div>
-                                    <div class="tegscontainer" id="letsdo">
-                                        <!-- tags will be here-->
-                                        <span class="eachtag">
-                                            tag
-                                            <i style="color:white; opacity:0.8;"
-                                                class="meraicon fas fa-times fa-1x"></i>
-                                        </span>
+                                    <div class="tegscontainer" id="i-movies-container">
                                     </div>
-                                    <!-- end of second hobbies -->
-                                    <!-- Third tabs for songs -->
-                                    <div class="input-group   mt-2 mb-2">
+                                    <!-- songs -->
+                                    <div class="input-group mt-2 mb-2">
                                         <div class="input-group-prepend">
                                             <span class="newlabeldesign">Songs
                                             </span>
                                         </div>
-                                        <input id="keywords" name="keywords" type="text"
-                                            class="form-control  newinputdesign" placeholder=" enter text here">
+                                        <input id="i-songs" type="text" class="form-control newinputdesign"
+                                            placeholder="Songs Please ...">
                                     </div>
-                                    <div class="tegscontainer" id="letsdo">
-                                        <!-- tags will be here-->
-                                        <span class="eachtag">
-                                            tag
-                                            <i style="color:white; opacity:0.8;"
-                                                class="meraicon fas fa-times fa-1x"></i>
-                                        </span>
+                                    <div class="tegscontainer" id="i-songs-container">
                                     </div>
+
+                                    <!-- Clear and Submit Buttons-->
                                     <div class="row d-flex flex-row mt-3">
                                         <div class="col-md-12 ml-5 ">
-                                            <!--LEFT BUTTON-->
-                                            <button type="button" class="btn btn-secondary searchbutton">Clear </button>
-                                            <button type="button" style="float:right; "
-                                                class="btn btn-secondary searchbutton mr-5">Submit</button>
+                                            <button type="button" class="btn btn-secondary searchbutton"
+                                                id="i-clear-btn">Clear </button>
+                                            <button type="button" style="float:right;"
+                                                class="btn btn-secondary searchbutton mr-5"
+                                                id="i-submit-btn">Submit</button>
                                         </div>
                                     </div>
                                 </div>
