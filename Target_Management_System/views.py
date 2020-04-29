@@ -13,6 +13,7 @@ from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 acq = Acquistion_Manager()
 km = Keybase_Manager()
+from django.views.generic import TemplateView
 
 class Add_Target(RequireLoginMixin, IsTSO, View):
 
@@ -69,10 +70,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         if (expire_on is not None):
             expire_on = convert_expired_on_to_datetime(expire_on)
 
-        if ('facebook_screenshot' in request.POST):
-            screen_shot = request.POST['facebook_screenshot']
-            if(screen_shot == '1'):
-                screen_shot = True
+
 
         print(website_id,target_type_index,username,user_id)
         acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
@@ -289,3 +287,389 @@ def convert_expired_on_to_datetime(expired_on):
     expired_onn = expired_on + ' 13:55:26'
     expired_onnn = datetime.datetime.strptime(expired_onn, '%Y-%m-%d %H:%M:%S')
     return expired_onnn
+
+
+
+# ahmed code
+class Instagram_Target_Response(TemplateView):
+    template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+
+
+
+
+
+class LinkedinCompany_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+         with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
+            company = json.load(f)
+         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': company})
+
+
+
+
+
+class FacebookPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        with open('static/Target_Json/facebook_person_data.json', 'r') as f:
+            profile = json.load(f)
+        return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': profile})
+
+class FacebookPage_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        with open('static/Target_Json/facebook_page_data.json', 'r') as f:
+            page = json.load(f)
+        return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': page})
+
+
+class FacebookGroup_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            group = json.load(f)
+        return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': group})
+
+
+
+
+
+
+# this json wasnot according to format to formatted here
+class Twitter_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        #  json_data = open('static/Target_Json/tweets.json')
+        #  data1 = json.load(json_data) # deserialises it
+        #  data2 = json.dumps(data1) # json formatted string
+        #  json_data.close()
+        tweets = {
+            "GTR": "91",
+            "author_account": 'null',
+            "name": "Fabia Nazar",
+            "location": "\n              Sargodha\n\n        ",
+            "profile_url": "https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg",
+            "biodata": "All praises be to ALLAH, the Cherisher and Sustainer of the World. xx",
+            "frequent_hashtags": [],
+            "website": "https://fabia056.blogspot.com",
+            "joined_twitter": "Joined June 2014",
+            "tweets_count": "13 Tweets",
+            "follower_count": "11 Followers",
+            "following_count": "12 Following",
+            "likes_count": "8 Likes",
+            "moments": 'null',
+            "profile_summary": "Fabia Nazar is a twitter user. Fabia Nazar have mentioned personal biography as All praises be to ALLAH, the Cherisher and Sustainer of the World. xx. This twitter handler also belongs to another website named as https://fabia056.blogspot.com. Fabia Nazar have joined Twitter in  June 2014. Up till now, Fabia Nazar have tweeted 13 Tweets in total. Currently, Fabia Nazar have 12 Following, 11 Followers and 8 Likes. ",
+            "target_update_count": 0,
+            "behaviour": "None",
+            "common_words": [],
+            "sentiments": ["0 Positive", "0 Negative"],
+            "emotions": ["sad", "cry"],
+            "posting_time_charts": [],
+            "tweets": [{
+                "id": 1151827719161896960,
+                "conversation_id": "1151824477484912640",
+                "created_at": 1563452102000,
+                "date": "2019-07-18",
+                "time": "05:15:02",
+                "timezone": "Pacific Daylight Time",
+                "user_id": 871226174550286336,
+                "username": "maliksblr92",
+                "name": "AwaRa.....",
+                "place": "",
+                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
+                "mentions": [
+                    "syntaxerrorhehe"
+                ],
+                "urls": [],
+                "photos": [],
+                "replies_count": 1,
+                "retweets_count": 0,
+                "likes_count": 1,
+                "hashtags": [],
+                "cashtags": [],
+                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
+                "retweet": 'false',
+                "quote_url": "",
+                "video": 0,
+                "near": "",
+                "geo": "",
+                "source": "",
+                "user_rt_id": "",
+                "user_rt": "",
+                "retweet_id": "",
+                "reply_to": [
+                    {
+                        "user_id": "871226174550286336",
+                        "username": "maliksblr92"
+                    },
+                    {
+                        "user_id": "756747471691386880",
+                        "username": "syntaxerrorhehe"
+                    }
+                ],
+                "retweet_date": "",
+                "translate": "",
+                "trans_src": "",
+                "trans_dest": ""
+            },
+                {
+                "id": 1151827719161896960,
+                "conversation_id": "1151824477484912640",
+                "created_at": 1563452102000,
+                "date": "2019-07-18",
+                "time": "05:15:02",
+                "timezone": "Pacific Daylight Time",
+                "user_id": 871226174550286336,
+                "username": "maliksblr92",
+                "name": "AwaRa.....",
+                "place": "",
+                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
+                "mentions": [
+                    "syntaxerrorhehe"
+                ],
+                "urls": [],
+                "photos": [],
+                "replies_count": 1,
+                "retweets_count": 0,
+                "likes_count": 1,
+                "hashtags": [],
+                "cashtags": [],
+                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
+                "retweet": 'false',
+                "quote_url": "",
+                "video": 0,
+                "near": "",
+                "geo": "",
+                "source": "",
+                "user_rt_id": "",
+                "user_rt": "",
+                "retweet_id": "",
+                "reply_to": [
+                    {
+                        "user_id": "871226174550286336",
+                        "username": "maliksblr92"
+                    },
+                    {
+                        "user_id": "756747471691386880",
+                        "username": "syntaxerrorhehe"
+                    }
+                ],
+                "retweet_date": "",
+                "translate": "",
+                "trans_src": "",
+                "trans_dest": ""
+            }, {
+                "id": 1151827719161896960,
+                "conversation_id": "1151824477484912640",
+                "created_at": 1563452102000,
+                "date": "2019-07-18",
+                "time": "05:15:02",
+                "timezone": "Pacific Daylight Time",
+                "user_id": 871226174550286336,
+                "username": "maliksblr92",
+                "name": "AwaRa.....",
+                "place": "",
+                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
+                "mentions": [
+                    "syntaxerrorhehe"
+                ],
+                "urls": [],
+                "photos": [],
+                "replies_count": 1,
+                "retweets_count": 0,
+                "likes_count": 1,
+                "hashtags": [],
+                "cashtags": [],
+                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
+                "retweet": 'false',
+                "quote_url": "",
+                "video": 0,
+                "near": "",
+                "geo": "",
+                "source": "",
+                "user_rt_id": "",
+                "user_rt": "",
+                "retweet_id": "",
+                "reply_to": [
+                    {
+                        "user_id": "871226174550286336",
+                        "username": "maliksblr92"
+                    },
+                    {
+                        "user_id": "756747471691386880",
+                        "username": "syntaxerrorhehe"
+                    }
+                ],
+                "retweet_date": "",
+                "translate": "",
+                "trans_src": "",
+                "trans_dest": ""
+            }
+
+
+
+            ]
+        }
+        print(tweets)
+        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': tweets})
+
+
+
+
+# this json wasnot according to format to formatted here
+class LinkedinPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        profile = {
+            "GTR": "91",
+            "target_type": "profile",
+            "name": "Asma Shakeel",
+            "headline": "I am Electrical Engineer specialization in DSSP. My passion is centered on Digital Design and Image Processing.",
+            "company": "Rapidev DMCC",
+            "school": "National University of Sciences and Technology (NUST)",
+            "location": "Islamabad Gpo, Federal Capial &AJK, Pakistan",
+            "image_url": "./data/linkedin/asma-shakeel.png",
+            "followers": "",
+            "email": "asma9t7@gmail.com",
+            "phone": 'null',
+            "connected": 'null',
+            "websites": [],
+            "target_update_count": 0,
+            "profile_summary": "Asma Shakeel is a Linkedin user. Rapidev DMCC is the company where this user works. Islamabad Gpo, Federal Capial &AJK, Pakistan is the location from where Asma Shakeel belongs.  This user profile's summary is Highly focused and motivated Electrical Engineer, able to work collaboratively in a variety of settings, conditions, and\n\n      environments.. Email: asma9t7@gmail.com.  User interests are: Bill Gates , Sony , Microsoft , LinkedIn , Jack Welch , JT O'Donnell.  User skills are: Matlab , Intel Quartus Prime , Alliance CAD Tool. ",
+            "current_company_link": "https://www.linkedin.com/company/rapidev-dmcc-dubai/",
+            "skills": [
+                {
+                    "name": "Matlab",
+                    "endorsements": 0
+                },
+                {
+                    "name": "Intel Quartus Prime",
+                    "endorsements": 0
+                },
+                {
+                    "name": "Alliance CAD Tool",
+                    "endorsements": 0
+                }
+            ],
+            "experience": {
+                "jobs": [
+                    {
+                        "title": "Hardware Design Internee",
+                        "company": "Rapidev DMCC\n        Internship",
+                        "date_range": "Oct 2019 \u2013 Present",
+                        "location": "National Science and Technology Park Islamabad",
+                        "description": 'null',
+                        "li_company_url": "https://www.linkedin.com/company/rapidev-dmcc-dubai/"
+                    }
+
+                ],
+                "education": [
+                    {
+                        "name": "National University of Sciences and Technology (NUST)",
+                        "degree": "Masters in Science",
+                        "grades": 'null',
+                        "field_of_study": "Electrical Engineering",
+                        "date_range": "2018 \u2013 2020",
+                        "activities": 'null'
+                    },
+                    {
+                        "name": "Government  College University, Faisalabad",
+                        "degree": "Electrical Engineering",
+                        "grades": "3.73/4",
+                        "field_of_study": "Electrical and Electronics Engineering",
+                        "date_range": "2014 \u2013 2018",
+                        "activities": 'null'
+                    },
+                    {
+                        "name": "Govt college for women karkhana bazar, Faisalabad",
+                        "degree": "HSSC (PRE-ENGINEERING)",
+                        "grades": "80%",
+                        "field_of_study": "Engineering",
+                        "date_range": "2012 \u2013 2014",
+                        "activities": 'null'
+                    },
+                    {
+                        "name": "Govt girls High School bhowana bazar, Faisalabad",
+                        "degree": "MATRICULATION",
+                        "grades": "80%",
+                        "field_of_study": "Science",
+                        "date_range": "2010 \u2013 2012",
+                        "activities": 'null'
+                    }
+                ],
+                "volunteering": [
+                    {
+                        "title": "Cordinator",
+                        "company": "IEEE student branch gcuf",
+                        "date_range": "Dec 2014 \u2013 Aug 2015",
+                        "location": 'null',
+                        "cause": "Education",
+                        "description": 'null'
+                    },
+                    {
+                        "title": "Chairperson",
+                        "company": "IEEE WIE GCUF Student Branch",
+                        "date_range": "Sep 2017 \u2013 Aug 2018",
+                        "location": 'null',
+                        "cause": "Education",
+                        "description": 'null'
+                    }
+                ]
+            },
+            "interests": [
+                "Bill Gates",
+                "Sony",
+                "Microsoft",
+                "LinkedIn",
+                "Jack Welch",
+                "JT O'Donnell"
+            ],
+            "accomplishments": {
+                "publications": [],
+                "certifications": [],
+                "patents": [],
+                "courses": [
+                    "ASIC Design Methodology ",
+                    "Advance Digital Image Processing ",
+                    "Advance Digital Signal Processing ",
+                    "Advance Digital System Design ",
+                    "Artificial Neural Network ",
+                    "Computer Vision",
+                    "Digital Signal Processing",
+                    "Stochastic system",
+                    "System Validation "
+                ],
+                "projects": [
+                    "Carry Look-Ahead Adder Design Using Alliance CAD Tools                                       ",
+                    "Interesting Games for Data Collection",
+                    "Modeling Online Shopping Smart Contract in NuSMV",
+                    "Non Linear Camera Calibration",
+                    "Autonomous Fire/Heat control Droid ",
+                    "Burgler Alarm(home security system)",
+                    "Digital Temperature Sensor",
+                    "Sensor Alarm using Thyristor"
+                ],
+                "honors": [
+                    "1st Postion in HSSC(Pre Engineering) in Govt college for women karkhana Bazar"
+                ],
+                "test_scores": [],
+                "languages": [
+                    "English",
+                    "Punjabi",
+                    "urdu"
+                ],
+                "organizations": []
+            },
+            "field_of_interest": [
+                "Electrical Engineering",
+                "Electrical and Electronics Engineering",
+                "Engineering",
+                "Science"
+            ],
+            "experience_education_graph": [
+                [],
+                []
+            ],
+            "linked_to": []
+        }
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': profile})
+class Index(TemplateView):
+    def get(self, request, *args, **kwargs):
+          with open('static/Target_Json/facebook_page_data.json', 'r') as f:
+            page = json.load(f)
+            return render(request, 'Target_Management_System/test.html',{'page':page})

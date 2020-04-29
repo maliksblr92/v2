@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from bson.objectid import ObjectId
 from django.views import View
 from django.http import HttpResponse,HttpResponseRedirect
@@ -13,10 +13,13 @@ from xhtml2pdf import pisa
 from io import BytesIO
 
 from django.template.loader import get_template
+from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
+from Public_Data_Acquisition_Unit.ais_api_controller import Ais_Api_Controller
 from django.template import Context
 
 p_manager = Processing_Manager()
-
+ess = Ess_Api_Controller()
+ais = Ais_Api_Controller()
 
 class Main(View):
     def get(self,request):
@@ -141,3 +144,142 @@ class Generate_Reports(object):
         if not pdf.err:
             return HttpResponse(result.getvalue(), content_type='application/pdf')
         return None
+
+
+class Index(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'Data_Processing_Unit/index.html')
+
+    def post(self, request, *args, **kwargs):
+        nationality = request.POST['nationality']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        print("nationality == ", nationality)
+        print("gender == ", gender)
+        print("age == ", age)
+        return redirect('/dpu/index/')
+
+
+class Index_Darkweb(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'Data_Processing_Unit/index_darkweb.html')
+
+    def post(self, request, *args, **kwargs):
+        query = request.POST['query']
+        print("query", query)
+        return redirect('/dpu/index_darkweb/')
+
+
+class Index_Scrapper(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'Data_Processing_Unit/index_scrapper.html')
+
+    def post(self, request, *args, **kwargs):
+        form_name = request.POST['form_name'];
+
+        if form_name == 'e_market_scrapper_form':
+            query = request.POST['query']
+            print("form_name    ==   ", form_name)
+            print("query  ==  ", query)
+
+
+        elif form_name == 'daraz_data_scrapper_form':
+            query = request.POST['query']
+            print("form_name    ==   ", form_name)
+            print("query  ==  ", query)
+
+
+
+
+        elif form_name == 'google_scholar':
+            query = request.POST['query']
+            print("form_name    ==   ", form_name)
+            print("query  ==  ", query)
+
+
+
+
+        elif form_name == 'google_patent':
+            query = request.POST['query']
+            print("form_name    ==   ", form_name)
+            print("query  ==  ", query)
+
+        return redirect('/dpu/index_scrapper')
+
+
+class Index_Textprocessing(View):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'Data_Processing_Unit/index_textprocessing.html')
+
+    def post(self, request, *args, **kwargs):
+        task_name = request.POST['task']
+        print(task_name)
+
+        if (task_name == 'common_words'):
+            text = request.POST['text']
+            print("text ===    ", text)
+            print("common words form submitted ")
+            return redirect('/dpu/index_textprocessing')
+
+
+        elif (task_name == 'sentiments'):
+            text = request.POST['text']
+            print("text ===    ", text)
+            print("sentiments form submitted ")
+            return redirect('/dpu/index_textprocessing')
+
+
+        elif (task_name == 'sentiments'):
+            text = request.POST['text']
+            print("text ===    ", text)
+            print("sentiments form submitted ")
+            return redirect('/dpu/index_textprocessing')
+
+        elif (task_name == 'most_used_hastags'):
+            text = request.POST['text']
+            print("text ===    ", text)
+            print("most_used_hastags form submitted ")
+            return redirect('/dpu/index_textprocessing')
+
+        elif (task_name == 'wordcloud'):
+            text = request.POST['text']
+            print("text ===    ", text)
+            print("wordcloud form submitted ")
+            return redirect('/dpu/index_textprocessing')
+
+
+class Twitter(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'Data_Processing_Unit/twitter.html')
+
+    def post(self, request, *args, **kwargs):
+        search_type = request.POST['search_type']
+        print(search_type)
+        if search_type == 'phrase_near_location':
+            location = request.POST['location']
+            phrase = request.POST['phrase']
+            print(phrase, location)
+            return redirect('/dpu/twitter')
+
+
+        elif search_type == 'near_location_within_miles':
+            location = request.POST['location']
+            distance = request.POST['distance']
+            print(distance, location)
+            return redirect('/dpu/twitter')
+
+
+        elif search_type == 'sentiments_search':
+            sentiment = request.POST['sentiment']
+            phrase = request.POST['phrase']
+            print(sentiment, phrase)
+            return redirect('/dpu/twitter')
+
+        elif search_type == 'phrase_search':
+            phrase = request.POST['phrase']
+            print(phrase)
+            return redirect('/dpu/twitter')
+
+        return redirect('/dpu/twitter')

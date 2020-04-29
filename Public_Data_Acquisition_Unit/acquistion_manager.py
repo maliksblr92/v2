@@ -1,5 +1,6 @@
 from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
+from Public_Data_Acquisition_Unit.ais_api_controller import Ais_Api_Controller
 from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.ess_api_controller import *
 from Public_Data_Acquisition_Unit.mongo_models import *
@@ -11,7 +12,7 @@ import logging
 
 import datetime
 ess = Ess_Api_Controller()
-
+ais = Ais_Api_Controller()
 class Acquistion_Manager(object):
 
     """

@@ -1,7 +1,17 @@
 from django.urls import path
 from Target_Management_System import views
 app_name = 'Target_Management_System'
+# ahmed  imports
+from .views import  Instagram_Target_Response
+from .views import  Twitter_Target_Response
+from .views import  LinkedinPerson_Target_Response
+from .views import  LinkedinCompany_Target_Response
+from .views import  FacebookPerson_Target_Response
+from .views import  FacebookPage_Target_Response
+from .views import  FacebookGroup_Target_Response
+from .views import Index
 
+# end ahmed imports
 urlpatterns = [
 
     # path('target_response/',views.Target_Response.as_view(),name='target_response'),
@@ -36,4 +46,15 @@ path(
     path('test/', views.Test_View.as_view(), name="sendevent"),
     path('test1/', views.Test_View1.as_view(), name="alertevent"),
     path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
+
+    # ahmed Class Views
+    path('target/instagram/', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
+    path('target/twitter/', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),
+    path('target/linkedin/person/', LinkedinPerson_Target_Response.as_view(), name="LinkedinPerson_Target_Response"),
+    path('target/linkedin/company/', LinkedinCompany_Target_Response.as_view(), name="LinkedinCompany_Target_Response"),
+    path('target/facebook/person/', FacebookPerson_Target_Response.as_view(), name="FacebookPerson_Target_Response"),
+    path('target/facebook/page/', FacebookPage_Target_Response.as_view(), name="FacebookPage_Target_Response"),
+    path('target/facebook/group/', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
+    path('target/test/', Index.as_view(), name="Index"),
+
 ]

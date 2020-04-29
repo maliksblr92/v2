@@ -14,6 +14,8 @@ from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Portfolio_Management_System.models import *
 
 acq = Acquistion_Manager()
+# ahmed imports
+from django.views.generic import TemplateView
 
 class Create_Portfolio(View):
 
@@ -104,3 +106,94 @@ class Search_Portfolio(View):
         print(resp)
 
         return JsonResponse(resp, safe=False)
+# ahmed class based views
+class Create(TemplateView):
+    def get(self, request, *args, **kwargs):
+         return render(request, 'Portfolio_Management_System/tso_create.html',{})
+    def post(self, request, *args, **kwargs):
+        form_name=request.POST['form_name']
+        if(form_name=='portfolio_create_form'):
+            author_id=request.POST['author_id']
+            author_name=request.POST['author_name']
+            author_url=request.POST['author_url']
+            username=request.POST['username']
+            options=request.POST['options']
+            print('######'+author_id+'########')
+            print('######'+author_name+'########')
+            print('######'+author_url+'########')
+            print('######'+username+'########')
+            print('######'+options+'########')
+            print(form_name)
+        if(form_name=='social_info'):
+            author_id=request.POST['author_id']
+            author_name=request.POST['author_name']
+            author_url=request.POST['author_url']
+            username=request.POST['username']
+            options=request.POST['options']
+            print('######'+author_id+'########')
+            print('######'+author_name+'########')
+            print('######'+author_url+'########')
+            print('######'+username+'########')
+            print('######'+options+'########')
+            print(form_name)
+
+
+
+        if(form_name=='personal_info'):
+            author_id=request.POST['author_id']
+            author_name=request.POST['author_name']
+            author_url=request.POST['author_url']
+            username=request.POST['username']
+            options=request.POST['options']
+            print('######'+author_id+'########')
+            print('######'+author_name+'########')
+            print('######'+author_url+'########')
+            print('######'+username+'########')
+            print('######'+options+'########')
+            print(form_name)
+
+        if(form_name=='other_info'):
+            author_id=request.POST['author_id']
+            author_name=request.POST['author_name']
+            author_url=request.POST['author_url']
+            username=request.POST['username']
+            options=request.POST['options']
+            print('######'+author_id+'########')
+            print('######'+author_name+'########')
+            print('######'+author_url+'########')
+            print('######'+username+'########')
+            print('######'+options+'########')
+            print(form_name)
+        return render(request, 'Portfolio_Management_System/tso_create.html',{})
+
+
+
+
+
+class Link(TemplateView):
+    def get(self, request, *args, **kwargs):
+         return render(request, 'Portfolio_Management_System/tso_link.html',{})
+    def post(self, request, *args, **kwargs):
+
+        return render(request, 'Portfolio_Management_System/tso_link.html',{})
+
+
+
+class Archive(TemplateView):
+    def get(self, request, *args, **kwargs):
+         return render(request, 'Portfolio_Management_System/tso_archive.html',{})
+    def post(self, request, *args, **kwargs):
+
+        return render(request, 'Portfolio_Management_System/tso_archive.html',{})
+
+
+
+
+
+
+class Overview(TemplateView):
+    def get(self, request, *args, **kwargs):
+         return render(request, 'Portfolio_Management_System/tso_overview.html',{})
+    def post(self, request, *args, **kwargs):
+
+        return render(request, 'Portfolio_Management_System/tso_overview.html',{})

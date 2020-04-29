@@ -107,7 +107,7 @@ SERVER_NAME = 'OCS'
 def publish(message,module_name =__name__,message_type='info',**kwargs):
 
     #publish({'server_name': 'OCS', 'module_name': __name__, 'messege_type': 'info','arguments':{'name':'awais'},'messege':'this is the messege'})
-    pub.publish({'server_name': SERVER_NAME, 'module_name':module_name, 'messege_type': message_type,'arguments':kwargs,'messege':message})
+    pub.publish({'server_name': SERVER_NAME, 'module_name':module_name, 'message_type': message_type,'arguments':kwargs,'messege':message})
     print(message)
 
 #def publish_control(message,module_name = __name__):

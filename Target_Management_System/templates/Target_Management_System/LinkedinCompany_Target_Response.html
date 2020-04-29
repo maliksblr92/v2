@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>TMS | Linkedin</title>
+
+
+
+        <style>
+          li{
+            font-size: 13px!important;;
+          }
+          #headingOne{
+            height: 40px;
+            font-size: 16px;;
+          }
+          .card-header {
+            height: 40px!important;
+            border-radius: 5px!important;;
+
+          }
+
+
+
+
+        html {
+        --scrollbarBG: #CFD8DC;
+        --thumbBG: #90A4AE;
+        }
+        ::-webkit-scrollbar {
+        width: 7px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+        ::-webkit-scrollbar-track {
+        background: var(--scrollbarBG);
+        }
+        ::-webkit-scrollbar-thumb {
+        background-color: var(--thumbBG) ;
+        border-radius: 6px;
+        border: 3px solid var(--scrollbarBG);
+        }
+
+          .profile_header{
+            height: 200px;
+            width: 100%;
+            background: url(/static/images/hudYSw.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+       -moz-background-size: cover;
+        -o-background-size: cover;
+       background-size: cover;
+          }
+          .prodile_pic_wrapper{
+            height:150px;;
+            width: 150px;;
+            border:1px solid white;
+            margin-top: -132px;
+
+          }
+          .prodile_data_wrapper{
+            height: 60px;
+    border: 1px solid white;
+    margin-top: -60px;
+
+          }
+                  </style>
+
+    </head>
+    <body style="
+      background: url(/static/images/background_gradient.svg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    ">
+     <!--  -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 profile_header border">
+
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+      <div class="prodile_pic_wrapper">
+        <img  src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100" style="width: 100%;height: 100%;"class="img-fluid" />
+        <!--   <img  src="{{company.image_url}}" style="width: 100%;height: 100%;"class="img-fluid" /> -->
+      </div>
+    </div>
+
+    <div class="col-md-8 prodile_data_wrapper bg-white">
+  <div class=" d-flex flex-row justify-content-start align-items-center">
+    <p class="font-weight-bold text-dark mt-2"style="font-size:12px;">   {{company.headline}}</p>
+  </div>
+    </div>
+  </div>
+</div>
+
+
+    <!--  -->
+      <div class="container-fluid mt-3 ">
+
+          <div class="col-md-12">
+
+          </div>
+          <div class="row mr-1"style="border-radius:5px;">
+            <div class="col-sm-4"><!--left col-->
+
+                <ul class="list-group">
+                  <li class="list-group-item font-weight-bold bg-info">{{company.name}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Institution</strong></span> {{company.name}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Email</strong></span> {{company.email}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Phone</strong></span> {{company.phone | default:"051-250648"}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Followers</strong></span> {{company.followers | default:"null"}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Joined</strong></span> 2.13.2014</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Company</strong></span> {{company.company}}</li>
+                  <li class="list-group-item text-right"><span class="float-left text-muted"><strong>Connected</strong></span> {{company.connected | default:"N/A"}}</li>
+                  <li class="list-group-item text-right text-truncate"><span class="float-left text-muted"><strong>Company URL</strong></span> <a class="badge badge badge-primary " href="{{company.current_company_link}}">Click To Find </a></li>
+
+
+                </ul>
+
+
+
+
+                <ul class="list-group ">
+                  <li class="list-group-item text-right bg-info"><span class="float-left"><strong>Profile Summary ({{company.name}}) </strong></span> &nbsp</li>
+
+                  <li class="list-group-item text-left">{{company.profile_summary}}</li>
+
+
+                </ul>
+
+
+
+              </div><!--/col-3-->
+            <div class="col-sm-8 border bg-white p-0 pl-1"style="border-radius:5px;">
+
+                <ul class="nav nav-tabs bg-info" id="myTab">
+                  <li class="btn btn-outline-info col-md-4" class="active"><a class="nav-link text-dark font-weight-bold" href="#profile" data-toggle="tab">Profile</a></li>
+                  <li class="btn btn-outline-info col-md-4"><a class="nav-link text-dark font-weight-bold " href="#accomplishments" data-toggle="tab">Accomplishments</a></li>
+                  <li class="btn btn-outline-info col-md-4"><a class="nav-link text-dark font-weight-bold " href="#experience" data-toggle="tab">Experience</a></li>
+                </ul>
+
+                <div class="tab-content bg-white " style="height:400px!important;overflow-y:auto;">
+                  <div class="tab-pane active " id="profile"style="">
+                    <div class="row mt-1">
+                      <ul class="list-group col-md-6">
+                        <li class="list-group-item text-right bg-info"><span class="float-left"><strong>Skills ({{company.skills | length}}) </strong></span> &nbsp</li>
+                        {% for i in profile.skills %}
+                        <li class="list-group-item text-right"><span class="float-left"> {{forloop.counter}} #  {{i.name}}</span> {{i.endorsements}}</li>
+                        {% endfor %}
+
+                      </ul>
+
+                      <ul class="list-group col-md-6">
+                        <li class="list-group-item text-right bg-info"><span class="float-left"><strong>Intrests ({{company.interests | length}})</strong></span> &nbsp</li>
+                        {% for i in profile.interests %}
+                        <li class="list-group-item text-left"><span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span></li>
+                        {% endfor %}
+
+                      </ul>
+
+                      <ul class="list-group col-md-6">
+                        <li class="list-group-item text-right bg-info"><span class="float-left"><strong>Field of Intrests ({{company.field_of_interest | length}})</strong></span> &nbsp</li>
+                        {% for i in profile.field_of_interest %}
+                        <li class="list-group-item text-left"><span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span></li>
+                        {% endfor %}
+
+                      </ul>
+
+                      <ul class="list-group col-md-6">
+                        <li class="list-group-item text-right bg-info"><span class="float-left"><strong>Languages ({{company.field_of_interest | length}})</strong></span> &nbsp</li>
+                        {% for i in profile.accomplishments.languages %}
+                        <li class="list-group-item text-left"><span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span></li>
+                        {% endfor %}
+
+                      </ul>
+
+
+                    </div>
+
+                    <hr>
+
+                   </div><!--/tab-pane-->
+                   <div class="tab-pane" id="accomplishments">
+
+
+
+                     <div class="accordion" id="accordionExample">
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_1">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#courses" aria-expanded="true" aria-controls="courses">
+                              1 # Courses ( {{ profile.accomplishments.courses | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="courses" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.courses %}
+
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No courses</li>
+
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <!--  -->
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_2">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#publications" aria-expanded="true" aria-controls="publications">
+                              2 # Publications ( {{ profile.accomplishments.publications | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="publications" class="collapse " aria-labelledby="heading_2" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.publications %}
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No Publications</li>
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!--  -->
+
+                       <!--  -->
+                       <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_3">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#certifications" aria-expanded="true" aria-controls="certifications">
+                              3 # Certifications ( {{ profile.accomplishments.certifications | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="certifications" class="collapse " aria-labelledby="heading_3" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.certifications %}
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No certifications</li>
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+                       <!--  -->
+                       <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_4">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#patents" aria-expanded="true" aria-controls="patents">
+                              4 #  Patents ( {{ profile.accomplishments.patents | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="patents" class="collapse " aria-labelledby="heading_4" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.patents %}
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No patents</li>
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                       <!--  -->
+                       <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_5">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#projects" aria-expanded="true" aria-controls="projects">
+                              5 # Projects  ( {{ profile.accomplishments.projects | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="projects" class="collapse " aria-labelledby="heading_5" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.projects %}
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No projects</li>
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!--  -->
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_6">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#honors" aria-expanded="true" aria-controls="honors">
+                              6 #    Honors  ( {{ profile.accomplishments.honors | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="honors" class="collapse " aria-labelledby="heading_6" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.accomplishments.honors %}
+                              <li class="list-group-item text-left "><span class="">{{forloop.counter}} # </span><span class="ml-2 font-weight-bold"> {{i}}</span></li>
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No honors</li>
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                   </div><!--/tab-pane-->
+                   <div class="tab-pane" id="experience">
+
+
+                    <div class="accordion" id="accordionExample">
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_1">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#jobs" aria-expanded="true" aria-controls="jobs">
+                              1 #   Jobs   ( {{ profile.experience.jobs | length}} )
+
+                            </button>
+
+                        </div>
+
+                        <div id="jobs" class="collapse " aria-labelledby="heading_11" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.experience.jobs %}
+
+
+
+                              <ul class="list-group col-md-12 m-0 p-0">
+                                <li class="list-group-item text-center font-weight-bold "> Job #  {{forloop.counter}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Job Title</span> {{i.title}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Company</span> {{i.company}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Duration</span> {{i.date_range}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Location</span> {{i.description}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Description</span> {{i.title}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Company URL</span> {{i.li_company_url}}</li>
+                                </ul>
+
+
+
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No jobs</li>
+
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_11">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#education" aria-expanded="true" aria-controls="education">
+                              2 #  Education  ( {{ profile.experience.education | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="education" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.experience.education %}
+
+
+
+                              <ul class="list-group col-md-12 m-0 p-0">
+                                <li class="list-group-item text-center font-weight-bold "> Education #  {{forloop.counter}}</li>
+                                <li class="list-group-item text-right"><span class="float-left"> Title</span> {{i.name}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Degree</span> {{i.degree}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Grades</span> {{i.grades}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Field</span> {{i.field_of_study}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Duration</span> {{i.date_range}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Activities</span> {{i.activities}}</li>
+                                </ul>
+
+
+
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No education</li>
+
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="card">
+                        <div class="card-header   d-flex flex-row justify-content-start align-items-center border" id="heading_11">
+
+                            <button class="btn btn-link m-0" type="button" data-toggle="collapse" data-target="#volunteering" aria-expanded="true" aria-controls="volunteering">
+                              3 #   Volunteering ( {{ profile.experience.volunteering | length}} )
+                            </button>
+
+                        </div>
+
+                        <div id="volunteering" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                          <div class="card-body m-0 p-0">
+                            <ul class="list-group col-md-12 m-0 p-0">
+                              {% for i in profile.experience.volunteering %}
+
+
+
+                              <ul class="list-group col-md-12 m-0 p-0">
+                                <li class="list-group-item text-center font-weight-bold "> Volunteer Service #  {{forloop.counter}}</li>
+                                <li class="list-group-item text-right"><span class="float-left"> Title</span> {{i.title}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Company</span> {{i.company}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Duration</span> {{i.date_range}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Location</span> {{i.location}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Cause</span> {{i.cause}}</li>
+                                <li class="list-group-item text-right"><span class="float-left">Description</span> {{i.description}}</li>
+                                </ul>
+
+
+
+                              {% empty %}
+                              <li class="list-group-item text-left "><span class=""> </span>No volunteering</li>
+
+                              {% endfor %}
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+
+                    </div><!--/tab-pane-->
+                </div><!--/tab-content-->
+
+              </div><!--/col-9-->
+          </div><!--/row-->
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</html>
