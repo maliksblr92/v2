@@ -1142,3 +1142,26 @@ class Share_Resource(Document):
     def get_rdo_resources():
         return Share_Resource.objects(share_with='rdo')
 
+class Rabbit_Messages(Document):
+
+    message_type = StringField(default='info')
+    message_data = DictField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+
+
+    @staticmethod
+    def get_all_messages():
+        return Rabbit_Messages.objects()
+
+    @staticmethod
+    def get_messages_with_date_range(start,end):
+        return Rabbit_Messages.objects(Q(created_on__gte=start) & Q(created_on__lte=end))
+
+    @staticmethod
+    def get_top_messages(top=10,message_type='message'):
+        return Rabbit_Messages.objects(message_type=message_type).order_by('-created_on')[:top]
+
+
+

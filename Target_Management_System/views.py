@@ -148,9 +148,12 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
 class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):
-        return render(request,
-                      'Target_Management_System/tso_internetsurvey.html',
-                      {'app': 'target'})
+
+        if('resp' in kwargs):
+
+            return render(request,'Target_Management_System/tso_internetsurvey.html',{'result': kwargs['resp']})
+
+        return render(request, 'Target_Management_System/tso_internetsurvey.html', {})
 
     def post(self, request, *args, **kwargs):
 
@@ -162,13 +165,14 @@ class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
         print(name, email, phone, address)
         # pass values to the user and wait for the response and show to the
         # same view
-        resp = acq.target_internet_survey(name, email, phone, address)
+        #resp = acq.target_internet_survey(name, email, phone, address)
+        resp = {'data': [{'encoding': 'ascii', 'last_modified': 'Tue, 21 Apr 2020 09:51:30 GMT', 'meta_robots': '', 'meta_title': '.: Project in C/C++ : Password Protected Contact bookInformation technology Revolution', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'infotechrevol.blogspot.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': "Aug 6, 2015 - ... need's to be correct or which might enhance the usability of the app you feel free to contact. awaisazam230@gmail.com. Please Comment !!", 'serp_title': '.: Project in C/C++ : Password Protected Contact bookinfotechrevol.blogspot.com › 2015/08 › project-in-cc-pas...', 'serp_type': 'results', 'serp_url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html', 'serp_visible_link': 'infotechrevol.blogspot.com › 2015/08 › project-in-cc-pas...', 'status': 200, 'text_raw': 'Pages Home Books Thursday, August 2015 Project in C/C++ Password Protected Contact book Features 1.\nInstallation of the Application 2.\nPassword Protection 3.\nIntelligent Searching 4.\nAdd ,Remove Contact Description It is console based app the compiler used for the development is "Borland 5.02" this project can be used as semester project with any c/c++ course in schools/collages it is best for learning and enhancing your skills in c++ This application is programmed in C++ using "filestream" and some other basic libraries.\nFirst the user is asked to allow the installation of the app and while installing it ask user six character password and ask user to login for the first time.\nProjects in C++ Calendar display with add note and age finder in This project is coded in using CodeBlock compiler it has around 540 lines of code easy to understand for beginners in language and c...\nSonic Weapons To disperse crowds and prevent rioting, various forms of non-lethal weapons NLW are used.\nAmong these, interestingly, is sound.\nBlog Archive 2015 24 September August 15 Kepler-452b,The Most Similar Planet To Earth Till ...\nSome strange but true facts on our earth Projects in C++ Canteen Management System Projects in C++ Calendar display with add note a...\nbrilliant future technologies which will make li...\nProject in C/C++ Password Protected Contact book...\nVehicle Parking Management System in C++ Your fingerprints are remotely stolen by Hackers f...\nEdit your friends "Facebook Status" and take fake ...\nArduino Studio IDE launched latest gadgets that you must have How People Weld Under Water How The Skype Translator Works How Targeted Advertising Work Human v/s Robots July About Me Unknown View my complete profile What do you think about our blog posts ---|--- Picture Window theme.\nPowered by Blogger.\n', 'url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html'}, {'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'apkpure.ai', 'serp_rank': 2, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'have 1 products. Developer link: Visit website , Email awaisazam230@gmail.com ,. FlyCopter APK · FlyCopter. Developer: Blutone · App Details. Popular Apps.', 'serp_title': 'Blutone APK list | APKPure.aiapkpure.ai › developer › blutone', 'serp_type': 'results', 'serp_url': 'https://apkpure.ai/developer/blutone/', 'serp_visible_link': 'apkpure.ai › developer › blutone'}, {'encoding': 'utf-8', 'last_modified': None, 'meta_robots': '', 'meta_title': ' Download Casual : Fly Copter 1.5 APK - Android Casual Games', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'apk-dl.com', 'serp_rank': 3, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'May 17, 2018 - Developer. Blutone. Installs. 50+. Price. Free. Category. Casual. Developer. awaisazam230@gmail.com. Google Play Link. Google Play Link\xa0...', 'serp_title': "Casual : Fly Copter 1.5 APK Download - Android Casual Gamesapk-dl.com › ... › {{trans('cats.' . cat_name(Casual))}}", 'serp_type': 'results', 'serp_url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter', 'serp_visible_link': "apk-dl.com › ... › {{trans('cats.' . cat_name(Casual))}}", 'status': 200, 'text_raw': "Hero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Show More...\nApp Information Casual Fly Copter App Name Casual Fly Copter Package Name com.blutonegames.flycopter Updated May 17, 2018 File Size Undefined Requires Android Android 4.0.3 and up Version 1.5 Developer Blutone Installs 50+ Price Free Category Casual Developer awaisazam230@gmail.com Google Play Link Google Play Link Blutone Show More...\nCasual Fly Copter 1.5 APK Blutone Free Flycopter is an intelligent flying enemy which attack on Hero'sbasestation.\nHero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Free Loading...\nAPK-DL APK Downloader Android Apps Android Games Contact Us Top Android Apps WIFI WPS WPA TESTER WPS Connect WordPress XPOSED IMEI Changer WhatsApp Messenger Top Android Games Clash of Clans Asphalt 8: Airborne Clash of Kings Case Clicker Mesgram Follow Us Facebook Twitter Apk-DL DMCA Disclaimer Privacy Policy Term of Use Contact Us\n", 'url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter'}, {'encoding': 'utf-8', 'last_modified': 'Mon, 27 Apr 2020 05:45:00 GMT', 'meta_robots': '', 'meta_title': '\n      Gmail: Secure Enterprise Email for Business | G Suite\n    ', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'gsuite.google.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': 'Email FeaturesContact Sales NowStart a Free Trial Now', 'serp_snippet': 'Google hosted email for @yourcompany.com. Try it free for 14 days. Make it your own domain with G Suite by Google Cloud. Get @yourbusiness.com. Draft Emails Offline. Google Email Hosting. Up To 30 Email Aliases. Automatic Reminders. Auto Suggest for Replies.', 'serp_title': 'Gmail For Business | Customise Your Gmail Address\u200eAd·gsuite.google.com/gmail\u200e', 'serp_type': 'ads_main', 'serp_url': 'https://gsuite.google.com/intl/en_sg/products/gmail/', 'serp_visible_link': 'gsuite.google.com/gmail', 'status': 200, 'text_raw': "See our tips for working from home with Suite, including video meetings.\nLearn more Gmail Secure, private, ad-free email for your business Gmail keeps you updated with real-time message notifications, and safely stores your important emails and data.\nIT admins can centrally manage accounts across your organization and devices.\nStart Free Trial Contact sales Get custom email @yourcompany Build customer trust by giving everyone in your company professional email address at your domain, like susan@yourcompany and joe@yourcompany.\nAlso create group mailing lists, like sales@yourcompany.\nWork without interruption Access your email anytime, anywhere, on any device—no Internet connection needed.\nRead and draft messages without connectivity, and they’ll be ready to send when you’re back online.\nElevate email conversations with chat and video For those moments when you need more than just email, join Meet video call or chat with colleague directly from your inbox.\nCompatible with your existing interface Gmail works great with desktop clients like Microsoft Outlook, Apple Mail and Mozilla Thunderbird.\nOutlook users can sync emails, events and contacts to and from Suite.\nEasy migration from Outlook and legacy services Migrate your email from Outlook, Exchange or Lotus easily with custom tools that help preserve your important messages.\n99.9% guaranteed uptime, 0% planned downtime Count on Google’s ultra-reliable servers to keep your lights on 24/7/365.\nAutomatic backups, spam protection and industry-leading security measures help protect your business data.\nSuite gave us reliable and convenient access to our emails and documents, regardless of our location.\nMr. Zhang Gixia Group Learn More Top questions about Gmail What's different about the paid version of Gmail?\nPaid Gmail features include: custom email @yourcompany.com unlimited group email addresses, 99.9% guaranteed uptime, twice the storage of personal Gmail, zero ads, 24/7 support, Suite Sync for Microsoft Outlook and more.\nCan user have more than one email address?\nuser can have several email addresses by creating email aliases.\nYou can add up to 30 email aliases for each user.\nCan migrate my existing email to Suite?\nSuite migration tools are available for importing your old emails from legacy environments, such as Microsoft®, IBM® Notes® and other email systems.\nFor more information on the tools available for data migrations into Suite, see Migrate your organisation’s data to Suite.\nStay in the loop Sign up for Google Cloud newsletters with product updates, event information, special offers and more.\nEmail Please enter valid email address.\nSelect one option.value Industry This is required Select one Number of Employees This is required Country Country country.countryName This is required Yes, sign me up for Google Cloud emails with news, product updates, event information, special offers and more.\nYou can unsubscribe at later time This is required Sign me up Thanks!\nWe’ll be in touch shortly.\n", 'url': 'https://gsuite.google.com/intl/en_sg/products/gmail/'}, {'encoding': 'ascii', 'last_modified': 'Tue, 21 Apr 2020 09:51:30 GMT', 'meta_robots': '', 'meta_title': '.: Project in C/C++ : Password Protected Contact bookInformation technology Revolution', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'infotechrevol.blogspot.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': "Aug 6, 2015 - ... need's to be correct or which might enhance the usability of the app you feel free to contact. awaisazam230@gmail.com. Please Comment !!", 'serp_title': '.: Project in C/C++ : Password Protected Contact bookinfotechrevol.blogspot.com › 2015/08 › project-in-cc-password-protected', 'serp_type': 'results', 'serp_url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html', 'serp_visible_link': 'infotechrevol.blogspot.com › 2015/08 › project-in-cc-password-protected', 'status': 200, 'text_raw': 'Pages Home Books Thursday, August 2015 Project in C/C++ Password Protected Contact book Features 1.\nInstallation of the Application 2.\nPassword Protection 3.\nIntelligent Searching 4.\nAdd ,Remove Contact Description It is console based app the compiler used for the development is "Borland 5.02" this project can be used as semester project with any c/c++ course in schools/collages it is best for learning and enhancing your skills in c++ This application is programmed in C++ using "filestream" and some other basic libraries.\nFirst the user is asked to allow the installation of the app and while installing it ask user six character password and ask user to login for the first time.\nProjects in C++ Calendar display with add note and age finder in This project is coded in using CodeBlock compiler it has around 540 lines of code easy to understand for beginners in language and c...\nSonic Weapons To disperse crowds and prevent rioting, various forms of non-lethal weapons NLW are used.\nAmong these, interestingly, is sound.\nBlog Archive 2015 24 September August 15 Kepler-452b,The Most Similar Planet To Earth Till ...\nSome strange but true facts on our earth Projects in C++ Canteen Management System Projects in C++ Calendar display with add note a...\nbrilliant future technologies which will make li...\nProject in C/C++ Password Protected Contact book...\nVehicle Parking Management System in C++ Your fingerprints are remotely stolen by Hackers f...\nEdit your friends "Facebook Status" and take fake ...\nArduino Studio IDE launched latest gadgets that you must have How People Weld Under Water How The Skype Translator Works How Targeted Advertising Work Human v/s Robots July About Me Unknown View my complete profile What do you think about our blog posts ---|--- Picture Window theme.\nPowered by Blogger.\n', 'url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html'}, {'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'apkpure.ai', 'serp_rank': 2, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'have 1 products. Developer link: Visit website , Email awaisazam230@gmail.com ,. FlyCopter APK · FlyCopter. Developer: Blutone · App Details. Popular Apps.', 'serp_title': 'Blutone APK list | APKPure.aiapkpure.ai › developer › blutone', 'serp_type': 'results', 'serp_url': 'https://apkpure.ai/developer/blutone/', 'serp_visible_link': 'apkpure.ai › developer › blutone'}, {'encoding': 'utf-8', 'last_modified': None, 'meta_robots': '', 'meta_title': ' Download Casual : Fly Copter 1.5 APK - Android Casual Games', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'apk-dl.com', 'serp_rank': 3, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'May 17, 2018 - Developer. Blutone. Installs. 50+. Price. Free. Category. Casual. Developer. awaisazam230@gmail.com. Google Play Link. Google Play Link\xa0...', 'serp_title': "Casual : Fly Copter 1.5 APK Download - Android Casual Gamesapk-dl.com › Games › {{trans('cats.' . cat_name(Casual))}}", 'serp_type': 'results', 'serp_url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter', 'serp_visible_link': "apk-dl.com › Games › {{trans('cats.' . cat_name(Casual))}}", 'status': 200, 'text_raw': "Hero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Show More...\nApp Information Casual Fly Copter App Name Casual Fly Copter Package Name com.blutonegames.flycopter Updated May 17, 2018 File Size Undefined Requires Android Android 4.0.3 and up Version 1.5 Developer Blutone Installs 50+ Price Free Category Casual Developer awaisazam230@gmail.com Google Play Link Google Play Link Blutone Show More...\nCasual Fly Copter 1.5 APK Blutone Free Flycopter is an intelligent flying enemy which attack on Hero'sbasestation.\nHero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Free Loading...\nAPK-DL APK Downloader Android Apps Android Games Contact Us Top Android Apps WIFI WPS WPA TESTER WPS Connect WordPress XPOSED IMEI Changer WhatsApp Messenger Top Android Games Clash of Clans Asphalt 8: Airborne Clash of Kings Case Clicker Mesgram Follow Us Facebook Twitter Apk-DL DMCA Disclaimer Privacy Policy Term of Use Contact Us\n", 'url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter'}, {'encoding': 'utf-8', 'last_modified': 'Mon, 27 Apr 2020 05:45:00 GMT', 'meta_robots': '', 'meta_title': '\n      Gmail: Secure Enterprise Email for Business | G Suite\n    ', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'gsuite.google.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': 'Email FeaturesContact Sales NowStart a Free Trial Now', 'serp_snippet': 'Get Gmail for your domain with G Suite. Start your free 14-day trial now. Make it your own domain with G Suite by Google Cloud. Get @yourbusiness.com. Custom Business Email. Draft Emails Offline. Save Time w/ Smart Reply. Phishing Protection. Automatic Reminders.', 'serp_title': 'Gmail For Business | Get @yourbusiness.com Gmail\u200eAd·gsuite.google.com/gmail\u200e', 'serp_type': 'ads_main', 'serp_url': 'https://gsuite.google.com/intl/en_sg/products/gmail/', 'serp_visible_link': 'gsuite.google.com/gmail', 'status': 200, 'text_raw': "See our tips for working from home with Suite, including video meetings.\nLearn more Gmail Secure, private, ad-free email for your business Gmail keeps you updated with real-time message notifications, and safely stores your important emails and data.\nIT admins can centrally manage accounts across your organization and devices.\nStart Free Trial Contact sales Get custom email @yourcompany Build customer trust by giving everyone in your company professional email address at your domain, like susan@yourcompany and joe@yourcompany.\nAlso create group mailing lists, like sales@yourcompany.\nWork without interruption Access your email anytime, anywhere, on any device—no Internet connection needed.\nRead and draft messages without connectivity, and they’ll be ready to send when you’re back online.\nElevate email conversations with chat and video For those moments when you need more than just email, join Meet video call or chat with colleague directly from your inbox.\nCompatible with your existing interface Gmail works great with desktop clients like Microsoft Outlook, Apple Mail and Mozilla Thunderbird.\nOutlook users can sync emails, events and contacts to and from Suite.\nEasy migration from Outlook and legacy services Migrate your email from Outlook, Exchange or Lotus easily with custom tools that help preserve your important messages.\n99.9% guaranteed uptime, 0% planned downtime Count on Google’s ultra-reliable servers to keep your lights on 24/7/365.\nAutomatic backups, spam protection and industry-leading security measures help protect your business data.\nSuite gave us reliable and convenient access to our emails and documents, regardless of our location.\nMr. Zhang Gixia Group Learn More Top questions about Gmail What's different about the paid version of Gmail?\nPaid Gmail features include: custom email @yourcompany.com unlimited group email addresses, 99.9% guaranteed uptime, twice the storage of personal Gmail, zero ads, 24/7 support, Suite Sync for Microsoft Outlook and more.\nCan user have more than one email address?\nuser can have several email addresses by creating email aliases.\nYou can add up to 30 email aliases for each user.\nCan migrate my existing email to Suite?\nSuite migration tools are available for importing your old emails from legacy environments, such as Microsoft®, IBM® Notes® and other email systems.\nFor more information on the tools available for data migrations into Suite, see Migrate your organisation’s data to Suite.\nStay in the loop Sign up for Google Cloud newsletters with product updates, event information, special offers and more.\nEmail Please enter valid email address.\nSelect one option.value Industry This is required Select one Number of Employees This is required Country Country country.countryName This is required Yes, sign me up for Google Cloud emails with news, product updates, event information, special offers and more.\nYou can unsubscribe at later time This is required Sign me up Thanks!\nWe’ll be in touch shortly.\n", 'url': 'https://gsuite.google.com/intl/en_sg/products/gmail/'}]}
 
         print(resp)
 
         #pass the response to front end and show it to user
         # return JsonResponse(resp, safe=False)
-        return render(request,'Target_Management_System/tso_internetsurvey.html',{})
+        return render(request,'Target_Management_System/tso_internetsurvey.html',{'result': })
 
 
 class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
@@ -295,6 +299,8 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
+
+
     template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
 
 
@@ -303,9 +309,14 @@ class Instagram_Target_Response(TemplateView):
 
 class LinkedinCompany_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
-         with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+        with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
             company = json.load(f)
-         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': company})
+
+        return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': data_object})
 
 
 
@@ -313,22 +324,35 @@ class LinkedinCompany_Target_Response(TemplateView):
 
 class FacebookPerson_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
         with open('static/Target_Json/facebook_person_data.json', 'r') as f:
             profile = json.load(f)
-        return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': profile})
+        return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': data_object})
 
 class FacebookPage_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
         with open('static/Target_Json/facebook_page_data.json', 'r') as f:
             page = json.load(f)
-        return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': page})
+        return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': data_object})
 
 
 class FacebookGroup_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
-        return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': group})
+        return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': data_object})
 
 
 
@@ -338,6 +362,13 @@ class FacebookGroup_Target_Response(TemplateView):
 # this json wasnot according to format to formatted here
 class Twitter_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+
         #  json_data = open('static/Target_Json/tweets.json')
         #  data1 = json.load(json_data) # deserialises it
         #  data2 = json.dumps(data1) # json formatted string
@@ -509,8 +540,8 @@ class Twitter_Target_Response(TemplateView):
 
             ]
         }
-        print(tweets)
-        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': tweets})
+        #print(tweets)
+        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
 
 
 
@@ -518,6 +549,10 @@ class Twitter_Target_Response(TemplateView):
 # this json wasnot according to format to formatted here
 class LinkedinPerson_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
         profile = {
             "GTR": "91",
             "target_type": "profile",
@@ -670,7 +705,9 @@ class LinkedinPerson_Target_Response(TemplateView):
             ],
             "linked_to": []
         }
-        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': profile})
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
+
+
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
           with open('static/Target_Json/facebook_page_data.json', 'r') as f:
