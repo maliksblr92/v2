@@ -56,7 +56,7 @@ class Create_Avatar(View):
         else:
             marital_status = None
         if not request.POST.get('pinfo-dob') == '':
-            dob = request.POST.get('pinfo-dob')
+            dob = datetime.datetime.strptime(request.POST.get('pinfo-dob'), '%m/%d/%Y')
         else:
             dob = None
         gender = request.POST.get('pinfo-gender')

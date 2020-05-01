@@ -234,8 +234,19 @@ class Avatar_AMS(Document):
         self.evaluate_health()
     
     def add_marriage(self, spouse, location, wedding_date, divorce_date):
+        # print(spouse, location, wedding_date, divorce_date)
         marriage = Marriage(spouse, location, wedding_date, divorce_date)
-        self.marriages.append(marriage)
+        # print(self.first_name)
+        # print(self.marriages)
+        # self.marriages.append(marriage)
+        if self.marriages.count():
+            print('marriage if')
+            self.marriages.append(marriage)
+        else:
+            print('marriage else')
+            self.marriages = []
+            self.marriages.append(marriage)
+        self.evaluate_health()
 
     @staticmethod
     def get_all_avatars():

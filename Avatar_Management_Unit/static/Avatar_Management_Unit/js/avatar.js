@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.target.parentNode.parentNode.removeChild(itemToRemove);
     });
 
-    //handle submit button
+    //handle submit button for interest
     $("#i-submit-btn").click((event) => {
         let hobbies = [],
             movies = [],
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#i-clear-btn").trigger("click");
     });
 
-    //handle clear button
+    //handle clear button for interest
     $("#i-clear-btn").click(() => {
         $("#i-hobbies, #i-movies, #i-songs").val("");
         $(
@@ -170,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     //marriage form submit
-    $("marriage-form").submit((event) => {
+    $("#marriage-form").submit((event) => {
+        console.log("marriage form submitted");
         fdata = {};
         $.each($("#marriage-form input"), (index, el) => {
             fdata[$(el).attr("name")] = $(el).val();
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "select[name=le-avatar] option:selected"
         ).val();
         console.log(fdata);
-        $("marriage-form").trigger("reset");
+        $("#marriage-form").trigger("reset");
         event.preventDefault();
         $.ajax({
             url: "/amu/addmarriage/",
