@@ -119,7 +119,7 @@ class Avatar_AMS(Document):
     works= ListField(default=[])
     educations = ListField(default=[])
     skills = ListField(default=[])
-    interests = EmbeddedDocumentField(Interest)
+    interests = DictField()
     locations = ListField(default=[])
     life_events = ListField(default=[])
     social_media_accounts = ListField(default=[])
@@ -205,16 +205,19 @@ class Avatar_AMS(Document):
         self.evaluate_health()
 
     def add_interests(self, hobbies, movies, songs):
-        # print(self.interests.hobbies)
-        # if self.interests:
-        #     self.interests.hobbies.append(hobbies)
-        #     self.interests.movies.append(movies)
-        #     self.interests.songs.append(songs)
-        # else:
-        #     self.interests = Interest()
-        #     self.interests.hobbies.append(hobbies)
-        #     self.interests.movies.append(movies)
-        #     self.interests.songs.append(songs)
+        # print(self.interests, hobbies, movies, songs)
+        if self.interests:
+            # print('interest if')
+            self.interests['hobbies'].extend(hobbies)
+            self.interests['movies'].extend(movies)
+            self.interests['songs'].extend(songs)
+        else:
+            # print('interest else')
+            self.interests = {
+                'hobbies': hobbies,
+                'movies': movies,
+                'songs': songs
+            }
 
         #self.save()
         self.evaluate_health()

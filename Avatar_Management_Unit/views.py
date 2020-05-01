@@ -210,15 +210,15 @@ class Add_Interest(View):
 
         # print(avatar_id, hobbies, movies, songs)
 
-        # try:
-        #     a = Avatar_AMS.get_object_by_id(avatar_id)
-        #     if(a is not None):
-        #         a.add_interests(hobbies, movies, songs)
+        try:
+            a = Avatar_AMS.get_object_by_id(avatar_id)
+            if(a is not None):
+                a.add_interests(hobbies, movies, songs)
 
-        #     return JsonResponse({'success': 200})
-        # except Exception as e:
-        #     print(e)
-        #     return JsonResponse({'error':str(e)})
+            return JsonResponse({'success': 200})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error':str(e)})
 
 class Add_Life_Event(View):
 
