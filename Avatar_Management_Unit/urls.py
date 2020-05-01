@@ -9,6 +9,9 @@ urlpatterns = [
     path('addinterest/', views.Add_Interest.as_view(), name='amu_add_interest'),
     path('addeducation/', views.Add_Education.as_view(), name='amu_add_education'),
     path('addmarriage/', views.Add_Marriage.as_view(), name='amu_add_marriage'),
+    path('addbiography/', views.Add_Biography.as_view(), name='amu_add_biography'),
+    path('addsocialaccount/', views.Add_Social_Account.as_view(), name='amu_add_socialaccount'),
+    path('addsocialpost/', views.Add_Social_Post.as_view(), name='amu_add_socialpost'),
     path('addskill/', views.Add_Skill.as_view(), name='amu_add_skill'),
 
     # ---------------------

@@ -191,4 +191,34 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
     });
+
+    //biography form submit
+    $("#biography-form").submit((event) => {
+        console.log("biography form submitted");
+        fdata = {};
+        $.each($("#biography-form input"), (index, el) => {
+            fdata[$(el).attr("name")] = $(el).val();
+        });
+        fdata["b-biography"] = $(
+            "#biography-form textarea[name=b-biography]"
+        ).val();
+        fdata["b-avatar"] = $(
+            "#biography-form select[name=b-avatar] option:selected"
+        ).val();
+        console.log(fdata);
+        $("#biography-form").trigger("reset");
+        event.preventDefault();
+        $.ajax({
+            url: "/amu/addbiography/",
+            method: "POST",
+            data: fdata,
+            success: (result) => {
+                console.log(result);
+            },
+        });
+    });
+
+    //social media account form submit
+
+    //posts form submit
 });

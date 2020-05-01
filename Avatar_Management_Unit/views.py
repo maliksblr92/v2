@@ -240,6 +240,21 @@ class Add_Life_Event(View):
             print(e)
             return HttpResponse(e)
 
+class Add_Biography(View):
+    def post(self, request, *args, **kwargs):
+        avatar_id = request.POST.get('b-avatar')
+        if request.POST.get('b-biography') != '':
+            biography = request.POST.get('b-biography')
+        else:
+            biography = None
+        try:
+            avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            avatar_obj.add_biography(biography)
+            return JsonResponse({'success': 200})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error': str(e)})
+
 class Add_Social_Account(View):
 
     def get(self, request, *args, **kwargs):
@@ -262,6 +277,19 @@ class Add_Social_Account(View):
             print(e)
             return HttpResponse(e)
 
+class Add_Social_Post(View):
+    def post(self, request, *args, **kwargs):
+        avatar_id = request.POST.get('smp-avatar')
+        if request.POST.get('smp-text') != '':
+            post = request.POST.get('smp-text')
+        social_media_type = request.POST.get('smp-platform')
+        try:
+            avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            avatar_obj.add_social_post(social_media_type, post)
+            return JsonResponse({'success': 200})
+        except Exception as e:
+            print(e)
+            return JsonResponse({'error':str(e)})
 
 class Avatar_Archive(View):
 

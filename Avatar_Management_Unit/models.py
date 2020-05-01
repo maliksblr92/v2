@@ -93,6 +93,10 @@ class SocialMediaAccount(EmbeddedDocument):
     password = StringField()
 
 
+class SocialMediaPost(EmbeddedDocument):
+    social_media_type = StringField(choices=SOCIAL_MEDIA_TYPE)
+    post_text = StringField()
+
 class Marriage(EmbeddedDocument):
     spouse = StringField(required=True)
     location = StringField()
@@ -124,6 +128,8 @@ class Avatar_AMS(Document):
     life_events = ListField(default=[])
     social_media_accounts = ListField(default=[])
     marriages = EmbeddedDocumentListField(Marriage)
+    biography = ListField(StringField())
+    social_media_posts = EmbeddedDocumentListField(SocialMediaPost)
 
 
     def __str__(self):
@@ -227,12 +233,21 @@ class Avatar_AMS(Document):
         self.life_events.append(event)
         self.evaluate_health()
 
+    def add_biography(self, biography):
+        self.biography.append(biography)
+        self.save()
 
-    def add_social_accounts(self,social_media_type,username,password):
-        social_account = SocialMediaAccount(social_media_type,username,password)
+    def add_social_accounts(self, social_media_type, username, password):
+        social_account = SocialMediaAccount(
+            social_media_type, username, password)
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
-    
+
+    def add_social_post(self, social_media_type, post):
+        social_post = SocialMediaPost(social_media_type, post)
+        self.social_media_posts.append(social_post)
+        self.save()
+
     def add_marriage(self, spouse, location, wedding_date, divorce_date):
         # print(spouse, location, wedding_date, divorce_date)
         marriage = Marriage(spouse, location, wedding_date, divorce_date)
