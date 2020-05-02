@@ -283,9 +283,13 @@ class Add_Social_Post(View):
         if request.POST.get('smp-text') != '':
             post = request.POST.get('smp-text')
         social_media_type = request.POST.get('smp-platform')
+        if request.POST.get('smp-date') != '':
+            post_date = datetime.datetime.strptime(request.POST.get('smp-date'), '%m/%d/%Y')
+        else:
+            post_date = None
         try:
             avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
-            avatar_obj.add_social_post(social_media_type, post)
+            avatar_obj.add_social_post(social_media_type, post, post_date)
             return JsonResponse({'success': 200})
         except Exception as e:
             print(e)

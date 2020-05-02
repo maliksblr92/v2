@@ -96,6 +96,7 @@ class SocialMediaAccount(EmbeddedDocument):
 class SocialMediaPost(EmbeddedDocument):
     social_media_type = StringField(choices=SOCIAL_MEDIA_TYPE)
     post_text = StringField()
+    post_date = DateField()
 
 class Marriage(EmbeddedDocument):
     spouse = StringField(required=True)
@@ -243,8 +244,8 @@ class Avatar_AMS(Document):
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
 
-    def add_social_post(self, social_media_type, post):
-        social_post = SocialMediaPost(social_media_type, post)
+    def add_social_post(self, social_media_type, post, post_date):
+        social_post = SocialMediaPost(social_media_type, post, post_date)
         self.social_media_posts.append(social_post)
         self.save()
 

@@ -221,4 +221,33 @@ document.addEventListener("DOMContentLoaded", function () {
     //social media account form submit
 
     //posts form submit
+    $("#socialpost-form").submit((event) => {
+        console.log("social post form submitted");
+        fdata = {};
+        fdata["csrfmiddlewaretoken"] = $(
+            "#socialpost-form input[name=csrfmiddlewaretoken]"
+        ).val();
+        fdata["smp-platform"] = $(
+            "#socialpost-form input[name=smp-platform]:checked"
+        ).val();
+        fdata["smp-avatar"] = $(
+            "#socialpost-form select[name=smp-avatar] option:selected"
+        ).val();
+        fdata["smp-text"] = $("#socialpost-form textarea[name=smp-text]").val();
+        fdata["smp-date"] = $("#socialpost-form input[name=smp-date]").val();
+        console.log(fdata);
+        event.preventDefault();
+        $.ajax({
+            url: "/amu/addsocialpost/",
+            method: "POST",
+            data: fdata,
+        })
+            .then((result) => {
+                console.log(result);
+                $("#socialpost-form").trigger("reset");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
 });

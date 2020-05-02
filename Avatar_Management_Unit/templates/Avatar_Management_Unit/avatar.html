@@ -940,8 +940,12 @@
                                     <!-- end of left img section -->
                                 </div>
                                 <!-- end of redundant nav -->
-                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                <form class="col-md-9 col-lg-9 col-xl-9" id="socialpost-form">
+
                                     <p class="paratext mt-2"> Select the social media below</p>
+                                    <!-- csrf token -->
+                                    {% csrf_token %}
+                                    <!-- platform type radio buttons -->
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12 col-xl-12 ">
                                             <div class="row mt-2 ml-auto text-center">
@@ -950,36 +954,57 @@
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-reddit fa-2x"></i>
+                                                        <input type="radio" name="smp-platform" value="reddit">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-linkedin fa-2x"></i>
+                                                        <input type="radio" name="smp-platform" value="linkedin">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-instagram fa-2x"></i>
+                                                        <input type="radio" name="smp-platform" value="instagram">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-facebook fa-2x"></i>
+                                                        <input type="radio" name="smp-platform" value="facebook">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-twitter-square fa-2x"></i>
+                                                        <input type="radio" name="smp-platform" value="twitter">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1 col-lg-1 col-xl-1"></div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- avatar id section -->
+                                    <!-- avatar -->
+                                    <div class="input-group mt-4 mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="newlabeldesign">Avatar</span>
+                                        </div>
+                                        <select name="smp-avatar" class="newinput custom-select amu-work-select">
+                                            {% for avatar in avatars %}
+                                            <option value="{{avatar.0}}"
+                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <!-- post text section -->
                                     <div class="row">
                                         <div class="col-md-12 col-xl-12 col-lg-12">
                                             <div class="input-group   mt-2 mb-3">
@@ -988,57 +1013,32 @@
                             opacity:0.9;">Enter Posts Texts
                                                     </span>
                                                 </div>
-                                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                                                <textarea class="form-control" rows="5" name="smp-text"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Started AND ended 2 column div -->
+                                    <!-- post date section -->
                                     <div class="row mt-2">
-                                        <div class="col-md-6">
-                                            <!-- EXPIRED ON SECTION-->
-                                            <div class="input-group   mt-1 mb-3">
+                                        <div class="col-md-12">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                opacity:0.9; padding:5px 9px 0 10px;">Started
+                                opacity:0.9; padding:5px 9px 0 10px;">Post Date
                                                     </span>
                                                 </div>
-                                                <select
-                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                    class="custom-select newinput" id="inputGroupSelect01">
-                                                    <option selected="">seelct</option>
-                                                    <option value="1">Female</option>
-                                                    <option value="2">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!--INTERVAL SECTION-->
-                                            <div class="input-group   mt-1 mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                opacity:0.9; padding:5px 9px 0 10px;">Ended
-                                                    </span>
-                                                </div>
-                                                <select
-                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                    class="custom-select newinput" id="inputGroupSelect01">
-                                                    <option selected="">Select</option>
-                                                    <option value="1">Female</option>
-                                                    <option value="2">Other</option>
-                                                </select>
+                                                <input class="form-control newinputdesign" type="text" name="smp-date"
+                                                    placeholder="MM/DD/YYYY">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row d-flex flex-row mt-3">
                                         <div class="col-md-12 ml-5 ">
-                                            <!--LEFT BUTTON-->
-                                            <button type="button" class="btn btn-secondary searchbutton">Clear </button>
-                                            <button type="button" style="float:right; "
+                                            <button type="reset" class="btn btn-secondary searchbutton">Clear </button>
+                                            <button type="submit" style="float:right; "
                                                 class="btn btn-secondary searchbutton mr-5">Submit</button>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- END of Personal information form-->
+                                </form>
                             </div>
                         </div>
                         <!-- end of posts tab -->
