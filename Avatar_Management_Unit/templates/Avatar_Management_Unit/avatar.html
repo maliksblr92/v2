@@ -760,11 +760,9 @@
                         <!-- end of biography tab -->
                         <!-- social media tab -->
                         <div class="tab-pane fade" id="nav-social" role="tabpanel">
-                            <!-- Each content tab #1 for keywords-->
                             <div class="row mt-2">
-                                <!-- divide the section into 3 columns -->
+                                <!-- redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
-                                    <!-- Left Image side-->
                                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
                                             Create</a></p>
                                     <div class="d-flex flex-column align-items-center">
@@ -785,11 +783,12 @@
                                         <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
                                                 Edit</a></p>
                                     </div>
-                                    <!-- end of left img section -->
                                 </div>
-                                <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <!-- HEre we will have Personal information form-->
-                                    <!--FORMS-->
+                                <!-- end of redundant navigation -->
+                                <!-- form container -->
+                                <form class="col-md-9 col-lg-9 col-xl-9" id="socialaccount-form">
+                                    {% csrf_token %}
+                                    <!-- sma platform -->
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12 col-xl-12 ">
                                             <div class="row mt-5 ml-auto text-center">
@@ -797,82 +796,127 @@
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
-                                                            class="fab fa-reddit-square fa-2x"></i>
+                                                            class="fab fa-reddit fa-2x"></i>
+                                                        <input type="radio" name="sma-platform" value="reddit">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-linkedin fa-2x"></i>
+                                                        <input type="radio" name="sma-platform" value="linkedin">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-instagram fa-2x"></i>
+                                                        <input type="radio" name="sma-platform" value="instagram">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-facebook fa-2x"></i>
+                                                        <input type="radio" name="sma-platform" value="facebook">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
                                                     <div class="iconbg">
                                                         <i style="color:white; opacity:0.8;"
                                                             class="fab fa-twitter-square fa-2x"></i>
+                                                        <input type="radio" name="sma-platform" value="twitter">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1 col-lg-1 col-xl-1"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group   mt-4 mb-3">
+                                    <!-- avatar -->
+                                    <div class="input-group mt-4 mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="newlabeldesign">Avatar</span>
+                                        </div>
+                                        <select name="sma-avatar" class="newinput custom-select amu-work-select">
+                                            {% for avatar in avatars %}
+                                            <option value="{{avatar.0}}"
+                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <!-- first name last name -->
+                                    <div class="row mt-2 mb-3">
+                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:7px 9px 0 10px;">First name
+                                                    </span>
+                                                </div>
+                                                <input name="sma-first-name" type="text"
+                                                    class="form-control newinputdesign" placeholder="First Name...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:7px 9px 0 10px;">Last name
+                                                    </span>
+                                                </div>
+                                                <input name="sma-last-name" type="text"
+                                                    class="form-control newinputdesign" placeholder="Last Name...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- email -->
+                                    <div class="input-group mt-2 mb-3">
                                         <div class="input-group-prepend">
                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                        opacity:0.9; padding:7px 9px 0 10px;">Full name
+                        opacity:0.9; padding:7px 9px 0 10px;">Email
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control  newinputdesign"
-                                            placeholder="Please Enter text...">
+                                        <input name="sma-email" type="email" class="form-control  newinputdesign"
+                                            placeholder="Email Please ...">
                                     </div>
+                                    <!-- phone -->
+                                    <div class="input-group mt-2 mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                        opacity:0.9; padding:7px 9px 0 10px;">Phone Number
+                                            </span>
+                                        </div>
+                                        <input name="sma-phone" type="text" class="form-control  newinputdesign"
+                                            placeholder="Phone Number ...">
+                                    </div>
+                                    <!-- username -->
                                     <div class="input-group   mt-2 mb-3">
                                         <div class="input-group-prepend">
                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                        opacity:0.9; padding:7px 9px 0 10px;">Nationality
+                          opacity:0.9; padding:7px 9px 0 10px;">Username
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control  newinputdesign"
+                                        <input name="sma-username" type="text" class="form-control  newinputdesign"
                                             placeholder="Please Enter text...">
                                     </div>
-                                    <div class="input-group   mt-2 mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                        opacity:0.9; padding:7px 9px 0 10px;">Address
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control  newinputdesign"
-                                            placeholder="Please Enter text...">
-                                    </div>
-                                    <!-- DATE AND TIME 2 column div -->
+                                    <!-- date of birth and gender -->
                                     <div class="row">
+                                        <!-- dob -->
                                         <div class="col-md-6">
-                                            <!-- EXPIRED ON SECTION-->
-                                            <div class="input-group   mt-1 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                 opacity:0.9; padding:5px 9px 0 10px;">DOB
                                                     </span>
                                                 </div>
-                                                <input class="form-control newinputdesign" id="date"
-                                                    style="color:#fff;font-size:13px;height:auto; width:100%; border:none; padding-top:-1px ;"
-                                                    name="date" placeholder="MM/DD/YYY" type="text">
+                                                <input class="form-control newinputdesign" name="sma-dob"
+                                                    placeholder="MM/DD/YYY" type="text">
                                             </div>
                                         </div>
+                                        <!-- gender -->
                                         <div class="col-md-6">
-                                            <!--INTERVAL SECTION-->
-                                            <div class="input-group   mt-1 mb-3">
+                                            <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                 opacity:0.9; padding:5px 9px 0 10px;">Gender
@@ -880,33 +924,24 @@
                                                 </div>
                                                 <select
                                                     style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                    class="custom-select newinput" id="inputGroupSelect01">
-                                                    <option selected="">Male</option>
-                                                    <option value="1">Female</option>
-                                                    <option value="2">Other</option>
+                                                    class="custom-select newinput" name="sma-gender">
+                                                    <option value="male" selected>Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">Other</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group   mt-2 mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                          opacity:0.9; padding:7px 9px 0 10px;">Username
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control  newinputdesign"
-                                            placeholder="Please Enter text...">
-                                    </div>
+                                    <!-- clear and submit button -->
                                     <div class="row d-flex flex-row mt-3">
                                         <div class="col-md-12 ml-5 ">
-                                            <!--LEFT BUTTON-->
-                                            <button type="button" class="btn btn-secondary searchbutton">Clear </button>
-                                            <button type="button" style="float:right; "
+                                            <button type="reset" class="btn btn-secondary searchbutton">Clear </button>
+                                            <button type="submit" style="float:right; "
                                                 class="btn btn-secondary searchbutton mr-5">Submit</button>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- END of Personal information form-->
+                                </form>
+                                <!-- end of form form container -->
                             </div>
                         </div>
                         <!-- end of social media tab -->

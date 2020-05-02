@@ -89,8 +89,13 @@ class LifeEvent(EmbeddedDocument):
 
 class SocialMediaAccount(EmbeddedDocument):
     social_media_type = StringField(choices=SOCIAL_MEDIA_TYPE)
-    username = StringField()
-    password = StringField()
+    first_name = StringField()
+    last_name = StringField()
+    email = EmailField()
+    phone_number = StringField()
+    user_name = StringField()
+    dob = DateField()
+    gender = StringField()
 
 
 class SocialMediaPost(EmbeddedDocument):
@@ -238,9 +243,11 @@ class Avatar_AMS(Document):
         self.biography.append(biography)
         self.save()
 
-    def add_social_accounts(self, social_media_type, username, password):
+    def add_social_accounts(self, social_media_type, first_name,
+                            last_name, email, phone_number, user_name, dob, gender):
         social_account = SocialMediaAccount(
-            social_media_type, username, password)
+            social_media_type, first_name,
+            last_name, email, phone_number, user_name, dob, gender)
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
 

@@ -219,6 +219,43 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     //social media account form submit
+    $("#socialaccount-form").submit((event) => {
+        console.log("social account form submitted");
+        fdata = {};
+        $.each(
+            $(
+                `#socialaccount-form input[type=text],
+                #socialaccount-form input[type=email],
+                #socialaccount-form input[name=csrfmiddlewaretoken]`
+            ),
+            (index, el) => {
+                fdata[$(el).attr("name")] = $(el).val();
+            }
+        );
+        fdata["sma-avatar"] = $(
+            "#socialaccount-form select[name=sma-avatar] option:selected"
+        ).val();
+        fdata["sma-gender"] = $(
+            "#socialaccount-form select[name=sma-gender] option:selected"
+        ).val();
+        fdata["sma-platform"] = $(
+            "#socialaccount-form input[name=sma-platform]:checked"
+        ).val();
+        console.log(fdata);
+        event.preventDefault();
+        $.ajax({
+            url: "/amu/addsocialaccount/",
+            method: "POST",
+            data: fdata,
+        })
+            .then((result) => {
+                console.log(result);
+                // $("#socialaccount-form").trigger("reset");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
 
     //posts form submit
     $("#socialpost-form").submit((event) => {

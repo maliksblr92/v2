@@ -255,6 +255,7 @@ class Add_Biography(View):
             print(e)
             return JsonResponse({'error': str(e)})
 
+
 class Add_Social_Account(View):
 
     def get(self, request, *args, **kwargs):
@@ -262,20 +263,54 @@ class Add_Social_Account(View):
 
     def post(self, request):
 
-        avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
-
-        social_media_type = 'facebook'
-        username = 'awais.a'
-        password = 'abc123def'
+        print(request.POST)
+        avatar_id = request.POST.get('sma-avatar')
+        if request.POST.get('sma-platform') != '':
+            sma_platform = request.POST.get('sma-platform')
+        else:
+            sma_platform = None
+        if request.POST.get('sma-first-name') != '':
+            sma_first_name = request.POST.get('sma-first-name')
+        else:
+            sma_first_name = None
+        if request.POST.get('sma-last-name') != '':
+            sma_last_name = request.POST.get('sma-last-name')
+        else:
+            sma_last_name = None
+        if request.POST.get('sma-email') != '':
+            sma_email = request.POST.get('sma-email')
+        else:
+            sma_email = None
+        if request.POST.get('sma-phone') != '':
+            sma_phone = request.POST.get('sma-phone')
+        else:
+            sma_phone = None
+        if request.POST.get('sma-username') != '':
+            sma_username = request.POST.get('sma-username')
+        else:
+            sma_username = None
+        if request.POST.get('sma-dob') != '':
+            sma_dob = datetime.datetime.strptime(request.POST.get('sma-dob'), '%m/%d/%Y')
+        else:
+            sma_dob = None
+        sma_gender = request.POST.get('sma-gender')
 
         try:
-            a = Avatar_AMS.get_object_by_id(avatar_id)
-            a.add_social_accounts(social_media_type,username,password)
+            avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            avatar_obj.add_social_accounts(
+                sma_platform,
+                sma_first_name,
+                sma_last_name,
+                sma_email,
+                sma_phone,
+                sma_username,
+                sma_dob,
+                sma_gender)
 
-            return HttpResponse('account added')
+            return JsonResponse({'success':200})
         except Exception as e:
             print(e)
-            return HttpResponse(e)
+            return JsonResponse({'error':str(e)})
 
 class Add_Social_Post(View):
     def post(self, request, *args, **kwargs):
