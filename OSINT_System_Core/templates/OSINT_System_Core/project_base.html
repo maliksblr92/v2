@@ -136,27 +136,63 @@
 
         <script>
           // jquery ready function
+
           document.addEventListener('DOMContentLoaded', function () {
             let footerRES = new ReconnectingEventSource('/events/')
             // console.log(footerRES)
             footerRES.addEventListener('message', (event) => {
-                      const control_msg = JSON.parse(event.data)
-                      console.log(control_msg)
-                      const control_msg_box = $('#control-msg-box')
-                      control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+
+                      rabbit_message("message")
+
             })
 
-          }) // end of jquery ready function
+          }); // end of jquery ready function
+
+          function rabbit_message(window_type) {
+
+                console.log("get top 10 messages from db");
+
+
+            var control_msg_box = null;
+            var data = {
+                window_type: window_type
+            };
+            $.ajax({
+                url: '{% url 'OSINT_System_Core:rabbit_message' %}',
+                data: data,
+                'success': (resp) => {
+
+                         console.log(resp)
+                    //const control_msg = JSON.parse(resp)
+
+                    if(window_type =='notification'){
+
+                        control_msg_box = $('#notification-box')
+                    }
+                    else if(window_type == 'message'){
+                         control_msg_box = $('#control-msg-box')
+                    }
+
+                              //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+                        control_msg_box.append(resp)
+
+
+                },
+
+            });
+}
+
+
 
         // jquery event function for notification f
           document.addEventListener('DOMContentLoaded', function () {
             let footerRES = new ReconnectingEventSource('/events/')
             // console.log(footerRES)
             footerRES.addEventListener('notification', (event) => {
-                      const control_msg = JSON.parse(event.data)
-                      console.log(control_msg)
-                      const control_msg_box = $('#notification-box')
-                      control_msg_box.append('<p class ="m-0 p-0">'+"-> From :"+control_msg['server_name']+" :"+control_msg['messege']+'</p>')
+                      //const control_msg = JSON.parse(event.data)
+                      //console.log(control_msg)
+                        rabbit_message("notification")
+
             })
 
           }) // end of jquery ready function
