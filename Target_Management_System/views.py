@@ -342,7 +342,7 @@ class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
         paragraphs =bool(request.POST.get('paragraphs',False))
         pictures =bool(request.POST.get('pictures',False))
         videos =bool(request.POST.get('videos',False))
-        ip =bool(request.POST.get('page_url',False))
+        ip =bool(request.POST.get('ip',False))
 
 
         print(request.POST)

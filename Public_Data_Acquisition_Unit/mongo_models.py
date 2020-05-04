@@ -1149,8 +1149,6 @@ class Rabbit_Messages(Document):
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
-
-
     @staticmethod
     def get_all_messages():
         return Rabbit_Messages.objects()
@@ -1161,7 +1159,7 @@ class Rabbit_Messages(Document):
 
     @staticmethod
     def get_top_messages(top=10,message_type='message'):
-        return Rabbit_Messages.objects(message_type=message_type).order_by('-created_on')[:top]
+        return Rabbit_Messages.objects(message_type=message_type).order_by('-id')[:top]
 
 
 
