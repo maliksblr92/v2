@@ -88,9 +88,11 @@
 
                             <ul class="nav nav-pills row">
 
-                              <li class="custom_pills active col-md-4 border-dark border"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
-                              <li class="custom_pills col-md-4 border-dark border"><a class="text-white "data-toggle="pill" href="#adresses">Add Adrresses </a></li>
-                              <li class="custom_pills col-md-4 border-dark border"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
+                              <li class="custom_pills active col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
+                              <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#adresses">Add Adrresses </a></li>
+                              <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
+                                <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
+
                             </ul>
 
                             <div class="tab-content">
@@ -100,85 +102,53 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                     <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="/pms/create/" method="POST">
+                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
                                           {% csrf_token %}
                                       <div class="card-body m-4 main_card">
-                                          <div class="row">
-                                              <div class="col-md-12  ">
-                                                  <div class="row ">
-                                                      <div class="col-md-12 btn-group btn-group-toggle d-flex flex-row justify-content-center align-items-center"
-                                                          data-toggle="buttons">
-                                                          <div class="row col-md-4"><label
-                                                                  class="btn  custom_center radio_btns active">
-                                                                  <input type="radio" class="options" name="options" id="option1" value="Individual   " checked="">
-                                                                  Individual </label></div>
-                                                          <div class="row col-md-4">
-                                                              <label class="btn  radio_btns custom_center">
-                                                                  <input type="radio" class="options" name="options" id="option2" value="Group"> Group </label>
-                                                          </div>
-                                                          <div class="row">
-                                                              <label class="btn  radio_btns custom_center">
-                                                                  <input type="radio" class="options" name="options" id="option3" value="Event"> Event </label>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-2"></div>
                                               <div class="col-md-9">
                                                   <div class="row">
                                                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author ID</span>
-                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                  name="author_id" required="">
+                                                                  class="input_text"><a href="{% url 'Target_Management_System:tms_marktarget' portfolio_id %}" class="btn btn-primary">Add New Target</a></span>
+
                                                           </label>
                                                       </div>
                                                   </div>
 
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author Name</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_name"
-                                                                  name="author_name" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author URL</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_url"
-                                                                  name="author_url" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">User Name</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="username"
-                                                                  name="username" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
+
                                               </div>
                                               <div class="col-md-1 ">
                                               </div>
                                           </div>
-                                          <input type="hidden" value="social_info" id="form_name" name="form_name" />
+                                          <input type="hidden" value="address" id="form_name" name="extra_type" />
+                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-6"></div>
                                               <div class="col-md-4"></div>
                                               <div class="col-md-2">
-                                                  <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                                                      name="submit" id="submit">
+
                                               </div>
                                           </div>
                                       </div>
                                   </form>
+                                        <div class="row">
+                                            {% for target in social_targets %}
+
+                                            <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Address</h5>
+                                        <p class="card-text">{{ target }}</p>
+                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      </div>
+                                    </div>
+                                                                {% endfor %}
+
+
+                                        </div>
+
                                     </div>
                                     </div>
 
@@ -188,85 +158,55 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                     <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="/pms/create/" method="POST">
+                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
                                           {% csrf_token %}
                                       <div class="card-body m-4 main_card">
-                                          <div class="row">
-                                              <div class="col-md-12  ">
-                                                  <div class="row ">
-                                                      <div class="col-md-12 btn-group btn-group-toggle d-flex flex-row justify-content-center align-items-center"
-                                                          data-toggle="buttons">
-                                                          <div class="row col-md-4"><label
-                                                                  class="btn btn-primary custom_center radio_btns active">
-                                                                  <input type="radio" class="options" name="options" id="option1" value="Individual   " checked="">
-                                                                  Individual </label></div>
-                                                          <div class="row col-md-4">
-                                                              <label class="btn btn-primary radio_btns custom_center">
-                                                                  <input type="radio" class="options" name="options" id="option2" value="Group"> Group </label>
-                                                          </div>
-                                                          <div class="row">
-                                                              <label class="btn btn-primary radio_btns custom_center">
-                                                                  <input type="radio" class="options" name="options" id="option3" value="Event"> Event </label>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-2"></div>
                                               <div class="col-md-9">
                                                   <div class="row">
                                                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author ID</span>
-                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                  name="author_id" required="">
+                                                                  class="input_text">Address</span>
+                                                                  <textarea class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
+                                                                            name="prime_value" required=""> </textarea>
                                                           </label>
                                                       </div>
                                                   </div>
 
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author Name</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_name"
-                                                                  name="author_name" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Author URL</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_url"
-                                                                  name="author_url" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">User Name</span>
-                                                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="username"
-                                                                  name="username" required="">
-                                                          </label>
-                                                      </div>
-                                                  </div>
+
                                               </div>
                                               <div class="col-md-1 ">
                                               </div>
                                           </div>
-                                          <input type="hidden" value="perosnal_info" id="form_name" name="form_name" />
+                                          <input type="hidden" value="address" id="form_name" name="extra_type" />
+                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-6"></div>
                                               <div class="col-md-4"></div>
                                               <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
+                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
                                                 name="submit" id="submit">
                                               </div>
                                           </div>
                                       </div>
                                   </form>
+                                        <div class="row">
+                                            {% for address in addresses %}
+
+                                            <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Address</h5>
+                                        <p class="card-text">{{ address }}</p>
+                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      </div>
+                                    </div>
+                                                                {% endfor %}
+
+
+                                        </div>
+
                                     </div>
                                     </div>
 
@@ -276,7 +216,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                     <div class="col-md-12">
-                                      <form name="portfolio_create_form" name="add_description_form" id="add_description_form" action="/pms/link/" method="POST">
+                                      <form name="portfolio_create_form" name="add_description_form" id="add_description_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
                                           {% csrf_token %}
                                           <input type="hidden" value= "add_description_form"name="form_name" id="form_name" value="form_name"/>
                                       <div class="card-body m-4 main_card">
@@ -284,22 +224,14 @@
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-2"></div>
                                               <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Description Key </span>
-                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_key"
-                                                                  name="description_key" required="required">
-                                                          </label>
-                                                      </div>
-                                                  </div>
+
 
                                                   <div class="row">
                                                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Description Value</span>
+                                                                  class="input_text">Description </span>
                                                               <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
-                                                                  name="description_value" rows="10" required="required"></textarea>
+                                                                  name="prime_value" rows="10" required="required"></textarea>
                                                           </label>
                                                       </div>
                                                   </div>
@@ -309,17 +241,94 @@
                                               <div class="col-md-1 ">
                                               </div>
                                           </div>
-
+                                        <input type="hidden" value="description" id="form_name" name="extra_type" />
+                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-6"></div>
                                               <div class="col-md-4"></div>
                                               <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
+                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
                                                 name="submit" id="submit">
                                               </div>
                                           </div>
                                       </div>
                                   </form>
+                                        <div class="row">
+                                            {% for description in descriptions %}
+
+                                            <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Description</h5>
+                                        <p class="card-text">{{ description }}</p>
+                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      </div>
+                                    </div>
+                                                                {% endfor %}
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+                                    </div>
+
+                                    </div>
+                              </div>
+                            <div id="phones" class="tab-pane fade">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                                          {% csrf_token %}
+                                      <div class="card-body m-4 main_card">
+
+                                          <div class="row input_wrapper_row">
+                                              <div class="col-md-2"></div>
+                                              <div class="col-md-9">
+                                                  <div class="row">
+                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                  class="input_text">Phone</span>
+                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
+                                                                            name="prime_value" required=""> </input>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+
+
+                                              </div>
+                                              <div class="col-md-1 ">
+                                              </div>
+                                          </div>
+                                          <input type="hidden" value="phones" id="form_name" name="extra_type" />
+                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                          <div class="row input_wrapper_row">
+                                              <div class="col-md-6"></div>
+                                              <div class="col-md-4"></div>
+                                              <div class="col-md-2">
+                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
+                                                name="submit" id="submit">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </form>
+                                        <div class="row">
+                                            {% for phone in phones %}
+
+                                            <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Phones</h5>
+                                        <p class="card-text">{{ phone }}</p>
+                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      </div>
+                                    </div>
+                                                                {% endfor %}
+
+
+                                        </div>
+
                                     </div>
                                     </div>
 

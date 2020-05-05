@@ -785,8 +785,9 @@ class Rabbit_Message(View):
 
     def get(self,request):
 
-        objects = Rabbit_Messages.get_top_messages(10,request.GET['window_type'])
-        print(objects[0].to_mongo())
+        print(request.GET)
+        objects = Rabbit_Messages.get_top_messages(10,request.GET.get('window_type','message'))
+        print(objects)
 
         return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
 

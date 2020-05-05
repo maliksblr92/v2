@@ -337,7 +337,7 @@ class Ess_Api_Controller(object):
         try:
             add_target_url = 'generic/'
             payload = {'url': url,'ip_address':ip_address,'domain':domain,'pictures':pictures,'videos':videos,'heading':heading,'paragraphs':paragraphs,'links':links,'GTR':GTR,'CTR':CTR}
-
+            print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()

@@ -121,7 +121,7 @@ class Acquistion_Manager(object):
 
                 print(keywords)
 
-                response = appropriate_ess_method(keywords,gtr,ctr)
+                response = appropriate_ess_method(keywords,gtr.id,ctr)
                 print(response)
                 publish('keybase target added successfully', message_type='info', module_name=__name__)
 
@@ -143,7 +143,7 @@ class Acquistion_Manager(object):
 
 
 
-                response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr,ctr)
+                response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr.id,ctr)
                 print(response)
                 publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
             else:
