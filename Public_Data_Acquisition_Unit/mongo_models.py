@@ -757,7 +757,7 @@ class Twitter_Profile(Twitter_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -809,7 +809,7 @@ class Instagram_Profile(Instagram_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -858,7 +858,7 @@ class Linkedin_Profile(Linkedin_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -960,9 +960,12 @@ class Keybase_Crawling(Document):
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='keybase_crawling')
 
     title = StringField()
     keybase_ref = DynamicField()
+
+
 
     def __str__(self):
         return str(self.keybase_ref.title)
@@ -1023,6 +1026,7 @@ class Dynamic_Crawling(Document):
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+    target_type = StringField(default='dynamic_crawling')
 
     title = StringField()
     url = StringField()
@@ -1113,4 +1117,51 @@ class Periodic_Targets(Document):
     @staticmethod
     def get_all_periodic_task():
         return Periodic_Targets.objects
+
+class Share_Resource(Document):
+
+    share_with = ListField()
+    seen = BooleanField(default=False)
+    processed = BooleanField(default=False)
+    user_id = IntField()
+    username = StringField()
+
+
+    resource_ref = DynamicField()
+    message = StringField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+    @staticmethod
+    def get_pao_resources():
+        return Share_Resource.objects(share_with='pao')
+
+    @staticmethod
+    def get_rdo_resources():
+        return Share_Resource.objects(share_with='rdo')
+
+class Rabbit_Messages(Document):
+
+    message_type = StringField(default='info')
+    message_data = DictField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+
+
+    @staticmethod
+    def get_all_messages():
+        return Rabbit_Messages.objects()
+
+    @staticmethod
+    def get_messages_with_date_range(start,end):
+        return Rabbit_Messages.objects(Q(created_on__gte=start) & Q(created_on__lte=end))
+
+    @staticmethod
+    def get_top_messages(top=10,message_type='message'):
+        return Rabbit_Messages.objects(message_type=message_type).order_by('-created_on')[:top]
+
+
 

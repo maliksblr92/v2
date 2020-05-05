@@ -18,6 +18,10 @@
   {% endblock %}
   <!-- loading css with link does not evaluate static tag -->
   <link rel="stylesheet" href="{% static 'OSINT_System_Core/css/style.css' %}" />
+
+<script src="{% static 'django_eventstream/json2.js' %}"></script>
+  <script  src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
+  <script  src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
 </head>
 
 <body>
@@ -44,14 +48,14 @@
                     <div class="col-lg-6  list list-inline custom_center "
                       style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class="btn  nav_btn  topnavitem" href="#"
+                        <a class="btn  nav_btn  topnavitem" href="{% url 'Target_Management_System:tms_marktarget' %}"
                           style="color:#fff; letter-spacing: normal;">TARGET</a>
                       </li>
                     </div>
                     <div class="col-lg-6  list list-inline custom_center "
                       style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class="   btn   nav_btn" href="#" style="">PORTFOLIO</a>
+                        <a class="   btn   nav_btn" href="{% url 'Portfolio_Management_System:Create' %}" style="">PORTFOLIO</a>
                       </li>
                     </div>
                   </div>
@@ -70,7 +74,7 @@
                     <div class="col-lg-6  list list-inline custom_center "
                       style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class="   btn   nav_btn" href="#" style="">KEYBASE</a>
+                        <a class="   btn   nav_btn" href="{% url 'Keybase_Management_System:kms_create' %}" style="">KEYBASE</a>
                       </li>
                     </div>
                   </div>
@@ -102,15 +106,14 @@
         <div class="row footer_wrapper ">
           <div class="col-lg-12 glowing_border" style="border-radius:5px;">
             <div class="row">
-              <div class="col-lg-2 m-0 p-3">
-                <div class="custom_center footer_div_1 ">
-                  <div class="text-center  text-white " style="font-size: 10px;" id="control-msg-box">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Eos tenetur facilis doloremque.
+              <div class="col-lg-4 m-0 p-3">
+                <div class="footer_div_1 ">
+                  <div class="text-white m-0 p-0 " style="font-size: 10px;" id="control-msg-box">
+
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 m-0 p-3 ">
+              <div class="col-lg-2 m-0 p-3 ">
                 <div id="chart_5" class="m-0 p-0 "></div>
               </div>
               <div class="col-lg-6  m-0 p-3 ">
@@ -130,32 +133,73 @@
           </div>
         </div>
         <!-- start footer script -->
+
         <script>
           // jquery ready function
+
           document.addEventListener('DOMContentLoaded', function () {
             let footerRES = new ReconnectingEventSource('/events/')
             // console.log(footerRES)
             footerRES.addEventListener('message', (event) => {
-              const control_msg = JSON.parse(event.data)
-              // console.log(control_msg)
-              const control_msg_box = $('#control-msg-box')
-              control_msg_box.text(control_msg['text'])
+
+                      rabbit_message("message")
+
             })
-            //footer graphs
-            //internet speed of crawl server
-            // $.ajax({
-            //   dataTyp: 'json',
-            //   url: '',
-            //   'success': (intspeed) => {
-            //     console.log(intspeed)
-            //   }
-            // })
-            // //crawl server state
-            // $.getJSON('', (state) => {
-            //   //update the graphs
-            //   console.log(state)
-            // })
+
+          }); // end of jquery ready function
+
+          function rabbit_message(window_type) {
+
+                console.log("get top 10 messages from db");
+
+
+            var control_msg_box = null;
+            var data = {
+                window_type: window_type
+            };
+            $.ajax({
+                url: '{% url 'OSINT_System_Core:rabbit_message' %}',
+                data: data,
+                'success': (resp) => {
+
+                         console.log(resp)
+                    //const control_msg = JSON.parse(resp)
+
+                    if(window_type =='notification'){
+
+                        control_msg_box = $('#notification-box')
+                    }
+                    else if(window_type == 'message'){
+                         control_msg_box = $('#control-msg-box')
+                    }
+
+                              //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+                        control_msg_box.append(resp)
+
+
+                },
+
+            });
+}
+
+
+
+        // jquery event function for notification f
+          document.addEventListener('DOMContentLoaded', function () {
+            let footerRES = new ReconnectingEventSource('/events/')
+            // console.log(footerRES)
+            footerRES.addEventListener('notification', (event) => {
+                      //const control_msg = JSON.parse(event.data)
+                      //console.log(control_msg)
+                        rabbit_message("notification")
+
+            })
+
           }) // end of jquery ready function
+
+
+
+
         </script>
         <!-- end of footer script -->
         {% endblock %}
@@ -174,9 +218,7 @@
   <script defer src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
   <script defer src="{% static 'popper/js/popper.min.js' %}"></script>
   <script defer src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script defer src="{% static 'django_eventstream/json2.js' %}"></script>
-  <script defer src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
-  <script defer src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
+
   <script defer src="{% static 'amchart/js/core.js' %}"></script>
   <script defer src="{% static 'amchart/js/charts.js' %}"></script>
   <script defer src="{% static 'amchart/js/themes/dark.js' %}"></script>
@@ -184,6 +226,200 @@
   <script defer src="{% static 'OSINT_System_Core/js/oss_core_chart.js' %}"></script>
   {% block foot_dep %} {% endblock %}
   {% block foot_script %} {% endblock %}
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="linkto_portfolio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Link To</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div class="row">
+    <div class="col-md-8">
+        <label>Search Object</label>
+         <input type="text" name="search" id="txtSearch" onkeyup="searchOpen()" />
+
+
+    </div>
+    <div class="col-md-4">
+
+        <label for="cars">Choose Type:</label>
+    <select id="type">
+  <option value="portfolio">Portfolio</option>
+  <option value="keybase">Keybase</option>
+  <option value="case">Case</option>
+  <option value="target">Target</option>
+</select>
+    </div>
+
+
+
+</div>
+
+    <div class="row" >
+<div class="col-md-12" id="search_result">
+
+
+</div>
+
+    </div>
+          <div class="row" >
+<div class="col-md-12">
+<div class="alert alert-light" id="response" role="alert">
+
+
+</div>
+
+</div>
+    </div>
+
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End-->
+
+  <!-- Modal -->
+<div class="modal fade" id="share_resource" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share Resource</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+<div class="row">
+    <div class="col-md-7">
+
+
+ <div class="form-group">
+  <label for="comment">Message</label>
+  <textarea class="form-control" rows="5" id="share_message"></textarea>
+</div>
+
+    </div>
+    <div class="col-md-5">
+
+        <label for="cars">Share With:</label>
+    <select id="group_type">
+  <option value="tso">Target Selection Officer</option>
+  <option value="tmo">Target Monitoring Officer</option>
+  <option value="pao">Processing & Analysis Officer</option>
+  <option value="rdo">Reporting and Documentation Officer</option>
+</select>
+    </div>
+
+
+
+</div>
+
+    <div class="row" id="search_result">
+
+
+    </div>
+           <div class="row" >
+
+<div class="alert alert-light" id="share_response" role="alert">h
+</div>
+    </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" onclick="submit_share()" class="btn btn-primary">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    function searchOpen() {
+    var type = $('#type').val()
+    var search = $('#txtSearch').empty().val()
+    var data = {
+        query: search,type:type
+    };
+    $.ajax({
+        url: '{% url 'OSINT_System_Core:find_object' %}',
+        data: data,
+        'success': (resp) => {
+                $('#search_result').empty().append(resp)
+
+                 console.log(resp)
+               },
+
+    });
+}
+
+function submit_share() {
+
+console.log("in submit share")
+var user_group = $('#group_type').val()
+    var resource_id = $('#btn_link').attr("data-id")
+    var message = $('#share_message').val()
+
+        //var beta_id = $('.btn_link').attr('data-id')
+ console.log(resource_id)
+
+
+    var data = {
+        resource_id: resource_id,message:message,user_group:user_group
+    };
+    $.ajax({
+        url: '{% url 'OSINT_System_Core:share_resource' %}',
+        data: data,
+        'success': (resp) => {
+
+                $('#share_response').text(resp)
+                 console.log(resp)
+               },
+
+    });
+}
+function submit_link(alpha_id) {
+
+console.log("i m clicked")
+
+    var beta_id = $('#btn_link').attr("data-id")
+        //var beta_id = $('.btn_link').attr('data-id')
+ console.log(beta_id)
+    var type = $('#type').val()
+
+    var data = {
+        alpha_id: alpha_id,beta_id:beta_id,type:type
+    };
+    $.ajax({
+        url: '{% url 'OSINT_System_Core:link_object' %}',
+        data: data,
+        'success': (resp) => {
+
+                $('#response').text(resp)
+                 console.log(resp)
+               },
+
+    });
+}
+
+
+</script>
+
 </body>
 
 </html>

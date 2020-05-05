@@ -1,0 +1,108 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<style>
+    .radio_btns {
+        height: 60px;
+        width: 160px;
+        background: transparent;
+        border: 1px solid white;
+        color:white;
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+    }
+select{
+        color:white!important;
+    }
+    #submit{
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+    }
+</style>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 ">
+        <div class="row border second_nav_row d-flex flex-row justify-content-between align-items-center">
+            <div class=" m-0 p-0  "><a class="btn btn-outline-success border-right  nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index">FAKE IDIENTITY GENEARTOR </a></div>
+            <div class=" m-0 p-0   "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_darkweb">DARK WEB</a></div>
+            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_scrapper"> DATA SCRAPPERS </a></div>
+            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_textprocessing"> TEXT PROCESSING </a></div>
+            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/twitter"> TWITTER </a></div>               
+                    </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+{% block belly %}
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">FAKE IDIENTITY GENERATOR</p>
+            </div>
+            <form name="fake_idientity_geneartor_from" id="fake_idientity_geneartor_from" action="/dpu/index/" method="POST">
+                {% csrf_token %}
+            <div class="card-body m-4 main_card">
+               
+                <div class="row input_wrapper_row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                        class="input_text">Nationailty </span>
+                                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="nationality"
+                                        name="nationality" required="required">
+                                </label>
+                            </div>
+                        </div>
+
+                       
+                        <div class="row">
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                        class="input_text">Gender</span>
+                                    <select type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="gender"
+                                        name="gender" required="required">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                   
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                     
+
+                        <div class="row">
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                        class="input_text">Age</span>
+                                    <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="age"
+                                        name="age" required="required">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 ">
+                    </div>
+                </div>
+               
+                <div class="row input_wrapper_row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
+                        name="submit" id="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

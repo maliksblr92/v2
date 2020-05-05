@@ -43,7 +43,7 @@
     <tr>
       <th scope="col">Website</th>
       <th scope="col">Target_Type</th>
-      <th scope="col">Username</th>
+      <th scope="col">Title</th>
       <th scope="col">Status</th>
         <th scope="col">Expire On</th>
         <th scope="col">Action</th>
@@ -55,10 +55,18 @@
     <tr>
       <th scope="row">{{target.GTR}}</th>
       <td>{{target.target_type}}</td>
-      <td>{{ target.username }}</td>
+      <td> {% if target.username %}
+          {{ target.username }}
+      {% elif target.title%}
+          {{ target.title }}
+
+          {% else %}
+          untitled
+          {% endif %}
+      </td>
       <td>{{ target.is_expired }}</td>
         <td>{{target.expired_on}}</td>
-      <td>Delete</td>
+      <td>Include|Delete</td>
     </tr>
 {% endfor %}
   </tbody>

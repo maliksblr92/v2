@@ -6,7 +6,7 @@ import datetime
 # -------------------------------------------------------- connection ------------------------------------------------------
 disconnect('default')
 #CONNECT TO MONGO DB
-connect(db='OSINT_System',host='127.0.0.1', port=27017)
+connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
 
 SOCIAL_MEDIA_TYPE = (
@@ -271,6 +271,9 @@ class Avatar_AMS(Document):
             self.marriages.append(marriage)
         self.evaluate_health()
 
+    def get_avatar_health(self):
+        return self.health
+
     @staticmethod
     def get_all_avatars():
         return Avatar_AMS.objects()
@@ -369,7 +372,9 @@ class Action_Schedule_AMS(Document):
     def get_all_active_actions():
         return Action_Schedule_AMS.objects(expired=False)
 
-
+    @staticmethod
+    def get_all_actions():
+        return Action_Schedule_AMS.objects()
 
 
 

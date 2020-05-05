@@ -20,7 +20,7 @@ class Create_Keybase(RequireLoginMixin, View):
 
     def post(self,request, *args, **kwargs):
         # input_data = request.POST.dict()
-        # print(request.POST)
+        print(request.POST)
         # print(request.POST.getlist('mentions[]'))
         # for item in request.POST.lists():
         #     print(item)

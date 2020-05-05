@@ -1,16 +1,18 @@
 from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
+from Public_Data_Acquisition_Unit.ais_api_controller import Ais_Api_Controller
 from OSINT_System_Core.publisher import publish
 from Public_Data_Acquisition_Unit.ess_api_controller import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from OSINT_System_Core.Data_Sharing import Mongo_Lookup
+from Portfolio_Management_System.models import Portfolio_PMS
 from bson import ObjectId
 
 import logging
 
 import datetime
 ess = Ess_Api_Controller()
-
+ais = Ais_Api_Controller()
 class Acquistion_Manager(object):
 
     """
@@ -26,7 +28,7 @@ class Acquistion_Manager(object):
         gtr.create(website_reff,target_type_index)
         return gtr
 
-    def add_target(self,website_id,target_type_index,**kwargs):
+    def add_target(self,website_id,target_type_index,portfolio_id=None,**kwargs):
 
         try:
             gtr = self.get_gtr(self.get_website_by_id(website_id),target_type_index)
@@ -34,6 +36,11 @@ class Acquistion_Manager(object):
             print(appropriate_class)
             ac_object = appropriate_class()
             target = ac_object.create(gtr,kwargs)
+
+            print(portfolio_id)
+            if(portfolio_id is not None):
+                obj = Portfolio_PMS.objects(id=ObjectId(portfolio_id)).first()
+                obj.add_social_target(target)
 
             if('periodic_interval' in kwargs):
                 interval = kwargs['periodic_interval']
@@ -51,6 +58,7 @@ class Acquistion_Manager(object):
             return target
         except Exception as e:
             print(e)
+            publish(e, message_type='error', module_name=__name__)
             return False
 
     def add_bulk_targts(self,website_id,target_type_index,prime_argument_list,expired_on,periodic_interval):
@@ -97,6 +105,8 @@ class Acquistion_Manager(object):
         """
         try:
             appropriate_class, appropriate_ess_method, _ = self.get_appropriate_method(gtr)
+
+
             kwargs = appropriate_class.objects(GTR=gtr.id)[0].to_mongo()
             print(kwargs)
             """
@@ -106,7 +116,12 @@ class Acquistion_Manager(object):
             print(gtr.target_type)
 
             if(gtr.target_type == 'keybase_crawling'):
-                response = None #appropriate_ess_method(kwargs['url'],kwargs['ip'],kwargs['domain'],kwargs['pictures'],kwargs['videos'],kwargs['headings'],kwargs['paragraphs'],kwargs['links'],gtr,ctr)
+                keybase = appropriate_class.objects(GTR=gtr.id)[0]
+                keywords = keybase.keybase_ref.keywords + keybase.keybase_ref.mentions+keybase.keybase_ref.phrases+keybase.keybase_ref.hashtags
+
+                print(keywords)
+
+                response = appropriate_ess_method(keywords,gtr,ctr)
                 print(response)
                 publish('keybase target added successfully', message_type='info', module_name=__name__)
 
@@ -132,7 +147,7 @@ class Acquistion_Manager(object):
                 print(response)
                 publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
             else:
-
+                #for normal profile targets
                 #ess_api needs basic arguments for adding a target
 
                 username = kwargs['username']
@@ -212,7 +227,7 @@ class Acquistion_Manager(object):
             if (gtr.target_type == 'dynamic_crawling'):
                 return (Dynamic_Crawling, ess.dynamic_crawling,None)
             elif (gtr.target_type == 'keybase_crawling'):
-                return (Keybase_Crawling, None ,None)
+                return (Keybase_Crawling,ess.add_keybase_target ,None)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
@@ -225,6 +240,18 @@ class Acquistion_Manager(object):
 
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
+
+    def get_data_response_object_by_gtr_id(self,gtr_id):
+
+        gtr = self.get_gtr_by_id(gtr_id)
+        _, _,appropriate_class = self.get_appropriate_method(gtr)
+
+        print(gtr.id)
+        dataobject = appropriate_class.objects(GTR=str(gtr_id)).first()
+        return dataobject
+
+
+
 
     def get_dataobject_by_gtr(self,gtr):
         appropriate_class,_,_= self.get_appropriate_method(gtr)

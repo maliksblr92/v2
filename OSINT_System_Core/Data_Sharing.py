@@ -76,6 +76,17 @@ class Data_Share(object):
     alpha is reference of class which is going to be linked/matched/included
     beta is reference of a resource which is going to be linked with alpha and have a path or reference
     gamma is reference of class where the link is going to be placed
+
+    e.g
+
+    km = Keybase_Match()
+    from bson import ObjectId
+    mat = Keybase_Match.create(ObjectId("5e5f527d4ee0e3808c8fc95d"),[ObjectId("5e60aa86259b006699179317"),'posts',2,'associated_links',0])
+
+
+
+
+
     """
 
     ml = Mongo_Lookup()
@@ -111,11 +122,11 @@ class Data_Share(object):
             beta_object = self.find_object_by_id(beta_path_list[0])
             del (beta_path_list[0])
             if (self.resolve_intell_reference(beta_object, beta_path_list) is not None):
-
-                alpha_object = self.get_object_by_id(alpha_object_id)
-                print(alpha_object)
-                km = self.gamma_class_ref(alpha_object, beta_object, beta_path_list).save()
-                return km
+                if(not self.gamma_class_ref.objects(Q(beta_reference=beta_object) & Q(beta_path=beta_path_list)).__len__() > 0):
+                    alpha_object = self.get_object_by_id(alpha_object_id)
+                    print(alpha_object)
+                    km = self.gamma_class_ref(alpha_object, beta_object, beta_path_list).save()
+                    return km
             else:
                 print('given intells path is not correct attachment unsuccessful ')
         except Exception as e:
@@ -257,4 +268,3 @@ class Case_Include(object):
 
 class Case_Link(object):
     pass
-
