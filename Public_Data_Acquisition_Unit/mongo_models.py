@@ -613,7 +613,7 @@ class Facebook_Search(Facebook_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format('facebook search'), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a facebook search, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -778,7 +778,7 @@ class Twitter_Profile(Twitter_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a twitter profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -829,7 +829,7 @@ class Instagram_Profile(Instagram_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a instagram profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -880,7 +880,7 @@ class Linkedin_Profile(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -933,7 +933,7 @@ class Linkedin_Company(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
