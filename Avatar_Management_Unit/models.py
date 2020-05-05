@@ -45,7 +45,7 @@ class Work(EmbeddedDocument):
     location = StringField(max_length=300)
     description = StringField(max_length=500)
     company = StringField(max_length=100)
-
+    current = BooleanField(required=True)
 
 
 
@@ -68,9 +68,9 @@ class Skill(EmbeddedDocument):
 
 
 class Interest(EmbeddedDocument):
-    category = ListField(StringField(max_length=100))
-    name = StringField()
-    link = StringField()
+    hobbies = ListField(StringField())
+    movies = ListField(StringField())
+    songs = ListField(StringField())
 
 
 
@@ -89,9 +89,25 @@ class LifeEvent(EmbeddedDocument):
 
 class SocialMediaAccount(EmbeddedDocument):
     social_media_type = StringField(choices=SOCIAL_MEDIA_TYPE)
-    username = StringField()
-    password = StringField()
+    first_name = StringField()
+    last_name = StringField()
+    email = EmailField()
+    phone_number = StringField()
+    user_name = StringField()
+    dob = DateField()
+    gender = StringField()
 
+
+class SocialMediaPost(EmbeddedDocument):
+    social_media_type = StringField(choices=SOCIAL_MEDIA_TYPE)
+    post_text = StringField()
+    post_date = DateField()
+
+class Marriage(EmbeddedDocument):
+    spouse = StringField(required=True)
+    location = StringField()
+    wedding_date = DateField(required=True)
+    divorce_date = DateField()
 
 class Avatar_AMS(Document):
     health = IntField(min_value=0, max_value=100, default=0)
@@ -107,14 +123,19 @@ class Avatar_AMS(Document):
     phone_number = StringField(max_length=20)
     profile_image = ImageField()
     cover_image = ImageField()
+    address = StringField(min_length=10)
+    nationality = StringField(min_length=5)
 
     works= ListField(default=[])
     educations = ListField(default=[])
     skills = ListField(default=[])
-    interests = ListField(default=[])
+    interests = DictField()
     locations = ListField(default=[])
     life_events = ListField(default=[])
     social_media_accounts = ListField(default=[])
+    marriages = EmbeddedDocumentListField(Marriage)
+    biography = ListField(StringField())
+    social_media_posts = EmbeddedDocumentListField(SocialMediaPost)
 
 
     def __str__(self):
@@ -156,18 +177,36 @@ class Avatar_AMS(Document):
         if 'email' in kwargs: self.email = kwargs['email']
         if 'profile_image' in kwargs: self.profile_image = kwargs['profile_image']
         if 'cover_image' in kwargs: self.cover_image = kwargs['cover_image']
+        if 'address' in kwargs: self.address = kwargs['address']
+        if 'nationality' in kwargs: self.nationality = kwargs['nationality']
 
         self.evaluate_health()
 
-    def add_work(self,title,start_date,end_date,location,description,company):
+    def add_work(self, title, company, location, description,
+                 start_date, end_date, is_current):
 
-        work = Work(title=title,start_date=start_date,end_date=end_date,location=location,description=description,company=company)
+        work = Work(
+            title=title,
+            start_date=start_date,
+            end_date=end_date,
+            location=location,
+            description=description,
+            company=company,
+            current=is_current)
         self.works.append(work)
+        self.correct_current_job(work)
         self.evaluate_health()
 
-    def add_education(self,institute,degree,grades,field_of_study,start_date,end_date):
+    def add_education(self, institute, degree, grades,
+                      field_of_study, start_date, end_date):
 
-        education = Education(institute,degree,grades,field_of_study,start_date,end_date)
+        education = Education(
+            institute,
+            degree,
+            grades,
+            field_of_study,
+            start_date,
+            end_date)
         self.educations.append(education)
         self.evaluate_health()
 
@@ -177,9 +216,21 @@ class Avatar_AMS(Document):
         self.skills.append(skill)
         self.evaluate_health()
 
-    def add_interests(self,category,name,link):
-        interest = Interest(category,name,link)
-        self.interests.append(interest)
+    def add_interests(self, hobbies, movies, songs):
+        # print(self.interests, hobbies, movies, songs)
+        if self.interests:
+            # print('interest if')
+            self.interests['hobbies'].extend(hobbies)
+            self.interests['movies'].extend(movies)
+            self.interests['songs'].extend(songs)
+        else:
+            # print('interest else')
+            self.interests = {
+                'hobbies': hobbies,
+                'movies': movies,
+                'songs': songs
+            }
+
         #self.save()
         self.evaluate_health()
 
@@ -188,10 +239,36 @@ class Avatar_AMS(Document):
         self.life_events.append(event)
         self.evaluate_health()
 
+    def add_biography(self, biography):
+        self.biography.append(biography)
+        self.save()
 
-    def add_social_accounts(self,social_media_type,username,password):
-        social_account = SocialMediaAccount(social_media_type,username,password)
+    def add_social_accounts(self, social_media_type, first_name,
+                            last_name, email, phone_number, user_name, dob, gender):
+        social_account = SocialMediaAccount(
+            social_media_type, first_name,
+            last_name, email, phone_number, user_name, dob, gender)
         self.social_media_accounts.append(social_account)
+        self.evaluate_health()
+
+    def add_social_post(self, social_media_type, post, post_date):
+        social_post = SocialMediaPost(social_media_type, post, post_date)
+        self.social_media_posts.append(social_post)
+        self.save()
+
+    def add_marriage(self, spouse, location, wedding_date, divorce_date):
+        # print(spouse, location, wedding_date, divorce_date)
+        marriage = Marriage(spouse, location, wedding_date, divorce_date)
+        # print(self.first_name)
+        # print(self.marriages)
+        # self.marriages.append(marriage)
+        if self.marriages.count():
+            print('marriage if')
+            self.marriages.append(marriage)
+        else:
+            print('marriage else')
+            self.marriages = []
+            self.marriages.append(marriage)
         self.evaluate_health()
 
     def get_avatar_health(self):
@@ -243,6 +320,18 @@ class Avatar_AMS(Document):
     @staticmethod
     def find_object(query):
         return Avatar_AMS.objects.search_text(query)
+    
+    def correct_current_job(self, correct_current_job_id):
+        """
+        This method is for the case when multiple jobs were added for an avatar
+        and 1 of them was current job, now another new current job is added,
+        which means the previous current job has to be converted to past job.
+        """
+        pass
+
+    @staticmethod
+    def get_all_avatars_id_and_names():
+        return Avatar_AMS.objects().fields(first_name=1, last_name=1)
 # ----------------------------------------------------------- Avatar Actions -----------------------------------------------
 
 
