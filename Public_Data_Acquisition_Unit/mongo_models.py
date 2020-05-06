@@ -1163,3 +1163,65 @@ class Rabbit_Messages(Document):
 
 
 
+class Timeline_Posts(Document):
+
+    target_site = StringField()
+    target_type = StringField()
+    gtr_id = StringField(unique=True)
+
+    username = StringField(unique=True)
+    title = StringField()
+    posts = ListField()
+    all_seen = BooleanField(default=False)
+    seenn_indexes = ListField() # it stores the indexes of the "posts list field" indexes in this list will considered seen
+
+
+    @staticmethod
+    def get_qualified_objects():
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_objs = []
+
+        tl_objs = Timeline_Posts.objects(all_seen=False)
+        for obj in tl_objs:
+            for post in obj.posts:
+                if(not post['seen']):
+                    qualified_objs.append(obj)
+
+
+        return qualified_objs
+
+    @staticmethod
+    def get_qualified_posts(top=10):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        for obj in tl_objs:
+
+
+            for post in obj.posts:
+
+
+
+                if (not post['seen']):
+                    count = count +1
+                    qualified_posts.append(post)
+                    post['seen'] = True
+                    obj.save()
+
+                if (count >= top):
+                    break
+
+        return qualified_posts

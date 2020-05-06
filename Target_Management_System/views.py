@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views import View
 from OSINT_System_Core.publisher import publish
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
-from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager,Timeline_Manager
 from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS
 from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +13,7 @@ from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 acq = Acquistion_Manager()
 km = Keybase_Manager()
+tl = Timeline_Manager()
 from django.views.generic import TemplateView
 
 class Add_Target(RequireLoginMixin, IsTSO, View):
@@ -308,6 +309,16 @@ class Test_View1(View):
         send_event('notifications', 'alert', {
             'new': 'alert1', 'prev1': 'alert2', 'prev2': 'alert3'})
         return JsonResponse({'alert_event_called': 1})
+
+
+class Timeline(RequireLoginMixin, IsTSO, View):
+
+    def get(self,request,*args,**kwargs):
+
+        posts = tl.fetch_posts_for_timeline()
+        print(posts)
+
+        return render(request,'Target_Management_System/timeline.html',{'posts':posts})
 
 
 def convert_expired_on_to_datetime(expired_on):
