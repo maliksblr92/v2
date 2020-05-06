@@ -58,7 +58,6 @@ class Acquistion_Manager(object):
             return target
         except Exception as e:
             print(e)
-            publish(e, message_type='error', module_name=__name__)
             return False
 
     def add_bulk_targts(self,website_id,target_type_index,prime_argument_list,expired_on,periodic_interval):
@@ -121,7 +120,7 @@ class Acquistion_Manager(object):
 
                 print(keywords)
 
-                response = appropriate_ess_method(keywords,gtr.id,ctr)
+                response = appropriate_ess_method(keywords,gtr,ctr)
                 print(response)
                 publish('keybase target added successfully', message_type='info', module_name=__name__)
 
@@ -143,7 +142,7 @@ class Acquistion_Manager(object):
 
 
 
-                response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr.id,ctr)
+                response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr,ctr)
                 print(response)
                 publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
             else:

@@ -82,41 +82,7 @@
                                                     <button type="button" class="btn btn-primary btn_link" id="btn_link" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#linkto_portfolio">L</button>
                                                 <br>
                                                     <button type="button" class="btn btn-primary btn_share" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource">S</button>
-                                                    <br>
-                                                    {% if target.1.GTR|lower == 'facebook'%}
-                                                            {% if target.1.target_type|lower == 'profile'%}
-                                                                <a class="btn btn-primary" href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}" role="button">E</a>
-                                                            {% elif target.1.target_type|lower == 'page'%}
-                                                             <a class="btn btn-primary" href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}" role="button">E</a>
-                                                            {% elif target.1.target_type|lower == 'group'%}
-                                                            <a class="btn btn-primary" href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}" role="button">E</a>
-
-                                                            {% endif %}
-                                                    {% elif target.1.GTR|lower == 'twitter'%}
-                                                    <a class="btn btn-primary" href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}" role="button">E</a>
-
-                                                    {% elif target.1.GTR|lower == 'instagram'%}
-                                                                <a class="btn btn-primary" href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}" role="button">E</a>
-
-                                                    {% elif target.1.GTR|lower == 'linkedin'%}
-
-
-                                                            {% if target.1.target_type|lower == 'profile'%}
-                                                                <a class="btn btn-primary" href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}" role="button">E</a>
-                                                            {% elif target.1.target_type|lower == 'company'%}
-                                                            <a class="btn btn-primary" href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}" role="button">E</a>
-
-                                                            {% endif %}
-                                                    {% elif target.1.GTR|lower == 'reddit'%}
-
-
-                                                    {% else %}
-
-
-                                                    {% endif %}
-
-
-                                                    </div>
+                                                </div>
                                                 <!-- Div Right part-->
                                                 <div class="col-md-10 glowing_border"
                                                     style="width:500px; border-radius:0px 15px 15px 0px;">
@@ -124,13 +90,8 @@
                                                         <div class="col-md-4">
                                                             <img class=""
                                                                 style="height:120px; width:120px; margin-top:50%;"
-                                                                {% if target.0.profile_picture_url.profile_picture %}
-                                                                  src="{{ target.0.profile_picture_url.profile_picture }}" alt="">
-                                                                 {% else %}
-                                                                 src="{% static 'images/testimonial.png' %}" alt="">
-                                                                {% endif %}
-
-                                                            <!-- src="" alt=""> -->
+                                                                src="{% static 'images/testimonial.png' %}" alt="">
+                                                                <!-- src="{{ target.0.profile_picture_url.profile_picture }}" alt=""> -->
 
 
 

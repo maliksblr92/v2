@@ -32,7 +32,6 @@ from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
 from django_eventstream import send_event
-from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
 
 
@@ -778,18 +777,6 @@ class Share_Resource(View):
         else:
             return HttpResponse('input parameters are left empty or invalid')
         return HttpResponse('unable to share resource')
-
-
-
-class Rabbit_Message(View):
-
-    def get(self,request):
-
-        print(request.GET)
-        objects = Rabbit_Messages.get_top_messages(10,request.GET.get('window_type','message'))
-        print(objects)
-
-        return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
 
 
 # .........................................Normal Functions ............
@@ -1590,8 +1577,9 @@ def mainHeatMap(request):
 
 
 def newsMonitor(request):
-    with open('static/Target_Json/news_data1.json', 'r') as f:
-        news_json = json.load(f)
+    # with open('static/Target_Json/news_data1.json', 'r') as f:
+    #     news_json = json.load(f)
+    model.objects.raw()
     return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
 
 

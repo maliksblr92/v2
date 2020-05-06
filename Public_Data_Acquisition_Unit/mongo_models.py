@@ -613,7 +613,7 @@ class Facebook_Search(Facebook_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format('facebook search'), message_type='control',module_name=__name__)
-                return self
+                return self.id
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a facebook search, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -757,7 +757,7 @@ class Twitter_Profile(Twitter_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, kwargs):
+    def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
         try:
@@ -778,7 +778,7 @@ class Twitter_Profile(Twitter_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self
+                return self.id
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a twitter profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -809,7 +809,7 @@ class Instagram_Profile(Instagram_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, kwargs):
+    def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
         try:
@@ -829,7 +829,7 @@ class Instagram_Profile(Instagram_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self
+                return self.id
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a instagram profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -858,7 +858,7 @@ class Linkedin_Profile(Linkedin_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, kwargs):
+    def create(self, GTR, **kwargs):
         # super().__init__(GTR)
 
         try:
@@ -880,7 +880,7 @@ class Linkedin_Profile(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self
+                return self.id
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -933,7 +933,7 @@ class Linkedin_Company(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self
+                return self.id
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -1141,25 +1141,4 @@ class Share_Resource(Document):
     @staticmethod
     def get_rdo_resources():
         return Share_Resource.objects(share_with='rdo')
-
-class Rabbit_Messages(Document):
-
-    message_type = StringField(default='info')
-    message_data = DictField()
-    created_on = DateTimeField(default=datetime.datetime.utcnow())
-
-
-    @staticmethod
-    def get_all_messages():
-        return Rabbit_Messages.objects()
-
-    @staticmethod
-    def get_messages_with_date_range(start,end):
-        return Rabbit_Messages.objects(Q(created_on__gte=start) & Q(created_on__lte=end))
-
-    @staticmethod
-    def get_top_messages(top=10,message_type='message'):
-        return Rabbit_Messages.objects(message_type=message_type).order_by('-id')[:top]
-
-
 

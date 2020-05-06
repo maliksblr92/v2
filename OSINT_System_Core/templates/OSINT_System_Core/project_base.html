@@ -22,9 +22,21 @@
 <script src="{% static 'django_eventstream/json2.js' %}"></script>
   <script  src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
   <script  src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
-</head>
 
-<body>
+  
+</head>
+<style>
+  body {
+    -webkit-transition: background-color 1s;
+    transition: background-color 1s;
+  }
+
+  
+ 
+</style>
+<body class="loading">
+  
+
   <!-- container fluid div -->
   <div class="container-fluid">
     <!-- header -->
@@ -48,14 +60,14 @@
                     <div class="col-lg-6  list list-inline custom_center "
                       style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class="btn  nav_btn  topnavitem" href="{% url 'Target_Management_System:tms_marktarget' %}"
+                        <a class="btn  nav_btn  topnavitem" href="#"
                           style="color:#fff; letter-spacing: normal;">TARGET</a>
                       </li>
                     </div>
                     <div class="col-lg-6  list list-inline custom_center "
                       style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class="   btn   nav_btn" href="{% url 'Portfolio_Management_System:create_portfolio' %}" style="">PORTFOLIO</a>
+                        <a class="   btn   nav_btn" href="#" style="">PORTFOLIO</a>
                       </li>
                     </div>
                   </div>
@@ -135,6 +147,32 @@
         <!-- start footer script -->
 
         <script>
+          // jquery ready function
+          document.addEventListener('DOMContentLoaded', function () {
+            let footerRES = new ReconnectingEventSource('/events/')
+            // console.log(footerRES)
+            footerRES.addEventListener('message', (event) => {
+                      const control_msg = JSON.parse(event.data)
+                      console.log(control_msg)
+                      const control_msg_box = $('#control-msg-box')
+                      control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+            })
+
+          }) // end of jquery ready function
+
+        // jquery event function for notification f
+          document.addEventListener('DOMContentLoaded', function () {
+            let footerRES = new ReconnectingEventSource('/events/')
+            // console.log(footerRES)
+            footerRES.addEventListener('notification', (event) => {
+                      const control_msg = JSON.parse(event.data)
+                      console.log(control_msg)
+                      const control_msg_box = $('#notification-box')
+                      control_msg_box.append('<p class ="m-0 p-0">'+"-> From :"+control_msg['server_name']+" :"+control_msg['messege']+'</p>')
+            })
+
+          }) // end of jquery ready function
+
 
 
 
@@ -153,97 +191,9 @@
   <!-- end of container fluid -->
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script   src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
-  <script   src="{% static 'popper/js/popper.min.js' %}"></script>
-  <script   src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
-<script>
-
-
-
-
-
-
-    $(document).ready(function () {
- console.log('ok running ')
- // jquery ready function
-
-
-
-
-let footerRES = new ReconnectingEventSource('/events/')
-
-            footerRES.addEventListener('message', (event) => {
-                        console.log(event)
-                      rabbit_message("message")
-
-            })
-
-
-
-        // jquery event function for notification f
-          document.addEventListener('DOMContentLoaded', function () {
-            let footerRES = new ReconnectingEventSource('/events/')
-            // console.log(footerRES)
-            footerRES.addEventListener('notification', (event) => {
-                      const control_msg = JSON.parse(event.data)
-                      console.log(control_msg)
-
-                        rabbit_message("notification")
-
-            })
-
-          }) // end of jquery ready function
-
-
-
-
-function rabbit_message(window_type) {
-
-                console.log("get top 10 messages from db for "+window_type);
-
-
-            var control_msg_box = null;
-            var data = {
-                window_type: window_type
-            };
-            console.log("in rabbit mq function ")
-            $.get({
-                url: '{% url 'OSINT_System_Core:rabbit_message' %}',
-                data: data,
-                'success': (resp) => {
-
-                         console.log(resp)
-                    //const control_msg = JSON.parse(resp)
-
-                    if(window_type =='notification'){
-
-                        control_msg_box = $('#notification-box')
-                    }
-                    else if(window_type == 'message'){
-                         control_msg_box = $('#control-msg-box')
-                    }
-
-                              //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
-                        control_msg_box.empty().append(resp)
-
-
-
-                },
-
-            });
-    }
-
-
-    rabbit_message("message")
-
-    });
-
-
-
-
-
-</script>
+  <script defer src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
+  <script defer src="{% static 'popper/js/popper.min.js' %}"></script>
+  <script defer src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
   <script defer src="{% static 'amchart/js/core.js' %}"></script>
   <script defer src="{% static 'amchart/js/charts.js' %}"></script>
@@ -445,7 +395,15 @@ console.log("i m clicked")
 
 
 </script>
+<script>
+  
+ 
 
+
+
+
+  
+</script>
 </body>
 
 </html>
