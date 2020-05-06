@@ -1,0 +1,101 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+
+
+
+   <div class="row fixed-bottom">
+    <div class="col-md-12 text-center bg-dark" style="background-color: black;">
+    <p class="text-white font-weight-bold ">Osint.com.pk</p>
+    </div>
+    </div>
+
+
+{% block system_content_block %}
+<br><br><br><br>
+<div class="row">
+
+    <div class="col-md-4">
+    <h1>Target Responses</h1>
+
+
+    </div>
+
+
+</div>
+<div class="row">
+
+    <div class="col-md-4">
+
+        <p>
+            this page shows the responses of the targets initiated buy the user
+
+        </p>
+
+
+    </div>
+
+
+</div>
+
+<br><br><br><br>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">GTR</th>
+        <th scope="col">Website</th>
+      <th scope="col">Target_Name</th>
+      <th scope="col">Target_Account</th>
+      <th scope="col">Profile_Url</th>
+        <th scope="col">is_expired</th>
+        <th scope="col">Expire In</th>
+      <th scope="col">Periodic Interval</th>
+      <th scope="col">Created on</th>
+        <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for resp in responses %}
+    <tr>
+      <th scope="row">{{resp.0.GTR}}</th>
+      <td>{{  resp.2.title }}</td>
+      <td>{{resp.1.author_name}}</td>
+      <td>{{resp.1.author_account}}</td>
+        <td >{{resp.1.author_url}}</td>
+      <td>{{resp.1.is_expired}}</td>
+      <td>{{resp.1.expired_on}}</td>
+      <td>{{resp.1.periodic_interval}}</td>
+        <td>{{resp.1.created_on}}</td>
+        {% if  resp.2.title == 'Instagram'%}
+            <td><a href="{% url 'Data_Processing_Unit:instagram_profile_view' resp.0.id %}" class="btn btn-primary btn-sm">View Profile</a></td>
+        {% elif  resp.2.title == 'Facebook'%}
+            <td><a href="{% url 'Data_Processing_Unit:facebook_profile_view' resp.0.id %}" class="btn btn-primary btn-sm">View Profile</a></td>
+        {% elif  resp.2.title == 'twitter'%}
+            <td><a href="{% url 'Data_Processing_Unit:twitter_profile_view' resp.0.id %}" class="btn btn-primary btn-sm">View Profile</a></td>
+        {% elif  resp.2.title == 'LinkedIn'%}
+            <td><a href="{% url 'Data_Processing_Unit:linkedin_profile_person_view' resp.0.id %}" class="btn btn-primary btn-sm">View Profile</a></td>
+        {% endif %}
+    </tr>
+
+{% endfor %}
+
+  </tbody>
+</table>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+   {% endblock %}
+
+
+
+

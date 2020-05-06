@@ -1,0 +1,349 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% load osint_custom_tags %}
+{% block head_dep %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_marktarget.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive ">
+            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+<!-- style="background-color:#012847; border-radius:15px 15px 0 0;" -->
+
+{% block belly %}
+<div class="row ">
+    <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
+        <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
+    </div>
+    <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
+        <!-- TOP MANU BAR -->
+        <nav>
+            <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-reddit-square fa-2x"></i></a>
+
+                <a class="nav-item nav-link" id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i></a>
+
+                <a class="nav-item nav-link" id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
+                    <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i></a>
+
+                <a class="nav-item nav-link active" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
+                    <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
+
+                <a class="nav-item nav-link" id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
+
+            </div>
+        </nav>
+
+        <!-- END OF TOP MANU BAR -->
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+
+            <div class="row ">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
+                    <!-- this is content -->
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        {% for platform in data.social %}
+                        <div class="tab-pane fade {% if platform.name|lower == 'facebook' %}active show{% endif %}"
+                            id="{{platform.name|lower}}" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <!-- Each content tab #1 for keywords-->
+
+                            <div class="row formbg ml-5">
+                                <div class="col-md-4 mt-5 ">
+                                    <div class="mt-5">
+                                        <img id="{{ platform.name|lower }}-profile_image" class="ml-5" style="height:150px; width:150px;"
+                                            src="{% static 'images/testimonial.png' %}" alt="">
+                                    </div>
+                                </div>
+
+                                <!-- END OF col-md4 LEFT DIV-->
+
+                                <!-- FORM DIV  RIGHT SIDE-->
+                                <div class="col-md-8">
+
+                                    <!--FORMS-->
+
+                                    <form style="padding-bottom:10px;" id="{{platform.name | lower}}-form"
+                                        action="/tms/marktarget/" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group ">
+
+                                            <div class="input-group    mt-5 mb-3">
+                                                <div class="input-group-prepend">
+
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                            opacity:0.9; padding:5px 9px 0 10px;">Author Account
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    placeholder="Please Enter your text"
+                                                    name="{{platform.name|lower}}_autheruseraccount"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button type="button" x-target-name="{{platform.name|lower}}"
+                                                        class="btn btn-secondary searchbutton smartsearch">SMART
+                                                        SEARCH</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group   mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">Author Type
+                                                    </span>
+                                                </div>
+                                                <select
+                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                    class="custom-select newinput"
+                                                    name="{{platform.name|lower}}_authortype">
+                                                    {% for choice in platform.target_type %}
+                                                    <option value={{forloop.counter0}}>{{choice}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <!-- author user id -->
+                                            <div class="input-group   mt-4 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author ID
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Please Enter your number"
+                                                    id="{{platform.name|lower}}-authoruserid"
+                                                    name="{{platform.name|lower}}_authoruserid"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            </div>
+                                        <input type="hidden" name="platform" value="{{platform.name|lower}}">
+
+                                            <!--for author name-->
+                                            <div class="input-group   mt-4 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author Name
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Please Enter your text"
+                                                    id="{{platform.name|lower}}-authorusername"
+                                                    name="{{platform.name|lower}}_authorusername"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            </div>
+
+                                            <!--AUTHUR URL-->
+                                            <div class="input-group   mt-4 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Author URL
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control  newinputdesign"
+                                                    placeholder="Please Enter your number"
+                                                    id="{{platform.name|lower}}-authoruserurl"
+                                                    name="{{platform.name|lower}}_authoruserurl"
+                                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            </div>
+
+                                            <!-- DATE AND TIME 2 column div -->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- EXPIRED ON SECTION-->
+                                                    <div class="input-group   mt-1 mb-3">
+                                                        <div class="input-group-prepend" >
+                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Expire on
+                                                            </span>
+                                                        </div>
+                                                        <input type="date" id="{{platform.name|lower}}-expirydate" name="{{platform.name|lower}}_expirydate">
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <!--INTERVAL SECTION-->
+                                                    <div class="input-group   mt-1 mb-3">
+                                                        <div class="input-group-prepend">
+
+                                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Interval
+                                                            </span>
+                                                        </div>
+                                                        <select
+                                                            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                            class="custom-select newinput"
+                                                            id="{{platform.name|lower}}-interval"
+                                                            name="{{platform.name|lower}}_interval">
+                                                            {% for interval in data.intervals %}
+                                                                <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- end of 2 column div for date and time-->
+
+                                            <div class="input-group   mt-2 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:7px 9px 0 10px;">Screenshots
+                                                    </span>
+                                                </div>
+                                                <input type="radio" class="form-control  newinputdesign"
+                                                    placeholder="Yes/ No" aria-label="Recipient's username"
+                                                    aria-describedby="basic-addon2"
+                                                    id="{{platform.name|lower}}-screenshot"
+                                                    name="{{platform.name|lower}}_screenshot"
+                                                    value="1">
+                                                 <label for="male">Yes</label><br>
+                                                <input type="radio" class="form-control  newinputdesign"
+                                                    placeholder="Yes/ No" aria-label="Recipient's username"
+                                                    aria-describedby="basic-addon2"
+                                                    id="{{platform.name|lower}}-screenshot"
+                                                    name="{{platform.name|lower}}_screenshot"
+                                                    value="0">
+                                                 <label for="male">No</label><br>
+                                                <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
+                                            </div>
+                                        </div>
+
+                                        <!-- TWO BUTTON BOTTOM-->
+
+                                        <div class="row d-flex flex-row">
+                                            <div class="col-md-12 ml-5 ">
+                                                <!--LEFT BUTTON-->
+                                                <button type="button"
+                                                    class="btn btn-secondary searchbutton clearform-btn"
+                                                    x-parent-form="{{platform.name|lower}}-form">
+                                                    CLEAR FORM</button>
+
+                                                <button type="submit" style="float:right; "
+                                                    class="btn btn-secondary searchbutton mr-5">Submit</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            <!-- end of the first reddit tab #1 -->
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- let me check -->
+
+                    <!-- end of content -->
+                </div>
+            </div>
+
+            <!-- END OF second row-->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script>
+    //start of document ready
+    document.addEventListener('DOMContentLoaded', function () {
+        let smartsearch = $('.smartsearch')
+        // smart search 
+        smartsearch.click((event) => {
+            // console.log(event.target)
+            let website = event.target.getAttribute('x-target-name')
+            let author_account = event.target.parentElement.parentElement.querySelector('input').value
+            // console.log(website, author_account)
+            // let author_account = $('#author-account').val()
+            let data = {
+                'author_account': author_account,
+                'search_site': website
+            }
+            $.ajax({
+                dataType: "json",
+                url: "/tms/smartsearch/",
+                data: data,
+                success: (response) => {
+                    // console.log(response)
+                    $(`#${website}-authoruserid`).val(response['author_userid'])
+                    $(`#${website}-authorusername`).val(response['author_username'])
+                    document.getElementById(`${website}-profile_image`).src = response['profile_url']
+                    switch (website) {
+                        case 'reddit':
+                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${author_account}`)
+                            break;
+                        case 'linkedin':
+                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${author_account}`)
+                            break;
+                        case 'instagram':
+                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${author_account}`)
+                            break;
+                        case 'facebook':
+                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${author_account}`)
+                            break;
+                        case 'twitter':
+                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${author_account}`)
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+        })
+        // clear form btn functionality
+        let clearformbtn = $('.clearform-btn')
+        clearformbtn.click(event => {
+            // console.log('clear form clicked')
+            let pf = event.target.getAttribute('x-parent-form')
+            // console.log(pf)
+            $(`#${pf}`).trigger('reset')
+        })
+
+        // add target form
+        // let addtargetform = $("#addtarget")
+        // addtargetform.submit((event) => {
+        //     event.preventDefault()
+        // })
+    }) // document ready
+</script>
+{% endblock %}

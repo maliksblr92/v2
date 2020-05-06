@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+
+    <title>Hello, world!</title>
+  </head>
+  <style>
+    html {
+      background: url("{% static 'User_Accounts_Management_Unit/images/OSINTUILoginScreen.png' %}")
+        no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    body {
+      background: url("{% static 'User_Accounts_Management_Unit/images/OSINTUILoginScreen.png' %}")
+        no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    input {
+      background-color: rgb(1, 1, 1, 0.5) !important;
+      color: white !important;
+      font-size: 25px !important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #username {
+      height: 60px;
+      width: 341px;
+    }
+
+    #password {
+      height: 60px;
+      width: 341px;
+    }
+
+    /* Change the white to any color ;) */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: white !important;
+      -webkit-font-size: 25px !important;
+      font-size: 25px !important;
+    }
+
+    input::-webkit-input-placeholder {
+      background-color: transparent !important;
+      color: white !important;
+      font-size: 25px;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    input:-moz-placeholder {
+      background-color: transparent !important;
+      color: white !important;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    /*Change text in autofill textbox*/
+    input:-webkit-autofill {
+      -webkit-text-fill-color: white !important;
+    }
+
+    .submit {
+      background-image: url("{% static 'User_Accounts_Management_Unit/images/logo_.png' %}");
+      background-size: cover;
+      background-position: center;
+      height: 60px;
+      width: 150px;
+      border: 2px solid rgb(230, 108, 108) !important;
+      border-radius: 10px;
+      padding: 0px !important;
+      margin: 0px !important;
+      background-color: rgb(57, 61, 63) !important;
+    }
+
+    #form_parent {
+      padding-top: 200px !important;
+    }
+
+    /*medai queries */
+
+    @media only screen and (max-width: 800px) {
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 20px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 40px;
+        width: 300px;
+      }
+
+      #password {
+        height: 40px;
+        width: 300px;
+      }
+
+      #form_parent {
+        padding-top: 0px !important;
+      }
+
+      .submit {
+        background-image: url("{% static 'User_Accounts_Management_Unit/images/logo_.png' %}");
+        background-size: cover;
+        background-position: center;
+        height: 40px;
+        width: 100px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }
+    }
+
+    @media only screen and (max-height: 800px) {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: white !important;
+        -webkit-font-size: 19px !important;
+        font-size: 25px !important;
+      }
+
+      input::-webkit-input-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-size: 19px;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+
+      input:-moz-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-weight: bold;
+        font-size: 19px;
+      }
+
+      /*Change text in autofill textbox*/
+      input:-webkit-autofill {
+        -webkit-text-fill-color: white !important;
+      }
+
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 15px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 40px;
+        width: 300px;
+      }
+
+      #password {
+        height: 40px;
+        width: 300px;
+      }
+
+      #form_parent {
+        margin-top: -100px !important;
+      }
+
+      .submit {
+        background-image: url(logo_.png);
+        background-size: cover;
+        background-position: center;
+        height: 40px;
+        width: 100px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }
+    }
+
+    @media only screen and (max-height: 400px) {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: white !important;
+        -webkit-font-size: 15px !important;
+        font-size: 25px !important;
+      }
+
+      input::-webkit-input-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+
+      input:-moz-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      /*Change text in autofill textbox*/
+      input:-webkit-autofill {
+        -webkit-text-fill-color: white !important;
+      }
+
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 13px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 25px;
+        width: 200px;
+      }
+
+      #password {
+        height: 25px;
+        width: 200px;
+      }
+
+      #form_parent {
+        margin-top: -50px !important;
+      }
+
+      .submit {
+        background-image: url(logo_.png);
+        background-size: cover;
+        background-position: center;
+        height: 30px;
+        width: 80px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }
+    }
+
+    @media only screen and (min-width: 992px) {
+      #form_parent {
+        margin-top: 0px !important;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      #form_parent {
+        margin-top: -50px !important;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="container-fluid vh-100">
+      <div class="row  vh-100">
+        <div class="col-md-4"></div>
+        <div
+          class="col-md-4 m-0 p-0  vh-100    d-flex flex-column justify-content-center align-items-center vh-100 "
+          id="form_parent"
+        >
+          <form action="/accounts/login/" method="POST">
+            {% csrf_token %}
+            <br />
+            <br />
+            <div class="row  mx-auto my-auto ">
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5 "
+              >
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="form-control"
+                  placeholder="LOGIN : _ _ _ _ _ _ _ _ "
+                  required
+                />
+              </div>
+
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5"
+              >
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="PASSWORD : _ _ _ _ _ _ _  "
+                  required
+                />
+              </div>
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5"
+              >
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
+                <input type="submit" class="submit" class="mt-2" value="" />
+              </div>
+            </div>
+          </form>
+
+          <!-- <div class="login_form" >
+            <input type="text" id="username"  name="password" id="password" class="form-control" style="" placeholder="LOGIN : _ _ _ _ _ _ _ _ " required/>
+            <input type="password" id="password" name="password" id="password"  class="form-control" style="" placeholder="PASSWORD : _ _ _ _ _ _ _  "  required/> 
+        </div>          -->
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

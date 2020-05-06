@@ -1,0 +1,77 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+{% endblock %}
+
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <h4 class="topheading">Keybase Crawling</h4>
+    </div>
+    <!-- end of top row -->
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+
+<form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
+{% csrf_token %}
+
+<label>title</label>
+<input type="text" name="title">
+
+  <label for="cars">Choose a Keybase</label>
+  <select id="keybase" name="keybase">
+     {% for keybase in keybases %}
+      <option value="{{ keybase.id }}">{{ keybase }}</option>
+    {% endfor %}
+  </select>
+
+ <select
+            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+            class="custom-select newinput"
+            id="interval"
+            name="interval">
+            {% for interval in intervals %}
+                <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+
+            {% endfor %}
+
+</select>
+
+   <!-- EXPIRED ON SECTION-->
+    <label>Expire on</label>
+    <input type="date" id="expire_on" name="expire_on">
+
+    <input type="submit">
+</form>
+
+
+    </div>
+</div>
+{% endblock %}>

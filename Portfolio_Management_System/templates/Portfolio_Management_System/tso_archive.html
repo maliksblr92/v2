@@ -1,0 +1,69 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_archive.css' %}" /> {% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 ">
+        <div class="row border second_nav_row">
+            <div class="col-md-3 m-0 p-0  "><a
+                    class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/create">Create</a></div>
+            <div class="col-md-3 border-top m-0 p-0  "><a
+                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/overview">Overview</a>
+            </div>
+            <div class="col-md-3  border-top m-0 p-0  "><a
+                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div>
+            <div class="col-md-3 m-0 p-0  "><a
+                    class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row">
+    <div class="col-md-12  m-0 p-0">
+        <div class="w-100 h-100 ">
+            <div class="card-header main_card_header m-0 p-0 ">
+                <p class="card_header_text">Profile Archive </p>
+            </div>
+            <div class="card-body main_card">
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    {% for portfolio in portfolios %}
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-4  ">
+                        <div class=" row small_card_warpper border">
+                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
+                                <div class="w-100 h-25 text-center">
+                                   <a href="{% url 'Portfolio_Management_System:add_information' portfolio.id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add Information</a>
+                                </div>
+                                <div class="w-100 h-50"></div>
+                                <div class="w-100 h-25 text-center">
+                                    <i class="fas fa-eye text-white eye_icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                                <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar">
+                            </div>
+                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
+                                <ul>
+                                    <li>Title :{{ portfolio.name }}</li>
+                                    <li>Portfolio type :{{ portfolio.portfolio_type}}</li>
+                                     <li>Created on :{{ portfolio.created_on}}</li>
+                                    <li>Updated on :{{ portfolio.created_on}}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end small card col-md-3 -->
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
