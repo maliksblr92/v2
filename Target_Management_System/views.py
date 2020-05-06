@@ -292,8 +292,11 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
-    template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
-
+   def get(self, request, *args, **kwargs):
+         with open('static/Target_Json/instagram_response.json', 'r') as f:
+            instagram_person = json.load(f)
+            # print(instagram_person)
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'instagram_person': instagram_person})
 
 
 

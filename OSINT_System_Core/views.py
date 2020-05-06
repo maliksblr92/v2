@@ -1577,8 +1577,9 @@ def mainHeatMap(request):
 
 
 def newsMonitor(request):
-    with open('static/Target_Json/news_data1.json', 'r') as f:
-        news_json = json.load(f)
+    # with open('static/Target_Json/news_data1.json', 'r') as f:
+    #     news_json = json.load(f)
+    model.objects.raw()
     return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
 
 

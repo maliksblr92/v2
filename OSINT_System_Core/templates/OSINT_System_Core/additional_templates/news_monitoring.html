@@ -2,126 +2,166 @@
 <!DOCTYPE html>
 <html>
   <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:09 GMT -->
- <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'Additional_assets/news_monitoring/css/style.css'%}">
-  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
-  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
- 
-
-    
-
-  </head>
-  <body>
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10 bg-dark text-center header m-0 p-0">
-      <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-      </div>
-         <div class="col-md-1"></div>
-    </div>
-
-
-
-
-
-
-
-
-      <div class="row mt-2 p-3  border  ml-2 mr-2">
-
-
-    <div class="col-md-4 p-2">
-      <div class="card" >
-        <div class="card-header text-center font-weight-bold text-white ">TV CHANNEL NAME 1</div>
-        <div class="card-body"style="height:400px;">
-{% for i in news_json.news %}
-<div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-
-        <a class="  d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
-
-        <div class="text-white w-75" style="font-size:12px;"> <span class="text-warning">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
-         <div  class="text-white w-25 badge badge-success"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
-
-        </a>
-
-    </div>
-
-    <div id="id{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-        <div  class="w-100 text-white "style="font-size:12px;">   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa eum commodi dolor rerum! Alias iure ullam suscipit odit aliquid cum iste voluptate quia et non rem, doloribus laboriosam aut ducimus?
-        </div>  {{i.Description}}</div>
-
-    </div>
-  </div>
-
-
-</div>
-{% endfor %}
-
-
-
-
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+      <<style>
+      .background-gradient{
+      background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+      }
+      .background-gradient-dark{
+      background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+      }
+      
+      </style>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="row pl-5 pr-5">
+          <div class="col-lg-12">
+            <nav class="navbar
+              navbar-expand-lg" id="header">
+              <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon ">
+                <i class="fas fa-bars"
+                style="color:#fff; font-size:28px;"></i>
+              </span>
+              </button>
+              <div class="collapse navbar-collapse"
+                id="navbarTogglerDemo01">
+                <div class="col-lg-2">
+                  
+                </div>
+                <div
+                  class="col-lg-8 ">
+                  <div class="row m-0 p-0">
+                    <div
+                      class="col-lg-5 pt-2">
+                      <div class="row">
+                        <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
+                          <li class="nav-item">
+                            <a class=" btn font-weight-bold nav_btn" href="#"  style="color: #fff !important;">DASHBOARD</a>
+                          </li>
+                        </div>
+                        <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;"> <li class="nav-item">
+                          <a class="btn font-weight-bold nav_btn" href="#" style="color: #fff !important;">MONITOR</a>
+                        </li>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 custom_center">
+                    <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
+                  </div>
+                  <div class="col-lg-5 pt-2">
+                    <div class="row">
+                      <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
+                        white;">
+                        <li class="nav-item">
+                          <a class="btn font-weight-bold nav_btn" href="#" style="color: #fff !important;">FETCH</a>
+                        </li>
+                      </div>
+                      <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
+                        <li class="nav-item">
+                          <a class="btn font-weight-bold nav_btn" href="#" style="color: #fff !important;">RETRIEVE</a>
+                        </li>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 ">
+                
+              </div>
+            </div>
+          </nav>
         </div>
-        <div class="card-footer bg-dark border border-success m-0 p-0">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <div class="text-white text-center  bg-danger font-weight-bold " style="font-size: 14px;;"> Most Common Words</div>
-              {% for i in news_json.common_words%}
-              <span class="badge badge-primary">{{i}}</span>
-              {% endfor %}
+      </div>
+      <div class="row mt-2 p-3   ml-2 mr-2">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 border border-warning text-center m-0 p-0">
+          <div class="col-md-12 card-header background-gradient-dark text-center font-weight-bold text-white">TV CHANNEL NAME 1</div>
+          <div class="row mt-2 mb-2">
+            <div class="col-md-6 text-center font-weight-bold text-white ">
+              <div class="card" >
+                <div class="card-body background-gradient-dark"style="height:400px;">
+                  {% for i in news_json.news %}
+                    <div class="accordion " id="accordionExample">
+                      <div class="card background-gradient">
+                        <div class="card-header" id="headingOne">
+                          <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                            <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-warning">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
+                            <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
+                          </a>
+                        </div>
+                        <div id="id{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div  class="w-100 text-white "style="font-size:12px;">   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa eum commodi dolor rerum! Alias iure ullam suscipit odit aliquid cum iste voluptate quia et non rem, doloribus laboriosam aut ducimus?
+                            </div>  {{i.Description}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 text-center font-weight-bold text-white ">
+                <div class="card" >
+                  <div class="card-footer bg-dark m-0 p-0">
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;"> Most Common Words</div>
+                        {% for i in news_json.common_words%}
+                          <span class="badge badge-light">{{i}}</span>
+                        {% endfor %}
+                      </div>
+                      <div class="col-md-12 text-center">
+                        <div class="text-white text-center background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;">  World Cloud </div>
+                        <span class="text-white" style="font-size: 12px;;"> {{news_json.WordCloud |cut:'#'}}</span>
+                      </div>
+                      <div class="col-md-12 text-center">
+                        <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;"> Most Used Hastag</div>
+                        <div class="" > {% for i in news_json.most_used_hashtags%}
+                          <span class="badge badge-light">{{i  }}</span>
+                        {% endfor %}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="col-md-12 text-center">
-              <div class="text-white text-center bg-danger font-weight-bold" style="font-size: 14px;;">  World Cloud </div>
-             <span class="text-white" style="font-size: 12px;;"> {{news_json.WordCloud |cut:'#'}}</span>
-            </div>
-            <div class="col-md-12 text-center">
-              <div class="text-white text-center  bg-danger font-weight-bold" style="font-size: 14px;;"> Most Used Hastag</div>
-              <div class="" > {% for i in news_json.most_used_hashtags%}
-                <span class="badge badge-primary">{{i  }}</span>
-                {% endfor %}</div>
-             </div>
           </div>
-
-
+          <div class="col-md-1"></div>
         </div>
+        
+        <!--           <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10 background-gradient text-center footer  m-0 p-0">
+            <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
+          </div>
+          <div class="col-md-1"></div>
+        </div> -->
+        <div class="row pl-5 pr-5 mt-3">
+          <div class="col-lg-12 ">
+            <nav class="navbar navbar-expand-lg " id="header">
+              <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
+                <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
+              </div>
+            </nav>
+          </div>
+        </div>
+        
       </div>
-    </div>
-
-</div>
-
-
-
-
-
-  <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10 bg-dark text-center footer  m-0 p-0">
-     <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
-      </div>
-         <div class="col-md-1"></div>
-    </div>
-
-
-
-
-
-</div>
-
-
-<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
     </body>
     <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:46 GMT -->
   </html>
