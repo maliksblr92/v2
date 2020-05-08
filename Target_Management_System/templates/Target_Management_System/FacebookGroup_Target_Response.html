@@ -70,10 +70,34 @@
       .wrapper{
       }
       .background-gradient{
-      background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+      background: linear-gradient(90deg, rgba(153,153,153,1) 0%, rgba(242,242,242,1) 33%, rgba(153,153,153,1) 66%, rgba(242,242,242,1) 100%) !important;
       }
       .background-gradient-dark{
-      background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+      background: linear-gradient(0deg, rgba(24,72,116,1) 0%, rgba(6,17,26,1) 100%) !important;
+      }
+      .custom_active_text > i{
+      color: #ffffff !important;
+      }
+      .custom_active_text.active > i{
+      color: #184874 !important;
+      }
+      .text_heading{
+      color: #06111a;
+      }
+      .text_paragraph{
+      color: #184874;
+      }
+      .custom_badge{
+      background-color: #06111a !important;
+      color: #ffffff !important;
+      }
+      .card-header{
+      border: 1px solid #06111a !important;
+      border-radius: 5px !important;
+      margin-bottom: 4px !important;
+      }
+      .custom_border_color{
+      border-color: #06111a !important;
       }
       .circle-dot1{
       width: 15px;
@@ -142,12 +166,6 @@
       .border-radius-5-all{
       border-radius: 5px!important;
       }
-      .custom_active_text > i{
-      color: #FEC134 !important;
-      }
-      .custom_active_text.active > i{
-      color: #FEC134 !important;
-      }
       .material-icons{
       color: #007bff;
       font-size: 16px;;
@@ -202,8 +220,8 @@
       }
       </style>
     </head>
-    <body>
-      <div class="container-fluid wrapper ">
+    <body class="background-gradient">
+      <div class="container-fluid wrapper">
         <div class="row pl-5 pr-5">
           <!-- <div class="col-lg-12 pl-5 pr-5"> -->
           <div class="col-lg-12">
@@ -269,12 +287,12 @@
           </div>
         </div>
         <div class="row ml-1 mr-1 pl-5 pr-5">
-          <div class="col-md-12 fb-cover-img" style="background-color:#4267b2">
+          <div class="col-md-12 fb-cover-img background-gradient-dark">
           </div>
         </div>
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <div class="col-md-2">
-            <div class="profile-image-wrapper">
+            <div class="profile-image-wrapper custom_border_color">
             </div>
           </div>
           <div class="col-md-8 ">
@@ -286,115 +304,127 @@
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <!-- Left Card Start -->
           <div class="col-md-3">
-            <div class="row border border-warning background-gradient mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
-              <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                <i class="fas fa-chart-bar text-warning fa-2x"></i>
-                <span class="text-warning ml-2"style="font-size:18px;">
-                  <span class="font-weight-bold">
-                    {{group.name}}
-                  </span>
-                  Statistics
-                </span>
+            <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
+              <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
+                <div class="row">
+                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                    <i class="fas fa-chart-bar text-white fa-2x"></i>
+                    <span class="text-white ml-2"style="font-size:18px;">
+                      <span class="font-weight-bold">
+                        {{group.name}}
+                      </span>
+                      Statistics
+                    </span>
+                  </div>
+                  <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
+                </div>
               </div>
-              <div class="col-md-2 text-warning mt-1">{{group.friends | length}}</div>
               
               <div class="col-md-12 mt-3 mb-3"style="height:auto;">
                 <div class="row">
                   <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px">
-                      <i class="fas fa-users  text-warning p-3"style="font-size:24px;"></i>
+                    <span class="border border-radius-5-all custom_border_color custom-center-center "style="height:70px;width:70px">
+                      <i class="fas fa-users text_heading p-3"style="font-size:24px;"></i>
                     </span>
                   </div>
                   <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text-white font-weight-bold "> {{group.group_members_stats.current_members}} Member</span>
-                    <small class="text-white"> {{group.group_members_stats.recent_members}}</small>
+                    <span class="text_paragraph font-weight-bold "> {{group.group_members_stats.current_members}} Member</span>
+                    <small class="text_paragraph"> {{group.group_members_stats.recent_members}}</small>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <div class="border border-radius-5-all d-flex flex-column justify-content-center align-items-center "style="height:70px;width:70px">
-                      <span class="text-warning font-weight-bold">Today  </span>
-                      <span class="text-warning font-weight-bold">  posts</span>
+                    <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center text_heading"style="height:70px;width:70px">
+                      <span class="font-weight-bold">Today  </span>
+                      <span class="font-weight-bold">  posts</span>
                     </div>
                   </div>
                   <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text-white font-weight-bold "> {{group.group_posting_stats.today_posts}}  posts a day</span>
+                    <span class="text_paragraph font-weight-bold "> {{group.group_posting_stats.today_posts}}  posts a day</span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <div class="border border-radius-5-all d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px">
-                      <span class="text-warning font-weight-bold">Recent  </span>
-                      <span class="text-warning font-weight-bold">  posts</span>
+                    <div class="border border-radius-5-all custom_border_color text_heading d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px">
+                      <span class="font-weight-bold">Recent  </span>
+                      <span class="font-weight-bold">  posts</span>
                     </div>
                   </div>
                   <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text-white font-weight-bold "> {{group.group_posting_stats.recent_posts}} </span>
+                    <span class="text_paragraph font-weight-bold "> {{group.group_posting_stats.recent_posts}} </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row border border-warning background-gradient mt-2 p-2" style="border-radius:0px 0px 0px 0px;">
-              <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                <i class="fas fa-chart-bar text-warning fa-2x"></i>
-                <span class="text-warning ml-2"style="font-size:18px;">
-                  <span class="font-weight-bold">{{group.name}}</span>
-                  Owner Details
-                </span>
+            <div class="row border custom_border_color bg-white mt-2">
+              <div class="col-md-12 p-2 background-gradient-dark">
+                <div class="row">
+                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                    <i class="fas fa-chart-bar text-white fa-2x"></i>
+                    <span class="text-white ml-2"style="font-size:18px;">
+                      <span class="font-weight-bold">{{group.name}}</span>
+                      Owner Details
+                    </span>
+                  </div>
+                  <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
+                </div>
               </div>
-              <div class="col-md-2 text-warning mt-1">{{group.friends | length}}</div>
               <div class="col-md-12 mt-3 mb-3"style="height:auto;">
                 <div class="row p-2">
                   <div class="col-md-12 "style="height:auto;">
                     <div class="row">
                       <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <div class="border border-radius-5-all d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text-warning font-weight-bold">Admin  </span>
-                        <span class="text-warning font-weight-bold">  count</span></div>
+                        <div class="border border-radius-5-all d-flex custom_border_color flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Admin  </span>
+                        <span class="text_heading font-weight-bold">  count</span></div>
                       </div>
                       <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                        <span class="text-white font-weight-bold "> {{group.num_admins}} Admin</span>
+                        <span class="text_paragraph font-weight-bold "> {{group.num_admins}} Admin</span>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <div class="border border-radius-5-all d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text-warning font-weight-bold"style="font-size:13px;">Moderator  </span>
-                        <span class="text-warning font-weight-bold"style="font-size:13px;">  count</span></div>
+                        <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold"style="font-size:13px;">Moderator  </span>
+                        <span class="text_heading font-weight-bold"style="font-size:13px;">  count</span></div>
                       </div>
                       <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                        <span class="text-white font-weight-bold "> {{group.num_moderators}} Moderators</span>
+                        <span class="text_paragraph font-weight-bold "> {{group.num_moderators}} Moderators</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row border border-warning background-gradient mt-2 p-2" style="border-radius:0px 0px 0px 10px;">
-              <div class="col-md-10 d-flex flex-row justify-content-start align-items-center"> <i class="fas fa-address-card fa-2x text-warning"></i>
-                <span class="text-warning ml-2"style="font-size:18px;"><span class="font-weight-bold">{{group.name}}</span> Privacy Details</span></div>
-                <div class="col-md-2 text-warning mt-1">{{group.friends | length}}</div>
+            <div class="row border custom_border_color bg-white mt-2" style="border-radius:0px 0px 0px 10px;">
+              <div class="col-md-12 background-gradient-dark p-2">
+                <div class="row">
+                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center"> <i class="fas fa-address-card fa-2x text-white"></i>
+                    <span class="text-white ml-2"style="font-size:18px;"><span class="font-weight-bold">{{group.name}}</span> Privacy Details</span></div>
+                    <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
+                  </div>
+                </div>
                 <div class="col-md-12 mt-3 mb-3"style="height:auto;">
                   <div class="row">
                     <div class="col-md-4 m-0 p-0  custom-center-center">
-                      <div class="border  border-radius-5-all d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text-warning font-weight-bold">Group  </span>
-                      <span class="text-warning font-weight-bold">  privacy</span></div>
+                      <div class="border  border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
+                      <span class="text_heading font-weight-bold">  privacy</span></div>
                     </div>
                     <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
-                      <span class="text-white font-weight-bold small-txt"> {{group.group_privacy}}</span>
+                      <span class="text_paragraph font-weight-bold small-txt"> {{group.group_privacy}}</span>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4 m-0 p-0  custom-center-center">
-                      <div class="border border-radius-5-all d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text-warning font-weight-bold">Group  </span>
-                      <span class="text-warning font-weight-bold">  visibilty</span></div>
+                      <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
+                      <span class="text_heading font-weight-bold">  visibilty</span></div>
                     </div>
                     <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
-                      <span class="text-white font-weight-bold small-txt"> {{group.group_visibility}}</span>
+                      <span class="text_paragraph font-weight-bold small-txt"> {{group.group_visibility}}</span>
                     </div>
                   </div>
                   {% for i in group.additional_info %}
                     <div class="row mt-2">
                       <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <span class="border bg-primary border-radius-5-all custom-center-center "style="height:70px;width:70px"><span class="text-uppercase text-warning font-weight-bold p-3"style="font-size:10px;"> {{i.type}}</span></span>
+                        <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px"><span class="text-uppercase text-warning font-weight-bold p-3"style="font-size:10px;"> {{i.type}}</span></span>
                       </div>
                       <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center border border-radius-5-all"style="height:120px;overflow-y:auto;">
                         <span class="text-dark font-weight-bold smaller-txt p-2"> {{i.info}}</span>
@@ -410,7 +440,7 @@
               /////////////////////////////
               ///////////////////////////
               //////////////////////////// -->
-              <div class="row border border-warning mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
+              <div class="row border custom_border_color mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
                 <div class="col-md-12 p-0 "style="height:766px;overflow-y:hidden;">
                   <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"style="height:40px;border-radius:0px 10px 0px 0px;">
                     <li class="active">
@@ -429,52 +459,66 @@
                       </a>
                     </li>
                   </ul>
-                  <div class="tab-content background-gradient pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
+                  <div class="tab-content bg-white pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
                     <!-- start close associates tab  -->
                     <div id="close_asscoiates"  class="tab-pane  text-white fade">
-                      <p>Close Associates ({{group.close_associates | length}})</p>
+                      <!-- <p>Close Associates ({{group.close_associates | length}})</p> -->
                       <div class="row">
-                        <div class="col-md-12">
-                          <div class="accordion" id="accordionExample">
-                            {% for c in group.close_associates %}
+                        {% for c in group.close_associates %}
+                          <div class="col-md-6">
+                            <div class="accordion" id="accordionExample">
                               <div class="card">
-                                <div class="card-header background-gradient-dark" id="headingOne">
-                                  <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                  <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                  <button class="btn btn-link text-warning" type="button" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
+                                <div class="card-header background-gradient-dark" id="headingOne" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
+                                  <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                     <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                  <div class="d-inline">
                                   {{c.name}}
-                                  </button>
+                                  </div>
                                 </div>
                                 <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                  <div class="card-body background-gradient">
-                                    <div class="row text-white">
+                                  <div class="card-body bg-white">
+                                    <div class="row text_heading">
                                       <div class="col-md-6">
                                         <div class="row">
-                                          <div class="col-md-6 text-14"> Entity Type:</div><div class="col-md-6 text-14"> {{c.entity_type}}</div>
-                                          <div class="col-md-6 text-14"> Username:</div><div class="col-md-6 text-14"> {{c.username}}</div>
-                                          <div class="col-md-6 text-14"> Id:</div><div class="col-md-6 text-14"> {{c.id}}</div>
-                                          <div class="col-md-6 text-14"> Is Admin:</div><div class="col-md-6 text-14"> {{c.is_admin}}</div>
-                                          <div class="col-md-6 text-14"> is Moderator:</div><div class="col-md-6 text-14"> {{c.is_moderator}}</div>
-                                          <div class="col-md-6 text-14"> Is Group Memeber:</div><div class="col-md-6 text-14"> {{c.is_page_member}}</div>
+                                          <div class="col-md-6 text-14"> Entity Type:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.entity_type}}</div>
+                                          <div class="col-md-6 text-14"> Username:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.username}}</div>
+                                          <div class="col-md-6 text-14"> Id:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.id}}</div>
+                                          <div class="col-md-6 text-14"> Is Admin:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_admin}}</div>
+                                          <div class="col-md-6 text-14"> is Moderator:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_moderator}}</div>
+                                          <div class="col-md-6 text-14"> Is Group Memeber:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_page_member}}</div>
                                         </div>
                                       </div>
                                       <div class="col-md-6">
                                         <div class="row ">
-                                          <div class="col-md-6 text-14"> Post Authors:</div><div class="col-md-6 text-14"> {{c.post_authors}}</div>
-                                          <div class="col-md-6 text-14"> Post Targets:</div><div class="col-md-6 text-14"> {{c.post_target}}</div>
-                                          <div class="col-md-6 text-14"> Post Tags:</div><div class="col-md-6 text-14"> {{c.post_tags}}</div>
-                                          <div class="col-md-6 text-14"> post_comments:</div><div class="col-md-6 text-14"> {{c.post_comments}}</div>
-                                          <div class="col-md-6 text-14"> Post Reactions:</div><div class="col-md-6 text-14"> {{c.post_reactions}}</div>
-                                          <div class="col-md-6 text-14"> URL:</div><div class="col-md-6 text-14"> <a class="badge badge-light" href="{{c.url}}">view</a></div>
+                                          <div class="col-md-6 text-14"> Post Authors:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_authors}}</div>
+                                          <div class="col-md-6 text-14"> Post Targets:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_target}}</div>
+                                          <div class="col-md-6 text-14"> Post Tags:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_tags}}</div>
+                                          <div class="col-md-6 text-14"> post_comments:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_comments}}</div>
+                                          <div class="col-md-6 text-14"> Post Reactions:</div>
+                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_reactions}}</div>
+                                          <div class="col-md-6 text-14"> URL:</div>
+                                          <div class="col-md-6 text-14"> 
+                                            <a class="badge custom_badge fa fa-search" href="{{c.url}}">View</a>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            {% endfor %}
+                            </div>
                           </div>
-                        </div>
+                        {% endfor %}
                       </div>
                     </div>
                     <!-- end close asscoiates  -->
@@ -484,48 +528,48 @@
                         <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
                         </div>
                         <div class="col-md-6  m-0 p-0  text-center">
-                          <h3><i class="material-icon text-warning">Common Words </i></h3>
+                          <h3><i class="material-icon text_heading">Common Words </i></h3>
                           <div class="row">
                             {% if group.common_wrods is not Null %}
-                              <div class="col-md-12 m-0 p-0" id="common_words_chart" style="height: 400px;width: 100%;">
+                              <div class="col-md-12 m-0 p-0 text_paragraph" id="common_words_chart" style="height: 400px;width: 100%;">
                               </div>
                             {% else %}
-                              <div class="col-md-12 text-center text-white"><p>No common words to display </p></div>
+                              <div class="col-md-12 text-center text_paragraph"><p>No common words to display </p></div>
                               {%endif%}
                             </div>
                           </div>
                           <div class="col-md-6 m-0 p-0 text-center">
-                            <h3><i class="material-icon text-warning"> Page Sentiment Analysis </i></h3>
+                            <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
                             <div class="row">
                               <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;">
                               </div>
                             </div>
                           </div>
                           <div class="col-md-12">
-                            <h3><i class="material-icon text-warning">Group Rules  </i></h3>
+                            <h3><i class="material-icon text_heading">Group Rules  </i></h3>
                             <div class="row">
                               <ul class="col-md-12 list-group list-unstyled">
                                 {% for i in group.group_rules%}
-                                  <li class="list-group-item bg-transparent border-white text-white">{{forloop.counter}} # {{i.heading}}</li>
-                                  <div class="border border-white p-3"><small class=" text-dark font-weight-bold"> {{i.body}} </small>
+                                  <li class="list-group-item custom_border_color text_paragraph">{{forloop.counter}} # {{i.heading}}</li>
+                                  <div class="border custom_border_color p-3"><small class=" text_heading font-weight-bold"> {{i.body}} </small>
                                   </div>
                                 {% endfor %}
                               </ul>
                             </div>
                           </div>
                           <div class="col-md-12">
-                            <h3><i class="material-icon text-warning">Group Histroy </i></h3>
+                            <h3><i class="material-icon text_heading">Group Histroy </i></h3>
                             <div class="row">
                               <ul class="col-md-12 list-group list-unstyled">
                                 {% for i in group.group_history%}
-                                  <li class="list-group-item bg-transparent border text-white">{{forloop.counter}} # {{i.event}}<small class="float-right font-weight-bold">Timestamp :{{i.time_stamp}} </small></small>
+                                  <li class="list-group-item border custom_border_color text_paragraph">{{forloop.counter}} # {{i.event}}<small class="float-right font-weight-bold">Timestamp :{{i.time_stamp}} </small></small>
                                   {% endfor %}
                                 </ul>
                               </div>
                             </div>
                             <div class="col-md-12 pb-4">
-                              <h3><i class="material-icon text-warning">Overall Behaviour </i></h3>
-                              <p class="text-white">{{group.behaviour}}</p>
+                              <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
+                              <p class="text_paragraph">{{group.behaviour}}</p>
                             </div>
                           </div>
                         </div>

@@ -440,3 +440,40 @@ class Index(TemplateView):
           with open('static/Target_Json/facebook_page_data.json', 'r') as f:
             page = json.load(f)
             return render(request, 'Target_Management_System/test.html',{'page':page})
+
+
+
+class FacebookPersonReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            profile = json.load(f)
+         return render(request,'Target_Management_System/FacebookPerson_Target_Report.html',{'profile':data_object})
+    
+
+
+class FacebookPageReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            page = json.load(f)
+         return render(request,'Target_Management_System/FacebookPage_Target_Report.html',{'page':data_object})
+
+
+
+class FacebookPersonReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            group = json.load(f)
+         return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
+    
