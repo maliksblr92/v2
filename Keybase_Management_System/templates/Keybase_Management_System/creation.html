@@ -103,23 +103,47 @@
                             <div style="width:100%;" class="container input1">
                                 <!-- textfield 1 -->
                                 <!-- title -->
-                                <div class="input-group mb-2 d-flex flex-row justify-content-between align-items-center ">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Title</span>
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Title</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            {% if ctx.title %}
+                                            <input type="text" id="title" class="form-control newinputdesign"
+                                                 name="title" value="{{ctx.title}}">
+                                            {% else %}
+                                            <input type="text" name="title" id="title" class="form-control newinputdesign"
+                                                placeholder="enter title here">
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    {% if ctx.title %}
-                                    <input type="text" id="title" class="form-control newinputdesign"
-                                         name="title" value="{{ctx.title}}">
-                                    {% else %}
-                                    <input type="text" name="title" id="title" class="form-control newinputdesign"
-                                        placeholder="enter title here">
-                                    {% endif %}
                                 </div>
                             
                                 <!--Tetfield 2 -->
                                 <!-- Topic -->
-                                <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                <div class="input-group pb-4 mb-2 d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Topic</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            {% if ctx.topic %}
+                                            <input type="text" id="title" class="form-control newinputdesign"
+                                                 name="title" value="{{ctx.title}}">
+                                            {% else %}
+                                            <input type="text" name="topic" id="topic" class="form-control newinputdesign"
+                                                placeholder="enter topic here">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="newlabeldesign">Topic
                                         </span>
                                     </div>
@@ -129,7 +153,7 @@
                                     {% else %}
                                     <input type="text" name="topic" id="topic" class="form-control newinputdesign"
                                         placeholder="enter topic here">
-                                    {% endif %}
+                                    {% endif %} -->
                                 </div>
                                 <!-- textfield 3 -->
                                 <!-- keywords -->
@@ -138,18 +162,28 @@
                                 <!--KEYWORDS TEGS SECTION-->
 
                                
-                                <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center mt-2">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">keywords</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" id="keywords" name="keywords" class="form-control   newinputdesign" 
+                                    aria-describedby="basic-addon2" data-role="tagsinput" 
+                                    placeholder="place text here place text here  place text here place text here " />
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="newlabeldesign">keywords
                                         </span>
                                     </div>
-                                    
-                               
-
-                                
-                                    <input type="text" id="keywords" name="keywords"
-                                    class="form-control   newinputdesign" 
-                                     aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
+                                    <input type="text" id="keywords" name="keywords" class="form-control   newinputdesign" 
+                                    aria-describedby="basic-addon2" data-role="tagsinput" 
+                                    placeholder="place text here place text here  place text here place text here " /> -->
                                     
                                 </div>
                                
@@ -157,50 +191,104 @@
                                 <!--Mentions SECTION-->
                                 
                                 <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Mentions</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" id="mentions" name="mentions"
+                                        class="form-control   newinputdesign" 
+                                         aria-describedby="basic-addon2" data-role="tagsinput" 
+                                         placeholder="place text here place text here  place text here place text here " />
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="newlabeldesign">Mentions
                                         </span>
                                     </div>
-                                  
-                              
-                                
                                         <input type="text" id="mentions" name="mentions"
                                         class="form-control   newinputdesign" 
-                                         aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
+                                         aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " /> -->
                                 </div>
                                
 
                                 <!--HASHTAGS TEGS SECTION-->
                                 <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Tags</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" id="tags" name="tags" class="form-control  newinputdesign" 
+                                            aria-describedby="basic-addon2" data-role="tagsinput" 
+                                            placeholder="place text here place text here  place text here place text here " />
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="newlabeldesign">Tags
                                         </span>
                                     </div>
-                                
-
-                                        <input type="text" id="tags" name="tags" class="form-control  newinputdesign"
-                                         
-                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
+                                        <input type="text" id="tags" name="tags" class="form-control  newinputdesign" 
+                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " /> -->
                                 </div>
                                
 
                                 <!--PHRASES SECTION-->
                                 <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Phrase</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input id="phrases" name="phrases" type="text" class="form-control  newinputdesign"
+                                         
+                                        aria-describedby="basic-addon2" data-role="tagsinput"
+                                        placeholder="place text here place text here  place text here place text here " />
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="input-group-text newlabeldesign">Phrase
                                         </span>
                                     </div>
                                 
                                     <input id="phrases" name="phrases" type="text" class="form-control  newinputdesign"
                                          
-                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
+                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " /> -->
                                 </div>
                               
 
                                 <!--DATE SECTION-->
 
                                 <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
-                                    <div class="input-group-prepend">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Expire on</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <div class="datepicker date input-group ">
+                                                <input style="width:50%;" class="form-control  newinputdesign" type="text"
+                                                    placeholder="Choose a reservation date" id="reservationDate" name="date">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text "><i class="fas fa-calendar fa-3x"style=""></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- <div class="input-group-prepend">
                                         <span class="newlabeldesign">Expire on
                                         </span>
                                     </div>
@@ -210,7 +298,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text px-4"><i class="fas fa-calendar"></i></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <!--SUBMIT BUTTON  -->

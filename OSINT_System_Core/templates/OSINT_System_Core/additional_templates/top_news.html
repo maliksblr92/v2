@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
       integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-      <<style>
+      <style>
       .background-gradient{
-      background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+        background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
       }
       .background-gradient-dark{
-      background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+        background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
       }
       
       </style>
@@ -27,24 +27,24 @@
       <div class="container-fluid">
           <div class="row">
 
-
-            {% for x in top_news %}
-         
+           
+            {% for x in   top_news %}
+        
               <div class="col-md-4 mt-4">
                 <div class="card">
                     <div class="card-header text-left"><span class="font-weight-bold"
-                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-white">{{x.channel}} </span></div>
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.0.channel}} </span></div>
                     <div class="card-body">
                         <div class="accordion" id="accordionExample">
                             <div class="card" style="height: 400px;overflow-y:auto">
-                                {% for y in x.most_emerging_news %}
+                                {% for y in x.0.most_emerging_news %}
                                 <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
                                     aria-controls="{{forloop.counter}}">
-                               <span class="text-warning">  {{forloop.counter}}</span> # {{y.HeadLine}}
-                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-white "></i> </a>
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger "></i> </a>
                                 </div>
                                 <div>
-                                    <span class=" badge badge-success float-right">{{y.Time}}</span>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"--" }}</span>
                                 </div>
                                
                                 {% endfor %}
@@ -59,6 +59,183 @@
                     </div>
                 </div>
               </div>
+
+
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.1.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.1.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger"></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"N/A"}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.2.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.2.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger"></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"N/A"}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.3.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.3.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger"></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"N/A"}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.4.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.4.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger"></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"N/A"}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-warning font-weight-bold">{{x.5.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.5.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}} #</span>  {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-danger"></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time|default:"N/A"}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
              
               {% endfor %}
 

@@ -940,10 +940,17 @@ def newsMonitor(request):
 
 
 def topNews(request):
-    data=News.objects(channel='ARY').first()
+    ary=News.objects(channel='ARY').limit(1)
+    dawn=News.objects(channel='DAWN').limit(1)
+    ndtv=News.objects(channel='NDTV').limit(1)
+    india_today=News.objects(channel='INDIATODAY').limit(1)
+    abp=News.objects(channel='ABP').limit(1)
+    zee=News.objects(channel='ZEE').limit(1)
+    dic=zip(ary,dawn,ndtv,india_today,abp,zee)
+        
     
-    print(top_news)
-    return render(request,"OSINT_System_Core/additional_templates/top_news.html",{'top_news':top_news})
+    print(type(dic))
+    return render(request,"OSINT_System_Core/additional_templates/top_news.html",{'top_news':dic})
 
 # get worldwide hashtags function
 def get_worldwide_hashtags():
