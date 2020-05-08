@@ -32,6 +32,7 @@ from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
 from django_eventstream import send_event
+from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
 
 
@@ -780,6 +781,27 @@ class Share_Resource(View):
         else:
             return HttpResponse('input parameters are left empty or invalid')
         return HttpResponse('unable to share resource')
+
+
+
+class Rabbit_Message(View):
+
+    def get(self,request):
+
+        print(request.GET)
+        objects = Rabbit_Messages.get_top_messages(10,request.GET.get('window_type','message'))
+        print(objects)
+
+        return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
+
+
+class Update_Footer_Graphs():
+
+    def get(self,request):
+        internet = acq.crawler_internet_connection()
+        mc_status = acq.mircocrawler_status()
+
+        return None
 
 
 # .........................................Normal Functions ............

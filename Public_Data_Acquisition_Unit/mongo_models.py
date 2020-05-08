@@ -253,7 +253,50 @@ class Facebook_Target(Document):
     def get_all_targets():
         return Facebook_Target.objects.order_by('created_on')
 
+class Youtube_Target(Document):
 
+
+    GTR = ReferenceField(Global_Target_Reference) # GTR should be unique for each facebook target
+    is_expired = BooleanField(default=False)
+    is_enabled = BooleanField(default=True)
+    need_screenshots = BooleanField(default=False)
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    expired_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+
+    meta = {'allow_inheritance': True}
+
+    #def __init__(self):
+    #    super().__init__()
+
+    def initialize_basic(self,kwargs):
+
+        # initializing default attributes
+
+        if 'is_expired' in kwargs: self.is_expired = kwargs['is_expired']
+        if 'is_enabled' in kwargs: self.is_enabled = kwargs['is_enabled']
+        if 'need_screenshots' in kwargs: self.need_screenshots = kwargs['need_screenshots']
+        if 'created_on' in kwargs: self.created_on = kwargs['created_on']
+        if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
+        if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
+        if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+
+    """
+    define all the function related to all the targets of facebook in the bellow section of this class
+    """
+    def am_i_expired(self):
+        return self.is_expired
+
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
+
+
+    @staticmethod
+    def get_all_targets():
+        return Facebook_Target.objects.order_by('created_on')
 
 class Reddit_Target(Document):
 
@@ -475,6 +518,58 @@ class Facebook_Profile(Facebook_Target):
     """
 
 
+class Youtube_Channel(Youtube_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a youtube profile, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
+
+    """
+
+
 class Facebook_Page(Facebook_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
     username = StringField(default='null')  # make username unique for soul one facebook profile target
@@ -613,7 +708,7 @@ class Facebook_Search(Facebook_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format('facebook search'), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a facebook search, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -757,7 +852,7 @@ class Twitter_Profile(Twitter_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -778,7 +873,7 @@ class Twitter_Profile(Twitter_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a twitter profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -809,7 +904,7 @@ class Instagram_Profile(Instagram_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -829,7 +924,7 @@ class Instagram_Profile(Instagram_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a instagram profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -858,7 +953,7 @@ class Linkedin_Profile(Linkedin_Target):
     def __repr__(self):
         return self.username if self.username != 'null' else self.user_id
 
-    def create(self, GTR, **kwargs):
+    def create(self, GTR, kwargs):
         # super().__init__(GTR)
 
         try:
@@ -880,7 +975,7 @@ class Linkedin_Profile(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -933,7 +1028,7 @@ class Linkedin_Company(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -1013,7 +1108,9 @@ class Keybase_Crawling(Document):
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
 
-
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
 
 class Dynamic_Crawling(Document):
 
@@ -1142,3 +1239,86 @@ class Share_Resource(Document):
     def get_rdo_resources():
         return Share_Resource.objects(share_with='rdo')
 
+class Rabbit_Messages(Document):
+
+    message_type = StringField(default='info')
+    message_data = DictField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+    @staticmethod
+    def get_all_messages():
+        return Rabbit_Messages.objects()
+
+    @staticmethod
+    def get_messages_with_date_range(start,end):
+        return Rabbit_Messages.objects(Q(created_on__gte=start) & Q(created_on__lte=end))
+
+    @staticmethod
+    def get_top_messages(top=10,message_type='message'):
+        return Rabbit_Messages.objects(message_type=message_type).order_by('-id')[:top]
+
+
+
+class Timeline_Posts(Document):
+
+    target_site = StringField()
+    target_type = StringField()
+    gtr_id = StringField(unique=True)
+
+    username = StringField(unique=True)
+    title = StringField()
+    posts = ListField()
+    all_seen = BooleanField(default=False)
+    seenn_indexes = ListField() # it stores the indexes of the "posts list field" indexes in this list will considered seen
+
+
+    @staticmethod
+    def get_qualified_objects():
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_objs = []
+
+        tl_objs = Timeline_Posts.objects(all_seen=False)
+        for obj in tl_objs:
+            for post in obj.posts:
+                if(not post['seen']):
+                    qualified_objs.append(obj)
+
+
+        return qualified_objs
+
+    @staticmethod
+    def get_qualified_posts(top=10):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        for obj in tl_objs:
+
+
+            for post in obj.posts:
+
+
+
+                if (not post['seen']):
+                    count = count +1
+                    qualified_posts.append(post)
+                    post['seen'] = True
+                    obj.save()
+
+                if (count >= top):
+                    break
+
+        return qualified_posts

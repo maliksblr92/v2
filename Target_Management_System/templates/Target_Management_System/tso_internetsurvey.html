@@ -46,7 +46,7 @@
             <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
                 <!-- FORM start -->
 
-                <form class="justify-content-center targetform formbg  pt-3 pb-5" method="POST" action="/tms/survey/">
+                <form class="justify-content-center targetform formbg  pt-3 pb-5" method="GET" action="/tms/survey/">
                     {% csrf_token %}
                     <div class="form-group justify-content-center text-center  ">
                         <div style="width:80%;" class="container input1">
@@ -109,31 +109,24 @@
                             <div class="container  d-flex justify-content-center">
                                 <div class="container">
                                     <h3 class="myresult">Results</h3>
-                                    <div class="row othercontainer">
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright ">
-                                            Hello row 1 Hello row 1
-                                        </div>
+                                    {% for result in results.data %}
 
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright ">
-                                            Hello row 2 Hello row 2
-                                        </div>
+                                    <div class="row">
 
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
-                                            Hello row 3 Hello row 3
-                                        </div>
+                                        <div class="card">
+                                          <div class="card-header">
+                                            {{ result.meta_title }}
+                                          </div>
+                                          <div class="card-body">
+                                            <h5 class="card-title">{{ result.serp_title }}</h5>
+                                            <p class="card-text">{{ result.serp_snippet }}</p>
+                                            <a href="{{ result.serp_url }}" class="btn btn-primary">visit</a>
+                                          </div>
+                                         </div>
 
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
-                                            Hello row 4 Hello row 4
-                                        </div>
 
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 resultright">
-                                            Hello row 5 Hello row 5
-                                        </div>
-
-                                        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
-                                            Hello row 6 Hello row 6
-                                        </div>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

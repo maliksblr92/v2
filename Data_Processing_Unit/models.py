@@ -404,7 +404,6 @@ class News(Document):
     spelling_variants = ListField()
 
 
-
 class Dynamic_Crawling_Response_TMS(Document):
     GTR = StringField()
     CTR = IntField()

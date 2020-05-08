@@ -2,5 +2,5 @@
 
 {% for message in messages %}
 
-<p>{{ message.message_data.messege}},{{ message.created_on }}</p>
+    <p><strong>{{ message.message_data.server_name|capfirst}}</strong>,{{ message.message_data.messege}},{{ message.created_on }}</p>
 {% endfor %}

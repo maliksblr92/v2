@@ -26,10 +26,10 @@ class Portfolio_PMS(Document):
 
     portfolio_type = StringField(choices=PORTFOLIO_TYPES)
     name = StringField(required=True)
-    dob = DateTimeField(null=True)
+    dob = DateField(null=True)
     religion = StringField(default='')
     sect = StringField(default='')
-
+    gender = StringField()
 
     addresses = ListField(default=[])
     phones = ListField(default=[])
@@ -42,6 +42,11 @@ class Portfolio_PMS(Document):
 
     #it saves ref of TMS target in list bellow
     social_targets = ListField()
+
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
 
     def __str__(self):
         return self.name
@@ -60,10 +65,13 @@ class Portfolio_PMS(Document):
             if 'sect' in kwargs: self.sect = kwargs['sect']
             if 'education' in kwargs: self.dob = kwargs['dob']
 
+
+            self.save()
             return self
 
         except Exception as e:
             publish(str(e),module_name=__name__,message_type='alert')
+            print(e)
             return None
 
     def add_address(self,address):
@@ -80,6 +88,10 @@ class Portfolio_PMS(Document):
 
     def add_description(self,description):
         self.description.append(description)
+        self.save()
+
+    def add_phone(self,phone):
+        self.phones.append(phone)
         self.save()
 
 
@@ -103,6 +115,10 @@ class Portfolio_PMS(Document):
          'weights': {'name': 10, 'description': 2}
          }
     ]}
+
+    @staticmethod
+    def get_all_portfolios():
+        return Portfolio_PMS.objects()
 
     @staticmethod
     def find_object(query):

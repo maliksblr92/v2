@@ -30,6 +30,9 @@
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
             <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
         </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
+        </div>
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -60,6 +63,8 @@
 
                 <a class="nav-item nav-link" id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
                         style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
+                <a class="nav-item nav-link" id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
 
             </div>
         </nav>
@@ -85,7 +90,7 @@
                             <div class="row formbg ml-5">
                                 <div class="col-md-4 mt-5 ">
                                     <div class="mt-5">
-                                        <img id="profile_image" class="ml-5" style="height:150px; width:150px;"
+                                        <img id="{{ platform.name|lower }}-profile_image" class="ml-5" style="height:150px; width:150px;"
                                             src="{% static 'images/testimonial.png' %}" alt="">
                                     </div>
                                 </div>
@@ -148,6 +153,7 @@
                                                     name="{{platform.name|lower}}_authoruserid"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
+                                        <input type="hidden" name="platform" value="{{platform.name|lower}}">
 
                                             <!--for author name-->
                                             <div class="input-group   mt-4 mb-3">
@@ -303,7 +309,7 @@
                     // console.log(response)
                     $(`#${website}-authoruserid`).val(response['author_userid'])
                     $(`#${website}-authorusername`).val(response['author_username'])
-                    document.getElementById("profile_image").src = response['profile_url']
+                    document.getElementById(`${website}-profile_image`).src = response['profile_url']
                     switch (website) {
                         case 'reddit':
                             $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${author_account}`)

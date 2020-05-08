@@ -46,15 +46,16 @@ path(
     path('test/', views.Test_View.as_view(), name="sendevent"),
     path('test1/', views.Test_View1.as_view(), name="alertevent"),
     path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
+    path('timeline/',views.Timeline.as_view(),name="timeline"),
 
     # ahmed Class Views
-    path('target/instagram/', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
-    path('target/twitter/', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),
-    path('target/linkedin/person/', LinkedinPerson_Target_Response.as_view(), name="LinkedinPerson_Target_Response"),
-    path('target/linkedin/company/', LinkedinCompany_Target_Response.as_view(), name="LinkedinCompany_Target_Response"),
-    path('target/facebook/person/', FacebookPerson_Target_Response.as_view(), name="FacebookPerson_Target_Response"),
-    path('target/facebook/page/', FacebookPage_Target_Response.as_view(), name="FacebookPage_Target_Response"),
-    path('target/facebook/group/', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
+    path('target/instagram/<str:object_gtr_id>', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
+    path('target/twitter/<str:object_gtr_id>', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),
+    path('target/linkedin/person/<str:object_gtr_id>', LinkedinPerson_Target_Response.as_view(), name="LinkedinPerson_Target_Response"),
+    path('target/linkedin/company/<str:object_gtr_id>', LinkedinCompany_Target_Response.as_view(), name="LinkedinCompany_Target_Response"),
+    path('target/facebook/person/<str:object_gtr_id>', FacebookPerson_Target_Response.as_view(), name="FacebookPerson_Target_Response"),
+    path('target/facebook/page/<str:object_gtr_id>', FacebookPage_Target_Response.as_view(), name="FacebookPage_Target_Response"),
+    path('target/facebook/group/<str:object_gtr_id>', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
     path('target/test/', Index.as_view(), name="Index"),
 
 ]

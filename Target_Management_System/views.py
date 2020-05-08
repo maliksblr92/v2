@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views import View
 from OSINT_System_Core.publisher import publish
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
-from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager,Timeline_Manager
 from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS
 from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,6 +13,7 @@ from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 acq = Acquistion_Manager()
 km = Keybase_Manager()
+tl = Timeline_Manager()
 from django.views.generic import TemplateView
 
 class Add_Target(RequireLoginMixin, IsTSO, View):
@@ -35,7 +36,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'blogs': json.loads(blog_sites.to_json()),
             'intervals':PERIODIC_INTERVALS,
         }
-        print(data)
+        #print(data)
+        #publish('target created successfully', message_type='notification')
         return render(request,
                       'Target_Management_System/tso_marktarget.html',
                       {'app': 'target',
@@ -51,31 +53,46 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         #<QueryDict: {'csrfmiddlewaretoken': ['Egw4i8ivl698nS7BzlKQkGGUue93nN6jEWHKEOwnRI5bsrp329nu2sCwAiDlGUi0'], 'facebook_autheruseraccount': ['awais'], 'facebook_authortype': ['0'], 'facebook_authoruserid': ['abcdef123'], 'facebook_authorusername': ['sharif ahmad'], 'facebook_authoruserurl': ['http://www.facebook.com/sharifahmad2061'], 'date': [''], 'facebook_interval': ['15'], 'facebook_screenshot': ['1']}
 
 
+        try:
 
-        print(request.POST)
-        website_id = ObjectId(request.POST['website_id'])
-        target_type_index = int(request.POST['facebook_authortype'])
-        username = request.POST['facebook_autheruseraccount']
-        user_id = request.POST['facebook_authoruserid']
-        name = request.POST['facebook_authorusername']
-        url = request.POST['facebook_authoruserurl']
-        expire_on = request.POST['facebook_expirydate']
-        interval = int(request.POST['facebook_interval'])
-        screen_shot = False
+            print(request.POST)
+            plateform = request.POST['platform']
 
-        portfolio_id = None
-        if 'selected_portfolio_id' in request.session :portfolio_id = request.session.get('selected_portfolio_id')
-        print(portfolio_id)
+            website_id = ObjectId(request.POST['website_id'])
+            target_type_index = int(request.POST[plateform+'_authortype'])
+            username = request.POST[plateform+'_autheruseraccount']
+            user_id = request.POST[plateform+'_authoruserid']
+            name = request.POST[plateform+'_authorusername']
+            url = request.POST[plateform+'_authoruserurl']
+            expire_on = request.POST[plateform+'_expirydate']
+            interval = int(request.POST[plateform+'_interval'])
+            screen_shot = False
 
-        if (expire_on is not None):
-            expire_on = convert_expired_on_to_datetime(expire_on)
+            portfolio_id = None
+            if 'selected_portfolio_id' in request.session :
+                portfolio_id = request.session.get('selected_portfolio_id')
+                del(request.session['selected_portfolio_id'])
+
+            print(portfolio_id)
+
+
+            if (expire_on is not None):
+                expire_on = convert_expired_on_to_datetime(expire_on)
 
 
 
-        print(website_id,target_type_index,username,user_id)
-        acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
-        #publish('target created successfully', message_type='notification')
-        return redirect('/tms/marktarget')
+            print(website_id,target_type_index,username,user_id)
+            acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
+            publish('target created successfully', message_type='notification')
+
+            if(portfolio_id is not None):
+                return HttpResponseRedirect(reverse('Portfolio_Management_System:add_information',args=[portfolio_id]))
+
+            return redirect('/tms/marktarget')
+        except Exception as e:
+            print(e)
+            publish(str(e), message_type='error')
+            return redirect('/tms/marktarget')
 
 
 # ...................................................Views for SmartSearch
@@ -133,10 +150,11 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
         if(not 'response' in resp):
 
             if(website == 'instagram'):
-                data = resp['data']['users']
+                data = resp['data']['data']
+                print(data)
                 for item in data:
                     #print(item)
-                    user = {'username': item['user']['username'],'fullname': item['user']['full_name'],'userid': '','profile_url':item['user']['profile_pic_url']}
+                    user = {'e_type':item['entity_type'],'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
                     users.append(user)
 
         print(users)
@@ -145,9 +163,29 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
 class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):
-        return render(request,
-                      'Target_Management_System/tso_internetsurvey.html',
-                      {'app': 'target'})
+        print(request.GET)
+
+        name = request.GET.get('name_lookup', None)
+        email = request.GET.get('email_lookup', None)
+        phone = request.GET.get('phone_lookup', None)
+        address = request.GET.get('address_lookup', None)
+        print(name, email, phone, address)
+
+        if(name or email or phone or address ):
+
+            # pass values to the user and wait for the response and show to the
+            # same view
+            #
+
+
+            resp = acq.target_internet_survey(name, email, phone, address)
+            print(resp)
+
+            return render(request, 'Target_Management_System/tso_internetsurvey.html', {'results':resp})
+
+        return render(request, 'Target_Management_System/tso_internetsurvey.html', {})
+
+
 
     def post(self, request, *args, **kwargs):
 
@@ -159,14 +197,15 @@ class Target_Internet_Survey(RequireLoginMixin, IsTSO, View):
         print(name, email, phone, address)
         # pass values to the user and wait for the response and show to the
         # same view
-        resp = acq.target_internet_survey(name, email, phone, address)
+        #resp = acq.target_internet_survey(name, email, phone, address)
+        resp = {'data': [{'encoding': 'ascii', 'last_modified': 'Tue, 21 Apr 2020 09:51:30 GMT', 'meta_robots': '', 'meta_title': '.: Project in C/C++ : Password Protected Contact bookInformation technology Revolution', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'infotechrevol.blogspot.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': "Aug 6, 2015 - ... need's to be correct or which might enhance the usability of the app you feel free to contact. awaisazam230@gmail.com. Please Comment !!", 'serp_title': '.: Project in C/C++ : Password Protected Contact bookinfotechrevol.blogspot.com › 2015/08 › project-in-cc-pas...', 'serp_type': 'results', 'serp_url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html', 'serp_visible_link': 'infotechrevol.blogspot.com › 2015/08 › project-in-cc-pas...', 'status': 200, 'text_raw': 'Pages Home Books Thursday, August 2015 Project in C/C++ Password Protected Contact book Features 1.\nInstallation of the Application 2.\nPassword Protection 3.\nIntelligent Searching 4.\nAdd ,Remove Contact Description It is console based app the compiler used for the development is "Borland 5.02" this project can be used as semester project with any c/c++ course in schools/collages it is best for learning and enhancing your skills in c++ This application is programmed in C++ using "filestream" and some other basic libraries.\nFirst the user is asked to allow the installation of the app and while installing it ask user six character password and ask user to login for the first time.\nProjects in C++ Calendar display with add note and age finder in This project is coded in using CodeBlock compiler it has around 540 lines of code easy to understand for beginners in language and c...\nSonic Weapons To disperse crowds and prevent rioting, various forms of non-lethal weapons NLW are used.\nAmong these, interestingly, is sound.\nBlog Archive 2015 24 September August 15 Kepler-452b,The Most Similar Planet To Earth Till ...\nSome strange but true facts on our earth Projects in C++ Canteen Management System Projects in C++ Calendar display with add note a...\nbrilliant future technologies which will make li...\nProject in C/C++ Password Protected Contact book...\nVehicle Parking Management System in C++ Your fingerprints are remotely stolen by Hackers f...\nEdit your friends "Facebook Status" and take fake ...\nArduino Studio IDE launched latest gadgets that you must have How People Weld Under Water How The Skype Translator Works How Targeted Advertising Work Human v/s Robots July About Me Unknown View my complete profile What do you think about our blog posts ---|--- Picture Window theme.\nPowered by Blogger.\n', 'url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html'}, {'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'apkpure.ai', 'serp_rank': 2, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'have 1 products. Developer link: Visit website , Email awaisazam230@gmail.com ,. FlyCopter APK · FlyCopter. Developer: Blutone · App Details. Popular Apps.', 'serp_title': 'Blutone APK list | APKPure.aiapkpure.ai › developer › blutone', 'serp_type': 'results', 'serp_url': 'https://apkpure.ai/developer/blutone/', 'serp_visible_link': 'apkpure.ai › developer › blutone'}, {'encoding': 'utf-8', 'last_modified': None, 'meta_robots': '', 'meta_title': ' Download Casual : Fly Copter 1.5 APK - Android Casual Games', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'apk-dl.com', 'serp_rank': 3, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'May 17, 2018 - Developer. Blutone. Installs. 50+. Price. Free. Category. Casual. Developer. awaisazam230@gmail.com. Google Play Link. Google Play Link\xa0...', 'serp_title': "Casual : Fly Copter 1.5 APK Download - Android Casual Gamesapk-dl.com › ... › {{trans('cats.' . cat_name(Casual))}}", 'serp_type': 'results', 'serp_url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter', 'serp_visible_link': "apk-dl.com › ... › {{trans('cats.' . cat_name(Casual))}}", 'status': 200, 'text_raw': "Hero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Show More...\nApp Information Casual Fly Copter App Name Casual Fly Copter Package Name com.blutonegames.flycopter Updated May 17, 2018 File Size Undefined Requires Android Android 4.0.3 and up Version 1.5 Developer Blutone Installs 50+ Price Free Category Casual Developer awaisazam230@gmail.com Google Play Link Google Play Link Blutone Show More...\nCasual Fly Copter 1.5 APK Blutone Free Flycopter is an intelligent flying enemy which attack on Hero'sbasestation.\nHero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Free Loading...\nAPK-DL APK Downloader Android Apps Android Games Contact Us Top Android Apps WIFI WPS WPA TESTER WPS Connect WordPress XPOSED IMEI Changer WhatsApp Messenger Top Android Games Clash of Clans Asphalt 8: Airborne Clash of Kings Case Clicker Mesgram Follow Us Facebook Twitter Apk-DL DMCA Disclaimer Privacy Policy Term of Use Contact Us\n", 'url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter'}, {'encoding': 'utf-8', 'last_modified': 'Mon, 27 Apr 2020 05:45:00 GMT', 'meta_robots': '', 'meta_title': '\n      Gmail: Secure Enterprise Email for Business | G Suite\n    ', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 1, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p1.png', 'serp_domain': 'gsuite.google.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': 'Email FeaturesContact Sales NowStart a Free Trial Now', 'serp_snippet': 'Google hosted email for @yourcompany.com. Try it free for 14 days. Make it your own domain with G Suite by Google Cloud. Get @yourbusiness.com. Draft Emails Offline. Google Email Hosting. Up To 30 Email Aliases. Automatic Reminders. Auto Suggest for Replies.', 'serp_title': 'Gmail For Business | Customise Your Gmail Address\u200eAd·gsuite.google.com/gmail\u200e', 'serp_type': 'ads_main', 'serp_url': 'https://gsuite.google.com/intl/en_sg/products/gmail/', 'serp_visible_link': 'gsuite.google.com/gmail', 'status': 200, 'text_raw': "See our tips for working from home with Suite, including video meetings.\nLearn more Gmail Secure, private, ad-free email for your business Gmail keeps you updated with real-time message notifications, and safely stores your important emails and data.\nIT admins can centrally manage accounts across your organization and devices.\nStart Free Trial Contact sales Get custom email @yourcompany Build customer trust by giving everyone in your company professional email address at your domain, like susan@yourcompany and joe@yourcompany.\nAlso create group mailing lists, like sales@yourcompany.\nWork without interruption Access your email anytime, anywhere, on any device—no Internet connection needed.\nRead and draft messages without connectivity, and they’ll be ready to send when you’re back online.\nElevate email conversations with chat and video For those moments when you need more than just email, join Meet video call or chat with colleague directly from your inbox.\nCompatible with your existing interface Gmail works great with desktop clients like Microsoft Outlook, Apple Mail and Mozilla Thunderbird.\nOutlook users can sync emails, events and contacts to and from Suite.\nEasy migration from Outlook and legacy services Migrate your email from Outlook, Exchange or Lotus easily with custom tools that help preserve your important messages.\n99.9% guaranteed uptime, 0% planned downtime Count on Google’s ultra-reliable servers to keep your lights on 24/7/365.\nAutomatic backups, spam protection and industry-leading security measures help protect your business data.\nSuite gave us reliable and convenient access to our emails and documents, regardless of our location.\nMr. Zhang Gixia Group Learn More Top questions about Gmail What's different about the paid version of Gmail?\nPaid Gmail features include: custom email @yourcompany.com unlimited group email addresses, 99.9% guaranteed uptime, twice the storage of personal Gmail, zero ads, 24/7 support, Suite Sync for Microsoft Outlook and more.\nCan user have more than one email address?\nuser can have several email addresses by creating email aliases.\nYou can add up to 30 email aliases for each user.\nCan migrate my existing email to Suite?\nSuite migration tools are available for importing your old emails from legacy environments, such as Microsoft®, IBM® Notes® and other email systems.\nFor more information on the tools available for data migrations into Suite, see Migrate your organisation’s data to Suite.\nStay in the loop Sign up for Google Cloud newsletters with product updates, event information, special offers and more.\nEmail Please enter valid email address.\nSelect one option.value Industry This is required Select one Number of Employees This is required Country Country country.countryName This is required Yes, sign me up for Google Cloud emails with news, product updates, event information, special offers and more.\nYou can unsubscribe at later time This is required Sign me up Thanks!\nWe’ll be in touch shortly.\n", 'url': 'https://gsuite.google.com/intl/en_sg/products/gmail/'}, {'encoding': 'ascii', 'last_modified': 'Tue, 21 Apr 2020 09:51:30 GMT', 'meta_robots': '', 'meta_title': '.: Project in C/C++ : Password Protected Contact bookInformation technology Revolution', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'infotechrevol.blogspot.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': "Aug 6, 2015 - ... need's to be correct or which might enhance the usability of the app you feel free to contact. awaisazam230@gmail.com. Please Comment !!", 'serp_title': '.: Project in C/C++ : Password Protected Contact bookinfotechrevol.blogspot.com › 2015/08 › project-in-cc-password-protected', 'serp_type': 'results', 'serp_url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html', 'serp_visible_link': 'infotechrevol.blogspot.com › 2015/08 › project-in-cc-password-protected', 'status': 200, 'text_raw': 'Pages Home Books Thursday, August 2015 Project in C/C++ Password Protected Contact book Features 1.\nInstallation of the Application 2.\nPassword Protection 3.\nIntelligent Searching 4.\nAdd ,Remove Contact Description It is console based app the compiler used for the development is "Borland 5.02" this project can be used as semester project with any c/c++ course in schools/collages it is best for learning and enhancing your skills in c++ This application is programmed in C++ using "filestream" and some other basic libraries.\nFirst the user is asked to allow the installation of the app and while installing it ask user six character password and ask user to login for the first time.\nProjects in C++ Calendar display with add note and age finder in This project is coded in using CodeBlock compiler it has around 540 lines of code easy to understand for beginners in language and c...\nSonic Weapons To disperse crowds and prevent rioting, various forms of non-lethal weapons NLW are used.\nAmong these, interestingly, is sound.\nBlog Archive 2015 24 September August 15 Kepler-452b,The Most Similar Planet To Earth Till ...\nSome strange but true facts on our earth Projects in C++ Canteen Management System Projects in C++ Calendar display with add note a...\nbrilliant future technologies which will make li...\nProject in C/C++ Password Protected Contact book...\nVehicle Parking Management System in C++ Your fingerprints are remotely stolen by Hackers f...\nEdit your friends "Facebook Status" and take fake ...\nArduino Studio IDE launched latest gadgets that you must have How People Weld Under Water How The Skype Translator Works How Targeted Advertising Work Human v/s Robots July About Me Unknown View my complete profile What do you think about our blog posts ---|--- Picture Window theme.\nPowered by Blogger.\n', 'url': 'http://infotechrevol.blogspot.com/2015/08/project-in-cc-password-protected.html'}, {'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'apkpure.ai', 'serp_rank': 2, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'have 1 products. Developer link: Visit website , Email awaisazam230@gmail.com ,. FlyCopter APK · FlyCopter. Developer: Blutone · App Details. Popular Apps.', 'serp_title': 'Blutone APK list | APKPure.aiapkpure.ai › developer › blutone', 'serp_type': 'results', 'serp_url': 'https://apkpure.ai/developer/blutone/', 'serp_visible_link': 'apkpure.ai › developer › blutone'}, {'encoding': 'utf-8', 'last_modified': None, 'meta_robots': '', 'meta_title': ' Download Casual : Fly Copter 1.5 APK - Android Casual Games', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'apk-dl.com', 'serp_rank': 3, 'serp_rating': None, 'serp_sitelinks': None, 'serp_snippet': 'May 17, 2018 - Developer. Blutone. Installs. 50+. Price. Free. Category. Casual. Developer. awaisazam230@gmail.com. Google Play Link. Google Play Link\xa0...', 'serp_title': "Casual : Fly Copter 1.5 APK Download - Android Casual Gamesapk-dl.com › Games › {{trans('cats.' . cat_name(Casual))}}", 'serp_type': 'results', 'serp_url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter', 'serp_visible_link': "apk-dl.com › Games › {{trans('cats.' . cat_name(Casual))}}", 'status': 200, 'text_raw': "Hero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Show More...\nApp Information Casual Fly Copter App Name Casual Fly Copter Package Name com.blutonegames.flycopter Updated May 17, 2018 File Size Undefined Requires Android Android 4.0.3 and up Version 1.5 Developer Blutone Installs 50+ Price Free Category Casual Developer awaisazam230@gmail.com Google Play Link Google Play Link Blutone Show More...\nCasual Fly Copter 1.5 APK Blutone Free Flycopter is an intelligent flying enemy which attack on Hero'sbasestation.\nHero is soldier and he is the only one left on hisbase.He has to fight against the enemies by using the optimumresourceshe has and also collect the power coins by which hisshootingcapability will be improved.\nHero has to fight till hislastbreadth, ammunition and health resources are dropped by therescueteam from above Free Loading...\nAPK-DL APK Downloader Android Apps Android Games Contact Us Top Android Apps WIFI WPS WPA TESTER WPS Connect WordPress XPOSED IMEI Changer WhatsApp Messenger Top Android Games Clash of Clans Asphalt 8: Airborne Clash of Kings Case Clicker Mesgram Follow Us Facebook Twitter Apk-DL DMCA Disclaimer Privacy Policy Term of Use Contact Us\n", 'url': 'https://apk-dl.com/casual-fly-copter/com.blutonegames.flycopter'}, {'encoding': 'utf-8', 'last_modified': 'Mon, 27 Apr 2020 05:45:00 GMT', 'meta_robots': '', 'meta_title': '\n      Gmail: Secure Enterprise Email for Business | G Suite\n    ', 'query': 'awaisazam230@gmail.com', 'query_num_results_page': 4, 'query_num_results_total': '0', 'query_page_number': 2, 'screenshot': './KBM/screenshots/2020-04-30/google_awaisazam230@gmail.com-p2.png', 'serp_domain': 'gsuite.google.com', 'serp_rank': 1, 'serp_rating': None, 'serp_sitelinks': 'Email FeaturesContact Sales NowStart a Free Trial Now', 'serp_snippet': 'Get Gmail for your domain with G Suite. Start your free 14-day trial now. Make it your own domain with G Suite by Google Cloud. Get @yourbusiness.com. Custom Business Email. Draft Emails Offline. Save Time w/ Smart Reply. Phishing Protection. Automatic Reminders.', 'serp_title': 'Gmail For Business | Get @yourbusiness.com Gmail\u200eAd·gsuite.google.com/gmail\u200e', 'serp_type': 'ads_main', 'serp_url': 'https://gsuite.google.com/intl/en_sg/products/gmail/', 'serp_visible_link': 'gsuite.google.com/gmail', 'status': 200, 'text_raw': "See our tips for working from home with Suite, including video meetings.\nLearn more Gmail Secure, private, ad-free email for your business Gmail keeps you updated with real-time message notifications, and safely stores your important emails and data.\nIT admins can centrally manage accounts across your organization and devices.\nStart Free Trial Contact sales Get custom email @yourcompany Build customer trust by giving everyone in your company professional email address at your domain, like susan@yourcompany and joe@yourcompany.\nAlso create group mailing lists, like sales@yourcompany.\nWork without interruption Access your email anytime, anywhere, on any device—no Internet connection needed.\nRead and draft messages without connectivity, and they’ll be ready to send when you’re back online.\nElevate email conversations with chat and video For those moments when you need more than just email, join Meet video call or chat with colleague directly from your inbox.\nCompatible with your existing interface Gmail works great with desktop clients like Microsoft Outlook, Apple Mail and Mozilla Thunderbird.\nOutlook users can sync emails, events and contacts to and from Suite.\nEasy migration from Outlook and legacy services Migrate your email from Outlook, Exchange or Lotus easily with custom tools that help preserve your important messages.\n99.9% guaranteed uptime, 0% planned downtime Count on Google’s ultra-reliable servers to keep your lights on 24/7/365.\nAutomatic backups, spam protection and industry-leading security measures help protect your business data.\nSuite gave us reliable and convenient access to our emails and documents, regardless of our location.\nMr. Zhang Gixia Group Learn More Top questions about Gmail What's different about the paid version of Gmail?\nPaid Gmail features include: custom email @yourcompany.com unlimited group email addresses, 99.9% guaranteed uptime, twice the storage of personal Gmail, zero ads, 24/7 support, Suite Sync for Microsoft Outlook and more.\nCan user have more than one email address?\nuser can have several email addresses by creating email aliases.\nYou can add up to 30 email aliases for each user.\nCan migrate my existing email to Suite?\nSuite migration tools are available for importing your old emails from legacy environments, such as Microsoft®, IBM® Notes® and other email systems.\nFor more information on the tools available for data migrations into Suite, see Migrate your organisation’s data to Suite.\nStay in the loop Sign up for Google Cloud newsletters with product updates, event information, special offers and more.\nEmail Please enter valid email address.\nSelect one option.value Industry This is required Select one Number of Employees This is required Country Country country.countryName This is required Yes, sign me up for Google Cloud emails with news, product updates, event information, special offers and more.\nYou can unsubscribe at later time This is required Sign me up Thanks!\nWe’ll be in touch shortly.\n", 'url': 'https://gsuite.google.com/intl/en_sg/products/gmail/'}]}
 
         print(resp)
 
         #pass the response to front end and show it to user
         # return JsonResponse(resp, safe=False)
-        return render(request,'Target_Management_System/tso_internetsurvey.html',{})
-
+        #return render(request,'Target_Management_System/tso_internetsurvey.html',{'result': resp})
+        return HttpResponseRedirect(reverse('Target_Management_System:tms_internetsurvey',kwargs={'resp':resp}))
 
 class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
 
@@ -219,7 +258,7 @@ class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
         paragraphs =bool(request.POST.get('paragraphs',False))
         pictures =bool(request.POST.get('pictures',False))
         videos =bool(request.POST.get('videos',False))
-        ip =bool(request.POST.get('page_url',False))
+        ip =bool(request.POST.get('ip',False))
 
 
         print(request.POST)
@@ -282,6 +321,16 @@ class Test_View1(View):
         return JsonResponse({'alert_event_called': 1})
 
 
+class Timeline(RequireLoginMixin, IsTSO, View):
+
+    def get(self,request,*args,**kwargs):
+
+        posts = tl.fetch_posts_for_timeline()
+        print(posts)
+
+        return render(request,'Target_Management_System/timeline.html',{'posts':posts})
+
+
 def convert_expired_on_to_datetime(expired_on):
     import datetime
     expired_onn = expired_on + ' 13:55:26'
@@ -292,6 +341,7 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
+   template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
    def get(self, request, *args, **kwargs):
          with open('static/Target_Json/instagram_response.json', 'r') as f:
             instagram_person = json.load(f)
@@ -299,13 +349,22 @@ class Instagram_Target_Response(TemplateView):
             return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'instagram_person': instagram_person})
 
 
+   
+
+
+
 
 
 class LinkedinCompany_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
-         with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+        with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
             company = json.load(f)
-         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': company})
+
+        return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': data_object})
 
 
 
@@ -313,22 +372,35 @@ class LinkedinCompany_Target_Response(TemplateView):
 
 class FacebookPerson_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
         with open('static/Target_Json/facebook_person_data.json', 'r') as f:
             profile = json.load(f)
-        return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': profile})
+        return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': data_object})
 
 class FacebookPage_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
         with open('static/Target_Json/facebook_page_data.json', 'r') as f:
             page = json.load(f)
-        return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': page})
+        return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': data_object})
 
 
 class FacebookGroup_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
-        return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': group})
+        return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': data_object})
 
 
 
@@ -338,179 +410,16 @@ class FacebookGroup_Target_Response(TemplateView):
 # this json wasnot according to format to formatted here
 class Twitter_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
-        #  json_data = open('static/Target_Json/tweets.json')
-        #  data1 = json.load(json_data) # deserialises it
-        #  data2 = json.dumps(data1) # json formatted string
-        #  json_data.close()
-        tweets = {
-            "GTR": "91",
-            "author_account": 'null',
-            "name": "Fabia Nazar",
-            "location": "\n              Sargodha\n\n        ",
-            "profile_url": "https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg",
-            "biodata": "All praises be to ALLAH, the Cherisher and Sustainer of the World. xx",
-            "frequent_hashtags": [],
-            "website": "https://fabia056.blogspot.com",
-            "joined_twitter": "Joined June 2014",
-            "tweets_count": "13 Tweets",
-            "follower_count": "11 Followers",
-            "following_count": "12 Following",
-            "likes_count": "8 Likes",
-            "moments": 'null',
-            "profile_summary": "Fabia Nazar is a twitter user. Fabia Nazar have mentioned personal biography as All praises be to ALLAH, the Cherisher and Sustainer of the World. xx. This twitter handler also belongs to another website named as https://fabia056.blogspot.com. Fabia Nazar have joined Twitter in  June 2014. Up till now, Fabia Nazar have tweeted 13 Tweets in total. Currently, Fabia Nazar have 12 Following, 11 Followers and 8 Likes. ",
-            "target_update_count": 0,
-            "behaviour": "None",
-            "common_words": [],
-            "sentiments": ["0 Positive", "0 Negative"],
-            "emotions": ["sad", "cry"],
-            "posting_time_charts": [],
-            "tweets": [{
-                "id": 1151827719161896960,
-                "conversation_id": "1151824477484912640",
-                "created_at": 1563452102000,
-                "date": "2019-07-18",
-                "time": "05:15:02",
-                "timezone": "Pacific Daylight Time",
-                "user_id": 871226174550286336,
-                "username": "maliksblr92",
-                "name": "AwaRa.....",
-                "place": "",
-                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
-                "mentions": [
-                    "syntaxerrorhehe"
-                ],
-                "urls": [],
-                "photos": [],
-                "replies_count": 1,
-                "retweets_count": 0,
-                "likes_count": 1,
-                "hashtags": [],
-                "cashtags": [],
-                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
-                "retweet": 'false',
-                "quote_url": "",
-                "video": 0,
-                "near": "",
-                "geo": "",
-                "source": "",
-                "user_rt_id": "",
-                "user_rt": "",
-                "retweet_id": "",
-                "reply_to": [
-                    {
-                        "user_id": "871226174550286336",
-                        "username": "maliksblr92"
-                    },
-                    {
-                        "user_id": "756747471691386880",
-                        "username": "syntaxerrorhehe"
-                    }
-                ],
-                "retweet_date": "",
-                "translate": "",
-                "trans_src": "",
-                "trans_dest": ""
-            },
-                {
-                "id": 1151827719161896960,
-                "conversation_id": "1151824477484912640",
-                "created_at": 1563452102000,
-                "date": "2019-07-18",
-                "time": "05:15:02",
-                "timezone": "Pacific Daylight Time",
-                "user_id": 871226174550286336,
-                "username": "maliksblr92",
-                "name": "AwaRa.....",
-                "place": "",
-                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
-                "mentions": [
-                    "syntaxerrorhehe"
-                ],
-                "urls": [],
-                "photos": [],
-                "replies_count": 1,
-                "retweets_count": 0,
-                "likes_count": 1,
-                "hashtags": [],
-                "cashtags": [],
-                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
-                "retweet": 'false',
-                "quote_url": "",
-                "video": 0,
-                "near": "",
-                "geo": "",
-                "source": "",
-                "user_rt_id": "",
-                "user_rt": "",
-                "retweet_id": "",
-                "reply_to": [
-                    {
-                        "user_id": "871226174550286336",
-                        "username": "maliksblr92"
-                    },
-                    {
-                        "user_id": "756747471691386880",
-                        "username": "syntaxerrorhehe"
-                    }
-                ],
-                "retweet_date": "",
-                "translate": "",
-                "trans_src": "",
-                "trans_dest": ""
-            }, {
-                "id": 1151827719161896960,
-                "conversation_id": "1151824477484912640",
-                "created_at": 1563452102000,
-                "date": "2019-07-18",
-                "time": "05:15:02",
-                "timezone": "Pacific Daylight Time",
-                "user_id": 871226174550286336,
-                "username": "maliksblr92",
-                "name": "AwaRa.....",
-                "place": "",
-                "tweet": "Tell the Democrat Governors that “Mutiny On The Bounty” was one of my all time favorite movies. A good old fashioned mutiny every now and then is an exciting and invigorating thing to watch, especially when the mutineers need so much from the Captain. Too easy!",
-                "mentions": [
-                    "syntaxerrorhehe"
-                ],
-                "urls": [],
-                "photos": [],
-                "replies_count": 1,
-                "retweets_count": 0,
-                "likes_count": 1,
-                "hashtags": [],
-                "cashtags": [],
-                "link": "https://twitter.com/maliksblr92/status/1151827719161896960",
-                "retweet": 'false',
-                "quote_url": "",
-                "video": 0,
-                "near": "",
-                "geo": "",
-                "source": "",
-                "user_rt_id": "",
-                "user_rt": "",
-                "retweet_id": "",
-                "reply_to": [
-                    {
-                        "user_id": "871226174550286336",
-                        "username": "maliksblr92"
-                    },
-                    {
-                        "user_id": "756747471691386880",
-                        "username": "syntaxerrorhehe"
-                    }
-                ],
-                "retweet_date": "",
-                "translate": "",
-                "trans_src": "",
-                "trans_dest": ""
-            }
+
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
 
 
 
-            ]
-        }
-        print(tweets)
-        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': tweets})
+
+        #print(tweets)
+        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
 
 
 
@@ -518,159 +427,14 @@ class Twitter_Target_Response(TemplateView):
 # this json wasnot according to format to formatted here
 class LinkedinPerson_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
-        profile = {
-            "GTR": "91",
-            "target_type": "profile",
-            "name": "Asma Shakeel",
-            "headline": "I am Electrical Engineer specialization in DSSP. My passion is centered on Digital Design and Image Processing.",
-            "company": "Rapidev DMCC",
-            "school": "National University of Sciences and Technology (NUST)",
-            "location": "Islamabad Gpo, Federal Capial &AJK, Pakistan",
-            "image_url": "./data/linkedin/asma-shakeel.png",
-            "followers": "",
-            "email": "asma9t7@gmail.com",
-            "phone": 'null',
-            "connected": 'null',
-            "websites": [],
-            "target_update_count": 0,
-            "profile_summary": "Asma Shakeel is a Linkedin user. Rapidev DMCC is the company where this user works. Islamabad Gpo, Federal Capial &AJK, Pakistan is the location from where Asma Shakeel belongs.  This user profile's summary is Highly focused and motivated Electrical Engineer, able to work collaboratively in a variety of settings, conditions, and\n\n      environments.. Email: asma9t7@gmail.com.  User interests are: Bill Gates , Sony , Microsoft , LinkedIn , Jack Welch , JT O'Donnell.  User skills are: Matlab , Intel Quartus Prime , Alliance CAD Tool. ",
-            "current_company_link": "https://www.linkedin.com/company/rapidev-dmcc-dubai/",
-            "skills": [
-                {
-                    "name": "Matlab",
-                    "endorsements": 0
-                },
-                {
-                    "name": "Intel Quartus Prime",
-                    "endorsements": 0
-                },
-                {
-                    "name": "Alliance CAD Tool",
-                    "endorsements": 0
-                }
-            ],
-            "experience": {
-                "jobs": [
-                    {
-                        "title": "Hardware Design Internee",
-                        "company": "Rapidev DMCC\n        Internship",
-                        "date_range": "Oct 2019 \u2013 Present",
-                        "location": "National Science and Technology Park Islamabad",
-                        "description": 'null',
-                        "li_company_url": "https://www.linkedin.com/company/rapidev-dmcc-dubai/"
-                    }
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
 
-                ],
-                "education": [
-                    {
-                        "name": "National University of Sciences and Technology (NUST)",
-                        "degree": "Masters in Science",
-                        "grades": 'null',
-                        "field_of_study": "Electrical Engineering",
-                        "date_range": "2018 \u2013 2020",
-                        "activities": 'null'
-                    },
-                    {
-                        "name": "Government  College University, Faisalabad",
-                        "degree": "Electrical Engineering",
-                        "grades": "3.73/4",
-                        "field_of_study": "Electrical and Electronics Engineering",
-                        "date_range": "2014 \u2013 2018",
-                        "activities": 'null'
-                    },
-                    {
-                        "name": "Govt college for women karkhana bazar, Faisalabad",
-                        "degree": "HSSC (PRE-ENGINEERING)",
-                        "grades": "80%",
-                        "field_of_study": "Engineering",
-                        "date_range": "2012 \u2013 2014",
-                        "activities": 'null'
-                    },
-                    {
-                        "name": "Govt girls High School bhowana bazar, Faisalabad",
-                        "degree": "MATRICULATION",
-                        "grades": "80%",
-                        "field_of_study": "Science",
-                        "date_range": "2010 \u2013 2012",
-                        "activities": 'null'
-                    }
-                ],
-                "volunteering": [
-                    {
-                        "title": "Cordinator",
-                        "company": "IEEE student branch gcuf",
-                        "date_range": "Dec 2014 \u2013 Aug 2015",
-                        "location": 'null',
-                        "cause": "Education",
-                        "description": 'null'
-                    },
-                    {
-                        "title": "Chairperson",
-                        "company": "IEEE WIE GCUF Student Branch",
-                        "date_range": "Sep 2017 \u2013 Aug 2018",
-                        "location": 'null',
-                        "cause": "Education",
-                        "description": 'null'
-                    }
-                ]
-            },
-            "interests": [
-                "Bill Gates",
-                "Sony",
-                "Microsoft",
-                "LinkedIn",
-                "Jack Welch",
-                "JT O'Donnell"
-            ],
-            "accomplishments": {
-                "publications": [],
-                "certifications": [],
-                "patents": [],
-                "courses": [
-                    "ASIC Design Methodology ",
-                    "Advance Digital Image Processing ",
-                    "Advance Digital Signal Processing ",
-                    "Advance Digital System Design ",
-                    "Artificial Neural Network ",
-                    "Computer Vision",
-                    "Digital Signal Processing",
-                    "Stochastic system",
-                    "System Validation "
-                ],
-                "projects": [
-                    "Carry Look-Ahead Adder Design Using Alliance CAD Tools                                       ",
-                    "Interesting Games for Data Collection",
-                    "Modeling Online Shopping Smart Contract in NuSMV",
-                    "Non Linear Camera Calibration",
-                    "Autonomous Fire/Heat control Droid ",
-                    "Burgler Alarm(home security system)",
-                    "Digital Temperature Sensor",
-                    "Sensor Alarm using Thyristor"
-                ],
-                "honors": [
-                    "1st Postion in HSSC(Pre Engineering) in Govt college for women karkhana Bazar"
-                ],
-                "test_scores": [],
-                "languages": [
-                    "English",
-                    "Punjabi",
-                    "urdu"
-                ],
-                "organizations": []
-            },
-            "field_of_interest": [
-                "Electrical Engineering",
-                "Electrical and Electronics Engineering",
-                "Engineering",
-                "Science"
-            ],
-            "experience_education_graph": [
-                [],
-                []
-            ],
-            "linked_to": []
-        }
-        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': profile})
+
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
+
+
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
           with open('static/Target_Json/facebook_page_data.json', 'r') as f:

@@ -45,6 +45,13 @@ supported_sites_content = [{
      'target_type':['profile','subreddit']
 
     }
+},{'website':
+    {'name':'Youtube',
+     'url':'',
+     'website_type':'blog',
+     'target_type':['channel']
+
+    }
 }]
 
 
