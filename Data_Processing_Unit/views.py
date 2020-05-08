@@ -24,9 +24,9 @@ ais = Ais_Api_Controller()
 
 # ahmed imports
 import twint
-import nest_asyncio
+#import nest_asyncio
 import asyncio
-import geopy
+#import geopy
 from geopy import Nominatim
 
 

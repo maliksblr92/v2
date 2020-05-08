@@ -467,7 +467,7 @@ class FacebookPageReport(TemplateView):
 
 
 
-class FacebookPersonReport(TemplateView):
+class FacebookGroupReport(TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
