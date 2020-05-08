@@ -144,17 +144,16 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
 
         print(query,website)
         resp = acq.identify_target(query,website)
-        #print(resp)
+        print(resp)
 
         users = []
         if(not 'response' in resp):
 
-            if(website == 'instagram'):
+            if(not website == 'instagram'):
                 data = resp['data']['data']
-                print(data)
                 for item in data:
                     #print(item)
-                    user = {'e_type':item['entity_type'],'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
+                    user = {'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
                     users.append(user)
 
         print(users)
