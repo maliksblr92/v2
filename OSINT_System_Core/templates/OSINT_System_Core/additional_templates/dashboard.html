@@ -81,10 +81,10 @@
         </div>
       </div>
       <div class="row border border-warning card1_row ">
-        <div class="col-md-12 bg-white text-dark text-center card_headers"><span class="float-left"style="font-size:14px;">Youtube Top Videos</span></div>
+        <div class="col-md-12 bg-white text-dark text-center card_headers"><span class="float-left"style="font-size:14px;">Youtube Top Trends</span><button type="button" class="float-right btn btn-primary btn-sm m-1"id="refesh_youtube_trends">Refresh</button></div>
         <div class="col-md-12 card1_col2" >
           <div class="row p-1" style="background-color: transparent!important;height: 250px;overflow-y:auto!important;overflow-x:hidden" id="youtube_trends">
-            {% for i in youtube_trends.trends %}
+            {% for i in youtube_trends.top_Trends %}
               <div class="col-md-3 mt-1 d-flex flex-column justify-content-center align-items-center border border-warning" style="border-radius:5px;">
                 <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">{{i.views}}
                 </span>
@@ -170,146 +170,47 @@
           </div>
         </div>
         
-        <div class="row border border-warning card1_row  mt-2">
-          <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Social Posts </div> -->
-          <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Social Posts</span> </div>
-          <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        
+         
+            
+            
+            <div class="row border border-warning card1_row  mt-2">
+              <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Twitter Country Top  Trends </span>
+                <select name="country_selector" id="country_selector"  required="required" class="form-control form-control-sm" style="width:150px;">
+                  <option value="">Select Country</option>
+                  {% for i in countries_list %}
+                  <option value="{{i}}"> {{i}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
+                <div class="row mt-1 pl-1 pr-1 " id="trends_by_country">
+                  {% for i in  twitter_country_hashtags.top_Trends %}
+                 
+                    <div class="col-md-12 mt-1">
+                      <div class="row">
+                        <div class="col-md-2  m-0 p-0 custom_center">
+                          <span class=" text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:50px;width:50px;font-size:12px;">{{i.tweet_count}}</span>
+                        </div>
+                        <div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;">
+                          <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.tag}}</a></div>
+                        </div>
+                      </div>
+                    {% endfor  %}
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-1 pl-1 pr-1 ">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                    ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </>
-      </div>
+            
+            
+            
+            
+            
+            
+            
+            
+        
+      
+     
       <div class="row mt-2">
         <div class="col-md-1"></div>
         <div class="col-md-10 bg-dark text-center footer  m-0 p-0">
@@ -319,4 +220,5 @@
       </div>
       <div class="flexbox">
       </div>
+      
     {% endblock%}

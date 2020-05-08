@@ -2,7 +2,6 @@
 # from django.utils import timezone
 # Create your models here.
 import datetime
-
 # Create your models here.
 from mongoengine import *
 from mongoengine import signals
@@ -149,7 +148,7 @@ class Linkedin_Profile_Response_TMS(Document):
     accomplishments = DictField()
     field_of_interest = ListField()
     experience_education_graph = ListField()
-    linked_to = ListField()
+    linked_to = DictField()
 
 
 class Linkedin_Company_Response_TMS(Document):
@@ -168,7 +167,7 @@ class Linkedin_Company_Response_TMS(Document):
     specialties = StringField()
     number_of_employees = IntField()
     jobs = DictField()
-    linked_to = ListField()
+    linked_to = DictField()
 
 
 """
@@ -380,6 +379,40 @@ class Facebook_Group_Response_TMS(Document):
     behaviour = StringField()
     common_words = ListField()
     linked_to = ListField()
+
+
+class Trends(Document):
+    trend_type = StringField()
+    trend_graph = DictField()
+    popular_hashtag = ListField()
+    top_Trends = ListField()
+    country = StringField()
+    wordcloud = ListField()
+    common_words = ListField()
+    spelling_variants = ListField()
+
+
+class News(Document):
+    GTR = StringField()
+    CTR = IntField()
+    channel = StringField()
+    most_used_hashtags = ListField()
+    wordcloud = StringField()
+    most_emerging_news = ListField()
+    news = ListField()
+    common_words = ListField()
+    spelling_variants = ListField()
+
+
+
+class Dynamic_Crawling_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    name = StringField()
+    registrar = StringField()
+    creation_date = DateTimeField()
+    expiration_date = DateTimeField()
+    data = DictField()
 
 
 """

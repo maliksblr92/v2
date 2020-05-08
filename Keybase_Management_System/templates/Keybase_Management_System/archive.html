@@ -52,6 +52,7 @@
     </div>
     <!-- end of top row -->
 
+
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
         <div class="">
@@ -61,7 +62,7 @@
                     <!-- this is content -->
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         {% csrf_token %}
-                        {% for key, value in ctx.items %}
+                        {% for key, value in gtx.items %}
                         <div class="tab-pane fade {% if key == 'keywords' %}active show{% endif %}" id="nav-{{key}}"
                             role="tabpanel">
                             <!-- Each content tab #1 for keywords-->
@@ -69,18 +70,100 @@
                                 <!-- divide the section into 2 columns -->
                                 <div class="col-md-4 col-lg-4 col-xl-4">
                                     <div class="container">
-                                        {% for listitem in value|slice:"0:5" %}
-                                        {% for key_in, value_in in listitem.items %}
+                                        {% if key == 'keywords' %}
+                                        {% for i in ctx %}
                                         <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend pilleditdel">
-                                                <input type="hidden" value="{{key_in}}">
-                                                <span class="keybaseLabel">{{key}}</span>
-                                                <span class="rightlabel">{{value_in|join:", "}}</span>
-                                            </div>
+                                         <div class="input-group-prepend pilleditdel">
+                                        <input type="hidden" value="{{key_in}}">
+                                         <span class="keybaseLabel">{{i.title}}</span>
+                                         <span class="rightlabel" style="width: 800px!important;;">{{i.keywords|join:", "}}</span>
                                         </div>
-                                        {% endfor %}
-                                        {% endfor %}
+                                        </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+                                   
+
+
+
+                                    {% if key == 'mentions' %}
+                                        {% for i in ctx %}
+                                        <div class="input-group mt-2 mb-2">
+                                         <div class="input-group-prepend pilleditdel">
+                                        <input type="hidden" value="{{key_in}}">
+                                         <span class="keybaseLabel">{{i.title}}</span>
+                                        <span class="rightlabel" style="width: 800px!important;;">{{i.mentions|join:", "}}</span>
+                                        </div>
+                                        </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+
+
+
+
+                                    {% if key == 'topics' %}
+                                        {% for i in ctx %}
+                                        <div class="input-group mt-2 mb-2">
+                                         <div class="input-group-prepend pilleditdel">
+                                        <input type="hidden" value="{{key_in}}">
+                                         <span class="keybaseLabel">{{i.title}}</span>
+                                        <span class="rightlabel" style="width: 800px!important;;">{{i.mentions|join:", "}}</span>
+                                        </div>
+                                        </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+
+
+
+
+
+                                    {% if key == 'phrases' %}
+                                        {% for i in ctx %}
+                                        <div class="input-group mt-2 mb-2">
+                                         <div class="input-group-prepend pilleditdel">
+                                        <input type="hidden" value="{{key_in}}">
+                                         <span class="keybaseLabel">{{i.title}}</span>
+                                        <span class="rightlabel" style="width: 800px!important;;">{{i.phrases|join:", "}}</span>
+                                        </div>
+                                        </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+                                   {% if key == 'tags' %}
+                                        {% for i in ctx %}
+                                        <div class="input-group mt-2 mb-2">
+                                         <div class="input-group-prepend pilleditdel">
+                                        <input type="hidden" value="{{key_in}}">
+                                         <span class="keybaseLabel">{{i.title}}</span>
+                                        <span class="rightlabel" style="width: 800px!important;;">{{i.hashtags|join:", "}}</span>
+                                        </div>
+                                        </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+
                                     </div>
+
+
+                                   
                                 </div>
                                 <div class="col-md-4 col-lg-4 col-xl-4">
                                     <div class="container">
@@ -90,7 +173,7 @@
                                             <div class="input-group-prepend pilleditdel">
                                                 <input type="hidden" value="{{key_in}}">
                                                 <span class="keybaseLabel">{{key}}</span>
-                                                <span class="rightlabel">{{value_in|join:", "}}</span>
+                                                <span class="rightlabel" style="width: 800px!important;;">{{value_in|join:", "}}</span>
                                             </div>
                                         </div>
                                         {% endfor %}

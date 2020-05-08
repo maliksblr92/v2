@@ -84,51 +84,103 @@
           </nav>
         </div>
       </div>
+      {% for x in news_json %}
+
+
+   
       <div class="row mt-2 p-3   ml-2 mr-2">
         <div class="col-md-1"></div>
         <div class="col-md-10 border border-warning text-center m-0 p-0">
-          <div class="col-md-12 card-header background-gradient-dark text-center font-weight-bold text-white">TV CHANNEL NAME 1</div>
+          <div class="col-md-12 card-header background-gradient-dark text-center font-weight-bold text-white">{{x.channel}}</div>
           <div class="row mt-2 mb-2">
             <div class="col-md-6 text-center font-weight-bold text-white ">
               <div class="card" >
-                <div class="card-body background-gradient-dark"style="height:400px;">
-                  {% for i in news_json.news %}
-                    <div class="accordion " id="accordionExample">
-                      <div class="card background-gradient">
-                        <div class="card-header" id="headingOne">
-                          <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
-                            <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-warning">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
-                            <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
-                          </a>
-                        </div>
-                        <div id="id{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                          <div class="card-body">
-                            <div  class="w-100 text-white "style="font-size:12px;">   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa eum commodi dolor rerum! Alias iure ullam suscipit odit aliquid cum iste voluptate quia et non rem, doloribus laboriosam aut ducimus?
-                            </div>  {{i.Description}}</div>
+                <div class="card-body background-gradient-dark">
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                     
+                  
+                    <div class="col-md-12 text-center">
+         <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;"> Most Emerging News </div>
+                      <div class="" style="height:400px;overflow-y:auto">
+                     
+                      {% for i in x.most_emerging_news %}
+                        <div class="accordion " id="accordionExample">
+                          <div class="card background-gradient">
+                            <div class="card-header" id="headingOne">
+                              <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                                <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-warning">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
+                                <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
+                              </a>
+                            </div>
+                            <div id="id{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                <div  class="w-100 text-white "style="font-size:12px;"> 
+                                </div>  {{i.Description}}</div>
+                                <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                                 <span> <i class="fas fa-chevron-circle-up fa-2x"></i></span><a class="badge badge-primary" href="{{i.Link}}">View</a>
+                                </a>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        {% endfor %}  
                       </div>
-                    {% endfor %}
+
+
+
+
+                      <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2 mt-2" style="font-size: 14px;;"> Top News </div>
+                      <div class="" style="height:400px;overflow-y:auto">
+                     
+                        {% for i in x.news %}
+                          <div class="accordion " id="accordionExample">
+                            <div class="card background-gradient">
+                              <div class="card-header" id="headingOne">
+                                <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                                  <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-warning">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
+                                  <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
+                                </a>
+                              </div>
+                              <div id="id{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                  <div  class="w-100 text-white "style="font-size:12px;"> 
+                                  </div>  {{i.Description}}</div>
+                                  <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#id{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                                   <span> <i class="fas fa-chevron-circle-up fa-2x"></i></span><a class="badge badge-primary" href="{{i.Link}}">View</a>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          {% endfor %}  
+                        </div>
+
+
+
+
+                    </div>
+                  
                   </div>
                 </div>
               </div>
+              </div>
+            </div>
               <div class="col-md-6 text-center font-weight-bold text-white ">
                 <div class="card" >
                   <div class="card-footer bg-dark m-0 p-0">
                     <div class="row">
                       <div class="col-md-12 text-center">
                         <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;"> Most Common Words</div>
-                        {% for i in news_json.common_words%}
+                        {% for i in x.common_words%}
                           <span class="badge badge-light">{{i}}</span>
                         {% endfor %}
                       </div>
                       <div class="col-md-12 text-center">
                         <div class="text-white text-center background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;">  World Cloud </div>
-                        <span class="text-white" style="font-size: 12px;;"> {{news_json.WordCloud |cut:'#'}}</span>
+                        <span class="text-white" style="font-size: 12px;;"> {{x.wordcloud |cut:'#'}}</span>
                       </div>
                       <div class="col-md-12 text-center">
                         <div class="text-white text-center  background-gradient-dark font-weight-bold pt-2 pb-2" style="font-size: 14px;;"> Most Used Hastag</div>
-                        <div class="" > {% for i in news_json.most_used_hashtags%}
+                        <div class="" > {% for i in x.most_used_hashtags%}
                           <span class="badge badge-light">{{i  }}</span>
                         {% endfor %}</div>
                       </div>
@@ -140,6 +192,7 @@
           </div>
           <div class="col-md-1"></div>
         </div>
+        {% endfor %}
         
         <!--           <div class="row">
           <div class="col-md-1"></div>
