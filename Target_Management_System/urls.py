@@ -17,7 +17,8 @@ urlpatterns = [
     # path('target_response/',views.Target_Response.as_view(),name='target_response'),
     # template urls
     path('marktarget/', views.Add_Target.as_view(), name="tms_marktarget"),
-    path('marktarget/<str:portfolio_id>', views.Add_Target.as_view(), name="tms_marktarget"),
+    path('marktarget_portfolio/<str:portfolio_id>', views.Add_Target.as_view(), name="tms_marktarget_portfolio"),
+    path('marktarget_prime/<str:prime_argument>', views.Add_Target.as_view(), name="tms_marktarget_prime"),
     path(
         'fetchtarget/',
         views.Target_Fetched.as_view(),

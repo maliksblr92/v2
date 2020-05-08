@@ -25,7 +25,11 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         news_sites = acq.get_all_news_sites()
         blog_sites = acq.get_all_blog_sites()
 
-        if 'portfolio_id' in kwargs :request.session['selected_portfolio_id'] = kwargs['portfolio_id']
+        portfolio_id = ''
+        prime_argument = ''
+
+        if 'portfolio_id' in kwargs :portfolio_id = kwargs['portfolio_id']
+        if 'prime_argument' in kwargs: prime_argument = kwargs['prime_argument']
         #print(kwargs['portfolio_id'])
         # print(social_sites.to_json())
         # data = serializers.serialize('json', social_sites.to_json(), fields=(
@@ -35,8 +39,10 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'news': json.loads(news_sites.to_json()),
             'blogs': json.loads(blog_sites.to_json()),
             'intervals':PERIODIC_INTERVALS,
+            'portfolio_id':portfolio_id,
+            'prime_argument':prime_argument
         }
-        #print(data)
+        print(prime_argument)
         #publish('target created successfully', message_type='notification')
         return render(request,
                       'Target_Management_System/tso_marktarget.html',
@@ -57,6 +63,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
             print(request.POST)
             plateform = request.POST['platform']
+            portfolio_id = request.POST.get('portfolio_id',None)
+
 
             website_id = ObjectId(request.POST['website_id'])
             target_type_index = int(request.POST[plateform+'_authortype'])
@@ -68,10 +76,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             interval = int(request.POST[plateform+'_interval'])
             screen_shot = False
 
-            portfolio_id = None
-            if 'selected_portfolio_id' in request.session :
-                portfolio_id = request.session.get('selected_portfolio_id')
-                del(request.session['selected_portfolio_id'])
+
+
 
             print(portfolio_id)
 

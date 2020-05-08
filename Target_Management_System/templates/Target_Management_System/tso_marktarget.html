@@ -116,7 +116,7 @@
                                                 </div>
                                                 <input type="text" class="form-control newinputdesign"
                                                     placeholder="Please Enter your text"
-                                                    name="{{platform.name|lower}}_autheruseraccount"
+                                                    name="{{platform.name|lower}}_autheruseraccount" value="{{ data.prime_argument }}"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button type="button" x-target-name="{{platform.name|lower}}"
@@ -246,6 +246,9 @@
                                                     value="0">
                                                  <label for="male">No</label><br>
                                                 <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
+
+                                                <input type="hidden" name="portfolio_id" value="{{ data.portfolio_id }}">
+
                                             </div>
                                         </div>
 
