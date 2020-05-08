@@ -53,37 +53,46 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
         #<QueryDict: {'csrfmiddlewaretoken': ['Egw4i8ivl698nS7BzlKQkGGUue93nN6jEWHKEOwnRI5bsrp329nu2sCwAiDlGUi0'], 'facebook_autheruseraccount': ['awais'], 'facebook_authortype': ['0'], 'facebook_authoruserid': ['abcdef123'], 'facebook_authorusername': ['sharif ahmad'], 'facebook_authoruserurl': ['http://www.facebook.com/sharifahmad2061'], 'date': [''], 'facebook_interval': ['15'], 'facebook_screenshot': ['1']}
 
 
+        try:
 
-        print(request.POST)
-        plateform = request.POST['platform']
+            print(request.POST)
+            plateform = request.POST['platform']
 
-        website_id = ObjectId(request.POST['website_id'])
-        target_type_index = int(request.POST[plateform+'_authortype'])
-        username = request.POST[plateform+'_autheruseraccount']
-        user_id = request.POST[plateform+'_authoruserid']
-        name = request.POST[plateform+'_authorusername']
-        url = request.POST[plateform+'_authoruserurl']
-        expire_on = request.POST[plateform+'_expirydate']
-        interval = int(request.POST[plateform+'_interval'])
-        screen_shot = False
+            website_id = ObjectId(request.POST['website_id'])
+            target_type_index = int(request.POST[plateform+'_authortype'])
+            username = request.POST[plateform+'_autheruseraccount']
+            user_id = request.POST[plateform+'_authoruserid']
+            name = request.POST[plateform+'_authorusername']
+            url = request.POST[plateform+'_authoruserurl']
+            expire_on = request.POST[plateform+'_expirydate']
+            interval = int(request.POST[plateform+'_interval'])
+            screen_shot = False
 
-        portfolio_id = None
-        if 'selected_portfolio_id' in request.session :portfolio_id = request.session.get('selected_portfolio_id')
-        print(portfolio_id)
+            portfolio_id = None
+            if 'selected_portfolio_id' in request.session :
+                portfolio_id = request.session.get('selected_portfolio_id')
+                del(request.session['selected_portfolio_id'])
 
-        if (expire_on is not None):
-            expire_on = convert_expired_on_to_datetime(expire_on)
+            print(portfolio_id)
+
+
+            if (expire_on is not None):
+                expire_on = convert_expired_on_to_datetime(expire_on)
 
 
 
-        print(website_id,target_type_index,username,user_id)
-        acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
-        publish('target created successfully', message_type='notification')
+            print(website_id,target_type_index,username,user_id)
+            acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
+            publish('target created successfully', message_type='notification')
 
-        if(portfolio_id is not None):
-            return HttpResponseRedirect(reverse('Portfolio_Management_System:add_information',args=[portfolio_id]))
+            if(portfolio_id is not None):
+                return HttpResponseRedirect(reverse('Portfolio_Management_System:add_information',args=[portfolio_id]))
 
-        return redirect('/tms/marktarget')
+            return redirect('/tms/marktarget')
+        except Exception as e:
+            print(e)
+            publish(str(e), message_type='error')
+            return redirect('/tms/marktarget')
 
 
 # ...................................................Views for SmartSearch
@@ -141,10 +150,11 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
         if(not 'response' in resp):
 
             if(website == 'instagram'):
-                data = resp['data']['users']
+                data = resp['data']['data']
+                print(data)
                 for item in data:
                     #print(item)
-                    user = {'username': item['user']['username'],'fullname': item['user']['full_name'],'userid': '','profile_url':item['user']['profile_pic_url']}
+                    user = {'e_type':item['entity_type'],'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
                     users.append(user)
 
         print(users)

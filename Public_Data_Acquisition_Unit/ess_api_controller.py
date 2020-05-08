@@ -517,6 +517,54 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def twitter_trends(self,country='pakistan'):
+        try:
+            add_target_url = 'twitter/trends'
+            payload = {'country':country}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def youtube_trends(self):
+        try:
+            add_target_url = 'youtube/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def reddit_trends(self):
+        try:
+            add_target_url = 'reddit/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def google_trends(self,country='pakistan',realtime=False):
+        try:
+            add_target_url = 'google/trends'
+            payload = {'country':country,'realtime':realtime}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
     #...................................Tools Api's.................................
 
     def fake_identitity_generator(self,nationality,gender,age):

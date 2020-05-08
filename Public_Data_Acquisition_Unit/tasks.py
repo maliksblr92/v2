@@ -24,6 +24,7 @@ def periodic_interval_targets_task():
 def periodic_general_task():
 
     acq.fetch_news()
+    acq.fetch_top_trends()
     print('......................................In General Task.......................................')
     #get news request here
     #get top trends request here

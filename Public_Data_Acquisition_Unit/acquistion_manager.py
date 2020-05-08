@@ -53,6 +53,10 @@ class Acquistion_Manager(object):
                     pt.save()
                     publish(' {0} is added to periodic targets'.format(target), message_type='info', module_name=__name__)
 
+                else:
+                    target.make_me_expire()
+            else:
+                target.make_me_expire()
 
             self.add_crawling_target(gtr,0)
             return target
@@ -237,6 +241,12 @@ class Acquistion_Manager(object):
                 return (Reddit_Subreddit, ess.add_target ,None)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'Youtube'):
+            if (gtr.target_type == 'channel'):
+                return (Youtube_Channel, ess.add_target, None)
+            else:
+                publish('target type not defined', message_type='alert', module_name=__name__)
+
 
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
@@ -468,10 +478,17 @@ class Acquistion_Manager(object):
 
 
     def crawler_internet_connection(self):
-        return ess.crawler_internet_connection()
+
+        resp = ess.crawler_internet_connection()
+        print(resp[0]['internet']['download'],resp[0]['internet']['upload'],resp[0]['internet']['timestamp'])
+        return {'download':resp[0]['internet']['download'],'upload':resp[0]['internet']['upload'],'stamp':resp[0]['internet']['timestamp']}
 
     def mircocrawler_status(self):
-        return ess.microcrawler_status()
+
+
+        print(ess.microcrawler_status())
+
+
 
     def fetch_news(self,top=10, GTR_ID=1):
         # fetch data from ess server
@@ -485,6 +502,12 @@ class Acquistion_Manager(object):
                 print(response)
         except Exception as e:
             print(e)
+
+    def fetch_top_trends(self):
+        ess.google_trends()
+        ess.youtube_trends()
+        ess.twitter_trends()
+        ess.reddit_trends()
 
 
     def identify_target(self,query,website):
