@@ -341,9 +341,15 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
+   template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+   def get(self, request, *args, **kwargs):
+         with open('static/Target_Json/instagram_response.json', 'r') as f:
+            instagram_person = json.load(f)
+            # print(instagram_person)
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'instagram_person': instagram_person})
 
 
-    template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+   
 
 
 
@@ -434,3 +440,40 @@ class Index(TemplateView):
           with open('static/Target_Json/facebook_page_data.json', 'r') as f:
             page = json.load(f)
             return render(request, 'Target_Management_System/test.html',{'page':page})
+
+
+
+class FacebookPersonReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            profile = json.load(f)
+         return render(request,'Target_Management_System/FacebookPerson_Target_Report.html',{'profile':data_object})
+    
+
+
+class FacebookPageReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            page = json.load(f)
+         return render(request,'Target_Management_System/FacebookPage_Target_Report.html',{'page':data_object})
+
+
+
+class FacebookPersonReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            group = json.load(f)
+         return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
+    

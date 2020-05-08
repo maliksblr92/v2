@@ -57,5 +57,10 @@ path(
     path('target/facebook/page/<str:object_gtr_id>', FacebookPage_Target_Response.as_view(), name="FacebookPage_Target_Response"),
     path('target/facebook/group/<str:object_gtr_id>', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
     path('target/test/', Index.as_view(), name="Index"),
+    
+    path('report/facebook/person/<str:object_gtr_id>', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
+    path('report/facebook/page/<str:object_gtr_id>', FacebookPageReport.as_view(), name="FacebookPageReport"),
+    path('report/facebook/group/<str:object_gtr_id>', FacebookGroupReport.as_view(), name="FacebookGroupReport"),
+    
 
 ]

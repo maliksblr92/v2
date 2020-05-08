@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:09 GMT -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/news_monitoring/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+      <<style>
+      .background-gradient{
+      background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+      }
+      .background-gradient-dark{
+      background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+      }
+      
+      </style>
+    </head>
+    <body>
+      <div class="container-fluid">
+          <div class="row">
+
+
+            {% for x in top_news %}
+         
+              <div class="col-md-4 mt-4">
+                <div class="card">
+                    <div class="card-header text-left"><span class="font-weight-bold"
+                            style="letter-spacing:5px;font-size:20px;">Top News <span class="text-white">{{x.channel}} </span></div>
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card" style="height: 400px;overflow-y:auto">
+                                {% for y in x.most_emerging_news %}
+                                <div class=" text-white p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                                    aria-controls="{{forloop.counter}}">
+                               <span class="text-warning">  {{forloop.counter}}</span> # {{y.HeadLine}}
+                               <a href="{{y.Link}}" class="float-right"> <i class="fa fa-eye text-white "></i> </a>
+                                </div>
+                                <div>
+                                    <span class=" badge badge-success float-right">{{y.Time}}</span>
+                                </div>
+                               
+                                {% endfor %}
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+              </div>
+             
+              {% endfor %}
+
+
+
+
+
+
+              
+          </div>
+      </div>
+      
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+      <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
+    </body>
+    <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:46 GMT -->
+  </html>

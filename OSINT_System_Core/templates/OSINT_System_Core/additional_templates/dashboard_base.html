@@ -46,8 +46,8 @@ es.addEventListener('reddit_trends', function (e) {
     //console.log("Reddit data recived")
     var html='';
     for(var x=0;x<len;x++){
-     // console.log(new_data.top_trends[x].author_fullname)
-      var html='<div class="col-md-12"><div class="row p-1 "><div class="col-md-3 border "style="border-radius:5px"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:10px;">'+new_data.top_trends[x].author_fullname+'</span><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">'+new_data.top_trends[x].count+'</span></div><div class="col-md-9 border d-flex flex-row justify-content-start align-items-center "style="border-radius:5px"><span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">'+new_data.top_trends[x].title+'</span></div></div></div>'
+     // console.log(new_new_data.top_trends[x].author_fullname)
+      var html='<div class="col-md-12"><div class="row p-1 "><div class="col-md-3 border "style="border-radius:5px"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:10px;">'+new_new_data.top_trends[x].author_fullname+'</span><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">'+new_new_data.top_trends[x].count+'</span></div><div class="col-md-9 border d-flex flex-row justify-content-start align-items-center "style="border-radius:5px"><span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">'+new_new_data.top_trends[x].title+'</span></div></div></div>'
       $('#reddit_trends').append(html);
     }
     console.log("Reddit Trends update complete ")
@@ -87,7 +87,7 @@ es.addEventListener('twitter_trends', function (e) {
     if (data[x].count == "count unavalible") {
       data[x].count = "N/A";
     }
-    var html =' <div class="col-md-12 mt-1"><div class="row"><div class="col-md-2  m-0 p-0 custom_center"><span class="bg-dark text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:40px;width:100%;font-size:12px;">' +data[x].count +'</span></div><div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" href=' +data[x].href +">" +data[x].name +"</a></div></div></div>";
+    var html =' <div class="col-md-12 mt-1"><div class="row"><div class="col-md-2  m-0 p-0 custom_center"><span class="bg-dark text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:40px;width:100%;4;">' +data[x].count +'</span></div><div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" href=' +data[x].href +">" +data[x].name +"</a></div></div></div>";
     // var html='<div class="col-md-6"><div class="row"><div class="col-md-3  m-0 p-0 custom_center"><img src="/static/assets/dashboard_app_assets/images/profile woman (3).svg"  class="m-0 p-0 recent_trends_img" style="" alt="" /></div><div class="col-md-9 border border-warning text-white m-0 recent_trends_post p-0 m-0"><div class="w-100 h-50 d-flex flex-row  justify-content-start align-items-center  "style ="font-size:10px;overflow:hidden;"><a href="'+data.message[x].href+'">'+data.message[x].name+'</a></div><div class="text-white w-80 h-50 d-flex flex-row justify-content-start align-items-center " style ="font-size:10px;"> Count :'+data.message[x].count+'</div></div></div></div>'
     $("#recent_trends_worldwide").append(html);
   }
@@ -452,7 +452,169 @@ toastr.options = {
 
 
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script>
+   $(document).ready(function(){
+    $('#country_selector').on('change', function() {
+      country_name=this.value;
+      console.log(country_name);
+      $.ajax({
+        type:'GET',
+        dataType: 'json',
+        url:'http://localhost:8000/core/getTrendsByCountry',
+        data:{country_name: country_name},
+ success: function(data) {
+ console.log("twitter trends recived for "+data.country)
+    console.log(data.trend_type)
+    len=data.top_Trends.length
+   $('#trends_by_country').empty() ;
+  for (var x = 0; x < len; x++) {
+    if (data.top_Trends[x].tweet_count == null) {
+      data.top_Trends[x].tweet_count = "N/A";
+    }
+   // console.log(new_data.top_Trends[x].tweet_count)
+    var html =' <div class="col-md-12 mt-1"><div class="row"><div class="col-md-2  m-0 p-0 custom_center"><span class="bg-dark text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:40px;width:100%;font-size:14px;">' +data.top_Trends[x].tweet_count +'</span></div><div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" href=' +data.top_Trends[x].href +">" +data.top_Trends[x].tag +"</a></div></div></div>";
+    $("#trends_by_country").append(html);
+  }
+  console.log("twitter trends updataion complete  for "+data.country)
+      
+ },
+        error:function(error){
+          
+          console.log(error)
+          alert("No trends Found for "+country_name)
+        },
+      })
+    });
 
+
+
+
+
+
+
+  
+
+      //update youtube trends 
+      $('#refesh_youtube_trends').on('click', function() {
+        $.ajax({
+          type:'GET',
+          dataType: 'json',
+          url:'http://localhost:8000/core/getYoutubeTrends',
+      success: function(new_data) {
+      console.log("youtube trends  recived ")
+        console.log(new_data);
+        len=new_data.top_Trends.length
+        console.log(len)
+        $('#youtube_trends').empty() ;
+      var html=''
+      for (var x = 0; x < len; x++) {
+      var html='<div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"> <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">' +new_data.top_Trends[x].views +'</span><a  href="' +new_data.top_Trends[x].video_link +'"class="badge badge-warning ">View</a></div><div class="col-md-9 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-start     align-items-center"style="font-size:11px;">' +new_data.top_Trends[x].video_name +'</span><span class="w-100 d-flex flex-row justify-content-center align-items-center"><img src="'+new_data.top_Trends[x].thumbnail_directory+'" class="img-fluid w-25" style="height:40px;width:40px;border-radius:5px;"/><span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-start align-items-center" style="font-size:11px;">Channel : ' +new_data.top_Trends[x].channel_name +'</span></span></div>';
+      $("#youtube_trends").append(html);
+      }
+      console.log("youtube trends  updataion complete  ")
+        
+      },
+          error:function(error){
+            
+            console.log(error)
+            alert("No youtube trends  ")
+          },
+        })
+      });
+      
+      
+      //AUTO UPDATE YOUTUBE TWEETS 
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+         })
+           
+         
+         function autoupdate_youtube_trends(){
+          $.ajax({
+            type:'GET',
+            dataType: 'json',
+            url:'http://localhost:8000/core/getYoutubeTrends',
+          success: function(new_data) {
+            console.log("youtube trends  timeout started ")
+          console.log(new_data);
+          len=new_data.top_Trends.length
+          console.log(len)
+          $('#youtube_trends').empty() ;
+          var html=''
+          for (var x = 0; x < len; x++) {
+          var html='<div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"> <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">' +new_data.top_Trends[x].views +'</span><a  href="' +new_data.top_Trends[x].video_link +'"class="badge badge-warning ">View</a></div><div class="col-md-9 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-start     align-items-center"style="font-size:11px;">' +new_data.top_Trends[x].video_name +'</span><span class="w-100 d-flex flex-row justify-content-center align-items-center"><img src="'+new_data.top_Trends[x].thumbnail_directory+'" class="img-fluid w-25" style="height:40px;width:40px;border-radius:5px;"/><span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-start align-items-center" style="font-size:11px;">Channel : ' +new_data.top_Trends[x].channel_name +'</span></span></div>';
+          $("#youtube_trends").append(html);
+          }
+          console.log("youtube trends  timeout  completed ")
+          
+          },
+            error:function(error){
+              
+              console.log(error)
+              alert("No youtube trends  ")
+            },
+          })
+         }
+          
+         setInterval(autoupdate_youtube_trends, 10000)
+      
+      
+         //AUTO UPDATE WORLD WIDE TRENDS 
+      
+         function autoupdate_world_wide_trends(){
+      
+          country_name='world';
+          console.log(country_name);
+          $.ajax({
+            type:'GET',
+            dataType: 'json',
+            url:'http://localhost:8000/core/getTrendsByCountry',
+            data:{country_name: country_name},
+      success: function(data) {
+        console.log("twitter trends recived for "+data.country)
+        console.log(data.trend_type)
+        len=data.top_Trends.length
+           $('#recent_trends_worldwide').empty() ;
+           for (var x = 0; x < len; x++) {
+            if (data.top_Trends[x].tweet_count == null) {
+              data.top_Trends[x].tweet_count = "N/A";
+            }
+            var html =' <div class="col-md-12 mt-1"><div class="row"><div class="col-md-2  m-0 p-0 custom_center"><span class="bg-dark text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:40px;width:100%;4;">' +data.top_Trends[x].tweet_count +'</span></div><div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" href=' +data.top_Trends[x].href +">" +data.top_Trends[x].tag +"</a></div></div></div>";
+            // var html='<div class="col-md-6"><div class="row"><div class="col-md-3  m-0 p-0 custom_center"><img src="/static/assets/dashboard_app_assets/images/profile woman (3).svg"  class="m-0 p-0 recent_trends_img" style="" alt="" /></div><div class="col-md-9 border border-warning text-white m-0 recent_trends_post p-0 m-0"><div class="w-100 h-50 d-flex flex-row  justify-content-start align-items-center  "style ="font-size:10px;overflow:hidden;"><a href="'+data.message[x].href+'">'+data.message[x].name+'</a></div><div class="text-white w-80 h-50 d-flex flex-row justify-content-start align-items-center " style ="font-size:10px;"> Count :'+data.message[x].count+'</div></div></div></div>'
+            $("#recent_trends_worldwide").append(html);
+          }
+          console.log("TTwitter World wide trends auto update complete  ")
+          var today = new Date();
+          var date =today.getFullYear() +"-" +(today.getMonth() + 1) +"-" +today.getDate();
+          var time =today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+          var dateTime = date + " " + time;
+          $("#trends_update_time").empty().append("Last updated : " + dateTime);
+         }
+         ,
+         error:function(error){
+              
+          console.log(error)
+          alert("No trends Found for "+country_name)
+        },
+        });
+      }
+      
+        setInterval(autoupdate_world_wide_trends, 5000)
+       
+ 
+</script>
     <link rel="stylesheet" media="all" href="{% static 'Additional_assets/dashboard/css/jquery.dataTables.min.css' %}" />
     <link rel="stylesheet" media="all" href="{% static 'Additional_assets/dashboard/css/select.dataTables.min.css' %}" />
     <script type="text/javascript" src="{% static 'Additional_assets/dashboard/js/jquery.dataTables.min.js' %}"></script>

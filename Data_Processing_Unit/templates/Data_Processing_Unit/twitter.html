@@ -33,17 +33,62 @@ select{
         color:black!important;
         font-size: 16px!important;;
     }
+    #success_message{
+        position: absolute;;
+        width: 350px;
+        height: 60px;
+        top: 0px;
+        right: 0px;;
+      }
+      
+      #warning_message{
+        position: absolute;;
+        width: 350px;
+        height: 60px;
+        top: 0px;
+        right: 0px;;
+      }
   
 </style>
+
+<!-- message for success -->
+{% if messages %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+<div id="success_message" class=" alert alert-success alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endif  %}
+
+
+<!-- message for warning -->
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+
+
+<div id="warning_message" class=" alert alert-warning alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif  %}
+{%endfor%}
+{%endif%}
+
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 ">
         <div class="row border second_nav_row d-flex flex-row justify-content-between align-items-center">
-            <div class=" m-0 p-0  "><a class="btn btn-outline-success border-right  nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index">FAKE IDIENTITY GENEARTOR </a></div>
-            <div class=" m-0 p-0   "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_darkweb">DARK WEB</a></div>
-            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_scrapper"> DATA SCRAPPERS </a></div>
-            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/index_textprocessing"> TEXT PROCESSING </a></div>
-            <div class=" m-0 p-0    "><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" href="/dpu/twitter"> TWITTER </a></div>               
+            <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success border-right  nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" style="font-size:14px;" href="/dpu/index">FAKE IDIENTITY GENEARTOR </a></div>
+            <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_darkweb">DARK WEB</a></div>
+            <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_scrapper"> DATA SCRAPPERS </a></div>
+            <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_textprocessing"> TEXT PROCESSING </a></div>
+            <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/twitter"> TWITTER </a></div>               
                     </div>
     </div>
     <div class="col-md-2"></div>
@@ -104,7 +149,16 @@ select{
                                                 </div>
                                             </div>
                     
-                                          
+                                            <div class="row">
+                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                            class="input_text">Tweets Limit </span>
+                                                            <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
+                                                            name="limit" value=""   required="required">
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                             
                                          
                     
@@ -163,6 +217,26 @@ select{
                                                             class="input_text">Location </span>
                                                             <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="location"
                                                             name="location" value=""   required="required">
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                            class="input_text">Default Radius </span>
+                                                            <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="radius"
+                                                            name="radius" value="100-KM" disabled="disabled"   required="required">
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                            class="input_text">Tweets Limit </span>
+                                                            <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
+                                                            name="limit" value=""   required="required">
                                                     </label>
                                                 </div>
                                             </div>
@@ -231,7 +305,16 @@ select{
                                                  </div>
                                              </div>
  
-                                             
+                                             <div class="row">
+                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                            class="input_text">Tweets Limit </span>
+                                                            <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
+                                                            name="limit" value=""   required="required">
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                            
                                              
                                           
@@ -337,4 +420,6 @@ select{
 
     </div>
 </div>
+
+
 {% endblock %}

@@ -27,6 +27,7 @@ urlpatterns = [
     path('index_textprocessing/', views.Index_Textprocessing.as_view(), name='index_textprocessing'),
     # ahmed twitter urls
     path('twitter/', views.Twitter.as_view(), name="Twitter"),
+    path('tweets/', views.Tweets.as_view(), name="Tweets"),
 ]
 
 

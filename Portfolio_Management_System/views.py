@@ -232,3 +232,12 @@ def formate_date(date):
     import datetime
     return datetime.datetime.strptime(date, '%Y-%m-%d')
 
+
+
+
+class Overview(TemplateView):
+    def get(self, request, *args, **kwargs):
+         return render(request, 'Portfolio_Management_System/tso_overview.html',{})
+    def post(self, request, *args, **kwargs):
+
+        return render(request, 'Portfolio_Management_System/tso_overview.html',{})

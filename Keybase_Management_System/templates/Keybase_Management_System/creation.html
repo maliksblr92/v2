@@ -2,11 +2,72 @@
 {% load static %}
 {% block page_title%}Keybase Create{%endblock%}
 {% block head_dep %}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .bootstrap-tagsinput {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: inline-block;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+  color: #555;
+  vertical-align: middle;
+  border-radius: 4px;
+  max-width: 100%;
+  line-height: 22px;
+  cursor: text;
+}
+.bootstrap-tagsinput input {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: auto !important;
+  max-width: inherit;
+}
+.bootstrap-tagsinput input:focus {
+  border: none;
+  box-shadow: none;
+}
+.bootstrap-tagsinput .tag {
+  margin-right: 2px;
+  color: white;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  margin-left: 8px;
+  cursor: pointer;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+  content: "x";
+  padding: 0px 2px;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+</style>>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+
+<!--  -->
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
 <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
 {% endblock %}
 {% block smallnavbar %}
+<style>
+    #keywords{
+        width: 100%!important;
+        width: 500px!important;
+    }
+</style>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 d-flex" style="">
@@ -42,22 +103,22 @@
                             <div style="width:100%;" class="container input1">
                                 <!-- textfield 1 -->
                                 <!-- title -->
-                                <div class="input-group mb-2">
+                                <div class="input-group mb-2 d-flex flex-row justify-content-between align-items-center ">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Title</span>
                                     </div>
                                     {% if ctx.title %}
                                     <input type="text" id="title" class="form-control newinputdesign"
-                                        placeholder=" enter text here" name="title" value="{{ctx.title}}">
+                                         name="title" value="{{ctx.title}}">
                                     {% else %}
                                     <input type="text" name="title" id="title" class="form-control newinputdesign"
                                         placeholder="enter title here">
                                     {% endif %}
                                 </div>
-
+                            
                                 <!--Tetfield 2 -->
                                 <!-- Topic -->
-                                <div class="input-group   mt-2 mb-2">
+                                <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Topic
                                         </span>
@@ -73,86 +134,72 @@
                                 <!-- textfield 3 -->
                                 <!-- keywords -->
 
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Keywords</span>
-                                    </div>
-                                    <input id="keywords" name="keywords" type="text"
-                                        class="form-control  newinputdesign" placeholder=" enter text here">
-                                </div>
 
                                 <!--KEYWORDS TEGS SECTION-->
 
-                                <div class="tegscontainer" id="forkeywords">
-                                    <!-- tags will be here-->
-                                    {% for keyword in ctx.keywords %}
-                                    <span class="eachtag">
-                                        {{keyword}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
+                               
+                                <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center">
+                                    <div class="input-group-prepend">
+                                        <span class="newlabeldesign">keywords
+                                        </span>
+                                    </div>
+                                    
+                               
+
+                                
+                                    <input type="text" id="keywords" name="keywords"
+                                    class="form-control   newinputdesign" 
+                                     aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
+                                    
                                 </div>
+                               
 
                                 <!--Mentions SECTION-->
-                                <div class="input-group   mt-2 mb-2">
+                                
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Mentions
                                         </span>
                                     </div>
-                                    <input type="text" id="mentions" name="mentions"
-                                        class="form-control  newinputdesign" placeholder=" enter text here"
-                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                  
+                              
+                                
+                                        <input type="text" id="mentions" name="mentions"
+                                        class="form-control   newinputdesign" 
+                                         aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
                                 </div>
-                                <div class="tegscontainer" id="formentions">
-                                    {% for mention in ctx.mentions %}
-                                    <span class="eachtag">
-                                        {{mention}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                               
 
                                 <!--HASHTAGS TEGS SECTION-->
-                                <div class="input-group   mt-2 mb-2">
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Tags
                                         </span>
                                     </div>
-                                    <input type="text" id="tags" name="tags" class="form-control  newinputdesign"
-                                        placeholder=" enter text here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                
+
+                                        <input type="text" id="tags" name="tags" class="form-control  newinputdesign"
+                                         
+                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
                                 </div>
-                                <div class="tegscontainer" id="fortags">
-                                    {% for hashtag in ctx.hashtags %}
-                                    <span class="eachtag">
-                                        {{hashtag}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                               
 
                                 <!--PHRASES SECTION-->
-                                <div class="input-group mt-2 mb-2">
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text newlabeldesign">Phrase
                                         </span>
                                     </div>
-                                    <input id="phrase" name="phrases" type="text" class="form-control  newinputdesign"
-                                        placeholder=" enter text here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                
+                                    <input id="phrases" name="phrases" type="text" class="form-control  newinputdesign"
+                                         
+                                        aria-describedby="basic-addon2" data-role="tagsinput" placeholder="place text here place text here  place text here place text here " />
                                 </div>
-                                <div class="tegscontainer" id="forphrases">
-                                    {% for phrase in ctx.phrases %}
-                                    <span class="eachtag">
-                                        {{phrase}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                              
 
                                 <!--DATE SECTION-->
 
-                                <div class="input-group   mt-2 mb-2">
+                                <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
                                     <div class="input-group-prepend">
                                         <span class="newlabeldesign">Expire on
                                         </span>
@@ -188,4 +235,6 @@
 {% block foot_dep %}
 <script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
 <script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+
+
 {% endblock %}
