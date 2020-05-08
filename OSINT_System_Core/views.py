@@ -792,6 +792,15 @@ class Rabbit_Message(View):
         return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
 
 
+class Update_Footer_Graphs():
+
+    def get(self,request):
+        internet = acq.crawler_internet_connection()
+        mc_status = acq.mircocrawler_status()
+
+        return None
+
+
 # .........................................Normal Functions ............
 
 

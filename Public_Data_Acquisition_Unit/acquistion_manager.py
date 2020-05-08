@@ -53,6 +53,10 @@ class Acquistion_Manager(object):
                     pt.save()
                     publish(' {0} is added to periodic targets'.format(target), message_type='info', module_name=__name__)
 
+                else:
+                    target.make_me_expire()
+            else:
+                target.make_me_expire()
 
             self.add_crawling_target(gtr,0)
             return target
@@ -237,6 +241,12 @@ class Acquistion_Manager(object):
                 return (Reddit_Subreddit, ess.add_target ,None)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'Youtube'):
+            if (gtr.target_type == 'channel'):
+                return (Youtube_Channel, ess.add_target, None)
+            else:
+                publish('target type not defined', message_type='alert', module_name=__name__)
+
 
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
@@ -275,6 +285,15 @@ class Acquistion_Manager(object):
 
     def add_twitter_target(self):
         pass
+
+
+
+
+
+
+
+
+
 
     def get_gtr_by_id(self,gtr_id):
         return Global_Target_Reference.objects(id=gtr_id)[0]
@@ -459,10 +478,17 @@ class Acquistion_Manager(object):
 
 
     def crawler_internet_connection(self):
-        return ess.crawler_internet_connection()
+
+        resp = ess.crawler_internet_connection()
+        print(resp[0]['internet']['download'],resp[0]['internet']['upload'],resp[0]['internet']['timestamp'])
+        return {'download':resp[0]['internet']['download'],'upload':resp[0]['internet']['upload'],'stamp':resp[0]['internet']['timestamp']}
 
     def mircocrawler_status(self):
-        return ess.microcrawler_status()
+
+
+        print(ess.microcrawler_status())
+
+
 
     def fetch_news(self,top=10, GTR_ID=1):
         # fetch data from ess server
@@ -477,6 +503,12 @@ class Acquistion_Manager(object):
         except Exception as e:
             print(e)
 
+    def fetch_top_trends(self):
+        ess.google_trends()
+        ess.youtube_trends()
+        ess.twitter_trends()
+        ess.reddit_trends()
+
 
     def identify_target(self,query,website):
 
@@ -489,6 +521,254 @@ class Acquistion_Manager(object):
         if website == 'reddit': resp = ess.reddit_target_identification(query)
 
         return resp
+
+
+
+class Timeline_Manager(object):
+
+    acq = None
+
+    response_posts_list = None
+
+    def __init__(self):
+        self.acq = Acquistion_Manager()
+        self.response_posts_list = []
+
+
+    def fetch_posts_for_timeline(self,top=10):
+        return Timeline_Posts.get_qualified_posts(top)
+
+
+
+    def get_qualified_response_objects(self):
+        pass
+
+    def get_all_unseen_posts(self,qualified_objects):
+        pass
+
+    def pick_posts_by_algo(self,qualified_unseen_posts):
+        pass
+
+
+    def encode_posts_packet(self,target_site,target_type,author,posts):
+
+        posts_list = []
+
+        if(len(posts) > 0):
+            if(target_site == 'facebook'):
+                if(target_type == 'profile'):
+                    for post in posts :
+                        try:
+                            p_dir=v_dir = ''
+
+                            if len(post.picture_directory) > 0 : p_dir = post.picture_directory[0]['url']
+                            if len(post.video_directory) > 0: v_dir = post.video_directory[0]['url']
+
+                            print(post.picture_directory[0]['url'])
+                            temp_dic = {'link':post.post_link,
+                                      'text':post.post_text,
+                                      'picture':p_dir,
+                                      'vedio': v_dir,
+                                        'author':author,
+                                      'a_url':post.author_url,
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
+
+                elif(target_type =='page'):
+                    return posts_list
+
+                elif (target_type == 'group'):
+                    return posts_list
+
+            elif(target_site == 'instagram'):
+                if(target_type == 'profile'):
+                    for post in posts :
+                        try:
+
+
+
+                            temp_dic = {'link':post.display_url,
+                                      'text':post.caption,
+                                      'picture':'',
+                                      'vedio':'',
+                                        'author':author,
+                                      'a_url':'https://www.instagram.com/'+post.owner_username+'/',
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
+
+            elif (target_site == 'twitter'):
+                if(target_type=='profile'):
+                    for post in posts :
+                        try:
+
+                            temp_dic = {'link':post.url,
+                                      'text':post.text,
+                                      'picture':'',
+                                      'vedio': '',
+                                        'author':author,
+                                      'a_url':'https://www.twitter.com/'+post.username_tweet+'/',
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
+
+
+    def update_timeline_posts(self,gtr = None):
+
+        sites_to_avoid = ['Linkedin','Reddit','Youtube']
+
+
+        if(gtr is not None):
+            try:
+                if (not gtr.website.name in sites_to_avoid):
+                    obj = self.acq.get_data_response_object_by_gtr_id(gtr.id)
+                    if (obj is not None):
+                        try:
+                            if (gtr.website.name == 'Twitter'):
+                                target_site = gtr.website.name
+                                target_type = gtr.target_type
+                                gtr_id = str(gtr.id)
+                                username = obj.name
+                                posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.tweets)
+                                if (len(obj.tweets) > 0):
+                                    posts = obj.tweets
+
+                                tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                    username=username, posts=posts)
+                                tl.save()
+                                print('timeline updated')
+
+                            else:
+
+                                target_site = gtr.website.name
+                                target_type = gtr.target_type
+                                gtr_id = str(gtr.id)
+                                username = obj.username
+                                posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.posts)
+
+                                if (len(posts) < 1):
+                                    return None
+
+                                tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                    username=username, posts=posts)
+                                tl.save()
+                                print('timeline updated')
+                        except Exception as e:
+                            print(e)
+
+                    else:
+                        print('given gtr has no response attatched')
+            except Exception as e:
+                print(e)
+        else:
+
+            GTRs = Global_Target_Reference.objects()
+
+            for gtr in GTRs:
+                try:
+                    if (not gtr.website.name in sites_to_avoid):
+                        obj = self.acq.get_data_response_object_by_gtr_id(gtr.id)
+                        if (obj is not None):
+                            try:
+                                if (gtr.website.name == 'Twitter'):
+                                    target_site = gtr.website.name
+                                    target_type = gtr.target_type
+                                    gtr_id = str(gtr.id)
+                                    username = obj.name
+                                    posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.tweets)
+                                    if(len(posts) < 1):
+                                        continue
+
+                                    tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                        username=username, posts=posts)
+                                    tl.save()
+                                    print('timeline updated')
+
+                                else:
+
+                                    target_site = gtr.website.name
+                                    target_type = gtr.target_type
+                                    gtr_id = str(gtr.id)
+                                    username = obj.username
+                                    posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.posts)
+                                    if (len(posts) < 1):
+                                        continue
+                                    tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                        username=username, posts=posts)
+                                    tl.save()
+                                    print('timeline updated')
+                            except Exception as e:
+                                print(e)
+
+                        else:
+                            print('given gtr has no response attatched')
+                except Exception as e:
+                    print(e)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
