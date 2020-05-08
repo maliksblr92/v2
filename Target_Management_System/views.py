@@ -437,9 +437,9 @@ class LinkedinPerson_Target_Response(TemplateView):
 
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
-          with open('static/Target_Json/facebook_page_data.json', 'r') as f:
-            page = json.load(f)
-            return render(request, 'Target_Management_System/test.html',{'page':page})
+          with open('static/Target_Json/facebook_person_data.json', 'r') as f:
+            profile = json.load(f)
+            return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile':profile})
 
 
 
@@ -467,7 +467,7 @@ class FacebookPageReport(TemplateView):
 
 
 
-class FacebookPersonReport(TemplateView):
+class FacebookGroupReport(TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))

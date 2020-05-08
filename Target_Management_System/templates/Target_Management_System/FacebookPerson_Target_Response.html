@@ -281,7 +281,10 @@
                         <div class="circle-dot1 ml-2"></div>
                         <div class="circle-dot2 ml-1"></div>
                         <div class="circle-dot3 ml-1"></div>
+                        <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                        
                     </div>
+                    
                 </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-12 fb-cover-img background-gradient-dark">
@@ -516,6 +519,9 @@
                                                         <div id="sports" class="collapse " aria-labelledby="sports1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.sports %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -552,6 +558,9 @@
                                                         <div id="music" class="collapse " aria-labelledby="music1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.music %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -587,6 +596,9 @@
                                                         <div id="films" class="collapse " aria-labelledby="films1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.films %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -623,6 +635,9 @@
                                                         <div id="tv_programmes" class="collapse " aria-labelledby="tv_programmes_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
+                                                                {% for i in profile.interests.tv_programmes %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -659,6 +674,9 @@
                                                         <div id="books" class="collapse " aria-labelledby="books1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
+                                                                {% for i in profile.interests.books %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -694,6 +712,9 @@
                                                         <div id="games" class="collapse " aria-labelledby="games_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
+                                                                {% for i in profile.interests.games %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -729,6 +750,9 @@
                                                         <div id="likes" class="collapse " aria-labelledby="likes_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.likes %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -765,6 +789,9 @@
                                                         <div id="events" class="collapse " aria-labelledby="events_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.events %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -802,6 +829,9 @@
                                                         <div id="questions" class="collapse " aria-labelledby="questions_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.questions %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -839,6 +869,9 @@
                                                         <div id="reviews" class="collapse " aria-labelledby="reviews_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.reviews %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -875,6 +908,9 @@
                                                         <div id="notes" class="collapse " aria-labelledby="notes_1"
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
+                                                                {% for i in profile.interests.notes %}
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1237,6 +1273,14 @@
         <script src="https://www.amcharts.com/lib/4/core.js"></script>
         <script src="https://www.amcharts.com/lib/4/charts.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+       <script>
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        console.log(id)
+       var url= $('#download_as_pdf').attr('href')
+       var href=url+id+""
+       console.log(href)
+       </script>
         <script>
         am4core.ready(function () {
         // Themes begin
@@ -1247,7 +1291,7 @@
         var chart = am4core.create("profile_chart", am4charts.SlicedChart);
         chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
         chart.data = [{
-        "name": "Friedns",
+        "name": "Friends",
         "value": 354
         }, {
         "name": "Close Associates",
