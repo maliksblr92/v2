@@ -174,7 +174,9 @@ class Index_Darkweb(View):
 
     def post(self, request, *args, **kwargs):
         query = request.POST['query']
-        print("query", query)
+        resp=ess.dark_web_search(query)
+        print("printing response ")
+        print(resp)
         return redirect('/dpu/index_darkweb/')
 
 
