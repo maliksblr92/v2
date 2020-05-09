@@ -236,53 +236,79 @@ function rabbit_message(window_type) {
                          console.log(resp)
                     //const control_msg = JSON.parse(resp)
 
-                    if(window_type =='notification'){
+                    if (window_type == 'notification') {
 
-                        control_msg_box = $('#notification-box')
-                  
-                        function notify(){
-                          control_msg_box.addClass(" border border-danger")
+                      control_msg_box = $('#notification-box')
+                      control_msg_box.style.borderWidth="5px"
+                      function notify() {
+                        control_msg_box.addClass(" border border-success")
                         setTimeout(function () {
-                        
-                          control_msg_box.removeClass("border border-danger")
-                          control_msg_box.addClass(" border border-white")
+        
+                          control_msg_box.removeClass("border border-success")
+                          control_msg_box.addClass(" border border-primary")
                           setTimeout(function () {
-                        
-                            control_msg_box.removeClass("border border-white")
-                            control_msg_box.addClass(" border border-danger")
+        
+                            control_msg_box.removeClass("border border-primary")
+                            control_msg_box.addClass(" border border-warning")
                             setTimeout(function () {
-                        
-                              control_msg_box.removeClass("border border-danger")
-                              control_msg_box.addClass("border border-white")
+        
+                              control_msg_box.removeClass("border border-warning")
+                              control_msg_box.addClass("border border-success")
                               setTimeout(function () {
-                        
-                                control_msg_box.removeClass("border border-white")
-                                control_msg_box.addClass(" border border-danger")
+        
+                                control_msg_box.removeClass("border border-success")
+                                control_msg_box.addClass(" border border-primary")
                                 setTimeout(function () {
-                        
-                                  control_msg_box.removeClass("border border-danger")
-                                  control_msg_box.addClass("border border-white")
-                                },1000)
-                              },1000);
+        
+                                  control_msg_box.removeClass("border border-primary")
+                                  control_msg_box.addClass("border border-success")
+                                  setTimeout(function () {
+        
+                                    control_msg_box.removeClass("border border-success")
+                                    control_msg_box.addClass("border border-primary")
+        
+                                    setTimeout(function () {
+                                      control_msg_box.removeClass("border border-primary")
+                                      control_msg_box.addClass("border border-warning")
+                                      setTimeout(function () {
+                                        control_msg_box.removeClass("border border-warning")
+                                        control_msg_box.addClass("border border-success")
+                                        setTimeout(function () {
+                                          control_msg_box.removeClass("border border-success")
+                                          control_msg_box.addClass("border border-primary")
+                                          setTimeout(function () {
+                                            control_msg_box.removeClass("border border-primary")
+                                            control_msg_box.addClass("border border-warning")
+                                            setTimeout(function () {
+                                              control_msg_box.removeClass("border border-warning")
+                                              control_msg_box.addClass("border border-success")
+                                              control_msg_box.removeClass("border border-success")
+                                            }, 1000)
+                                          }, 1000)
+                                        }, 1000)
+                                      }, 1000)
+                                    }, 1000)
+                                  }, 1000)
+                                }, 1000)
+                              }, 1000);
+                            }, 1000);
                           }, 1000);
                         }, 1000);
-                      }, 1000);
-                        }
-
-                        notify()
+                      }
+        
+                 
+                      notify()
                       
-                       
-
-                      
-
-                    
+        
+        
+        
+        
+                    } else if (window_type == 'message') {
+                      control_msg_box = $('#control-msg-box')
                     }
-                    else if(window_type == 'message'){
-                         control_msg_box = $('#control-msg-box')
-                    }
-
-                              //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
-                        control_msg_box.empty().append(resp)
+        
+                    //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+                    control_msg_box.empty().append(resp)
                         
 
 

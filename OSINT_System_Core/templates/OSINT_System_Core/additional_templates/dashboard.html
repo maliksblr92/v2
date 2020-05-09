@@ -18,149 +18,177 @@
             <div class="col-lg-2">
               
             </div>
-            <div
-              class="col-lg-8 ">
-              <div class="row m-0 p-0" style="color: #fff !important;">
-                <div
-                  class="col-lg-5 pt-2">
+            <div class="col-lg-8 ">
+              <div class="row">
+                <div class="col-lg-4 p-3">
                   <div class="row">
-                    <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
                       <li class="nav-item">
-                        <a class=" btn font-weight-bold nav_btn" href="#"  style="color: #fff !important;">DASHBOARD</a>
+                        <a class="   btn text-white font-weight-bold nav_btn" href="#">DASHBOARD</a>
                       </li>
                     </div>
-                    <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;"> <li class="nav-item">
-                      <a class="btn font-weight-bold nav_btn" href="#" style="color: #fff !important;">MONITOR</a>
-                    </li>
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn text-white  font-weight-bold nav_btn" href="#">MONITOR</a>
+                      </li>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-2 custom_center">
-                <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-              </div>
-              <div class="col-lg-5 pt-2">
-                <div class="row">
-                  <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
-                    white;">
-                    <li class="nav-item">
-                      <a class="btn font-weight-bold nav_btn" href="#" style="color: #fff !important;">FETCH</a>
-                    </li>
-                  </div>
-                  <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
-                    <li class="nav-item">
-                      <a href="{% url 'OSINT_System_Core:topNews' %}" class="btn secondnavitems " style="font-size:1vw;">News</a>
-                    </li>
-                  </div>
+                <div class="col-lg-4 custom_center">
+                  <img src="{% static 'Additional_assets/main/images/logo.svg' %}" height="120"
+                  width="250" class=" m-0 p-0" />
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2 ">
-            
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
-  
-  <!-- ////////////// -->
-  <!--     <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10 bg-dark text-center header m-0 p-0">
-      <img src=" {% static 'Additional_assets/dashboard/images/Asset 722.svg'%}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-    </div>
-    <div class="col-md-1"></div>
-  </div> -->
-  <!-- //////// -->
-  <div class="row mt-2">
-    <div class="col-md-3  ">
-      <div class="row border border-warning card1_row ">
-        <div class="col-md-12 bg-white text-dark t text-center card_headers"><span class="float-left"style="font-size:14px;">Social Media</span> </div>
-        <div class="col-md-12 card1_col2" >
-          <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div>
-        </div>
-      </div>
-      <div class="row border border-warning card1_row ">
-        <div class="col-md-12 bg-white text-dark text-center card_headers"><span class="float-left"style="font-size:14px;">Youtube Top Trends</span><button type="button" class="float-right btn btn-primary btn-sm m-1"id="refesh_youtube_trends">Refresh</button></div>
-        <div class="col-md-12 card1_col2" >
-          <div class="row p-1" style="background-color: transparent!important;height: 250px;overflow-y:auto!important;overflow-x:hidden" id="youtube_trends">
-            {% for i in youtube_trends.top_Trends %}
-              <div class="col-md-3 mt-1 d-flex flex-column justify-content-center align-items-center border border-warning" style="border-radius:5px;">
-                <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">{{i.views}}
-                </span>
-                <a  href="{{i.video_link}}"class="badge badge-warning ">View</a>
-              </div>
-              <div class="col-md-9 mt-1 d-flex flex-column justify-content-center align-items-center border border-warning" style="border-radius:5px;">
-                <span class="text-white font-weight-bold d-flex flex-row justify-content-start     align-items-center"style="font-size:11px;">{{i.video_name}}</span>
-                <span class="w-100 d-flex flex-row justify-content-center align-items-center">
-                  <img src="{{i.thumbnail_directory}}" class="img-fluid w-25" style="height: 40px;width:40px;border-radius:5px; float: left;" />
-                  <span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-end lign-items-center"style="font-size:11px;">Channel : {{i.channel_name}}</span>
-                </span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="row border border-warning card1_row  mt-2">
-        <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Twitter Top  Trends </span><button type="button" class="float-right btn btn-primary btn-sm m-1"id="refesh_world_wide_trends_btn">Refresh</button></div>
-        <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
-          <div class="row mt-1 pl-1 pr-1 " id="recent_trends_worldwide">
-            {% for i in  twitter_top_hastags %}
-              <div class="col-md-12 mt-1">
-                <div class="row">
-                  <div class="col-md-2  m-0 p-0 custom_center">
-                    <span class=" text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:50px;width:50px;font-size:12px;">{{i.count}}</span>
-                  </div>
-                  <div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;">
-                    <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.name}}"</a></div>
-                  </div>
-                </div>
-              {% endfor  %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div  id="chartdiv" style="width: 100%" ></div>
-      </div>
-      <div class="col-md-3 ">
-        <div class="row border border-warning card2_row">
-          <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Hastag Chart </div> -->
-          <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Hashtag Chart </span> </div>
-          <div class="col-md-12 card1_col2" >
-            <div class=" " id="youtube_charts" style="background-color: transparent!important;height: 250px;"></div>
-          </div>
-        </div>
-        
-        <div class="row border border-warning card2_row">
-          <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Reddit Top Trends </div> -->
-          <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Reddit Top Trends</span> </div>
-          <div class="col-md-12 card1_col2"style="height: 250px;" >
-            
-            <div class="row p-1 "  id="reddit_trends">
-              {% for i in reddit_top_post.top_trends %}
-                <div class="col-md-12 mt-1" >
+                <div class="col-lg-4 p-3">
                   <div class="row">
-                    <div class="col-md-2  m-0 p-0 custom_center"  alt="Reddit Counts">
-                      <span class=" text-white custom_center border border-warning font-weight-bold" style="border-radius:50%;height:50px;width:50px;font-size:12px;">
-                        {{i.count}}
-                      </span>
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  text-white font-weight-bold nav_btn" href="#">FETCH</a>
+                      </li>
                     </div>
-                    <div class="col-md-10 border border-warning m-0  social_posts_post"style="overflow: hidden; flex-direction: column;">
-                      <span class="text-white font-weight-bold d-flex flex-row" style="" >username: "{{i.author_fullname}}"</span>
-                      <span class="text-white font-weight-bold d-flex flex-row" style="">{{i.title}}</span>
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  text-white font-weight-bold nav_btn" href="#">RETRIEVE</a>
+                      </li>
                     </div>
-                    {% comment %} <div class="col-md-3 border border-warning" style="border-radius:5px;">
-                      <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center" style="font-size:10px;">
-                        {{i.author_fullname}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      
+      <div class="row mt-2">
+        <div class="col-md-3  ">
+          <div class="row border border-white card1_row ">
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Social Media</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div>
+            </div>
+          </div>
+          <div class="row border border-white card1_row ">
+            <div class="col-md-12 bg-white text-dark text-center card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Youtube Top Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"id="refesh_youtube_trends">Refresh</button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <div class="row p-1" style="background-color: transparent!important;height: 280px;overflow-y:auto!important;overflow-x:hidden" id="youtube_trends">
+                {% for i in youtube_trends.top_Trends %}
+                  <div class="col-md-3 mt-1 d-flex flex-column justify-content-center align-items-center border border-white" style="border-radius:5px;">
+                    <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                      {{i.views}}
+                    </span>
+                    <a  href="{{i.video_link}}"class="badge badge-light ">View</a>
+                  </div>
+                  <div class="col-md-9 mt-1 d-flex flex-column justify-content-center align-items-center border border-white" style="border-radius:5px;">
+                    <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:11px;">
+                      {{i.video_name}}
+                    </span>
+                    <span class="w-100 d-flex flex-row justify-content-center align-items-center">
+                      <img src="{{i.thumbnail_directory}}" class="img-fluid w-25" style="height: 40px;width:40px;border-radius:5px; float: left;" />
+                      <span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-end lign-items-center"style="font-size:11px;">
+                        Channel : {{i.channel_name}}
                       </span>
-                      <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">
-                        {{i.count}}
-                      </span>
+                    </span>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row border border-white card1_row">
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Twitter Top  Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"id="refesh_world_wide_trends_btn">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2 " >
+              <div class="row mt-1 pl-1 pr-1 " id="recent_trends_worldwide" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                {% for i in  twitter_top_hastags %}
+                  <div class="col-md-12 mt-1">
+                    <div class="row">
+                      <div class="col-md-2  m-0 p-0 custom_center">
+                        
+                        <span class="text-white custom_center border border-white font-weight-bold"style="border-radius:50%;height:50px;width:50px;font-size:12px;">
+                          {{i.count}}
+                        </span>
+                      </div>
+                      <div class="col-md-10 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                        <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.name}}"</a>
+                      </div>
                     </div>
-                    <div class="col-md-9 border border-warning d-flex flex-row justify-content-start align-items-center "style="border-radius:5px;">
-                      <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">{{i.title}}</span>
-                    </div> {% endcomment %}
+                  </div>
+                {% endfor  %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div  id="chartdiv" style="width: 100%" ></div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="row border border-white  card1_row ">
+            <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Hastag Chart </div> -->
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Hashtag Chart </span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <div class=" " id="youtube_charts" style="background-color: transparent!important;height: 250px;"></div>
+            </div>
+          </div>
+          
+          <div class="row border border-white card1_row ">
+            <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Reddit Top Trends </div> -->
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Reddit Top Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2"style="height: 280px;" >
+              
+              <div class="row p-1"  id="reddit_trends" >
+                {% for i in reddit_top_post.top_trends %}
+                  <div class="col-md-12 mt-1" >
+                    <div class="row">
+                      
+                      <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                          {{i.count}}
+                        </span>
+                        <a  href="#"class="badge badge-light ">View</a>
+                      </div>
+                      <div class="col-md-9 border border-white m-0  social_posts_post"style="overflow: hidden; flex-direction: column; font-size: 13px;">
+                        <span class="text-white font-weight-bold d-flex flex-row" style="" >username: "{{i.author_fullname}}"</span>
+                        <span class="text-white font-weight-bold d-flex flex-row" style="">{{i.title}}</span>
+                      </div>
+                      {% comment %}
+                      <div class="col-md-3 border border-white" style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center" style="font-size:10px;">
+                          {{i.author_fullname}}
+                        </span>
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">
+                          {{i.count}}
+                        </span>
+                      </div>
+                      <div class="col-md-9 border border-white d-flex flex-row justify-content-start align-items-center "style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">
+                          {{i.title}}
+                        </span>
+                      </div>
+                    {% endcomment %}
                   </div>
                   
                 </div>
@@ -171,52 +199,65 @@
         </div>
         
         
-         
-            
-            
-            <div class="row border border-warning card1_row  mt-2">
-              <div class="col-md-12 bg-white text-dark card_headers"><span class="float-left"style="font-size:14px;">Twitter Country Top  Trends </span>
-                <select name="country_selector" id="country_selector"  required="required" class="form-control form-control-sm" style="width:150px;">
-                  <option value="">Select Country</option>
-                  {% for i in countries_list %}
-                  <option value="{{i}}"> {{i}}</option>
-                    {% endfor %}
-                </select>
-              </div>
-              <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
-                <div class="row mt-1 pl-1 pr-1 " id="trends_by_country">
-                  {% for i in  twitter_country_hashtags.top_Trends %}
-                 
-                    <div class="col-md-12 mt-1">
-                      <div class="row">
-                        <div class="col-md-2  m-0 p-0 custom_center">
-                          <span class=" text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:50px;width:50px;font-size:12px;">{{i.tweet_count}}</span>
-                        </div>
-                        <div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;">
-                          <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.tag}}</a></div>
-                        </div>
-                      </div>
-                    {% endfor  %}
-                  </div>
-                </div>
-              </div>
-            
-            
-            
-            
-            
-            
-            
-            
         
-      
-     
-      <div class="row mt-2">
-        <div class="col-md-1"></div>
-        <div class="col-md-10 bg-dark text-center footer  m-0 p-0">
-          <p class="font-weight-bold text-white mt-2">BIG VIEW </p>
+        
+        
+        <div class="row border border-white card1_row">
+          <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+            <span class="float-left"style="font-size:14px;">Twitter Country Top  Trends </span>
+            <select name="country_selector" id="country_selector"  required="required" class="form-control form-control-sm" style="width:150px;">
+              <option value="">Select Country</option>
+              {% for i in countries_list %}
+                <option value="{{i}}"> {{i}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-12 card1_col2 ">
+            <div class="row mt-1 pl-1 pr-1 " id="trends_by_country" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+              {% for i in  twitter_country_hashtags.top_Trends %}
+                
+                <div class="col-md-12 mt-1">
+                  <div class="row">
+                    
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                      <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                        {{i.tweet_count}}
+                      </span>
+                      <a  href="#"class="badge badge-light ">View</a>
+                    </div>
+                    <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                      <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.tag}}</a></div>
+                    </div>
+                  </div>
+                {% endfor  %}
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-1"></div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <div class="row mt-2">
+        <div class="col-md-12 mt-2">
+          <div class="row ">
+            <div class="col-lg-12 ">
+              <nav class="navbar navbar-expand-lg " id="header">
+                <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
+                  <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="flexbox">
       </div>
