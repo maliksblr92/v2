@@ -71,6 +71,9 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('main_1/', views.main_1, name='main_1'),
     path('main/heatmap/', views.mainHeatMap, name='mainHeatMap'),
     path('newsmonitoring/', views.newsMonitor, name='newsMonitor'),
+    path('top_news/', views.topNews, name='topNews'),
+    path('getTrendsByCountry/', views.getTrendsByCountry, name='getTrendsByCountry'),
+    path('getYoutubeTrends/', views.getYoutubeTrends, name='getYoutubeTrends'),
     # ahmed end
 ]
 

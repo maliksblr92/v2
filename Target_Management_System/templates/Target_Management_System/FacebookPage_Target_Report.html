@@ -1,0 +1,1010 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+            <style>
+            .small-txt {
+            font-size: 13px !important;
+            }
+            .smaller-txt {
+            font-size: 10px !important;
+            }
+            .text-12 {
+            font-size: 12px;
+            ;
+            }
+            .text-12 {
+            font-size: 12px;
+            ;
+            }
+            .text-14 {
+            font-size: 14px;
+            ;
+            }
+            .text-20 {
+            font-size: 20px;
+            ;
+            }
+            .text-25 {
+            font-size: 25px;
+            ;
+            }
+            .border-radius-5-all {
+            border-radius: 5px !important;
+            }
+            </style>
+            <style>
+            html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+            }
+            ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+            }
+            </style>
+            <style>
+            
+            .background-gradient{
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            }
+            .background-gradient-dark{
+            background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+            }
+            .circle-dot1 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f35d5b;
+            }
+            .circle-dot2 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f6bd3a;
+            }
+            .circle-dot3 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #44cc45;
+            }
+            .fb-cover-img {
+            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 300px;
+            /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
+            /* z-index: 1; */
+            }
+            .profile-image-wrapper {
+            height: 150px;
+            width: 150px;
+            margin-top: -120px;
+            border:5px solid #FEC134;
+            border-radius: 10px;
+            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
+            ;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }
+            .profile-image-name {
+            font-size: 25px;
+            font-weight: bold;
+            ;
+            color: black;
+            margin-top: -50px;
+            letter-spacing: 3px;
+            ;
+            }
+            .custom-1 {
+            height: 200px;
+            width: 100%;
+            border: 1px solid red;
+            background-color: white;
+            padding: 20px;
+            ;
+            }
+            .border-radius-5-all {
+            border-radius: 5px !important;
+            }
+            .material-icons {
+            color: #007bff;
+            font-size: 16px;
+            ;
+            }
+            a {
+            text-decoration: none !important;
+            }
+            .border-right {
+            border-right: 1px solid black;
+            ;
+            }
+            .border-left {
+            border-left: 1px solid black;
+            ;
+            }
+            .custom-center-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+            .custom-start-center {
+            display: flex !important;
+            justify-content: start !important;
+            align-items: center !important;
+            }
+            .custom-end-center {
+            display: flex !important;
+            justify-content: end !important;
+            align-items: center !important;
+            }
+            .custom-row-center-center {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+            }
+            .custom-column-center-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            }
+            .custom-column-start-start {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: start !important;
+            }
+            .custom-column-start-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: center !important;
+            }
+            .custom_active_text > i{
+            color: #FEC134 !important;
+            }
+            .custom_active_text.active > i{
+            color: #FEC134 !important;
+            }
+            div.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            }
+            </style>
+        </head>
+        <body>
+            <div class="container-fluid wrapper ">
+                <!--  -->
+                <div class="row ml-1 mr-1 pl-5 pr-5">
+                    <div class="col-md-12">
+                        <div class="row border border-warning mt-2 ml-1" style="border-radius:10px 10px 10px 10px ;">
+                            <div class="col-md-12  p-0 ">
+                                <div class="sticky">
+                                    <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"style="height:40px;border-radius:10px 10px 0px 0px;">
+                                        <li class=" active   ">
+                                            <a class="nav-link custom_active_text" href="#profile">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
+                                                Profile Informnation
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class="   ">
+                                            <a class="nav-link custom_active_text" href="#liked_pages">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-thumbs-up text-warning fa-2x">
+                                                Liked Pages
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a class="nav-link custom_active_text" href="#page_posts">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-sticky-note">
+                                                Page Posts ({{page.page_posts | length}})
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class="    ">
+                                            <a class="nav-link custom_active_text" href="#close_asscoiates">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-user-friends">
+                                                Close Associates ({{page.close_associates | length}})
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class="    ">
+                                            <a class="nav-link custom_active_text" href="#statistics">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-chart-bar">
+                                                Statistics
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class="    ">
+                                            <a class="nav-link custom_active_text" href="#contacts">
+                                                <i class="material-icons text-dark font-weight-bold fa fa-address-card">
+                                                Contacts
+                                                </i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="background-gradient pl-4 pr-4 pt-2">
+                                    <!-- start profile tab  -->
+                                    <div id="profile" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Profile</h1>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Facebook Page Type </i></h3>
+                                                <p class="text-white">{{page.facebook_type}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Scope </i></h3>
+                                                <p class="text-white">{{page.scope}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Page Info </i></h3>
+                                                <p class="text-white">{{page.page_info}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Countries Involved </i></h3>
+                                                <ul  class="text-white">
+                                                    {% for c in page.countries_involved %}
+                                                        <li>{{c.country_name}} : {{c.num_people_involved}} People Invloved</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Page Histroy </i></h3>
+                                                <p class="text-white">{{page.page_history.O.event}}</p>
+                                                <p class="text-white">{{page.page_history.O.timestamp}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Overall Behaviour </i></h3>
+                                                <p class="text-white">{{page.behaviour}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h3><i class="material-icon text-warning">Posting Time </i></h3>
+                                                <p class="text-white">{{page.posting_time_charts}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end profile tab  -->
+                                    <!-- start liked_pages tab   -->
+                                    <div id="liked_pages" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Liked Pages</h1>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="accordion" id="accordionExample">
+                                                    {% for c in page.liked_pages %}
+                                                        <div class="card">
+                                                            <div class="card-header background-gradient-dark" id="headingOne">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <img src="/static/images/VIaL8H.jpg"
+                                                                        style="height: 60px;width:60px;border-radius: 50%;;"
+                                                                        class="img-fluid">
+                                                                        <button class="btn btn-link text-warning" type="button"
+                                                                        data-toggle="collapse" data-target="#sports"
+                                                                        aria-expanded="true" aria-controls="sports">
+                                                                        {{c.name}}
+                                                                    </button></div>
+                                                                    <div class="col-md-6 d-flex flex-column text-white">
+                                                                        <span>page id : <span>{{c.id}}</span></span>
+                                                                        <span>page username : <span>{{c.username}}</span></span>
+                                                                        <span><a href="{{c.url}}" class="badge badge-light">view
+                                                                        page</a></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% empty %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end realted tab  -->
+                                    <!-- start posts tab  -->
+                                    <div id="page_posts" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Page Posts</h1>
+                                        <div class="row">
+                                            {% for p in  page.page_posts %}
+                                                <div class="border col-md-12 text-center text-warning">
+                                                    Post # {{forloop.counter}}
+                                                </div>
+                                                <div class="col-md-12 border post-wrapper">
+                                                    <div class="row">
+                                                        <div class="col-md-2 m-0 p-0 custom-center-center  border">
+                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            style="height: 60px;width:60px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
+                                                        </div>
+                                                        <div class="col-md-5 custom-column-start-start pt-2 text-white border">
+                                                            <span> {{page.name}}</span>
+                                                            <span class="smaller-txt">{{p.timestamp}}</span>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-5  m-0 p-0 d-flex flex-column justify-content-around align-items-center text-white border">
+                                                            <div class="smaller-txt w-100 border text-left h-100">post_id:
+                                                            {{p.post_id}}</div>
+                                                            <div class="smaller-txt w-100 border text-left h-100">author_name:
+                                                            {{p.author_name}}</div>
+                                                            <div class="smaller-txt w-100 border text-left h-100">author_username:
+                                                            {{p.author_username}}</div>
+                                                            <div class="smaller-txt w-100 border text-left h-100">sentiment:
+                                                            {{p.sentiment | default:"N/A"}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 text-center small-txt border text-white">
+                                                            {{p.post_text}}
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row">
+                                                        <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
+                                                            <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="row" style="height:300px;overflow-y:auto;">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">Post
+                                                            Pictures ({{p.picture_links | length}})</i>
+                                                        </div>
+                                                        {% for x in p.picture_links  %}
+                                                            <div class="col-md-12 text-center" style="height:300px;overflow-y:none">
+                                                                <img src="{{x.url}}" class="img-fluid" />
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">Liked By
+                                                            ({{ p.reactions.like | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.like  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                            Loved' By ({{ p.reactions.love | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.love  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                            HAHA' By ({{ p.reactions.haha | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.haha  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                            WOW' By ({{ p.reactions.wow | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.wow  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                            ANGRY' By ({{ p.reactions.angry | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.angry  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                            SAD' By ({{ p.reactions.sad | length}})</i>
+                                                        </div>
+                                                        {% for r in p.reactions.sad  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text-warning" style="font-size:20px;">'Comments'
+                                                            By ({{ p.comments | length}})</i>
+                                                        </div>
+                                                        {% for r in p.comments  %}
+                                                            <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                                style="height:100px;">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    {{r.name}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    {{r.username}}</span>
+                                                                    <span
+                                                                        class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    {{r.id}}</span>
+                                                                    <a href="{{r.url}}"
+                                                                    class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8 border custom-center-center">
+                                                                {{r.comment_text}}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2 text-center small-txt border"><i
+                                                            class="fas fa-comments text-warning mr-1"></i>{{p.comments_statistics}}
+                                                        </div>
+                                                        <div class="col-md-2 text-center small-txt border"><i
+                                                            class="fas fa-grin-hearts text-warning mr-1"></i>{{p.reactions_statistics}}
+                                                        </div>
+                                                        <div class="col-md-2 text-center small-txt border"><i
+                                                            class="fas fa-share-alt text-warning mr-1"></i>{{p.shares_statistics}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!-- end posts tab  -->
+                                    <!-- start close associates tab  -->
+                                    <div id="close_asscoiates" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Close Associates ({{page.close_associates | length}})</h1>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="accordion" id="accordionExample">
+                                                    {% for c in page.close_associates %}
+                                                        <div class="card">
+                                                            <div class="card-header background-gradient-dark" id="headingOne">
+                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                                <button class="btn btn-link text-warning" type="button" data-toggle="collapse"
+                                                                data-target="#_{{c.id}}" aria-expanded="true"
+                                                                aria-controls="_{{c.id}}">
+                                                                {{c.name}}
+                                                                </button>
+                                                            </div>
+                                                            <div id="_{{c.id}}" class="collapse show" aria-labelledby="headingOne"
+                                                                data-parent="#accordionExample">
+                                                                <div class="card-body background-gradient">
+                                                                    <div class="row text-white">
+                                                                        <div class="col-md-6">
+                                                                            <div class="row ">
+                                                                                <div class="col-md-6 text-14"> Entity Type:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.entity_type}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> Username:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.username}}</div>
+                                                                                <div class="col-md-6 text-14"> Id:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.id}}</div>
+                                                                                <div class="col-md-6 text-14"> Name:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.name}}</div>
+                                                                                <div class="col-md-6 text-14"> Score:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.score}}</div>
+                                                                                <div class="col-md-6 text-14"> is_liked_page:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.is_liked_page}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> is_associated_group:
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14">
+                                                                                {{c.is_associated_group}}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="row ">
+                                                                                <div class="col-md-6 text-14"> Post Authors:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.post_authors}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> Post Targets:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.post_target}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> Post Tags:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.post_tags}}</div>
+                                                                                <div class="col-md-6 text-14"> post_comments:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.post_comments}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> Post Reactions:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.post_reactions}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> is_top_fan:</div>
+                                                                                <div class="col-md-6 text-14"> {{c.is_top_fan}}
+                                                                                </div>
+                                                                                <div class="col-md-6 text-14"> URL:</div>
+                                                                                <div class="col-md-6 text-14"> <a
+                                                                                    class="badge badge-light"
+                                                                                href="{{c.url}}">view</a></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end close asscoiates  -->
+                                    <!-- Statistics Start  -->
+                                    <div id="statistics" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Statistics {{page.friends | length}}</h1>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row border border-warning background-gradient mt-2 p-2">
+                                                    <div class="col-md-12 mt-3 mb-3"style="height:auto;">
+                                                        <div class="row">
+                                                            <div class="col-md-2 m-0 p-0  custom-center-center">
+                                                                <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px">
+                                                                    <i class="fas fa-thumbs-up text-warning p-3"style="font-size:24px;"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 m-0 p-0 d-flex flex-column  justify-content-center align-items-start" style="height:100px;overflow-y:auto;">
+                                                                <span class="text-white font-weight-bold "> {{page.statistics.likes_count}}
+                                                                Likes</span>
+                                                            </div>
+                                                            <div class="col-md-2 m-0 p-0  custom-center-center">
+                                                                <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px">
+                                                                    <i class="fas fa-users text-warning p-3"style="font-size:24px;"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 m-0 p-0 d-flex flex-column  justify-content-center align-items-start" style="height:100px;overflow-y:auto;">
+                                                                <span class="text-white font-weight-bold ">{{page.statistics.followers_count}}
+                                                                    Followers
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-2 m-0 p-0  custom-center-center">
+                                                                <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px">
+                                                                    <i class="fas fa-check-double text-warning"style="font-size:24px;"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 m-0 p-0 d-flex flex-column  justify-content-center align-items-start" style="height:100px;overflow-y:auto;">
+                                                                <span class="text-white font-weight-bold ">
+                                                                    {{page.statistics.check_ins_count}} Checkins
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-2 m-0 p-0  custom-center-center">
+                                                                <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px">
+                                                                    <i class="fas fa-ad fa-3x text-warning"style="font-size:24px;"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 m-0 p-0 d-flex flex-column  justify-content-center align-items-start" style="height:100px;overflow-y:auto;">
+                                                                <span class="text-white font-weight-bold ">
+                                                                    {{page.ads_status}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Statistics End  -->
+                                    <!-- Contact Start  -->
+                                    <div id="contacts" class="pt-5">
+                                        <h1 class="text-white font-weight-bold">Contact</h1>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row border border-warning background-gradient mt-2 p-2" style="border-radius:0px 0px 0px 10px;">
+                                                    <div class="col-md-12 mt-3 mb-3" style="height:auto;">
+                                                        <div class="row">
+                                                            <div class="col-md-4 m-0 p-0  custom-center-center">
+                                                                <span class="border border-radius-5-all custom-center-center"style="height:70px;width:70px">
+                                                                    <i class="fas fa-link text-warning p-3"style="font-size:24px;"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-8 m-0 p-0 d-flex flex-column border border-radius-5-all  justify-content-center align-items-start" style="height:100px;overflow-y:auto;">
+                                                                <span class="text-white font-weight-bold small-txt p-4">
+                                                                    {{page.contact_information.0.value}}
+                                                                    <br/><a href="{{page.contact_information.0.value}}" class="badge badge-light">view</a>
+                                                                </span>
+                                                                
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        {% for i in page.additional_info %}
+                                                            <div class="row mt-2">
+                                                                <div class="col-md-4 m-0 p-0  custom-center-center">
+                                                                    <span class="border border-radius-5-all custom-center-center" style="height:70px;width:70px;">
+                                                                        <span class="text-uppercase text-warning font-weight-bold p-3 align-items-center" style="font-size:10px;"> {{i.type}}</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-8 m-0 p-0  d-flex flex-column border border-radius-5-all align-items-start" style="height:100px;overflow-y:auto;">
+                                                                    <span class="text-white font-weight-bold smaller-txt p-4"> {{i.info}}</span>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Contact End  -->
+                                </div>
+                                <!-- end tab content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-2">
+                    
+                    <div class="row ">
+                        
+                        <div class="col-lg-12 pl-5 pr-5">
+                            <nav class="navbar navbar-expand-lg " id="header">
+                                
+                                <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0s">
+                                    <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
+                                    
+                                    
+                                </div>
+                                
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="https://www.amcharts.com/lib/4/core.js"></script>
+            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+            <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+            <script>
+                $(document).ready(function(){
+
+                    window.print();
+                   
+                
+            });
+            </script>
+            <script>
+            am4core.ready(function() {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+            var chart = am4core.create("profile_chart", am4charts.SlicedChart);
+            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+            chart.data = [{
+            "name": "Friedns",
+            "value": 354
+            }, {
+            "name": "Close Associates",
+            "value": 245
+            }, {
+            "name": "Posts",
+            "value": 187
+            }, {
+            "name": "Popularity",
+            "value": 123
+            }, {
+            "name": "Popularity",
+            "value": 87
+            }, {
+            "name": "Positivity",
+            "value": 45
+            }];
+            var series = chart.series.push(new am4charts.PictorialStackedSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.maskSprite.path = iconPath;
+            series.ticks.template.locationX = 1;
+            series.ticks.template.locationY = 0.5;
+            series.labelsContainer.width = 200;
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "left";
+            chart.legend.valign = "bottom";
+            }); // end am4core.ready()
+            </script>
+            <script>
+            am4core.ready(function() {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var chart = am4core.create("common_words_chart", am4plugins_wordCloud.WordCloud);
+            var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+            chart.padding(0,0,0,0)
+            series.accuracy = 4;
+            series.step = 15;
+            series.rotationThreshold = 0.7;
+            series.maxCount = 200;
+            series.minWordLength = 2;
+            series.labels.template.margin(4,4,4,4);
+            series.maxFontSize = am4core.percent(30);
+            data=[]
+            {% for i in page.common_words%}
+                data+='{{i}}'+",",
+            {% endfor %}
+            console.log(data)
+            series.text =data;
+            //series.text = "Though yet of Hamlet our dear brother's death The memory be green, and that it us befitted To bear our hearts in grief and our whole kingdom To be contracted in one brow of woe, Yet so far hath discretion fought with nature That we with wisest sorrow think on him, Together with remembrance of ourselves. Therefore our sometime sister, now our queen, The imperial jointress to this warlike state, Have we, as 'twere with a defeated joy,-- With an auspicious and a dropping eye, With mirth in funeral and with dirge in marriage, In equal scale weighing delight and dole,-- Taken to wife: nor have we herein barr'd Your better wisdoms, which have freely gone With this affair along. For all, our thanks. Now follows, that you know, young Fortinbras, Holding a weak supposal of our worth, Or thinking by our late dear brother's death Our state to be disjoint and out of frame, Colleagued with the dream of his advantage, He hath not fail'd to pester us with message, Importing the surrender of those lands Lost by his father, with all bonds of law, To our most valiant brother. So much for him. Now for ourself and for this time of meeting: Thus much the business is: we have here writ To Norway, uncle of young Fortinbras,-- Who, impotent and bed-rid, scarcely hears Of this his nephew's purpose,--to suppress His further gait herein; in that the levies, The lists and full proportions, are all made Out of his subject: and we here dispatch You, good Cornelius, and you, Voltimand, For bearers of this greeting to old Norway; Giving to you no further personal power To business with the king, more than the scope Of these delated articles allow. Farewell, and let your haste commend your duty. Tis sweet and commendable in your nature, Hamlet,To give these mourning duties to your father: But, you must know, your father lost a father; That father lost, lost his, and the survivor bound In filial obligation for some term To do obsequious sorrow: but to persever In obstinate condolement is a course Of impious stubbornness; 'tis unmanly grief; It shows a will most incorrect to heaven, A heart unfortified, a mind impatient, An understanding simple and unschool'd: For what we know must be and is as common As any the most vulgar thing to sense, Why should we in our peevish opposition Take it to heart? Fie! 'tis a fault to heaven, A fault against the dead, a fault to nature, To reason most absurd: whose common theme Is death of fathers, and who still hath cried, From the first corse till he that died to-day, 'This must be so.' We pray you, throw to earth This unprevailing woe, and think of us As of a father: for let the world take note, You are the most immediate to our throne; And with no less nobility of love Than that which dearest father bears his son, Do I impart toward you. For your intent In going back to school in Wittenberg, It is most retrograde to our desire: And we beseech you, bend you to remain Here, in the cheer and comfort of our eye, Our chiefest courtier, cousin, and our son.";
+            series.colors = new am4core.ColorSet();
+            series.colors.passOptions = {}; // makes it loop
+            //series.labelsContainer.rotation = 45;
+            series.angles = [0,-90];
+            series.fontWeight = "900"
+            setInterval(function () {
+            series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+            }, 10000)
+            }); // end am4core.ready()
+            </script>
+            <script>
+            am4core.ready(function() {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            // create chart
+            var chart = am4core.create("sentiment_chart", am4charts.GaugeChart);
+            chart.hiddenState.properties.opacity = 0;
+            var axis = chart.xAxes.push(new am4charts.ValueAxis());
+            axis.min = 0;
+            axis.max = 160;
+            axis.strictMinMax = true;
+            axis.renderer.inside = true;
+            //axis.renderer.ticks.template.inside = true;
+            //axis.stroke = chart.colors.getIndex(3);
+            axis.renderer.radius = am4core.percent(97);
+            //axis.renderer.radius = 80;
+            axis.renderer.line.strokeOpacity = 1;
+            axis.renderer.line.strokeWidth = 5;
+            axis.renderer.line.stroke = chart.colors.getIndex(0);
+            axis.renderer.ticks.template.disabled = false
+            axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
+            axis.renderer.labels.template.radius = 35;
+            axis.renderer.ticks.template.strokeOpacity = 1;
+            axis.renderer.grid.template.disabled = true;
+            axis.renderer.ticks.template.length = 10;
+            axis.hiddenState.properties.opacity = 1;
+            axis.hiddenState.properties.visible = true;
+            axis.setStateOnChildren = true;
+            axis.renderer.hiddenState.properties.endAngle = 180;
+            var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
+            axis2.min = 0;
+            axis2.max = 240;
+            axis2.strictMinMax = true;
+            axis2.renderer.line.strokeOpacity = 1;
+            axis2.renderer.line.strokeWidth = 5;
+            axis2.renderer.line.stroke = chart.colors.getIndex(3);
+            axis2.renderer.ticks.template.stroke = chart.colors.getIndex(3);
+            axis2.renderer.ticks.template.disabled = false
+            axis2.renderer.ticks.template.strokeOpacity = 1;
+            axis2.renderer.grid.template.disabled = true;
+            axis2.renderer.ticks.template.length = 10;
+            axis2.hiddenState.properties.opacity = 1;
+            axis2.hiddenState.properties.visible = true;
+            axis2.setStateOnChildren = true;
+            axis2.renderer.hiddenState.properties.endAngle = 180;
+            var hand = chart.hands.push(new am4charts.ClockHand());
+            hand.fill = axis.renderer.line.stroke;
+            hand.stroke = axis.renderer.line.stroke;
+            hand.axis = axis;
+            hand.pin.radius = 14;
+            hand.startWidth = 10;
+            var hand2 = chart.hands.push(new am4charts.ClockHand());
+            hand2.fill = axis2.renderer.line.stroke;
+            hand2.stroke = axis2.renderer.line.stroke;
+            hand2.axis = axis2;
+            hand2.pin.radius = 10;
+            hand2.startWidth = 10;
+            setInterval(function() {
+            hand.showValue({{page.sentiments.positive}}, 1000, am4core.ease.cubicOut);
+            label.text = Math.round(hand.value).toString();
+            hand2.showValue({{page.sentiments.negitive}}, 1000, am4core.ease.cubicOut);
+            label2.text = Math.round(hand2.value).toString();
+            }, 9000);
+            var legend = new am4charts.Legend();
+            legend.isMeasured = false;
+            legend.y = am4core.percent(100);
+            legend.verticalCenter = "bottom";
+            legend.parent = chart.chartContainer;
+            legend.data = [{
+            "name": "Positive",
+            "fill": chart.colors.getIndex(0)
+            }, {
+            "name": "Negitive",
+            "fill": chart.colors.getIndex(3)
+            }];
+            legend.itemContainers.template.events.on("hit", function(ev) {
+            var index = ev.target.dataItem.index;
+            if (!ev.target.isActive) {
+            chart.hands.getIndex(index).hide();
+            chart.xAxes.getIndex(index).hide();
+            labelList.getIndex(index).hide();
+            }
+            else {
+            chart.hands.getIndex(index).show();
+            chart.xAxes.getIndex(index).show();
+            labelList.getIndex(index).show();
+            }
+            });
+            var labelList = new am4core.ListTemplate(new am4core.Label());
+            labelList.template.isMeasured = false;
+            labelList.template.background.strokeWidth = 2;
+            labelList.template.fontSize = 25;
+            labelList.template.padding(10, 20, 10, 20);
+            labelList.template.y = am4core.percent(50);
+            labelList.template.horizontalCenter = "middle";
+            var label = labelList.create();
+            label.parent = chart.chartContainer;
+            label.x = am4core.percent(40);
+            label.background.stroke = chart.colors.getIndex(0);
+            label.fill = chart.colors.getIndex(0);
+            label.text = "0";
+            var label2 = labelList.create();
+            label2.parent = chart.chartContainer;
+            label2.x = am4core.percent(60);
+            label2.background.stroke = chart.colors.getIndex(3);
+            label2.fill = chart.colors.getIndex(3);
+            label2.text = "0";
+            }); // end am4core.ready()
+            </script>
+        </body>
+    </html>

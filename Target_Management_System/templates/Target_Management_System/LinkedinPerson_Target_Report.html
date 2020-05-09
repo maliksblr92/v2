@@ -116,8 +116,8 @@
       <div class="col-md-12">
         
       </div>
-      <div class="row mr-1"style="border-radius:5px;">
-        <div class="col-sm-3"><!--left col-->
+      <div class="row mr-1 ml-1"style="border-radius:10px;">
+        <div class="col-mb-12"><!--left col-->
         
         <ul class="list-group">
           <li class="list-group-item font-weight-bold bg-info main_card_header text-white">
@@ -189,9 +189,9 @@
         
         
         </div><!--/col-3-->
-        <div class="col-sm-9 border bg-white p-0"style="border-radius:5px;">
+        <div class="col-md-12 p-0"style="border-radius:5px;">
           
-          <ul class="nav nav-tabs main_card_header" id="myTab">
+          <!-- <ul class="nav nav-tabs main_card_header" id="myTab">
             <li class="btn btn-outline-light col-md-4" class="active">
               <a class="nav-link text-white font-weight-bold custom_nav" href="#profile" data-toggle="tab">Profile</a>
             </li>
@@ -201,51 +201,52 @@
             <li class="btn btn-outline-light col-md-4">
               <a class="nav-link text-white font-weight-bold custom_nav" href="#experience" data-toggle="tab">Experience</a>
             </li>
-          </ul>
+          </ul> -->
           
-          <div class="tab-content bg-white " style="overflow-y:auto;">
-            <div class="tab-pane active " id="profile"style="">
-              <div class="row mt-1">
+          <div class="bg-white mt-4  border" style="border-radius: 10px;">
+            <h2 class="ml-1">Profile</h2>
+            <div class="active " id="profile"style="">
+              <div class="row mt-1 ml-1">
                 <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Skills ({{profile.skills | length}}) </strong></span> &nbsp</li>
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Skills ({{profile.skills | length}}) </strong></span> &nbsp</li>
                   {% for i in profile.skills %}
-                    <li class="list-group-item text-right">
-                      <span class="float-left"> {{forloop.counter}} #  {{i.name}}</span> {{i.endorsements}}
+                    <li class="list-group-item">
+                      <span class=""> {{forloop.counter}} #  {{i.name}}</span> {{i.endorsements}}
                     </li>
                   {% endfor %}
                   
                 </ul>
                 <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Intrests ({{profile.interests | length}})</strong></span>
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Intrests ({{profile.interests | length}})</strong></span>
                   </li>
                   {% for i in profile.interests %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span>
                       <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
                   
                 </ul>
-                <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Field of Intrests ({{profile.field_of_interest | length}})</strong></span>
+                <ul class="list-group col-md-6 mt-1">
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Field of Intrests ({{profile.field_of_interest | length}})</strong></span>
                   </li>
                   {% for i in profile.field_of_interest %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
                   
                 </ul>
-                <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Languages ({{profile.field_of_interest | length}})</strong></span> 
+                <ul class="list-group col-md-6 mt-1">
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Languages ({{profile.field_of_interest | length}})</strong></span> 
                   </li>
                   {% for i in profile.accomplishments.languages %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span>
                       <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
@@ -257,10 +258,8 @@
               <hr>
               
               </div><!--/tab-pane-->
-              <div class="tab-pane" id="accomplishments">
-                
-                
-                
+              <div class="" id="accomplishments">
+                <h2 class="ml-1">Accomplishments</h2>
                 <div class="accordion" id="accordionExample">
                   <div class="card">
                     <div class="card-header main_card_header d-flex flex-row justify-content-start align-items-center border" id="heading_1">
@@ -271,7 +270,7 @@
                       
                     </div>
                     
-                    <div id="courses" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                    <div id="courses" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.courses %}
@@ -296,7 +295,7 @@
                       
                     </div>
                     
-                    <div id="publications" class="collapse " aria-labelledby="heading_2" data-parent="#accordionExample">
+                    <div id="publications" class="collapse show" aria-labelledby="heading_2" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.publications %}
@@ -321,7 +320,7 @@
                       
                     </div>
                     
-                    <div id="certifications" class="collapse " aria-labelledby="heading_3" data-parent="#accordionExample">
+                    <div id="certifications" class="collapse show" aria-labelledby="heading_3" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.certifications %}
@@ -344,7 +343,7 @@
                       
                     </div>
                     
-                    <div id="patents" class="collapse " aria-labelledby="heading_4" data-parent="#accordionExample">
+                    <div id="patents" class="collapse show" aria-labelledby="heading_4" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.patents %}
@@ -367,7 +366,7 @@
                       
                     </div>
                     
-                    <div id="projects" class="collapse " aria-labelledby="heading_5" data-parent="#accordionExample">
+                    <div id="projects" class="collapse show" aria-labelledby="heading_5" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.projects %}
@@ -390,7 +389,7 @@
                       
                     </div>
                     
-                    <div id="honors" class="collapse " aria-labelledby="heading_6" data-parent="#accordionExample">
+                    <div id="honors" class="collapse show" aria-labelledby="heading_6" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.honors %}
@@ -407,9 +406,8 @@
                 </div>
                 
                 </div><!--/tab-pane-->
-                <div class="tab-pane" id="experience">
-                  
-                  
+                <div class="" id="experience">
+                  <h2 class="ml-1">Experience</h2>
                   <div class="accordion" id="accordionExample">
                     <div class="card">
                       <div class="card-header  main_card_header  d-flex flex-row justify-content-start align-items-center border" id="heading_1">
@@ -420,7 +418,7 @@
                         
                       </div>
                       
-                      <div id="jobs" class="collapse " aria-labelledby="heading_11" data-parent="#accordionExample">
+                      <div id="jobs" class="collapse show" aria-labelledby="heading_11" data-parent="#accordionExample">
                         <div class="card-body m-0 p-0">
                           <ul class="list-group col-md-12 m-0 p-0">
                             {% for i in profile.experience.jobs %}
@@ -457,7 +455,7 @@
                         
                       </div>
                       
-                      <div id="education" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                      <div id="education" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                         <div class="card-body m-0 p-0">
                           <ul class="list-group col-md-12 m-0 p-0">
                             {% for i in profile.experience.education %}
@@ -494,7 +492,7 @@
                         
                       </div>
                       
-                      <div id="volunteering" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                      <div id="volunteering" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                         <div class="card-body m-0 p-0">
                           <ul class="list-group col-md-12 m-0 p-0">
                             {% for i in profile.experience.volunteering %}

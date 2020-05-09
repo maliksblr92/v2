@@ -2,7 +2,6 @@
 # from django.utils import timezone
 # Create your models here.
 import datetime
-
 # Create your models here.
 from mongoengine import *
 from mongoengine import signals

@@ -157,9 +157,18 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
 
             if(not website == 'instagram'):
                 data = resp['data']['data']
+                print(data)
                 for item in data:
                     #print(item)
                     user = {'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
+                    users.append(user)
+            elif (website == 'instagram'):
+                data = resp['data']['users']
+                print(data)
+                for item in data:
+                    # print(item)
+                    user = {'username': item['user']['username'], 'fullname': item['user']['full_name'], 'userid': '',
+                            'profile_url': item['user']['profile_pic_url']}
                     users.append(user)
 
         print(users)
@@ -346,9 +355,15 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
+   template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+   def get(self, request, *args, **kwargs):
+         with open('static/Target_Json/instagram_response.json', 'r') as f:
+            instagram_person = json.load(f)
+            # print(instagram_person)
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'instagram_person': instagram_person})
 
 
-    template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+
 
 
 
@@ -436,6 +451,42 @@ class LinkedinPerson_Target_Response(TemplateView):
 
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
-          with open('static/Target_Json/facebook_page_data.json', 'r') as f:
+          with open('static/Target_Json/facebook_person_data.json', 'r') as f:
+            profile = json.load(f)
+            return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile':profile})
+
+
+
+class FacebookPersonReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            profile = json.load(f)
+         return render(request,'Target_Management_System/FacebookPerson_Target_Report.html',{'profile':data_object})
+
+
+
+class FacebookPageReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             page = json.load(f)
-            return render(request, 'Target_Management_System/test.html',{'page':page})
+         return render(request,'Target_Management_System/FacebookPage_Target_Report.html',{'page':data_object})
+
+
+
+class FacebookGroupReport(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            group = json.load(f)
+         return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})

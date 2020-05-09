@@ -36,8 +36,8 @@ class Create_Keybase(RequireLoginMixin, View):
             hashtags=request.POST.getlist('tags[]'),
             phrases=request.POST.getlist('phrases[]')
             )
-        # print(resp)
-        # print(type(resp))
+        print(resp) 
+        print(type(resp))
         return JsonResponse({'success':200})
 
 class Delete_Keybase(View):
@@ -107,7 +107,7 @@ class Keybase_Archive(RequireLoginMixin, View):
         objects1['phrases'] = [{obj['_id']['$oid']:obj['phrases']} for obj in objects if obj.get('phrases', False)]
         
         print(objects1)
-        return render(request, 'Keybase_Management_System/archive.html', {'ctx': objects1})
+        return render(request, 'Keybase_Management_System/archive.html', {'ctx': objects,'gtx':objects1})
 
 
 class View_Keybase(View):

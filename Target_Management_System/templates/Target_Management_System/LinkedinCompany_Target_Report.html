@@ -106,8 +106,8 @@
     <div class="container-fluid mt-3 ">
       <div class="col-md-12">
       </div>
-      <div class="row mr-1"style="border-radius:5px;">
-        <div class="col-sm-4"><!--left col-->
+      <div class="row"style="border-radius:10px;">
+        <div class="col-md-12"><!--left col-->
         <ul class="list-group">
           <li class="list-group-item font-weight-bold main_card_header text-white">
             {{company.name}}
@@ -147,8 +147,8 @@
           </li>
         </ul>
         </div><!--/col-3-->
-        <div class="col-sm-8 border bg-white p-0"style="border-radius:5px;">
-          <ul class="nav nav-tabs main_card_header" id="myTab">
+        <div class="col-md-12" style="border-radius:10px;">
+          <!-- <ul class="nav nav-tabs main_card_header" id="myTab">
             <li class="btn btn-outline-light col-md-4" class="active">
               <a class="nav-link text-white font-weight-bold custom_nav" href="#profile" data-toggle="tab">Profile</a>
             </li>
@@ -158,54 +158,64 @@
             <li class="btn btn-outline-light col-md-4">
               <a class="nav-link text-white font-weight-bold custom_nav" href="#experience" data-toggle="tab">Experience</a>
             </li>
-          </ul>
-          <div class="tab-content bg-white " style="height:400px!important;overflow-y:auto;">
-            <div class="tab-pane active " id="profile"style="">
-              <div class="row mt-1">
+          </ul> -->
+          <div class="bg-white mt-4 p-0  border" style="border-radius: 10px;">
+            <h2 class="ml-1">Profile</h2>
+            <div class="active " id="profile"style="">
+              <div class="row mt-1 ml-1">
                 <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Skills ({{company.skills | length}}) </strong></span>
-                  </li>
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Skills ({{profile.skills | length}}) </strong></span> &nbsp</li>
                   {% for i in profile.skills %}
-                    <li class="list-group-item text-right">
-                      <span class="float-left"> {{forloop.counter}} #  {{i.name}}</span> {{i.endorsements}}
+                    <li class="list-group-item">
+                      <span class=""> {{forloop.counter}} #  {{i.name}}</span> {{i.endorsements}}
                     </li>
                   {% endfor %}
+                  
                 </ul>
                 <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Intrests ({{company.interests | length}})</strong></span>
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Intrests ({{profile.interests | length}})</strong></span>
                   </li>
                   {% for i in profile.interests %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span>
+                      <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
+                  
                 </ul>
-                <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Field of Intrests ({{company.field_of_interest | length}})</strong></span>
+                <ul class="list-group col-md-6 mt-1">
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Field of Intrests ({{profile.field_of_interest | length}})</strong></span>
                   </li>
                   {% for i in profile.field_of_interest %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
+                  
                 </ul>
-                <ul class="list-group col-md-6">
-                  <li class="list-group-item text-right background_heading text-white">
-                    <span class="float-left"><strong>Languages ({{company.field_of_interest | length}})</strong></span>
+                <ul class="list-group col-md-6 mt-1">
+                  <li class="list-group-item background_heading text-white">
+                    <span class=""><strong>Languages ({{profile.field_of_interest | length}})</strong></span> 
                   </li>
                   {% for i in profile.accomplishments.languages %}
-                    <li class="list-group-item text-left">
-                      <span class="float-left">{{forloop.counter}} # </span> <span class="ml-2">{{i}}</span>
+                    <li class="list-group-item">
+                      <span class="">{{forloop.counter}} # </span>
+                      <span class="ml-2">{{i}}</span>
                     </li>
                   {% endfor %}
+                  
                 </ul>
+                
               </div>
+              
               <hr>
+              
               </div><!--/tab-pane-->
-              <div class="tab-pane" id="accomplishments">
+              <div class="" id="accomplishments">
+              <h2 class="ml-1">Accomplishment</h1>
                 <div class="accordion" id="accordionExample">
                   <div class="card">
                     <div class="card-header main_card_header d-flex flex-row justify-content-start align-items-center border" id="heading_1">
@@ -213,7 +223,7 @@
                       1 # Courses ( {{ profile.accomplishments.courses | length}} )
                       </button>
                     </div>
-                    <div id="courses" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                    <div id="courses" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.courses %}
@@ -236,7 +246,7 @@
                       2 # Publications ( {{ profile.accomplishments.publications | length}} )
                       </button>
                     </div>
-                    <div id="publications" class="collapse " aria-labelledby="heading_2" data-parent="#accordionExample">
+                    <div id="publications" class="collapse show" aria-labelledby="heading_2" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.publications %}
@@ -260,7 +270,7 @@
                       3 # Certifications ( {{ profile.accomplishments.certifications | length}} )
                       </button>
                     </div>
-                    <div id="certifications" class="collapse " aria-labelledby="heading_3" data-parent="#accordionExample">
+                    <div id="certifications" class="collapse show" aria-labelledby="heading_3" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.certifications %}
@@ -283,7 +293,7 @@
                       4 #  Patents ( {{ profile.accomplishments.patents | length}} )
                       </button>
                     </div>
-                    <div id="patents" class="collapse " aria-labelledby="heading_4" data-parent="#accordionExample">
+                    <div id="patents" class="collapse show" aria-labelledby="heading_4" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.patents %}
@@ -306,7 +316,7 @@
                       5 # Projects  ( {{ profile.accomplishments.projects | length}} )
                       </button>
                     </div>
-                    <div id="projects" class="collapse " aria-labelledby="heading_5" data-parent="#accordionExample">
+                    <div id="projects" class="collapse show" aria-labelledby="heading_5" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.projects %}
@@ -329,7 +339,7 @@
                       6 #    Honors  ( {{ profile.accomplishments.honors | length}} )
                       </button>
                     </div>
-                    <div id="honors" class="collapse " aria-labelledby="heading_6" data-parent="#accordionExample">
+                    <div id="honors" class="collapse show" aria-labelledby="heading_6" data-parent="#accordionExample">
                       <div class="card-body m-0 p-0">
                         <ul class="list-group col-md-12 m-0 p-0">
                           {% for i in profile.accomplishments.honors %}
@@ -347,7 +357,8 @@
                   </div>
                 </div>
                 </div><!--/tab-pane-->
-                <div class="tab-pane" id="experience">
+                <div class="" id="experience">
+              <h2 class="ml-1">Experience</h1>
                   <div class="accordion" id="accordionExample">
                     <div class="card">
                       <div class="card-header main_card_header  d-flex flex-row justify-content-start align-items-center border" id="heading_1">
@@ -355,7 +366,7 @@
                         1 #   Jobs   ( {{ profile.experience.jobs | length}} )
                         </button>
                       </div>
-                      <div id="jobs" class="collapse " aria-labelledby="heading_11" data-parent="#accordionExample">
+                      <div id="jobs" class="collapse show" aria-labelledby="heading_11" data-parent="#accordionExample">
                         <div class="card-body m-0 p-0">
                           <ul class="list-group col-md-12 m-0 p-0">
                             {% for i in profile.experience.jobs %}
@@ -394,7 +405,7 @@
                           2 #  Education  ( {{ profile.experience.education | length}} )
                           </button>
                         </div>
-                        <div id="education" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                        <div id="education" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                           <div class="card-body m-0 p-0">
                             <ul class="list-group col-md-12 m-0 p-0">
                               {% for i in profile.experience.education %}
@@ -436,7 +447,7 @@
                           3 #   Volunteering ( {{ profile.experience.volunteering | length}} )
                           </button>
                         </div>
-                        <div id="volunteering" class="collapse " aria-labelledby="heading_1" data-parent="#accordionExample">
+                        <div id="volunteering" class="collapse show" aria-labelledby="heading_1" data-parent="#accordionExample">
                           <div class="card-body m-0 p-0">
                             <ul class="list-group col-md-12 m-0 p-0">
                               {% for i in profile.experience.volunteering %}

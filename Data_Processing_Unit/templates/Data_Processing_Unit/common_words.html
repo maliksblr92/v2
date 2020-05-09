@@ -1,0 +1,133 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<style>
+
+select{
+        color:white!important;
+    }
+    #submit{
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+    }
+
+    .custom_pills{
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+     
+        text-align: center;
+       
+    }
+    .custom_pills a{
+        text-decoration: none;;
+        font-weight: bolder;
+        font-size: 12px;;
+    }
+    textarea::placeholder{
+        color:black!important;
+        font-size: 16px!important;;
+    }
+
+    textarea{
+        color:black!important;
+        font-size: 16px!important;;
+    }
+    #success_message{
+        position: absolute;;
+        width: 350px;
+        height: 60px;
+        top: 0px;
+        right: 0px;;
+      }
+      
+      #warning_message{
+        position: absolute;;
+        width: 350px;
+        height: 60px;
+        top: 0px;
+        right: 0px;;
+      }
+  
+</style>
+
+<!-- message for success -->
+{% if messages %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+<div id="success_message" class=" alert alert-success alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endif  %}
+
+
+<!-- message for warning -->
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+
+
+<div id="warning_message" class=" alert alert-warning alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif  %}
+{%endfor%}
+{%endif%}
+
+{% endblock %}
+
+{% block belly %}
+
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">TWEETS  </p>
+            </div>
+         
+            <div class="card-body m-4 main_card"style="height:600px;overflow-y:auto">
+
+               
+<div class="row">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>SR#</th>
+        <th>Words</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in common_words.common_words %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.0}}</td>
+    <td>{{i.1}}</td>
+  </tr>
+{% endfor %}
+    
+      
+    </tbody>
+  </table>
+ 
+    
+</div>
+                
+            </div>
+      
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
