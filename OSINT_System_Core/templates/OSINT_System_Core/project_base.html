@@ -35,7 +35,15 @@
  
 </style>
 <body class="loading">
-  
+  <style>
+    #control-msg-box{
+      height: 150px;;
+      overflow-y: auto;
+      padding-left: 10px!important;;
+      padding-top: 5px!important;;
+      padding-bottom: 5px!important;;
+    }
+  </style>
 
   <!-- container fluid div -->
   <div class="container-fluid">
@@ -180,7 +188,7 @@
  console.log('ok running ')
  // jquery ready function
 
-
+const alert=0;
 
 
 let footerRES = new ReconnectingEventSource('/events/')
@@ -194,8 +202,8 @@ let footerRES = new ReconnectingEventSource('/events/')
 
 
         // jquery event function for notification f
-          document.addEventListener('DOMContentLoaded', function () {
-            let footerRES = new ReconnectingEventSource('/events/')
+          //document.addEventListener('DOMContentLoaded', function () {
+           // let footerRES = new ReconnectingEventSource('/events/')
             // console.log(footerRES)
             footerRES.addEventListener('notification', (event) => {
                       const control_msg = JSON.parse(event.data)
@@ -203,7 +211,7 @@ let footerRES = new ReconnectingEventSource('/events/')
 
                         rabbit_message("notification")
 
-            })
+           // })
 
           }) // end of jquery ready function
 
@@ -231,6 +239,43 @@ function rabbit_message(window_type) {
                     if(window_type =='notification'){
 
                         control_msg_box = $('#notification-box')
+                  
+                        function notify(){
+                          control_msg_box.addClass(" border border-danger")
+                        setTimeout(function () {
+                        
+                          control_msg_box.removeClass("border border-danger")
+                          control_msg_box.addClass(" border border-white")
+                          setTimeout(function () {
+                        
+                            control_msg_box.removeClass("border border-white")
+                            control_msg_box.addClass(" border border-danger")
+                            setTimeout(function () {
+                        
+                              control_msg_box.removeClass("border border-danger")
+                              control_msg_box.addClass("border border-white")
+                              setTimeout(function () {
+                        
+                                control_msg_box.removeClass("border border-white")
+                                control_msg_box.addClass(" border border-danger")
+                                setTimeout(function () {
+                        
+                                  control_msg_box.removeClass("border border-danger")
+                                  control_msg_box.addClass("border border-white")
+                                },1000)
+                              },1000);
+                          }, 1000);
+                        }, 1000);
+                      }, 1000);
+                        }
+
+                        notify()
+                      
+                       
+
+                      
+
+                    
                     }
                     else if(window_type == 'message'){
                          control_msg_box = $('#control-msg-box')
@@ -238,6 +283,7 @@ function rabbit_message(window_type) {
 
                               //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
                         control_msg_box.empty().append(resp)
+                        
 
 
 
@@ -248,6 +294,9 @@ function rabbit_message(window_type) {
 
 
     rabbit_message("message")
+    rabbit_message("notification")
+
+    
 
     });
 
