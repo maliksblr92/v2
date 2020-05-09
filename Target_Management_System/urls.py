@@ -10,6 +10,9 @@ from .views import  FacebookPerson_Target_Response
 from .views import  FacebookPage_Target_Response
 from .views import  FacebookGroup_Target_Response
 from .views import Index
+from .views import FacebookPersonReport
+from .views import FacebookPageReport
+from .views import FacebookGroupReport
 
 # end ahmed imports
 urlpatterns = [
@@ -58,9 +61,9 @@ path(
     path('target/facebook/group/<str:object_gtr_id>', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
     path('target/test/', Index.as_view(), name="Index"),
     
-    path('report/facebook/person/<str:object_gtr_id>', views.FacebookPersonReport.as_view(), name="FacebookPersonReport"),
-    path('report/facebook/page/<str:object_gtr_id>', views.FacebookPageReport.as_view(), name="FacebookPageReport"),
-    path('report/facebook/group/<str:object_gtr_id>', views.FacebookGroupReport.as_view(), name="FacebookGroupReport"),
+    path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
+    path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
+    path('report/facebook/group/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookGroupReport.as_view(), name="FacebookGroupReport"),
     
 
 ]

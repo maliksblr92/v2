@@ -402,7 +402,7 @@ class News(Document):
     news = ListField()
     common_words = ListField()
     spelling_variants = ListField()
-
+    meta = {'strict': False}
 
 class Dynamic_Crawling_Response_TMS(Document):
     GTR = StringField()

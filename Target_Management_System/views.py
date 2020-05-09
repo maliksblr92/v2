@@ -149,12 +149,20 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
         users = []
         if(not 'response' in resp):
 
-            if(website == 'instagram'):
+            if(not website == 'instagram'):
                 data = resp['data']['data']
                 print(data)
                 for item in data:
                     #print(item)
-                    user = {'e_type':item['entity_type'],'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
+                    user = {'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
+                    users.append(user)
+            elif (website == 'instagram'):
+                data = resp['data']['users']
+                print(data)
+                for item in data:
+                    # print(item)
+                    user = {'username': item['user']['username'], 'fullname': item['user']['full_name'], 'userid': '',
+                            'profile_url': item['user']['profile_pic_url']}
                     users.append(user)
 
         print(users)
@@ -437,9 +445,9 @@ class LinkedinPerson_Target_Response(TemplateView):
 
 class Index(TemplateView):
     def get(self, request, *args, **kwargs):
-          with open('static/Target_Json/facebook_page_data.json', 'r') as f:
-            page = json.load(f)
-            return render(request, 'Target_Management_System/test.html',{'page':page})
+          with open('static/Target_Json/facebook_person_data.json', 'r') as f:
+            profile = json.load(f)
+            return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile':profile})
 
 
 
