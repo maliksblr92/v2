@@ -154,126 +154,131 @@
 //     });
 // });
 
-
-$(document).ready(function () {
-
-
-
-    // INITIALIZE DATEPICKER PLUGIN
-    $(".datepicker").datepicker({
-        clearBtn: true,
-        format: "dd/mm/yyyy",
-    });
-
-
-
-    $("#kms-form-submit").on("click", function () {
-        var keywords = $("#keywords").val();
-        var keywords_list = keywords.split(",");
-        console.log(keywords_list);
-
-        var tags = $("#tags").val();
-        var tags_list = tags.split(",");
-        console.log(tags_list);
-
-        var mentions = $("#mentions").val();
-        var mentions_list = mentions.split(",");
-        console.log(mentions_list);
-
-        var phrases = $("#phrases").val();
-        var phrases_list = phrases.split(",");
-        console.log(phrases_list);
-
-        var reservationdate = $("#reservationDate").val();
-        var title = $("#title").val();
-        var topic = $("#topic").val();
-        console.log(reservationdate, title, topic);
-
-
-    });
-        //submit form
-        $("#kms-create-form").submit((event) => {
-            event.preventDefault();
+$("#mentions").tagsinput('removeAll');
+    function emptyfeilds(){
+        console.log("empty formed")
+        $("#keywords").tagsinput('removeAll');
+        $("#tags").tagsinput('removeAll');
+        $("#mentions").tagsinput('removeAll');
+        $("#phrases").tagsinput('removeAll');
+        $("#reservationDate").val("");
+        $("#title").val("");
+        $("#topic").val("");
+    
+    }
+    $(document).ready(function () {
+    
+    
+    
+        // INITIALIZE DATEPICKER PLUGIN
+        $(".datepicker").datepicker({
+            clearBtn: true,
+            format: "dd/mm/yyyy",
         });
-
-function emptyfeilds(){
-    $("#keywords").val("");
-    $("#tags").val("");
-    $("#mentions").val("");
-    $("#phrases").val("");
-    $("#reservationDate").val("");
-    $("#title").val("");
-    $("#topic").val("");
-}
-
-        $("#kms-form-submit").click((event) => {
+    
+    
+    
+        $("#kms-form-submit").on("click", function () {
             var keywords = $("#keywords").val();
             var keywords_list = keywords.split(",");
+            console.log(keywords_list);
     
             var tags = $("#tags").val();
             var tags_list = tags.split(",");
-
+            console.log(tags_list);
     
             var mentions = $("#mentions").val();
             var mentions_list = mentions.split(",");
-   
+            console.log(mentions_list);
     
             var phrases = $("#phrases").val();
             var phrases_list = phrases.split(",");
-        
+            console.log(phrases_list);
     
             var reservationdate = $("#reservationDate").val();
             var title = $("#title").val();
             var topic = $("#topic").val();
-            let kmsCreateFormData = {};
-            kmsCreateFormData["title"] = $("input[name=title]").val();
-            kmsCreateFormData["topic"] = $("input[name=topic]").val();
-            kmsCreateFormData["date"] = $("input[name=date]").val();
-            kmsCreateFormData["csrfmiddlewaretoken"] = $(
-                "input[name=csrfmiddlewaretoken]"
-            ).val();
-            kmsCreateFormData["keywords"] = keywords_list;
-            kmsCreateFormData["mentions"] = mentions_list;
-            kmsCreateFormData["tags"] = tags_list;
-            kmsCreateFormData["phrases"] = phrases_list;
-            console.log(kmsCreateFormData);
-            // submit to edit view according to url
-            currentUrl = window.location.pathname;
-            //         // console.log(currentUrl);
-            splitList = currentUrl.split("/");
-            // console.log(splitList);
-            currentView = splitList[2];
-            if (currentView == "edit") {
-                const docId = window.location.href.split("docId=")[1];
-                // console.log(docId);
-                $.ajax({
-                    url: `/kms/edit/?docId=${docId}`,
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        ...kmsCreateFormData,
-                    },
-                    success: (result) => {
-                        console.log(result);
-                        emptyfeilds()
-                    },
-                });
-            } else {
-                $.ajax({
-                    url: "/kms/create/",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        ...kmsCreateFormData,
-                    },
-                    success: (result) => {
-                        console.log(result);
-                        emptyfeilds()
-                    },
-                });
-                $("#kms-create-form").trigger("reset");
-            }
-            // event.preventDefault();
-        })
-   
-});
+            console.log(reservationdate, title, topic);
+    
+    
+        });
+            //submit form
+            $("#kms-create-form").submit((event) => {
+                event.preventDefault();
+            });
+    
+    
+    
+            $("#kms-form-submit").click((event) => {
+                var keywords = $("#keywords").val();
+                var keywords_list = keywords.split(",");
+        
+                var tags = $("#tags").val();
+                var tags_list = tags.split(",");
+    
+        
+                var mentions = $("#mentions").val();
+                var mentions_list = mentions.split(",");
+       
+        
+                var phrases = $("#phrases").val();
+                var phrases_list = phrases.split(",");
+            
+        
+                var reservationdate = $("#reservationDate").val();
+                var title = $("#title").val();
+                var topic = $("#topic").val();
+                let kmsCreateFormData = {};
+                kmsCreateFormData["title"] = $("input[name=title]").val();
+                kmsCreateFormData["topic"] = $("input[name=topic]").val();
+                kmsCreateFormData["date"] = $("input[name=date]").val();
+                kmsCreateFormData["csrfmiddlewaretoken"] = $(
+                    "input[name=csrfmiddlewaretoken]"
+                ).val();
+                kmsCreateFormData["keywords"] = keywords_list;
+                kmsCreateFormData["mentions"] = mentions_list;
+                kmsCreateFormData["tags"] = tags_list;
+                kmsCreateFormData["phrases"] = phrases_list;
+                console.log(kmsCreateFormData);
+                // submit to edit view according to url
+                currentUrl = window.location.pathname;
+                //         // console.log(currentUrl);
+                splitList = currentUrl.split("/");
+                // console.log(splitList);
+                currentView = splitList[2];
+                if (currentView == "edit") {
+                    const docId = window.location.href.split("docId=")[1];
+                    // console.log(docId);
+                    $.ajax({
+                        url: `/kms/edit/?docId=${docId}`,
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            ...kmsCreateFormData,
+                        },
+                        success: (result) => {
+                            console.log(result);
+                            emptyfeilds()
+                            location.reload();
+                        },
+                    });
+                } else {
+                    $.ajax({
+                        url: "/kms/create/",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            ...kmsCreateFormData,
+                        },
+                        success: (result) => {
+                            console.log(result);
+                            emptyfeilds()
+                            location.reload();
+                        },
+                    });
+                    $("#kms-create-form").trigger("reset");
+                }
+                // event.preventDefault();
+            })
+       
+    });

@@ -46,6 +46,10 @@ from Data_Processing_Unit.models import News
 from Data_Processing_Unit.models import Trends
 from django.core import serializers
 from django.shortcuts import get_object_or_404
+from mongoengine.queryset.visitor import Q 
+
+
+
 # djangorestframework moduels below
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
@@ -940,17 +944,16 @@ def newsMonitor(request):
 
 
 def topNews(request):
-    ary=News.objects(channel='ARY').limit(1)
-    dawn=News.objects(channel='DAWN').limit(1)
-    ndtv=News.objects(channel='NDTV').limit(1)
-    india_today=News.objects(channel='INDIATODAY').limit(1)
-    abp=News.objects(channel='ABP').limit(1)
-    zee=News.objects(channel='ZEE').limit(1)
-    dic=zip(ary,dawn,ndtv,india_today,abp,zee)
-        
-    
-    print(type(dic))
-    return render(request,"OSINT_System_Core/additional_templates/top_news.html",{'top_news':dic})
+    ary=News.objects(Q(channel='ARY')).order_by('-id').first()
+    dawn=News.objects(Q(channel='DAWN')).order_by('-id').first()
+    ndtv=News.objects(Q(channel='NDTV')).order_by('-id').first()
+    india_today=News.objects(Q(channel='INDIATODAY')).order_by('-id').first()
+    abp=News.objects(Q(channel='ABP')).order_by('-id').first()
+    zee=News.objects(Q(channel='ZEE')).order_by('-id').first()
+    list1=[ary,dawn,ndtv,india_today,abp,zee]
+    print(ndtv.channel)
+    print(ndtv.most_emerging_news)
+    return render(request,"OSINT_System_Core/additional_templates/top_news.html",{'top_news':list1})
 
 # get worldwide hashtags function
 def get_worldwide_hashtags():
