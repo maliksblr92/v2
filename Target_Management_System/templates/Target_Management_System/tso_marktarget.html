@@ -49,17 +49,17 @@
             <!-- TOP MANU BAR -->
             <nav>
                 <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link" id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
+                    <a class="nav-item nav-link {% if data.target_site == 'reddit' %} active {% endif %}"  id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
                     style="color:white; opacity:0.8;" class="fab fa-reddit-square fa-2x"></i></a>
-                    <a class="nav-item nav-link" id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
+                    <a class="nav-item nav-link {% if data.target_site == 'linkedin' %} active {% endif %}" id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
                     style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i></a>
-                    <a class="nav-item nav-link" id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
+                    <a class="nav-item nav-link {% if data.target_site == 'instagram' %} active {% endif %}" id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
                     <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i></a>
-                    <a class="nav-item nav-link active" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
+                    <a class="nav-item nav-link {% if data.target_site == 'facebook' or not data.target_site%} active {% endif %}" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
                     <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
-                    <a class="nav-item nav-link" id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
+                    <a class="nav-item nav-link"  {% if data.target_site == 'twitter' %} active {% endif %} id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
                     style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
-                    <a class="nav-item nav-link" id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
+                    <a class="nav-item nav-link"  {% if data.target_site == 'youtube' %} active {% endif %} id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
                     style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                 </div>
             </nav>
@@ -75,7 +75,16 @@
                         <!-- this is content -->
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                             {% for platform in data.social %}
-                                <div class="tab-pane fade {% if platform.name|lower == 'facebook' %}active show{% endif %}"
+                                <div class="tab-pane fade {% if data.target_site %}
+                                                            {% if platform.name|lower == data.target_site %}active show{% endif %}
+
+
+                                                             {% else  %}
+
+                                                                {% if platform.name|lower == 'facebook' %}active show {% endif %}
+                                                            {% endif %}
+
+"
                                 id="{{platform.name|lower}}" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <!-- Each content tab #1 for keywords-->
                                 <div class="row formbg">
@@ -108,6 +117,7 @@
                                                 <input type="text" class="form-control newinputdesign"
                                                     placeholder="Please Enter your text"
                                                     name="{{platform.name|lower}}_autheruseraccount"
+                                                       value="{{ data.prime_argument }}"
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button type="button" x-target-name="{{platform.name|lower}}"
@@ -142,6 +152,7 @@
                                                     placeholder="Please Enter your number"
                                                     id="{{platform.name|lower}}-authoruserid"
                                                     name="{{platform.name|lower}}_authoruserid"
+
                                                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                                             </div>
                                         <input type="hidden" name="platform" value="{{platform.name|lower}}">
@@ -237,6 +248,7 @@
                                                     value="0">
                                                  <label for="male">No</label><br>
                                                 <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
+                                                <input type="hidden" name="portfolio_id" value="{{data.portfolio_id}}">
                                             </div>
                                         </div>
 

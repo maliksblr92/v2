@@ -27,9 +27,12 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
         portfolio_id = ''
         prime_argument = ''
+        target_site = ''
 
         if 'portfolio_id' in kwargs :portfolio_id = kwargs['portfolio_id']
         if 'prime_argument' in kwargs: prime_argument = kwargs['prime_argument']
+        if 'target_site' in kwargs: target_site = kwargs['target_site']
+
         #print(kwargs['portfolio_id'])
         # print(social_sites.to_json())
         # data = serializers.serialize('json', social_sites.to_json(), fields=(
@@ -40,7 +43,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'blogs': json.loads(blog_sites.to_json()),
             'intervals':PERIODIC_INTERVALS,
             'portfolio_id':portfolio_id,
-            'prime_argument':prime_argument
+            'prime_argument':prime_argument,
+            'target_site':target_site,
         }
         print(prime_argument)
         #publish('target created successfully', message_type='notification')
@@ -64,7 +68,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             print(request.POST)
             plateform = request.POST['platform']
             portfolio_id = request.POST.get('portfolio_id',None)
-
+            if(not len(portfolio_id) >0): portfolio_id = None
 
             website_id = ObjectId(request.POST['website_id'])
             target_type_index = int(request.POST[plateform+'_authortype'])
@@ -160,14 +164,14 @@ class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
                 print(data)
                 for item in data:
                     #print(item)
-                    user = {'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
+                    user = {'target_site':website,'username': item['username'],'fullname': item['full_name'],'userid': item['id'],'profile_url':item['picture_url']}
                     users.append(user)
             elif (website == 'instagram'):
                 data = resp['data']['users']
                 print(data)
                 for item in data:
                     # print(item)
-                    user = {'username': item['user']['username'], 'fullname': item['user']['full_name'], 'userid': '',
+                    user = {'target_site':website,'username': item['user']['username'], 'fullname': item['user']['full_name'], 'userid': '',
                             'profile_url': item['user']['profile_pic_url']}
                     users.append(user)
 

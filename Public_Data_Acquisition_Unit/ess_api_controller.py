@@ -457,7 +457,10 @@ class Ess_Api_Controller(object):
 
         try:
             add_target_url = 'keybase/'
+
             payload = {'keywords':keywords,'GTR':GTR,'CTR':CTR}
+            print(payload)
+
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
             print(response.json())
             return response.json()
