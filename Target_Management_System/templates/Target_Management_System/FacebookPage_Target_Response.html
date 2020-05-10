@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
             integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css" integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous" />
             <style>
             .small-txt {
             font-size: 13px !important;
@@ -97,7 +98,7 @@
             background-color: #44cc45;
             }
             .fb-cover-img {
-            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
+            /*background: url({{c.media_directory}}) no-repeat center center fixed;*/
             background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -113,7 +114,7 @@
             margin-top: -120px;
             border:5px solid #FEC134;
             border-radius: 10px;
-            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
+            background: url({{c.media_directory}}) no-repeat center center fixed;
             ;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -608,7 +609,7 @@
                                                                     <div class="col-md-6">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                                <img src="{{c.media_directory}}"
                                                                                 style="height: 60px;width:60px;border-radius: 50%;"
                                                                                 class="img-fluid">
                                                                             </div>
@@ -647,7 +648,7 @@
                                                 <div class="col-md-12 post-wrapper">
                                                     <div class="row border custom_border_color">
                                                         <div class="col-md-2 m-0 p-0 custom-center-center">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{p.media_directory}}"
                                                             style="height: 60px;width:60px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
@@ -675,7 +676,7 @@
                                                         </div>
                                                     </div>                                                    <!-- <div class="row">
                                                     <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
-                                                        <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
+                                                        <img src="{{c.media_directory}}" class="img-fluid"/>
                                                     </div>
                                                 </div> -->
                                                 <div class="row" style="height:300px;">
@@ -697,7 +698,7 @@
                                                     {% for r in p.reactions.like  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -724,7 +725,7 @@
                                                     {% for r in p.reactions.love  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -751,7 +752,7 @@
                                                     {% for r in p.reactions.haha  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -778,7 +779,7 @@
                                                     {% for r in p.reactions.wow  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -805,7 +806,7 @@
                                                     {% for r in p.reactions.angry  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -832,7 +833,7 @@
                                                     {% for r in p.reactions.sad  %}
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -859,7 +860,7 @@
                                                     {% for r in p.comments  %}
                                                         <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{r.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->

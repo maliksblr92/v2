@@ -220,7 +220,7 @@
         </head>
         <body>
             <div class="container-fluid wrapper background-gradient">
-                <div class="row pl-5 pr-5">
+                <!-- <div class="row pl-5 pr-5">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg" id="header">
                             <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
@@ -275,13 +275,14 @@
                             </div>
                         </nav>
                     </div>
-                </div>
+                </div> -->
                 <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white d-flex flex-row justify-content-start align-items-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                        <div class="circle-dot1 ml-2"></div>
+                    <div class="col-md-12 bg-white text-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                        <!-- <div class="circle-dot1 ml-2"></div>
                         <div class="circle-dot2 ml-1"></div>
-                        <div class="circle-dot3 ml-1"></div>
-                        <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                        <div class="circle-dot3 ml-1"></div> -->
+                        <span class="btn btn-primary btn-sm  float"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span>
+                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
                         
                     </div>
                     
@@ -293,6 +294,7 @@
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-2">
                         <div class="profile-image-wrapper custom_border_color">
+                            <img src="{{profile.posts.0.author_media_directory}}" style="height: 100%;width:100%;" class="img-fluid" />
                         </div>
                     </div>
                     <div class="col-md-8 ">
@@ -323,13 +325,10 @@
                                 {% for f in profile.friends %}
                                     <div class="row mt-1 ">
                                         <div class="col-md-4 m-0 p-0 " >
-                                            {% if f.media_directory  is not None   %}
+                                          
                                                 <img src="{{f.media_directory}}" style="height:80px;width:80px;" class="img-fluid" />
                                             </div>
-                                        {% else %}
-                                            <img src="/static/images/VIaL8H.jpg" style="height:80px;width:80px;" class="img-fluid" />
-                                        </div>
-                                    {% endif%}
+                                       
                                     <div class="col-md-8 border custom_border_color rounded" style="height:80px;">
                                         <div class="row h-100 d-flex flex-row text-white justify-content-center align-items-center">
                                             <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Name:</div>
@@ -404,10 +403,10 @@
                                                         <div class="card-header background-gradient-dark" id="custom1" data-toggle="collapse"
                                                             data-target="#_{{c.id}}" aria-expanded="true"
                                                             aria-controls="_{{c.id}}">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{c.media_directory}}"
                                                             style="height: 80px;width:80px;border-radius: 50%;;"
                                                             class="img-fluid">
-                                                            <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                          
                                                             <button class="btn btn-link text-white" type="button" >
                                                             {{c.name}}
                                                             </button>
@@ -471,32 +470,29 @@
                                 <!-- start profile tab  -->
                                 <div id="profile" class="tab-pane fade show in active pb-5">
                                     <div class="row">
-                                        <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
-                                        </div>
+                                        <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
+                                        </div> -->
                                         <div class="col-md-12">
                                             <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_overview_summary}}</p>
+                                            <p class="text_paragraph text-justify">{{profile.profile_overview_summary|default:"N/A"}}</p>
                                         </div>
                                         <div class="col-md-12">
                                             <h3><i class="material-icon text_heading">Profile Friends Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_friends_summary}}</p>
+                                            <p class="text_paragraph text-justify">{{profile.profile_friends_summary|default:"N/A"}}</p>
                                         </div>
                                         <div class="col-md-12">
                                             <h3><i class="material-icon text_heading">Profile Intrest Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_interest_summary}}</p>
+                                            <p class="text_paragraph text-justify">{{profile.profile_interest_summary|default:"N/A"}}</p>
                                         </div>
                                         <div class="col-md-12">
                                             <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_close_associates_summary}}</p>
+                                            <p class="text_paragraph text-justify">{{profile.profile_close_associates_summary|default:"N/A"}}</p>
                                         </div>
                                         <div class="col-md-12">
                                             <h3><i class="material-icon text_heading">Profile Behaviour Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.behaviour}}</p>
+                                            <p class="text_paragraph text-justify">{{profile.behaviour|default:"N/A"}}</p>
                                         </div>
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_close_associates_summary}}</p>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- end profile tab  -->
@@ -947,10 +943,10 @@
                                             <div class="col-md-12 post-wrapper">
                                                 <div class="row border custom_border_color">
                                                     <div class="col-md-2 m-0 p-0 custom-center-center">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{p.author_media_directory}}"
                                                         style="height: 60px;width:60px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
+                                                        
                                                     </div>
                                                     <div class="col-md-2 custom-column-start-start pt-2 text_heading">
                                                         <span> {{page.name}}</span>
@@ -997,8 +993,8 @@
                                                 {% for r in p.reactions.like  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
+                                                        <img src="{{r.media_directory}}" 
+                                                        style="height: 80px;width:100px;border-radius: 50%;;"
                                                         class="img-fluid">
                                                         <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                         <div class="p-2">
@@ -1024,10 +1020,10 @@
                                                 {% for r in p.reactions.love  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{r.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                        
                                                         <div class="p-2">
                                                             <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                 <span class="text_paragraph">{{r.name}}</span>
@@ -1051,10 +1047,10 @@
                                                 {% for r in p.reactions.haha  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{r.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                       
                                                         <div class="p-2">
                                                             <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                 <span class="text_paragraph">{{r.name}}</span>
@@ -1078,10 +1074,10 @@
                                                 {% for r in p.reactions.wow  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{r.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                      
                                                         <div class="p-2">
                                                             <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                 <span class="text_paragraph">{{r.name}}</span>
@@ -1105,10 +1101,10 @@
                                                 {% for r in p.reactions.angry  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{r.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                      
                                                         <div class="p-2">
                                                             <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                 <span class="text_paragraph">{{r.name}}</span>
@@ -1132,10 +1128,10 @@
                                                 {% for r in p.reactions.sad  %}
                                                     <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                        <img src="{{r.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                        
                                                         <div class="p-2">
                                                             <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                 <span class="text_paragraph">{{r.name}}</span>
@@ -1155,25 +1151,30 @@
                                                 <div class="col-md-12">
                                                     <i class="material-icon text_heading" style="font-size:20px;">'Comments'
                                                     By ({{ p.comments | length}})</i>
+                                                  
                                                 </div>
                                                 {% for r in p.comments  %}
+
                                                     <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                         style="height:100px;">
-                                                        <img src="/static/images/VIaL8H.jpg"
+                                                      <div>
+                                                         
+                                                      </div>
+                                                        <img src=" {{r.commentor.media_directory}}"
                                                         style="height: 80px;width:80px;border-radius: 50%;;"
                                                         class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                        
                                                         <div class="p-2">
                                                             <span
                                                                 class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
-                                                            {{r.name}}</span>
+                                                            {{r.commentor.name}}</span>
                                                             <span
                                                                 class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
-                                                            {{r.username}}</span>
+                                                            {{r.commentor.username}}</span>
                                                             <span
                                                                 class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
-                                                            {{r.id}}</span>
-                                                            <a href="{{r.url}}"
+                                                            {{r.commentor.id}}</span>
+                                                            <a href="{{r.commentor.url}}"
                                                             class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
                                                         </div>
                                                     </div>
@@ -1204,13 +1205,14 @@
                                 <div class="row">
                                     {% for c in profile.check_ins %}
                                         <div class="col-md-6">
+                                           
                                             <div class="card">
                                                 <div class="card-header">
                                                     <div class="row">
                                                         <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-                                                            <img src="/static/images/VIaL8H.jpg"
-                                                            style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                            <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                            <!-- <img src="{{c.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                           
                                                             <button class="btn btn-link text_heading" type="button" data-toggle="collapse"
                                                             data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
                                                             {{c.name}}
@@ -1247,19 +1249,7 @@
             </div>
             <!-- end col-md-9 -->
         </div>
-        <div class="row mt-2 ml-1 mr-1">
-            <div class="col-md-12 mt-2">
-                <div class="row ">
-                    <div class="col-lg-12 pl-5 pr-5">
-                        <nav class="navbar navbar-expand-lg " id="header">
-                            <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                                <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

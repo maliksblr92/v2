@@ -77,6 +77,7 @@ path('test_api/', views.Test_Api.as_view(), name='test_api'),
     path('getYoutubeTrends/', views.getYoutubeTrends, name='getYoutubeTrends'),
     path('update_micro_crawler_stats/',views.update_micro_crawler_stats,name='update_micro_crawler_stats'),
     path('update_internet_stats/',views.update_internet_stats,name='update_internet_stats'),
+    path('update_dashboard_donutchart/',views.update_dashboard_donutchart,name='update_dashboard_donutchart'),
     # ahmed end
 ]
 

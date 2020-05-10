@@ -438,65 +438,7 @@
             background-size: cover;
             ">
             <div class="container-fluid">
-                <div class="row pl-5 pr-5">
-                    <div class="col-lg-12">
-                        <nav class="navbar
-                            navbar-expand-lg" id="header">
-                            <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon ">
-                                <i class="fas fa-bars"
-                                style="color:#fff; font-size:28px;"></i>
-                            </span>
-                            </button>
-                            <div class="collapse navbar-collapse"
-                                id="navbarTogglerDemo01">
-                                <div class="col-lg-2">
-                                    
-                                </div>
-                                <div
-                                    class="col-lg-8 ">
-                                    <div class="row m-0 p-0">
-                                        <div
-                                            class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class=" btn font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;"> <li class="nav-item">
-                                                    <a class="btn font-weight-bold nav_btn" href="#">MONITOR</a>
-                                                </li>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 custom_center">
-                                        <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-                                    </div>
-                                    <div class="col-lg-5 pt-2">
-                                        <div class="row">
-                                            <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
-                                                white;">
-                                                <li class="nav-item">
-                                                    <a class="btn font-weight-bold nav_btn" href="#">FETCH</a>
-                                                </li>
-                                            </div>
-                                            <div class="col-lg-6 list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid white;">
-                                                <li class="nav-item">
-                                                    <a class="btn font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                                                </li>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 ">
-                                
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+                
             <div class="row pl-5 pr-5 pt-3">
                 
                 <div class="col-md-8">
@@ -717,14 +659,14 @@
                                         <div class="col-md-10 ">
                                             <div class="row">
                                                 <div class="col-md-12 d-flex flex-row justify-content-around align-items-center">
-                                                    <b class="text-danger border m-0 p-0 col-md-4 " style="font-size:10px;">
-                                                    {{i.name}}
+                                                    <b class="text-primary border m-0 p-0 col-md-4 " style="font-size:10px;">
+                                                    {{i.sentiment}}
                                                     </b>
-                                                    <span class="text-danger border m-0 p-0 col-md-4 " style="font-size:12px;">
-                                                        @{{i.username}}.
+                                                    <span class="text-primary border m-0 p-0 col-md-4 " style="font-size:12px;">
+                                                        @{{i.username_tweet}}.
                                                     </span>
-                                                    <span class="text-danger border m-0 p-0 col-md-4 " style="font-size:10px;">
-                                                        {{i.date}} {{i.time}}
+                                                    <span class="text-primary border m-0 p-0 col-md-4 " style="font-size:10px;">
+                                                        {{i.datetime_created}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -733,21 +675,13 @@
                                     <div class="row">
                                         <div class="col-md-12 text-dark font-weight-bold "
                                             style="font-size:14px;height:150px;overflow:auto;">
-                                            {{i.tweet}}
+                                            {{i.text}}
                                         </div>
-                                        {% if i.photos  %}
-                                            <div class="col-md-12 text-dark " style="font-size:12px;height:200px;overflow:auto;">
-                                                <img src="{{i.photos}}" class="img-thumbnail" />
-                                            </div>
-                                        {% else %}
-                                            <div class="col-md-12 text-dark " style="font-size:12px;height:200px;overflow:auto;">
-                                                <img src="/static/images/no_img_placeholder.png" class="img-thumbnail" />
-                                            </div>
-                                        {% endif %}
+                                        
                                     </div>
                                     <div class="row " style="position:relative;bottom:0px;">
                                         <div class="col-md-3 text-dark d-flex flex-row justify-content-around border m-0 p-0 align-items-center" style="border-radius: 0px 0px 0px 10px;">
-                                            <i class=" text-danger fas fa-comment">
+                                            <i class=" text-primary fas fa-comment">
                                             </i>
                                             <span style="font-size: 9px;;">
                                                 {{i.mentions}}
@@ -755,7 +689,7 @@
                                         </div>
                                         <div
                                             class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center">
-                                            <i aria-hidden="true" class=" text-danger fa fa-retweet">
+                                            <i aria-hidden="true" class=" text-primary fa fa-retweet">
                                             </i>
                                             <span style="font-size: 12px;;">
                                                 {{i.replies_count}}
@@ -763,7 +697,7 @@
                                         </div>
                                         <div
                                             class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center">
-                                            <i class=" text-danger fas fa-heart">
+                                            <i class=" text-primary fas fa-heart">
                                             </i>
                                             <span style="font-size: 12px;;">
                                                 {{i.likes_count}}
@@ -771,10 +705,10 @@
                                         </div>
                                         <div
                                             class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center" style="border-radius: 0px 0px 10px 0px;">
-                                            <i class=" text-danger fas fa-upload">
+                                            <i class=" text-primary fas fa-upload">
                                             </i>
                                             <span style="font-size: 12px;;">
-                                                {{i.retweets_count}}
+                                                {{i.retweeet_count}}
                                             </span>
                                         </div>
                                     </div>
@@ -783,15 +717,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row pl-5 pr-5 mt-3">
-                    <div class="col-lg-12 ">
-                        <nav class="navbar navbar-expand-lg " id="header">
-                            <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                                <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+                
             </div>
             
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

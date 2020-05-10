@@ -293,10 +293,7 @@
                                     <h3><i class="material-icon text-warning">Profile Behaviour Summary </i></h3>
                                     <p class="text-white">{{profile.behaviour}}</p>
                                 </div>
-                                <div class="col-md-12">
-                                    <h3><i class="material-icon text-warning">Profile Close Associates Summary </i></h3>
-                                    <p class="text-white">{{profile.profile_close_associates_summary}}</p>
-                                </div>
+                                
                             </div>
                             <!-- PROFILE END -->
                             <!-- FRIENDS START -->
@@ -307,14 +304,11 @@
                                 {% for f in profile.friends  %}
                                     <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                         style="height:100px;">
-                                        {% if f.media_directory  is not None   %}
+                                        
                                             <img src="{{f.media_directory}}" style="height:80px;width:80px;border-radius: 50%;" class="img-fluid" />
                                             
-                                        {% else %}
-                                            <img src="/static/images/VIaL8H.jpg" style="height:80px;width:80px;border-radius: 50%;" class="img-fluid" />
-                                            
-                                        {% endif%}
-                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                        
+                                     
                                         <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                             <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                 Name: {{f.name}}
@@ -750,9 +744,8 @@
                                     <div class="col-md-12 border post-wrapper">
                                         <div class="row">
                                             <div class="col-md-2 m-0 p-0 custom-center-center">
-                                                <img src="/static/images/VIaL8H.jpg"
-                                                style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid">
-                                                <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
+                                               
+                                               <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> 
                                             </div>
                                             <div class="col-md-5 custom-column-start-start pt-2 text-white border-left border-right">
                                                 <span> {{profile.name}}</span>
@@ -794,9 +787,9 @@
                                             {% for r in p.reactions.like  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
+                                                    <img src="{{r.media_directory}}"
                                                     style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -824,9 +817,8 @@
                                             {% for r in p.reactions.love  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
+                                                   <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -854,9 +846,8 @@
                                             {% for r in p.reactions.haha  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
+                                                  <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -884,9 +875,8 @@
                                             {% for r in p.reactions.wow  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -914,9 +904,7 @@
                                             {% for r in p.reactions.angry  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -944,9 +932,8 @@
                                             {% for r in p.reactions.sad  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -974,9 +961,8 @@
                                             {% for r in p.comments  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                     style="height:100px;">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                    <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -1022,10 +1008,8 @@
                                         {% for c in profile.close_associates %}
                                             <div class="card">
                                                 <div class="card-header background-gradient-dark" id="custom1">
-                                                    <img src="/static/images/VIaL8H.jpg"
-                                                    style="height: 80px;width:80px;border-radius: 50%;;"
-                                                    class="img-fluid">
-                                                    <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                    
+                                                <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> 
                                                     <button class="btn btn-link text-white" type="button" data-toggle="collapse"
                                                     data-target="#_{{c.id}}" aria-expanded="true"
                                                     aria-controls="_{{c.id}}">
@@ -1097,9 +1081,8 @@
                                                 <div class="row">
                                                     <div
                                                         class="col-md-4 d-flex flex-column justify-content-start align-items-center">
-                                                        <img src="/static/images/VIaL8H.jpg"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                                        <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                        
+                                                          <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                                         <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
                                                         {{c.name}}
                                                         </button>

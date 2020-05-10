@@ -234,7 +234,6 @@ class Global_Target_Reference(Document):
 
     @staticmethod
     def target_count_for_all_sites():
-
         sites = Supported_Website.get_all_supported_sites()
         data_resp = []
 
