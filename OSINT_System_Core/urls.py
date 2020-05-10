@@ -64,7 +64,7 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
     path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
     path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
-path('test_api/', views.Test_Api.as_view(), name='test_api'),
+
 
     # ahmed start
     path('dashboard/', views.Dashboard.as_view(), name='dashboard'),

@@ -5,19 +5,18 @@ from datetime import timedelta
 from Data_Processing_Unit import tasks
 from .mixins import RequireLoginMixin, IsTSO, IsTMO, IsRDO, IsPAO
 from bson import ObjectId
-#from OSINT_System_Core.models import Supported_Socail_Sites
-#from OSINT_System_Core.serializers import Supported_Socail_Sites_Serializer
-#from OSINT_System_Core.core_db_manager import Coredb_Manager
+# from OSINT_System_Core.models import Supported_Socail_Sites
+# from OSINT_System_Core.serializers import Supported_Socail_Sites_Serializer
+# from OSINT_System_Core.core_db_manager import Coredb_Manager
 
 from rest_framework.views import APIView
 from django.http import JsonResponse
 
-#imports for the find objects view
+# imports for the find objects view
 
 from Keybase_Management_System.models import Keybase_KMS
 from Portfolio_Management_System.models import Portfolio_PMS
 from Avatar_Management_Unit.models import Avatar_AMS
-
 
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
@@ -34,8 +33,6 @@ from django.utils import timezone
 from django_eventstream import send_event
 from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
-
-
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -46,9 +43,8 @@ from Data_Processing_Unit.models import News
 from Data_Processing_Unit.models import Trends
 from django.core import serializers
 from django.shortcuts import get_object_or_404
-from mongoengine.queryset.visitor import Q 
-
-
+from mongoengine.queryset.visitor import Q
+from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
 
 # djangorestframework moduels below
 from django.views.decorators.csrf import csrf_exempt
@@ -57,7 +53,8 @@ from rest_framework import viewsets, response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from OSINT_System_Core.Data_Sharing import Keybase_Match,Portfolio_Link,Portfolio_Include,Keybase_Include,Mongo_Lookup
+from OSINT_System_Core.Data_Sharing import Keybase_Match, Portfolio_Link, Portfolio_Include, Keybase_Include, \
+    Mongo_Lookup
 from Public_Data_Acquisition_Unit.mongo_models import Share_Resource as Share_Resource_M
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
@@ -67,27 +64,28 @@ from rest_framework.status import (
 
 # Create your views here.
 
-#processing_manager = Processing_Manager()
+# processing_manager = Processing_Manager()
 acq = Acquistion_Manager()
-#coreDb = Coredb_Manager()
+# coreDb = Coredb_Manager()
 log_manager = System_Log_Manager()
 pl = Portfolio_Link()
 pi = Portfolio_Include()
 km = Keybase_Match()
 
-#FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
+
+# FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
 
 
 class Main(View):
     def get(self, request):
         # response = fetch_instagram_profile('author','atifaslam')   #author or post
-        #response =  acq_manager.ess_add_facebook_person_target('prince.nuada.16','closeAssociates')
-        #response = acq_manager.ess_add_instagram_target('author','atifaslam')
-        #response = acq_manager.ess_add_linkedin_person_target()
-        #response = acq_manager.ess_add_linkedin_company_target('facebook')
+        # response =  acq_manager.ess_add_facebook_person_target('prince.nuada.16','closeAssociates')
+        # response = acq_manager.ess_add_instagram_target('author','atifaslam')
+        # response = acq_manager.ess_add_linkedin_person_target()
+        # response = acq_manager.ess_add_linkedin_company_target('facebook')
 
-        #response = acq_manager.ess_add_twitter_phrase_target('PSL')
-        #response = fetch_twitter_tweets('refferencing','itsaadee')
+        # response = acq_manager.ess_add_twitter_phrase_target('PSL')
+        # response = fetch_twitter_tweets('refferencing','itsaadee')
         # return JsonResponse(response,safe=False)
         # print(processing_manager.fetch_news())
 
@@ -95,6 +93,8 @@ class Main(View):
         tasks.add.schedule((4, 5), eta=eta)
 
         return render(request, 'OSINT_System_Core/main.html', {})
+
+
 # ...........................................Views for Target Forms.......
 
 
@@ -132,7 +132,7 @@ class Target_Author_Linkedin(View):
 
 class Target_Headlines_Main(View):
     def get(self, request):
-        #send_event('test', 'message', {'text': 'hello world'})
+        # send_event('test', 'message', {'text': 'hello world'})
 
         return render(
             request,
@@ -489,7 +489,6 @@ class Add_Linkedin_Target(APIView):
 
 """
 
-
 """
 
 class Get_Facebook_Targets(APIView):
@@ -546,15 +545,12 @@ class Supported_Social_Site_List(APIView):
 """
 
 
-
-
 # ...................................................Views for General Que
 
 class Crawler_Internet_Connection(View):
-    #permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
-
         resp = acq.crawler_internet_connection()
         return JsonResponse(resp, safe=False)
 
@@ -563,7 +559,6 @@ class Microcrawler_Status(View):
     # permission_classes = (IsAuthenticated,)
     # resp = acq.mircocrawler_status()
     def get(self, request, *args, **kwargs):
-
         resp = acq.mircocrawler_status()
         return JsonResponse(resp, safe=False)
 
@@ -571,10 +566,9 @@ class Microcrawler_Status(View):
 # ...................................................Views for SmartSearch
 
 class Smart_Search(APIView):
-    #permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
-
         resp = tasks.fetch_smart_search(
             username=kwargs['author_account'],
             search_site=kwargs['search_site'])
@@ -691,89 +685,84 @@ class Article_Trend(APIView):
 class Dispatcher(View):
 
     def get(self, request, *args, **kwargs):
-
         print(
             '...........................In Disipatcher...................................')
         GTR = kwargs['GTR']
         author_account = kwargs['author_account']
 
         send_event('notifications', 'notification', {
-                   'GTR': GTR, 'author_account': author_account})
+            'GTR': GTR, 'author_account': author_account})
         return HttpResponse('success')
 
-#...........................................View For Object Search(awais)
+
+# ...........................................View For Object Search(awais)
 
 class Find_Object(View):
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
 
         print(request.GET)
         type = request.GET['type']
         query = request.GET['query']
 
-
-        if(type == 'portfolio'):
+        if (type == 'portfolio'):
             resp = Portfolio_PMS.find_object(query)
-            return render(request,'OSINT_System_Core/find_object.html',{'objects':resp})
-        elif(type == 'keybase'):
+            return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
+        elif (type == 'keybase'):
             resp = Keybase_KMS.find_object(query)
             return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
-        elif(type == 'avatar'):
+        elif (type == 'avatar'):
             resp = Avatar_AMS.find_object(query)
             return render(request, 'OSINT_System_Core/find_object.html', {'objects': resp})
         else:
             print('invalid choice')
 
-
         return HttpResponse('')
 
 
 class Link_Object(View):
-    def get(self,request):
+    def get(self, request):
         print(request.GET)
         alpha_id = ObjectId(request.GET['alpha_id'])
         beta_path_list = [ObjectId(request.GET['beta_id'])]
 
         type = request.GET['type']
         if (type == 'portfolio'):
-            resp = pl.create(alpha_id,beta_path_list)
-            if(resp is not None):
+            resp = pl.create(alpha_id, beta_path_list)
+            if (resp is not None):
                 return HttpResponse('resource linked sucessfully ')
         elif (type == 'keybase'):
-            #resp = Keybase_KMS.find_object(query)
+            # resp = Keybase_KMS.find_object(query)
             return HttpResponse('resource linked sucessfully ')
         elif (type == 'avatar'):
-            #resp = Avatar_AMS.find_object(query)
+            # resp = Avatar_AMS.find_object(query)
             return HttpResponse('resource linked sucessfully ')
         else:
 
             return HttpResponse('given type is either empty or invalid')
-        return HttpResponse('this resource is already linked with this '+type)
+        return HttpResponse('this resource is already linked with this ' + type)
+
 
 class Share_Resource(View):
     ml = Mongo_Lookup()
 
-
-
-    def get(self,request):
+    def get(self, request):
         print(request.GET)
-        group_typ = request.GET.get('user_group',None)
-        message = request.GET.get('message',None)
-        resource_id = request.GET.get('resource_id',None)
+        group_typ = request.GET.get('user_group', None)
+        message = request.GET.get('message', None)
+        resource_id = request.GET.get('resource_id', None)
 
-        if(group_typ and message and resource_id):
+        if (group_typ and message and resource_id):
             resource_obj = self.ml.find_object_by_id(ObjectId(resource_id))
-            if(resource_obj is not None):
+            if (resource_obj is not None):
                 try:
                     obj = Share_Resource_M(user_id=request.user.id,
-                                         username=request.user.username,
-                                         share_with=[group_typ],
-                                         message=message,
-                                         resource_ref = resource_obj,
+                                           username=request.user.username,
+                                           share_with=[group_typ],
+                                           message=message,
+                                           resource_ref=resource_obj,
 
-
-
-                                         )
+                                           )
 
                     obj.save()
                     return HttpResponse('resource shared successfully')
@@ -787,21 +776,19 @@ class Share_Resource(View):
         return HttpResponse('unable to share resource')
 
 
-
 class Rabbit_Message(View):
 
-    def get(self,request):
+    def get(self, request):
+        print(request.GET)
+        objects = Rabbit_Messages.get_top_messages(10, request.GET.get('window_type', 'message'))
+        print(objects)
 
-        #print(request.GET)
-        objects = Rabbit_Messages.get_top_messages(10,request.GET.get('window_type','message'))
-        #print(objects)
-
-        return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
+        return render(request, 'OSINT_System_Core/message_loger.html', {'messages': objects})
 
 
 class Update_Footer_Graphs():
 
-    def get(self,request):
+    def get(self, request):
         internet = acq.crawler_internet_connection()
         mc_status = acq.mircocrawler_status()
 
@@ -855,35 +842,43 @@ class Dashboard(APIView):
         # calling core manager function
 
         # first time load data
-        reddit_top_post = {
-            "trend_type": "reddit_trends",
-            "trend_graph": [],
-            "popular_hashtag": "",
-            "top_trends": [
-                {
-                    "author_fullname": "t2_2bfojune",
-                    "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
-                    "title": "Join our new subreddit r/Dark_Demented_Memes !",
-                    "count": 5
-                },
-                {
-                    "author_fullname": "Jt2_4qqy8cha",
-                    "selftext": "We remodeled the subreddit",
-                    "title": "r/adults",
-                    "count": 3
-                }
-            ],
-            "country": "",
-            "common_words": [],
-            "spelling_variants": []
-        }
+        reddit_trends = Trends.objects.filter(trend_type='reddit_trends').order_by('-id').first()
+        print("perinting reeddit trends ")
+        print(len(reddit_trends))
+        for i in reddit_trends:
+            print(i)
+        # {
+        #     "trend_type": "reddit_trends",
+        #     "trend_graph": [],
+        #     "popular_hashtag": "",
+        #     "top_trends": [
+        #         {
+        #             "author_fullname": "t2_2bfojune",
+        #             "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
+        #             "title": "Join our new subreddit r/Dark_Demented_Memes !",
+        #             "count": 5
+        #         },
+        #         {
+        #             "author_fullname": "Jt2_4qqy8cha",
+        #             "selftext": "We remodeled the subreddit",
+        #             "title": "r/adults",
+        #             "count": 3
+        #         }
+        #     ],
+        #     "country": "",
+        #     "common_words": [],
+        #     "spelling_variants": []
+        # }
         # youtube first time load data
-        youtube_trends = Trends.objects.filter(trend_type='youtube_trends').first()
-            
-        twitter_top_hastags={}
+        youtube_trends = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
+
+        twitter_top_hastags = {}
+        Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
+        print(type(Target_Count_Chart))
         # get top hashtags for first load
         try:
-            twitter_country_hashtags=Trends.objects.filter(country='pakistan',trend_type='twitter_trends').first()
+            twitter_country_hashtags = Trends.objects.filter(country='pakistan', trend_type='twitter_trends').order_by(
+                '-id').first()
         # hashtag chart update
         except Trends.DoesNotExist:
             twitter_country_hashtags = None
@@ -911,10 +906,11 @@ class Dashboard(APIView):
             'india',
             'Peru'
         ]
-        
+
         return render(request, 'OSINT_System_Core/additional_templates/dashboard.html',
-                         {'reddit_top_post': reddit_top_post, 'twitter_top_hastags': twitter_top_hastags,
-                       'youtube_trends': youtube_trends,'twitter_country_hashtags':twitter_country_hashtags,'countries_list':countries_list})
+                      {'reddit_trends': reddit_trends, 'twitter_top_hastags': twitter_top_hastags,
+                       'youtube_trends': youtube_trends, 'twitter_country_hashtags': twitter_country_hashtags,
+                       'countries_list': countries_list, 'Target_Count_Chart': Target_Count_Chart})
 
 
 def main(request):
@@ -938,22 +934,23 @@ def mainHeatMap(request):
 def newsMonitor(request):
     # with open('static/Target_Json/news_data1.json', 'r') as f:
     #     news_json = json.load(f)
-    news_json=News.objects().limit(1)
+    news_json = News.objects().limit(1)
     print(news_json)
     return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
 
 
 def topNews(request):
-    ary=News.objects(Q(channel='ARY')).order_by('-id').first()
-    dawn=News.objects(Q(channel='DAWN')).order_by('-id').first()
-    ndtv=News.objects(Q(channel='NDTV')).order_by('-id').first()
-    india_today=News.objects(Q(channel='INDIATODAY')).order_by('-id').first()
-    abp=News.objects(Q(channel='ABP')).order_by('-id').first()
-    zee=News.objects(Q(channel='ZEE')).order_by('-id').first()
-    list1=[ary,dawn,ndtv,india_today,abp,zee]
+    ary = News.objects(Q(channel='ARY')).order_by('-id').first()
+    dawn = News.objects(Q(channel='DAWN')).order_by('-id').first()
+    ndtv = News.objects(Q(channel='NDTV')).order_by('-id').first()
+    india_today = News.objects(Q(channel='INDIATODAY')).order_by('-id').first()
+    abp = News.objects(Q(channel='ABP')).order_by('-id').first()
+    zee = News.objects(Q(channel='ZEE')).order_by('-id').first()
+    list1 = [ary, dawn, ndtv, india_today, abp, zee]
     print(ndtv.channel)
     print(ndtv.most_emerging_news)
-    return render(request,"OSINT_System_Core/additional_templates/top_news.html",{'top_news':list1})
+    return render(request, "OSINT_System_Core/additional_templates/top_news.html", {'top_news': list1})
+
 
 # get worldwide hashtags function
 def get_worldwide_hashtags():
@@ -990,52 +987,49 @@ def get_worldwide_hashtags():
 
 def getTrendsByCountry(request):
     if request.method == 'GET':
-        country_name=request.GET['country_name']
+        country_name = request.GET['country_name']
         print(country_name)
         # data=Trends.objects.get(country='pakistan',trend_type='twitter_trends')
         try:
-            data = Trends.objects.get(country=country_name,trend_type='twitter_trends')
-            json_data = data.to_json()
-            return HttpResponse(json_data)
-        except Trends.DoesNotExist:
-            data = None
-            return HttpResponse(data)
-        
-def getYoutubeTrends(request):
-    if request.method=='GET':
-        try:
-            data=Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
+            data = Trends.objects.filter(country=country_name, trend_type='twitter_trends').order_by('-id').first()
             json_data = data.to_json()
             return HttpResponse(json_data)
         except Trends.DoesNotExist:
             data = None
             return HttpResponse(data)
 
-def update_micro_crawler_stats(request):
-    if request.method=='GET':
-            micro_cralwer_stats=acq.mircocrawler_status()
-            json_data = json.dumps(micro_cralwer_stats)
+
+def getYoutubeTrends(request):
+    if request.method == 'GET':
+        try:
+            data = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
+            json_data = data.to_json()
             return HttpResponse(json_data)
-            
+        except Trends.DoesNotExist:
+            data = None
+            return HttpResponse(data)
+
+
+def update_micro_crawler_stats(request):
+    if request.method == 'GET':
+        micro_cralwer_stats = acq.mircocrawler_status()
+        json_data = json.dumps(micro_cralwer_stats)
+        return HttpResponse(json_data)
 
 
 def update_internet_stats(request):
-
-    if request.method=='GET':
-        
-        internet_stats=acq.crawler_internet_connection()
-        #print("called update internet stats fucntion ")
-        #print(internet_stats)
+    if request.method == 'GET':
+        internet_stats = acq.crawler_internet_connection()
+        print("called update internet stats fucntion ")
+        print(internet_stats)
         json_data = json.dumps(internet_stats)
-        #print(json_data)
+        print(json_data)
         return HttpResponse(json_data)
 
-class Test_Api(View):
-    def get(self,request):
-        return HttpResponse('ok')
-    def post(self,request):
 
-        print(request.body)
-
-        return HttpResponse('ok')
-
+def update_dashboard_donutchart(request):
+    if request.method == 'GET':
+        Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
+        json_data = json.dumps(Target_Count_Chart)
+        print(json_data)
+        return HttpResponse(json_data)
