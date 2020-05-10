@@ -123,8 +123,8 @@ class Acquistion_Manager(object):
                 keybase = appropriate_class.objects(GTR=gtr.id)[0]
                 keywords = keybase.keybase_ref.keywords + keybase.keybase_ref.mentions+keybase.keybase_ref.phrases+keybase.keybase_ref.hashtags
 
+                print('..............................adding keybase target ................................')
                 print(keywords)
-
                 response = appropriate_ess_method(keywords,gtr.id,ctr)
                 print(response)
                 publish('keybase target added successfully', message_type='info', module_name=__name__)
@@ -394,9 +394,9 @@ class Acquistion_Manager(object):
 
         return all_expired_objects_list
 
-    def fetch_smart_search(self,username,search_site):
+    def fetch_smart_search(self,username,search_site,entity_type):
         try:
-            response = ess.ess_add_smart_serach_target(username,search_site)
+            response = ess.ess_add_smart_serach_target(username,search_site,entity_type)
 
             return response
         except Exception as e:

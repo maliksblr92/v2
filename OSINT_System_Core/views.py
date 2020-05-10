@@ -792,9 +792,9 @@ class Rabbit_Message(View):
 
     def get(self,request):
 
-        print(request.GET)
+        #print(request.GET)
         objects = Rabbit_Messages.get_top_messages(10,request.GET.get('window_type','message'))
-        print(objects)
+        #print(objects)
 
         return render(request,'OSINT_System_Core/message_loger.html',{'messages':objects})
 
@@ -1017,14 +1017,25 @@ def update_micro_crawler_stats(request):
             json_data = json.dumps(micro_cralwer_stats)
             return HttpResponse(json_data)
             
-    
+
+
 def update_internet_stats(request):
 
     if request.method=='GET':
         
         internet_stats=acq.crawler_internet_connection()
-        print("called update internet stats fucntion ")
-        print(internet_stats)
+        #print("called update internet stats fucntion ")
+        #print(internet_stats)
         json_data = json.dumps(internet_stats)
-        print(json_data)
+        #print(json_data)
         return HttpResponse(json_data)
+
+class Test_Api(View):
+    def get(self,request):
+        return HttpResponse('ok')
+    def post(self,request):
+
+        print(request.body)
+
+        return HttpResponse('ok')
+

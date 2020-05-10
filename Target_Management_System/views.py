@@ -6,7 +6,7 @@ from django.views import View
 from OSINT_System_Core.publisher import publish
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager,Timeline_Manager
-from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS
+from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS,Supported_Website
 from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
@@ -112,10 +112,16 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
         username = request.GET['author_account']
         search_site = request.GET['search_site']
+        target_type_index = request.GET['target_type']
 
-        print(username,search_site)
+        entity_type = Supported_Website.get_target_type_by_index(search_site,target_type_index)
 
-        resp = acq.fetch_smart_search(username=username,search_site=search_site)
+
+
+
+        print(username,search_site,entity_type)
+
+        resp = acq.fetch_smart_search(username=username,search_site=search_site,entity_type=entity_type)
         # print(kwargs)
         if (not 'response' in resp):
             print(resp)

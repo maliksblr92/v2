@@ -135,9 +135,9 @@
                                                 <select
                                                     style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
                                                     class="custom-select newinput"
-                                                    name="{{platform.name|lower}}_authortype">
+                                                    name="{{platform.name|lower}}_authortype" id="{{platform.name|lower}}_authortype">
                                                     {% for choice in platform.target_type %}
-                                                    <option value={{forloop.counter0}}>{{choice}}</option>
+                                                    <option value="{{forloop.counter0}}">{{choice}}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -293,16 +293,23 @@
     //start of document ready
     document.addEventListener('DOMContentLoaded', function () {
         let smartsearch = $('.smartsearch')
-        // smart search 
+        // smart search
         smartsearch.click((event) => {
             // console.log(event.target)
             let website = event.target.getAttribute('x-target-name')
             let author_account = event.target.parentElement.parentElement.querySelector('input').value
+            let target_type = "{{platform.name|lower}}"
+            //console.log(website)
+            var author_type = $(`#${website}_authortype option:selected`).val();
+
+    console.log(author_type)
+             console.log(author_type)
             // console.log(website, author_account)
             // let author_account = $('#author-account').val()
             let data = {
                 'author_account': author_account,
-                'search_site': website
+                'search_site': website,
+                'target_type': author_type
             }
             $.ajax({
                 dataType: "json",
