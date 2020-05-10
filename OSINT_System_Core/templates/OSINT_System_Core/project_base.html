@@ -144,7 +144,7 @@
                   <div class="col-lg-4 ">
                     <div id="chart_7" class="m-0 p-0 "></div>
                   </div>
-                  <div class="col-lg-4 ">
+                  <div class="col-lg-4 m-0 p-0">
                     <div id="chart_8" class="m-0 p-0 "></div>
                   </div>
                 </div>
@@ -200,6 +200,14 @@ let footerRES = new ReconnectingEventSource('/events/')
             })
 
 
+            //Alert by Ahmed 
+            footerRES.addEventListener('alert', (event) => {
+              console.log(event)
+            rabbit_message("alerts")
+
+  })
+
+
 
         // jquery event function for notification f
           //document.addEventListener('DOMContentLoaded', function () {
@@ -236,53 +244,82 @@ function rabbit_message(window_type) {
                          console.log(resp)
                     //const control_msg = JSON.parse(resp)
 
-                    if(window_type =='notification'){
+                    if (window_type == 'notification') {
 
-                        control_msg_box = $('#notification-box')
-                  
-                        function notify(){
-                          control_msg_box.addClass(" border border-danger")
+                      control_msg_box = $('#notification-box')
+                     
+                      function notify() {
+                        control_msg_box.addClass(" border border-success")
                         setTimeout(function () {
-                        
-                          control_msg_box.removeClass("border border-danger")
-                          control_msg_box.addClass(" border border-white")
+        
+                          control_msg_box.removeClass("border border-success")
+                          control_msg_box.addClass(" border border-primary")
                           setTimeout(function () {
-                        
-                            control_msg_box.removeClass("border border-white")
-                            control_msg_box.addClass(" border border-danger")
+        
+                            control_msg_box.removeClass("border border-primary")
+                            control_msg_box.addClass(" border border-warning")
                             setTimeout(function () {
-                        
-                              control_msg_box.removeClass("border border-danger")
-                              control_msg_box.addClass("border border-white")
+        
+                              control_msg_box.removeClass("border border-warning")
+                              control_msg_box.addClass("border border-success")
                               setTimeout(function () {
-                        
-                                control_msg_box.removeClass("border border-white")
-                                control_msg_box.addClass(" border border-danger")
+        
+                                control_msg_box.removeClass("border border-success")
+                                control_msg_box.addClass(" border border-primary")
                                 setTimeout(function () {
-                        
-                                  control_msg_box.removeClass("border border-danger")
-                                  control_msg_box.addClass("border border-white")
-                                },1000)
-                              },1000);
+        
+                                  control_msg_box.removeClass("border border-primary")
+                                  control_msg_box.addClass("border border-success")
+                                  setTimeout(function () {
+        
+                                    control_msg_box.removeClass("border border-success")
+                                    control_msg_box.addClass("border border-primary")
+        
+                                    setTimeout(function () {
+                                      control_msg_box.removeClass("border border-primary")
+                                      control_msg_box.addClass("border border-warning")
+                                      setTimeout(function () {
+                                        control_msg_box.removeClass("border border-warning")
+                                        control_msg_box.addClass("border border-success")
+                                        setTimeout(function () {
+                                          control_msg_box.removeClass("border border-success")
+                                          control_msg_box.addClass("border border-primary")
+                                          setTimeout(function () {
+                                            control_msg_box.removeClass("border border-primary")
+                                            control_msg_box.addClass("border border-warning")
+                                            setTimeout(function () {
+                                              control_msg_box.removeClass("border border-warning")
+                                              control_msg_box.addClass("border border-success")
+                                              control_msg_box.removeClass("border border-success")
+                                            }, 1000)
+                                          }, 1000)
+                                        }, 1000)
+                                      }, 1000)
+                                    }, 1000)
+                                  }, 1000)
+                                }, 1000)
+                              }, 1000);
+                            }, 1000);
                           }, 1000);
                         }, 1000);
-                      }, 1000);
-                        }
-
-                        notify()
+                      }
+        
+                 
+                      notify()
                       
-                       
-
-                      
-
-                    
+        
+        
+        
+        
+                    } else if (window_type == 'message') {
+                      control_msg_box = $('#control-msg-box')
                     }
-                    else if(window_type == 'message'){
-                         control_msg_box = $('#control-msg-box')
+                    else if(window_type=='alert'){
+                      control_msg_box = $('#alert-box')
                     }
-
-                              //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
-                        control_msg_box.empty().append(resp)
+        
+                    //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+                    control_msg_box.empty().append(resp)
                         
 
 
@@ -295,7 +332,7 @@ function rabbit_message(window_type) {
 
     rabbit_message("message")
     rabbit_message("notification")
-
+    rabbit_message("alert")
     
 
     });
@@ -305,7 +342,11 @@ function rabbit_message(window_type) {
 
 
 </script>
-
+<script>
+  $(document).ready(function(){
+    
+  });
+</script>
   <script defer src="{% static 'amchart/js/core.js' %}"></script>
   <script defer src="{% static 'amchart/js/charts.js' %}"></script>
   <script defer src="{% static 'amchart/js/themes/dark.js' %}"></script>
@@ -508,7 +549,9 @@ console.log("i m clicked")
 </script>
 <script>
   
- 
+
+
+
 
 
 

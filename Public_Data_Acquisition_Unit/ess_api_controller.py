@@ -433,7 +433,6 @@ class Ess_Api_Controller(object):
             add_target_url = 'crawler_status/'
             payload = {}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
-            print(response.json())
             return response.json()
 
         except Exception as e:

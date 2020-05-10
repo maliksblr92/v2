@@ -20,6 +20,12 @@
 </div>
 {% endblock %}
 {% block belly %}
+<style>
+    #nav-tabContent{
+       height: 600px;
+       overflow-y :auto ; 
+    }
+</style>
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
         <!-- TOP MANU BAR -->
@@ -60,7 +66,7 @@
             <div class="row formbg ml-5">
                 <div class="col-md-11 col-lg-11 col-xl-11 col-sm-11">
                     <!-- this is content -->
-                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                         {% csrf_token %}
                         {% for key, value in gtx.items %}
                         <div class="tab-pane fade {% if key == 'keywords' %}active show{% endif %}" id="nav-{{key}}"
@@ -73,17 +79,17 @@
                                         <div class="row">
                                             {% if key == 'keywords' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3 m-0">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9 m-0">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.keywords|join:", "}}</span>
+                                                    <span class="rightlabel w-100" >{{i.keywords|join:", "|default:"No Keywords available "}}</span>
                                                     </div>
                                             </div>
     
@@ -97,17 +103,17 @@
                                         <div class="row">
                                             {% if key == 'mentions' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.mentions|join:", "}}</span>
+                                                    <span class="rightlabel w-100" >{{i.mentions|join:", "|default:"No Mentions available "}}</span>
                                                     </div>
                                             </div>
     
@@ -123,17 +129,17 @@
                                         <div class="row">
                                             {% if key == 'topics' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.topic|join:", "|default:"&nbsp;"}}</span>
+                                                    <span class="rightlabel w-100" >{{i.topic|join:", "|default:"N/A"}}</span>
                                                     </div>
                                             </div>
     
@@ -147,17 +153,17 @@
                                         <div class="row">
                                             {% if key == 'phrases' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.phrases|join:", "}}</span>
+                                                    <span class="rightlabel w-100" >{{i.phrases|join:", "|default:"No Phrases available "}}</span>
                                                     </div>
                                             </div>
     
@@ -178,17 +184,17 @@
                                         <div class="row">
                                             {% if key == 'tags' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.hashtags|join:", "}}</span>
+                                                    <span class="rightlabel w-100" >{{i.hashtags|join:", "|default:"No Hashtags available "}}</span>
                                                     </div>
                                             </div>
     
@@ -199,17 +205,17 @@
                                         <div class="row">
                                             {% if key == 'titles' %}
                                             {% for i in ctx %}
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group mt-2 mb-2">
                                                     <div class="input-group-prepend w-100 pilleditdel">
                                                    <input type="hidden" value="{{key_in}}">
-                                                    <span class="keybaseLabel w-100 text-center">{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
                                                    </div>
                                                    </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
-                                                    <span class="rightlabel w-100" >{{i.title|default:"&nbsp;"}}</span>
+                                                    <span class="rightlabel w-100" >{{i.title|default:"N/A"|default:"No Title available "}}</span>
                                                     </div>
                                             </div>
     
