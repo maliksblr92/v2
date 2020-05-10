@@ -287,10 +287,10 @@ class Ess_Api_Controller(object):
             return {'response': 'ess replied null'}
 
 
-    def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook'):
+    def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook',entity_type='profile'):
         try:
             add_target_url = 'smart_search/'
-            payload = {'username': username,'category':search_site}
+            payload = {'username': username,'category':search_site,'entity_type':entity_type}
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()

@@ -206,6 +206,41 @@ class Global_Target_Reference(Document):
     def target_added_count_by_website(website_id):
         return Global_Target_Reference.objects(website__id=website_id)
 
+    @staticmethod
+    def get_targets_by_website_name_count(website='facebook'):
+        GTRS = Global_Target_Reference.objects
+        objects = []
+        for gtr in GTRS:
+            if (gtr.website.name.lower() == website):
+                objects.append(gtr)
+
+        return len(objects)
+
+    @staticmethod
+    def target_sites_percetage_share():
+        total_targets_count = len(Global_Target_Reference.targets_added_all_time())
+        sites = Supported_Website.get_all_supported_sites()
+        data_resp = []
+
+        for site in sites:
+            site_count = Global_Target_Reference.get_targets_by_website_name_count(site.name.lower())
+            temp_dict = {site.name.lower():(site_count/total_targets_count)*100}
+            data_resp.append(temp_dict)
+        return data_resp
+
+    @staticmethod
+    def target_count_for_all_sites():
+
+        sites = Supported_Website.get_all_supported_sites()
+        data_resp = []
+
+        for site in sites:
+            site_count = Global_Target_Reference.get_targets_by_website_name_count(site.name.lower())
+            temp_dict = {site.name.lower(): site_count}
+            data_resp.append(temp_dict)
+        return data_resp
+
+
 #.....................................................................BASE DOCUMENT SECTION STARTED...........................................................
 
 class Facebook_Target(Document):
