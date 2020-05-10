@@ -464,7 +464,7 @@ class Ess_Api_Controller(object):
                       'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
             import json
             payload_json = json.dumps(payload)
-            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload_json)
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload)
             print(response.json())
             return response.json()
 
