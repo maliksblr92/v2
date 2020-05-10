@@ -3,7 +3,7 @@
 {% block content%}
   <div class="container-fluid">
     
-    <div class="row ">
+    <!-- <div class="row ">
       <div class="col-lg-12">
         <nav class="navbar
           navbar-expand-lg" id="header">
@@ -61,13 +61,13 @@
           </nav>
         </div>
       </div>
-      
+       -->
       <div class="row mt-2">
         <div class="col-md-3  ">
           <div class="row border border-white card1_row ">
             <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
-              <span class="float-left"style="font-size:14px;">Social Media</span>
-              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              <span class="float-left"style="font-size:14px;">Social Media Targets</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="hashtag_chart_btn">
               Refresh
               </button>
             </div>
@@ -139,8 +139,8 @@
           <div class="row border border-white  card1_row ">
             <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Hastag Chart </div> -->
             <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
-              <span class="float-left"style="font-size:14px;">Hashtag Chart </span>
-              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              <span class="float-left"style="font-size:14px;">Targets </span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="donut_chart_btn">
               Refresh
               </button>
             </div>
@@ -157,22 +157,30 @@
               Refresh
               </button>
             </div>
-            <div class="col-md-12 card1_col2"style="height: 280px;" >
+            <div class="col-md-12 card1_col2"style="height: 280px;overflow-y:auto;" >
               
               <div class="row p-1"  id="reddit_trends" >
-                {% for i in reddit_top_post.top_trends %}
+                {% for x in reddit_trends.top_Trends %}
+                {% for i in x.trends %}
+         
                   <div class="col-md-12 mt-1" >
                     <div class="row">
                       
                       <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
-                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
-                          {{i.count}}
+                        <span class="text-white font-weight-bold d-flex flex-column justify-content-center align-items-center"style="font-size:11px;">
+                          <span style="font-size:10px" class="text-center">Total Comments</span>
+                          <span>{{i.statistics.num_comments}}</span>
+                       
                         </span>
-                        <a  href="#"class="badge badge-light ">View</a>
+                        <span> <a  href="{{i.post_link}}"class="badge badge-light ">View</a></span>
+                       
                       </div>
-                      <div class="col-md-9 border border-white m-0  social_posts_post"style="overflow: hidden; flex-direction: column; font-size: 13px;">
-                        <span class="text-white font-weight-bold d-flex flex-row" style="" >username: "{{i.author_fullname}}"</span>
-                        <span class="text-white font-weight-bold d-flex flex-row" style="">{{i.title}}</span>
+                      <div class="col-md-9 border border-white m-0  social_posts_post_reddit"style="overflow-y: auto; flex-direction: column; font-size: 13px;">
+                        <div class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center" style="font-size:10px" > 
+                          <span class="text-warning"> Username: </span> <span>{{i.poster.username}}</span></div>
+                        <div class="text-white font-weight-bold d-flex flex-column" style="font-size:10px;">  <span class="text-warning">Post Text: </span><span>{{i.text}}</span></div>
+                        <div class="text-white font-weight-bold d-flex flex-row" style="font-size:10px;">  <span  class="text-warning">Sub Reddit Name : </span><span>{{i.subreddit.name}}</span><span >   <a style="font-size:10px;" href="{{i.subreddit.link}}"class="badge badge-light ">View Sub Reddit</a></span></div>
+
                       </div>
                       {% comment %}
                       <div class="col-md-3 border border-white" style="border-radius:5px;">
@@ -180,18 +188,19 @@
                           {{i.author_fullname}}
                         </span>
                         <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">
-                          {{i.count}}
+                          {{i.statistics.score}}
                         </span>
                       </div>
                       <div class="col-md-9 border border-white d-flex flex-row justify-content-start align-items-center "style="border-radius:5px;">
                         <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">
-                          {{i.title}}
+                          {{i.text}}
                         </span>
                       </div>
                     {% endcomment %}
                   </div>
                   
                 </div>
+              {% endfor %}
               {% endfor %}
               
             </div>
@@ -246,19 +255,6 @@
       
       
       
-      <div class="row mt-2">
-        <div class="col-md-12 mt-2">
-          <div class="row ">
-            <div class="col-lg-12 ">
-              <nav class="navbar navbar-expand-lg " id="header">
-                <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                  <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="flexbox">
       </div>
       
