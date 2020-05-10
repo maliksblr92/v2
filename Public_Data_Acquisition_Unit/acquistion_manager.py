@@ -486,7 +486,7 @@ class Acquistion_Manager(object):
     def mircocrawler_status(self):
 
 
-        print(ess.microcrawler_status())
+       return ess.microcrawler_status()
 
 
 

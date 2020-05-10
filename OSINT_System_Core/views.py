@@ -1010,3 +1010,21 @@ def getYoutubeTrends(request):
         except Trends.DoesNotExist:
             data = None
             return HttpResponse(data)
+
+def update_micro_crawler_stats(request):
+    if request.method=='GET':
+            micro_cralwer_stats=acq.mircocrawler_status()
+            json_data = json.dumps(micro_cralwer_stats)
+            return HttpResponse(json_data)
+            
+    
+def update_internet_stats(request):
+
+    if request.method=='GET':
+        
+        internet_stats=acq.crawler_internet_connection()
+        print("called update internet stats fucntion ")
+        print(internet_stats)
+        json_data = json.dumps(internet_stats)
+        print(json_data)
+        return HttpResponse(json_data)
