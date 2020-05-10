@@ -12,7 +12,11 @@
                                     <i class="fas fa-link text-white chain_icon"></i>
                                 </div>
                                 <div class="w-100 h-50">
-                                    <button class="btn btn-sm" type="button" onclick="">T</button>
+                                    {% if user.id %}
+                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.id user.target_site  %}" class="btn-success btn" >{{ user.id }} </a>
+                                    {% elif user.username %}
+                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.username user.target_site %}" class="btn-success btn" >{{ user.username }}</a>
+                                    {% endif %}
 
                                 </div>
                                 <div class="w-100 h-25 text-center">
