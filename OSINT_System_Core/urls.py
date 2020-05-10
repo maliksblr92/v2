@@ -76,6 +76,7 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('getYoutubeTrends/', views.getYoutubeTrends, name='getYoutubeTrends'),
     path('update_micro_crawler_stats/',views.update_micro_crawler_stats,name='update_micro_crawler_stats'),
     path('update_internet_stats/',views.update_internet_stats,name='update_internet_stats'),
+    path('update_dashboard_donutchart/',views.update_dashboard_donutchart,name='update_dashboard_donutchart'),
     # ahmed end
 ]
 

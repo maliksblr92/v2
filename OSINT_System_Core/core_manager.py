@@ -2,30 +2,19 @@ from django_eventstream import send_event
 import random
 from bs4 import BeautifulSoup
 import requests
-
+from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
 
 class Update_Bigview():
 
     def update_hashtag_charts(self):
-
-        n1 = random.randint(0, 400)
-        n2 = random.randint(0, 400)
-        n3 = random.randint(0, 400)
-        n4 = random.randint(0, 400)
-
-        random_numbers = [n1, n2, n3, n4]
-        json_data = random_numbers
+        values=Global_Target_Reference.target_count_for_all_sites()
+        json_data = values
         send_event('bigview_streams', 'hashtag_charts', json_data)
 
     def update_youtube_charts(self):
 
-        n1 = random.randint(0, 400)
-        n2 = random.randint(0, 400)
-        n3 = random.randint(0, 400)
-        n4 = random.randint(0, 400)
-
-        random_numbers = [n1, n2, n3, n4]
-        json_data = random_numbers
+        values=Global_Target_Reference.target_count_for_all_sites()
+        json_data = values
         send_event('bigview_streams', 'youtube_charts', json_data)
 
     def update_reddit_trends(self):
