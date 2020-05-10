@@ -13,10 +13,11 @@
                                 </div>
                                 <div class="w-100 h-50">
                                     {% if user.id %}
-                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.id  %}" class="btn-primary" > </a>
+                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.id user.target_site  %}" class="btn-success btn" >{{ user.id }} </a>
                                     {% elif user.username %}
-                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.username  %}" class="btn-primary" > </a>
+                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.username user.target_site %}" class="btn-success btn" >{{ user.username }}</a>
                                     {% endif %}
+
                                 </div>
                                 <div class="w-100 h-25 text-center">
                                     <i class="fas fa-eye text-white eye_icon"></i>

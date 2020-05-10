@@ -1004,7 +1004,7 @@ def getTrendsByCountry(request):
 def getYoutubeTrends(request):
     if request.method=='GET':
         try:
-            data=Trends.objects.filter(trend_type='youtube_trends').first()
+            data=Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
             json_data = data.to_json()
             return HttpResponse(json_data)
         except Trends.DoesNotExist:
