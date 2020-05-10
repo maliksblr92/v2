@@ -576,7 +576,7 @@ am4core.ready(function() {
                 url:'http://localhost:8000/core/update_internet_stats',
                 success:function(e){
                   console.log("in interval of upload speed")
-                    upload=e.upload/1000000;
+                    upload=e.upload/10000;
                   
                
                 chart.addData(
