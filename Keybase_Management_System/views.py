@@ -12,6 +12,8 @@ from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 
 km = Keybase_Manager()
 
+# ahmed import 
+from Data_Processing_Unit.models import Keybase_Response_TMS
 
 class Create_Keybase(RequireLoginMixin, View):
 
@@ -143,3 +145,10 @@ class DeleteKeybaseProperty(RequireLoginMixin, IsTSO, View):
         elif prop_to_delete == 'phrases':
             resp = km.update_keybase(doc_id, phrases=None)
         return JsonResponse({'success':200})
+
+class Keybase_Fetched_Responses(View):  
+    def get(self,request,*args,**kwargs):
+        resp=Keybase_Response_TMS.objects.all()
+        return render(request,'Keybase_Management_System/keybase_fetched_responses.html',{'resp':resp})
+    def post(self,request,*args,**kwargs):
+        return render(request,'Keybase_Management_System/keybase_fetched_responses.html')

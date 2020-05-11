@@ -112,6 +112,15 @@
                                                             {% endif %}
                                                     {% elif target.1.GTR|lower == 'reddit'%}
 
+                                                        {% elif target.1.GTR|lower == 'custom'%}
+
+                                                            {% if target.1.target_type|lower == 'keybase_crawling'%}
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                            {% elif target.1.target_type|lower == 'dynamic_crawling'%}
+                                                            <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+
+                                                            {% endif %}
+
 
                                                     {% else %}
 

@@ -291,6 +291,7 @@ class Ess_Api_Controller(object):
         try:
             add_target_url = 'smart_search/'
             payload = {'username': username,'category':search_site,'entity_type':entity_type}
+            print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
