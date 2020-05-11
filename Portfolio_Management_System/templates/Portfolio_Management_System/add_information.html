@@ -98,31 +98,28 @@
                             <div class="tab-content">
 
 
-                              <div id="social" class="tab-pane active in  fade show">
+                              <div id="social" class="tab-pane fade">
                                 <div class="container-fluid">
                                     <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 m-0 p-0">
                                       <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
                                           {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text"><a href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" class="btn btn-primary">Add New Target</a></span>
-
-                                                          </label>
-                                                      </div>
-                                                  </div>
+                                      <div class="card-body m-0 p-0  ">
 
 
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
+
+                                          <div class="row  ">
+                                          
+                                            <div class="col-md-12  m-0 p-0">
+                                                <span class="float-left text-white btn btn-primary btn-sm">
+                                                    <i class="far fa-address-card mr-2"></i>   All Social Targets
+                                                </span>
+                                                <a  href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" type="button" class=" float-right  btn-sm btn-success mr-2"><i class="fas fa-plus mr-2"></i>ADD</a>
+
+                                            </div>
+                                           
+                                            </div>
+                                        </div>
                                           <input type="hidden" value="address" id="form_name" name="extra_type" />
                                           <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
                                           <div class="row input_wrapper_row">
@@ -134,14 +131,21 @@
                                           </div>
                                       </div>
                                   </form>
-                                        <div class="row">
+                                        <div class="row border p-2"style="height:450px;overflow-y:auto;">
                                             {% for target in social_targets %}
 
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">Address</h5>
-                                        <p class="card-text">{{ target }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
+                                            <div class="col-md-3 m-0 p-0  card mt-2" style="width: 18rem;">
+                                                <div class="card-header text-left  " style="font-size:16px;"><i class="fa fa-user text-dark  "></i> Target Address</div>
+                                      <div class="card-body d-flex flex-row justify-content-between align-items-center">
+                                        
+                                        
+                                            <span class="badge badge-dark text-white font-weight-bold">Target Username :</span><span style="font-size:14px;" class="text-danger ">  {{ target }}</span>
+                                        
+                                         
+                                       
+                                      </div>
+                                      <div class="card-footer">
+                                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-trash"></i> Delete</a>
                                       </div>
                                     </div>
                                                                 {% endfor %}
@@ -153,34 +157,27 @@
                                     </div>
 
                                     </div>
-                              </div>
-                              <div id="adresses" class="tab-pane fade">
+                             
+                              <div id="adresses" class="tab-pane fade ">
                                 <div class="container-fluid">
                                     <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
-                                          {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Address</span>
-                                                                  <textarea class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                            name="prime_value" required=""> </textarea>
-                                                          </label>
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                          <input type="hidden" value="address" id="form_name" name="extra_type" />
+                                    <div class="col-md-12 m-0 p-0">
+                                      
+                                      <div class="card-body  main_card">
+                                        <div class="row">
+                                            <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group form-inline col-md-12">
+                                                    <label class="form-control form-control-lg d-flex flex-row justify-content-center align-items-center" for="addresses">
+                                                      <span class="btn btn-sm btn-success mr-2">  adresses</span>
+                                                        <input type="text" class="form-control  w-75" required="required"  id="author_id"
+                                                        name="prime_value" />
+                                                    </label>
+                                                </div>
+                                          
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="hidden" value="address" id="form_name" name="extra_type" />
                                           <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
                                           <div class="row input_wrapper_row">
                                               <div class="col-md-6"></div>
@@ -190,16 +187,29 @@
                                                 name="submit" id="submit">
                                               </div>
                                           </div>
+                                        </div>
+                                         
+                                          
                                       </div>
                                   </form>
-                                        <div class="row">
+                                        
+
+                                        <div class="row border p-2" >
                                             {% for address in addresses %}
 
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">Address</h5>
-                                        <p class="card-text">{{ address }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
+                                            <div class="col-md-3 m-0 p-0  card mt-2" style="width: 18rem;">
+                                                <div class="card-header text-left  " style="font-size:16px;"><i class="fa fa-user text-dark  "></i> Target Address</div>
+                                      <div class="card-body d-flex flex-column justify-content-between align-items-center">
+                                        
+                                        
+                                            
+                                            <span style="font-size:14px;" class="text-danger ">  {{ address }}</span>
+                                        
+                                         
+                                       
+                                      </div>
+                                      <div class="card-footer">
+                                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-trash"></i> Delete</a>
                                       </div>
                                     </div>
                                                                 {% endfor %}
@@ -212,7 +222,7 @@
 
                                     </div>
                               </div>
-                              <div id="description" class="tab-pane fade">
+                              <div id="description" class="tab-pane fade in active show">
                                 <div class="container-fluid">
                                     <div class="row">
                                     <div class="col-md-12">
