@@ -508,6 +508,7 @@ class Acquistion_Manager(object):
         ess.youtube_trends()
         ess.twitter_trends()
         ess.reddit_trends()
+        ess.twitter_world_trends()
 
 
     def identify_target(self,query,website):

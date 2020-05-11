@@ -553,6 +553,18 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def twitter_world_trends(self):
+        try:
+            add_target_url = 'twitter/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
     def youtube_trends(self):
         try:
             add_target_url = 'youtube/trends'
