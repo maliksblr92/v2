@@ -154,6 +154,10 @@ class Supported_Website(Document):
     def get_all_supported_sites():
         return Supported_Website.objects
 
+    @staticmethod
+    def get_target_type_by_index(website_name,index):
+        return Supported_Website.objects(name=website_name.capitalize()).first().target_type[int(index)]
+
 class Global_Target_Reference(Document):
 
     website = ReferenceField(Supported_Website)
