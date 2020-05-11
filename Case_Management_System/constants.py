@@ -1,7 +1,24 @@
 """
-tuple of world-wide languages to be imported into
-CMS models.py
+tuple of world-wide languages, genders and spoken language
+fluency levels to be imported into CMS models.py
 """
+
+GENDERS = (
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('transgender', 'Transgender'),
+    ('other', 'Other')
+)
+
+SPOKEN_LANGUAGE_FLUENCY = (
+    ('beginner', 'Beginner'),
+    ('elementary', 'Elementary'),
+    ('intermediate', 'Intermediate'),
+    ('upper intermediate', 'Upper Intermediate'),
+    ('advanced', 'Advanced'),
+    ('proficient', 'Proficient')
+)
+
 LANGUAGES = (
     ('mandarin chinese', 'Mandarin Chinese'),
     ('spanish', 'Spanish'),

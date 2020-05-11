@@ -6,31 +6,21 @@ from mongoengine import EmbeddedDocument, EmbeddedDocumentListField
 from mongoengine import PointField, StringField, URLField
 from mongoengine import BooleanField, EmailField
 
-from Case_Management_System.languages import LANGUAGES
+from Case_Management_System.constants import LANGUAGES, GENDERS
+from Case_Management_System.constants import SPOKEN_LANGUAGE_FLUENCY
 # Create your models here.
 
 disconnect('default')
 connect(db='OSINT_System')
 
-GENDERS = (
-    ('male', 'Male'),
-    ('female', 'Female'),
-    ('transgender', 'Transgender'),
-    ('other', 'Other')
-)
-
-SPOKEN_FLUENCY = (
-    ('beginner', 'Beginner'),
-    ('elementary', 'Elementary'),
-    ('intermediate', 'Intermediate'),
-    ('upper intermediate', 'Upper Intermediate'),
-    ('advanced', 'Advanced'),
-    ('proficient', 'Proficient')
-)
-
 class Investigator(EmbeddedDocument):
+    """
+    Embedded Doc that contains details of each investigator
+    associated with the case
+    """
     first_name = StringField()
     last_name = StringField()
+    employee_id = StringField() # unique police officer id
     cell_phone = StringField()
     email = EmailField()
 
@@ -40,9 +30,36 @@ class CaseFile(EmbeddedDocument):
     associated with the case
     """
     name = StringField(required=True)
-    file_location = URLField()
-    description = StringField()
+    document_location = URLField()
+    document_description = StringField()
+    source = StringField()
 
+class PictureEvidenceFile(EmbeddedDocument):
+    """
+    details of pictures associated with the case
+    """
+    name = StringField()
+    picture_location = URLField()
+    picture_description = StringField()
+    source = StringField()
+
+class VideoEvidenceFile(EmbeddedDocument):
+    """
+    Embedded Doc that contains details of each video
+    associated with the case, such as short description
+    of what is contained in the video, its server location,
+    source of the video
+    """
+    name = StringField()
+    video_location = URLField()
+    video_description = StringField()
+    source = StringField()
+
+class PhysicalEvidence(EmbeddedDocument):
+    """
+    Characteristics of physical evidence obtained by police
+    from the crime scene as well other sources
+    """
 
 class Language(EmbeddedDocument):
     """
@@ -54,7 +71,7 @@ class Language(EmbeddedDocument):
     can_read = BooleanField()
     can_write = BooleanField()
     can_speak = BooleanField()
-    speaking_fluency = StringField(choices=SPOKEN_FLUENCY)
+    speaking_fluency = StringField(choices=SPOKEN_LANGUAGE_FLUENCY)
 
 class PersonOfInterest(EmbeddedDocument):
     """
@@ -85,8 +102,10 @@ class CaseCMS(Document):
     # unique case number assigned to the case
     case_number = StringField()
     investigators = EmbeddedDocumentListField(Investigator)
-    # police case files, server location (url)
-    case_files_location = URLField()
     people_of_interest = EmbeddedDocumentListField(PersonOfInterest)
     locations_of_interest = EmbeddedDocumentListField(LocationOfInterest)
-
+    # police case files, server location (url)
+    case_files = EmbeddedDocumentListField(CaseFile)
+    pictures = EmbeddedDocumentListField(PictureEvidenceFile)
+    videos = EmbeddedDocumentListField(VideoEvidenceFile)
+    physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
