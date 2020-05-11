@@ -47,6 +47,7 @@ from Data_Processing_Unit.models import Trends
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 from mongoengine.queryset.visitor import Q 
+from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
 
 
 
@@ -855,35 +856,42 @@ class Dashboard(APIView):
         # calling core manager function
 
         # first time load data
-        reddit_top_post = {
-            "trend_type": "reddit_trends",
-            "trend_graph": [],
-            "popular_hashtag": "",
-            "top_trends": [
-                {
-                    "author_fullname": "t2_2bfojune",
-                    "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
-                    "title": "Join our new subreddit r/Dark_Demented_Memes !",
-                    "count": 5
-                },
-                {
-                    "author_fullname": "Jt2_4qqy8cha",
-                    "selftext": "We remodeled the subreddit",
-                    "title": "r/adults",
-                    "count": 3
-                }
-            ],
-            "country": "",
-            "common_words": [],
-            "spelling_variants": []
-        }
+        reddit_trends = Trends.objects.filter(trend_type='reddit_trends').order_by('-id').first()
+        print("perinting reeddit trends ")
+        print(len(reddit_trends))
+        for i in reddit_trends:
+            print(i)
+        # {
+        #     "trend_type": "reddit_trends",
+        #     "trend_graph": [],
+        #     "popular_hashtag": "",
+        #     "top_trends": [
+        #         {
+        #             "author_fullname": "t2_2bfojune",
+        #             "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
+        #             "title": "Join our new subreddit r/Dark_Demented_Memes !",
+        #             "count": 5
+        #         },
+        #         {
+        #             "author_fullname": "Jt2_4qqy8cha",
+        #             "selftext": "We remodeled the subreddit",
+        #             "title": "r/adults",
+        #             "count": 3
+        #         }
+        #     ],
+        #     "country": "",
+        #     "common_words": [],
+        #     "spelling_variants": []
+        # }
         # youtube first time load data
-        youtube_trends = Trends.objects.filter(trend_type='youtube_trends').first()
+        youtube_trends = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
             
         twitter_top_hastags={}
+        Target_Count_Chart=Global_Target_Reference.target_count_for_all_sites()
+        print(type(Target_Count_Chart))
         # get top hashtags for first load
         try:
-            twitter_country_hashtags=Trends.objects.filter(country='pakistan',trend_type='twitter_trends').first()
+            twitter_country_hashtags=Trends.objects.filter(country='pakistan',trend_type='twitter_trends').order_by('-id').first()
         # hashtag chart update
         except Trends.DoesNotExist:
             twitter_country_hashtags = None
@@ -913,8 +921,8 @@ class Dashboard(APIView):
         ]
         
         return render(request, 'OSINT_System_Core/additional_templates/dashboard.html',
-                         {'reddit_top_post': reddit_top_post, 'twitter_top_hastags': twitter_top_hastags,
-                       'youtube_trends': youtube_trends,'twitter_country_hashtags':twitter_country_hashtags,'countries_list':countries_list})
+                         {'reddit_trends': reddit_trends, 'twitter_top_hastags': twitter_top_hastags,
+                       'youtube_trends': youtube_trends,'twitter_country_hashtags':twitter_country_hashtags,'countries_list':countries_list,'Target_Count_Chart':Target_Count_Chart})
 
 
 def main(request):
@@ -994,7 +1002,7 @@ def getTrendsByCountry(request):
         print(country_name)
         # data=Trends.objects.get(country='pakistan',trend_type='twitter_trends')
         try:
-            data = Trends.objects.get(country=country_name,trend_type='twitter_trends')
+            data = Trends.objects.filter(country=country_name,trend_type='twitter_trends').order_by('-id').first()
             json_data = data.to_json()
             return HttpResponse(json_data)
         except Trends.DoesNotExist:
@@ -1026,5 +1034,13 @@ def update_internet_stats(request):
         print("called update internet stats fucntion ")
         print(internet_stats)
         json_data = json.dumps(internet_stats)
+        print(json_data)
+        return HttpResponse(json_data)
+    
+    
+def update_dashboard_donutchart(request):
+    if request.method=='GET':
+        Target_Count_Chart=Global_Target_Reference.target_count_for_all_sites()
+        json_data = json.dumps(Target_Count_Chart)
         print(json_data)
         return HttpResponse(json_data)
