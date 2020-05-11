@@ -291,6 +291,9 @@ class Facebook_Target(Document):
     def get_all_targets():
         return Facebook_Target.objects.order_by('created_on')
 
+
+
+
 class Youtube_Target(Document):
 
 
@@ -555,6 +558,16 @@ class Facebook_Profile(Facebook_Target):
     
     """
 
+    meta = {'indexes': [
+        {'fields': ['$username', "$user_id"],
+         'default_language': 'english',
+         'weights': {'username': 10, 'user_id': 2}
+         }
+    ]}
+
+    @staticmethod
+    def find_object(query):
+        return Facebook_Profile.objects.search_text(query)
 
 class Youtube_Channel(Youtube_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target

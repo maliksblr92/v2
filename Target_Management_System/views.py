@@ -500,3 +500,78 @@ class FacebookGroupReport(TemplateView):
          with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
          return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
+
+
+#view for link analysis graph
+
+class Link_Analysis(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
+        print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        resp = convert_facebook_indirect_links_to_graph(data_object['linked_to'][1])
+        print(resp)
+        return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+
+def convert_facebook_indirect_links_to_graph(data):
+
+    n_data = []
+
+    for i,item in enumerate(data):
+
+        print(item)
+        if(not username_exists(item['username'],n_data)):
+            node = {'name': item['username'],
+                    'value': 1,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": acq.get_picture_by_facebook_username(item['username']),
+                    }
+            linkwith = set()
+
+            for y in data:
+                if(item['username']==y['username']):
+                    linkwith.add(y['mutual_close_associate'])
+
+            node['linkWith'] = list(linkwith)
+
+            n_data.append(node)
+
+    for i,item in enumerate(data):
+
+        #print(item)
+        if(not username_exists(item['mutual_close_associate'],n_data)):
+            node = {'name': item['mutual_close_associate'],
+                    'value': 0.5,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": acq.get_picture_by_facebook_username(item['mutual_close_associate']),
+                    }
+
+            linkwith = set()
+
+            for y in data:
+                if(item['mutual_close_associate']==y['mutual_close_associate']):
+                    linkwith.add(y['username'])
+
+            node['linkWith'] = list(linkwith)
+
+            n_data.append(node)
+
+
+    print(n_data)
+    return json.dumps(n_data)
+
+
+def username_exists(username,n_data):
+    for item in n_data:
+        if(username == item['name']):
+            return True
+
+    return False

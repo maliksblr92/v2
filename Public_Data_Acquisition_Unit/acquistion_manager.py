@@ -286,12 +286,14 @@ class Acquistion_Manager(object):
     def add_twitter_target(self):
         pass
 
-
-
-
-
-
-
+    def get_picture_by_facebook_username(self,username):
+        obj =  Facebook_Profile.find_object(username).first()
+        if(obj):
+            res_obj = Facebook_Profile_Response_TMS.objects(Q(username=obj.username) | Q(author_id=obj.user_id)).first()
+            if(res_obj is not None):
+                res_obj_json = res_obj.to_mongo()
+                print(res_obj_json)
+                return res_obj_json['profile_picture_url']['profile_picture']
 
 
 
