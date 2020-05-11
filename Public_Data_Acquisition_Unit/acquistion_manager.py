@@ -229,9 +229,9 @@ class Acquistion_Manager(object):
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'custom'):
             if (gtr.target_type == 'dynamic_crawling'):
-                return (Dynamic_Crawling, ess.dynamic_crawling,None)
+                return (Dynamic_Crawling, ess.dynamic_crawling,Dynamic_Crawling_Response_TMS)
             elif (gtr.target_type == 'keybase_crawling'):
-                return (Keybase_Crawling,ess.add_keybase_target ,None)
+                return (Keybase_Crawling,ess.add_keybase_target ,Keybase_Response_TMS)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
@@ -464,6 +464,44 @@ class Acquistion_Manager(object):
                     targ = appropriate_model_targ.objects(GTR=gtr.id).first()
 
                     responses.append([resp, targ])
+
+
+                #resp = Facebook_Profile.objects(GTR=gtr.id)
+                #targ = Facebook_Profile.objects(GTR=gtr.id)
+
+
+
+
+
+
+        return responses
+
+    def get_fetched_keybases(self,top=50):
+        responses = []
+
+        #ml = Mongo_Lookup()
+        GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+        for gtr in GTRs:
+
+            if(gtr.website.name == 'custom'):
+                appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+
+                print(appropriate_model_targ,appropriate_model_resp)
+
+                if(appropriate_model_targ.target_type =='keybase_crawling'):
+                    #obj_amt = appropriate_model_targ()
+                    #obj_amr = appropriate_model_resp()
+
+                    if(appropriate_model_resp is not None):
+
+                        #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                        resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                        if(resp is not None):
+                            targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+
+                            responses.append([resp, targ])
 
 
                 #resp = Facebook_Profile.objects(GTR=gtr.id)
