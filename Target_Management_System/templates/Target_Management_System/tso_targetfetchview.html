@@ -47,22 +47,19 @@
                                 <!-- FIrst Row of the Main COntent-->
                                 <div class="row">
                                     <!-- DIv for Mark Target Section-->
-                                    <div class="col-md-10 topcontentbar  " style="border-radius:15px 0 0 0;">
+                                    <div class="col-md-3 topcontentbar  " style="border-radius:15px 0 0 0;">
                                         <h5 class=" myH5"> Target Fetch View</h5>
                                     </div>
-                                    <div class="col-md-2"
+                                    <div class="col-md-9"
                                         style="background-color:#243F52;padding-left:1.5rem; border-top-right-radius:15px;">
                                         <!--RIGHT SECTION FOR icons-->
                                         <div class="row">
-                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
-                                                <a href="#"><i style="color:white; opacity:0.8;"
-                                                        class="fas fa-list-ul fa-2x"></i> </a>
+                                            {% for site in supported_sites %}
+                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
+                                                <a href="{% url 'Target_Management_System:tms_fetchtarget' site.name|lower %}" class="btn btn-primary">{{ site.name }}</a>
 
                                             </div>
-                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
-                                                <i style="color:white; opacity:0.8;"
-                                                    class="fas fa-grip-vertical fa-2x"></i>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                         <!--END OF GRID AND TILE VIEW RIGHT section -->
                                     </div>
@@ -75,6 +72,7 @@
 
 
                                         <!-- Just like card 1  start looping here -->
+                                        {% if targets|length > 0 %}
                                         {% for target in targets %}
                                         <div class="col-md-6">
                                             <!-- inside CaRD DIV-->
@@ -151,8 +149,8 @@
                                                         <div class="col-md-8">
 
                                                             <ul class="" style="margin-top:5%;  color:white">
-                                                                <li>Name :{{ target.0.name }} </li>
-                                                                <li>Username :{{ target.0.username }} </li>
+                                                                <li>Name :{{ target.0.name }}</li>
+                                                                <li>Username :{% if target.0.username %}{{ target.0.username }} {% else %} {{ target.1.title }}{% endif %} </li>
                                                                 <li>Website :{{ target.1.GTR }} </li>
                                                                 <li>Target Type :{{ target.1.target_type }}</li>
                                                                 <li>Added On :{{ target.1.created_on }}</li>
@@ -165,6 +163,10 @@
                                             </div>
                                         </div>
                                         {% endfor %}
+                                    {% else %}
+                                            <h4 style="color: white">no data found</h4>
+
+                                    {% endif %}
                                         <!--END OF CARD 1-->
 
 

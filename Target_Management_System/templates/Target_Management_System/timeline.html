@@ -41,25 +41,28 @@
  {% for post in posts %}
     <div class="card text-center">
   <div class="card-header">
-    {{ post.username }}
+    {{ post.post.username }}
   </div>
   <div class="card-body">
-    <h5 class="card-title"><a href="{{ post.a_url }}" target="_blank" >{{ post.author }}</a></h5>
-    <p class="card-text">{{ post.text }}</p>
+    <h5 class="card-title"><a href="{{ post.post.a_url }}" target="_blank" >{{ post.post.author }}</a></h5>
+    <p class="card-text">{{ post.post.text }}</p>
       <div class="row">
           <div class="col-md-12">
-              {% if post.picture|length > 0 %}
-              <img class="img-fluid" src="{{ post.picture }}">
+              {% if post.post.picture|length > 0 %}
+              <img class="img-fluid" src="{{ post.post.picture }}">
                 {% endif %}
           </div>
 
 
       </div>
-    <a href="{{ post.link }}" class="btn btn-primary">post</a>
+    <a href="{{ post.post.link }}" class="btn btn-primary">post</a>
+<button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ post.object_id }}" data-toggle="modal" data-target="#linkto_portfolio"><i class="fa fa-chain"></i></button>
+      <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource"><i class="fa fa-share"></i></button>
+
 
   </div>
   <div class="card-footer text-muted">
-   site: {{ post.t_site }} type : {{ post.t_type }}
+   site: {{ post.post.t_site }} type : {{ post.post.t_type }}
   </div>
 </div>
 {% endfor %}

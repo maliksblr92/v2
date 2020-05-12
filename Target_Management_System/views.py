@@ -137,9 +137,12 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
 class Target_Fetched(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
 
-        resp = acq.get_fetched_targets()
-        print(resp)
-        return render(request,'Target_Management_System/tso_targetfetchview.html',{'targets':resp})
+        target_site=None
+        if 'target_site' in kwargs:target_site = kwargs['target_site']
+
+        resp = acq.get_fetched_targets(website=target_site)
+        #print(resp)
+        return render(request,'Target_Management_System/tso_targetfetchview.html',{'targets':resp,'supported_sites':acq.get_all_supported_sites()})
 
     def post(self, request, *args, **kwargs):
         pass
@@ -242,26 +245,29 @@ class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
 
 
     def post(self,request):
+        try:
+            print(request.POST)
+            title = request.POST.get('title',None)
+            website_id = acq.get_custom_webiste_id()
+            target_type = 0
 
-        print(request.POST)
-        title = request.POST.get('title',None)
-        website_id = acq.get_custom_webiste_id()
-        target_type = 0
+            keybase_id = request.POST.get('keybase',None)
+            interval = int(request.POST.get('interval',None))
+            expire_date = request.POST.get('expire_on',None)
 
-        keybase_id = request.POST.get('keybase',None)
-        interval = int(request.POST.get('interval',None))
-        expire_date = request.POST.get('expire_on',None)
+            keybase_ref = km.get_keybase_object_by_id(keybase_id)
 
-        keybase_ref = km.get_keybase_object_by_id(keybase_id)
-
-        if(expire_date is not None):
-            expire_on = convert_expired_on_to_datetime(expire_date)
+            if(expire_date is not None):
+                expire_on = convert_expired_on_to_datetime(expire_date)
 
 
-        acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval)
+            acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval)
 
-        return HttpResponseRedirect(reverse('Target_Management_System:tms_keybase_crawling'))
-
+            return HttpResponseRedirect(reverse('Target_Management_System:tms_targetscreated'))
+        except Exception as e:
+            print(e)
+            publish(str(e),module_name=__name__,message_type='error')
+            return HttpResponseRedirect(reverse('Target_Management_System:tms_keybase_crawling'))
 
 class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
 
@@ -500,3 +506,85 @@ class FacebookGroupReport(TemplateView):
          with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
          return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
+
+
+#view for link analysis graph
+
+class Link_Analysis(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
+        #print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        if(len(data_object['linked_to'][1]) > 0):
+
+            resp = convert_facebook_indirect_links_to_graph(data_object['linked_to'][1])
+            print(resp)
+            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+        else:
+            return render(request, 'Target_Management_System/link_analysis.html', {})
+
+
+
+
+def convert_facebook_indirect_links_to_graph(data):
+
+    n_data = []
+
+    for i,item in enumerate(data):
+
+        print(item)
+        if(not username_exists(item['username'],n_data)):
+            node = {'name': item['username'],
+                    'value': 1,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": acq.get_picture_by_facebook_username(item['username']),
+                    }
+            linkwith = set()
+
+            for y in data:
+                if(item['username']==y['username']):
+                    linkwith.add(y['mutual_close_associate'])
+
+            node['linkWith'] = list(linkwith)
+
+            n_data.append(node)
+
+    for i,item in enumerate(data):
+
+        #print(item)
+        if(not username_exists(item['mutual_close_associate'],n_data)):
+            node = {'name': item['mutual_close_associate'],
+                    'value': 0.5,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": acq.get_picture_by_facebook_username(item['mutual_close_associate']),
+                    }
+
+            linkwith = set()
+
+            for y in data:
+                if(item['mutual_close_associate']==y['mutual_close_associate']):
+                    linkwith.add(y['username'])
+
+            node['linkWith'] = list(linkwith)
+
+            n_data.append(node)
+
+
+    print(n_data)
+    return json.dumps(n_data)
+
+
+def username_exists(username,n_data):
+    for item in n_data:
+        if(username == item['name']):
+            return True
+
+    return False
