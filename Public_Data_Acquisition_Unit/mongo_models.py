@@ -152,7 +152,7 @@ class Supported_Website(Document):
 
     @staticmethod
     def get_all_supported_sites():
-        return Supported_Website.objects
+        return Supported_Website.objects()
 
     @staticmethod
     def get_target_type_by_index(website_name,index):
@@ -1365,7 +1365,7 @@ class Timeline_Posts(Document):
 
                 if (not post['seen']):
                     count = count +1
-                    qualified_posts.append(post)
+                    qualified_posts.append({'post':post,'object_id':obj.id})
                     post['seen'] = True
                     obj.save()
 

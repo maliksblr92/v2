@@ -444,7 +444,7 @@ class Acquistion_Manager(object):
         return responses
         """
 
-    def get_fetched_targets(self,top=50):
+    def get_fetched_targets(self,website=None,top=50):
         responses = []
 
         ml = Mongo_Lookup()
@@ -452,20 +452,20 @@ class Acquistion_Manager(object):
 
         for gtr in GTRs:
 
+            if(gtr.website.name.lower() == website or website == None):
+                appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+                #obj_amt = appropriate_model_targ()
+                #obj_amr = appropriate_model_resp()
 
-            appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
-            #obj_amt = appropriate_model_targ()
-            #obj_amr = appropriate_model_resp()
+                if(appropriate_model_resp is not None):
 
-            if(appropriate_model_resp is not None):
+                    #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
 
-                #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+                    resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                    if(resp is not None):
+                        targ = appropriate_model_targ.objects(GTR=gtr.id).first()
 
-                resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
-                if(resp is not None):
-                    targ = appropriate_model_targ.objects(GTR=gtr.id).first()
-
-                    responses.append([resp, targ])
+                        responses.append([resp, targ])
 
 
                 #resp = Facebook_Profile.objects(GTR=gtr.id)

@@ -27,6 +27,11 @@ urlpatterns = [
         views.Target_Fetched.as_view(),
         name="tms_fetchtarget"),
     path(
+        'fetchtarget/<str:target_site>',
+        views.Target_Fetched.as_view(),
+        name="tms_fetchtarget"),
+
+    path(
         'identifytarget/',
         views.Identify_Target.as_view(),
         name="tms_identifytarget"),
