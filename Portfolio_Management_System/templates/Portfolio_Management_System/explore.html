@@ -1,0 +1,101 @@
+{% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}"> {% endblock %} {% block smallnavbar %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 ">
+            <div class="row border second_nav_row">
+                <div class="col-md-3 m-0 p-0  "><a class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+                <div class="col-md-3 border-top m-0 p-0  "><a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
+            </div>
+            <div class="col-md-3  border-top m-0 p-0  "><a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
+            <div class="col-md-3 m-0 p-0  "><a class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row">
+    <div class="col-md-12">
+        {{resp}}
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">Explore Portfolio </p>
+            </div>
+            
+            <!-- all targets start -->
+            <div class="card">
+                <div class="card-header">All Targets</div>
+                <div class="card-body">
+                    
+                    {% for address in resp.addresses %}
+                        <span class="badge badge-primary text-white font-weight-bold">  {{ address|default:"N/A" }}</span>
+                    {% endfor %}
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+            </div>
+            <!-- all targets end  -->
+            <!-- all addresses start -->
+            <div class="card">
+                <div class="card-header">All Phones</div>
+                <div class="card-body">
+                    
+                    
+                    
+                    
+                    {% for phone in resp.phones %}
+                        <span class="badge badge-primary text-white font-weight-bold">  {{ phone|default:"N/A" }}</span>
+                    {% endfor %}
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+                
+            </div>
+            <!-- all addresses end  -->
+            <!-- all addresses start -->
+            <div class="card">
+                <div class="card-header">All Description</div>
+                <div class="card-body w-100">
+                    
+                    
+                    
+                        {% for description in resp.description %}
+                      
+                        {{description|linebreaks|default:"N/A" }}
+                        {% endfor %}
+                        
+                        
+                  
+                    
+                    
+                    
+                    
+                </div>
+                
+            </div>
+            <!-- all addresses end  -->
+        </div>
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

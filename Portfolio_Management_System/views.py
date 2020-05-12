@@ -16,7 +16,7 @@ from Portfolio_Management_System.models import *
 acq = Acquistion_Manager()
 # ahmed imports
 from django.views.generic import TemplateView
-
+from Portfolio_Management_System.models import Portfolio_PMS
 class Create_Portfolio(View):
 
     def get(self, request, *args, **kwargs):
@@ -241,3 +241,11 @@ class Overview(TemplateView):
     def post(self, request, *args, **kwargs):
 
         return render(request, 'Portfolio_Management_System/tso_overview.html',{})
+
+
+class Explore(View):
+    def get(self,request,*args,**kwargs):
+        resp=Portfolio_PMS.objects().first()
+        print("printitng portfolio pms object")
+        print(resp)
+        return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})

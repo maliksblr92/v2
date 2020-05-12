@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_information/', views.Add_Extras.as_view(), name='add_information'),
     path('archive/', views.Archive.as_view(), name='archive'),
     path('overview/', views.Overview.as_view(), name='overview'),
+    path('explore/', views.Explore.as_view(), name='explore'),
 ]

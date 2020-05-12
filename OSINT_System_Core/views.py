@@ -843,38 +843,11 @@ class Dashboard(APIView):
 
         # first time load data
         reddit_trends = Trends.objects.filter(trend_type='reddit_trends').order_by('-id').first()
-        print("perinting reeddit trends ")
-        print(len(reddit_trends))
-        for i in reddit_trends:
-            print(i)
-        # {
-        #     "trend_type": "reddit_trends",
-        #     "trend_graph": [],
-        #     "popular_hashtag": "",
-        #     "top_trends": [
-        #         {
-        #             "author_fullname": "t2_2bfojune",
-        #             "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
-        #             "title": "Join our new subreddit r/Dark_Demented_Memes !",
-        #             "count": 5
-        #         },
-        #         {
-        #             "author_fullname": "Jt2_4qqy8cha",
-        #             "selftext": "We remodeled the subreddit",
-        #             "title": "r/adults",
-        #             "count": 3
-        #         }
-        #     ],
-        #     "country": "",
-        #     "common_words": [],
-        #     "spelling_variants": []
-        # }
-        # youtube first time load data
         youtube_trends = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
 
         twitter_top_hastags = {}
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
-        print(type(Target_Count_Chart))
+       
         # get top hashtags for first load
         try:
             twitter_country_hashtags = Trends.objects.filter(country='pakistan', trend_type='twitter_trends').order_by(
@@ -932,10 +905,7 @@ def mainHeatMap(request):
 
 
 def newsMonitor(request):
-    # with open('static/Target_Json/news_data1.json', 'r') as f:
-    #     news_json = json.load(f)
     news_json = News.objects().limit(1)
-    print(news_json)
     return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
 
 
@@ -947,8 +917,6 @@ def topNews(request):
     abp = News.objects(Q(channel='ABP')).order_by('-id').first()
     zee = News.objects(Q(channel='ZEE')).order_by('-id').first()
     list1 = [ary, dawn, ndtv, india_today, abp, zee]
-    print(ndtv.channel)
-    print(ndtv.most_emerging_news)
     return render(request, "OSINT_System_Core/additional_templates/top_news.html", {'top_news': list1})
 
 
@@ -988,7 +956,7 @@ def get_worldwide_hashtags():
 def getTrendsByCountry(request):
     if request.method == 'GET':
         country_name = request.GET['country_name']
-        print(country_name)
+       
         # data=Trends.objects.get(country='pakistan',trend_type='twitter_trends')
         try:
             data = Trends.objects.filter(country=country_name, trend_type='twitter_trends').order_by('-id').first()
@@ -1020,10 +988,7 @@ def update_micro_crawler_stats(request):
 def update_internet_stats(request):
     if request.method == 'GET':
         internet_stats = acq.crawler_internet_connection()
-        print("called update internet stats fucntion ")
-        print(internet_stats)
         json_data = json.dumps(internet_stats)
-        print(json_data)
         return HttpResponse(json_data)
 
 
@@ -1031,5 +996,5 @@ def update_dashboard_donutchart(request):
     if request.method == 'GET':
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
         json_data = json.dumps(Target_Count_Chart)
-        print(json_data)
+       
         return HttpResponse(json_data)
