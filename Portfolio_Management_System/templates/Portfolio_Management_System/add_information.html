@@ -345,7 +345,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                     <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" enctype="multipart/form-data" method="POST">
                                           {% csrf_token %}
                                       <div class="card-body m-4 main_card">
 
@@ -357,7 +357,7 @@
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                                                                   class="input_text">Title</span>
                                                                   <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                            name="prime_value" required=""> </input>
+                                                                            name="title" required=""> </input>
                                                           </label>
                                                       </div>
                                                       <div class="row">
@@ -365,15 +365,25 @@
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                                                                   class="input_text">Description</span>
                                                                    <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
-                                                                  name="prime_value" rows="10" required="required"></textarea>
+                                                                  name="description" rows="10" required="required"></textarea>
                                                           </label>
                                                       </div>
                                                       <div class="row">
                                                           <div class="col-sm-9">
                                                             <span class="btn btn-default btn-file">
-                                                                <input id="input-2" name="file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                                                                <input id="input-1" name="photos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
                                                             </span>
                                                         </div>
+
+                                                      </div>
+
+                                                          <div class="row">
+                                                          <div class="col-sm-9">
+                                                            <span class="btn btn-default btn-file">
+                                                                <input id="input-2" name="videos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                                                            </span>
+                                                        </div>
+
                                                       </div>
                                                   </div>
 
@@ -393,14 +403,18 @@
                                               </div>
                                           </div>
                                       </div>
-                                  </form>
+                                    </form>
+
                                         <div class="row">
-                                            {% for phone in phoness %}
+                                            {% for visual in visuals %}
 
                                             <div class="card" style="width: 18rem;">
                                       <div class="card-body">
-                                        <h5 class="card-title">Phones</h5>
-                                        <p class="card-text">{{ phone }}</p>
+                                        <h5 class="card-title">{{ visual.title }}</h5>
+                                        <p class="card-text">{{ visual.description }}</p>
+                                          {% for image in visual.images %}
+                                          <img src="{% static 'Portfolio_Management_System/mongo_temp_files/' %}" alt="">
+                                              {% endfor %}
                                         <a href="#" class="btn btn-primary">Delete</a>
                                       </div>
                                     </div>

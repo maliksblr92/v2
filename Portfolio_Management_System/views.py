@@ -4,15 +4,18 @@ from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
+from django.core.files.storage import FileSystemStorage
 import json
+import os
 from bson import ObjectId
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse, HttpResponseRedirect
-from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include
+from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include,Visuals,Photo,Video
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
+from django.conf import settings as djangoSettings
 
 acq = Acquistion_Manager()
 # ahmed imports
@@ -82,11 +85,33 @@ class Add_Extras(View):
         if 'portfolio_id' in kwargs:
             portfolio_id = kwargs['portfolio_id']
             obj = Portfolio_PMS.get_object_by_id(portfolio_id)
+            """
+            visuals = []
+            if(len(obj.visuals) >0):
+                for visual in obj.visuals:
+                    temp_dict = {'title':visual.title,'description':visual.description,'images':[],'videos':[]}
 
+                    for i,image in enumerate(visual.photos):
 
+                        print(str(os.path.join(djangoSettings.BASE_DIR,"static")+'/mongo_temp_files/img'+str(obj.id)+str(i)))
+
+                        #img = open(str(os.path.join(djangoSettings.BASE_DIR,"static")+'Portfolio_Management_System/mongo_temp_files/img'+str(visual.title.replace(' ','_'))+str(i))+'.jpg','wb')
+                        file = image.photo.read()
+                        fs = FileSystemStorage()
+                        filename = fs.save('img'+str(obj.id)+str(i),file)
+                        print(fs.url(filename))
+
+                        #temp_dict['images'].append(str(os.path.join(djangoSettings.BASE_DIR,"static")+'/mongo_temp_files/img'+str(visual.title.replace(' ','_'))+str(i))+'.jpg')
+
+                        #img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(img)
+                        #img_tags.append(img_tag)
+                    visuals.append(temp_dict)
+
+            print(visuals)
+            """
             # return the form here
             # pass the extratype with the form to let user choose from
-            return render(request,'Portfolio_Management_System/add_information.html',{'portfolio_id':portfolio_id,'addresses':obj.addresses,'descriptions':obj.description,'phones':obj.phones,'social_targets':obj.social_targets})
+            return render(request,'Portfolio_Management_System/add_information.html',{'portfolio_id':portfolio_id,'addresses':obj.addresses,'descriptions':obj.description,'phones':obj.phones,'social_targets':obj.social_targets,'visuals':[]})
 
         return render(request, 'Portfolio_Management_System/add_information.html',{})
 
@@ -116,8 +141,34 @@ class Add_Extras(View):
                 obj.add_description({'title':title,'description':prime_value})
 
             if(extra_type =='visuals'):
-                print(request.FILES.getlist('file_field'))
+                print(request.FILES)
 
+                title = request.POST.get('title',None)
+                description = request.POST.get('description',None)
+
+                visual_obj = Visuals(title=title,description=description)
+
+                image_files = request.FILES.getlist('photos_file_field[]')
+                video_files = request.FILES.getlist('videos_file_field[]')
+
+                print(image_files)
+                if(len(image_files) > 0):
+                    for file in image_files:
+                        photo = Photo()
+
+                        photo.photo.put(file,content_type='image/jpeg')
+                        visual_obj.photos.append(photo)
+                        print('i file saved')
+
+                if (len(video_files) > 0):
+                    for file in video_files:
+                        video = Video()
+
+                        video.video.put(file, content_type='video/mp4')
+                        visual_obj.photos.append(video)
+                        print('v file saved')
+
+                obj.add_visual(visual_obj)
 
         return HttpResponseRedirect(reverse('Portfolio_Management_System:add_information',args=[portfolio_id]))
 

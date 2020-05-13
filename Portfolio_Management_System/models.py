@@ -22,6 +22,24 @@ PORTFOLIO_TYPES = (
 )
 
 
+class Photo(EmbeddedDocument):
+    photo = FileField()
+
+
+class Video(EmbeddedDocument):
+    video = FileField()
+
+class Visuals(EmbeddedDocument):
+
+    title = StringField()
+    description = StringField()
+
+    photos = ListField(EmbeddedDocumentField(Photo))
+    videos = ListField(EmbeddedDocumentField(Video))
+
+
+
+
 class Portfolio_PMS(Document):
 
     portfolio_type = StringField(choices=PORTFOLIO_TYPES)
@@ -36,7 +54,7 @@ class Portfolio_PMS(Document):
     education = StringField()
 
     description = ListField(default=[])
-
+    visuals = ListField(EmbeddedDocumentField(Visuals))
 
     # if portfolio type is group it should have list of individual portfolios
     portfolios = ListField(default=[])
@@ -95,6 +113,11 @@ class Portfolio_PMS(Document):
     def add_phone(self,phone):
         self.phones.append(phone)
         self.save()
+
+    def add_visual(self,visual):
+        self.visuals.append(visual)
+        self.save()
+
 
 
     @staticmethod
