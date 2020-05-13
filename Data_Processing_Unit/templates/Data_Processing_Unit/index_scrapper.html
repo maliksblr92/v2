@@ -248,4 +248,121 @@ select{
 
     </div>
 </div>
+{% if google_scholar_resposne %}
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">Google Scholar  Response  </p>
+            </div>
+            
+            <div class="card-body m-4 main_card"style="height:400px;overflow-y:scroll;">
+               
+               
+                    {% for i in google_scholar_resposne.data %}
+                    <div class="row mt-2">
+                        <div class="col-md-12 border ">
+
+                       
+                    <ul class="list-group card list-unstyled "style="background-color:transparent!important">
+                   <li class="text-white"><span class=" badge badge-warning"style="width:150px">Source Link : </span><a href="{{i.link}}" class="badge badge-light ">View</a></li> 
+                  <li class="text-white"> <span class="badge badge-warning"style="width:150px">Citations :</span>{{i.citations|default:'N/A'}}</li> 
+                   <li class="text-white"><span class="badge badge-warning"style="width:150px;">Partial Summary :</span> {{i.partial_summary|default:'N/A'}}</li>
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Pdf :</span> <a href="{{i.pdf.link|default:'N/A'}}" class=" badge badge-light ">Download </a> </li>
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Pdf  Source:</span> <a href="{{i.pdf.site|default:'N/A'}}" class=" badge badge-light ">View site </a> </li>
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Publishing Information :</span> 
+                    <span class="text-white">Authors :</span>{{i.authors|default:'N/A'}}
+                </li>
+                <li class="text-white"> <span class="badge badge-light">Publishing Location :</span> 
+                   {{i.journalconference|default:'N/A'}}
+                </li>
+            </ul>
+        </div>
+    </div>
+                    {% endfor %}
+                
+               
+                
+       
+        </div>
+
+    </div>
+</div>
+</div>
+{% endif %}
+
+
+
+{% if google_patent_resposne %}
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">Google patent  Response  </p>
+            </div>
+            
+            <div class="card-body m-4 main_card"style="height:400px;overflow-y:scroll;">
+               
+               
+                    {% for i in google_patent_resposne.data %}
+                    <div class="row mt-2">
+                        <div class="col-md-12 border ">
+
+                       
+                    <ul class="list-group card list-unstyled "style="background-color:transparent!important">
+                   <li class="text-white"><span class=" badge badge-warning"style="width:150px">Cited Link : </span><a href="{{i.cited_link}}" class="badge badge-light ">View</a></li> 
+                  <li class="text-white"> <span class="badge badge-warning"style="width:150px">filing_date :</span>{{i.citations|default:'N/A'}}</li> 
+                   <li class="text-white"><span class="badge badge-warning"style="width:150px;">inventors</span> 
+                    
+                    <a href="{{i.inventors.google_inventor_search_link}}" class="badge badge-light">Google inventor search link</a>
+                    <span>Inventor Name</span>
+                    <span>{{i.inventors.name|default:"N/A"}}</span>
+                    
+                   
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Pdf :</span> <a href="{{i.pdf.link|default:'N/A'}}" class=" badge badge-light ">Download </a> </li>
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Pdf  Source:</span> <a href="{{i.pdf.site|default:'N/A'}}" class=" badge badge-light ">View site </a> </li>
+                   <li class="text-white"> <span class="badge badge-warning"style="width:150px">Publishing Information :</span> 
+                    <span class="text-white">Authors :</span>{{i.authors|default:'N/A'}}
+                </li>
+                <li class="text-white"> <span class="badge badge-warning"style="width:150px">Issued Date :</span> 
+                   {{i.issued_date|default:'N/A'}}
+                </li>
+
+
+                <li class="text-white"> <span class="badge badge-warning"style="width:150px">Patent Link :</span> 
+                   <a href="{{i.link}}" class="badge badge-warning"style="width:150px"> Patent Source Link </a>
+                 </li>
+
+                <li class="text-white"> <span class="badge badge-warning"style="width:150px">Partial Description  :</span> 
+                    {{i.partial_description|default:"N/A"}}
+                  </li>
+
+                  <li class="text-white"> <span class="badge badge-warning"style="width:150px">Published Date   :</span> 
+                    {{i.published_date|default:"N/A"}}
+                  </li>
+
+
+                  <li class="text-white"> <span class="badge badge-warning"style="width:150px">Status     :</span> 
+                    {{i.status|default:"N/A"}}
+                  </li>
+
+                  <li class="text-white"> <span class="badge badge-warning"style="width:150px">Title     :</span> 
+                    {{i.title|default:"N/A"}}
+                  </li>
+
+                  
+            </ul>
+        </div>
+    </div>
+                    {% endfor %}
+                
+               
+                
+       
+        </div>
+
+    </div>
+</div>
+</div>
+{% endif %}
 {% endblock %}

@@ -170,14 +170,14 @@ class Index(View):
 
 class Index_Darkweb(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'Data_Processing_Unit/index_darkweb.html')
+        resp={}
+        return render(request, 'Data_Processing_Unit/index_darkweb.html',{'resp':resp})
 
     def post(self, request, *args, **kwargs):
         query = request.POST['query']
         resp=ess.dark_web_search(query)
-        print("printing response ")
-        print(resp)
-        return redirect('/dpu/index_darkweb/')
+        print(len(resp))
+        return render(request, 'Data_Processing_Unit/index_darkweb.html',{'resp':resp})
 
 
 class Index_Scrapper(View):
@@ -197,16 +197,22 @@ class Index_Scrapper(View):
             query = request.POST['query']
             print("form_name    ==   ", form_name)
             print("query  ==  ", query)
+            ess.daraz_data_scraper(query)
 
         elif form_name == 'google_scholar':
             query = request.POST['query']
             print("form_name    ==   ", form_name)
             print("query  ==  ", query)
+            google_scholar_resposne=ess.google_scholar_data_scraper(query)
+            return render(request, 'Data_Processing_Unit/index_scrapper.html',{'google_scholar_resposne':google_scholar_resposne})
+
 
         elif form_name == 'google_patent':
             query = request.POST['query']
             print("form_name    ==   ", form_name)
             print("query  ==  ", query)
+            google_patent_resposne=ess.google_patents_data_scraper(query)
+            return render(request, 'Data_Processing_Unit/index_scrapper.html',{'google_patent_resposne':google_patent_resposne})
 
         return redirect('/dpu/index_scrapper')
 
@@ -617,3 +623,8 @@ class Tweets(View):
     def get(self, request, *args, **kwargs):
          tweets_json={}
          return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json': tweets_json})
+
+
+class Darkweb_Resposne(View):
+    def get(self,request,*args,**kwargs):
+        return render (request,'Data_Processing_Unit/darkweb_resposne.html')

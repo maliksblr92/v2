@@ -83,4 +83,30 @@ select{
 
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12  ">
+        <div class="w-100 h-100 " id="content_div">
+            <div class="card-header  main_card_header m-0 p-0 ">
+                <p class="card_header_text">Query Response </p>
+            </div>
+            
+            <div class="card-body m-4 main_card"style="height:400px;overflow-y:scroll;">
+               
+                <ul class="list-group card "style="background-color:transparent!important">
+                    {% for i in resp.data %}
+                   <li class="text-white"><span class=" badge badge-light">Source Link : </span><a href="{{i.link}}" class="badge badge-light ">View</a></li> 
+                  <li class="text-white"> <span class="badge badge-light">Description :</span>{{i.description}}</li> 
+                   <li class="text-white"><span class="badge badge-light">Score :</span> {{i.score}}</li>
+                   <li class="text-white"> <span class="badge badge-light">Title :</span>{{i.title}}</li>
+                    {% endfor %}
+                </ul>
+               
+                
+       
+        </div>
+
+    </div>
+</div>
+</div>
 {% endblock %}

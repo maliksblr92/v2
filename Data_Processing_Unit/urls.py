@@ -28,6 +28,7 @@ urlpatterns = [
     # ahmed twitter urls
     path('twitter/', views.Twitter.as_view(), name="Twitter"),
     path('tweets/', views.Tweets.as_view(), name="Tweets"),
+    path('darkweb_resposne',views.Darkweb_Resposne.as_view(),name='darkweb_resposne')
 ]
 
 
