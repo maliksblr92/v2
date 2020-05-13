@@ -8,6 +8,7 @@ urlpatterns = [
     path('create/', views.Create_Keybase.as_view(), name='kms_create'),
     path('archive/', views.Keybase_Archive.as_view(), name='kms_archive'),
     path('edit/', views.Edit_Keybase.as_view(), name='kms_edit'),
-    path('delprop/', views.DeleteKeybaseProperty.as_view(), name='kms_delprop')
+    path('delprop/', views.DeleteKeybaseProperty.as_view(), name='kms_delprop'),
+    path('keybase_fetched_responses/<str:GTR_id>', views.Keybase_Fetched_Responses.as_view(), name='Keybase_Fetched_Responses')
 
 ]

@@ -12,7 +12,10 @@ from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 
 km = Keybase_Manager()
 
-
+# ahmed import 
+from Data_Processing_Unit.models import Keybase_Response_TMS
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+acq=Acquistion_Manager()
 class Create_Keybase(RequireLoginMixin, View):
 
     def get(self,request, *args, **kwargs):
@@ -143,3 +146,15 @@ class DeleteKeybaseProperty(RequireLoginMixin, IsTSO, View):
         elif prop_to_delete == 'phrases':
             resp = km.update_keybase(doc_id, phrases=None)
         return JsonResponse({'success':200})
+
+class Keybase_Fetched_Responses(View):  
+    def get(self,request,*args,**kwargs):
+        resp=Keybase_Response_TMS.objects.all()
+        GTR_id=kwargs['GTR_id']
+        resp=acq.get_data_response_object_by_gtr_id(GTR_id)
+        target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
+        print(resp,target_object)
+        # return HttpResponse('<div>asdas</div>')
+        return render(request,'Keybase_Management_System/Keybase_Fetched_Responses.html',{'resp':resp,'target_object':target_object})
+    def post(self,request,*args,**kwargs):
+        pass

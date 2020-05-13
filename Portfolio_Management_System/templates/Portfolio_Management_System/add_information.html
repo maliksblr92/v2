@@ -1,218 +1,204 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_link.css' %}" />
+  <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_link.css' %}" />
 {% endblock %}
 {% block smallnavbar %}
-<div class="row">
+  <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 ">
-        <div class="row border second_nav_row">
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/create">Create</a></div>
-            <div class="col-md-3 border-top m-0 p-0  "><a
-                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/overview">Overview</a>
-            </div>
-            <div class="col-md-3  border-top m-0 p-0  "><a
-                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div>
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
-        </div>
+      <div class="row border second_nav_row">
+        <div class="col-md-3 m-0 p-0  "><a
+        class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/create">Create</a></div>
+        <div class="col-md-3 border-top m-0 p-0  "><a
+        class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/overview">Overview</a>
+      </div>
+      <div class="col-md-3  border-top m-0 p-0  "><a
+      class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div>
+      <div class="col-md-3 m-0 p-0  "><a
+      class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
     </div>
-    <div class="col-md-2"></div>
+  </div>
+  <div class="col-md-2"></div>
 </div>
 {% endblock %}
 {% block belly %}
 <style>
-    .custom_label {
-        border: 1px solid white;
-        border-radius: 0px;
-        background: transparent !important;
-        padding-left: 5px;
-        border-radius: 5px;
-
-    }
-    .input_text {
-        width: 200px;
-        font-size: 12px;
-        letter-spacing: 4px;
-        font-weight: bold;
-        color: white;
-    }
-    input {
-        background-color: transparent !important;
-        border-radius: 10px 5px 5px 10px !important;
-        color: white !important;
-    }
-    .radio_btns {
-        height: 60px;
-        width: 160px;
-        background: transparent;
-        border: 1px solid white;
-        color:white;
-        background: linear-gradient(to right, #283e51, #1cb5e0);
-    }
-    .custom_pills{
-        background: linear-gradient(to right, #283e51, #1cb5e0);
-
-        text-align: center;
-
-    }
-    .custom_pills a{
-        text-decoration: none;;
-        font-weight: bolder;
-    }
-    #submit{
-        background: linear-gradient(to right, #283e51, #1cb5e0);
-    }
+.custom_label {
+border: 1px solid white;
+border-radius: 0px;
+background: transparent !important;
+padding-left: 5px;
+border-radius: 5px;
+}
+.input_text {
+width: 200px;
+font-size: 12px;
+letter-spacing: 4px;
+font-weight: bold;
+color: white;
+}
+input {
+background-color: transparent !important;
+border-radius: 10px 5px 5px 10px !important;
+color: white !important;
+}
+.radio_btns {
+height: 60px;
+width: 160px;
+background: transparent;
+border: 1px solid white;
+color:white;
+background: linear-gradient(to right, #283e51, #1cb5e0);
+}
+.custom_pills{
+/*background: linear-gradient(to right, #283e51, #1cb5e0);*/
+background: linear-gradient(
+90deg,
+rgba(0, 113, 188, 20%) 0%,
+rgba(65, 130, 173, 29%) 50%,
+rgba(0, 0, 0, 40%) 100%
+);
+text-align: center;
+}
+.custom_pills a{
+text-decoration: none;;
+font-weight: bolder;
+}
+#submit{
+background: rgb(24, 72, 116);
+background: linear-gradient(
+93deg,
+rgba(24, 72, 116, 1) 0%,
+rgba(6, 17, 26, 1) 100%
+);
+}
 </style>
 <div class="row">
-    <div class="col-md-12  ">
-        <div class="w-100 h-100 " id="content_div">
-            <div class="card-header  main_card_header m-0 p-0 ">
-                <p class="card_header_text">Add Information</p>
-            </div>
-            <div class="card-body   p-4  m-0 ">
-                <div class="row card_row">
-                    <div class="col-md-1  m-0 p-0  ">
-                        <div
-                            class="  w-100 h-50 m-0 p-0 eye_icon d-flex flex-column justify-content-start  text-center  ">
-                            <i class="fas fa-unlink icon_chain text-white  pb-3 pt-3 border border-left-0 "></i>
-                        </div>
-                        <div class=" w-100 h-50 m-0 p-0 eye_icon d-flex flex-column justify-content-end  text-center ">
-                            <i class="fas fa-eye icon_eye text-white pb-3 pt-3 border border-left-0 "></i>
-                        </div>
-                    </div>
-                    <div class="col-md-10 m-0 p-0 ">
-                        <div class="container-fluid  border">
-
-                            <ul class="nav nav-pills row">
-
-                              <li class="custom_pills active col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
-                              <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#adresses">Add Adrresses </a></li>
-                              <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
-
-                                <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
-
-
-                            </ul>
-
-                            <div class="tab-content">
-
-
-                              <div id="social" class="tab-pane active in  fade show">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
-                                          {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text"><a href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" class="btn btn-primary">Add New Target</a></span>
-
-                                                          </label>
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                          <input type="hidden" value="address" id="form_name" name="extra_type" />
-                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-6"></div>
-                                              <div class="col-md-4"></div>
-                                              <div class="col-md-2">
-
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </form>
-                                        <div class="row">
-                                            {% for target in social_targets %}
-
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">Address</h5>
-                                        <p class="card-text">{{ target }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
-                                      </div>
-                                    </div>
-                                                                {% endfor %}
-
-
-                                        </div>
-
-                                    </div>
-                                    </div>
-
-                                    </div>
+  <div class="col-md-12  ">
+    <div class="w-100 h-100 " id="content_div">
+      <div class="card-header  main_card_header m-0 p-0 ">
+        <p class="card_header_text">Add Information</p>
+      </div>
+      <div class="card-body   p-4  m-0 ">
+        <div class="row card_row glowing_border">
+          <div class="col-md-12 m-0 p-0 ">
+            <div class="container-fluid">
+              <ul class="nav nav-pills row">
+                <li class="custom_pills active col-md-3 border-dark" style="border-radius: 10px 0px 0px 0px;"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
+                <li class="custom_pills col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#adresses">Add Addresses </a></li>
+                <li class="custom_pills col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
+                <li class="custom_pills col-md-3 border-dark" style="border-radius: 0px 10px 0px 0px;"><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
+              </ul>
+              <div class="tab-content">
+                <div id="social" class="tab-pane fade">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12 m-0 p-0">
+                        <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                          {% csrf_token %}
+                          <div class="card-body m-0 p-0 ">
+                            <div class="row  ">
+                              
+                              <div class="col-md-12  m-0 p-0">
+                                <span class="float-left glowing_border text-white btn-sm newlabeldesign">
+                                  <i class="far fa-address-card mr-2"></i>   All Social Targets
+                                </span>
+                            {% comment %}    <a  href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" type="button" class="glowing_border addbutton float-right  btn-sm btn-success mr-2" id="submit">   {% endcomment %} 
+                                  <i class="fas fa-plus mr-2"></i>ADD
+                                </a>
                               </div>
-                              <div id="adresses" class="tab-pane fade">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
-                                          {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Address</span>
-                                                                  <textarea class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                            name="prime_value" required=""> </textarea>
-                                                          </label>
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                          <input type="hidden" value="address" id="form_name" name="extra_type" />
-                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-6"></div>
-                                              <div class="col-md-4"></div>
-                                              <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
-                                                name="submit" id="submit">
-                                              </div>
-                                          </div>
+                              
+                            </div>
+                          </div>
+                          <input type="hidden" value="address" id="form_name" name="extra_type" />
+                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                          <div class="row input_wrapper_row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="row glowing_border p-2"style="height:450px;overflow-y:auto;">
+                        {% for target in social_targets %}
+                          <div class="col-md-4">
+                            <!-- inside CaRD DIV-->
+                            <div class="row mr-2">
+                              <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;">
+                                <span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;">
+                                  <i class="fa fa-user text-white mr-2">Target Username</i>
+                                </span>
+                                <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="" data-toggle="" data-target="#">
+                                <i class="fa fa-trash"></i>
+                                </button>
+                              </div>
+                              <!-- Div Right part-->
+                              <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                <span style="font-size:12px;" class="text-white ">  {{ target }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="adresses" class="tab-pane fade ">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12 m-0 p-0">
+                        
+                        <div class="card-body m-0 p-0 main_card">
+                          <div class="row">
+                            <form name="portfolio_create_form" id="portfolio_create_form" class="w-100" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="row">
+                                <div class="col-md-8">
+                                  <div class="">
+                                    <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="addresses">
+                                      <span class="newlabeldesign glowing_border">Adresses</span>
+                                      <input type="text" class="w-50 newinputdesign glowing_border" required="required"  id="author_id"
+                                      name="prime_value" />
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                  <div class="">
+                                    <input type="hidden" value="address" id="form_name" name="extra_type" />
+                                    <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                    <div class="row input_wrapper_row">
+                                      <div class="col-md-12">
+                                        <input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white" value="Add" name="submit" id="submit">
                                       </div>
-                                  </form>
-                                        <div class="row">
-                                            {% for address in addresses %}
-
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">Address</h5>
-                                        <p class="card-text">{{ address }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
-                                      </div>
                                     </div>
-                                                                {% endfor %}
-
-
-                                        </div>
-
-                                    </div>
-                                    </div>
-
-                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row p-2 glowing_border" >
+                          {% for address in addresses %}
+                            <div class="col-md-4">
+                              <!-- inside CaRD DIV-->
+                              <div class="row mr-2">
+                                <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;">
+                                  <span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;">
+                                    <i class="fa fa-user text-white mr-2">Target Address</i>
+                                  </span>
+                                  <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="5eb8742a31cbda0214058eff" data-toggle="modal" data-target="#linkto_portfolio">
+                                  <i class="fa fa-trash"></i>
+                                  </button>
+                                </div>
+                                <!-- Div Right part-->
+                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                  <span style="font-size:12px;" class="text-white ">  {{ address }}</span>
+                                </div>
                               </div>
                               <div id="description" class="tab-pane fade">
                                 <div class="container-fluid">
@@ -282,63 +268,66 @@
 
                                     </div>
                               </div>
-                            <div id="phones" class="tab-pane fade">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
-                                          {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Phone</span>
-                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                            name="prime_value" required=""> </input>
-                                                          </label>
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                          <input type="hidden" value="phones" id="form_name" name="extra_type" />
-                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-6"></div>
-                                              <div class="col-md-4"></div>
-                                              <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
-                                                name="submit" id="submit">
-                                              </div>
-                                          </div>
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row glowing_border p-2">
+                          {% for description in descriptions %}
+                            <div class="col-md-4">
+                              <!-- inside CaRD DIV-->
+                              <div class="row mr-2">
+                                <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;">
+                                  <span class="rotate custom_label glowing_border" role="button" style="font-size:14px; margin-top: auto; margin-bottom: auto;">
+                                    <i class="fa fa-user text-white mr-2">Description</i>
+                                  </span>
+                                  <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="5eb8742a31cbda0214058eff" data-toggle="modal" data-target="#linkto_portfolio">
+                                  <i class="fa fa-trash"></i>
+                                  </button>
+                                </div>
+                                <!-- Div Right part-->
+                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                  <span style="font-size:12px;" class="text-white ">  {{ description }}</span>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="phones" class="tab-pane fade">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12 m-0 p-0">
+                        <div class="card-body m-0 p-0 main_card">
+                          <div class="row">
+                            <form name="portfolio_create_form" id="portfolio_create_form" class="w-100" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="row">
+                                <div class="col-md-8">
+                                  <div class="">
+                                    <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="phone">
+                                      <span class="newlabeldesign glowing_border">  Phone</span>
+                                      <input type="text" class="w-50 newinputdesign glowing_border" id="author_id"
+                                      name="prime_value"  required=""/>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                  <div class="">
+                                    <input type="hidden" value="phone" id="form_name" name="extra_type" />
+                                    <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                    <div class="row input_wrapper_row">
+                                      <div class="col-md-12">
+                                        <input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white glowing_border" value="Add" name="submit" id="submit">
                                       </div>
-                                  </form>
-                                        <div class="row">
-                                            {% for phone in phones %}
-
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">Phones</h5>
-                                        <p class="card-text">{{ phone }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
-                                      </div>
                                     </div>
-                                                                {% endfor %}
-
-
-                                        </div>
-
-                                    </div>
-                                    </div>
-
-                                    </div>
+                                  </div>
+                                </div>
                               </div>
 
                         <div id="visuals" class="tab-pane fade">
@@ -440,586 +429,27 @@
                                         style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 712px; height: 410px;">
                                     </div>
                                 </div>
-                                <div class="resize-sensor-shrink"
-                                    style="pointer-events: none; position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;">
-                                    <div
-                                        style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 200%; height: 200%;">
-                                    </div>
+                                Div Right part-->
+                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                  <span style="font-size:12px;" class="text-white ">  {{ phone }}</span>
                                 </div>
+                              </div>
                             </div>
-                            <div style="width: 100%; height: 100%; position: relative; left: 0.3125px;">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" role="group"
-                                    style="width: 100%; height: 100%; overflow: visible;">
-                                    <desc>JavaScript chart by amCharts</desc>
-                                    <defs>
-                                        <clipPath id="id-30">
-                                            <rect width="702" height="400"></rect>
-                                        </clipPath>
-                                        <linearGradient id="gradient-id-53" x1="1%" x2="99%" y1="59%" y2="41%">
-                                            <stop stop-color="#474758" offset="0"></stop>
-                                            <stop stop-color="#474758" stop-opacity="1" offset="0.75"></stop>
-                                            <stop stop-color="#3cabff" stop-opacity="1" offset="0.755"></stop>
-                                        </linearGradient>
-                                        <clipPath id="id-74"></clipPath>
-                                        <filter id="filter-id-35" width="200%" height="200%" x="-50%" y="-50%">
-                                            <feGaussianBlur result="blurOut" in="SourceGraphic" stdDeviation="1.5">
-                                            </feGaussianBlur>
-                                            <feOffset result="offsetBlur" dx="1" dy="1"></feOffset>
-                                            <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
-                                            <feComposite in2="offsetBlur" operator="in"></feComposite>
-                                            <feMerge>
-                                                <feMergeNode></feMergeNode>
-                                                <feMergeNode in="SourceGraphic"></feMergeNode>
-                                            </feMerge>
-                                        </filter>
-                                        <filter id="filter-id-79" width="200%" height="200%" x="-50%" y="-50%">
-                                            <feGaussianBlur result="blurOut" in="SourceGraphic" stdDeviation="1.5">
-                                            </feGaussianBlur>
-                                            <feOffset result="offsetBlur" dx="1" dy="1"></feOffset>
-                                            <feFlood flood-color="#000000" flood-opacity="0.5"></feFlood>
-                                            <feComposite in2="offsetBlur" operator="in"></feComposite>
-                                            <feMerge>
-                                                <feMergeNode></feMergeNode>
-                                                <feMergeNode in="SourceGraphic"></feMergeNode>
-                                            </feMerge>
-                                        </filter>
-                                        <filter id="filter-id-50" width="120%" height="120%" x="-10%" y="-10%">
-                                            <feColorMatrix type="saturate" values="0"></feColorMatrix>
-                                        </filter>
-                                    </defs>
-                                    <g>
-                                        <g fill="#ffffff" fill-opacity="0">
-                                            <rect width="702" height="400"></rect>
-                                        </g>
-                                        <g>
-                                            <g role="region" clip-path='url("#id-30")' opacity="1"
-                                                aria-describedby="id-22-description">
-                                                <g>
-                                                    <g>
-                                                        <g>
-                                                            <g>
-                                                                <g>
-                                                                    <g>
-                                                                        <g>
-                                                                            <g role="menu" font-size="10"
-                                                                                aria-describedby="id-69-description">
-                                                                                <g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#6771dc"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M373.948,168.215  L472.015,138.294 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#6771dc"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M472.015,138.294  L572.997,147.516 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#a367dc"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M373.948,168.215  L270.148,176.736 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#dc67ce"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M373.948,168.215  L431.884,251.737 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#dc6788"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M373.948,168.215  L323.885,258.447 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g fill-opacity="0"
-                                                                                        stroke-opacity="0.5"
-                                                                                        stroke="#dc8c67"
-                                                                                        stroke-width="1"
-                                                                                        style="pointer-events: none;"
-                                                                                        opacity="1">
-                                                                                        <path
-                                                                                            d=" M373.948,168.215  L320.273,83.032 ">
-                                                                                        </path>
-                                                                                    </g>
-                                                                                    <g clip-path='url("#id-74")'>
-                                                                                        <g></g>
-                                                                                    </g>
-                                                                                    <g></g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#67b7dc"
-                                                                                        stroke="#67b7dc" opacity="1"
-                                                                                        transform="translate(373.948,168.215)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: pointer;"
-                                                                                        id="id-732">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle r="33"></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1"
-                                                                                                style="pointer-events: none;">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,52.6)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            Network
-                                                                                                            #1
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_chrome.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#6771dc"
-                                                                                        stroke="#6771dc" opacity="1"
-                                                                                        transform="translate(472.015,138.294)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: pointer;"
-                                                                                        id="id-757">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle r="33"></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1"
-                                                                                                style="pointer-events: none;">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,52.6)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            A1
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_chrome.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#6771dc"
-                                                                                        stroke="#6771dc" opacity="1"
-                                                                                        transform="translate(572.997,147.516)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: default;"
-                                                                                        id="id-780">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                display="none"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1" style="">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,40)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            AA2
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_firefox.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#a367dc"
-                                                                                        stroke="#a367dc" opacity="1"
-                                                                                        transform="translate(270.148,176.736)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: default;"
-                                                                                        id="id-803">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                display="none"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1" style="">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,40)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            A2
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_firefox.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#dc67ce"
-                                                                                        stroke="#dc67ce" opacity="1"
-                                                                                        transform="translate(431.884,251.737)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: default;"
-                                                                                        id="id-826">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                display="none"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1" style="">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,40)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            A3
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_ie.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#dc6788"
-                                                                                        stroke="#dc6788" opacity="1"
-                                                                                        transform="translate(323.885,258.447)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: default;"
-                                                                                        id="id-849">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                display="none"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1" style="">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,40)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            A4
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_safari.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                    <g role="menuitem" focusable="true"
-                                                                                        tabindex="0" fill="#dc8c67"
-                                                                                        stroke="#dc8c67" opacity="1"
-                                                                                        transform="translate(320.273,83.032)"
-                                                                                        style="touch-action: none; user-select: none; -webkit-user-drag: none; cursor: default;">
-                                                                                        <g>
-                                                                                            <g stroke-width="2"
-                                                                                                fill="#ffffff"
-                                                                                                display="none"
-                                                                                                transform="translate(0,0) scale(1.1)">
-                                                                                                <circle></circle>
-                                                                                            </g>
-                                                                                            <g fill-opacity="0.5"
-                                                                                                opacity="1" style="">
-                                                                                                <circle r="30"></circle>
-                                                                                            </g>
-                                                                                            <g fill="#ffffff"
-                                                                                                stroke-opacity="0"
-                                                                                                style="pointer-events: none;"
-                                                                                                transform="translate(0,40)">
-                                                                                                <g transform="translate(-30,-30)"
-                                                                                                    style="user-select: none;">
-                                                                                                    <text x="30px"
-                                                                                                        y="35.5078125"
-                                                                                                        dy="-2.974"
-                                                                                                        text-anchor="middle">
-                                                                                                        <tspan>
-                                                                                                            A5
-                                                                                                        </tspan>
-                                                                                                    </text>
-                                                                                                </g>
-                                                                                            </g>
-                                                                                            <g>
-                                                                                                <image
-                                                                                                    transform="translate(-20,-20)"
-                                                                                                    width="40"
-                                                                                                    height="40"
-                                                                                                    xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg">
-                                                                                                </image>
-                                                                                            </g>
-                                                                                        </g>
-                                                                                    </g>
-                                                                                </g>
-                                                                                <desc id="id-69-description">
-                                                                                    Series
-                                                                                </desc>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                    <g>
-                                                                        <g>
-                                                                            <g>
-                                                                                <g></g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                                <desc id="id-22-description">
-                                                    Chart
-                                                </desc>
-                                            </g>
-                                            <g>
-                                                <g>
-                                                    <g role="tooltip" visibility="hidden" opacity="0">
-                                                        <g fill="#ffffff" fill-opacity="0.9" stroke-width="1"
-                                                            stroke-opacity="1" stroke="#ffffff"
-                                                            filter='url("#filter-id-35")' style="pointer-events: none;"
-                                                            transform="translate(0,6)">
-                                                            <path
-                                                                d="M3,0 L3,0 L0,-6 L13,0 L21,0 a3,3 0 0 1 3,3 L24,8 a3,3 0 0 1 -3,3 L3,11 a3,3 0 0 1 -3,-3 L0,3 a3,3 0 0 1 3,-3">
-                                                            </path>
-                                                        </g>
-                                                        <g>
-                                                            <g fill="#ffffff" style="pointer-events: none;"
-                                                                transform="translate(12,6)">
-                                                                <g transform="translate(0,7)" display="none"></g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                    <g visibility="hidden" display="none" style="pointer-events: none;">
-                                                        <g fill="#ffffff" opacity="1">
-                                                            <rect width="1021" height="400"></rect>
-                                                        </g>
-                                                        <g>
-                                                            <g transform="translate(510.5,200)">
-                                                                <g>
-                                                                    <g stroke-opacity="1" fill="#f3f3f3"
-                                                                        fill-opacity="0.8">
-                                                                        <g>
-                                                                            <g>
-                                                                                <path
-                                                                                    d=" M53,0  a53,53,0,0,1,-106,0 a53,53,0,0,1,106,0 M42,0  a42,42,0,0,0,-84,0 a42,42,0,0,0,84,0 L42,0 ">
-                                                                                </path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                    <g stroke-opacity="1" fill="#000000"
-                                                                        fill-opacity="0.2">
-                                                                        <g>
-                                                                            <g>
-                                                                                <path
-                                                                                    d=" M50,0  a50,50,0,0,1,-100,0 a50,50,0,0,1,100,0 M45,0  a45,45,0,0,0,-90,0 a45,45,0,0,0,90,0 L45,0 ">
-                                                                                </path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                    <g fill="#000000" fill-opacity="0.4">
-                                                                        <g transform="translate(-21,-8.5)"
-                                                                            style="user-select: none;">
-                                                                            <text x="0" y="17" dy="-4.59">
-                                                                                <tspan>
-                                                                                    100%
-                                                                                </tspan>
-                                                                            </text>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                    <g opacity="0.4" aria-labelledby="id-50-title"
-                                                        style="cursor: pointer;" transform="translate(0,379)"
-                                                        filter='url("#filter-id-50")'>
-                                                        <g fill="#ffffff" opacity="0">
-                                                            <rect width="66" height="21"></rect>
-                                                        </g>
-                                                        <g>
-                                                            <g shape-rendering="auto" fill="none" stroke-opacity="1"
-                                                                stroke-width="1.7999999999999998" stroke="#3cabff">
-                                                                <path
-                                                                    d=" M15,15  C17.4001,15 22.7998,15.0001 27,15 C31.2002,14.9999 33.2999,6 36,6 C38.7001,6 38.6999,10.5 40.5,10.5 C42.3001,10.5 42.2999,6 45,6 C47.7001,6 50.9999,14.9999 54,15 C57.0002,15.0001 58.7999,15 60,15">
-                                                                </path>
-                                                            </g>
-                                                            <g shape-rendering="auto" fill="none" stroke-opacity="1"
-                                                                stroke-width="1.7999999999999998"
-                                                                stroke='url("#gradient-id-53")'>
-                                                                <path
-                                                                    d=" M6,15  C8.2501,15 9.7498,15.0001 15,15 C20.2502,14.9999 20.7748,3.6 27,3.6 C33.2252,3.6 33.8998,14.9999 39.9,15 C45.9002,15.0001 45.9748,15 51,15 C56.0252,15 57.7499,15 60,15">
-                                                                </path>
-                                                            </g>
-                                                        </g>
-                                                        <title id="id-50-title">
-                                                            Chart created using
-                                                            amCharts library
-                                                        </title>
-                                                    </g>
-                                                    <g role="tooltip" opacity="0" aria-describedby="id-757"
-                                                        transform="translate(518.236,93.869)" aria-hidden="true"
-                                                        visibility="hidden">
-                                                        <g fill="#6771dc" fill-opacity="0.9" stroke-width="1"
-                                                            stroke-opacity="1" stroke="#ffffff"
-                                                            filter='url("#filter-id-79")' style="pointer-events: none;"
-                                                            transform="translate(-32,-34)">
-                                                            <path
-                                                                d="M3,0 L61,0 a3,3 0 0 1 3,3 L64,25 a3,3 0 0 1 -3,3 L61,28 L37,28 L32,34 L27,28 L3,28 a3,3 0 0 1 -3,-3 L0,3 a3,3 0 0 1 3,-3">
-                                                            </path>
-                                                        </g>
-                                                        <g>
-                                                            <g fill="#ffffff" style="pointer-events: none;"
-                                                                transform="translate(0,-34)">
-                                                                <g transform="translate(-20,7)"
-                                                                    style="user-select: none;">
-                                                                    <text x="0" y="17.015625" dy="-4.594">
-                                                                        <tspan>
-                                                                            A1:
-                                                                        </tspan>
-                                                                        <tspan style="font-weight:bold">
-                                                                            1
-                                                                        </tspan>
-                                                                    </text>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                        </div> -->
+                            
+                            
+                          {% endfor %}
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-md-1 card_text    m-0 p-0 ">
-                        <p class="text-white">Case Link Relation</p>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
+       
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 {% endblock %}

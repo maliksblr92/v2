@@ -66,13 +66,49 @@
         <div class="col-md-3  ">
           <div class="row border border-white card1_row ">
             <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
-              <span class="float-left"style="font-size:14px;">Social Media Targets</span>
-              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="hashtag_chart_btn">
+              <span class="float-left"style="font-size:14px;">Google Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"onclick="autoupdate_google_trends()" >
               Refresh
               </button>
             </div>
             <div class="col-md-12 card1_col2" >
-              <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div>
+              <!-- <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div> -->
+              
+
+
+
+
+            
+                <div class="col-md-12 card1_col2 " >
+                  <div class="row mt-1 pl-1 pr-1 "style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                    <div class="row mt-1 pl-1 pr-1 "  id="trends_by_google"  style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                      {% for i in  google_trends.top_Trends %}
+                       
+                        <div class="col-md-12 mt-1">
+                          <div class="row">
+                            
+                            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                              <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                                {{i.tweet_count|default:"N/A"}}
+                              </span>
+                              <!-- <a  href=""class="badge badge-light ">View</a> -->
+                            </div>
+                            <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                              <a target="_blank" class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="#">{{i.tag}}</a></div>
+                            </div>
+                          </div>
+                        {% endfor  %}
+                      </div>
+                  </div>
+                </div>
+             
+
+
+
+
+
+
+
             </div>
           </div>
           <div class="row border border-white card1_row ">
@@ -87,7 +123,7 @@
                     <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
                       {{i.views}}
                     </span>
-                    <a  href="{{i.video_link}}"class="badge badge-light ">View</a>
+                    <a target="_blank"  href="{{i.video_link}}"class="badge badge-light ">View</a>
                   </div>
                   <div class="col-md-9 mt-1 d-flex flex-column justify-content-center align-items-center border border-white" style="border-radius:5px;">
                     <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:11px;">
@@ -106,28 +142,32 @@
           </div>
           <div class="row border border-white card1_row">
             <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
-              <span class="float-left"style="font-size:14px;">Twitter Top  Trends</span>
-              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"id="refesh_world_wide_trends_btn">
+              <span class="float-left"style="font-size:14px;">World-Wide Twitter Top Hashtags <br>
+                <span class="text-warning"style="font-size:10px;"id="worldwide_hashtags_updatedtime"></span></span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" onclick="autoupdate_world_wide_trends()"id="refesh_world_wide_trends_btn">
               Refresh
               </button>
             </div>
             <div class="col-md-12 card1_col2 " >
               <div class="row mt-1 pl-1 pr-1 " id="recent_trends_worldwide" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
-                {% for i in  twitter_top_hastags %}
-                  <div class="col-md-12 mt-1">
-                    <div class="row">
-                      <div class="col-md-2  m-0 p-0 custom_center">
+                <div class="row mt-1 pl-1 pr-1 " id="trends_by_world" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                  {% for i in  worldwide_hashtags %}
+                    
+                    <div class="col-md-12 mt-1">
+                      <div class="row">
                         
-                        <span class="text-white custom_center border border-white font-weight-bold"style="border-radius:50%;height:50px;width:50px;font-size:12px;">
-                          {{i.count}}
-                        </span>
+                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                          <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                            {{i.count}}
+                          </span>
+                          <a  href="{% url 'Data_Processing_Unit:get_hashtag_tweets' hashtag_name=i.name %}" onclick="" target="_blank"class="badge badge-light">View</a>
+                        </div>
+                        <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                          <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}" target="_blank">{{i.name}}</a></div>
+                        </div>
                       </div>
-                      <div class="col-md-10 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
-                        <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.name}}"</a>
-                      </div>
-                    </div>
+                    {% endfor  %}
                   </div>
-                {% endfor  %}
               </div>
             </div>
           </div>
@@ -172,7 +212,7 @@
                           <span>{{i.statistics.num_comments}}</span>
                        
                         </span>
-                        <span> <a  href="{{i.post_link}}"class="badge badge-light ">View</a></span>
+                        <span> <a  target="_blank" href="{{i.post_link}}"class="badge badge-light ">View</a></span>
                        
                       </div>
                       <div class="col-md-9 border border-white m-0  social_posts_post_reddit"style="overflow-y: auto; flex-direction: column; font-size: 13px;">
@@ -213,7 +253,7 @@
         
         <div class="row border border-white card1_row">
           <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
-            <span class="float-left"style="font-size:14px;">Twitter Country Top  Trends </span>
+            <span class="float-left"style="font-size:14px;">Twitter Country/State Top  Trends </span>
             <select name="country_selector" id="country_selector"  required="required" class="form-control form-control-sm" style="width:150px;">
               <option value="">Select Country</option>
               {% for i in countries_list %}
@@ -223,19 +263,19 @@
           </div>
           <div class="col-md-12 card1_col2 ">
             <div class="row mt-1 pl-1 pr-1 " id="trends_by_country" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
-              {% for i in  twitter_country_hashtags.top_Trends %}
+              {% for i in  twitter_country_hashtags %}
                 
                 <div class="col-md-12 mt-1">
                   <div class="row">
                     
                     <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
                       <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
-                        {{i.tweet_count}}
+                        {{i.count}}
                       </span>
-                      <a  href="#"class="badge badge-light ">View</a>
+                      <a target="_blank"  href="{% url 'Data_Processing_Unit:get_hashtag_tweets' hashtag_name='+e[x].name+'%}" target="_blank"class="badge badge-light ">View</a>
                     </div>
                     <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
-                      <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}">{{i.tag}}</a></div>
+                      <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}" target="_blank">{{i.name}}</a></div>
                     </div>
                   </div>
                 {% endfor  %}

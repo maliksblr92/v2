@@ -225,69 +225,24 @@
         </head>
         <body>
             <div class="container-fluid wrapper background-gradient">
-                <div class="row pl-5 pr-5">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg" id="header">
-                            <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-                            data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon ">
-                                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-                            </span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8 ">
-                                    <div class="row m-0 p-0">
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">MONITOR</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 custom_center">
-                                            <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-                                        </div>
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">FETCH</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6 list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 "></div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+              <div>
+                 
+              </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white d-flex flex-row justify-content-start align-items-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                        <div class="circle-dot1 ml-2"></div>
+                    <div class="col-md-12 bg-white text-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                        <!-- <div class="circle-dot1 ml-2"></div>
                         <div class="circle-dot2 ml-1"></div>
-                        <div class="circle-dot3 ml-1"></div>
-                        <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                        <div class="circle-dot3 ml-1"></div> -->
+                        <span class="btn btn-primary btn-sm  float"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Page </span>
+                      {% comment %}
+                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                        {% endcomment %}
+                       
+                        
+
                     </div>
+                    
                 </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-12 fb-cover-img background-gradient-dark">
@@ -296,6 +251,7 @@
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-2">
                         <div class="profile-image-wrapper custom_border_color">
+                            <img src=" {{page.page_posts.0.media_directory}}" style="height: 100%;width:100%;" class="img-fluid" />
                         </div>
                     </div>
                     <div class="col-md-8 ">
@@ -905,23 +861,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mt-2">
-                
-                <div class="row ">
-                    
-                    <div class="col-lg-12 pl-5 pr-5">
-                        <nav class="navbar navbar-expand-lg " id="header">
-                            
-                            <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0s">
-                                <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-                                
-                                
-                            </div>
-                            
-                        </nav>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

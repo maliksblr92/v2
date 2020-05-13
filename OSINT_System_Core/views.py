@@ -843,74 +843,59 @@ class Dashboard(APIView):
 
         # first time load data
         reddit_trends = Trends.objects.filter(trend_type='reddit_trends').order_by('-id').first()
-        print("perinting reeddit trends ")
-        print(len(reddit_trends))
-        for i in reddit_trends:
-            print(i)
-        # {
-        #     "trend_type": "reddit_trends",
-        #     "trend_graph": [],
-        #     "popular_hashtag": "",
-        #     "top_trends": [
-        #         {
-        #             "author_fullname": "t2_2bfojune",
-        #             "selftext": "We post dark, demented memes and we're looking for people to join our community. \n\nr/Dark_Demented_Memes",
-        #             "title": "Join our new subreddit r/Dark_Demented_Memes !",
-        #             "count": 5
-        #         },
-        #         {
-        #             "author_fullname": "Jt2_4qqy8cha",
-        #             "selftext": "We remodeled the subreddit",
-        #             "title": "r/adults",
-        #             "count": 3
-        #         }
-        #     ],
-        #     "country": "",
-        #     "common_words": [],
-        #     "spelling_variants": []
-        # }
-        # youtube first time load data
         youtube_trends = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
-
-        twitter_top_hastags = {}
+        google_trends = Trends.objects.filter(trend_type='google_trends').order_by('-id').first()
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
-        print(type(Target_Count_Chart))
+       
         # get top hashtags for first load
         try:
-            twitter_country_hashtags = Trends.objects.filter(country='pakistan', trend_type='twitter_trends').order_by(
-                '-id').first()
+            twitter_country_hashtags  = get_country_hashtags("pakistan")
+            worldwide_hashtags=get_worldwide_hashtags()
         # hashtag chart update
         except Trends.DoesNotExist:
             twitter_country_hashtags = None
+            worldwide_hashtags=None
         # first time load data end
         countries_list = [
-            'world',
-            'australia', 'russia', 'israel',
-            'austria', 'saudi arabia', 'italy',
-            'bahrain', 'singapore', 'japan',
-            'Belarus', 'South', 'africa', 'Jordan',
-            'Belgium', 'Spain', 'kenya',
-            'Brazil', 'Sweden', 'korea',
-            'Canada', 'Switzerland', 'kuwait',
-            'Chile', 'Thailand', 'Latvia',
-            'Colombia', 'Turkey', 'Lebanon',
-            'Denmark', 'Ukraine', 'Malaysia',
-            'Dominican', 'Republic', 'United Arab Emirates', 'Mexico',
-            'Ecuador', 'United', 'Kingdom', 'Netherlands',
-            'Egypt', 'United States', 'New Zealand',
-            'France', 'Venezuela', 'Nigeria',
-            'Germany', 'Vietnam', 'Norway',
-            'Ghana', 'Philippines', 'Oman',
-            'Greece', 'Poland', 'pakistan',
-            'Guatemala', 'Portugal', 'Panama',
+            'pakistan',
+             'pakistan/faisalabad',
+             'pakistan/karachi',
+             'pakistan/lahore'
+             'pakistan/multan',
+             'pakistan/rawalpindi',
             'india',
-            'Peru'
+            'india/ahmedabad'
+            'india/amritsar',    
+            'india/bangalore',  
+            'india/bhopal',    
+            'india/chennai',
+            'india/delhi',
+            'india/hyderabad',
+            'india/indore',
+            'india/jaipur',
+            'india/kanpur',
+            'india/kolkata',
+            'india/lucknow',
+            'india/mumbai',
+            'india/nagpur',
+            'india/patna',
+            'india/pune',
+            'india/rajkot',
+            'india/ranchi',
+            'india/srinagar',
+            'india/surat',
+            'india/thane',
+            
+            'israel',
+            'israel/haifa',
+            'israel/jerusalem',
+            'israel/tel-aviv',
+            
         ]
 
         return render(request, 'OSINT_System_Core/additional_templates/dashboard.html',
-                      {'reddit_trends': reddit_trends, 'twitter_top_hastags': twitter_top_hastags,
-                       'youtube_trends': youtube_trends, 'twitter_country_hashtags': twitter_country_hashtags,
-                       'countries_list': countries_list, 'Target_Count_Chart': Target_Count_Chart})
+                      {'reddit_trends': reddit_trends,'youtube_trends': youtube_trends, 'twitter_country_hashtags': twitter_country_hashtags,
+                       'countries_list': countries_list, 'Target_Count_Chart': Target_Count_Chart,'worldwide_hashtags':worldwide_hashtags,'google_trends':google_trends})
 
 
 def main(request):
@@ -932,10 +917,7 @@ def mainHeatMap(request):
 
 
 def newsMonitor(request):
-    # with open('static/Target_Json/news_data1.json', 'r') as f:
-    #     news_json = json.load(f)
     news_json = News.objects().limit(1)
-    print(news_json)
     return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
 
 
@@ -947,8 +929,6 @@ def topNews(request):
     abp = News.objects(Q(channel='ABP')).order_by('-id').first()
     zee = News.objects(Q(channel='ZEE')).order_by('-id').first()
     list1 = [ary, dawn, ndtv, india_today, abp, zee]
-    print(ndtv.channel)
-    print(ndtv.most_emerging_news)
     return render(request, "OSINT_System_Core/additional_templates/top_news.html", {'top_news': list1})
 
 
@@ -985,18 +965,55 @@ def get_worldwide_hashtags():
     return (dic)
 
 
+
+
+def get_country_hashtags(country):
+    # text_data_json = json.loads(text_data)
+    # message = text_data_json['message']
+    url = 'https://trends24.in/'+country+'';
+    page = requests.get(url);
+    status_code = page.status_code;
+    dic = {};
+    hashtag_name = [];
+    hashtag_href = [];
+    hashtag_count = [];
+    if (status_code == 200):
+        data = BeautifulSoup(page.text, 'lxml')
+        new = data.find('ol', class_="trend-card__list");
+        li = data.find_all('li')
+        for i in li:
+            hashtag_name.append(i.a.text)
+            hashtag_href.append(i.a.attrs['href'])
+            if (i.find('span')):
+                hashtag_count.append(i.span.text)
+            else:
+                hashtag_count.append("N/A")
+    dic = []
+    for i in range(len(hashtag_name)):
+        dic.append(
+            {"name": hashtag_name[i],
+             "count": hashtag_count[i],
+             "href": hashtag_href[i]
+             })
+
+    return (dic)
+
+
 def getTrendsByCountry(request):
     if request.method == 'GET':
         country_name = request.GET['country_name']
-        print(country_name)
-        # data=Trends.objects.get(country='pakistan',trend_type='twitter_trends')
-        try:
-            data = Trends.objects.filter(country=country_name, trend_type='twitter_trends').order_by('-id').first()
-            json_data = data.to_json()
-            return HttpResponse(json_data)
-        except Trends.DoesNotExist:
-            data = None
-            return HttpResponse(data)
+        if country_name!="world":
+                print("country name"+country_name)
+                data=get_country_hashtags(country_name)
+                json_data=json.dumps(data)
+                return HttpResponse(json_data)
+        else:
+                print("==world"+country_name)
+                data=get_worldwide_hashtags()
+                json_data=json.dumps(data)
+                return HttpResponse(json_data)
+               
+       
 
 
 def getYoutubeTrends(request):
@@ -1020,10 +1037,7 @@ def update_micro_crawler_stats(request):
 def update_internet_stats(request):
     if request.method == 'GET':
         internet_stats = acq.crawler_internet_connection()
-        print("called update internet stats fucntion ")
-        print(internet_stats)
         json_data = json.dumps(internet_stats)
-        print(json_data)
         return HttpResponse(json_data)
 
 
@@ -1031,5 +1045,16 @@ def update_dashboard_donutchart(request):
     if request.method == 'GET':
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
         json_data = json.dumps(Target_Count_Chart)
-        print(json_data)
+       
         return HttpResponse(json_data)
+
+def getGoogleTrends(request):
+    if request.method=='GET':
+        try:
+            data = Trends.objects.filter(trend_type='google_trends').order_by('-id').first()
+            json_data = data.to_json()
+            return HttpResponse(json_data)
+        except Trends.DoesNotExist:
+            data = None
+            return HttpResponse(data)
+

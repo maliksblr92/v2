@@ -576,7 +576,7 @@ am4core.ready(function() {
                 url:'http://localhost:8000/core/update_internet_stats',
                 success:function(e){
                   console.log("in interval of upload speed")
-                    upload=e.upload/10000;
+                    upload=e.upload/100000;
 
 
                 chart.addData(
@@ -781,7 +781,7 @@ am4core.ready(function() {
                 url:'http://localhost:8000/core/update_internet_stats',
                 success:function(e){
                   console.log("in interval of download speed")
-                    download=e.download/100000;
+                    download=e.download/1000000;
 
 
                 chart.addData(
@@ -914,6 +914,42 @@ am4core.ready(function() {
     // Create chart instance
     var chart = am4core.create("chart_8", am4charts.XYChart);
 
+
+
+    chart.data = [{
+        "worker": "Uavatar_workerSA",
+        "tasks": 1
+      }, {
+        "worker": "fb_worker",
+        "tasks": 1
+      }, {
+        "worker": "generic_worker",
+        "tasks": 1
+      },
+      {
+        "worker": "instareddit_worker",
+        "tasks": 1
+      }, {
+        "worker": "linkedin_worker",
+        "tasks": 1
+      },{
+        "worker": "news_worker",
+        "tasks": 1
+      },
+      {
+        "worker": "super_worker",
+        "tasks": 1
+      },
+      {
+        "worker": "twitter_worker",
+        "tasks": 1
+      },{
+        "worker": "youtube_worker",
+        "tasks": 1
+      }
+    ];
+ 
+
     console.log("ajax request for micro crawler stats");
     setInterval(function(){
     $.ajax({
@@ -965,24 +1001,7 @@ am4core.ready(function() {
 
     })
 }, 10000);
-    // Add data
-
-
-    // chart.data = [{
-    //     "worker": "USA",
-    //     "tasks": 2025
-    //   }, {
-    //     "worker": "China",
-    //     "tasks": 1882
-    //   }, {
-    //     "worker": "Japan",
-    //     "tasks": 1809
-    //   }, {
-    //     "worker": "Germany",
-    //     "tasks": 1322
-    //   }];
-
-    // Create axes
+   
 
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "worker";
