@@ -1,95 +1,92 @@
 {% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}"> {% endblock %} {% block smallnavbar %} {% comment %}
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex" style="">
-        <div class="col-md-1">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}"> {% endblock %} {% block smallnavbar %} {% comment %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+            </div>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
-            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
-            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
-        </div>
-    </div>
-    <div class="col-md-2"></div>
-</div> {% endcomment %} {% endblock %} {% block belly %}
-<style>
+        <div class="col-md-2"></div>
+    </div> {% endcomment %} {% endblock %} {% block belly %}
+    <style>
     .glowing_border {
-        border: 1px solid #1cb5e0;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        -webkit-box-shadow: 0px 0px 4px #1cb5e0;
-        -moz-box-shadow: 0px 0px 4px #1cb5e0;
-        box-shadow: 0px 0px 4px #1cb5e0;
+    border: 1px solid #1cb5e0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 4px #1cb5e0;
+    -moz-box-shadow: 0px 0px 4px #1cb5e0;
+    box-shadow: 0px 0px 4px #1cb5e0;
     }
-
     .transparent {
-        background: transparent!important;
+    background: transparent!important;
     }
-
     .custom_icons {
-        border: 1px solid #fff;
-        width: 40px;
-        border-radius: 5px;
-        height: 40px;
-        margin: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+    border: 1px solid #fff;
+    width: 40px;
+    border-radius: 5px;
+    height: 40px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
     }
-</style>
-<div class="row middlecontentdiv">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-        <h4 class="topheading">Time Line</h4>
-    </div>
-    <!-- end of top row -->
-    <!-- inside main container -->
-    {% for post in posts %}
-    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
-
-        <div class="card text-center glowing_border transparent">
-            <div class="card-header text-white">
-                {{ post.post.username }}
-            </div>
-            <div class="card-body ">
-                <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}" target="_blank">{{ post.post.author }}</a></h5>
-                <p class="card-text text-white">{{ post.post.text }}</p>
-                <div class="row">
-                    <div class="col-md-12">
-                        {% if post.post.picture|length > 0 %}
-                        <img class="img-fluid border" src="{{ post.post.picture }}"> {% endif %}
-                    </div>
-
-
-                </div>
-                <a href="{{ post.post.link }}" class="btn btn-outline-light  ">Post</a>
-                <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ post.object_id }}" data-toggle="modal" data-target="#linkto_portfolio"><i class="fa fa-chain"></i></button>
-                <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource"><i class="fa fa-share"></i></button>
-
-
-            </div>
-            <div class="card-footer text-muted">
-                <span class="badge badge-light float-left">Site : {{ post.post.t_site }}</span>
-                <span class="badge badge-light float-right">Type : {{ post.post.t_type }}</span>
-            </div>
+    </style>
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Time Line</h4>
         </div>
-
-
+        <!-- end of top row -->
+        <!-- inside main container -->
+        {% for post in posts %}
+            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
+                <div class="card text-center glowing_border transparent">
+                    <div class="card-header text-white text-left topcontentbar">
+                        Username: {{ post.post.username }}
+                        <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}" target="_blank">Author: {{ post.post.author }}</a></h5>
+                    </div>
+                    <div class="card-body ">
+                        <p class="card-text text-white">{{ post.post.text }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if post.post.picture|length > 0 %}
+                                <img class="img-fluid border" src="{{ post.post.picture }}"> {% endif %}
+                            </div>
+                        </div>
+                        <a href="{{ post.post.link }}" class="btn btn-outline-light  ">Post</a>
+                        <div class="d-flex flex-row">
+                            <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ post.object_id }}" data-toggle="modal" data-target="#linkto_portfolio">
+                            <i class="fa fa-link"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource">
+                            <i class="fa fa-share"></i>
+                        </button>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span class="badge badge-light float-left">Site : {{ post.post.t_site }}</span>
+                        <span class="badge badge-light float-right">Type : {{ post.post.t_type }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}>

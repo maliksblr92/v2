@@ -413,6 +413,7 @@ am4core.ready(function() {
     lineChart.zoomOutButton.disabled = true;
     lineChart.paddingBottom = 5;
     lineChart.paddingTop = 3;
+    lineChart.strokeWidth = 7;
     lineChart.data = JSON.parse(JSON.stringify(covid_total_timeline));
     var dateAxis = lineChart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.minGridDistance = 50;
@@ -430,6 +431,7 @@ am4core.ready(function() {
     valueAxis.renderer.baseGrid.disabled = true;
     valueAxis.tooltip.disabled = true;
     valueAxis.extraMax = 0.05;
+
     valueAxis.maxPrecision = 0;
     valueAxis.renderer.inside = true;
     valueAxis.renderer.labels.template.verticalCenter = "bottom";

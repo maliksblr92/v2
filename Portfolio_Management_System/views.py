@@ -247,5 +247,4 @@ class Explore(View):
     def get(self,request,*args,**kwargs):
         resp=Portfolio_PMS.objects().first()
         print("printitng portfolio pms object")
-        print(resp)
         return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})

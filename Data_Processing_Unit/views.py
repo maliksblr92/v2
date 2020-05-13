@@ -176,7 +176,6 @@ class Index_Darkweb(View):
     def post(self, request, *args, **kwargs):
         query = request.POST['query']
         resp=ess.dark_web_search(query)
-        print(len(resp))
         return render(request, 'Data_Processing_Unit/index_darkweb.html',{'resp':resp})
 
 
@@ -625,6 +624,160 @@ class Tweets(View):
          return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json': tweets_json})
 
 
-class Darkweb_Resposne(View):
+
+class Get_Hashtag_Tweets(View):
     def get(self,request,*args,**kwargs):
-        return render (request,'Data_Processing_Unit/darkweb_resposne.html')
+            phrase = kwargs['hashtag_name']
+            print(phrase)
+            tweets_json=[]
+            asyncio.set_event_loop(asyncio.new_event_loop())
+            c = twint.Config()
+            c.Limit =20
+            c.Search = ""+phrase
+            c.Images = True
+            # c.Output = False
+            c.Store_object = True
+            dic = []
+            id=[]
+            id_str=[]
+            conversation_id=[]
+            datetime=[]
+            datestamp=[]
+            timestamp=[]
+            user_id=[]
+            user_id_str=[]
+            username=[]
+            name=[]
+            place=[]
+            timezone=[]
+            img=[]
+            mentions=[]
+            urls=[]
+            photos=[]
+            video=[]
+            text=[]
+            hashtags=[]
+            cashtags=[]
+            replies_count=[]
+            retweets_count=[]
+            likes_count=[]
+            link=[]
+            user_rt_id=[]
+            retweet=[]
+            retweet_id=[]
+            retweet_date=[]
+            quote_url=[]
+            near=[]
+            geo=[]
+            source=[]
+            reply_to=[]
+            twint.output.clean_lists()
+            twint.run.Search(c)
+            tweets = twint.output.tweets_list
+            for tweet in tweets:
+            
+                id.append(tweet.id)
+                id_str.append(tweet.id_str)
+                conversation_id.append(tweet.conversation_id)
+                datetime.append(tweet.datetime)
+                datestamp.append(tweet.datestamp)
+                timestamp.append(tweet.timestamp)
+                user_id.append(tweet.user_id)
+                user_id_str.append(tweet.user_id_str)
+                username.append(tweet.username)
+                name.append(tweet.name)
+                place.append(tweet.place)
+                timezone.append(tweet.timezone)
+                mentions.append(tweet.mentions)
+                urls.append(tweet.urls)
+                photos.append(tweet.photos)
+                video.append(tweet.video)
+                text.append(tweet.tweet)
+                hashtags.append(tweet.hashtags)
+                cashtags.append(tweet.cashtags)
+                replies_count.append(tweet.replies_count)
+                retweets_count.append(tweet.retweets_count)
+                likes_count.append(tweet.likes_count)
+                link.append(tweet.link)
+                user_rt_id.append(tweet.user_rt_id)
+                retweet.append(tweet.retweet)
+                retweet_id.append(tweet.retweet_id)
+                retweet_date.append(tweet.retweet_date)
+                quote_url.append(tweet.quote_url)
+                near.append(tweet.near)
+                geo.append(tweet.geo)
+                source.append(tweet.source)
+                reply_to.append(tweet.reply_to)
+            
+            for item in zip(id,id_str,conversation_id,datetime,
+                datestamp,timestamp,user_id,user_id_str,username
+                ,name,place,timezone,mentions,urls,photos,
+                 video,text,hashtags,cashtags,replies_count,likes_count,retweets_count,link
+               ,user_rt_id,retweet,retweet_id,retweet_date,quote_url,near,geo,
+                source,reply_to
+               ):
+
+                dic.append({
+            'id':item[0],
+            'id_str':item[1],
+            'conversation_id':item[2],
+            'datetime':item[3],
+            'datestamp':item[4],
+            'timestamp':item[5],
+            'user_id':item[6],
+            'user_id_str':item[7],
+            'username':item[8],
+            'name':item[9],
+            'place':item[10],
+            'timezone':item[11],
+            'mentions':item[12],
+            'urls':item[13],
+            'photos':item[14],
+            'video':item[15],
+            'text':item[16],
+            'hashtags':item[17],
+            'cashtags':item[18],
+            'replies_count':item[19],
+            'likes_count':item[20],
+            'retweets_count':item[21],
+            'link':item[22],
+            'user_rt_id':item[23],
+            'retweet':item[24],
+            'retweet_id':item[25],
+            'retweet_date':item[26],
+            'quote_url':item[27],
+            'near':item[28],
+            'geo':item[29],
+            'source':item[30],
+            'reply_to':item[31],
+                })
+            print(dic)
+            # if(len(dic) > 0 ):
+            #     messages.success(
+            #           request, 'Query Executed Successfully --Phrase Search ')
+            return render(request,'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
+        
+        
+class Ip_Tools(View):
+    def get(self,request,*args,**kwargs):
+        return render(request,'Data_Processing_Unit/ip_tools.html')
+    
+    def post(self,request,*args,**kwargs):
+        query_type=request.POST['query_type']
+        if query_type=='image_reverse_lookup':
+            print("Query Type "+query_type)
+            url=request.POST['url']
+            image=request.POST['image']
+            print(url,image)
+            pass
+        elif query_type=='ip_shortend':
+            print("Query Type "+query_type)
+            url=request.POST['url']
+            print(url)
+            pass
+        elif query_type=='ip_tracking':
+            code=request.POST['code']
+            start_date=request.POST['start_date']
+            end_date=request.POST['end_date']
+            print(code,start_date,end_date)
+        return render(request,'Data_Processing_Unit/ip_tools.html')

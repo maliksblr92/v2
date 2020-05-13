@@ -150,8 +150,7 @@ class Target_Fetched(RequireLoginMixin, IsTSO, View):
 
 class Identify_Target(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
-        return render(request,
-                      'Target_Management_System/tso_identifytarget.html',{})
+        return render(request,'Target_Management_System/tso_identifytarget.html',{})
 
 class Identify_Target_Request(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):

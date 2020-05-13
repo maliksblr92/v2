@@ -1,65 +1,43 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-  <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-  <style>
-  select{
-  color:white!important;
-  }
-  #submit{
-  background: linear-gradient(to right, #283e51, #1cb5e0);
-  }
-  .custom_pills{
-  background: linear-gradient(to right, #283e51, #1cb5e0);
-  
-  text-align: center;
-  
-  }
-  .custom_pills a{
-  text-decoration: none;;
-  font-weight: bolder;
-  font-size: 12px;;
-  }
-  .rotate{
-  transform: rotate(-90deg);
-  }
-  .custom_heading{
-  width: 150px !important;
-  border-radius: 5px;
-  height: 30px;
-  margin: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #012847 !important;
-  font-weight: bold;
-  }
-  .custom_para{
-  align-items: center;
-  justify-content: start;
-  display: flex;
-  }
-  
-  </style>
-  <div class="row">
+<style>
+    .radio_btns {
+        height: 60px;
+        width: 160px;
+        background: transparent;
+        border: 1px solid white;
+        color:white;
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+    }
+select{
+        color:white!important;
+    }
+    #submit{
+        background: linear-gradient(to right, #283e51, #1cb5e0);
+    }
+</style>
+<div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 ">
-      <div class="row border second_nav_row d-flex flex-row justify-content-between align-items-center">
-        <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success border-right  nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" style="font-size:14px;" href="/dpu/index">FAKE IDIENTITY GENEARTOR </a></div>
-        <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_darkweb">DARK WEB</a></div>
-        <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_scrapper"> DATA SCRAPPERS </a></div>
-        <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_textprocessing"> TEXT PROCESSING </a></div>
-        <div class=" m-0 p-0" style="width:20%;height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/twitter"> TWITTER </a></div>
-      </div>
+        <div class="row border second_nav_row d-flex flex-row justify-content-between align-items-center">
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success border-right  nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold" style="font-size:14px;" href="/dpu/index">FAKE IDIENTITY GENEARTOR </a></div>
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_darkweb">DARK WEB</a></div>
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_scrapper"> DATA SCRAPPERS </a></div>
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/index_textprocessing"> TEXT PROCESSING </a></div>
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/twitter"> TWITTER </a></div> 
+            <div class=" m-0 p-0" style="height:40px"><a class="btn btn-outline-success  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white font-weight-bold"style="font-size:14px;" href="/dpu/iptools"> LOOKUP TOOLS </a></div>               
+                    </div>
     </div>
     <div class="col-md-2"></div>
-  </div>
+</div>
 {% endblock %}
+
 {% block belly %}
-  <div class="row">
+<div class="row">
     <div class="col-md-12  ">
       <div class="w-100 h-100 " id="content_div">
         <div class="card-header  main_card_header m-0 p-0 ">
@@ -70,20 +48,20 @@
           <div class="container-fluid  border">
             <ul class="nav nav-pills row">
               
-              <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#emarket_form">E-MARKET SCRAPPER</a></li>
-              <li class="custom_pills col-md-3 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#daraz_form">DARAZ DATA SCRAPPER </a></li>
-              <li class="custom_pills col-md-3 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#scholor_form">GOOGLE SCHOLAR DATA SCRAPPER</a></li>
-              <li class="custom_pills col-md-3 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#patent_form">GOOGLE PATENT DATA SCRAPPER</a></li>
+              <li class="custom_pills  col-md-4 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#ip_short_end">IP SHORT</a></li>
+              <li class="custom_pills col-md-4 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#ip_tracking">IP TRACKING </a></li>
+              <li class="custom_pills col-md-4 m-0 p-0"><a class="btn btn-outline-success w-100 text-white "data-toggle="tab" href="#image_reverse_lookup">IMAGE REVERSE LOOKUP</a></li>
+            
             </ul>
             
             <div class="row">
               <div class="col-md-12">
                 <div class="tab-content" style="height:400px;">
-                  <div id="scholor_form" class="tab-pane fade in active show  ">
+                  <div id="image_reverse_lookup" class="tab-pane fade  ">
                     
                     <div class="card-body m-4 main_card">
                       
-                      <form name="google_scholar" id="google_scholar" action="/dpu/index_scrapper/" method="POST">
+                      <form name="image_lookup_form" id="image_lookup_form"  enctype="multipart/form-data" action="/dpu/iptools/" method="POST">
                         {% csrf_token %}
                         <div class="row input_wrapper_row">
                           <div class="col-md-2"></div>
@@ -91,9 +69,27 @@
                             <div class="row">
                               <div class="col-md-12  form-group form-inline w-100 h-100 b">
                                 <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                class="input_text">Query </span>
-                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query"
-                                name="query" required="required">
+                                class="input_text">Query Type </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query_type"
+                                name="query_type" value="image_reverse_lookup"readonly="readonly" required="required">
+                              </label>
+                            </div>
+
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">URL </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="url"
+                                name="url" required="required">
+                              </label>
+                            </div>
+
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Image </span>
+                                <input type="file" class=" ml-2 form-control form-control-sm form_input w-100" id="image"
+                                name="image" required="required">
                               </label>
                             </div>
                           </div>
@@ -120,23 +116,33 @@
                   </form>
                 </div>
                 
-                <div id="emarket_form" class="tab-pane ">
+                <div id="ip_short_end" class="tab-pane in active show ">
                   
                   <div class="card-body m-4 main_card">
                     
-                    <form name="e_market_scrapper_form" id="e_market_scrapper_form" action="/dpu/index_scrapper/" method="POST">
+                    <form name="ip_shortend_form" id="ip_shortend_form" action="/dpu/iptools/" method="POST">
                       {% csrf_token %}
                       <div class="row input_wrapper_row">
                         <div class="col-md-2"></div>
                         <div class="col-md-9">
                           <div class="row">
                             <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                              <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                              class="input_text">Query </span>
-                              <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query"
-                              name="query" required="required">
-                            </label>
-                          </div>
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Query Type </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query_type"
+                                name="query_type" value="ip_shortend"readonly="readonly" required="required">
+                              </label>
+                            </div>
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">URL </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="url"
+                                name="url" required="required">
+                              </label>
+                            </div>
+
+
                         </div>
                         
                         
@@ -161,23 +167,48 @@
                 </form>
               </div>
               
-              <div id="daraz_form" class="tab-pane ">
+              <div id="ip_tracking" class="tab-pane ">
                 
                 <div class="card-body m-4 main_card">
                   
-                  <form name="daraz_data_scrapper_form" id="daraz_data_scrapper_form" action="/dpu/index_scrapper/" method="POST">
+                  <form name="ip_tracking_form" id="ip_tracking_form" action="/dpu/iptools/" method="POST">
                     {% csrf_token %}
                     <div class="row input_wrapper_row">
                       <div class="col-md-2"></div>
                       <div class="col-md-9">
                         <div class="row">
-                          <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                            class="input_text">Query </span>
-                            <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query"
-                            name="query" required="required">
-                          </label>
-                        </div>
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Query Type </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query_type"
+                                name="query_type" value="ip_tracking"readonly="readonly" required="required">
+                              </label>
+                            </div>
+
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Code </span>
+                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="code"
+                                name="code" value="" required="required">
+                              </label>
+                            </div>
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Code </span>
+                                <input type="date" class=" ml-2 form-control form-control-sm form_input w-100" id="start_date"
+                                name="start_date" value="" required="required">
+                              </label>
+                            </div>
+
+                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                class="input_text">Code </span>
+                                <input type="date" class=" ml-2 form-control form-control-sm form_input w-100" id="end_date"
+                                name="end_date" value="" required="required">
+                              </label>
+                            </div>
                       </div>
                       
                       
@@ -205,47 +236,7 @@
             
             
             
-            
-            <div id="patent_form" class="tab-pane  ">
-              
-              <div class="card-body m-4 main_card">
-                
-                <form name="google_patent" id="google_patent" action="/dpu/index_scrapper/" method="POST">
-                  {% csrf_token %}
-                  <div class="row input_wrapper_row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-9">
-                      <div class="row">
-                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                          class="input_text">Query </span>
-                          <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query"
-                          name="query" required="required">
-                        </label>
-                      </div>
-                    </div>
-                    
-                    
-                    <input type="hidden" name="form_name" value="google_patent" id="form_name"/>
-                    
-                    
-                    
-                  </div>
-                  <div class="col-md-1 ">
-                  </div>
-                </div>
-                
-                <div class="row input_wrapper_row">
-                  <div class="col-md-6"></div>
-                  <div class="col-md-4"></div>
-                  <div class="col-md-2">
-                    <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                    name="submit" id="submit">
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+           
         </div>
       </div>
     </div>
