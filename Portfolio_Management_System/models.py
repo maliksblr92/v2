@@ -37,11 +37,13 @@ class Portfolio_PMS(Document):
 
     description = ListField(default=[])
 
+
     # if portfolio type is group it should have list of individual portfolios
     portfolios = ListField(default=[])
 
     #it saves ref of TMS target in list bellow
     social_targets = ListField()
+
 
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -183,10 +185,10 @@ class Portfolio_Linked_PMS(Document):
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
     def __str__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def __repr__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def resolve_intell_reference(self,step_before=0):
 

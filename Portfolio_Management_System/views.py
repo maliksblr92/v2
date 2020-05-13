@@ -1,5 +1,5 @@
 from django.shortcuts import render , reverse
-
+from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 # Create your views here.
 from django.shortcuts import render
 from django.views import View
@@ -11,6 +11,7 @@ from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse, HttpResponseRedirect
 from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
 
 acq = Acquistion_Manager()
@@ -110,7 +111,13 @@ class Add_Extras(View):
             if extra_type == 'portfolio':
                 obj.add_portfolios(prime_value)
             if extra_type == 'description':
-                obj.add_description(prime_value)
+                title = request.POST.get('title', None)
+
+                obj.add_description({'title':title,'description':prime_value})
+
+            if(extra_type =='visuals'):
+                print(request.FILES.getlist('file_field'))
+
 
         return HttpResponseRedirect(reverse('Portfolio_Management_System:add_information',args=[portfolio_id]))
 
@@ -241,3 +248,30 @@ class Overview(TemplateView):
     def post(self, request, *args, **kwargs):
 
         return render(request, 'Portfolio_Management_System/tso_overview.html',{})
+
+
+class Portfolio_Links(RequireLoginMixin, IsTSO, View):
+
+    SUPPORTED_LINK_TYPES = ()
+
+    def get(self,request,*args,**kwargs):
+
+        gtr_list = []
+        portfolio_id = None
+        if 'portfolio_id' in kwargs:portfolio_id=kwargs['portfolio_id']
+        if(portfolio_id is not None):
+            portfolio = Portfolio_PMS.get_object_by_id(portfolio_id)
+            if(portfolio):
+                linked_refs = Portfolio_Linked_PMS.objects(alpha_reference=portfolio)
+                for ref in linked_refs:
+                    if(not isinstance(ref,Timeline_Posts_Model)):
+                        gtr_list.append(ref.beta_reference.GTR)
+
+
+                resp = acq.get_linked_targets(link_type='portfolio',gtr_list=gtr_list)
+
+                return render(request, 'Portfolio_Management_System/portfolio_links.html',
+                              {'targets': resp, 'supported_sites': acq.get_all_supported_sites()})
+
+
+        return render(request,'Portfolio_Management_System/portfolio_links.html',{})

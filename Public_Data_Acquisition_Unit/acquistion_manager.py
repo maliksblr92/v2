@@ -478,6 +478,45 @@ class Acquistion_Manager(object):
 
         return responses
 
+    def get_linked_targets(self,link_type='portfolio',gtr_list=[]):
+
+        if(len(gtr_list)>0 and link_type =='portfolio'):
+
+            responses = []
+
+            #ml = Mongo_Lookup()
+            GTRs = []
+            for gtr_id in gtr_list:
+                 GTRs.append(Global_Target_Reference.objects(id=gtr_id).first())
+
+
+            #GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+            for gtr in GTRs:
+
+
+                appropriate_model_targ, _, appropriate_model_resp = self.get_appropriate_method(gtr)
+                # obj_amt = appropriate_model_targ()
+                # obj_amr = appropriate_model_resp()
+
+                if (appropriate_model_resp is not None):
+
+                    # print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                    resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                    if (resp is not None):
+                        targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+
+                        responses.append([resp, targ])
+
+                # resp = Facebook_Profile.objects(GTR=gtr.id)
+                # targ = Facebook_Profile.objects(GTR=gtr.id)
+
+            return responses
+
+
+
+
     def get_fetched_keybases(self,top=50):
         responses = []
 
@@ -544,7 +583,7 @@ class Acquistion_Manager(object):
             print(e)
 
     def fetch_top_trends(self):
-        ess.google_trends()
+        ess.google_trends(country='india')
         ess.youtube_trends()
         ess.twitter_trends()
         ess.reddit_trends()

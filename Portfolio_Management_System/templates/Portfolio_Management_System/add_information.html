@@ -91,7 +91,9 @@
                               <li class="custom_pills active col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
                               <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#adresses">Add Adrresses </a></li>
                               <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
+
                                 <li class="custom_pills col-md-3 border-dark border"><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
+
 
                             </ul>
 
@@ -229,6 +231,10 @@
                                                   <div class="row">
                                                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                                                           <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                  class="input_text">Title </span>
+                                                              <input type="text" name="title" class="ml-2 form-control form-control-sm form_input w-100">
+                                                          </label>
+                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                                                                   class="input_text">Description </span>
                                                               <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
                                                                   name="prime_value" rows="10" required="required"></textarea>
@@ -258,8 +264,8 @@
 
                                             <div class="card" style="width: 18rem;">
                                       <div class="card-body">
-                                        <h5 class="card-title">Description</h5>
-                                        <p class="card-text">{{ description }}</p>
+                                        <h5 class="card-title">{{ description.title }}</h5>
+                                        <p class="card-text">{{ description.description }}</p>
                                         <a href="#" class="btn btn-primary">Delete</a>
                                       </div>
                                     </div>
@@ -334,8 +340,83 @@
 
                                     </div>
                               </div>
+
+                        <div id="visuals" class="tab-pane fade">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                                          {% csrf_token %}
+                                      <div class="card-body m-4 main_card">
+
+                                          <div class="row input_wrapper_row">
+                                              <div class="col-md-2"></div>
+                                              <div class="col-md-9">
+                                                  <div class="row">
+                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                  class="input_text">Title</span>
+                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
+                                                                            name="prime_value" required=""> </input>
+                                                          </label>
+                                                      </div>
+                                                      <div class="row">
+                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                  class="input_text">Description</span>
+                                                                   <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
+                                                                  name="prime_value" rows="10" required="required"></textarea>
+                                                          </label>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-sm-9">
+                                                            <span class="btn btn-default btn-file">
+                                                                <input id="input-2" name="file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                                                            </span>
+                                                        </div>
+                                                      </div>
+                                                  </div>
+
+
+                                              </div>
+                                              <div class="col-md-1 ">
+                                              </div>
+                                          </div>
+                                          <input type="hidden" value="visuals" id="form_name" name="extra_type" />
+                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                          <div class="row input_wrapper_row">
+                                              <div class="col-md-6"></div>
+                                              <div class="col-md-4"></div>
+                                              <div class="col-md-2">
+                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
+                                                name="submit" id="submit">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </form>
+                                        <div class="row">
+                                            {% for phone in phoness %}
+
+                                            <div class="card" style="width: 18rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Phones</h5>
+                                        <p class="card-text">{{ phone }}</p>
+                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      </div>
+                                    </div>
+                                                                {% endfor %}
+
+
+                                        </div>
+
+                                    </div>
+                                    </div>
+
+                                    </div>
+                              </div>
                             </div>
                           </div>
+                    </div>
                         <!-- <div class="m-0 p-0 " id="case_link" style="position: relative;">
                             <div dir="ltr" class="resize-sensor"
                                 style="pointer-events: none; position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;">
