@@ -291,6 +291,7 @@ class Ess_Api_Controller(object):
         try:
             add_target_url = 'smart_search/'
             payload = {'username': username,'category':search_site,'entity_type':entity_type}
+            print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
@@ -464,7 +465,7 @@ class Ess_Api_Controller(object):
                       'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
             import json
             payload_json = json.dumps(payload)
-            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload_json)
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload)
             print(response.json())
             return response.json()
 
@@ -545,6 +546,18 @@ class Ess_Api_Controller(object):
         try:
             add_target_url = 'twitter/trends'
             payload = {'country':country}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def twitter_world_trends(self):
+        try:
+            add_target_url = 'twitter/trends'
+            payload = {}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
             print(response.json())
             return response.json()

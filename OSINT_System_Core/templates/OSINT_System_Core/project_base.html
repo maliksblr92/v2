@@ -486,7 +486,27 @@ function rabbit_message(window_type) {
   </div>
 </div>
 <script>
+
+    var beta_id_g = "";
+
+    function open_model(beta_id,modal_type) {
+        beta_id_g = beta_id
+        console.log(beta_id)
+
+        if(modal_type =='link'){
+             $('#linkto_portfolio').modal('show')
+        }
+        else{
+            $('#share_resource').modal('show')
+        }
+
+    }
+
+
     function searchOpen() {
+
+
+
     var type = $('#type').val()
     var search = $('#txtSearch').empty().val()
     var data = {
@@ -508,7 +528,7 @@ function submit_share() {
 
 console.log("in submit share")
 var user_group = $('#group_type').val()
-    var resource_id = $('#btn_link').attr("data-id")
+    var resource_id = beta_id_g;
     var message = $('#share_message').val()
 
         //var beta_id = $('.btn_link').attr('data-id')
@@ -525,6 +545,7 @@ var user_group = $('#group_type').val()
 
                 $('#share_response').text(resp)
                  console.log(resp)
+                beta_id_g = ""
                },
 
     });
@@ -533,7 +554,7 @@ function submit_link(alpha_id) {
 
 console.log("i m clicked")
 
-    var beta_id = $('#btn_link').attr("data-id")
+    var beta_id = beta_id_g ;//$('#btn_link').attr("data-id")
         //var beta_id = $('.btn_link').attr('data-id')
  console.log(beta_id)
     var type = $('#type').val()
@@ -548,6 +569,7 @@ console.log("i m clicked")
 
                 $('#response').text(resp)
                  console.log(resp)
+                    beta_id_g = ""
                },
 
     });

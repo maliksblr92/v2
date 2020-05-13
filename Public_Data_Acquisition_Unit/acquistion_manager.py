@@ -229,9 +229,9 @@ class Acquistion_Manager(object):
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'custom'):
             if (gtr.target_type == 'dynamic_crawling'):
-                return (Dynamic_Crawling, ess.dynamic_crawling,None)
+                return (Dynamic_Crawling, ess.dynamic_crawling,Dynamic_Crawling_Response_TMS)
             elif (gtr.target_type == 'keybase_crawling'):
-                return (Keybase_Crawling,ess.add_keybase_target ,None)
+                return (Keybase_Crawling,ess.add_keybase_target ,Keybase_Response_TMS)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
@@ -286,12 +286,14 @@ class Acquistion_Manager(object):
     def add_twitter_target(self):
         pass
 
-
-
-
-
-
-
+    def get_picture_by_facebook_username(self,username):
+        obj =  Facebook_Profile.find_object(username).first()
+        if(obj):
+            res_obj = Facebook_Profile_Response_TMS.objects(Q(username=obj.username) | Q(author_id=obj.user_id)).first()
+            if(res_obj is not None):
+                res_obj_json = res_obj.to_mongo()
+                print(res_obj_json)
+                return res_obj_json['profile_picture_url']['profile_picture']
 
 
 
@@ -442,7 +444,7 @@ class Acquistion_Manager(object):
         return responses
         """
 
-    def get_fetched_targets(self,top=50):
+    def get_fetched_targets(self,website=None,top=50):
         responses = []
 
         ml = Mongo_Lookup()
@@ -450,20 +452,97 @@ class Acquistion_Manager(object):
 
         for gtr in GTRs:
 
+            if(gtr.website.name.lower() == website or website == None):
+                appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+                #obj_amt = appropriate_model_targ()
+                #obj_amr = appropriate_model_resp()
 
-            appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
-            #obj_amt = appropriate_model_targ()
-            #obj_amr = appropriate_model_resp()
+                if(appropriate_model_resp is not None):
 
-            if(appropriate_model_resp is not None):
+                    #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
 
-                #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+                    resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                    if(resp is not None):
+                        targ = appropriate_model_targ.objects(GTR=gtr.id).first()
 
-                resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
-                if(resp is not None):
-                    targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+                        responses.append([resp, targ])
 
-                    responses.append([resp, targ])
+
+                #resp = Facebook_Profile.objects(GTR=gtr.id)
+                #targ = Facebook_Profile.objects(GTR=gtr.id)
+
+
+
+
+
+
+        return responses
+
+    def get_linked_targets(self,link_type='portfolio',gtr_list=[]):
+
+        if(len(gtr_list)>0 and link_type =='portfolio'):
+
+            responses = []
+
+            #ml = Mongo_Lookup()
+            GTRs = []
+            for gtr_id in gtr_list:
+                 GTRs.append(Global_Target_Reference.objects(id=gtr_id).first())
+
+
+            #GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+            for gtr in GTRs:
+
+
+                appropriate_model_targ, _, appropriate_model_resp = self.get_appropriate_method(gtr)
+                # obj_amt = appropriate_model_targ()
+                # obj_amr = appropriate_model_resp()
+
+                if (appropriate_model_resp is not None):
+
+                    # print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                    resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                    if (resp is not None):
+                        targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+
+                        responses.append([resp, targ])
+
+                # resp = Facebook_Profile.objects(GTR=gtr.id)
+                # targ = Facebook_Profile.objects(GTR=gtr.id)
+
+            return responses
+
+
+
+
+    def get_fetched_keybases(self,top=50):
+        responses = []
+
+        #ml = Mongo_Lookup()
+        GTRs = Global_Target_Reference.objects.all().order_by('-id')
+
+        for gtr in GTRs:
+
+            if(gtr.website.name == 'custom'):
+                appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+
+                print(appropriate_model_targ,appropriate_model_resp)
+
+                if(appropriate_model_targ.target_type =='keybase_crawling'):
+                    #obj_amt = appropriate_model_targ()
+                    #obj_amr = appropriate_model_resp()
+
+                    if(appropriate_model_resp is not None):
+
+                        #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                        resp = appropriate_model_resp.objects(GTR=str(gtr.id)).first()
+                        if(resp is not None):
+                            targ = appropriate_model_targ.objects(GTR=gtr.id).first()
+
+                            responses.append([resp, targ])
 
 
                 #resp = Facebook_Profile.objects(GTR=gtr.id)
@@ -504,10 +583,11 @@ class Acquistion_Manager(object):
             print(e)
 
     def fetch_top_trends(self):
-        ess.google_trends()
+        ess.google_trends(country='india')
         ess.youtube_trends()
         ess.twitter_trends()
         ess.reddit_trends()
+        ess.twitter_world_trends()
 
 
     def identify_target(self,query,website):

@@ -2,6 +2,7 @@
 # from django.utils import timezone
 # Create your models here.
 import datetime
+
 # Create your models here.
 from mongoengine import *
 from mongoengine import signals
@@ -198,6 +199,14 @@ class Instagram_Posts(EmbeddedDocument):
     comments_count = IntField()
     likes_count = IntField()
     display_url = URLField()
+
+
+class Keybase_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    data = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
 class Instagram_Response_TMS(Document):
@@ -402,7 +411,9 @@ class News(Document):
     news = ListField()
     common_words = ListField()
     spelling_variants = ListField()
-    meta = {'strict':False}
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
 
 class Dynamic_Crawling_Response_TMS(Document):
     GTR = StringField()
@@ -412,6 +423,15 @@ class Dynamic_Crawling_Response_TMS(Document):
     creation_date = DateTimeField()
     expiration_date = DateTimeField()
     data = DictField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+class Temp(Document):
+    GTR = StringField()
+    CTR = StringField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
 """

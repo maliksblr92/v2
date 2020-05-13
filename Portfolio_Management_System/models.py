@@ -22,6 +22,24 @@ PORTFOLIO_TYPES = (
 )
 
 
+class Photo(EmbeddedDocument):
+    photo = FileField()
+
+
+class Video(EmbeddedDocument):
+    video = FileField()
+
+class Visuals(EmbeddedDocument):
+
+    title = StringField()
+    description = StringField()
+
+    photos = ListField(EmbeddedDocumentField(Photo))
+    videos = ListField(EmbeddedDocumentField(Video))
+
+
+
+
 class Portfolio_PMS(Document):
 
     portfolio_type = StringField(choices=PORTFOLIO_TYPES)
@@ -36,12 +54,14 @@ class Portfolio_PMS(Document):
     education = StringField()
 
     description = ListField(default=[])
+    visuals = ListField(EmbeddedDocumentField(Visuals))
 
     # if portfolio type is group it should have list of individual portfolios
     portfolios = ListField(default=[])
 
     #it saves ref of TMS target in list bellow
     social_targets = ListField()
+
 
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -93,6 +113,11 @@ class Portfolio_PMS(Document):
     def add_phone(self,phone):
         self.phones.append(phone)
         self.save()
+
+    def add_visual(self,visual):
+        self.visuals.append(visual)
+        self.save()
+
 
 
     @staticmethod
@@ -183,10 +208,10 @@ class Portfolio_Linked_PMS(Document):
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
     def __str__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def __repr__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def resolve_intell_reference(self,step_before=0):
 

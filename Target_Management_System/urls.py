@@ -27,6 +27,11 @@ urlpatterns = [
         views.Target_Fetched.as_view(),
         name="tms_fetchtarget"),
     path(
+        'fetchtarget/<str:target_site>',
+        views.Target_Fetched.as_view(),
+        name="tms_fetchtarget"),
+
+    path(
         'identifytarget/',
         views.Identify_Target.as_view(),
         name="tms_identifytarget"),
@@ -51,6 +56,7 @@ path(
     path('test1/', views.Test_View1.as_view(), name="alertevent"),
     path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
     path('timeline/',views.Timeline.as_view(),name="timeline"),
+    path('link_analysis/<str:object_gtr_id>',views.Link_Analysis.as_view(),name="link_analysis"),
 
     # ahmed Class Views
     path('target/instagram/<str:object_gtr_id>', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
@@ -64,7 +70,7 @@ path(
     
     path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
     path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
-    path('report/facebook/group/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookGroupReport.as_view(), name="FacebookGroupReport"),
+
     
 
 ]
