@@ -3,9 +3,109 @@ import random
 import time
 import json
 from datetime import datetime,timezone
+import re
+
+from Public_Data_Acquisition_Unit.mongo_models import *
+from Portfolio_Management_System.models import *
+from Keybase_Management_System.models import *
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
+from Data_Processing_Unit.models import *
+
+
+acq = Acquistion_Manager()
+
+class System_Stats(object):
+
+    def __init__(self):
+
+        pass
+
+
+    def total_targets_added(self):
+        return len(Global_Target_Reference.targets_added_all_time())
+
+    def total_targets_fetched(self):
+        return len(acq.get_fetched_targets())
+
+    def targets_added_by_date(self,start_date,end_date):
+        return len(Global_Target_Reference.targets_added_count_by_date_range(start_date,end_date))
+
+    def targets_fetched_by_date(self,start_date,end_date):
+        pass
+
+    def total_keybase_crawling_targets_added(self):
+        return len(Keybase_Crawling.objects())
+
+    def total_dynamic_crawling_targets_added(self):
+        return len(Dynamic_Crawling.objects())
+
+    def total_keybase_crawling_targets_fetched(self):
+        return len(Keybase_Response_TMS.objects())
+
+    def total_dynamic_crawling_targets_fetched(self):
+        return len(Dynamic_Crawling_Response_TMS.objects())
+
+    def top_profiles_with_negative_behavior(self,website='facebook',target_type='profile'):
+
+        username_list = []
+        if(website == 'facebook' and target_type =='profile'):
+            responces = Facebook_Profile_Response_TMS.objects()
+            for resp in responces:
+                resp_j = resp.to_mongo()
+
+                if(resp_j['behaviour'].lower() == 'negative'):
+
+                    if(resp_j['username']):
+                        username_list.append(resp.username)
+
+            return username_list
+
+        return None
+
+    def top_twitter_profiles_with_highest_counts(self,top=20,count_type='likes_count'):
+        data_list = []
+        try:
+            responces = Twitter_Response_TMS.objects().order_by(''+count_type)[:top]
+            for resp in responces:
+                resp.to_mongo()
+                data_list.append({'name':resp.name,'count':int(re.search(r'\d+', resp[count_type]).group())})
+
+            return data_list
+        except Exception as e:
+            return None
+
+
+    def total_periodic_targets(self):
+        return len(Periodic_Targets.objects())
+
+    def total_expired_targets(self,website=None):
+
+        expired_count = 0
+        expired_count += Facebook_Profile.expired_targets_count()
+        expired_count += Facebook_Page.expired_targets_count()
+        expired_count += Facebook_Group.expired_targets_count()
+        expired_count += Instagram_Profile.expired_targets_count()
+        expired_count += Twitter_Profile.expired_targets_count()
+        expired_count += Linkedin_Profile.expired_targets_count()
+        expired_count += Linkedin_Company.expired_targets_count()
+        expired_count += Reddit_Profile.expired_targets_count()
+        expired_count += Youtube_Channel.expired_targets_count()
+        expired_count += Keybase_Crawling.expired_targets_count()
+        expired_count += Dynamic_Crawling.expired_targets_count()
+
+
+        return expired_count
 
 
 
+
+
+
+
+
+
+
+"""
 TIME_FACTOR = int((datetime.now()-datetime(2019,12,17)).total_seconds())
 ADDITION_FACTOR = random.randint(200, 400)
 SUBTRACTION_FACTOR = 1000
@@ -204,3 +304,4 @@ class System_Log_Manager(object):
         }
 
         return data
+"""

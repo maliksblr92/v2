@@ -8,6 +8,7 @@ PASSWORD = ''
 HOST_IP = ''
 PORT = ''
 
+import os
 disconnect('default')
 #CONNECT TO MONGO DB
 connect(db='OSINT_System',host='192.168.18.20', port=27017)
@@ -569,6 +570,10 @@ class Facebook_Profile(Facebook_Target):
     def find_object(query):
         return Facebook_Profile.objects.search_text(query)
 
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Profile.objects(is_expired=True))
+
 class Youtube_Channel(Youtube_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
     username = StringField(default='null')  # make username unique for soul one facebook profile target
@@ -619,7 +624,9 @@ class Youtube_Channel(Youtube_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
-
+    @staticmethod
+    def expired_targets_count():
+        return len(Youtube_Channel.objects(is_expired=True))
 
 class Facebook_Page(Facebook_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -671,6 +678,10 @@ class Facebook_Page(Facebook_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Page.objects(is_expired=True))
+
 
 class Facebook_Group(Facebook_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -722,6 +733,10 @@ class Facebook_Group(Facebook_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Group.objects(is_expired=True))
+
 class Facebook_Search(Facebook_Target):
 
 
@@ -833,6 +848,9 @@ class Reddit_Profile(Reddit_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Reddit_Profile.objects(is_expired=True))
 
 class Reddit_Subreddit(Reddit_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -884,6 +902,9 @@ class Reddit_Subreddit(Reddit_Target):
     define all the function related to all the profile targets of reddit in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Reddit_Subreddit.objects(is_expired=True))
 
 #.....................................................................Twitter Targets Sections...........................................................
 
@@ -936,6 +957,9 @@ class Twitter_Profile(Twitter_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Twitter_Profile.objects(is_expired=True))
 
 #.....................................................................Instagram Targets Sections...........................................................
 
@@ -986,6 +1010,10 @@ class Instagram_Profile(Instagram_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Instagram_Profile.objects(is_expired=True))
+
 #.....................................................................Linkedin Targets Sections...........................................................
 
 class Linkedin_Profile(Linkedin_Target):
@@ -1040,6 +1068,10 @@ class Linkedin_Profile(Linkedin_Target):
 
     """
 
+    @staticmethod
+    def expired_targets_count():
+        return len(Linkedin_Profile.objects(is_expired=True))
+
 
 class Linkedin_Company(Linkedin_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -1092,6 +1124,10 @@ class Linkedin_Company(Linkedin_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Linkedin_Company.objects(is_expired=True))
+
 
 #.....................................................................Custom Targets Sections...........................................................
 
@@ -1162,6 +1198,11 @@ class Keybase_Crawling(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Keybase_Crawling.objects(is_expired=True))
+
 
 class Dynamic_Crawling(Document):
 
@@ -1247,6 +1288,10 @@ class Dynamic_Crawling(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Dynamic_Crawling.objects(is_expired=True))
 #.....................................................................Periodic Targets Models...........................................................
 
 class Periodic_Targets(Document):
@@ -1294,6 +1339,7 @@ class Rabbit_Messages(Document):
 
     message_type = StringField(default='info')
     message_data = DictField()
+    process_id = IntField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
@@ -1307,7 +1353,12 @@ class Rabbit_Messages(Document):
 
     @staticmethod
     def get_top_messages(top=10,message_type='message'):
-        return Rabbit_Messages.objects(message_type=message_type).order_by('-id')[:top]
+
+        if(message_type == 'alert'):
+            return Rabbit_Messages.objects(Q(message_type=message_type)).order_by('-id')[:top]
+
+        else:
+            return Rabbit_Messages.objects(Q(message_type=message_type) & Q(process_id=os.getpid())).order_by('-id')[:top]
 
 
 
