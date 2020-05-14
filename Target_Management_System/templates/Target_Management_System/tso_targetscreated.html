@@ -31,6 +31,24 @@
 </div>
 {% endblock %}
 {% block belly %}
+<style>
+    tr {
+        width: 100%;
+        display: inline-table;
+        table-layout: fixed;
+        }
+        
+        table{
+         height:500px;              // <-- Select the height of the table
+         display: -moz-groupbox;    // Firefox Bad Effect
+        }
+        tbody{
+          overflow-y: scroll;      
+          height: 400px;            //  <-- Select the height of the body
+          width: 100%;
+          position: absolute;
+        }
+</style>
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
         <h4 class="topheading">Already Created Targets</h4>
@@ -38,9 +56,10 @@
     <!-- end of top row -->
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-       <table class="table" style="color: white">
+       <table class="table" style="color: white" >
   <thead>
     <tr>
+        <th scope="col">Sr#</th>
       <th scope="col">Website</th>
       <th scope="col">Target_Type</th>
       <th scope="col">Title</th>
@@ -50,9 +69,10 @@
 
     </tr>
   </thead>
-  <tbody>
+  <tbody >
   {% for target in targets %}
     <tr>
+        <th scope="row">{{forloop.counter}}</th>
       <th scope="row">{{target.GTR}}</th>
       <td>{{target.target_type}}</td>
       <td> {% if target.username %}

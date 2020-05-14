@@ -172,7 +172,25 @@ document.getElementById("loading_icon_linkedin").style.display = "none";
 document.getElementById("loading_icon_reddit").style.display = "none";
 
     function myFunction(website) {
-       
+        if(website == 'instagram'){
+            $('#loading_icon_instagram').show()
+        }
+
+        if(website == 'facebook'){
+            $('#loading_icon_facebook').show()
+        }
+
+        if(website == 'reddit'){
+            $('#loading_icon_reddit').show()
+        }
+        if(website == 'linkedin'){
+            $('#loading_icon_linked').show()
+        }
+
+        if(website == 'twitter'){
+            $('#loading_icon_twitter').show()
+        }
+        
     var query = document.getElementById("hid_query").value
     $.ajax({
     url: "/tms/identifytarget_request/",
@@ -182,30 +200,28 @@ document.getElementById("loading_icon_reddit").style.display = "none";
     },
     'success': (response) => {
     //console.log('i am called    ss  s')
+   
     if(website == 'instagram'){
-    document.getElementById("loading_icon_facebook").style.display = "block";
-    $('#instagram_response').empty().append(response)
-    document.getElementById("loading_icon_facebook").style.display = "none";
+     
+        $('#instagram_response').empty().append(response)
+        $('#loading_icon_instagram').hide()
     }
-    if(website == 'twitter'){
-        document.getElementById("loading_icon_twitter").style.display = "block";
+    if(website == 'twitter'){  
     $('#twitter_response').empty().append(response)
-    document.getElementById("loading_icon_twitter").style.display = "none";
+    $('#loading_icon_twitter').hide()
     }
     if(website == 'reddit'){
-        document.getElementById("loading_icon_reddit").style.display = "block";
     $('#reddit_response').empty().append(response)
-    document.getElementById("loading_icon_reddit").style.display = "none";
+    $('#loading_icon_reddit').hide()
     }
     if(website == 'linkedin'){
-        document.getElementById("loading_icon_linkedin").style.display = "block";
     $('#linkedin_response').empty().append(response)
-    document.getElementById("loading_icon_linkedin").style.display = "none";
+    $('#loading_icon_linkedin').hide()
     }
-    if(website == 'facebook'){
-        document.getElementById("loading_icon_facebook").style.display = "block";
+    if(website == 'facebook'){ 
     $('#facebook_response').empty().append(response)
-    document.getElementById("loading_icon_facebook").style.display = "none";
+    $('#loading_icon_facebook').hide()
+  
 
     }
     //console.log(response)
