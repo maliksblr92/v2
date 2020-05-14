@@ -344,7 +344,7 @@ class Ess_Api_Controller(object):
             return response.json()
         except Exception as e:
             print(e)
-            return {'response': 'ess replied null'}
+            return None
 
     def add_target(self,username,category,entity_type,GTR,CTR):
         try:
@@ -355,7 +355,7 @@ class Ess_Api_Controller(object):
             return response.json()
         except Exception as e:
             print(e)
-            return {'response': 'ess replied null'}
+            return None
 
     def news_crawling(self,top = 10,news_site='bbc'):
         try:
@@ -471,7 +471,7 @@ class Ess_Api_Controller(object):
 
         except Exception as e:
             print(e)
-        return {'response': 'ess replied null'}
+        return None
 
 
     def test_api(self,keywords,GTR,CTR):
@@ -491,6 +491,51 @@ class Ess_Api_Controller(object):
         except Exception as e:
             print(e)
         return {'response': 'ess replied null'}
+
+# ..................................................API For IP Lookup...................................................
+
+    def create_payload(self, url=''):
+        try:
+            add_target_url = 'ip_shortend_url/'
+            payload = {'url': url}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def track_ip(self, code, start_date, end_date):
+        try:
+            add_target_url = 'ip_tracking/'
+            payload = {'code': code, 'start_date': start_date, 'end_date': end_date}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def image_reverse_lookup(self, image, url=''):
+        try:
+            add_target_url = 'image_lookup/'
+            payload = {'url': url}
+            image = {'media': image}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload,
+                                     files=image)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+
 #................................................API For Avatar Actions................................................
 
     def action_post(self,text,social_media,username,password):

@@ -51,7 +51,7 @@ class Acquistion_Manager(object):
                     pt.target_reff = target
                     pt.re_invoke_time =  datetime.datetime.utcnow() + datetime.timedelta(minutes=interval)
                     pt.save()
-                    publish(' {0} is added to periodic targets'.format(target), message_type='info', module_name=__name__)
+                    #publish(' {0} is added to periodic targets'.format(target), message_type='info', module_name=__name__)
 
                 else:
                     target.make_me_expire()
@@ -126,8 +126,12 @@ class Acquistion_Manager(object):
                 print('..............................adding keybase target ................................')
                 print(keywords)
                 response = appropriate_ess_method(keywords,gtr.id,ctr)
-                print(response)
-                publish('keybase target added successfully', message_type='info', module_name=__name__)
+                if(response is not None):
+                    print(response)
+                    publish(' '+keybase.keybase_ref.title+' target added successfully', message_type='notification', module_name=__name__)
+                else:
+                    publish(' ' + keybase.keybase_ref.title + ' not queued on ESS ',
+                            message_type='notification', module_name=__name__)
 
             elif (gtr.target_type == 'dynamic_crawling'):
 
@@ -148,8 +152,16 @@ class Acquistion_Manager(object):
 
 
                 response = appropriate_ess_method(kwargs['url'],ip,domain,pictures,videos,headings,paragraphs,links,gtr.id,ctr)
-                print(response)
-                publish('dynamic crawling target added successfully', message_type='info', module_name=__name__)
+
+
+                if (response is not None):
+                    print(response)
+                    publish(' ' + kwargs['url'] + ' target added successfully', message_type='notification',
+                            module_name=__name__)
+                else:
+                    publish(' ' + kwargs['url'] + ' not queued on ESS ',
+                            message_type='notification', module_name=__name__)
+
             else:
                 #for normal profile targets
                 #ess_api needs basic arguments for adding a target
@@ -165,9 +177,13 @@ class Acquistion_Manager(object):
 
                 response = appropriate_ess_method(username,category,entity_type,GTR,CTR)
                 print(response)
-                publish('crawling target added successfully', message_type='info', module_name=__name__)
 
 
+                if (response is not None):
+                    print(response)
+                    publish(' '+username+' added successfully', message_type='notification', module_name=__name__)
+                else:
+                    publish(' '+username+' not queued on ESS ', message_type='notification', module_name=__name__)
 
 
             return True

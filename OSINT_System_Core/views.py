@@ -26,7 +26,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
-from System_Log_Management_Unit.system_log_manager import System_Log_Manager
+
 from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
@@ -45,7 +45,7 @@ from django.core import serializers
 from django.shortcuts import get_object_or_404
 from mongoengine.queryset.visitor import Q
 from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
-
+from System_Log_Management_Unit.system_log_manager import System_Stats
 # djangorestframework moduels below
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
@@ -67,11 +67,11 @@ from rest_framework.status import (
 # processing_manager = Processing_Manager()
 acq = Acquistion_Manager()
 # coreDb = Coredb_Manager()
-log_manager = System_Log_Manager()
+log_manager = ""
 pl = Portfolio_Link()
 pi = Portfolio_Include()
 km = Keybase_Match()
-
+ss = System_Stats()
 
 # FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
 
@@ -779,7 +779,7 @@ class Share_Resource(View):
 class Rabbit_Message(View):
 
     def get(self, request):
-        print(request.GET)
+        #print(request.GET)
         objects = Rabbit_Messages.get_top_messages(10, request.GET.get('window_type', 'message'))
         print(objects)
 
