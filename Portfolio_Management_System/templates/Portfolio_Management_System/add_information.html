@@ -74,24 +74,36 @@ rgba(6, 17, 26, 1) 100%
 );
 }
 </style>
-<div class="row">
-  <div class="col-md-12  ">
-    <div class="w-100 h-100 " id="content_div">
-      <div class="card-header  main_card_header m-0 p-0 ">
-        <p class="card_header_text">Add Information</p>
-      </div>
-      <div class="card-body   p-4  m-0 ">
-        <div class="row card_row glowing_border">
-          <div class="col-md-12 m-0 p-0 ">
-            <div class="container-fluid">
-              <ul class="nav nav-pills row">
-                <li class="custom_pills active col-md-3 border-dark" style="border-radius: 10px 0px 0px 0px;"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
-                <li class="custom_pills col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#adresses">Add Addresses </a></li>
-                <li class="custom_pills col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
-                <li class="custom_pills col-md-3 border-dark" style="border-radius: 0px 10px 0px 0px;"><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12  ">
+      <div class="w-100 h-100 " id="content_div">
+        <div class="card-header  main_card_header m-0 p-0 ">
+          <p class="card_header_text">Add Information</p>
+        </div>
+        <div class="card-body ">
+          <div class="row card_row glowing_border">
+            <div class="col-md-12 m-0 p-0 ">
+              
+              
+              
+              
+              <div class="container-fluid">
+                <ul class="nav nav-pills row">
+                  
+                  <li class="custom_pills btn active col-md-3 border-dark" style="border-radius: 10px 0px 0px 0px;"><a class="text-white "data-toggle="pill" href="#social">Add Social Targets </a></li>
+                  <li class="custom_pills btn col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#adresses">Add Addresses </a></li>
+                  <li class="custom_pills btn col-md-3 border-dark"><a class="text-white "data-toggle="pill" href="#description">Add Description</a></li>
+                  <li class="custom_pills btn col-md-3 border-dark" ><a class="text-white "data-toggle="pill" href="#phones">Add Phones</a></li>
+                  {% comment %}
+                  <li class="custom_pills btn col-md-2 border-dark" style="border-radius: 0px 10px 0px 0px;"><a class="text-white "data-toggle="pill" href="#visuals">Add Visuals</a></li>
+                {% endcomment%}
+                
               </ul>
+              <!-- START OF TAB CONTENT DIV  -->
               <div class="tab-content">
-                <div id="social" class="tab-pane fade">
+                <!-- START SOCIAL TAB -->
+                <div id="social" class="tab-pane fade in active show ">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-md-12 m-0 p-0">
@@ -100,11 +112,12 @@ rgba(6, 17, 26, 1) 100%
                           <div class="card-body m-0 p-0 ">
                             <div class="row  ">
                               
-                              <div class="col-md-12  m-0 p-0">
-                                <span class="float-left glowing_border text-white btn-sm newlabeldesign">
+                              <div class="col-md-12  m-0 mt-4 p-0">
+                                <!-- <span class="float-left glowing_border text-white btn-sm newlabeldesign">
                                   <i class="far fa-address-card mr-2"></i>   All Social Targets
-                                </span>
-                            {% comment %}    <a  href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" type="button" class="glowing_border addbutton float-right  btn-sm btn-success mr-2" id="submit">   {% endcomment %} 
+                                </span> -->
+                                <a  href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id %}" type="button" class="glowing_border addbutton float-right  btn-sm btn-success mr-2" id="submit">
+                                  
                                   <i class="fas fa-plus mr-2"></i>ADD
                                 </a>
                               </div>
@@ -121,7 +134,7 @@ rgba(6, 17, 26, 1) 100%
                           </div>
                         </form>
                       </div>
-                      <div class="row glowing_border p-2"style="height:450px;overflow-y:auto;">
+                      <div class="row p-2"style="height:500px;overflow-y:auto;">
                         {% for target in social_targets %}
                           <div class="col-md-4">
                             <!-- inside CaRD DIV-->
@@ -146,7 +159,11 @@ rgba(6, 17, 26, 1) 100%
                     </div>
                   </div>
                 </div>
+                <!-- END SOCIAL TAB -->
                 
+                
+                
+                <!-- START ADDRESES TAB -->
                 <div id="adresses" class="tab-pane fade ">
                   <div class="container-fluid">
                     <div class="row">
@@ -167,7 +184,7 @@ rgba(6, 17, 26, 1) 100%
                                   </div>
                                 </div>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="margin: auto;">
                                   <div class="">
                                     <input type="hidden" value="address" id="form_name" name="extra_type" />
                                     <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
@@ -182,7 +199,7 @@ rgba(6, 17, 26, 1) 100%
                             </form>
                           </div>
                         </div>
-                        <div class="row p-2 glowing_border" >
+                        <div class="row p-2" >
                           {% for address in addresses %}
                             <div class="col-md-4">
                               <!-- inside CaRD DIV-->
@@ -200,78 +217,59 @@ rgba(6, 17, 26, 1) 100%
                                   <span style="font-size:12px;" class="text-white ">  {{ address }}</span>
                                 </div>
                               </div>
-                              <div id="description" class="tab-pane fade">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" name="add_description_form" id="add_description_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
-                                          {% csrf_token %}
-                                          <input type="hidden" value= "add_description_form"name="form_name" id="form_name" value="form_name"/>
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-
-
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Title </span>
-                                                              <input type="text" name="title" class="ml-2 form-control form-control-sm form_input w-100">
-                                                          </label>
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Description </span>
-                                                              <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
-                                                                  name="prime_value" rows="10" required="required"></textarea>
-                                                          </label>
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                        <input type="hidden" value="description" id="form_name" name="extra_type" />
-                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-6"></div>
-                                              <div class="col-md-4"></div>
-                                              <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
-                                                name="submit" id="submit">
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </form>
-                                        <div class="row">
-                                            {% for description in descriptions %}
-
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">{{ description.title }}</h5>
-                                        <p class="card-text">{{ description.description }}</p>
-                                        <a href="#" class="btn btn-primary">Delete</a>
-                                      </div>
-                                    </div>
-                                                                {% endfor %}
-
-
-                                        </div>
-
-
-
-
-                                    </div>
-                                    </div>
-
-                                    </div>
-                              </div>
-                            </form>
-                          </div>
+                              
+                              
+                            </div>
+                          {% endfor %}
                         </div>
-                        <div class="row glowing_border p-2">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END ADDRESSES TAB -->
+                
+                <!-- START DESCRIPTION TABS  -->
+                <div id="description" class="tab-pane fade">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <form name="portfolio_create_form" name="add_description_form" id="add_description_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" value= "add_description_form"name="form_name" id="form_name" value="form_name"/>
+                          
+                          <div class="row">
+                            <div class="col-md-8">
+                              <div class="">
+                                <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="addresses">
+                                  <span class="newlabeldesign glowing_border">Title</span>
+                                  <input type="text" class="w-100 newinputdesign glowing_border" required="required"  id="author_id"
+                                  name="prime_value" />
+                                </label>
+                              </div>
+                              <div class="mb-2">
+                                <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="addresses">
+                                  <span class="newlabeldesign glowing_border">Description</span>
+                                  <textarea type="text" class="newinputdesign glowing_border w-100" id="description_value"
+                                  name="prime_value" rows="2" required="required"></textarea>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2" style="margin: auto;">
+                              <div class="">
+                                <input type="hidden" value="address" id="form_name" name="extra_type" />
+                                <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                <div class="row input_wrapper_row">
+                                  <div class="col-md-12">
+                                    <input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white" value="Add" name="submit" id="submit">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        <div class="row p-2">
                           {% for description in descriptions %}
                             <div class="col-md-4">
                               <!-- inside CaRD DIV-->
@@ -285,8 +283,10 @@ rgba(6, 17, 26, 1) 100%
                                   </button>
                                 </div>
                                 <!-- Div Right part-->
-                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-                                  <span style="font-size:12px;" class="text-white ">  {{ description }}</span>
+                                <div class="col-md-10 glowing_border d-flex flex-column justify-content-center align-items-start" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                  <div style="font-size:12px;" class="text-white "> Title: {{ description.title }}</div>
+                                  <div style="font-size:12px;" class="text-white ">  Description : {{ description.description }}</div>
+                                  
                                 </div>
                               </div>
                             </div>
@@ -298,6 +298,9 @@ rgba(6, 17, 26, 1) 100%
                     </div>
                   </div>
                 </div>
+                <!-- END DESCRIPTION TABS  -->
+                
+                <!-- START PHONES TAB -->
                 <div id="phones" class="tab-pane fade">
                   <div class="container-fluid">
                     <div class="row">
@@ -306,146 +309,169 @@ rgba(6, 17, 26, 1) 100%
                           <div class="row">
                             <form name="portfolio_create_form" id="portfolio_create_form" class="w-100" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST">
                               {% csrf_token %}
+                              
                               <div class="row">
                                 <div class="col-md-8">
-                                  <div class="">
-                                    <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="phone">
-                                      <span class="newlabeldesign glowing_border">  Phone</span>
-                                      <input type="text" class="w-50 newinputdesign glowing_border" id="author_id"
-                                      name="prime_value"  required=""/>
-                                    </label>
-                                  </div>
+                                <div class="">
+                                  <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center" for="phone">
+                                    <span class="newlabeldesign glowing_border">  Phone</span>
+                                    <input type="text" class="w-50 newinputdesign glowing_border" id="author_id"
+                                    name="prime_value"  required=""/>
+                                  </label>
                                 </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-2">
-                                  <div class="">
-                                    <input type="hidden" value="phone" id="form_name" name="extra_type" />
-                                    <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                    <div class="row input_wrapper_row">
-                                      <div class="col-md-12">
-                                        <input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white glowing_border" value="Add" name="submit" id="submit">
-                                      </div>
+                              </div>
+                              <div class="col-md-2"></div>
+                              <div class="col-md-2" style="margin: auto;">
+                                <div class="">
+                                  <input type="hidden" value="phone" id="form_name" name="extra_type" />
+                                  <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                                  <div class="row input_wrapper_row">
+                                    <div class="col-md-12">
+                                      <input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white glowing_border" value="Add" name="submit" id="submit">
                                     </div>
                                   </div>
                                 </div>
                               </div>
-
-                        <div id="visuals" class="tab-pane fade">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                    <div class="col-md-12">
-                                      <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" enctype="multipart/form-data" method="POST">
-                                          {% csrf_token %}
-                                      <div class="card-body m-4 main_card">
-
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-2"></div>
-                                              <div class="col-md-9">
-                                                  <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Title</span>
-                                                                  <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                                                            name="title" required=""> </input>
-                                                          </label>
-                                                      </div>
-                                                      <div class="row">
-                                                      <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                          <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                  class="input_text">Description</span>
-                                                                   <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
-                                                                  name="description" rows="10" required="required"></textarea>
-                                                          </label>
-                                                      </div>
-                                                      <div class="row">
-                                                          <div class="col-sm-9">
-                                                            <span class="btn btn-default btn-file">
-                                                                <input id="input-1" name="photos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                                                            </span>
-                                                        </div>
-
-                                                      </div>
-
-                                                          <div class="row">
-                                                          <div class="col-sm-9">
-                                                            <span class="btn btn-default btn-file">
-                                                                <input id="input-2" name="videos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                                                            </span>
-                                                        </div>
-
-                                                      </div>
-                                                  </div>
-
-
-                                              </div>
-                                              <div class="col-md-1 ">
-                                              </div>
-                                          </div>
-                                          <input type="hidden" value="visuals" id="form_name" name="extra_type" />
-                                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                                          <div class="row input_wrapper_row">
-                                              <div class="col-md-6"></div>
-                                              <div class="col-md-4"></div>
-                                              <div class="col-md-2">
-                                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
-                                                name="submit" id="submit">
-                                              </div>
-                                          </div>
+                              </div>
+                              
+                            </form>
+                            <div class="col-md-12 "style="height:500px;overflow-y:auto;">
+                              <div class="row">
+                                {% for phones in phones %}
+                                  <div class="col-md-4">
+                                    <!-- inside CaRD DIV-->
+                                    <div class="row mr-1 ml-1">
+                                      <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;">
+                                        <span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;">
+                                          <i class="fa fa-user text-white mr-2">Target Username</i>
+                                        </span>
+                                        <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="" data-toggle="" data-target="#">
+                                        <i class="fa fa-trash"></i>
+                                        </button>
                                       </div>
-                                    </form>
-
-                                        <div class="row">
-                                            {% for visual in visuals %}
-
-                                            <div class="card" style="width: 18rem;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">{{ visual.title }}</h5>
-                                        <p class="card-text">{{ visual.description }}</p>
-                                          {% for image in visual.images %}
-                                          <img src="{% static 'Portfolio_Management_System/mongo_temp_files/' %}" alt="">
-                                              {% endfor %}
-                                        <a href="#" class="btn btn-primary">Delete</a>
+                                      <!-- Div Right part-->
+                                      <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                                        <span style="font-size:12px;" class="text-white ">  {{ phones }}</span>
                                       </div>
                                     </div>
-                                                                {% endfor %}
-
-
-                                        </div>
-
-                                    </div>
-                                    </div>
-
-                                    </div>
+                                  </div>
+                                  
+                                {% endfor %}
                               </div>
                             </div>
                           </div>
-                    </div>
-                        <!-- <div class="m-0 p-0 " id="case_link" style="position: relative;">
-                            <div dir="ltr" class="resize-sensor"
-                                style="pointer-events: none; position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;">
-                                <div class="resize-sensor-expand"
-                                    style="pointer-events: none; position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden; max-width: 100%;">
-                                    <div
-                                        style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 712px; height: 410px;">
-                                    </div>
-                                </div>
-                                Div Right part-->
-                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-                                  <span style="font-size:12px;" class="text-white ">  {{ phone }}</span>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            
-                          {% endfor %}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <!-- END PHONES TAB  -->
+                
+                
+                <!-- START VISUAL TAB -->
+                
+                {% comment %}
+                <div id="visuals" class="tab-pane fade">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" enctype="multipart/form-data" method="POST">
+                          {% csrf_token %}
+                          <div class="card-body m-4 main_card">
+                            
+                            <div class="row input_wrapper_row">
+                              <div class="col-md-2"></div>
+                              <div class="col-md-9">
+                                <div class="row">
+                                  <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                    class="input_text">Title</span>
+                                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
+                                    name="title" required="" />
+                                  </label>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                    class="input_text">Description</span>
+                                    <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
+                                    name="description" rows="10" required="required"></textarea>
+                                  </label>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-9">
+                                    <span class="btn btn-default btn-file">
+                                      <input id="input-1" name="photos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                                    </span>
+                                  </div>
+                                  
+                                </div>
+                                
+                                <div class="row">
+                                  <div class="col-sm-9">
+                                    <span class="btn btn-default btn-file">
+                                      <input id="input-2" name="videos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                                    </span>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+                            <div class="col-md-1 ">
+                            </div>
+                          </div>
+                          <input type="hidden" value="visuals" id="form_name" name="extra_type" />
+                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+                          <div class="row input_wrapper_row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                              <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
+                              name="submit" id="submit">
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      
+                      <div class="row">
+                        {% for visual in visuals %}
+                          
+                          <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ visual.title }}</h5>
+                              <p class="card-text">{{ visual.description }}</p>
+                              {% for image in visual.images %}
+                                <img src="{% static 'Portfolio_Management_System/mongo_temp_files/' %}" alt="">
+                              {% endfor %}
+                              <a href="#" class="btn btn-primary">Delete</a>
+                            </div>
+                          </div>
+                        {% endfor %}
+                        
+                        
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
               </div>
             </div>
-       
+          {% endcomment %}
+          <!-- END VISUAL TAB -->
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
   </div>
 </div>
 </div>

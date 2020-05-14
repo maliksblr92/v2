@@ -44,7 +44,7 @@ from Data_Processing_Unit.models import Trends
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 from mongoengine.queryset.visitor import Q
-from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
+from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference,Periodic_Targets
 
 # djangorestframework moduels below
 from django.views.decorators.csrf import csrf_exempt
@@ -1058,3 +1058,9 @@ def getGoogleTrends(request):
             data = None
             return HttpResponse(data)
 
+def Periodic_Target_DB(request):
+    if request.method=='GET':
+        obj=Periodic_Targets()
+        Periodic_Targets_List=obj.get_all_periodic_task()
+        return render(request,'OSINT_System_Core/Periodic_Targets.html',{'Periodic_Targets_List':Periodic_Targets_List})
+    

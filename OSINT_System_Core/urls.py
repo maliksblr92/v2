@@ -80,6 +80,7 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('update_dashboard_donutchart/',views.update_dashboard_donutchart,name='update_dashboard_donutchart'),
     path('worldwide_twitter_hashtags/',views.get_worldwide_hashtags,name='worldwide_twitter_hashtags'),
     path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
+    path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     # ahmed end
 ]
 
