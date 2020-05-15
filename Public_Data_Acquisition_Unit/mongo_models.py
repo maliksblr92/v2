@@ -1310,6 +1310,12 @@ class Periodic_Targets(Document):
     @staticmethod
     def get_all_periodic_task():
         return Periodic_Targets.objects
+    
+
+    def delete_periodic_task(self):
+        self.target_reff.make_me_expire()
+        self.delete()
+   
 
 class Share_Resource(Document):
 

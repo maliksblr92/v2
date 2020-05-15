@@ -81,6 +81,7 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('worldwide_twitter_hashtags/',views.get_worldwide_hashtags,name='worldwide_twitter_hashtags'),
     path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
+    path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
     # ahmed end
 ]
 

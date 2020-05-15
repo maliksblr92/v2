@@ -2,9 +2,39 @@
 {% load static %}
 {% block head_dep %}
   <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+  <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-  <style>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+            <a  href="/dpu/index" class="btn secondnavitems "style="font-size:10px!important">   FAKE IDIENTITY GENEARTOR</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="/dpu/index_darkweb" class="btn secondnavitems "style="font-size:12px!important;">    DARK WEB</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
+            <a href="/dpu/index_scrapper" class="btn secondnavitems "style="font-size:12px!important;">  DATA SCRAPPERS</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="/dpu/index_textprocessing" class="btn secondnavitems "style="font-size:12px!important;"> TEXT PROCESSING</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="/dpu/twitter" class="btn secondnavitems "style="font-size:12px!important;">  TWITTER</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="/dpu/iptools" class="btn secondnavitems "style="font-size:12px!important;"> LOOKUP TOOLS</a>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<style>
   select{
   color:white!important;
   }
@@ -51,46 +81,6 @@
   }
   
   </style>
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10 ">
-      <div class="row border d-flex flex-row justify-content-between align-items-center">
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu" style="height:40px">
-          <a class="btn secondnavitems" style="font-size:14px !important;" href="/dpu/index">
-            FAKE IDIENTITY GENEARTOR
-          </a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu" style="height:40px">
-          <a class="btn secondnavitems"style="font-size:14px;" href="/dpu/index_darkweb">
-            DARK WEB
-          </a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive" style="height:40px">
-          <a class="btn secondnavitems"style="font-size:14px;" href="/dpu/index_scrapper">
-            DATA SCRAPPERS
-          </a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu" style="height:40px">
-          <a class="btn secondnavitems"style="font-size:14px;" href="/dpu/index_textprocessing">
-            TEXT PROCESSING
-          </a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu" style="height:40px">
-          <a class="btn secondnavitems"style="font-size:14px;" href="/dpu/twitter">
-            TWITTER
-          </a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu" style="height:40px">
-          <a class="btn secondnavitems"style="font-size:14px;" href="/dpu/iptools">
-            LOOKUP TOOLS
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-{% endblock %}
-{% block belly %}
   <div class="row">
     <div class="col-md-12  ">
       <div class="w-100 h-100 " id="content_div">

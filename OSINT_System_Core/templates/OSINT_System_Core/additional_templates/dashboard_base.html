@@ -591,17 +591,12 @@
          // country_name: country_name
        // },
         success: function (data) {
-          console.log(data.top_Trends)
-          len = data.top_Trends.length
           var html = ''
           for (var x = 0; x < len; x++) {
-            if (data.top_Trends[x].tweet_count == '') {
-              data.top_Trends[x].tweet_count =
-                "N/A"
-            }
           $('#trends_by_google').empty();
           for (var x = 0; x < len; x++) {
-            var html='<div class="col-md-12 mt-1"><div class="row"><div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">'+data.top_Trends[x].tweet_count+'</span></div><div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="">'+data.top_Trends[x].tag+'</a></div></div></div>';
+            console.log(data.top_Trends[0][x])
+            var html='<div class="col-md-12 mt-1"><div class="row"><div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">N/A</span></div><div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" style="font-size: 12px;" href="'+data.top_Trends[0][x].article_link+'">'+data.top_Trends[0][x].article_name+'</a></div></div></div>';
             $("#trends_by_google").append(html);
           }
           //var today = new Date();
