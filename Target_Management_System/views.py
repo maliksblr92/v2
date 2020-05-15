@@ -16,6 +16,41 @@ km = Keybase_Manager()
 tl = Timeline_Manager()
 from django.views.generic import TemplateView
 
+
+
+
+
+class Test(View):
+    
+    def get(self,request,*args,**kwargs):
+      
+        if request.method=="GET":
+            print("GET METHOD")
+            social_sites = acq.get_all_social_sites()
+            intervals=PERIODIC_INTERVALS,
+            print(social_sites)
+            return render(request,'Target_Management_System/new_page.html',{'social_sites':social_sites,'intervals':intervals})
+
+    def post(self,request,*args,**kwargs):
+       
+        if request.method=="POST":
+            print("POST METHOD")
+            website=request.POST['website']
+            target_type=request.POST['target_type']
+            interval=request.POST['interval']
+            expired_on=request.POST['expired_on']
+            screenshots=request.POST['screenshots']
+            usernames=request.POST['usernames']
+            print(website,target_type,interval,expired_on, screenshots,usernames)
+            return redirect('/tms/new_page')
+
+
+
+
+
+
+
+
 class Add_Target(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):

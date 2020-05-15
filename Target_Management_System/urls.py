@@ -13,6 +13,7 @@ from .views import Index
 from .views import FacebookPersonReport
 from .views import FacebookPageReport
 from .views import FacebookGroupReport
+from .views import Test
 
 # end ahmed imports
 urlpatterns = [
@@ -70,6 +71,7 @@ path(
     
     path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
     path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
+    path('new_page/',Test.as_view(), name="new_page"),
 
     
 
