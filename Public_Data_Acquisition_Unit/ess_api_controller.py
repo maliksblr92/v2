@@ -446,7 +446,7 @@ class Ess_Api_Controller(object):
             add_target_url = 'crawler_internet/'
             payload = {}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
-            print(response.json())
+            #print(response.json())
             return response.json()
 
         except Exception as e:
@@ -522,12 +522,20 @@ class Ess_Api_Controller(object):
 
     def image_reverse_lookup(self, image, url=''):
         try:
-            add_target_url = 'image_lookup/'
+            #img = self.data["personal_info"]["image"]
+
+            #req = requests.post(url=API_ENDPOINT, files=files)
+            import json
+            add_target_url = 'image_lookup'
             payload = {'url': url}
-            image = {'media': image}
-            print(payload)
-            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload,
-                                     files=image)
+            #image = {'media': image}
+
+            #img = self.data["personal_info"]["image"]
+            #files = [('files', (img, open(img, 'rb'), 'application/octet')),('data', ('data', json.dumps(self.data), 'application/json')), ]
+
+            files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
+            #print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,files=files)
             print(response.json())
             return response.json()
 

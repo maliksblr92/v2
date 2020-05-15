@@ -575,7 +575,7 @@ class Acquistion_Manager(object):
     def crawler_internet_connection(self):
 
         resp = ess.crawler_internet_connection()
-        print(resp[0]['internet']['download'],resp[0]['internet']['upload'],resp[0]['internet']['timestamp'])
+        #print(resp[0]['internet']['download'],resp[0]['internet']['upload'],resp[0]['internet']['timestamp'])
         return {'download':resp[0]['internet']['download'],'upload':resp[0]['internet']['upload'],'stamp':resp[0]['internet']['timestamp']}
 
     def mircocrawler_status(self):

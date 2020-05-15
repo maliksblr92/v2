@@ -767,14 +767,16 @@ class Ip_Tools(View):
         if query_type=='image_reverse_lookup':
             print("Query Type "+query_type)
             url=request.POST['url']
-            image=request.POST['image']
-            print(url,image)
-            pass
+            image=request.FILES['image[]']
+            print(image)
+            resp = ess.image_reverse_lookup(image,url)
+            print(resp)
+
         elif query_type=='ip_shortend':
             print("Query Type "+query_type)
             url=request.POST['url']
             print(url)
-            pass
+
         elif query_type=='ip_tracking':
             code=request.POST['code']
             start_date=request.POST['start_date']
