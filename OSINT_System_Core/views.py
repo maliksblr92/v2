@@ -21,7 +21,7 @@ from Avatar_Management_Unit.models import Avatar_AMS
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
-from django.shortcuts import reverse, render
+from django.shortcuts import reverse, render,redirect
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -42,7 +42,7 @@ import os
 from Data_Processing_Unit.models import News
 from Data_Processing_Unit.models import Trends
 from django.core import serializers
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,reverse
 from mongoengine.queryset.visitor import Q
 from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference,Periodic_Targets
 
@@ -1065,4 +1065,15 @@ def Periodic_Target_DB(request):
         obj=Periodic_Targets()
         Periodic_Targets_List=obj.get_all_periodic_task()
         return render(request,'OSINT_System_Core/Periodic_Targets.html',{'Periodic_Targets_List':Periodic_Targets_List})
+    
+
+    
+class Delete_Periodic_Target_DB(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs['periodic_task_id']
+        print(id)
+        fetch_object_for_deletion=Periodic_Targets.objects(id=id).first()
+        if fetch_object_for_deletion:
+            fetch_object_for_deletion.delete_periodic_task()
+        return redirect('/core/periodic_target')
     
