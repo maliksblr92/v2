@@ -51,14 +51,13 @@
                                         <h5 class=" myH5"> Target Fetch View</h5>
                                     </div>
                                     <div class="col-md-9"
-                                        style="background-color:#243F52;padding-left:1.5rem; border-top-right-radius:15px;">
+                                        style="background-color:#243F52;padding-left:1.5rem; margin: auto;">
                                         <!--RIGHT SECTION FOR icons-->
-                                        <div class="row">
+                                        <div class="row d-flex flex-row justify-content-around">
                                             {% for site in supported_sites %}
-                                            <div class="col-md-2 col-md-offset-1" style="padding:10px;">
-                                                <a href="{% url 'Target_Management_System:tms_fetchtarget' site.name|lower %}" class="btn btn-primary">{{ site.name }}</a>
+                                                <a href="{% url 'Target_Management_System:tms_fetchtarget' site.name|lower %}" style="padding:5px margin: 10px;" class="btn btn-primary custom_social_icons">{{ site.name }}</a>
 
-                                            </div>
+                                            <!-- </div> -->
                                             {% endfor %}
                                         </div>
                                         <!--END OF GRID AND TILE VIEW RIGHT section -->
@@ -113,7 +112,7 @@
                                                         {% elif target.1.GTR|lower == 'custom'%}
 
                                                             {% if target.1.target_type|lower == 'keybase_crawling'%}
-                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
                                                             {% elif target.1.target_type|lower == 'dynamic_crawling'%}
                                                             <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
 

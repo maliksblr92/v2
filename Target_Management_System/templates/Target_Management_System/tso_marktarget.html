@@ -123,8 +123,12 @@
                                                     <button type="button" x-target-name="{{platform.name|lower}}"
                                                         class="btn btn-secondary searchbutton smartsearch">SMART
                                                         SEARCH</button>
+                                                       
+
                                                 </div>
+                                               
                                             </div>
+                                            <div><span> <i class="fas fa-spinner fa-spin"style="font-size:25px;" id="loading_icon"></i></span></div>
 
                                             <div class="input-group   mt-1 mb-3">
                                                 <div class="input-group-prepend">
@@ -290,11 +294,18 @@
 
 {% block foot_script %}
 <script>
+  
+        console.log("hiding icon");
+        $('#loading_icon').hide()
+
+   
     //start of document ready
     document.addEventListener('DOMContentLoaded', function () {
         let smartsearch = $('.smartsearch')
         // smart search
         smartsearch.click((event) => {
+            $('#loading_icon').show()
+
             // console.log(event.target)
             let website = event.target.getAttribute('x-target-name')
             let author_account = event.target.parentElement.parentElement.querySelector('input').value
@@ -339,6 +350,8 @@
                         default:
                             break;
                     }
+                    $('#loading_icon').hide()
+
                 }
             })
         })

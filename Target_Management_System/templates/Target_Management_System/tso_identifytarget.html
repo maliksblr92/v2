@@ -73,7 +73,7 @@
             <div class="col-md-12  ">
                 <!-- social box for facebook -->
                 <div class="row custom_row mb-3">
-                    <div class="iconlabel col-md-9">
+                    <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-facebook fa-1x mt-2  ml-4  ">
                         Facebook
                         </i>
@@ -82,12 +82,15 @@
                     onclick="myFunction('facebook')">
                     Search
                     </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_facebook" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
-                <div class="container othercontainer d-flex justify-content-center" id="facebook_response">
+                <div class="container othercontainer d-flex justify-content-center" id="facebook_response" style="border:none;">
                 </div>
                 <!-- for Instagram -->
                 <div class="row custom_row mb-3">
-                    <div class="iconlabel col-md-9">
+                    <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-instagram fa-1x mt-2  ml-4  ">
                         Instagram
                         </i>
@@ -96,12 +99,15 @@
                     onclick="myFunction('instagram')">
                     Search
                     </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_instagram" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
-                <div class="container othercontainer d-flex justify-content-center" id="instagram_response">
+                <div class="container othercontainer d-flex justify-content-center" id="instagram_response" style="border:none;">
                 </div>
                 <!-- For twitter -->
                 <div class="row custom_row mb-3">
-                    <div class="iconlabel col-md-9">
+                    <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-twitter-square fa-1x mt-2  ml-4  ">
                         Twitter
                         </i>
@@ -110,12 +116,15 @@
                     onclick="myFunction('twitter')">
                     Search
                     </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_twitter" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
-                <div class="container othercontainer d-flex justify-content-center" id="twitter_response">
+                <div class="container othercontainer d-flex justify-content-center" id="twitter_response" style="border:none;">
                 </div>
                 <!-- for LinkedIn -->
                 <div class="row custom_row mb-3">
-                    <div class="iconlabel col-md-9">
+                    <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-linkedin fa-1x mt-2  ml-4  ">
                         LinkedIn
                         </i>
@@ -124,12 +133,15 @@
                     onclick="myFunction('linkedin')">
                     Search
                     </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_linkedin" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
-                <div class="container othercontainer d-flex justify-content-center" id="linkedin_response">
+                <div class="container othercontainer d-flex justify-content-center" id="linkedin_response" style="border:none;">
                 </div>
                 <!-- for LinkedIn -->
                 <div class="row custom_row mb-3">
-                    <div class="iconlabel col-md-9">
+                    <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
                         Reddit
                         </i>
@@ -138,15 +150,47 @@
                     onclick="myFunction('reddit')">
                     Search
                     </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_reddit" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
-                <div class="container othercontainer d-flex justify-content-center" id="reddit_response">
+                <div class="container othercontainer d-flex justify-content-center" id="reddit_response" style="border:none;">
                 </div>
                 <!-- END OF second row-->
             </div>
         </div>
     </div>
     <script>
+          function hideLoadingIcons(){
+    console.log("hide all icons")
+
+}
+document.getElementById("loading_icon_facebook").style.display = "none";
+document.getElementById("loading_icon_twitter").style.display = "none";
+document.getElementById("loading_icon_instagram").style.display = "none";
+document.getElementById("loading_icon_linkedin").style.display = "none";
+document.getElementById("loading_icon_reddit").style.display = "none";
+
     function myFunction(website) {
+        if(website == 'instagram'){
+            $('#loading_icon_instagram').show()
+        }
+
+        if(website == 'facebook'){
+            $('#loading_icon_facebook').show()
+        }
+
+        if(website == 'reddit'){
+            $('#loading_icon_reddit').show()
+        }
+        if(website == 'linkedin'){
+            $('#loading_icon_linked').show()
+        }
+
+        if(website == 'twitter'){
+            $('#loading_icon_twitter').show()
+        }
+        
     var query = document.getElementById("hid_query").value
     $.ajax({
     url: "/tms/identifytarget_request/",
@@ -156,24 +200,38 @@
     },
     'success': (response) => {
     //console.log('i am called    ss  s')
+   
     if(website == 'instagram'){
-    $('#instagram_response').empty().append(response)
+     
+        $('#instagram_response').empty().append(response)
+        $('#loading_icon_instagram').hide()
     }
-    if(website == 'twitter'){
+    if(website == 'twitter'){  
     $('#twitter_response').empty().append(response)
+    $('#loading_icon_twitter').hide()
     }
     if(website == 'reddit'){
     $('#reddit_response').empty().append(response)
+    $('#loading_icon_reddit').hide()
     }
     if(website == 'linkedin'){
     $('#linkedin_response').empty().append(response)
+    $('#loading_icon_linkedin').hide()
     }
-    if(website == 'facebook'){
+    if(website == 'facebook'){ 
     $('#facebook_response').empty().append(response)
+    $('#loading_icon_facebook').hide()
+  
+
     }
     //console.log(response)
     }
     });
+  
     }
+
+       
+       
+   
     </script>
 {% endblock %}

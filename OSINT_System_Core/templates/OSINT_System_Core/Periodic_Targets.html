@@ -7,32 +7,32 @@
 
 {% block smallnavbar %}
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex" style="">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
-            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
-            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
-        </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-8 d-flex" style="">
+    <div class="col-md-1">
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+      <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+      <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+      <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+      <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+      <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
 </div>
 {% endblock %}
 {% block belly %}
 <style>
-  tr {
+ tr {
     width: 100%;
     display: inline-table;
     table-layout: fixed;
@@ -96,48 +96,47 @@
 }
 </style>
 <div class="row middlecontentdiv">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-        <h4 class="topheading">Already Created Targets</h4>
-    </div>
-    <!-- end of top row -->
-    <!-- inside main container -->
-    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-       <table class="table table-responsive"  style="color: white" >
-  <thead>
-    <tr>
-        <th scope="col">Sr#</th>
-      <th scope="col">Website</th>
-      <th scope="col">Target_Type</th>
-      <th scope="col">Title</th>
-      <th scope="col">Expired</th>
-        <th scope="col">Expire On</th>
-        <th scope="col">Action</th>
+  <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+    <h4 class="topheading">Periodic Targets</h4>
+  </div>
+  <!-- end of top row -->
+  <!-- inside main container -->
+  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+    <table class="table table-responsive" style="color: white">
+      <thead>
+        <tr>
+         
+          <th scope="col">GTR</th>
+          <th scope="col">CTR</th>
+          <th scope="col">Periodic Interval</th>
+          <th scope="col">Username / Title </th>
+          <th scope="col">Expire On</th>
+          <th scope="col">Action</th>
 
-    </tr>
-  </thead>
-  <tbody >
-  {% for target in targets %}
-    <tr>
-        <th scope="row">{{forloop.counter}}</th>
-      <th scope="row">{{target.GTR}}</th>
-      <td>{{target.target_type}}</td>
-      <td> {% if target.username %}
-          {{ target.username }}
-      {% elif target.title%}
-          {{ target.title }}
-
-          {% else %}
-          untitled
-          {% endif %}
-      </td>
-      <td>{{ target.is_expired }}</td>
-        <td>{{target.expired_on}}</td>
-      <td>Include|Delete</td>
-    </tr>
-{% endfor %}
-  </tbody>
-</table>
-</table>
-    </div>
+        </tr>
+      </thead>
+      <tbody>
+        {% for target in Periodic_Targets_List %}
+        <tr>
+         
+          <th scope="row">{{target.GTR}}</th>
+          <td>{{target.CTR}}</td>
+          <td>{{target.target_reff.periodic_interval}}</td>
+          <td> {% if target.target_reff.username %}
+            {{ target.target_reff.username }}
+            {% elif target.target_reff.title %}
+            {{ target.target_reff.title }}
+            {% else %}
+            untitled
+            {% endif %}
+          </td>
+          <td style="font-size:10px;" ><span class="text-truncate">{{target.target_reff.expired_on}}</span></td>
+          <td>Delete</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </table>
+  </div>
 </div>
 {% endblock %}>

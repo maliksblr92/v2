@@ -14,15 +14,18 @@
             <!-- facebook person target css start -->
             <style>
             
-            body {
-            background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            margin: 0 !important;
-            padding: 0 !important;
-            }
+            
+body {
+    background: url("./../../../../static/images/background_gradient.svg")
+        no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0 !important;
+    padding: 0 !important;
+   overflow-x:hidden!important;
+}
             html {
             --scrollbarBG: #CFD8DC;
             --thumbBG: #90A4AE;
@@ -219,71 +222,18 @@
             <!-- facebook person target css end -->
         </head>
         <body>
-            <div class="container-fluid wrapper background-gradient">
-                <!-- <div class="row pl-5 pr-5">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg" id="header">
-                            <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-                            data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon ">
-                                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-                            </span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8 ">
-                                    <div class="row m-0 p-0">
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">MONITOR</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 custom_center">
-                                            <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-                                        </div>
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">FETCH</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6 list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 "></div>
-                            </div>
-                        </nav>
-                    </div>
-                </div> -->
+            <div class="container-fluid ">
+               
                 <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white text-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                        <!-- <div class="circle-dot1 ml-2"></div>
-                        <div class="circle-dot2 ml-1"></div>
-                        <div class="circle-dot3 ml-1"></div> -->
-                        <span class="btn btn-primary btn-sm  float"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span>
-                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
-                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                    <div class="col-md-12 bg-white  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                       <div class="row">
+                        <div class="col-md-6 text-right"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+                       
+                        <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                            <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2" style="margin-top:2px;" href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                        <a type="button" class="btn  btn-sm btn-success float-right"style="margin-top:2px;"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                        </div>
+                       </div>
 
                     </div>
                     
@@ -324,6 +274,7 @@
                             <div class="col-md-12 " >
                                 <!--  -->
                                 {% for f in profile.friends %}
+                            
                                     <div class="row mt-1 ">
                                         <div class="col-md-4 m-0 p-0 " >
                                           
@@ -337,7 +288,7 @@
                                             <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Id:</div>
                                             <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.id}}</div>
                                             <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Visit:</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph"><a href=""
+                                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph"><a target="_black" href="{{f.url}}"
                                             class="badge custom_badge fa fa-search">View</a></div>
                                         </div>
                                     </div>
@@ -502,7 +453,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="accordion" id="accordionExample">
-                                                {% for c in profile.interests.games %}
+                                              
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="sports1" data-toggle="collapse"
                                                             data-target="#sports" aria-expanded="true"
@@ -517,32 +468,17 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.sports %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="sports1" data-toggle="collapse"
-                                                            data-target="#sports" aria-expanded="true"
-                                                            aria-controls="sports">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            Sports ({{profile.interests.sports | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="sports" class="collapse " aria-labelledby="sports1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No sports</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
+                                                    
+                                             
                                                 <!-- nusic  -->
-                                                {% for c in profile.interests.games %}
+                                             
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="music1" data-toggle="collapse"
                                                             data-target="#music" aria-expanded="true" aria-controls="music">
@@ -556,31 +492,15 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.music %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="music1" data-toggle="collapse"
-                                                            data-target="#music" aria-expanded="true" aria-controls="music">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            music ({{profile.interests.music | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="music" class="collapse " aria-labelledby="music1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No music</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
+                                               
                                                 <!-- films  -->
-                                                {% for c in profile.interests.games %}
+                                               
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="films1" data-toggle="collapse"
                                                             data-target="#films" aria-expanded="true" aria-controls="films">
@@ -594,31 +514,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.films %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="films1" data-toggle="collapse"
-                                                            data-target="#films" aria-expanded="true" aria-controls="films">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            films ({{profile.interests.films | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="films" class="collapse " aria-labelledby="films1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No films</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                   
                                                 <!-- tv_programmes  -->
-                                                {% for c in profile.interests.games %}
+                                              
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="tv_programmes_1" data-toggle="collapse"
                                                             data-target="#tv_programmes" aria-expanded="true"
@@ -633,32 +536,15 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
                                                                 {% for i in profile.interests.tv_programmes %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="tv_programmes_1" data-toggle="collapse"
-                                                            data-target="#tv_programmes" aria-expanded="true"
-                                                            aria-controls="tv_programmes">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            tv_programmes ({{profile.interests.tv_programmes | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="tv_programmes" class="collapse " aria-labelledby="tv_programmes_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No tv_programmes</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                   
+                                           
                                                 <!-- books  -->
-                                                {% for c in profile.interests.games %}
+                                              
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="books1" data-toggle="collapse"
                                                             data-target="#books" aria-expanded="true" aria-controls="books">
@@ -672,31 +558,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
                                                                 {% for i in profile.interests.books %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="books1" data-toggle="collapse"
-                                                            data-target="#books" aria-expanded="true" aria-controls="books">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            books ({{profile.interests.books | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="books" class="collapse " aria-labelledby="books1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No books</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                                 <!-- games  -->
-                                                {% for c in profile.interests.games %}
+                                              
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="games_1" data-toggle="collapse"
                                                             data-target="#games" aria-expanded="true" aria-controls="games">
@@ -710,31 +579,15 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body  text_paragraph">
                                                                 {% for i in profile.interests.games %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="games_1" data-toggle="collapse"
-                                                            data-target="#games" aria-expanded="true" aria-controls="games">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            games ({{profile.interests.games | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="games" class="collapse " aria-labelledby="games_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body  text_paragraph">
-                                                                <p>No games</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
+                                                
                                                 <!-- likes  -->
-                                                {% for c in profile.interests.likes %}
+                                                
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="likes_1" data-toggle="collapse"
                                                             data-target="#likes" aria-expanded="true" aria-controls="likes">
@@ -748,31 +601,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.likes %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="likes_1" data-toggle="collapse"
-                                                            data-target="#likes" aria-expanded="true" aria-controls="likes">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            likes ({{profile.interests.likes | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="likes" class="collapse " aria-labelledby="likes_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No likes</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                                 <!-- events  -->
-                                                {% for c in profile.interests.events %}
+                                              
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="events_1" data-toggle="collapse"
                                                             data-target="#events" aria-expanded="true"
@@ -787,32 +623,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.events %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="events_1" data-toggle="collapse"
-                                                            data-target="#events" aria-expanded="true"
-                                                            aria-controls="events">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            events ({{profile.interests.events | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="events" class="collapse " aria-labelledby="events_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No events</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                                 <!-- questions  -->
-                                                {% for c in profile.interests.questions %}
+                                             
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="questions_1" data-toggle="collapse"
                                                             data-target="#questions" aria-expanded="true"
@@ -827,32 +645,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.questions %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="questions_1" data-toggle="collapse"
-                                                            data-target="#questions" aria-expanded="true"
-                                                            aria-controls="questions">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            questions ({{profile.interests.questions | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="questions" class="collapse " aria-labelledby="questions_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body  text_paragraph">
-                                                                <p>No questions</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                                 <!-- reviews  -->
-                                                {% for c in profile.interests.reviews %}
+                                               
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="reviews_1" data-toggle="collapse"
                                                             data-target="#reviews" aria-expanded="true"
@@ -867,32 +667,14 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.reviews %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="reviews_1" data-toggle="collapse"
-                                                            data-target="#reviews" aria-expanded="true"
-                                                            aria-controls="reviews">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            reviews ({{profile.interests.reviews | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="reviews" class="collapse " aria-labelledby="reviews_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No reviews</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                                 <!-- notes  -->
-                                                {% for c in profile.interests.notes %}
+                                               
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="notes_1" data-toggle="collapse"
                                                             data-target="#notes" aria-expanded="true" aria-controls="notes">
@@ -906,29 +688,12 @@
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.notes %}
-                                                                    <a target="_blank" href="{{i.link}}">{{i.name}}</a>
+                                                                    <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% empty %}
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="notes_1" data-toggle="collapse"
-                                                            data-target="#notes" aria-expanded="true" aria-controls="notes">
-                                                            <h2 class="mb-0">
-                                                            <button class="btn btn-link text-white" type="button">
-                                                            notes ({{profile.interests.notes | length}})
-                                                            </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="notes" class="collapse " aria-labelledby="notes_1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body text_paragraph">
-                                                                <p>No notes</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
+                                                    
                                             </div>
                                         </div>
                                     </div>

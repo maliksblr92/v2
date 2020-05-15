@@ -20,7 +20,7 @@ from django.conf import settings as djangoSettings
 acq = Acquistion_Manager()
 # ahmed imports
 from django.views.generic import TemplateView
-
+from Portfolio_Management_System.models import Portfolio_PMS
 class Create_Portfolio(View):
 
     def get(self, request, *args, **kwargs):
@@ -301,6 +301,11 @@ class Overview(TemplateView):
         return render(request, 'Portfolio_Management_System/tso_overview.html',{})
 
 
+class Explore(View):
+    def get(self,request,*args,**kwargs):
+        resp=Portfolio_PMS.objects().first()
+        print("printitng portfolio pms object")
+        return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
 class Portfolio_Links(RequireLoginMixin, IsTSO, View):
 
     SUPPORTED_LINK_TYPES = ()

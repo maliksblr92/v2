@@ -1,0 +1,141 @@
+
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title%}Keybase Create{%endblock%}
+{% block head_dep %}
+<!-- Stylesheet -->
+<link rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+      crossorigin="anonymous">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+
+<!--  -->
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<style>
+    #keywords{
+        width: 100%!important;
+        width: 500px!important;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-4 col-lg-4 col-xl-4"></div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+            <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
+        </div>
+      
+    </div>
+    <div class="col-md-4 col-lg-4 col-xl-4"></div>
+</div>
+{% endblock %}
+
+{% block belly %}
+<div class="row  ">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <h4 class="topheading">Keybase Responses</h4>
+       
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  "style="height:450px;overflow-y:auto;">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+            <div class="row formbg ml-5">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                    {% for x in resp.data %}
+                    
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar  ">
+                        <h4 class="topheading">      {{target_object}} Response
+                        {% if x.serp_domain == "www.youtube.com" %}
+                       <span class="float-right d-flex flex-row justify-content-center align-items-center bg-danger" style="border-radius:5px;height:40px;width:60px;"> <i class="fab fa-youtube   text-white  " style="font-size:25px;"></i></span>
+                    </h4>
+                    <p class="ml-3" style="font-size:12px;"> <span class="badge badge-success"> Response Source :</span> {{x.url|default:"N/A"}}</p>
+                        {% endif %}</span>
+                    </div>
+                    <div class="card-body border border-dark "style="border-radius:0px 0px 15px 15px">
+                        {% if x.query|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query  :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.query|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+                        {% if x.serp_title|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query Search title :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.serp_title|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+                        {% if x.meta_title|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Meta  title :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.meta_title|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+
+                        {% if x.serp_url|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+                        </div>
+                        {% endif %}
+                        {% if x.serp_snippet|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Search Snippet :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;">  {{x.serp_snippet|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+
+                            {% if x.text_raw|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Raw Text :</span></div></div>
+                            <div class="col-md-10 border border-dark p-2"style="font-size:12px;height:200px;overflow-y:auto;border-radius:3px;"> {{x.text_raw|linebreaksbr|default:"N/A"}}</div>
+                        </div>
+
+                      
+                        {% endif %}
+
+                  
+                           
+                    </div>
+                   
+           {% endfor %}
+
+</div>
+
+
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+{% endblock %}
+{% block foot_dep %}
+
+<!-- JavaScript -->
+
+<script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
+
+<script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
+<script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+
+<script>
+  
+    
+    </script>
+
+{% endblock %}
+
