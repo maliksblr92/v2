@@ -44,6 +44,7 @@ class Acquistion_Manager(object):
 
             if('periodic_interval' in kwargs):
                 interval = kwargs['periodic_interval']
+                print('............interval '+str(interval))
                 if(interval > 0):
                     #print('in here')
                     pt = Periodic_Targets()
@@ -615,6 +616,7 @@ class Acquistion_Manager(object):
         if website == 'twitter': resp = ess.twitter_target_identification(query)
         if website == 'linkedin': resp = ess.linkedin_target_identification(query)
         if website == 'reddit': resp = ess.reddit_target_identification(query)
+        if website == 'youtube': resp = ess.youtube_target_identification(query)
 
         return resp
 

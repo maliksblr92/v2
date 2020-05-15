@@ -1,0 +1,32 @@
+{% for post in posts %}
+            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
+                <div class="card text-center glowing_border transparent">
+                    <div class="card-header text-white text-left topcontentbar">
+                        Username: {{ post.post.username }}
+                        <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}" target="_blank">Author: {{ post.post.author }}</a></h5>
+                    </div>
+                    <div class="card-body ">
+                        <p class="card-text text-white">{{ post.post.text }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if post.post.picture|length > 0 %}
+                                <img class="img-fluid border" src="{{ post.post.picture }}"> {% endif %}
+                            </div>
+                        </div>
+                        <a href="{{ post.post.link }}" class="btn btn-outline-light  ">Post</a>
+                        <div class="d-flex flex-row">
+                            <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ post.object_id }}" data-toggle="modal" data-target="#linkto_portfolio">
+                            <i class="fa fa-link"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource">
+                            <i class="fa fa-share"></i>
+                        </button>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span class="badge badge-light float-left">Site : {{ post.post.t_site }}</span>
+                        <span class="badge badge-light float-right">Type : {{ post.post.t_type }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}

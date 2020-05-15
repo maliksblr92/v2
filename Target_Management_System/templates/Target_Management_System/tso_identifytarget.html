@@ -139,7 +139,7 @@
                 </div>
                 <div class="container othercontainer d-flex justify-content-center" id="linkedin_response" style="border:none;">
                 </div>
-                <!-- for LinkedIn -->
+                <!-- for Reddit -->
                 <div class="row custom_row mb-3">
                     <div class="iconlabel col-md-8">
                         <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
@@ -156,6 +156,23 @@
                 </div>
                 <div class="container othercontainer d-flex justify-content-center" id="reddit_response" style="border:none;">
                 </div>
+                 <!-- for Youtube -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
+                        Youtube
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('youtube')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_youtube" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="youtube_response" style="border:none;">
+                </div>
                 <!-- END OF second row-->
             </div>
         </div>
@@ -170,6 +187,7 @@ document.getElementById("loading_icon_twitter").style.display = "none";
 document.getElementById("loading_icon_instagram").style.display = "none";
 document.getElementById("loading_icon_linkedin").style.display = "none";
 document.getElementById("loading_icon_reddit").style.display = "none";
+document.getElementById("loading_icon_youtube").style.display = "none";
 
     function myFunction(website) {
         if(website == 'instagram'){
@@ -189,6 +207,10 @@ document.getElementById("loading_icon_reddit").style.display = "none";
 
         if(website == 'twitter'){
             $('#loading_icon_twitter').show()
+        }
+
+        if(website == 'youtube'){
+            $('#loading_icon_youtube').show()
         }
         
     var query = document.getElementById("hid_query").value
@@ -222,6 +244,12 @@ document.getElementById("loading_icon_reddit").style.display = "none";
     $('#facebook_response').empty().append(response)
     $('#loading_icon_facebook').hide()
   
+
+    }
+    if(website == 'youtube'){
+    $('#youtube_response').empty().append(response)
+    $('#loading_icon_youtube').hide()
+
 
     }
     //console.log(response)
