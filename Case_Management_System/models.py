@@ -17,6 +17,17 @@ from Portfolio_Management_System.models import Portfolio_PMS
 disconnect('default')
 connect(db='OSINT_System')
 
+class LocationOfInterest(EmbeddedDocument):
+    """
+    Embedded Doc that contains the specifics of each location
+    pertinent to a case. There will be multiple of these locations.
+    Notes and important details of each location will be stored in
+    `description`
+    """
+    location = PointField()
+    address = StringField()
+    description = StringField()
+
 class Investigator(EmbeddedDocument):
     """
     Embedded Doc that contains details of each investigator
@@ -95,17 +106,6 @@ class PersonOfInterest(EmbeddedDocument):
     portfolio = ReferenceField(Portfolio_PMS)
     poi_category = ListField(StringField(choices=POI_CATEGORY))
 
-class LocationOfInterest(EmbeddedDocument):
-    """
-    Embedded Doc that contains the specifics of each location
-    pertinent to a case. There will be multiple of these locations.
-    Notes and important details of each location will be stored in
-    **`description`**
-    """
-    location = PointField()
-    address = StringField()
-    description = StringField()
-
 class CaseCMS(Document):
     """
     central model class which will contain further
@@ -136,4 +136,13 @@ class CaseCMS(Document):
     physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
 
 class AllLocationsOfInterest(Document):
+    """md
+    All Locations ever added to the police database
+    """
     locations = EmbeddedDocumentListField(LocationOfInterest)
+
+class AllPeopleOfInterest(Document):
+    """md
+    All people ever stored in the police database
+    """
+    people = EmbeddedDocumentListField(PersonOfInterest)
