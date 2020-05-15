@@ -354,10 +354,17 @@ class Timeline(RequireLoginMixin, IsTSO, View):
 
     def get(self,request,*args,**kwargs):
 
-        posts = tl.fetch_posts_for_timeline()
+        return render(request,'Target_Management_System/timeline.html',{})
+
+class Timeline_Fetch(RequireLoginMixin,IsTSO,View):
+
+    def get(self,request,*args,**kwargs):
+
+        top = int(request.GET.get('top','10'))
+        posts = tl.fetch_posts_for_timeline(top)
         print(posts)
 
-        return render(request,'Target_Management_System/timeline.html',{'posts':posts})
+        return render(request,'Target_Management_System/timeline_subtemplate.html',{'posts':posts})
 
 
 def convert_expired_on_to_datetime(expired_on):

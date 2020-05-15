@@ -3,6 +3,11 @@ from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
 import os
 
+from Public_Data_Acquisition_Unit.acquistion_manager import Timeline_Manager
+
+tm = Timeline_Manager()
+
+
 def on_messege_recived(data,**kwargs):
     """
     this function is used to call or perform the appropriate action in a seperate thread on the message received
@@ -64,7 +69,8 @@ def on_messege_recived(data,**kwargs):
 
 
 def on_ais_message(data):
-    pass
+    print('...............AIS.............')
+    tm.update_timeline_posts()
 
 
 def on_ess_message(data):

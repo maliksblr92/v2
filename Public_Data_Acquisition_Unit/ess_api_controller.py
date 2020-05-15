@@ -429,6 +429,18 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def youtube_target_identification(self,query):
+        try:
+            add_target_url = 'youtube_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
     def microcrawler_status(self):
         try:
             add_target_url = 'crawler_status/'
