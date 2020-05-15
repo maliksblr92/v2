@@ -4,10 +4,14 @@ contains all models for Case Management System
 from mongoengine import disconnect, connect, Document
 from mongoengine import EmbeddedDocument, EmbeddedDocumentListField
 from mongoengine import PointField, StringField, URLField
-from mongoengine import BooleanField, EmailField
+from mongoengine import BooleanField, EmailField, EmbeddedDocumentField
+from mongoengine import ReferenceField, ListField, DateTimeField
 
 from Case_Management_System.constants import LANGUAGES, GENDERS
 from Case_Management_System.constants import SPOKEN_LANGUAGE_FLUENCY
+from Case_Management_System.constants import CASE_STATES, POI_CATEGORY
+
+from Portfolio_Management_System.models import Portfolio_PMS
 # Create your models here.
 
 disconnect('default')
@@ -60,6 +64,12 @@ class PhysicalEvidence(EmbeddedDocument):
     Characteristics of physical evidence obtained by police
     from the crime scene as well other sources
     """
+    object_name = StringField()
+    object_description = StringField()
+    object_storage_location = StringField()
+    datetime_of_evidence_collection = DateTimeField()
+    object_collection_location = EmbeddedDocumentField(LocationOfInterest)
+    object_picture = EmbeddedDocumentField(PictureEvidenceFile)
 
 class Language(EmbeddedDocument):
     """
@@ -82,6 +92,8 @@ class PersonOfInterest(EmbeddedDocument):
     last_name = StringField(required=True)
     gender = StringField(required=True, choices=GENDERS)
     languages = EmbeddedDocumentListField(Language)
+    portfolio = ReferenceField(Portfolio_PMS)
+    poi_category = ListField(StringField(choices=POI_CATEGORY))
 
 class LocationOfInterest(EmbeddedDocument):
     """
@@ -101,7 +113,20 @@ class CaseCMS(Document):
     """
     # unique case number assigned to the case
     case_number = StringField()
+    case_title = StringField()
+    # Case Creation Date and Time
+    case_creation_datetime = DateTimeField()
+    # Incident Date and Time
+    incident_datetime = DateTimeField()
+    # case type, there are many types for which
+    # domain knowledge is required, therefore
+    # we make it a text field for now
+    case_type = StringField()
+    # state of the case i.e. pending, under_investigation,
+    #  closed_resolved, closed_unresolved
+    case_state = StringField(required=True, choices=CASE_STATES)
     investigators = EmbeddedDocumentListField(Investigator)
+    # references portfolios of people from PMS
     people_of_interest = EmbeddedDocumentListField(PersonOfInterest)
     locations_of_interest = EmbeddedDocumentListField(LocationOfInterest)
     # police case files, server location (url)
@@ -109,3 +134,6 @@ class CaseCMS(Document):
     pictures = EmbeddedDocumentListField(PictureEvidenceFile)
     videos = EmbeddedDocumentListField(VideoEvidenceFile)
     physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
+
+class AllLocationsOfInterest(Document):
+    locations = EmbeddedDocumentListField(LocationOfInterest)

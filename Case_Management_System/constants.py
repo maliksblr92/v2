@@ -111,3 +111,20 @@ LANGUAGES = (
     ('min dong chinese', 'Min Dong Chinese'),
     ('sylheti', 'Sylheti')
 )
+
+CASE_STATES = (
+    ('p', 'Pending'),
+    ('ui', 'Under Investigation'),
+    ('cr', 'Closed Resolved'),
+    ('cu', 'Closed Unresolved')
+)
+
+POI_CATEGORY = (
+    ('r', 'Case Reporter'), # person who reported the case to police
+    ('w', 'Witness'),
+    ('s', 'Suspect'),
+    ('a', 'Accused'),
+    ('d', 'Dependent'),
+    ('g', 'Guilty'),
+    ('i', 'Innocent')
+)
