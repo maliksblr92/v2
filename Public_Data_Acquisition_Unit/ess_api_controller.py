@@ -517,7 +517,7 @@ class Ess_Api_Controller(object):
 
         except Exception as e:
             print(e)
-        return {'response': 'ess replied null'}
+            return {'response': 'ess replied null'}
 
     def track_ip(self, code, start_date, end_date):
         try:

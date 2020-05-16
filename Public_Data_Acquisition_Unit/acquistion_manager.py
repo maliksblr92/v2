@@ -253,14 +253,14 @@ class Acquistion_Manager(object):
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
             if (gtr.target_type == 'profile'):
-                return (Reddit_Profile,ess.add_target,None)
+                return (Reddit_Profile,ess.add_target,Reddit_Profile_Response_TMS)
             elif (gtr.target_type == 'subreddit'):
-                return (Reddit_Subreddit, ess.add_target ,None)
+                return (Reddit_Subreddit, ess.add_target ,Reddit_Subreddit_Response_TMS)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Youtube'):
             if (gtr.target_type == 'channel'):
-                return (Youtube_Channel, ess.add_target, None)
+                return (Youtube_Channel, ess.add_target, Youtube_Response_TMS)
             else:
                 publish('target type not defined', message_type='alert', module_name=__name__)
 

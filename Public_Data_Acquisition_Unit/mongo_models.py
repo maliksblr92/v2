@@ -1441,14 +1441,14 @@ class Timeline_Posts(Document):
 
         for obj in tl_objs:
 
-            for post in obj.posts:
+            for index,post in enumerate(obj.posts):
 
                 if (not post['seen']):
                     #count = count + 1
 
                     if(random.randint(10,100)>50):
 
-                        qualified_posts.append({'post': post, 'object_id': obj.id})
+                        qualified_posts.append({'post': post, 'object_id': obj.id,'post_index':index})
                         post['seen'] = True
                         obj.save()
 

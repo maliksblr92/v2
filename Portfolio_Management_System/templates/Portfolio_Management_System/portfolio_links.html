@@ -53,7 +53,7 @@
                             <div class="row ml-4 mt-4 mr-4">
                                 <div class="col-md-12">
                                     <div class="row">
-
+                                    <h5 class=" myH5">Linked Targets</h5>
 
                                         <!-- Just like card 1  start looping here -->
                                         {% if targets|length > 0 %}
@@ -93,8 +93,9 @@
 
                                                         {% elif target.1.GTR|lower == 'custom'%}
 
+
                                                             {% if target.1.target_type|lower == 'keybase_crawling'%}
-                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
                                                             {% elif target.1.target_type|lower == 'dynamic_crawling'%}
                                                             <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
 
@@ -142,6 +143,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+
                                         </div>
                                         {% endfor %}
                                     {% else %}
@@ -152,6 +157,41 @@
 
 
                                     </div>
+                                <div class="row">
+                                             <h5 class=" myH5">Linked Posts</h5>
+
+                                            {% for post in posts %}
+            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
+                <div class="card text-center glowing_border transparent">
+                    <div class="card-header text-white text-left topcontentbar">
+                        Username: {{ post.username }}
+                        <h5 class="card-title"><a class="text-white" href="{{ post.a_url }}" target="_blank">Author: {{post.author }}</a></h5>
+                    </div>
+                    <div class="card-body ">
+                        <p class="card-text text-black">{{ post.text }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if post.picture|length > 0 %}
+                                <img class="img-fluid border" src="{{ post.picture }}">
+                                {% else %}
+                                    <img class="img-fluid border" src="{{ post.link }}">
+
+
+                                {% endif %}
+                            </div>
+                        </div>
+                        <a href="{{ post.link }}" target="_blank" class="btn btn-outline-light  ">Post</a>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span class="badge badge-light float-left">Site : {{ post.t_site }}</span>
+                        <span class="badge badge-light float-right">Type : {{ post.t_type }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+                                            </div>
 
                                 </div>
                             </div>

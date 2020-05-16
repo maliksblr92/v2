@@ -109,6 +109,20 @@
                                                             {% endif %}
                                                     {% elif target.1.GTR|lower == 'reddit'%}
 
+                                                            {% if target.1.target_type|lower == 'profile'%}
+                                                                <a class="btn btn-primary custom_icons" href="" role="button"><i class="fa fa-eye"></i></a>
+                                                            {% elif target.1.target_type|lower == 'subreddit'%}
+                                                            <a class="btn btn-primary custom_icons" href="" role="button"><i class="fa fa-eye"></i></a>
+
+                                                            {% endif %}
+
+                                                        {% elif target.1.GTR|lower == 'youtube'%}
+
+                                                            {% if target.1.target_type|lower == 'channel'%}
+                                                                <a class="btn btn-primary custom_icons" href="" role="button"><i class="fa fa-eye"></i></a>
+
+                                                            {% endif %}
+
                                                         {% elif target.1.GTR|lower == 'custom'%}
 
                                                             {% if target.1.target_type|lower == 'keybase_crawling'%}
@@ -135,7 +149,20 @@
                                                                 style="height:120px; width:120px; border-radius: 50%;"
                                                                 {% if target.0.profile_picture_url.profile_picture %}
                                                                   src="{{ target.0.profile_picture_url.profile_picture }}" alt="">
-                                                                 {% else %}
+
+                                                                {% elif target.0.profile_picture_url %}
+                                                                   src="{{ target.0.profile_picture_url }}" alt="">
+
+                                                                 {% elif target.0.overview.media_directory %}
+                                                                   src="{{ target.0.overview.media_directory }}" alt="">
+
+                                                                 {% elif target.0.profile_url %}
+                                                                   src="{{ target.0.profile_url }}" alt="">
+
+                                                                 {% elif target.0.icon_media_directory %}
+                                                                   src="{{ target.0.icon_media_directory }}" alt="">
+
+                                                                {% else %}
                                                                  src="{% static 'images/testimonial.png' %}" alt="">
                                                                 {% endif %}
 
