@@ -724,9 +724,29 @@ class Find_Object(View):
 
 class Link_Object(View):
     def get(self, request):
+
         print(request.GET)
+        print(request.GET.getlist('beta_path_list[]'))
         alpha_id = ObjectId(request.GET['alpha_id'])
-        beta_path_list = [ObjectId(request.GET['beta_id'])]
+        beta_path_list = []
+        try:
+
+            beta_path_list.append(ObjectId(request.GET.getlist('beta_path_list[]')[0]),)
+        except:
+            pass
+
+        try:
+
+            beta_path_list.append(request.GET.getlist('beta_path_list[]')[1])
+        except:
+            pass
+
+        try:
+
+            beta_path_list.append(int(request.GET.getlist('beta_path_list[]')[2]))
+        except:
+            pass
+
 
         type = request.GET['type']
         if (type == 'portfolio'):

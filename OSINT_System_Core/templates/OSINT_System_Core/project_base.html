@@ -450,9 +450,27 @@
 
     var beta_id_g = "";
 
-    function open_model(beta_id,modal_type) {
-        beta_id_g = beta_id
-        console.log(beta_id)
+    function open_model(beta_id,modal_type,constant='',list_index=-1) {
+        var beta_path = []
+
+
+        beta_path.push(beta_id);
+
+        if(constant !== ''){
+            beta_path.push(constant);
+        }
+
+        if(list_index !== -1){
+            beta_path.push(list_index);
+        }
+
+
+
+
+
+        beta_id_g = beta_path
+        console.log(beta_path)
+
 
         if(modal_type =='link'){
              $('#linkto_portfolio').modal('show')
@@ -515,7 +533,7 @@ console.log("i m clicked")
  console.log(beta_id)
     var type = $('#type').val()
     var data = {
-    alpha_id: alpha_id,beta_id:beta_id,type:type
+    alpha_id: alpha_id,beta_path_list:beta_id,type:type
     };
     $.ajax({
         url: '{% url 'OSINT_System_Core:link_object' %}',

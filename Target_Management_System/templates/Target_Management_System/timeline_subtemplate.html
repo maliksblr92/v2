@@ -10,15 +10,20 @@
                         <div class="row">
                             <div class="col-md-12">
                                 {% if post.post.picture|length > 0 %}
-                                <img class="img-fluid border" src="{{ post.post.picture }}"> {% endif %}
+                                <img class="img-fluid border" src="{{ post.post.picture }}">
+                                {% else %}
+                                    <img class="img-fluid border" src="{{ post.post.link }}">
+
+
+                                {% endif %}
                             </div>
                         </div>
-                        <a href="{{ post.post.link }}" class="btn btn-outline-light  ">Post</a>
+                        <a href="{{ post.post.link }}" target="_blank" class="btn btn-outline-light  ">Post</a>
                         <div class="d-flex flex-row">
-                            <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ post.object_id }}" data-toggle="modal" data-target="#linkto_portfolio">
+                            <button type="button" class="btn btn-primary btn_link custom_icons" onclick="open_model('{{ post.object_id }}','link','posts',{{ post.post_index }})" >
                             <i class="fa fa-link"></i>
                         </button>
-                        <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource">
+                        <button type="button" class="btn btn-primary btn_share custom_icons" onclick="open_model('{{ post.object_id }}','share')">
                             <i class="fa fa-share"></i>
                         </button>
                         </div>

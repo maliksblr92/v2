@@ -11,7 +11,7 @@ from bson import ObjectId
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse, HttpResponseRedirect
-from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include,Visuals,Photo,Video
+from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include,Visuals,Photo,Video,Data_Share
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
@@ -306,6 +306,8 @@ class Explore(View):
         resp=Portfolio_PMS.objects().first()
         print("printitng portfolio pms object")
         return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
+
+
 class Portfolio_Links(RequireLoginMixin, IsTSO, View):
 
     SUPPORTED_LINK_TYPES = ()
@@ -313,21 +315,31 @@ class Portfolio_Links(RequireLoginMixin, IsTSO, View):
     def get(self,request,*args,**kwargs):
 
         gtr_list = []
+        posts = []
         portfolio_id = None
+        #ds = Data_Share()
+
         if 'portfolio_id' in kwargs:portfolio_id=kwargs['portfolio_id']
+
         if(portfolio_id is not None):
             portfolio = Portfolio_PMS.get_object_by_id(portfolio_id)
+            print(portfolio)
             if(portfolio):
-                linked_refs = Portfolio_Linked_PMS.objects(alpha_reference=portfolio)
-                for ref in linked_refs:
-                    if(not isinstance(ref,Timeline_Posts_Model)):
-                        gtr_list.append(ref.beta_reference.GTR)
+                linked_objs = Portfolio_Linked_PMS.objects(alpha_reference=portfolio)
+                if(linked_objs):
+                    for obj in linked_objs:
+                        if(not isinstance(obj.beta_reference,Timeline_Posts_Model)):
+                            gtr_list.append(obj.beta_reference.GTR)
+                        else:
+                            resource = Portfolio_Link.resolve_intell_refference(beta_ref=obj.beta_reference, beta_path=obj.beta_path)
+                            if(resource):
+                                posts.append(resource)
 
 
-                resp = acq.get_linked_targets(link_type='portfolio',gtr_list=gtr_list)
-
-                return render(request, 'Portfolio_Management_System/portfolio_links.html',
-                              {'targets': resp, 'supported_sites': acq.get_all_supported_sites()})
+                    resp = acq.get_linked_targets(link_type='portfolio',gtr_list=gtr_list)
+                    print(posts)
+                    return render(request, 'Portfolio_Management_System/portfolio_links.html',
+                                  {'targets': resp, 'supported_sites': acq.get_all_supported_sites(),'posts':posts})
 
 
         return render(request,'Portfolio_Management_System/portfolio_links.html',{})

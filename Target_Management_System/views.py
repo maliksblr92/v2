@@ -362,7 +362,7 @@ class Timeline_Fetch(RequireLoginMixin,IsTSO,View):
 
         top = int(request.GET.get('top','10'))
         posts = tl.fetch_posts_for_timeline(top)
-        print(posts)
+        #print(posts)
 
         return render(request,'Target_Management_System/timeline_subtemplate.html',{'posts':posts})
 
