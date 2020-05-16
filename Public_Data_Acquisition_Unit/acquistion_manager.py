@@ -647,6 +647,13 @@ class Timeline_Manager(object):
     def pick_posts_by_algo(self,qualified_unseen_posts):
         pass
 
+    def update_timeline_posts_by_gtr_id(self,gtr_id):
+        try:
+            GTR = self.acq.get_gtr_by_id(gtr_id)
+            self.update_timeline_posts(gtr=GTR)
+        except Exception as e:
+            print(e)
+            publish(str(e),module_name=__name__,message_type='error')
 
     def encode_posts_packet(self,target_site,target_type,author,posts):
 
