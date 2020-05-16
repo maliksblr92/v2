@@ -627,3 +627,9 @@ def username_exists(username,n_data):
             return True
 
     return False
+
+
+
+class Reddit_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+            return render(request,'Target_Management_System/Reddit_Target_Response')

@@ -14,7 +14,7 @@ from .views import FacebookPersonReport
 from .views import FacebookPageReport
 from .views import FacebookGroupReport
 from .views import Bulk_Targets
-
+from .views import Reddit_Target_Response
 # end ahmed imports
 urlpatterns = [
 
@@ -73,5 +73,6 @@ path(
     path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
     path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
     path('bulk_targets/',Bulk_Targets.as_view(), name="bulk_targets"),
+    path('target/reddit/', Reddit_Target_Response.as_view(), name="reddit_target_response"),
 
 ]
