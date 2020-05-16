@@ -63,8 +63,8 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-from System_Log_Management_Unit.system_log_manager import  System_Stats
 
+from System_Log_Management_Unit.system_log_manager import  System_Stats
 ss=System_Stats()
 # Create your views here.
 
@@ -824,7 +824,7 @@ def test_view1(request):
 class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
         context={
-        'total_keybase_crawling_targets_added':           ss.total_keybase_crawling_targets_added(),
+        'total_keybase_crawling_targets_added':     ss.total_keybase_crawling_targets_added(),
         'total_expired_targets':                    ss.total_expired_targets(),
         'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
         'total_periodic_targets':                   ss.total_periodic_targets(),
@@ -837,7 +837,7 @@ class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
         # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
         }
         dic=ss.top_twitter_profiles_with_highest_counts()
-        
+        print(dic)
         return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
 
 
