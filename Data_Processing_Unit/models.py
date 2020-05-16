@@ -420,7 +420,7 @@ class Dynamic_Crawling_Response_TMS(Document):
     registrar = StringField()
     creation_date = DateTimeField()
     expiration_date = DateTimeField()
-    data = DictField()
+    data = StringField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
