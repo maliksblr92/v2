@@ -634,7 +634,7 @@ class Timeline_Manager(object):
 
 
     def fetch_posts_for_timeline(self,top=10):
-        return Timeline_Posts.get_qualified_posts_randomly(top)
+        return Timeline_Posts.get_qualified_posts_with_hard_random(top)
 
 
 

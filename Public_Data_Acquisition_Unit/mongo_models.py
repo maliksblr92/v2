@@ -1463,3 +1463,36 @@ class Timeline_Posts(Document):
                     break
 
         return qualified_posts
+
+    @staticmethod
+    def get_qualified_posts_with_hard_random(top=20):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        while(len(qualified_posts) < top):
+            for obj in tl_objs:
+
+                r_index = random.randint(0,len(obj.posts)-1)
+                print(r_index,len(obj.posts))
+                post = obj.posts[r_index]
+
+                if (not post['seen']):
+                    # count = count + 1
+
+
+                    qualified_posts.append({'post': post, 'object_id': obj.id, 'post_index': r_index})
+                    post['seen'] = True
+                    obj.save()
+
+                if (len(qualified_posts) > top):
+                    break
+
+        return qualified_posts

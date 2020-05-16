@@ -508,7 +508,7 @@ class Ess_Api_Controller(object):
 
     def create_payload(self, url=''):
         try:
-            add_target_url = 'ip_shortend_url/'
+            add_target_url = 'ip_shortend_url'
             payload = {'url': url}
             print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
@@ -521,7 +521,7 @@ class Ess_Api_Controller(object):
 
     def track_ip(self, code, start_date, end_date):
         try:
-            add_target_url = 'ip_tracking/'
+            add_target_url = 'ip_tracking'
             payload = {'code': code, 'start_date': start_date, 'end_date': end_date}
             print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)

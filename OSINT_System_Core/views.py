@@ -774,7 +774,9 @@ class Share_Resource(View):
         print(request.GET)
         group_typ = request.GET.get('user_group', None)
         message = request.GET.get('message', None)
-        resource_id = request.GET.get('resource_id', None)
+        resource_id = []
+
+        if request.GET.getlist('resource_id[]'): resource_id = request.GET.getlist('resource_id[]')[0]
 
         if (group_typ and message and resource_id):
             resource_obj = self.ml.find_object_by_id(ObjectId(resource_id))
