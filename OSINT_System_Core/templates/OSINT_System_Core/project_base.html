@@ -220,6 +220,7 @@
     <!-- index 1 js Resources -->
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="{% static 'Additional_assets/main/js/chart.js'%}"></script>
@@ -550,6 +551,298 @@ console.log("i m clicked")
     </script>
     <script>
     
+ 
+      am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_dark);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+  
+  
+  
+        // Create chart instance
+        var chart = am4core.create("chart_3", am4charts.RadarChart);
+  
+        // Add data
+        chart.data = [{
+          "category": "Keybase Targets",
+          "value": {{ context.total_keybase_crawling_targets_added }},
+          "full":100
+  
+        }, {
+          "category": "Expired Targets",
+          "value": {{ context.total_expired_targets }},
+          "full":100
+        }, {
+          "category": "Crawling Targets Fetched",
+          "value": {{ context.total_keybase_crawling_targets_fetched }},
+          "full":100
+        }, {
+          "category": "Periodic Targets",
+          "value": {{ context.total_periodic_targets }},
+          "full":100
+        }, 
+        
+        {
+          "category": "Dynamic crawling Targets",
+          "value": {{ context.total_dynamic_crawling_targets_added }},
+          "full":100
+        }, 
+        
+        
+        {
+          "category": "Dynamic Crawling Fetched",
+          "value": {{ context.total_dynamic_crawling_targets_fetched }},
+          "full":100
+        }, 
+
+        {
+          "category": "Targets Added",
+          "value": {{ context.total_targets_added }},
+          "full":100
+        }, 
+        
+        
+        ];
+  
+        // Make chart not full circle
+        chart.startAngle = -90;
+        chart.endAngle = 180;
+        chart.innerRadius = am4core.percent(30);
+  
+        // Set number format
+        chart.numberFormatter.numberFormat = "#.#'%'";
+  
+        // Create axes
+        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "category";
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.grid.template.strokeOpacity = 0;
+        categoryAxis.renderer.labels.template.horizontalCenter = "right";
+        categoryAxis.renderer.labels.template.fontWeight = 500;
+        categoryAxis.renderer.labels.template.fontSize = 12;
+  
+        categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
+          return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
+        });
+        categoryAxis.renderer.minGridDistance = 10;
+  
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.grid.template.strokeOpacity = 0;
+        valueAxis.min = 0;
+        valueAxis.max = 100;
+        valueAxis.strictMinMax = true;
+  
+        // Create series
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.dataFields.valueX = "full";
+        series1.dataFields.categoryY = "category";
+        series1.clustered = false;
+        series1.columns.template.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
+        series1.columns.template.fillOpacity = 0.08;
+        series1.columns.template.cornerRadiusTopLeft = 20;
+        series1.columns.template.strokeWidth = 0;
+        series1.columns.template.radarColumn.cornerRadius = 20;
+  
+        var series2 = chart.series.push(new am4charts.RadarColumnSeries());
+        series2.dataFields.valueX = "value";
+        series2.dataFields.categoryY = "category";
+        series2.clustered = false;
+        series2.columns.template.strokeWidth = 0;
+        series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
+        series2.columns.template.radarColumn.cornerRadius = 20;
+  
+        series2.columns.template.adapter.add("fill", function (fill, target) {
+          return chart.colors.getIndex(target.dataItem.index);
+        });
+  
+        // Add cursor
+        chart.cursor = new am4charts.RadarCursor();
+  
+      }); // end am4core.ready()
+  
+  
+  
+      am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        
+        // Create chart instance
+        var chart = am4core.create("chart_1", am4charts.XYChart3D);
+        chart.paddingBottom = 30;
+        chart.angle = 35;
+        
+        chart.data = [{
+          "country": "Keybase Targets",
+          "visits": {{ context.total_keybase_crawling_targets_added }}
+  
+        }, {
+          "country": "Expired Targets",
+          "visits": {{ context.total_expired_targets }}
+        }, {
+          "country": "Crawling Targets Fetched",
+          "visits": {{ context.total_keybase_crawling_targets_fetched }}
+        }, {
+          "country": "Periodic Targets",
+          "visits": {{ context.total_periodic_targets }}
+        }, 
+        
+        {
+          "country": "Dynamic crawling Targets",
+          "visits": {{ context.total_dynamic_crawling_targets_added }}
+        }, 
+        
+        
+        {
+          "country": "Dynamic Crawling Fetched",
+          "visits": {{ context.total_dynamic_crawling_targets_fetched }}
+        }, 
+
+        {
+          "country": "Targets Added",
+          "visits": {{ context.total_targets_added }}
+        }, 
+        
+        
+        ];
+        
+        // Create axes
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "country";
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.inside = true;
+        categoryAxis.renderer.grid.template.disabled = true;
+        
+        let labelTemplate = categoryAxis.renderer.labels.template;
+        labelTemplate.rotation = -90;
+        labelTemplate.horizontalCenter = "left";
+        labelTemplate.verticalCenter = "middle";
+        labelTemplate.dy = 10; // moves it a bit down;
+        labelTemplate.inside = false; // this is done to avoid settings which are not suitable when label is rotated
+        
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.grid.template.disabled = true;
+        
+        // Create series
+        var series = chart.series.push(new am4charts.ConeSeries());
+        series.dataFields.valueY = "visits";
+        series.dataFields.categoryX = "country";
+        
+        var columnTemplate = series.columns.template;
+        columnTemplate.adapter.add("fill", function(fill, target) {
+          return chart.colors.getIndex(target.dataItem.index);
+        })
+        
+        columnTemplate.adapter.add("stroke", function(stroke, target) {
+          return chart.colors.getIndex(target.dataItem.index);
+        })
+        
+        }); // end am4core.ready()
+  
+  
+  
+  
+  
+  
+        
+      am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        
+        var chart = am4core.create("chart_2", am4charts.XYChart);
+        
+        chart.data={{ dic|safe}}
+        
+        for (var i = 0; i < names.length; i++) {
+          value += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 5);
+          data.push({ category: names[i], value: value });
+        }
+        
+        chart.data = data;
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.dataFields.category = "name";
+        categoryAxis.renderer.minGridDistance = 15;
+        categoryAxis.renderer.grid.template.location = 0.5;
+        categoryAxis.renderer.grid.template.strokeDasharray = "1,3";
+        categoryAxis.renderer.labels.template.rotation = -90;
+        categoryAxis.renderer.labels.template.horizontalCenter = "left";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.labels.template.fontSize = 12;
+        categoryAxis.renderer.labels.template.truncate = true;
+        categoryAxis.renderer.labels.template.maxWidth = 80
+        
+        categoryAxis.renderer.labels.template.adapter.add("dx", function(dx, target) {
+            return -target.maxRight / 2;
+        })
+        
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.ticks.template.disabled = true;
+        valueAxis.renderer.axisFills.template.disabled = true;
+        
+        var series = chart.series.push(new am4charts.ColumnSeries());
+        series.dataFields.categoryX = "name";
+        series.dataFields.valueY = "count";
+        series.tooltipText = "{valueY.count}";
+        series.sequencedInterpolation = true;
+        series.fillOpacity = 0;
+        series.strokeOpacity = 1;
+        series.strokeDashArray = "1,3";
+        series.columns.template.width = 0.01;
+        series.tooltip.pointerOrientation = "horizontal";
+        
+        var bullet = series.bullets.create(am4charts.CircleBullet);
+        
+        chart.cursor = new am4charts.XYCursor();
+        
+        chart.scrollbarX = new am4core.Scrollbar();
+        chart.scrollbarY = new am4core.Scrollbar();
+        
+        
+        }); // end am4core.ready()
+  
+  
+  
+        //$('#asd').hide();
+        am4core.ready(function() {
+
+          // Themes begin
+          am4core.useTheme(am4themes_animated);
+          // Themes end
+          
+          
+          var chart = am4core.create("chart_4", am4plugins_wordCloud.WordCloud);
+          var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+          
+          series.accuracy = 4;
+          series.step = 15;
+          series.rotationThreshold = 0.7;
+          series.maxCount = 200;
+          series.minWordLength = 2;
+          series.labels.template.margin(4,4,4,4);
+          series.maxFontSize = am4core.percent(30);
+          var z=   "{{ context.top_profiles_with_negative_behavior }}"
+          series.text = z
+          
+          series.colors = new am4core.ColorSet();
+          series.colors.passOptions = {}; // makes it loop
+          
+          //series.labelsContainer.rotation = 45;
+          series.angles = [0,-90];
+          series.fontWeight = "700"
+          
+          setInterval(function () {
+            series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+           }, 10000)
+          
+          }); // end am4core.ready()
     
     </script>
   </body>

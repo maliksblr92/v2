@@ -64,6 +64,8 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
+from System_Log_Management_Unit.system_log_manager import  System_Stats
+ss=System_Stats()
 # Create your views here.
 
 # processing_manager = Processing_Manager()
@@ -833,12 +835,30 @@ def test_view(request):
 
 def test_view1(request):
     if request.method == 'GET':
+        
+        
+            
         return render(request, 'OSINT_System_Core/tso_dashboard.html')
 
 
 class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+        context={
+        'total_keybase_crawling_targets_added':     ss.total_keybase_crawling_targets_added(),
+        'total_expired_targets':                    ss.total_expired_targets(),
+        'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
+        'total_periodic_targets':                   ss.total_periodic_targets(),
+        'total_targets_added':                      ss.total_targets_added(),
+        'top_twitter_profiles_with_highest_counts': ss.top_twitter_profiles_with_highest_counts(),
+        'top_profiles_with_negative_behavior':      ss.top_profiles_with_negative_behavior(),
+        # 'targets_added_by_date':                    ss.targets_added_by_date(),
+        'total_dynamic_crawling_targets_added':     ss.total_dynamic_crawling_targets_added(),
+        'total_dynamic_crawling_targets_fetched':   ss.total_dynamic_crawling_targets_fetched(),
+        # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
+        }
+        dic=ss.top_twitter_profiles_with_highest_counts()
+        print(dic)
+        return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
 
 
 class TMO_Dashboard(RequireLoginMixin, IsTMO, View):
