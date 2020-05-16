@@ -19,8 +19,8 @@
             <div class=" row small_card_warpper glowing_border" style="height: 180px">
                 <div class="col-md-1 d-flex flex-row justify-content-around align-items-center glowing_border background">
                     
-                        {% if user.id %}
-                            <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.id user.target_site  %}" class="badge badge-sm m-0 p-0 rotate side_text" ><i class="fas fa-link mr-1"></i>{{ user.id }} </a>
+                        {% if user.userid %}
+                            <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.userid user.target_site  %}" class="badge badge-sm m-0 p-0 rotate side_text" ><i class="fas fa-link mr-1"></i>{{ user.userid }} </a>
                             {% elif user.username %}
                             <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.username user.target_site %}" class="badge badge-sm m-0 p-0 rotate side_text" ><i class="fas fa-link mr-1"></i>{{ user.username }}</a>
                         {% endif %}

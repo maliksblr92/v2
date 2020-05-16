@@ -31,7 +31,9 @@ class Change_Record(Document):
     GTR = StringField()
     CTR = IntField()
     recent_CTR = IntField()
-    # attribute_keylist = DictField()
+    changes = StringField(default="")
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
 """
@@ -68,6 +70,7 @@ class Person_Tweets(EmbeddedDocument):
     is_retweet = BooleanField()
     sentiment = StringField()
     user_id = StringField(max_length=50)
+    categorization = ListField()
 
 
 """
@@ -199,14 +202,7 @@ class Instagram_Posts(EmbeddedDocument):
     comments_count = IntField()
     likes_count = IntField()
     display_url = URLField()
-
-
-class Keybase_Response_TMS(Document):
-    GTR = StringField()
-    CTR = IntField()
-    data = ListField()
-    created_on = DateTimeField(default=datetime.datetime.utcnow())
-    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    categorization = ListField()
 
 
 class Instagram_Response_TMS(Document):
@@ -260,6 +256,7 @@ class Facebook_Posts(EmbeddedDocument):
     video_directory = ListField()
     reactions = DictField()
     comments = ListField()
+    categorization = ListField()
 
 
 class Page_Posts(EmbeddedDocument):
@@ -282,6 +279,7 @@ class Page_Posts(EmbeddedDocument):
     reactions = DictField()
     comments = ListField()
     sentiment = StringField()
+    categorization = ListField()
 
 
 class Facebook_Profile_Response_TMS(Document):
@@ -427,9 +425,69 @@ class Dynamic_Crawling_Response_TMS(Document):
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
+class Keybase_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    data = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
 class Temp(Document):
     GTR = StringField()
     CTR = StringField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    categorization = ListField(default=[])
+
+
+class Youtube_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    overview = DictField()
+    videos = DictField()
+    channels = DictField()
+    playlists = ListField()
+    posts = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+class Reddit_Profile_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    reddit_id = StringField()
+    profile_id = StringField()
+    username = StringField()
+    url = StringField()
+    description = StringField()
+    icon_media_directory = StringField()
+    timestamp_created = StringField()
+    karma_points = DictField()
+    subscribers = IntField()
+    custom_feeds = ListField()
+    subreddits = ListField()
+    posts = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+class Reddit_Subreddit_Response_TMS(Document):
+    GTR = StringField()
+    CTR = IntField()
+    subreddit_id = StringField()
+    name = StringField()
+    url = StringField()
+    category = StringField()
+    subreddit_type = StringField()
+    description = StringField()
+    num_subscribers = IntField()
+    currently_active = IntField()
+    timestamp_created = StringField()
+    icon_media_directory = StringField()
+    num_moderators = IntField()
+    top_moderators = ListField()
+    posts = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 

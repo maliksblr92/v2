@@ -44,6 +44,7 @@ class Acquistion_Manager(object):
 
             if('periodic_interval' in kwargs):
                 interval = kwargs['periodic_interval']
+                print('............interval '+str(interval))
                 if(interval > 0):
                     #print('in here')
                     pt = Periodic_Targets()
@@ -252,14 +253,14 @@ class Acquistion_Manager(object):
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Reddit'):
             if (gtr.target_type == 'profile'):
-                return (Reddit_Profile,ess.add_target,None)
+                return (Reddit_Profile,ess.add_target,Reddit_Profile_Response_TMS)
             elif (gtr.target_type == 'subreddit'):
-                return (Reddit_Subreddit, ess.add_target ,None)
+                return (Reddit_Subreddit, ess.add_target ,Reddit_Subreddit_Response_TMS)
             else:
                 publish('target type not defined',message_type='alert',module_name=__name__)
         elif (gtr.website.name == 'Youtube'):
             if (gtr.target_type == 'channel'):
-                return (Youtube_Channel, ess.add_target, None)
+                return (Youtube_Channel, ess.add_target, Youtube_Response_TMS)
             else:
                 publish('target type not defined', message_type='alert', module_name=__name__)
 
@@ -615,6 +616,7 @@ class Acquistion_Manager(object):
         if website == 'twitter': resp = ess.twitter_target_identification(query)
         if website == 'linkedin': resp = ess.linkedin_target_identification(query)
         if website == 'reddit': resp = ess.reddit_target_identification(query)
+        if website == 'youtube': resp = ess.youtube_target_identification(query)
 
         return resp
 
@@ -632,7 +634,7 @@ class Timeline_Manager(object):
 
 
     def fetch_posts_for_timeline(self,top=10):
-        return Timeline_Posts.get_qualified_posts(top)
+        return Timeline_Posts.get_qualified_posts_randomly(top)
 
 
 
@@ -645,6 +647,13 @@ class Timeline_Manager(object):
     def pick_posts_by_algo(self,qualified_unseen_posts):
         pass
 
+    def update_timeline_posts_by_gtr_id(self,gtr_id):
+        try:
+            GTR = self.acq.get_gtr_by_id(gtr_id)
+            self.update_timeline_posts(gtr=GTR)
+        except Exception as e:
+            print(e)
+            publish(str(e),module_name=__name__,message_type='error')
 
     def encode_posts_packet(self,target_site,target_type,author,posts):
 

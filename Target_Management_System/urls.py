@@ -57,6 +57,7 @@ path(
     path('test1/', views.Test_View1.as_view(), name="alertevent"),
     path('identifytarget_request/',views.Identify_Target_Request.as_view(),name="tms_identifytarget_request"),
     path('timeline/',views.Timeline.as_view(),name="timeline"),
+    path('timeline_fetch/',views.Timeline_Fetch.as_view(),name="timeline_fetch"),
     path('link_analysis/<str:object_gtr_id>',views.Link_Analysis.as_view(),name="link_analysis"),
 
     # ahmed Class Views
@@ -72,7 +73,5 @@ path(
     path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
     path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
     path('new_page/',Test.as_view(), name="new_page"),
-
-    
 
 ]

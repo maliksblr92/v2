@@ -1,6 +1,7 @@
 from mongoengine import *
 import datetime
 from OSINT_System_Core.publisher import publish
+import random
 
 DATABASE = ''
 USERNAME = ''
@@ -1427,6 +1428,38 @@ class Timeline_Posts(Document):
                     obj.save()
 
                 if (count >= top):
+                    break
+
+        return qualified_posts
+
+    @staticmethod
+    def get_qualified_posts_randomly(top=20):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        for obj in tl_objs:
+
+            for index,post in enumerate(obj.posts):
+
+                if (not post['seen']):
+                    #count = count + 1
+
+                    if(random.randint(10,100)>50):
+
+                        qualified_posts.append({'post': post, 'object_id': obj.id,'post_index':index})
+                        post['seen'] = True
+                        obj.save()
+
+
+                if (len(qualified_posts) > top):
                     break
 
         return qualified_posts
