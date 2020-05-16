@@ -111,18 +111,20 @@
           <th scope="col">Periodic Interval</th>
           <th scope="col">Username / Title </th>
           <th scope="col">Expire On</th>
+          <th scope="col">Re Invoke On</th>
           <th scope="col">Action</th>
 
         </tr>
       </thead>
       <tbody>
         {% for target in Periodic_Targets_List %}
+      
         <tr>
          
-          <th scope="row">{{target.GTR}}</th>
-          <td>{{target.CTR}}</td>
-          <td>{{target.target_reff.periodic_interval}}</td>
-          <td> {% if target.target_reff.username %}
+          <th  style="font-size:12px;" scope="row">{{target.GTR}}</th>
+          <td  style="font-size:12px;">{{target.CTR}}</td>
+          <td  style="font-size:12px;">{{target.target_reff.periodic_interval}}</td>
+          <td  style="font-size:12px;"> {% if target.target_reff.username %}
             {{ target.target_reff.username }}
             {% elif target.target_reff.title %}
             {{ target.target_reff.title }}
@@ -131,7 +133,9 @@
             {% endif %}
           </td>
           <td style="font-size:10px;" ><span class="text-truncate">{{target.target_reff.expired_on}}</span></td>
-          <td>Delete</td>
+          <td style="font-size:10px;" ><span class="text-truncate"> {{ target.re_invoke_time }}</span></td>
+         
+          <td><a class="btn" href="{% url 'OSINT_System_Core:Delete_Periodic_Target_DB' periodic_task_id=target.id %}"><i class="fa fa-trash text-white" ></i></a></td>
         </tr>
         {% endfor %}
       </tbody>

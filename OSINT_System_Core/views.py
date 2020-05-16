@@ -21,7 +21,7 @@ from Avatar_Management_Unit.models import Avatar_AMS
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
-from django.shortcuts import reverse, render
+from django.shortcuts import reverse, render,redirect
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -42,7 +42,7 @@ import os
 from Data_Processing_Unit.models import News
 from Data_Processing_Unit.models import Trends
 from django.core import serializers
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,reverse
 from mongoengine.queryset.visitor import Q
 from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference,Periodic_Targets
 
@@ -64,6 +64,8 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
+from System_Log_Management_Unit.system_log_manager import  System_Stats
+ss=System_Stats()
 # Create your views here.
 
 # processing_manager = Processing_Manager()
@@ -833,12 +835,30 @@ def test_view(request):
 
 def test_view1(request):
     if request.method == 'GET':
+        
+        
+            
         return render(request, 'OSINT_System_Core/tso_dashboard.html')
 
 
 class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'OSINT_System_Core/tso_dashboard.html')
+        context={
+        'total_keybase_crawling_targets_added':     ss.total_keybase_crawling_targets_added(),
+        'total_expired_targets':                    ss.total_expired_targets(),
+        'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
+        'total_periodic_targets':                   ss.total_periodic_targets(),
+        'total_targets_added':                      ss.total_targets_added(),
+        'top_twitter_profiles_with_highest_counts': ss.top_twitter_profiles_with_highest_counts(),
+        'top_profiles_with_negative_behavior':      ss.top_profiles_with_negative_behavior(),
+        # 'targets_added_by_date':                    ss.targets_added_by_date(),
+        'total_dynamic_crawling_targets_added':     ss.total_dynamic_crawling_targets_added(),
+        'total_dynamic_crawling_targets_fetched':   ss.total_dynamic_crawling_targets_fetched(),
+        # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
+        }
+        dic=ss.top_twitter_profiles_with_highest_counts()
+        print(dic)
+        return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
 
 
 class TMO_Dashboard(RequireLoginMixin, IsTMO, View):
@@ -1085,4 +1105,15 @@ def Periodic_Target_DB(request):
         obj=Periodic_Targets()
         Periodic_Targets_List=obj.get_all_periodic_task()
         return render(request,'OSINT_System_Core/Periodic_Targets.html',{'Periodic_Targets_List':Periodic_Targets_List})
+    
+
+    
+class Delete_Periodic_Target_DB(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs['periodic_task_id']
+        print(id)
+        fetch_object_for_deletion=Periodic_Targets.objects(id=id).first()
+        if fetch_object_for_deletion:
+            fetch_object_for_deletion.delete_periodic_task()
+        return redirect('/core/periodic_target')
     

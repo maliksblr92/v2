@@ -105,7 +105,7 @@
        <table class="table table-responsive"  style="color: white" >
   <thead>
     <tr>
-        <th scope="col">Sr#</th>
+        
       <th scope="col">Website</th>
       <th scope="col">Target_Type</th>
       <th scope="col">Title</th>
@@ -118,7 +118,7 @@
   <tbody >
   {% for target in targets %}
     <tr>
-        <th scope="row">{{forloop.counter}}</th>
+      
       <th scope="row">{{target.GTR}}</th>
       <td>{{target.target_type}}</td>
       <td> {% if target.username %}
@@ -132,7 +132,7 @@
       </td>
       <td>{{ target.is_expired }}</td>
         <td>{{target.expired_on}}</td>
-      <td>Include|Delete</td>
+      <td>Include | <i class="fa fa-trash"></i></td>
     </tr>
 {% endfor %}
   </tbody>
