@@ -620,6 +620,56 @@ class Acquistion_Manager(object):
 
         return resp
 
+    def create_payload(self,title,description,input_url):
+
+        try:
+            resp = ess.create_payload(input_url)
+            if(resp):
+                if(resp['data']['is_successful']):
+                    obj = Ip_Logger(title=title,description=description,input_url=input_url,payload_data=resp['data'])
+                    obj.save()
+                    publish('payload created successfully', message_type='notification')
+                    return resp['data']['payload_url']
+                else:
+                    publish('payload creation got failed by ESS',message_type='notification')
+                    return None
+            else:
+                publish('responces from ESS is not satisfactory,payload failed', message_type='notification')
+                return None
+
+        except Exception as e:
+            print(e)
+            publish(str(e), message_type='info')
+            return None
+
+    def track_logged_payloads(self):
+        try:
+
+            loggers = Ip_Logger.objects(is_ip_logged=False)
+            for logger in loggers:
+                resp = ess.track_ip(code=logger.payload_data['tracking_code'],start_date=str(logger.start_date),end_date=str(datetime.date.today()))
+                if(resp):
+                    if(resp['data']['data']):
+                        logger.logged_response = resp['data']['data']
+                        logger.updated_on = datetime.datetime.utcnow()
+                        logger.is_ip_logged = True
+                        logger.save()
+
+
+        except Exception as e:
+            print(e)
+            publish(str(e), message_type='info')
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Timeline_Manager(object):

@@ -1367,6 +1367,23 @@ class Rabbit_Messages(Document):
         else:
             return Rabbit_Messages.objects(Q(message_type=message_type) & Q(process_id=os.getpid())).order_by('-id')[:top]
 
+class Ip_Logger(Document):
+
+    title = StringField()
+    description = StringField()
+    input_url = StringField()
+
+    payload_data = DictField()
+    is_ip_logged = BooleanField(default=False)
+    logged_response = DictField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+    start_date = DateField(default=datetime.date.today())
+    end_date = DateField(default=datetime.date.today())
+
+
 
 
 class Timeline_Posts(Document):

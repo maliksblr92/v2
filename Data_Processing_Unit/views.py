@@ -776,6 +776,8 @@ class Ip_Tools(View):
             print("Query Type "+query_type)
             url=request.POST['url']
             print(url)
+            resp = ess.create_payload(url)
+            print(resp)
 
         elif query_type=='ip_tracking':
             code=request.POST['code']
