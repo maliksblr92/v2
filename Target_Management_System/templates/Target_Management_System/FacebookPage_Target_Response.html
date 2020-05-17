@@ -224,24 +224,22 @@
             </style>
         </head>
         <body>
-            <div class="container-fluid wrapper background-gradient">
+            <div class="container-fluid wrapper background-gradient-dark">
               <div>
                  
               </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white text-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                        <!-- <div class="circle-dot1 ml-2"></div>
-                        <div class="circle-dot2 ml-1"></div>
-                        <div class="circle-dot3 ml-1"></div> -->
-                        <span class="btn btn-primary btn-sm  float"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Page </span>
-                      {% comment %}
-                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
-                        <a type="button" class="btn  btn-sm btn-success float-right"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
-                        {% endcomment %}
-                       
+                    <div class="col-md-12 bg-white  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                        <div class="row">
+                         <div class="col-md-6 text-right"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
                         
-
-                    </div>
+                         <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                             <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white" style="margin-top:2px;"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}" id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                         <a type="button" class="btn  btn-sm btn-success float-right text-white"style="margin-top:2px;" >Link Analysis</a>
+                         </div>
+                        </div>
+ 
+                     </div>
                     
                 </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
@@ -499,9 +497,9 @@
                                     <!-- start profile tab  -->
                                     <div id="profile" class="tab-pane fade show in active ">
                                         <div class="row">
-                                            <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
-                                            </div>
-                                            <div class="col-md-6  m-0 p-0  text-center">
+                                            <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
+                                            </div> -->
+                                            <div class="col-md-12  m-0 p-0  text-center">
                                                 <h3><i class="material-icon text_heading">Common Words </i></h3>
                                                 <div class="row">
                                                     <div class="col-md-12 m-0 p-0" id="common_words_chart"
@@ -509,14 +507,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 m-0 p-0 text-center">
+                                            <!-- <div class="col-md-6 m-0 p-0 text-center">
                                                 <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
                                                 <div class="row">
                                                     <div class="col-md-12 m-0 p-0  " id="sentiment_chart"
-                                                        style="height: 400px;width: 100%;">
+                                                        style="height: 400px;width:100%;">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Facebook Page Type </i></h3>
                                                 <p class="text_paragraph">{{page.facebook_type}}</p>
@@ -527,7 +525,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Page Info </i></h3>
-                                                <p class="text_paragraph">{{page.page_info}}</p>
+                                                <p class="text_paragraph">{{page.page_info|default:"N/A"}}</p>
+                                               
                                             </div>
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Countries Involved </i></h3>
@@ -539,8 +538,10 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Page Histroy </i></h3>
-                                                <p class="text_paragraph">{{page.page_history.O.event}}</p>
-                                                <p class="text_paragraph">{{page.page_history.O.timestamp}}</p>
+                                                {%  for i in page.page_history %}
+                                                <p class="text_paragraph">{{i.event}} : {{i.timestamp}}</p>
+                                               
+                                            {% endfor %}
                                             </div>
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
@@ -873,6 +874,14 @@
         <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
         <script>
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            console.log(id)
+           var url= $('#download_as_pdf').attr('href')
+           var href=url+id+""
+           console.log(href)
+           </script>
+        <!-- <script>
         am4core.ready(function() {
         // Themes begin
         am4core.useTheme(am4themes_animated);
@@ -912,6 +921,42 @@
         chart.legend.valign = "bottom";
         }); // end am4core.ready()
         </script>
+
+
+
+
+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <script>
         am4core.ready(function() {
         // Themes begin
@@ -926,7 +971,7 @@
         series.maxCount = 200;
         series.minWordLength = 2;
         series.labels.template.margin(4,4,4,4);
-        series.maxFontSize = am4core.percent(30);
+        series.maxFontSize = am4core.percent(70);
         data=[]
         {% for i in page.common_words%}
             data+='{{i}}'+",",
@@ -939,11 +984,21 @@
         //series.labelsContainer.rotation = 45;
         series.angles = [0,-90];
         series.fontWeight = "900"
-        setInterval(function () {
-        series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-        }, 10000)
+        
         }); // end am4core.ready()
         </script>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+        
         <script>
         am4core.ready(function() {
         // Themes begin
@@ -1053,6 +1108,6 @@
         label2.fill = chart.colors.getIndex(3);
         label2.text = "0";
         }); // end am4core.ready()
-        </script>
+        </script> -->
     </body>
 </html>

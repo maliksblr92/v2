@@ -112,7 +112,7 @@
                                                             {% if target.1.target_type|lower == 'profile'%}
                                                             <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:reddit_target_response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
                                                             {% elif target.1.target_type|lower == 'subreddit'%}
-                                                            <a class="btn btn-primary custom_icons" href="" role="button"><i class="fa fa-eye"></i></a>
+                                                            <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:subreddit_target_resposne' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
 
                                                             {% endif %}
 
@@ -128,7 +128,7 @@
                                                             {% if target.1.target_type|lower == 'keybase_crawling'%}
                                                                 <a class="btn btn-primary custom_icons" href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
                                                             {% elif target.1.target_type|lower == 'dynamic_crawling'%}
-                                                            <a class="btn btn-primary custom_icons" role="button"><i class="fa fa-eye"></i></a>
+                                                            <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:dynamic_crawling_target' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
 
                                                             {% endif %}
 
