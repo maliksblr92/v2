@@ -575,15 +575,16 @@ class Ess_Api_Controller(object):
             #req = requests.post(url=API_ENDPOINT, files=files)
             import json
             add_target_url = 'image_lookup'
-            payload = {'url': url}
+            payload = {'image':image,'url': url}
             #image = {'media': image}
 
             #img = self.data["personal_info"]["image"]
             #files = [('files', (img, open(img, 'rb'), 'application/octet')),('data', ('data', json.dumps(self.data), 'application/json')), ]
 
-            files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
-            #print(payload)
-            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,files=files)
+            Header = {'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
+            #files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,data={'url':url},files={'image':image})
             print(response.json())
             return response.json()
 

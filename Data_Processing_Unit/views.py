@@ -772,10 +772,15 @@ class Ip_Tools(View):
         query_type=request.POST['query_type']
         if query_type=='image_reverse_lookup':
             print("Query Type "+query_type)
-            url=request.POST['url']
-            image=request.FILES['image[]']
-            print(image)
-            resp = ess.image_reverse_lookup(image,url)
+            url=request.POST.get('url',None)
+            image=request.FILES.get('image[]',None)
+            print(url)
+            #print(image)
+            if(image == '' or image == None):
+                resp = ess.image_reverse_lookup(image=None, url=url)
+            else:
+                resp = ess.image_reverse_lookup(image=image, url=None)
+
             print(resp)
 
         elif query_type=='ip_shortend':
