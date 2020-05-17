@@ -1,0 +1,179 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title%}Keybase Create{%endblock%}
+{% block head_dep %}
+<!-- Stylesheet -->
+<link rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+      crossorigin="anonymous">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+
+<!--  -->
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<style>
+    #keywords{
+        width: 100%!important;
+        width: 500px!important;
+    }
+</style>
+
+
+
+<div class="row">
+
+    <div class="col-md-4 col-lg-4 col-xl-4"></div>
+</div>
+{% endblock %}
+
+{% block belly %}
+<div class="row  ">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <h4 class="topheading">Block URL</h4>
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+            <div class="row formbg ml-5">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                    <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Keybase_Management_System:block_url' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="row input_wrapper_row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-9">
+
+
+                        <div class="row">
+                            <!-- title -->
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Title</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+
+                                            <input type="text" id="title" class="form-control newinputdesign w-100"
+                                                 name="title" value="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <!-- Description -->
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Description</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <div class="col-md-9 p-0">
+                                                <textarea name="description" class="form-control newinputdesign w-100"></textarea>
+
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="row">
+
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">URL</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <div class="col-md-9 p-0">
+                                            {% if b_url %}
+                                            <input type="text" id="url" class="form-control newinputdesign w-100"
+                                                 name="url" value="{{ b_url }}">
+                                            {% else %}
+                                                <input type="text" id="url" class="form-control newinputdesign w-100"
+                                                 name="url" value="">
+                                                {% endif %}
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-1 ">
+                    </div>
+                </div>
+
+                <div class="row input_wrapper_row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
+                        name="submit" id="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+                </div>
+            </div>
+            <!-- Second row-->
+            <!-- END OF second row-->
+    </div></div>
+<!-- inside main container -->
+  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+    <table class="table table-responsive" style="color: white">
+      <thead>
+        <tr>
+
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Url</th>
+          <th scope="col">Blocked On</th>
+
+          <th scope="col">Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for url in urls %}
+
+        <tr>
+
+          <th  style="font-size:12px;" scope="row">{{url.title}}</th>
+          <td  style="font-size:12px;">{{url.description}}</td>
+            <td  style="font-size:12px;"><a href="{{url.url}}" target="_blank">{{url.url}}</a></td>
+            <td  style="font-size:12px;">{{url.created_on}}</td>
+
+
+
+          <td><a class="btn" href="{% url 'Keybase_Management_System:delete_url' url.id %}"><i class="fa fa-trash text-white" ></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+{% block foot_dep %}
+
+
+{% endblock %}

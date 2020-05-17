@@ -485,6 +485,42 @@ class Ess_Api_Controller(object):
             print(e)
         return None
 
+    def get_rss_feed(self):
+        try:
+            add_target_url = 'rss_feeds'
+            payload = {'GTR':'','CTR':''}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_ip_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_ip_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 
     def test_api(self,keywords,GTR,CTR):
 
@@ -508,7 +544,7 @@ class Ess_Api_Controller(object):
 
     def create_payload(self, url=''):
         try:
-            add_target_url = 'ip_shortend_url/'
+            add_target_url = 'ip_shortend_url'
             payload = {'url': url}
             print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
@@ -521,7 +557,7 @@ class Ess_Api_Controller(object):
 
     def track_ip(self, code, start_date, end_date):
         try:
-            add_target_url = 'ip_tracking/'
+            add_target_url = 'ip_tracking'
             payload = {'code': code, 'start_date': start_date, 'end_date': end_date}
             print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
@@ -539,15 +575,16 @@ class Ess_Api_Controller(object):
             #req = requests.post(url=API_ENDPOINT, files=files)
             import json
             add_target_url = 'image_lookup'
-            payload = {'url': url}
+            payload = {'image':image,'url': url}
             #image = {'media': image}
 
             #img = self.data["personal_info"]["image"]
             #files = [('files', (img, open(img, 'rb'), 'application/octet')),('data', ('data', json.dumps(self.data), 'application/json')), ]
 
-            files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
-            #print(payload)
-            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,files=files)
+            Header = {'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
+            #files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,data={'url':url},files={'image':image})
             print(response.json())
             return response.json()
 

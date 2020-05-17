@@ -1367,6 +1367,50 @@ class Rabbit_Messages(Document):
         else:
             return Rabbit_Messages.objects(Q(message_type=message_type) & Q(process_id=os.getpid())).order_by('-id')[:top]
 
+class Ip_Logger(Document):
+
+    title = StringField()
+    description = StringField()
+    input_url = StringField()
+
+    payload_data = DictField()
+    is_ip_logged = BooleanField(default=False)
+    logged_response = DictField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+    start_date = DateField(default=datetime.date.today())
+    end_date = DateField(default=datetime.date.today())
+
+    @staticmethod
+    def get_all_loggers():
+        return Ip_Logger.objects()
+
+    @staticmethod
+    def get_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=True)
+
+    @staticmethod
+    def get_not_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=False)
+
+class Blocked_Urls(Document):
+
+    title = StringField()
+    description = StringField()
+    url = StringField()
+
+    created_on = DateField(default=datetime.datetime.utcnow())
+    updated_on = DateField(default=datetime.datetime.utcnow())
+
+    @staticmethod
+    def get_all_blocked_urls():
+        return Blocked_Urls.objects()
+
+    @staticmethod
+    def get_object_by_id(obj_id):
+        return Blocked_Urls.objects(id=obj_id)
 
 
 class Timeline_Posts(Document):
@@ -1458,6 +1502,39 @@ class Timeline_Posts(Document):
                         post['seen'] = True
                         obj.save()
 
+
+                if (len(qualified_posts) > top):
+                    break
+
+        return qualified_posts
+
+    @staticmethod
+    def get_qualified_posts_with_hard_random(top=20):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        while(len(qualified_posts) < top):
+            for obj in tl_objs:
+
+                r_index = random.randint(0,len(obj.posts)-1)
+                print(r_index,len(obj.posts))
+                post = obj.posts[r_index]
+
+                if (not post['seen']):
+                    # count = count + 1
+
+
+                    qualified_posts.append({'post': post, 'object_id': obj.id, 'post_index': r_index})
+                    post['seen'] = True
+                    obj.save()
 
                 if (len(qualified_posts) > top):
                     break
