@@ -66,6 +66,7 @@ path(
     # ahmed Class Views
     path('target/instagram/<str:object_gtr_id>', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
     path('target/twitter/<str:object_gtr_id>', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),
+    path('report/twitter/<str:object_gtr_id>', Twitter_Target_Report.as_view(), name="Twitter_Target_Report"),
     path('target/linkedin/person/<str:object_gtr_id>', LinkedinPerson_Target_Response.as_view(), name="LinkedinPerson_Target_Response"),
     path('target/linkedin/company/<str:object_gtr_id>', LinkedinCompany_Target_Response.as_view(), name="LinkedinCompany_Target_Response"),
     path('target/facebook/person/<str:object_gtr_id>', FacebookPerson_Target_Response.as_view(), name="FacebookPerson_Target_Response"),

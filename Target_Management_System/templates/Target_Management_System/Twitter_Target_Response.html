@@ -142,7 +142,7 @@
         <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
         <!-- Chart code -->
-        <script>
+        <!-- <script>
         am4core.ready(function() {
         // Themes begin
         am4core.useTheme(am4themes_dark);
@@ -342,11 +342,12 @@
         chart.cursor.lineX.fillOpacity = 0.1;
         chart.scrollbarX = new am4core.Scrollbar();
         }); // end am4core.ready()
-        </script>
+        </script> -->
         <script>
         am4core.ready(function() {
         
         // Themes begin
+        am4core.useTheme(am4themes_dark);
         am4core.useTheme(am4themes_animated);
         // Themes end
         
@@ -390,6 +391,7 @@
         categoryAxis.renderer.labels.template.horizontalCenter = "right";
         categoryAxis.renderer.labels.template.fontWeight = 500;
         categoryAxis.renderer.labels.template.fontSize = 10;
+
         categoryAxis.renderer.labels.template.adapter.add("fill", function(fill, target) {
         return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
         });
@@ -399,9 +401,10 @@
         valueAxis.renderer.grid.template.strokeOpacity = 0;
         valueAxis.min = 0;
         valueAxis.renderer.labels.template.fontSize = 10;
+       
         valueAxis.max = 100;
         valueAxis.strictMinMax = true;
-        
+     
         // Create series
         var series1 = chart.series.push(new am4charts.RadarColumnSeries());
         series1.dataFields.valueX = "full";
@@ -465,10 +468,10 @@
                             
                             <div class="d-flex flex-row justify-content-start align-items-center">  <!-- style="margin-top:-48px;" -->
                                 <a title="Mert S. Kaplan"
-                                    href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                    href="#"
                                     class="twPc-avatarLink">
                                     <img alt="Mert S. Kaplan"
-                                    src="https://mertskaplan.com/wp-content/plugins/msk-twprofilecard/img/mertskaplan.jpg"
+                                    src="{{tweets.profile_url}}"
                                     class="twPc-avatarImg">
                                 </a>
                                 <div class="twPc-divUser">
@@ -478,7 +481,7 @@
                                     </div>
                                     <span>
                                         <a
-                                            href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg">@<span>{{author_name | default:"maliksblr92"}}</span></a>
+                                            href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg">@<span>{{tweets.name | default:"maliksblr92"}}</span></a>
                                         </span>
                                         
                                     </div>
@@ -542,9 +545,9 @@
                             <div class="col-md-12 text-center text-white text-success font-weight-bold ">
                                 Posting Time Chart
                             </div>
-                            <div class="col-md-12 m-0 p-0" style="height: 90%;width:100%;" id="posting_time_charts">
+                            <!-- <div class="col-md-12 m-0 p-0" style="height: 90%;width:100%;" id="posting_time_charts">
                                 
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -650,7 +653,7 @@
                                     <div class="row p-2">
                                         <div class="col-md-2 m-0 p-0 d-flex flex-column justify-content-center align-items-center"
                                             style="height:auto;">
-                                            <img class="img-fluid " src="/static/images/077_twitter-512"
+                                            <img class="img-fluid " src="{{tweets.profile_url}}"
                                             style="height:50px;width:50px;border-radius:50%;" />
                                             <p style="font-size:12px" class="text-primary font-weight-bold  ">
                                                 Tweet # {{ forloop.counter }}
