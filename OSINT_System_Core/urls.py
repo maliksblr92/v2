@@ -57,7 +57,10 @@ urlpatterns = [
     path('find_object/',views.Find_Object.as_view(), name='find_object'),
     path('link_object/',views.Link_Object.as_view(), name='link_object'),
     path('share_resource/',views.Share_Resource.as_view(), name='share_resource'),
-path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
+    path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
+    path('logged_ips/', views.Logged_Ips.as_view(), name='logged_ips'),
+
+
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
     path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),

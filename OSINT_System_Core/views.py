@@ -31,7 +31,7 @@ from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
 from django_eventstream import send_event
-from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
+from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages,Ip_Logger
 
 from bs4 import BeautifulSoup
 import requests
@@ -774,7 +774,9 @@ class Share_Resource(View):
         print(request.GET)
         group_typ = request.GET.get('user_group', None)
         message = request.GET.get('message', None)
-        resource_id = request.GET.get('resource_id', None)
+        resource_id = []
+
+        if request.GET.getlist('resource_id[]'): resource_id = request.GET.getlist('resource_id[]')[0]
 
         if (group_typ and message and resource_id):
             resource_obj = self.ml.find_object_by_id(ObjectId(resource_id))
@@ -808,6 +810,16 @@ class Rabbit_Message(View):
         print(objects)
 
         return render(request, 'OSINT_System_Core/message_loger.html', {'messages': objects})
+
+
+class Logged_Ips(RequireLoginMixin,IsTSO,View):
+
+    def get(self,request,*args,**kwargs):
+        responses = Ip_Logger.get_all_loggers()
+
+        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+
+
 
 
 class Update_Footer_Graphs():

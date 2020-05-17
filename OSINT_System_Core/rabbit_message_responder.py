@@ -71,7 +71,7 @@ def on_messege_recived(data,**kwargs):
 def on_ais_message(data):
     print(data['arguments'])
     if(data['arguments']):
-        if('GTR' in data):
+        if('GTR' in data['arguments']):
             GTR_id = data['arguments']['GTR']
             print('.....................GOT GTR ID AIS........................')
             tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
