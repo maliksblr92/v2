@@ -411,14 +411,12 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 class Instagram_Target_Response(TemplateView):
-   template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
-   def get(self, request, *args, **kwargs):
-         with open('static/Target_Json/instagram_response.json', 'r') as f:
-            instagram_person = json.load(f)
-            # print(instagram_person)
-            return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'instagram_person': instagram_person})
-
-
+       template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
+       def get(self, request, *args, **kwargs):
+            object_gtr_id = kwargs['object_gtr_id']
+            profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+            print(profile.to_mongo())
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'profile': profile})
 
 
 
@@ -646,3 +644,19 @@ class Youtube_Target_Response(View):
         print(channel.to_mongo())
 
         return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
+    
+class Dynamic_Crawling_Target(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(target.to_mongo())
+        return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
+    
+    
+
+class Subreddit_Target_Resposne(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(subreddit_profile.to_mongo())
+        return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})

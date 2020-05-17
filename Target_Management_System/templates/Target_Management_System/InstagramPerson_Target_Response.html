@@ -1,504 +1,603 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
-        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
-        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-            <!-- facebook person target css start -->
-            <style>
 
-            body {
-            background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            margin: 0 !important;
-            padding: 0 !important;
-            }
-            html {
-            --scrollbarBG: #CFD8DC;
-            --thumbBG: #90A4AE;
-            }
-            ::-webkit-scrollbar {
-            width: 7px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-            }
-            ::-webkit-scrollbar-track {
-            background: var(--scrollbarBG);
-            }
-            ::-webkit-scrollbar-thumb {
-            background-color: var(--thumbBG);
-            border-radius: 6px;
-            border: 3px solid var(--scrollbarBG);
-            }
-            </style>
-            <style>
-            .wrapper {
-            background: transparent !important;
-            }
-            .background-gradient{
-            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
-            }
-            .background-gradient-dark{
-            background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
-            }
-            .circle-dot1 {
-            width: 15px;
-            height: 15px;
-            float: left;
-            margin: 6px;
-            border-radius: 50%;
-            cursor: pointer;
-            background-color: #f35d5b;
-            }
-            .circle-dot2 {
-            width: 15px;
-            height: 15px;
-            float: left;
-            margin: 6px;
-            border-radius: 50%;
-            cursor: pointer;
-            background-color: #f6bd3a;
-            }
-            .circle-dot3 {
-            width: 15px;
-            height: 15px;
-            float: left;
-            margin: 6px;
-            border-radius: 50%;
-            cursor: pointer;
-            background-color: #44cc45;
-            }
-            .fb-cover-img {
-            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
-            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            height: 300px;
-            /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
-            /* z-index: 1; */
-            }
-            .instagram_person-image-wrapper{
-            height: 150px;
-            width: 150px;
-            margin-top: -120px;;
-            border:5px solid #FEC134;
-            border-radius: 10px;
-            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            }
-            /*            .instagram_person-image-wrapper {
-            height: 150px;
-            width: 100%;
-            margin-top: -120px;
-            border:5px solid #FEC134;
-            border-radius: 10px;
-            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            }*/
-            .instagram_person-image-name {
-            font-size: 25px;
-            font-weight: bold;
-            ;
-            color: black;
-            margin-top: -50px;
-            letter-spacing: 3px;
-            ;
-            }
-            .custom-1 {
-            height: 200px;
-            width: 100%;
-            border: 1px solid red;
-            background-color: white;
-            padding: 20px;
-            ;
-            }
-            .small-txt {
-            font-size: 11px !important;
-            }
-            .smaller-txt {
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css"
+        integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous">
+    <style>
+        .text_10px {
             font-size: 10px !important;
-            }
-            .material-icons {
-            color: #007bff;
-            font-size: 16px;
+        }
+
+        .text_12px {
+            font-size: 12px;
             ;
-            }
-            a {
+        }
+
+        .text_13px {
+            font-size: 13px !important;
+        }
+
+        .text_14px {
+            font-size: 14px;
+            ;
+        }
+
+        .text_15px {
+            font-size: 15px;
+            ;
+        }
+
+        .text_20px {
+            font-size: 20px;
+            ;
+        }
+
+        .text_25px {
+            font-size: 25px;
+            ;
+        }
+
+        .border_radius_5px {
+            border-radius: 5px !important;
+        }
+
+
+        .background-gradient-dark {
+            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+        }
+
+        .no_decoration {
             text-decoration: none !important;
-            }
-            .border-right {
+        }
+
+        .border_right {
             border-right: 1px solid black;
             ;
-            }
-            .border-left {
+        }
+
+        .border_left {
             border-left: 1px solid black;
             ;
-            }
-            .custom-center-center {
+        }
+
+        .custom-start-center {
             display: flex;
             justify-content: center;
             align-items: center;
-            }
-            .custom-start-center {
+        }
+
+        .custom-start-center {
             display: flex !important;
             justify-content: start !important;
             align-items: center !important;
-            }
-            .custom-end-center {
+        }
+
+        .custom-end-center {
             display: flex !important;
             justify-content: end !important;
             align-items: center !important;
-            }
-            .custom-row-center-center {
+        }
+
+        .d-flex flex-row justify-content-start align-items-center {
             display: flex !important;
             flex-direction: row !important;
             justify-content: center !important;
             align-items: center !important;
-            }
-            .custom-column-center-center {
+        }
+
+        .custom-column-center-center {
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
-            }
-            .custom-column-start-start {
+        }
+
+        .custom-column-start-start {
             display: flex !important;
             flex-direction: column !important;
             justify-content: start !important;
             align-items: start !important;
-            }
-            .custom-column-start-center {
+        }
+
+        .custom-column-start-center {
             display: flex !important;
             flex-direction: column !important;
             justify-content: start !important;
             align-items: center !important;
-            }
-            .custom_active_text > i{
-            color: #FEC134 !important;
-            }
-            .custom_active_text.active > i{
-            color: #FEC134 !important;
-            }
-            </style>
-            <!-- facebook person target css end -->
-        </head>
-        <body>
-            <div class="container-fluid wrapper ">
-                <div class="row pl-5 pr-5">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg" id="header">
-                            <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-                            data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon ">
-                                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-                            </span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                                <div class="col-lg-2"></div>
-                                <div class="col-lg-8 ">
-                                    <div class="row m-0 p-0">
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="   btn  font-weight-bold nav_btn" href="#">MONITOR</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 custom_center">
-                                            <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-                                        </div>
-                                        <div class="col-lg-5 pt-2">
-                                            <div class="row">
-                                                <div class="col-lg-6  list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">FETCH</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-lg-6 list list-inline custom_center "
-                                                    style="border-right:2px solid white;border-left:2px solid white;">
-                                                    <li class="nav-item">
-                                                        <a class="btn font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                                                    </li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 "></div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-                <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white d-flex flex-row justify-content-start align-items-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                        <div class="circle-dot1 ml-2"></div>
-                        <div class="circle-dot2 ml-1"></div>
-                        <div class="circle-dot3 ml-1"></div>
-                    </div>
-                </div>
-                <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 fb-cover-img" style="background-color:#4267b2">
-                    </div>
-                </div>
-                <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-2">
-                        <div class="instagram_person-image-wrapper">
-                        </div>
-                    </div>
-                    <div class="col-md-8 ">
-                        <div class="instagram_person-image-name text-white ">
-                            <span class=""style="border-radius:2px;padding:10px;letter-spacing:4px;">  {{instagram_person.name}}</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- //////////////////////////////////////////// -->
+        }
 
-                <!-- /////////////////////////////////////////////// -->
-                <!--  -->
-                <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-3">
-                        <div class="row border border-warning background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
-                            <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                                <i class="fas fa-user-friends text-warning fa-2x"></i>
-                                <span class="ml-2 text-warning" style="font-size:18px;">
-                                    <span class="font-weight-bold">{{instagram_person.name}}</span>
-                                    Freinds
-                                </span>
-                            </div>
-                            <div class="col-md-2 text-warning mt-1">{{instagram_person.friends | length}}</div>
+        .full_space {
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        .ellipsis {
+            text-overflow: hidden;
+        }
+    </style>
+    <style>
+        html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+        }
+    </style>
+    <style>
+        .profile-img-wrapper {
+            border: 4px solid white;
+            height: 250px;
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        .label {
+            color: white
+        }
+
+        .header-wrapper {}
+
+        .stats-box-upper {
+            border-radius: 5px 5px 0px 0px;
+            text-align: center;
+            font-weight: bold;
+            color: red
+        }
+
+        .stats-box-lower {
+            border-radius: 0px 0px 5px 5px;
+            text-align: center;
+            color: blue
+        }
+
+        .post-wrapper {
+            height: 700px;
+            overflow-y: auto;
+        }
+
+        .header-icons {
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: white;
+            ;
+        }
+
+        .header-text {
+            font-size: 16px !important;
+            ;
+            width: 200px;
+            ;
+            text-align: left;
+        }
+
+        .card-body-label {
+            width: 100px;
+            ;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid wrapper background-gradient-dark">
+        <div class="row ">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row p-2">
+                    <div class="col-md-4 text-left">
+                        <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                            <i class="fab fa-instagram mr-2"></i> Instagram
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
+                            <i class="fas fa-users mr-2"></i> Instagram Profile Target
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                            <i class="fas fa-download  mr-2"></i> Download PDF Report
+                        </a>
+                    </div>
+                </div>
+                <div class="row background-gradient-dark border_radius_5px ">
+                    <div class="col-md-2  custom-column-center-center">
+                        <div class="profile-img-wrapper ">
+                            <img src="{{profile.profile_picture_url}}"
+                                class="border_radius_5px img-fluid full_space">
                         </div>
-                        <div class="row p-1 border border-warning background-gradient" style="height:613px;overflow-y:auto;">
-                            <div class="col-md-12 " >
-                                <!--  -->
-                                {% for f in instagram_person.friends %}
-                                    <div class="row mt-1 ">
-                                        <div class="col-md-4 m-0 p-0 " >
-                                            {% if f.media_directory  is not None   %}
-                                                <img src="{{f.media_directory}}" style="height:80px;width:80px;" class="img-fluid" />
-                                            </div>
-                                        {% else %}
-                                            <img src="/static/images/VIaL8H.jpg" style="height:80px;width:80px;" class="img-fluid" />
-                                        </div>
-                                    {% endif%}
-                                    <div class="col-md-8 border rounded" style="height:80px;background:transparent!important;">
-                                        <div class="row h-100 d-flex flex-row text-white justify-content-center align-items-center">
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt">Name</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt">{{f.name}}</div>
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt">Id</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt">{{f.id}}</div>
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt">Visit</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt"><a href=""
-                                            class="badge badge-light">Click</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% empty %}
-                                <p>No freinds to display </p>
-                            {% endfor %}
-                            <!--  -->
+                        <div>
+                            <a href="" target="_blank"
+                                class="badge badge-success text_14px mt-2">
+                                <i class="fa fa-eye text-dark header-icons mr-2"></i> View profile
+                            </a>
                         </div>
                     </div>
-                    <!--  colmd-9-->
+                    <div class="col-md-5  background-gradient-dark p-5">
+                        <div class="row  p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Full Name
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.fullname|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row  p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>User Name
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.username|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fas fa-compass text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                    Followers
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.follow|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                    Followed By
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.followed_by|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Bio-Graphy
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.biography|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Person ID
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.person_id|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Behaviour 
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{profile.behaviour|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                    <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
+                        <div id="profile_chart" style="height:400px;width:100%"></div>
+                    </div>
                 </div>
-                <!-- start of tabs  -->
-                <div class="col-md-9">
-                    <div class="row border border-warning mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
-                        <div class="col-md-12  p-0 " style="height:662px;overflow-y:hidden;">
-                            <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center "
-                                style="height:40px;border-radius:0px 10px 0px 0px ;">
-                                <li class=" active   ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#instagram_person">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
-                                        Instagram_person Informnation
-                                        </i>
-                                    </a>
-                                </li>
-                              
-                                <li class=" ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-sticky-note text-warning fa-2x">
-                                        Posts
-                                        </i>
-                                    </a>
-                                </li>
+                <!-- 
+
+         -->
+                <div class="row ">
+                    <div class="col-md-12 m-0 p-0">
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-link active">
+                                        <a data-toggle="tab" href="#profile">
+                                           Profile
+                                        </a>
+                                    </li>
+
+
+                                    <li class="nav-link active">
+                                        <a data-toggle="tab" href="#posts">
+                                           Posts
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div id="profile" class="tab-pane fade in active show">
                              
-                               
-                            </ul>
-                            <div class="tab-content background-gradient pl-4 pr-4 pt-2" style="height:100%;overflow-y:auto;">
-                                <!-- start close associates tab  -->
-                              
-                                <!-- end close asscoiates  -->
-                                <!-- start instagram_person tab  -->
-                                <div id="instagram_person" class="tab-pane fade show in active ">
-                                    <div class="row">
-                                        <div class="col-md-12" id="instagram_person_chart" style="height: 300px;width:100%;">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> Biography </i></h3>
-                                            <p class="text-white">{{instagram_person.biography}}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> Followed by </i></h3>
-                                            <p class="text-white">{{instagram_person.followed_by}}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> Following </i></h3>
-                                            <p class="text-white">{{instagram_person.follow}}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> Full Name </i></h3>
-                                            <p class="text-white">{{instagram_person.fullname}}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> User Name </i></h3>
-                                            <p class="text-white">{{instagram_person.username}}</p>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <h3><i class="material-icon text-warning"> Sentiments </i></h3>
-                                            <p class="text-white"><span class="badge badge-primary mr-2">Positive :</span>{{instagram_person.sentiments.positive}}</p>
-                                            <p class="text-white"><span class="badge badge-primary mr-2">Negitive :</span>{{instagram_person.sentiments.negitive}}</p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- end instagram_person tab  -->
-                               
-                                <!-- start posts tab  -->
-                                <div id="posts" class="tab-pane fade ">
-                                <div class="row mt-2">
-                                  {% for p in  instagram_person.posts %}
-                                <div class="col-md-6 mt-2">
-                                  <div class="card ">
-
-                                  <div class="card-body">
-                                  <img src="{{p.display_url}}" style="width: 100%;height: 200px;" class="img-fluid img-thumbnail" />
-                                  <div class="p-2" style="font-size:12px;height: 100px;overflow-y:auto;;">{{p.caption}}</div>
-                                  </div>
-                                  <div class="card-footer">
-                                    <div class="row">
-                                      <div class="col-md-6  text-white text-left"><span class="badge badge-primary">Comments Count</span></div>
-                                      <div class="col-md-6 text-right"><span class="badge badge-success ">{{p.comments_count}}</span></div>
-
+                                  <div class="col-md-12 card p-5">
+                                      <div class="card-header">
+                                        Profile Summary
                                       </div>
-                                  <div class="row ">
-                                    <div class="col-md-6  text-white text-left"><span class="badge badge-primary">Likes Counts</span></div>
-                                  <div class="col-md-6 text-right"><span class="badge badge-success">{{p.likes_count}}</span></div>
-                                  </div>
+                                      <div class="card-body">
+                                        {{profile.profile_summary|default:"N/A"}}
+                                      </div>
+
+
+                                      <div class="card-header">
+Sentiments
+                                       </div>
+                                       <div class="card-body">
+                                         {% for sentiment in profile.sentiments %}
+                                         <span class="badge badge-info ">{{sentiment}}</span>
+                                         {% endfor %}
+                                       </div>
+
+
+                                       <div class="card-header">
+                                        Common words 
+                                       </div>
+                                       <div class="card-body">
+                                         {% for sentiment in profile.comm %}
+                                         <span class="badge badge-info ">{{sentiment}}</span>
+                                         {% endfor %}
+                                       </div>
+
+
+                                       
+
+                                  <div class="card-footer">
+
                                   </div>
                                   </div>
 
 
-                                  </div>
-                                  {% endfor %}
-                                </div>
-
-
-                                </div>
-                                <!-- end posts tab  -->
-                            
-                                <!-- end checkin -->
                             </div>
-                            <!-- end tab content -->
-                        </div>
-                    </div>
-                </div>
-                <!-- end col-md-9 -->
-            </div>
-            <div class="row mt-2 ml-1 mr-1">
-                <div class="col-md-12 mt-2">
-                    <div class="row ">
-                        <div class="col-lg-12 pl-5 pr-5">
-                            <nav class="navbar navbar-expand-lg " id="header">
-                                <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                                    <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
+
+
+
+<!-- instagram posts  -->
+                            <div id="posts" class="tab-pane fade">
+                             
+                         <div class="row m-0 p-0 ">
+
+                             
+                                 {% for post in profile.posts %}
+                                 <div class="col-md-3 card">
+                                 <div class="card">
+                                     <div class="card-header bg-info">
+                                         <div class="row">
+                                             <div class="col-md-4 text_14px"><span class="text-white font-weight-bold">Post # {{forloop.counter}}</span></div>
+                                             <div class="col-md-4 text_14px"> <span class="badge badge-light">{{post.owner_username}}</span></div>
+                                             <div class="col-md-4  text-right">
+                                                <i class="fab fa-instagram fa-2x text-white"></i>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="card-body">
+                                         <div class="row">
+                                             <div class="col-md-12 text-center m-0 p-0">
+                                                 <img src="{{post.display_url}}" class="img-fluid img-responsive" style="height:250px;width:100%;" >
+                                             </div>
+
+                                             <div class="col-md-12 text_12px m-0 p-0">
+                                                {{post.caption}}
+                                            </div>
+                                         </div>
+                                       
+                                      
+    
+                                       
+                                        
+                                       
+                                     </div>
+                                     <div class="card-footer">
+                                   <span class="badge badge-info float-left">  Likes :  {{post.likes_count}}</span>
+                                   <span class="badge badge-info float-right"> Comments : {{post.comments_count}}</span>
+                                     </div>
+                                 </div>
+                                    
+                                    
+
                                 </div>
-                            </nav>
+                                 {% endfor %}
+                                </div>
+                           
+                          </div>
+
+<!-- end instagram posts -->
+                            
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="{% static '/jquery/js/jquery-3.2.1.min.js'%}"></script>
-            <script src="{% static '/bootstrap/js/bootstrap.min.js'%}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-            </script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-            </script>
-            <script src="https://www.amcharts.com/lib/4/core.js"></script>
-            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-            <script>
-            am4core.ready(function () {
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>
+        am4core.ready(function () {
+
             // Themes begin
+            am4core.useTheme(am4themes_dark);
             am4core.useTheme(am4themes_animated);
             // Themes end
-            var iconPath =
-            "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
-            var chart = am4core.create("instagram_person_chart", am4charts.SlicedChart);
-            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-            chart.data = [{
-            "name": "Friedns",
-            "value": 354
-            }, {
-            "name": "Close Associates",
-            "value": 245
-            }, {
-            "name": "Posts",
-            "value": 187
-            }, {
-            "name": "Popularity",
-            "value": 123
-            }, {
-            "name": "Popularity",
-            "value": 87
-            }, {
-            "name": "Positivity",
-            "value": 45
-            }];
-            var series = chart.series.push(new am4charts.PictorialStackedSeries());
-            series.dataFields.value = "value";
-            series.dataFields.category = "name";
-            series.alignLabels = true;
-            series.maskSprite.path = iconPath;
-            series.ticks.template.locationX = 1;
-            series.ticks.template.locationY = 0.5;
-            series.labelsContainer.width = 200;
-            chart.legend = new am4charts.Legend();
-            chart.legend.position = "left";
-            chart.legend.valign = "bottom";
-            }); // end am4core.ready()
-            </script>
-        </body>
-    </html>
+
+            var chart = am4core.create("profile_chart", am4charts.RadarChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            
+
+            var dic = [
+
+                {
+                    category: "Posts",
+                    value1: "{{ profile.posts|length }}",
+
+                },
+
+                
+                
+                {
+                    category: "Target Update ",
+                    value1: "{{ profile.target_update_count }}",
+
+                },
+
+                {
+                    category: "Followers",
+                    value1: "{{ profile.follow }}",
+
+                },
+                {
+                    category: "Followed By",
+                    value1: "{{ profile.followed_by }}",
+
+                },
+
+            ]
+
+            chart.data = dic
+
+            //chart.padding(20, 20, 20, 20);
+            chart.colors.step = 4;
+
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            categoryAxis.renderer.labels.template.location = 0.5;
+            categoryAxis.renderer.labels.template.horizontalCenter = "right";
+            categoryAxis.renderer.labels.template.fontSize = 10;
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.tooltipLocation = 0.5;
+            categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
+            categoryAxis.renderer.axisFills.template.disabled = true;
+            categoryAxis.interactionsEnabled = false;
+            categoryAxis.renderer.minGridDistance = 10;
+
+            var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+            valueAxis.tooltip.disabled = true;
+            valueAxis.renderer.labels.template.horizontalCenter = "left";
+            valueAxis.min = 0;
+            valueAxis.max = 1000;
+            valueAxis.strictMinMax = true;
+            valueAxis.renderer.maxLabelPosition = 0.99;
+            valueAxis.renderer.minGridDistance = 10;
+            valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+            valueAxis.renderer.axisFills.template.disabled = true;
+            valueAxis.interactionsEnabled = false;
+
+            var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+            series1.columns.template.tooltipText = "{name}: {valueX.value}";
+            series1.name = "Counts";
+            series1.dataFields.categoryY = "category";
+            series1.dataFields.valueX = "value1";
+            series1.stacked = true;
+
+
+
+            chart.seriesContainer.zIndex = -1;
+
+            chart.scrollbarX = new am4core.Scrollbar();
+            chart.scrollbarX.exportable = false;
+            chart.scrollbarY = new am4core.Scrollbar();
+            chart.scrollbarY.exportable = false;
+
+            chart.cursor = new am4charts.RadarCursor();
+            chart.cursor.lineY.disabled = true;
+
+        }); // end am4core.ready()
+    </script>
+</body>
+
+</html>
