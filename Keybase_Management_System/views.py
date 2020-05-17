@@ -1,11 +1,11 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render,reverse
 from django.views import View
 from OSINT_System_Core.publisher import publish
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
-
+from Public_Data_Acquisition_Unit.mongo_models import Blocked_Urls
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 
 # Create your views here.
@@ -42,6 +42,65 @@ class Create_Keybase(RequireLoginMixin, View):
         print(resp) 
         print(type(resp))
         return JsonResponse({'success':200})
+
+
+class Block_URL(View):
+    def get(self,request,*args,**kwargs):
+
+        url = ''
+
+        if 'url' in kwargs: url = kwargs['url']
+
+        if(not url == ''):
+            url = url.replace(' ','/')
+
+
+
+        urls = Blocked_Urls.get_all_blocked_urls()
+
+        return render(request,'Keybase_Management_System/block_url.html',{'urls':urls,'b_url':url})
+
+    def post(self,request,*args,**kwargs):
+
+        print(request.POST)
+
+
+
+        title = request.POST.get('title',None)
+        description = request.POST.get('description',None)
+        url = request.POST.get('url',None)
+
+        print(title,description,url)
+
+        try:
+            if(title and description and url):
+                obj = Blocked_Urls(title=title,description=description,url=url)
+                obj.save()
+
+
+        except Exception as e:
+            print(e)
+            publish(str(e),message_type='notification')
+
+
+        return HttpResponseRedirect(reverse('Keybase_Management_System:block_url'))
+
+class Delete_URL(View):
+
+    def get(self,request,*args,**kwargs):
+        url_id = None
+        try:
+            if 'url_id' in kwargs: url_id = kwargs['url_id']
+
+            obj = Blocked_Urls.get_object_by_id(url_id)
+            obj.delete()
+
+
+        except Exception as e:
+            print(e)
+            publish(str(e), message_type='notification')
+
+        return HttpResponseRedirect(reverse('Keybase_Management_System:block_url'))
 
 class Delete_Keybase(View):
 
@@ -119,7 +178,7 @@ class View_Keybase(View):
 
         keybase = km.get_keybase_object_by_id(kwargs['keybase_id'])
 
-        return objects
+        return ''
 
 
 class DeleteKeybaseProperty(RequireLoginMixin, IsTSO, View):

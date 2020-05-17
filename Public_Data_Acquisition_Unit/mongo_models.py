@@ -1395,6 +1395,23 @@ class Ip_Logger(Document):
     def get_not_logged_loggers():
         return Ip_Logger.objects(is_ip_logged=False)
 
+class Blocked_Urls(Document):
+
+    title = StringField()
+    description = StringField()
+    url = StringField()
+
+    created_on = DateField(default=datetime.datetime.utcnow())
+    updated_on = DateField(default=datetime.datetime.utcnow())
+
+    @staticmethod
+    def get_all_blocked_urls():
+        return Blocked_Urls.objects()
+
+    @staticmethod
+    def get_object_by_id(obj_id):
+        return Blocked_Urls.objects(id=obj_id)
+
 
 class Timeline_Posts(Document):
 
