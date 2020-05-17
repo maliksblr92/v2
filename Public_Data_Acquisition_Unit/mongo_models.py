@@ -1383,7 +1383,17 @@ class Ip_Logger(Document):
     start_date = DateField(default=datetime.date.today())
     end_date = DateField(default=datetime.date.today())
 
+    @staticmethod
+    def get_all_loggers():
+        return Ip_Logger.objects()
 
+    @staticmethod
+    def get_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=True)
+
+    @staticmethod
+    def get_not_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=False)
 
 
 class Timeline_Posts(Document):

@@ -485,6 +485,42 @@ class Ess_Api_Controller(object):
             print(e)
         return None
 
+    def get_rss_feed(self):
+        try:
+            add_target_url = 'rss_feeds'
+            payload = {'GTR':'','CTR':''}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_ip_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_ip_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 
     def test_api(self,keywords,GTR,CTR):
 

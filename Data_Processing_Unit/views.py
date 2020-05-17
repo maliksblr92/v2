@@ -16,11 +16,13 @@ from io import BytesIO
 from django.template.loader import get_template
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
 from Public_Data_Acquisition_Unit.ais_api_controller import Ais_Api_Controller
+from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from django.template import Context
 
 p_manager = Processing_Manager()
 ess = Ess_Api_Controller()
 ais = Ais_Api_Controller()
+acq = Acquistion_Manager()
 
 # ahmed imports
 import twint
@@ -763,6 +765,10 @@ class Ip_Tools(View):
         return render(request,'Data_Processing_Unit/ip_tools.html')
     
     def post(self,request,*args,**kwargs):
+
+        print(request.POST)
+        #print(request.POST['query_type'],request.POST['domain'])
+
         query_type=request.POST['query_type']
         if query_type=='image_reverse_lookup':
             print("Query Type "+query_type)
@@ -774,9 +780,13 @@ class Ip_Tools(View):
 
         elif query_type=='ip_shortend':
             print("Query Type "+query_type)
+
+            title = request.POST['title']
+            description = request.POST['description']
             url=request.POST['url']
+
             print(url)
-            resp = ess.create_payload(url)
+            resp = acq.create_payload(title,description,url)
             print(resp)
 
         elif query_type=='ip_tracking':
@@ -784,4 +794,17 @@ class Ip_Tools(View):
             start_date=request.POST['start_date']
             end_date=request.POST['end_date']
             print(code,start_date,end_date)
-        return render(request,'Data_Processing_Unit/ip_tools.html')
+
+        elif query_type=='domains_ip_info':
+            domain=request.POST['domain']
+            resp = ess.get_domains_ip_info(domain)
+
+            print(resp)
+
+        elif query_type == 'domains_info':
+            domain = request.POST['domain']
+            resp = ess.get_domains_info(domain)
+
+            print(resp)
+
+        return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})

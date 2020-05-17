@@ -79,16 +79,17 @@
           <div class="container-fluid ">
             <ul class="nav nav-pills row">
               
-              <li class="custom_pills  col-md-4 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#ip_short_end">IP SHORT</a></li>
-              <li class="custom_pills col-md-4 m-0 p-0"><a class="btn  w-100 text-white "data-toggle="tab" href="#ip_tracking">IP TRACKING </a></li>
-              <li class="custom_pills col-md-4 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#image_reverse_lookup">IMAGE REVERSE LOOKUP</a></li>
-              
+              <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#ip_short_end">IP SHORT</a></li>
+
+              <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#image_reverse_lookup">IMAGE REVERSE LOOKUP</a></li>
+              <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#domain_ip_info">DOMAIN IP INFO</a></li>
+                <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#domain_info">DOMAIN INFO</a></li>
             </ul>
             
             <div class="row">
               <div class="col-md-12">
                 <div class="tab-content" style="height:400px;">
-                  <div id="image_reverse_lookup" class="tab-pane fade  ">
+                  <div id="image_reverse_lookup" class="tab-pane  {% if query_type == 'image_reverse_lookup' %}in active show {% else %} fade {% endif %} ">
                     
                     <div class="card-body m-4 main_card border-0">
                       
@@ -143,7 +144,7 @@
               </form>
             </div>
             
-            <div id="ip_short_end" class="tab-pane in active show ">
+            <div id="ip_short_end" class="tab-pane {% if query_type == 'ip_shortend' or query_type|length < 1%}in active show {% else %} fade {% endif %} ">
               
               <div class="card-body m-4 main_card border-0">
                 
@@ -160,6 +161,22 @@
                           name="query_type" value="ip_shortend"readonly="readonly" required="required">
                         </label>
                       </div>
+                          <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                        class="input_text">Payload Title </span>
+                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="title"
+                        name="title" required="required">
+                      </label>
+                    </div>
+
+                          <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                        class="input_text">Description</span>
+                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description"
+                        name="description" required="required">
+                      </label>
+                    </div>
+
                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                         <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                         class="input_text">URL </span>
@@ -189,6 +206,10 @@
               </div>
             </div>
           </form>
+
+                <strong><p style="color: white"><a href="{{ response }} " target="_blank" >{{ response }}</a></p></strong>
+
+
         </div>
         
         <div id="ip_tracking" class="tab-pane ">
@@ -253,7 +274,108 @@
   </form>
 </div>
 
+ <div id="domain_ip_info" class="tab-pane {% if query_type == 'domains_ip_info' %}in active show {% else %} fade {% endif %}">
 
+          <div class="card-body m-4 main_card border-0">
+
+            <form name="domain_ip_info" id="domain_ip_info" action="/dpu/iptools/" method="POST">
+              {% csrf_token %}
+              <div class="row input_wrapper_row">
+                <div class="col-md-2"></div>
+                <div class="col-md-9">
+                  <div class="row">
+                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                      <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                      class="input_text">Query Type </span>
+                      <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query_type"
+                      name="query_type" value="domains_ip_info" readonly="readonly" required="required">
+                    </label>
+                  </div>
+                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                      <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                      class="input_text">Domain</span>
+                      <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="domain"
+                      name="domain" value="" required="required">
+                    </label>
+                  </div>
+
+
+
+          </div>
+
+
+          <input type="hidden" name="form_name" value="domain_ip_info" id="form_name"/>
+
+
+
+        </div>
+        <div class="col-md-1 ">
+        </div>
+      </div>
+
+      <div class="row input_wrapper_row">
+        <div class="col-md-6"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+          <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="query"
+          name="submit" id="submit">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+                    <div id="domain_info" class="tab-pane {% if query_type == 'domains_info' %}in active show {% else %} fade {% endif %}">
+
+          <div class="card-body m-4 main_card border-0">
+
+            <form name="domain_info" id="domain_info" action="/dpu/iptools/" method="POST">
+              {% csrf_token %}
+              <div class="row input_wrapper_row">
+                <div class="col-md-2"></div>
+                <div class="col-md-9">
+                  <div class="row">
+                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                      <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                      class="input_text">Query Type </span>
+                      <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="query_type"
+                      name="query_type" value="domains_info" readonly="readonly" required="required">
+                    </label>
+                  </div>
+
+                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                      <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                      class="input_text">Domain</span>
+                      <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="domain"
+                      name="domain" value="" required="required">
+                    </label>
+                  </div>
+
+
+
+          </div>
+
+
+          <input type="hidden" name="form_name" value="domain_info" id="form_name"/>
+
+
+
+        </div>
+        <div class="col-md-1 ">
+        </div>
+      </div>
+
+      <div class="row input_wrapper_row">
+        <div class="col-md-6"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-2">
+          <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
+          name="submit" id="submit">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 
 
