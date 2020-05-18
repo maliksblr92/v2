@@ -1,0 +1,162 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Case_Management_System/css/case_create.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex">
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems">CREATE</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems">INSPECT</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_setting' %}" class="btn secondnavitems">STATUS</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_report' %}" class="btn secondnavitems">ARCHIVE</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xl-3"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
+        <!-- Sub Menu Bar for app specific menu -->
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-create-case" data-toggle="tab" href="create-case-tab">Create
+                    Case</a>
+                <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="location-tab">Location</a>
+                <a class="nav-item nav-link" id="nav-interest-tab" data-toggle="tab" href="case-files-tab">Case
+                    Files</a>
+                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="evidence-tab">Evidence</a>
+            </div>
+        </nav>
+        <!-- end of sub menu -->
+    </div>
+    <!-- end of top row -->
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+        <div class="">
+            <div class="row formbg ml-3">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                    <!-- nav tab content section -->
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <!-- case creation tab -->
+                        <div class="tab-pane fade active show" id="create-case-tab" role="tabpanel">
+                            <div class="row mt-2">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="case-creation-form">
+                                        {% csrf_token %}
+                                        <div class="form-group ">
+                                            <!-- case number -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">Case Number
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="cc-case-number"
+                                                    class="form-control newinputdesign"
+                                                    placeholder="Case Number Please ..." required>
+                                            </div>
+                                            <!-- end of case number -->
+                                            <!-- case title -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">Case Title
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="cc-case-title"
+                                                    class="form-control newinputdesign" placeholder="Case Title Please"
+                                                    required>
+                                            </div>
+                                            <!-- end of case title -->
+                                            <!-- Incident Date time -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Incident Date Time
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="cc-incident-dt" placeholder="MM/DD/YYYY HH:MM:SS ...">
+                                            </div>
+                                            <!-- end of incident date time -->
+                                            <!--for Case Type-->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;"> Case Type
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="cc-case-type" placeholder="Case Type ...">
+                                            </div>
+                                            <!-- end of case type -->
+                                            <!-- Case State -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Case State
+                                                    </span>
+                                                </div>
+                                                <select name="cc-case-state" class="custom-select newinput"
+                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;">
+                                                    <option value="p">Pending</option>
+                                                    <option value="ui">Under Investigation</option>
+                                                    <option value="cr">Case Resolved</option>
+                                                    <option value="cu">Case Unresolved</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- TWO BUTTON BOTTOM-->
+                                        <div class="row d-flex flex-row">
+                                            <div class="col-md-12 ml-5">
+                                                <!--LEFT BUTTON-->
+                                                <button type="reset" class="btn btn-secondary searchbutton"
+                                                    id="cc-clear-btn">Clear
+                                                </button>
+                                                <button type="submit" style="float:right;"
+                                                    class="btn btn-secondary searchbutton mr-5"
+                                                    id="cc-submit-btn">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of case creation tab -->
+                        <!-- work details tab -->
+                        <!-- end of work details tab -->
+                        <!-- interests tab -->
+                        <!-- end of interests tab -->
+                        <!-- life events tab -->
+                        <!-- end of life events tab -->
+                        <!-- biography tab -->
+                        <!-- end of biography tab -->
+                        <!-- social media tab -->
+                        <!-- end of social media tab -->
+                        <!-- Posts tab -->
+                        <!-- end of posts tab -->
+                    </div>
+                    <!-- end of nav tab content -->
+                </div>
+            </div>
+            <!-- END OF second row-->
+        </div>
+    </div>
+    <!-- end of main container -->
+
+</div>
+{% endblock %}
+{% block foot_dep %}
+<script defer src="{% static 'Case_Management_System/js/case_create.js' %}"></script>
+{% endblock %}

@@ -1,8 +1,16 @@
+"""
+django views
+"""
+import json
+from datetime import datetime
+
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render,reverse
-import json
+from django.http import JsonResponse
+
+from Case_Management_System.models import CaseCMS
+
+APP_NAME = 'Case_Management_System'
 
 # Create your views here.
 n_series_data = []
@@ -82,8 +90,43 @@ def convert_json_to_network_series(data,n=1):
     #print(n_series_data)
     return json.dumps(n_series_data)
 
+class CreateCase(View):
+    """md
+    case creation view
+    """
+    def get(self, request, *args, **kwargs):
+        """md
+        renders the Case Creation Form
+        """
+        return render(request, f'{APP_NAME}/case_create.html')
 
+    def post(self, request, *args, **kwargs):
+        """md
+        handles the data received from case creation
+        and stores it in the database
+        """
+        print(request.POST)
+        case_number = request.POST.get('cc-case-number')
+        if request.POST.get('cc-case-title'):
+            case_title = request.POST.get('cc-case-title')
+        else:
+            case_title = None
+        if request.POST.get('cc-incident-dt'):
+            incident_datetime = datetime.strptime(request.POST.get('cc-incident-dt'), '%m/%d/%Y %H:%M:%S')
+        else:
+            incident_datetime = None
+        if request.POST.get('cc-case-type'):
+            case_type = request.POST.get('cc-case-type')
+        else:
+            case_type = None
+        if request.POST.get('cc-case-state'):
+            case_state = request.POST.get('cc-case-state')
+        else:
+            case_state = None
 
-
-
-
+        try:
+            case_cms = CaseCMS()
+            case_cms.create_case(case_number, case_title, incident_datetime, case_type, case_state)
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        return JsonResponse({'success': 200})

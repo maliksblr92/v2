@@ -1,6 +1,8 @@
 """
 contains all models for Case Management System
 """
+from datetime import datetime
+
 from mongoengine import disconnect, connect, Document
 from mongoengine import EmbeddedDocument, EmbeddedDocumentListField
 from mongoengine import PointField, StringField, URLField
@@ -115,7 +117,7 @@ class CaseCMS(Document):
     case_number = StringField()
     case_title = StringField()
     # Case Creation Date and Time
-    case_creation_datetime = DateTimeField()
+    case_creation_datetime = DateTimeField(default=datetime.utcnow)
     # Incident Date and Time
     incident_datetime = DateTimeField()
     # case type, there are many types for which
@@ -134,6 +136,14 @@ class CaseCMS(Document):
     pictures = EmbeddedDocumentListField(PictureEvidenceFile)
     videos = EmbeddedDocumentListField(VideoEvidenceFile)
     physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
+
+    def create_case(self, case_number, case_title, incident_datetime, case_type, case_state):
+        self.case_number = case_number
+        self.case_title = case_title
+        self.incident_datetime = incident_datetime
+        self.case_type = case_type
+        self.case_state = case_state
+        self.save()
 
 class AllLocationsOfInterest(Document):
     """md
