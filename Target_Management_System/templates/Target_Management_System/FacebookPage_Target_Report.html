@@ -278,7 +278,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <h3><i class="material-icon text-warning">Page Info </i></h3>
-                                                <p class="text-white">{{page.page_info}}</p>
+                                                <p class="text-white">{{page.page_info|default:"N/A"}}</p>
+                                               
                                             </div>
                                             <div class="col-md-6">
                                                 <h3><i class="material-icon text-warning">Countries Involved </i></h3>
@@ -290,8 +291,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <h3><i class="material-icon text-warning">Page Histroy </i></h3>
-                                                <p class="text-white">{{page.page_history.O.event}}</p>
-                                                <p class="text-white">{{page.page_history.O.timestamp}}</p>
+                                                {%  for i in page.page_history %}
+                                                <p class="text-white">{{i.event}} : {{i.timestamp}}</p>
+                                               
+                                            {% endfor %}
                                             </div>
                                             <div class="col-md-6">
                                                 <h3><i class="material-icon text-warning">Overall Behaviour </i></h3>
@@ -350,7 +353,7 @@
                                                 <div class="col-md-12 border post-wrapper">
                                                     <div class="row">
                                                         <div class="col-md-2 m-0 p-0 custom-center-center  border">
-                                                            <img src="/static/images/VIaL8H.jpg"
+                                                            <img src="{{p.media_directory}}"
                                                             style="height: 60px;width:60px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
@@ -372,7 +375,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-12 text-center small-txt border text-white">
+                                                        <div class="col-md-12 text-center font-weight-bold border text-white"style="font-size:22px;">
                                                             {{p.post_text}}
                                                         </div>
                                                     </div>
@@ -381,6 +384,7 @@
                                                             <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
                                                         </div>
                                                     </div> -->
+                                                    {% if p.picture_links %}
                                                     <div class="row" style="height:300px;overflow-y:auto;">
                                                         <div class="col-md-12">
                                                             <i class="material-icon text-warning" style="font-size:20px;">Post
@@ -392,6 +396,8 @@
                                                             </div>
                                                         {% endfor %}
                                                     </div>
+                                                    {% else %}
+                                                    {% endif %}
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <i class="material-icon text-warning" style="font-size:20px;">Liked By
@@ -400,7 +406,7 @@
                                                         {% for r in p.reactions.like  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -428,7 +434,7 @@
                                                         {% for r in p.reactions.love  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -456,7 +462,7 @@
                                                         {% for r in p.reactions.haha  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -484,7 +490,7 @@
                                                         {% for r in p.reactions.wow  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -512,7 +518,7 @@
                                                         {% for r in p.reactions.angry  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -540,7 +546,7 @@
                                                         {% for r in p.reactions.sad  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="/{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -568,7 +574,7 @@
                                                         {% for r in p.comments  %}
                                                             <div class="col-md-4  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
                                                                 style="height:100px;">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{r.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
@@ -616,7 +622,7 @@
                                                     {% for c in page.close_associates %}
                                                         <div class="card">
                                                             <div class="card-header background-gradient-dark" id="headingOne">
-                                                                <img src="/static/images/VIaL8H.jpg"
+                                                                <img src="{{c.media_directory}}"
                                                                 style="height: 80px;width:80px;border-radius: 50%;;"
                                                                 class="img-fluid">
                                                                 <!--    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->

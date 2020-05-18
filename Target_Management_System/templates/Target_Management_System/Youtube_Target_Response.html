@@ -122,8 +122,8 @@
             width: 100% !important;
         }
 
-        .dotted_text {
-            text-overflow: ellipsis !important;
+        .ellipsis {
+            text-overflow: hidden;
         }
     </style>
     <style>
@@ -192,6 +192,12 @@
             font-size: 16px !important;
             ;
             width: 200px;
+            ;
+            text-align: left;
+        }
+
+        .card-body-label {
+            width: 100px;
             ;
             text-align: left;
         }
@@ -344,7 +350,7 @@
                                     <li class="nav-link ">
                                         <a data-toggle="tab" href="#new_videos">New Videos</a>
                                     </li>
-                                   <li class="nav-link ">
+                                    <li class="nav-link ">
                                         <a data-toggle="tab" href="#featured_channels"> Featured Channels</a>
                                     </li>
                                     <li class="nav-link ">
@@ -368,20 +374,36 @@
                                         <div class="row ">
                                             {% for video in channel.videos.popular %}
                                             <div class="col-md-4 p-3 ">
-                                                <div class="border border_radius_5px">
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Video #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                             fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card "
+                                                    style="height:400px;overflow-y:auto;overflow-x:hidden">
                                                     <div class="row  p-2">
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
+                                                            <span class="badge badge-primary card-body-label">
+
                                                                 Name
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <span class="text_12px dotted_text">{{video.name}}</span>
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
+                                                            <span class="badge badge-primary card-body-label">
+
                                                                 Link
                                                             </span>
                                                         </div>
@@ -391,8 +413,8 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
+                                                            <span class="badge badge-primary card-body-label">
+
                                                                 length
                                                             </span>
                                                         </div>
@@ -400,8 +422,8 @@
                                                             <span class="text_12px">{{video.video_length}}</span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
+                                                            <span class="badge badge-primary card-body-label">
+
                                                                 Views
                                                             </span>
                                                         </div>
@@ -411,25 +433,21 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
+                                                            <span class="badge badge-primary card-body-label">
+
                                                                 Created On
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <span class="text_12px">{{video.timestamp}}</span>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
-                                                                Thumbnail
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-9">
+
+                                                        <div class="col-md-12 text-center">
                                                             <span class="text_12px">
                                                                 {% if video.thumbnail_directory %}
                                                                 <img src="{{video.thumbnail_directory}}"
-                                                                    class="img-fluid img-thumbnail" alt="">
+                                                                    class="img-fluid img-thumbnail" alt=""
+                                                                    style="height:250px;">
                                                                 {% else %}
                                                                 {% endif %}
                                                             </span>
@@ -459,7 +477,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <span class="text_12px dotted_text">{{video.name}}</span>
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <span class="badge badge-primary">
@@ -546,7 +564,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <span class="text_12px dotted_text">{{video.name}}</span>
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <span class="badge badge-primary">
@@ -621,6 +639,7 @@
 
                             <div id="subscribed_channels" class="tab-pane fade">
                                 <div class="card">
+
                                     <div class="card-body post-wrapper">
                                         <div class="row ">
                                             {% for video in channel.channels.subscribed %}
@@ -634,7 +653,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <span class="text_12px dotted_text">{{video.name}}</span>
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <span class="badge badge-primary">
@@ -714,23 +733,39 @@
 
                             <div id="play_list" class="tab-pane fade">
                                 <div class="card">
+
                                     <div class="card-body post-wrapper">
                                         <div class="row ">
                                             {% for video in channel.playlists %}
                                             <div class="col-md-4 p-3 ">
-                                                <div class="border border_radius_5px">
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Video #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+                                                            {{video.name}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                             fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="border ">
                                                     <div class="row  p-2">
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
+                                                            <span class="badge badge-primary card-body-label">
                                                                 Video
                                                                 Name
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <span class="text_12px dotted_text">{{video.name}}</span>
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
+                                                            <span class="badge badge-primary card-body-label">
                                                                 Video
                                                                 Link
                                                             </span>
@@ -740,9 +775,9 @@
                                                                 {{video.link}}
                                                             </span>
                                                         </div>
-                                                       
+
                                                         <div class="col-md-3">
-                                                            <span class="badge badge-primary">
+                                                            <span class="badge badge-primary card-body-label">
                                                                 Video
                                                                 Views
                                                             </span>
@@ -752,24 +787,21 @@
                                                                 {{video.num_videos}}
                                                             </span>
                                                         </div>
-                                                        
-                                                        <div class="col-md-3">
-                                                            <span class="badge badge-primary">
-                                                                Video
-                                                                Thumbnail
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <span class="text_12px">
+
+                                                        <div class="col-md-12 text-center">
+                                                            <span class="">
                                                                 {% if video.thumbnail_directory %}
                                                                 <img src="{{video.thumbnail_directory}}"
-                                                                    class="img-fluid img-thumbnail" alt="">
+                                                                    class="img-fluid img-thumbnail" alt=""
+                                                                    style="height:200px;">
                                                                 {% else %}
                                                                 {% endif %}
                                                             </span>
                                                         </div>
                                                     </div>
+
                                                 </div>
+                                                <div class="card-footer"></div>
                                             </div>
                                             {% empty %}
                                             <p>No Playlist Videos</p>
@@ -786,118 +818,166 @@
 
                             <div id="posts" class="tab-pane fade">
                                 <div class="card">
+                                    <div class="card-header">
+                                    </div>
                                     <div class="card-body post-wrapper">
                                         <div class="row ">
                                             {% for video in channel.posts %}
                                             <div class="col-md-4 p-3 ">
-                                                <div class="border border_radius_5px">
+
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Post #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+                                                            {{video.post_author.name}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                                    fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card border ">
                                                     <div class="row  p-2">
-                                                     <div class="col-md-3"><span class="badge badge-priamry">Post Author</span></div>
-                                                     <div class="col-md-9"><span class="text_12px">{{video.post_author.name}}</span></div>
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Author</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_author.name}}</span>
+                                                        </div>
 
 
-                                                     <div class="col-md-3"><span class="badge badge-priamry">Post Link</span></div>
-                                                     <div class="col-md-9"><span class="text_12px">{{video.post_link}}</span></div>
-
-
-
-
-                                                     <div class="col-md-3"><span class="badge badge-priamry">Post Created</span></div>
-                                                     <div class="col-md-9"><span class="text_12px">{{video.timestamp}}</span></div>
-
-
-                                                     <div class="col-md-3"><span class="badge badge-priamry">Post Likes</span></div>
-                                                     <div class="col-md-9"><span class="text_12px">{{video.post_likes}}</span></div>
-
-
-                                                     <div class="col-md-3"><span class="badge badge-priamry">Post Type</span></div>
-                                                     <div class="col-md-9"><span class="badge">
-                                                         
-                                                        {% if video.post_type.is_text  %}
-                                                       <span> Is_Text</span>
-                                                       {% else %}
-                                                       <span> Non Text</span>
-                                                        {% endif %}
-                                                    </span>
-                                                    <span class="badge">
-                                                         
-                                                        {% if video.post_type.is_picture  %}
-                                                       <span> Is_Picture</span>
-                                                       {% else %}
-                                                       <span> No Picture </span>
-                                                        {% endif %}
-                                                    </span>
-
-                                                    <span class="badge">
-                                                         
-                                                        {% if video.post_type.is_video  %}
-                                                       <span> Is_Video</span>
-                                                       {% else %}
-                                                       <span> No Video</span>
-                                                        {% endif %}
-                                                    </span>
-
-                                                    <span class="badge">
-                                                         
-                                                        {% if video.post_type.is_vote  %}
-                                                       <span> Is_Voted</span>
-                                                       {% else %}
-                                                       <span> Not Voted</span>
-                                                        {% endif %}
-                                                    </span>
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Link</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_link}}</span></div>
 
 
 
-                                                       
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Created</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.timestamp}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Likes</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_likes}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Type</span></div>
+                                                        <div class="col-md-9"><span class="badge">
+
+                                                                {% if video.post_type.is_text  %}
+                                                                <span> Has_Text</span>
+                                                                {% else %}
+                                                                <span> Non Text</span>
+                                                                {% endif %}
+                                                            </span>
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_picture  %}
+                                                                <span> Has_Picture</span>
+                                                                {% else %}
+                                                                <span> No Picture </span>
+                                                                {% endif %}
+                                                            </span>
+
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_video  %}
+                                                                <span> Has_Video</span>
+                                                                {% else %}
+                                                                <span> No Video</span>
+                                                                {% endif %}
+                                                            </span>
+
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_vote  %}
+                                                                <span> Is_Voted</span>
+                                                                {% else %}
+                                                                <span> Not Voted</span>
+                                                                {% endif %}
+                                                            </span>
+
+
+
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Text</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_text}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Comments</span></div>
+                                                        <div class="col-md-9"><span class="text_12px">
+                                                                {% if video.comments %}
+                                                                {% for c in video.comments %}
+                                                                {{c}}
+                                                                {% endfor %}
+                                                                {% else %}
+                                                                <span>No Comments</span>
+                                                                {% endif %}
+                                                            </span></div>
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Pictures
+                                                                Links </span></div>
+                                                        <div class="col-md-9">{% for i in video.picture_links %}
+                                                            <img src="{{i}}" class="img-fluid img-thumbnail" alt="">
+                                                            {% empty %}
+                                                            <span class="text_12px">No pictures</span>
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        {% comment %}
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Video Links
+                                                            </span></div>
+                                                        <div class="col-md-9">{% for i in video.video_links %}
+                                                            <iframe src="{{i}}"></iframe>
+                                                            {% empty %}
+                                                            <span class="text_12px">No Video Link</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endcomment %}
+                                                        {% comment %}
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Others Links
+                                                            </span></div>
+                                                        <div class="col-md-9">{% for i in video.other_links %}
+                                                            <iframe src="{{i}}"></iframe>
+                                                            {% empty %}
+                                                            <span class="text_12px">No Video Link</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endcomment %}
+
+
+
                                                     </div>
-
-
-                                                    <div class="col-md-3"><span class="badge badge-priamry">Post Text</span></div>
-                                                    <div class="col-md-9"><span class="text_12px">{{video.post_text}}</span></div>
-
-
-                                                    <div class="col-md-3"><span class="badge badge-priamry">Post Text</span></div>
-                                                    <div class="col-md-9"><span class="text_12px">
-                                                        {% if video.comments %}
-                                                        {% for c in video.comments %}
-                                                            {{c}}
-                                                        {% endfor %}
-                                                        {% else %}
-                                                        <span>No Comments</span>
-                                                        {% endif %}
-                                                    </span></div>
-
-                                                    <div class="col-md-3"><span class="badge badge-priamry">Pictures Links </span></div>
-                                                    <div class="col-md-9">{% for i in video.picture_links %}
-                                                       <img src="{{i}}" class="img-fluid img-thumbnail" alt="">
-                                                                        {% empty %}
-                                                                        <span class="text_12px">No pictures</span>
-                                                                        {% endfor %}
-                                                    </div>
-
-{% comment %}
-                                                    <div class="col-md-3"><span class="badge badge-priamry">Video Links </span></div>
-                                                    <div class="col-md-9">{% for i in video.video_links %}
-                                                       <iframe src="{{i}}" ></iframe>
-                                                                        {% empty %}
-                                                                        <span class="text_12px">No Video Link</span>
-                                                                        {% endfor %}
-                                                    </div>
-{% endcomment %}
-{% comment %}
-                                                    <div class="col-md-3"><span class="badge badge-priamry">Others Links </span></div>
-                                                    <div class="col-md-9">{% for i in video.other_links %}
-                                                       <iframe src="{{i}}" ></iframe>
-                                                                        {% empty %}
-                                                                        <span class="text_12px">No Video Link</span>
-                                                                        {% endfor %}
-                                                    </div>
-                                                    {% endcomment %}
-
-
+                                                    <div class="card-footer">
 
                                                     </div>
                                                 </div>
+
                                             </div>
                                             {% empty %}
                                             <p>No Posts </p>

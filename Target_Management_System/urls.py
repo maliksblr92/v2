@@ -16,6 +16,9 @@ from .views import FacebookGroupReport
 from .views import Bulk_Targets
 from .views import Reddit_Target_Response
 from .views import  Youtube_Target_Response
+from .views import Dynamic_Crawling_Target
+from .views import Subreddit_Target_Resposne
+# from.views import Twitter_Target_Report
 # end ahmed imports
 urlpatterns = [
 
@@ -64,6 +67,7 @@ path(
     # ahmed Class Views
     path('target/instagram/<str:object_gtr_id>', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
     path('target/twitter/<str:object_gtr_id>', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),
+    # path('report/twitter/<str:object_gtr_id>', Twitter_Target_Report.as_view(), name="Twitter_Target_Report"),
     path('target/linkedin/person/<str:object_gtr_id>', LinkedinPerson_Target_Response.as_view(), name="LinkedinPerson_Target_Response"),
     path('target/linkedin/company/<str:object_gtr_id>', LinkedinCompany_Target_Response.as_view(), name="LinkedinCompany_Target_Response"),
     path('target/facebook/person/<str:object_gtr_id>', FacebookPerson_Target_Response.as_view(), name="FacebookPerson_Target_Response"),
@@ -76,5 +80,7 @@ path(
     path('bulk_targets/',Bulk_Targets.as_view(), name="bulk_targets"),
     path('target/reddit/<str:object_gtr_id>', Reddit_Target_Response.as_view(), name="reddit_target_response"),
     path('target/youtube/<str:object_gtr_id>/', Youtube_Target_Response.as_view(), name="youtube_target_response"),
-
+    path('target/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Target.as_view(), name="dynamic_crawling_target"),
+    path('target/sub_reddit/<str:object_gtr_id>/',Subreddit_Target_Resposne.as_view(), name="subreddit_target_resposne")
+    
 ]
