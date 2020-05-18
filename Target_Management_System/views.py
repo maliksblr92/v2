@@ -7,6 +7,7 @@ from OSINT_System_Core.publisher import publish
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager,Timeline_Manager
 from Public_Data_Acquisition_Unit.mongo_models import PERIODIC_INTERVALS,Supported_Website
+
 from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
@@ -15,8 +16,8 @@ acq = Acquistion_Manager()
 km = Keybase_Manager()
 tl = Timeline_Manager()
 from django.views.generic import TemplateView
-
-
+from Data_Processing_Unit.models import Reddit_Profile_Response_TMS
+from Data_Processing_Unit.models import Youtube_Response_TMS
 
 
 
@@ -627,3 +628,21 @@ def username_exists(username,n_data):
             return True
 
     return False
+
+
+
+class Reddit_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(profile.to_mongo())
+        return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
+    
+    
+class Youtube_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(channel.to_mongo())
+
+        return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
