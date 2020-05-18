@@ -167,6 +167,10 @@ class Index(View):
         print("nationality == ", nationality)
         print("gender == ", gender)
         print("age == ", age)
+
+        resp = ess.fake_identitity_generator(nationality,gender,age)
+
+        print(resp)
         return redirect('/dpu/index/')
 
 

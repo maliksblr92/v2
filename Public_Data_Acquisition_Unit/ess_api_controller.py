@@ -708,7 +708,7 @@ class Ess_Api_Controller(object):
 
     def fake_identitity_generator(self,nationality,gender,age):
         try:
-            add_target_url = 'identitygenerator/'
+            add_target_url = 'identitygenerator'
             payload = {'nationality':nationality,'gender':gender,'age':age}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
             print(response.json())
