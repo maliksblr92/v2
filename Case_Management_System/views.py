@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 
-from Case_Management_System.models import CaseCMS
+from Case_Management_System.models import CaseCMS, AllLocationsOfInterest
 
 APP_NAME = 'Case_Management_System'
 
@@ -98,7 +98,16 @@ class CreateCase(View):
         """md
         renders the Case Creation Form
         """
-        return render(request, f'{APP_NAME}/case_create.html')
+        cases = json.loads(CaseCMS.get_all_cases_id_and_title().to_json())
+        ctx = {}
+        ctx['cases'] = []
+        for case in cases:
+            ctx['cases'].append([
+                case['_id']['$oid'],
+                case['case_number'] + ' | ' + case['case_title']
+            ])
+        print(ctx)
+        return render(request, f'{APP_NAME}/case_create.html', ctx)
 
     def post(self, request, *args, **kwargs):
         """md
@@ -130,3 +139,48 @@ class CreateCase(View):
         except Exception as exc:
             return JsonResponse({'error': str(exc)})
         return JsonResponse({'success': 200})
+
+class StoreAndRetrieveLocation(View):
+    """md
+    stores location data and retrieves it
+    """
+    def get(self, request, *args, **kwargs):
+        """
+        get request
+        """
+        pass
+
+    def post(self, request, *args, **kwargs):
+        """
+        post request
+        """
+        print(request.POST)
+        if request.POST.get('ld-case') != '':
+            case_doc_id = request.POST.get('ld-case')
+        else:
+            case_doc_id = None
+        if request.POST.get('ld-coordinates'):
+            location = request.POST.get('ld-coordinates')
+            location = [float(x) for x in location.strip().split()]
+            print(location)
+        else:
+            location = None
+        if request.POST.get('ld-address'):
+            address = request.POST.get('ld-address')
+        else:
+            address = None
+        if request.POST.get('ld-description'):
+            description = request.POST.get('ld-description')
+        else:
+            description = None
+        try:
+            # store location data to individual cms
+            if case_doc_id:
+                case_cms = CaseCMS().get_object_by_id(case_doc_id)
+                case_cms.store_location(location, address, description)
+            # store location data to separate location collection
+            all_locations = AllLocationsOfInterest()
+            all_locations.store_location(location, address, description)
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        return JsonResponse({'success':200})

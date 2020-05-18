@@ -144,12 +144,30 @@ class CaseCMS(Document):
         self.case_type = case_type
         self.case_state = case_state
         self.save()
+    
+    def store_location(self, location, address, description):
+        location_of_interest = LocationOfInterest(location, address, description)
+        self.locations_of_interest.append(location_of_interest)
+        self.save()
+
+    @staticmethod
+    def get_all_cases_id_and_title():
+        return CaseCMS.objects().fields(case_number=1, case_title=1)
+
+    @staticmethod
+    def get_object_by_id(document_id):
+        return CaseCMS.objects(id=document_id).first()
 
 class AllLocationsOfInterest(Document):
     """md
     All Locations ever added to the police database
     """
     locations = EmbeddedDocumentListField(LocationOfInterest)
+
+    def store_location(self, location, address, description):
+        location_of_interest = LocationOfInterest(location, address, description)
+        self.locations.append(location_of_interest)
+        self.save()
 
 class AllPeopleOfInterest(Document):
     """md

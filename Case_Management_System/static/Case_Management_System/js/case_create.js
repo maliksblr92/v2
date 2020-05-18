@@ -15,7 +15,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         event.preventDefault();
     });
-    // location information form
+    // location details form
+    let ld_form = "#location-details-form";
+    $(ld_form).submit((event) => {
+        let form_data = $(ld_form).serializeArray();
+        console.log(form_data);
+        $.ajax({
+            url: "/cms/location/",
+            method: "POST",
+            data: form_data,
+            success: (result) => {
+                console.log(result);
+                $(ld_form).trigger("reset");
+            },
+        });
+        event.preventDefault();
+    });
     //evidence form
     //person of interest form
 });

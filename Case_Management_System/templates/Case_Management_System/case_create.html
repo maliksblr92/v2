@@ -29,13 +29,13 @@
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
         <!-- Sub Menu Bar for app specific menu -->
         <nav>
-            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-create-case" data-toggle="tab" href="create-case-tab">Create
+            <div class="nav nav-tabs nav-fill">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#create-case-tab">Create
                     Case</a>
-                <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="location-tab">Location</a>
-                <a class="nav-item nav-link" id="nav-interest-tab" data-toggle="tab" href="case-files-tab">Case
+                <a class="nav-item nav-link" data-toggle="tab" href="#location-details-tab">Location</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#case-files-tab">Case
                     Files</a>
-                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="evidence-tab">Evidence</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#evidence-tab">Evidence</a>
             </div>
         </nav>
         <!-- end of sub menu -->
@@ -47,7 +47,7 @@
             <div class="row formbg ml-3">
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
                     <!-- nav tab content section -->
-                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-content">
                         <!-- case creation tab -->
                         <div class="tab-pane fade active show" id="create-case-tab" role="tabpanel">
                             <div class="row mt-2">
@@ -117,35 +117,82 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- TWO BUTTON BOTTOM-->
-                                        <div class="row d-flex flex-row">
-                                            <div class="col-md-12 ml-5">
-                                                <!--LEFT BUTTON-->
-                                                <button type="reset" class="btn btn-secondary searchbutton"
-                                                    id="cc-clear-btn">Clear
-                                                </button>
-                                                <button type="submit" style="float:right;"
-                                                    class="btn btn-secondary searchbutton mr-5"
-                                                    id="cc-submit-btn">Submit</button>
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-4 mb-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
                                             </div>
                                         </div>
+                                        <!-- end of reset and submit button -->
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <!-- end of case creation tab -->
-                        <!-- work details tab -->
-                        <!-- end of work details tab -->
-                        <!-- interests tab -->
-                        <!-- end of interests tab -->
-                        <!-- life events tab -->
-                        <!-- end of life events tab -->
-                        <!-- biography tab -->
-                        <!-- end of biography tab -->
-                        <!-- social media tab -->
-                        <!-- end of social media tab -->
-                        <!-- Posts tab -->
-                        <!-- end of posts tab -->
+                        <!-- location details tab -->
+                        <div class="tab-pane fade" id="location-details-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="location-details-form">
+                                        {% csrf_token %}
+                                        <!-- associated case -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="ld-case" class="custom-select newinput">
+                                                <option value="">None</option>
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}">{{case.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- location coordinates -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span
+                                                    class="newlabeldesign">CoOrdinates</span></div>
+                                            <input type="text" name="ld-coordinates" class="form-control newinputdesign"
+                                                placeholder="23.5434523627 43.45555653">
+                                        </div>
+                                        <!-- end of location coordinates -->
+                                        <!-- address -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Address</span>
+                                            </div>
+                                            <input type="text" name="ld-address" class="form-control newinputdesign"
+                                                placeholder="431 James Street ...">
+                                        </div>
+                                        <!-- end of address -->
+                                        <!-- description -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span
+                                                    class="newlabeldesign">Description</span></div>
+                                            <textarea name="ld-description" class="form-control" rows="5"></textarea>
+                                        </div>
+                                        <!-- end of description -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-4 mb-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of location details tab -->
                     </div>
                     <!-- end of nav tab content -->
                 </div>
