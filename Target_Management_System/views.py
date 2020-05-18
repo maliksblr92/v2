@@ -12,6 +12,9 @@ from bson import ObjectId
 from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
+from System_Log_Management_Unit.system_log_manager import Data_Queries
+
+dq = Data_Queries()
 acq = Acquistion_Manager()
 km = Keybase_Manager()
 tl = Timeline_Manager()
@@ -576,6 +579,57 @@ class Link_Analysis(View):
         else:
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
+
+class Close_Associates_Tree_Graph(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
+        #print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        if(len(data_object['close_associates']) > 0):
+
+            alpha_node,beta_node_list = dq.generalize_data_for_nodes('facebook','profile',data_object)
+            resp =  dq.convert_nodes_to_graph_data(alpha_node,beta_node_list)
+
+            print(resp)
+            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+        else:
+            return render(request, 'Target_Management_System/link_analysis.html', {})
+
+class Instagram_Follower_Tree_Graph(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
+        #print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        if(len(data_object['followers']) > 0):
+
+            alpha_node,beta_node_list = dq.generalize_data_for_nodes('instagram','profile',data_object)
+            resp =  dq.convert_nodes_to_graph_data(alpha_node,beta_node_list)
+
+            print(resp)
+            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+        else:
+            return render(request, 'Target_Management_System/link_analysis.html', {})
+
+class Twitter_Follower_Tree_Graph(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
+        #print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        if(len(data_object['followers']) > 0):
+
+            alpha_node,beta_node_list = dq.generalize_data_for_nodes('twitter','profile',data_object)
+            resp =  dq.convert_nodes_to_graph_data(alpha_node,beta_node_list)
+
+            print(resp)
+            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+        else:
+            return render(request, 'Target_Management_System/link_analysis.html', {})
 
 
 

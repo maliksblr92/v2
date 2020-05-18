@@ -63,7 +63,9 @@ path(
     path('timeline/',views.Timeline.as_view(),name="timeline"),
     path('timeline_fetch/',views.Timeline_Fetch.as_view(),name="timeline_fetch"),
     path('link_analysis/<str:object_gtr_id>',views.Link_Analysis.as_view(),name="link_analysis"),
-
+    path('close_associates_tree_graph/<str:object_gtr_id>',views.Close_Associates_Tree_Graph.as_view(),name="close_associates_tree_graph"),
+    path('instagram_follower_tree_graph/<str:object_gtr_id>',views.Instagram_Follower_Tree_Graph.as_view(),name="instagram_follower_tree_graph"),
+    path('twitter_follower_tree_graph/<str:object_gtr_id>',views.Twitter_Follower_Tree_Graph.as_view(),name="twitter_follower_tree_graph"),
     # ahmed Class Views
     path('target/instagram/<str:object_gtr_id>', Instagram_Target_Response.as_view(), name="Instagram_Target_Response"),
     path('target/twitter/<str:object_gtr_id>', Twitter_Target_Response.as_view(), name="Twitter_Target_Response"),

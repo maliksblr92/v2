@@ -280,6 +280,8 @@ opacity:0.9; padding:7px 9px 0 10px;height:35px;width:110px;">Screenshots
           name="{{platform.name|lower}}_screenshot" value="0"
           required="required"  />
 <span class="badge badge-danger ml-2">          No</span>
+            <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
+            <input type="hidden" name="portfolio_id" value="{{data.portfolio_id}}">
       </label>
     </div>
 </div>
@@ -291,12 +293,6 @@ opacity:0.9; padding:7px 9px 0 10px;height:35px;width:110px;">Screenshots
       
     </div>
 
-
-
-
-
-
-                                            
                                         </div>
 
                                         <!-- TWO BUTTON BOTTOM-->
