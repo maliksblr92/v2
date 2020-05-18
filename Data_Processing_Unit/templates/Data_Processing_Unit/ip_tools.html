@@ -656,4 +656,98 @@
 </div>
 </div>
 {% endif %}
+
+
+{% if response %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header text-white  main_card_header ">
+      Article Links
+    </div>
+    <div class="card-body">
+      {% for i in  response.data.article_links %}
+      <div class="row  ">
+        <div class="col-md-2">
+          <span class="badge badge-light">Title : </span>
+        </div>
+        <div class="col-md-10 text-white" style="font-size:13px;">
+          {{i.title}}
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          <span class="badge badge-light">View / Url : </span>
+        </div>
+        <div class="col-md-10 text-white" style="font-size:13px;">
+          {{i.url}}<a href="{{i.url}}" class="badge badge-success float-right mr-2"><i class="fa fa-eye">View</i></a>
+        </div>
+      </div>
+        {% endfor %}
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="col-md-12">
+    <div class="card-header text-white  main_card_header ">
+      Simmilar Images
+    </div>
+    <div class="card-body ">
+      <div class="row">
+        
+   
+      {% for i in  response.data.similar_images %}
+     
+      <div class="col-md-3 border border-primary p-2">
+       <div class="card-header text-center"> <a href={{i}} class="badge badge-success"><i class="fa fa-eye"></i> View</a></div>
+       <div class="card-body">
+       <div class="row">
+         <div class="col-md-12">
+          <img src="{{i}}" class="img-fluid img-thumbnail"style="height:200px; width:100%" />
+         
+         </div>
+       </div>
+       </div>
+    
+      </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+{% endif %}
+
 {% endblock %}
