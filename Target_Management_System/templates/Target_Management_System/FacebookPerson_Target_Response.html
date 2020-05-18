@@ -15,17 +15,17 @@
             <style>
             
             
-body {
-    background: url("./../../../../static/images/background_gradient.svg")
-        no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    margin: 0 !important;
-    padding: 0 !important;
-   overflow-x:hidden!important;
-}
+            body {
+            background: url("./../../../../static/images/background_gradient.svg")
+            no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x:hidden!important;
+            }
             html {
             --scrollbarBG: #CFD8DC;
             --thumbBG: #90A4AE;
@@ -223,18 +223,17 @@ body {
         </head>
         <body>
             <div class="container-fluid ">
-               
+                
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-12 bg-white  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                       <div class="row">
-                        <div class="col-md-6 text-right"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
-                       
-                        <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                            <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2" style="margin-top:2px;" href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
-                        <a type="button" class="btn  btn-sm btn-success float-right"style="margin-top:2px;"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                        <div class="row">
+                            <div class="col-md-6 text-right"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+                            
+                            <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2" style="margin-top:2px;" href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+                                <a type="button" class="btn  btn-sm btn-success float-right"style="margin-top:2px;"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                            </div>
                         </div>
-                       </div>
-
                     </div>
                     
                 </div>
@@ -274,139 +273,157 @@ body {
                             <div class="col-md-12 " >
                                 <!--  -->
                                 {% for f in profile.friends %}
-                            
+                                    
                                     <div class="row mt-1 ">
                                         <div class="col-md-4 m-0 p-0 " >
-                                          
-                                                <img src="{{f.media_directory}}" style="height:80px;width:80px;" class="img-fluid" />
+                                            
+                                            <img src="{{f.media_directory}}" style="height:80px;width:80px;" class="img-fluid" />
+                                        </div>
+                                        
+                                        <div class="col-md-8 border custom_border_color rounded" style="height:80px;">
+                                            <div class="row h-100 d-flex flex-row text-white justify-content-center align-items-center">
+                                                <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Name:</div>
+                                                <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.name}}</div>
+                                                <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Id:</div>
+                                                <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.id}}</div>
+                                                <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Visit:</div>
+                                                <div class="col-md-6 m-0 p-0 small-txt text_paragraph"><a target="_black" href="{{f.url}}"
+                                                class="badge custom_badge fa fa-search">View</a></div>
+                                                <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading"></div>
+                                                {% if f.username %}
+                                                    <div class="col-md-6 m-0 p-0 small-txt text_paragraph">
+                                                        <a target="_blank" href="{% url 'Target_Management_System:tms_marktarget_prime' f.username 'facebook' %}"
+                                                            class="badge custom_badge">
+                                                            <i class="fa fa-link fa-2x"></i>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
                                             </div>
-                                       
-                                    <div class="col-md-8 border custom_border_color rounded" style="height:80px;">
-                                        <div class="row h-100 d-flex flex-row text-white justify-content-center align-items-center">
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Name:</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.name}}</div>
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Id:</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.id}}</div>
-                                            <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Visit:</div>
-                                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph"><a target="_black" href="{{f.url}}"
-                                            class="badge custom_badge fa fa-search">View</a></div>
                                         </div>
                                     </div>
-                                </div>
-                                {% empty %}
-                                <p>No freinds to display </p>
-                            {% endfor %}
-                            <!--  -->
+                                    {% empty %}
+                                    <p>No freinds to display </p>
+                                {% endfor %}
+                                <!--  -->
+                            </div>
                         </div>
+                        <!--  colmd-9-->
                     </div>
-                    <!--  colmd-9-->
-                </div>
-                <!-- start of tabs  -->
-                <div class="col-md-9">
-                    <div class="row border border-warning bg-white mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
-                        <div class="col-md-12  p-0 " style="height:662px;overflow-y:hidden;"">
-                            <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-between background-gradient-dark align-items-center "
-                                style="height:40px;border-radius:0px 10px 0px 0px ;">
-                                <li class=" active   ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#profile">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
-                                        Profile Informnation
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class="   ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#related">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-info-circle text-warning fa-2x">
-                                        Related Informnation
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class=" ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-sticky-note text-warning fa-2x">
-                                        Posts
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class=" ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#close_asscoiates">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
-                                        Close Associates
-                                        </i>
-                                    </a>
-                                </li>
-                                <li class=" ">
-                                    <a data-toggle="tab" class="nav-link custom_active_text" href="#checkins">
-                                        <i class="material-icons text-dark font-weight-bold fa fa-check-double text-warning fa-2x">
-                                        Check-ins
-                                        </i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content pl-4 pr-4 pt-2" style="height:100%;overflow-y:auto;">
-                                <!-- start close associates tab  -->
-                                <div id="close_asscoiates" class="tab-pane fade text-white">
-                                    <!-- <p>Close Associates ({{profile.close_associates | length}})</p> -->
-                                    <div class="row">
-                                        {% for c in profile.close_associates %}
-                                            <div class="col-md-6">
-                                                <div class="accordion" id="accordionExample">
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient-dark" id="custom1" data-toggle="collapse"
-                                                            data-target="#_{{c.id}}" aria-expanded="true"
-                                                            aria-controls="_{{c.id}}">
-                                                            <img src="{{c.media_directory}}"
-                                                            style="height: 80px;width:80px;border-radius: 50%;;"
-                                                            class="img-fluid">
-                                                          
-                                                            <button class="btn btn-link text-white" type="button" >
-                                                            {{c.name}}
-                                                            </button>
-                                                        </div>
-                                                        <div id="_{{c.id}}" class="collapse " aria-labelledby="custom1"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="row text_heading">
-                                                                            <div class="col-md-6"> Name:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.name}}</div>
-                                                                            <div class="col-md-6"> Username:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.username}}</div>
-                                                                            <div class="col-md-6"> Friend:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.is_friend}}</div>
-                                                                            <div class="col-md-6"> Post Authors:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_authors}}</div>
-                                                                            <div class="col-md-6"> Post Target:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_target}}</div>
-                                                                            <div class="col-md-6"> Post Tags:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_tags}}</div>
-                                                                            <div class="col-md-6"> Post Comments:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_comments}}</div>
-                                                                            <div class="col-md-6"> Post Replies:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_replies}}</div>
-                                                                        </div>
+                    <!-- start of tabs  -->
+                    <div class="col-md-9">
+                        <div class="row border border-warning bg-white mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
+                            <div class="col-md-12  p-0 " style="height:662px;overflow-y:hidden;"">
+                                <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-between background-gradient-dark align-items-center "
+                                    style="height:40px;border-radius:0px 10px 0px 0px ;">
+                                    <li class=" active   ">
+                                        <a data-toggle="tab" class="nav-link custom_active_text" href="#profile">
+                                            <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
+                                            Profile Informnation
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li class="   ">
+                                        <a data-toggle="tab" class="nav-link custom_active_text" href="#related">
+                                            <i class="material-icons text-dark font-weight-bold fa fa-info-circle text-warning fa-2x">
+                                            Related Informnation
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li class=" ">
+                                        <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
+                                            <i class="material-icons text-dark font-weight-bold fa fa-sticky-note text-warning fa-2x">
+                                            Posts
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li class=" ">
+                                        <a data-toggle="tab" class="nav-link custom_active_text" href="#close_asscoiates">
+                                            <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
+                                            Close Associates
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li class=" ">
+                                        <a data-toggle="tab" class="nav-link custom_active_text" href="#checkins">
+                                            <i class="material-icons text-dark font-weight-bold fa fa-check-double text-warning fa-2x">
+                                            Check-ins
+                                            </i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content pl-4 pr-4 pt-2" style="height:100%;overflow-y:auto;">
+                                    <!-- start close associates tab  -->
+                                    <div id="close_asscoiates" class="tab-pane fade text-white">
+                                        <!-- <p>Close Associates ({{profile.close_associates | length}})</p> -->
+                                        <div class="row">
+                                            {% for c in profile.close_associates %}
+                                                <div class="col-md-6">
+                                                    <div class="accordion" id="accordionExample">
+                                                        <div class="card">
+                                                            <div class="card-header background-gradient-dark" id="custom1" data-toggle="collapse"
+                                                                data-target="#_{{c.id}}" aria-expanded="true"
+                                                                aria-controls="_{{c.id}}">
+                                                                <img src="{{c.media_directory}}"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                class="img-fluid">
+                                                                
+                                                                <button class="btn btn-link text-white" type="button" >
+                                                                {{c.name}}
+                                                                </button>
+                                                                {% if c.username %}
+                                                                    <div class="badge custom_badge">
+                                                                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}">
+                                                                            <i class="fa fa-link"></i>
+                                                                        </a>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="row text_heading">
-                                                                            <div class="col-md-6">Sscore:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.score}}</div>
-                                                                            <div class="col-md-6">Post Mentions:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_mentions}}</div>
-                                                                            <div class="col-md-6">Post Reactions:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.post_reactions}}</div>
-                                                                            <div class="col-md-6">Mentioned by Owner:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.mentioned_by_owner}}</div>
-                                                                            <div class="col-md-6">Mentioned Owner:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.mentioned_owner}}</div>
-                                                                            <div class="col-md-6">Replied by Owner:</div>
-                                                                            <div class="col-md-6 text_paragraph"> {{c.replied_by_owner}}</div>
-                                                                            <div class="col-md-6">Replied Owner:</div>
-                                                                            <div class="col-md-6 text_paragraph">{{c.replied_owner}}</div>
-                                                                            <div class="col-md-6">View:</div>
-                                                                            <div class="col-md-6"><a
-                                                                                class="badge custom_badge fa fa-search"
-                                                                            href="{{c.url}}">View</a></div>
+                                                                {% endif %}
+                                                                
+                                                            </div>
+                                                            <div id="_{{c.id}}" class="collapse " aria-labelledby="custom1"
+                                                                data-parent="#accordionExample">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="row text_heading">
+                                                                                <div class="col-md-6"> Name:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.name}}</div>
+                                                                                <div class="col-md-6"> Username:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.username}}</div>
+                                                                                <div class="col-md-6"> Friend:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.is_friend}}</div>
+                                                                                <div class="col-md-6"> Post Authors:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_authors}}</div>
+                                                                                <div class="col-md-6"> Post Target:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_target}}</div>
+                                                                                <div class="col-md-6"> Post Tags:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_tags}}</div>
+                                                                                <div class="col-md-6"> Post Comments:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_comments}}</div>
+                                                                                <div class="col-md-6"> Post Replies:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_replies}}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="row text_heading">
+                                                                                <div class="col-md-6">Sscore:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.score}}</div>
+                                                                                <div class="col-md-6">Post Mentions:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_mentions}}</div>
+                                                                                <div class="col-md-6">Post Reactions:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.post_reactions}}</div>
+                                                                                <div class="col-md-6">Mentioned by Owner:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.mentioned_by_owner}}</div>
+                                                                                <div class="col-md-6">Mentioned Owner:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.mentioned_owner}}</div>
+                                                                                <div class="col-md-6">Replied by Owner:</div>
+                                                                                <div class="col-md-6 text_paragraph"> {{c.replied_by_owner}}</div>
+                                                                                <div class="col-md-6">Replied Owner:</div>
+                                                                                <div class="col-md-6 text_paragraph">{{c.replied_owner}}</div>
+                                                                                <div class="col-md-6">View:</div>
+                                                                                <div class="col-md-6"><a
+                                                                                    class="badge custom_badge fa fa-search"
+                                                                                href="{{c.url}}">View</a></div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -414,46 +431,45 @@ body {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!-- end close asscoiates  -->
+                                    <!-- start profile tab  -->
+                                    <div id="profile" class="tab-pane fade show in active pb-5">
+                                        <div class="row">
+                                            <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
+                                            </div> -->
+                                            <div class="col-md-12">
+                                                <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
+                                                <p class="text_paragraph text-justify">{{profile.profile_overview_summary|default:"N/A"}}</p>
                                             </div>
-                                        {% endfor %}
+                                            <div class="col-md-12">
+                                                <h3><i class="material-icon text_heading">Profile Friends Summary </i></h3>
+                                                <p class="text_paragraph text-justify">{{profile.profile_friends_summary|default:"N/A"}}</p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h3><i class="material-icon text_heading">Profile Intrest Summary </i></h3>
+                                                <p class="text_paragraph text-justify">{{profile.profile_interest_summary|default:"N/A"}}</p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
+                                                <p class="text_paragraph text-justify">{{profile.profile_close_associates_summary|default:"N/A"}}</p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h3><i class="material-icon text_heading">Profile Behaviour Summary </i></h3>
+                                                <p class="text_paragraph text-justify">{{profile.behaviour|default:"N/A"}}</p>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- end close asscoiates  -->
-                                <!-- start profile tab  -->
-                                <div id="profile" class="tab-pane fade show in active pb-5">
-                                    <div class="row">
-                                        <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
-                                        </div> -->
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_overview_summary|default:"N/A"}}</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Friends Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_friends_summary|default:"N/A"}}</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Intrest Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_interest_summary|default:"N/A"}}</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.profile_close_associates_summary|default:"N/A"}}</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h3><i class="material-icon text_heading">Profile Behaviour Summary </i></h3>
-                                            <p class="text_paragraph text-justify">{{profile.behaviour|default:"N/A"}}</p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- end profile tab  -->
-                                <!-- start related tab   -->
-                                <div id="related" class="tab-pane fade pb-5">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="accordion" id="accordionExample">
-                                              
+                                    <!-- end profile tab  -->
+                                    <!-- start related tab   -->
+                                    <div id="related" class="tab-pane fade pb-5">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="accordion" id="accordionExample">
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="sports1" data-toggle="collapse"
                                                             data-target="#sports" aria-expanded="true"
@@ -468,7 +484,6 @@ body {
                                                             data-parent="#accordionExample">
                                                             <div class="card-body text_paragraph">
                                                                 {% for i in profile.interests.sports %}
-
                                                                     <a target="_blank" href="{{i.link}}">{{i.name|linebreaks}}</a>
                                                                 {% endfor %}
                                                             </div>
@@ -476,9 +491,9 @@ body {
                                                     </div>
                                                     
                                                     
-                                             
-                                                <!-- nusic  -->
-                                             
+                                                    
+                                                    <!-- nusic  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="music1" data-toggle="collapse"
                                                             data-target="#music" aria-expanded="true" aria-controls="music">
@@ -498,9 +513,9 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                               
-                                                <!-- films  -->
-                                               
+                                                    
+                                                    <!-- films  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="films1" data-toggle="collapse"
                                                             data-target="#films" aria-expanded="true" aria-controls="films">
@@ -519,9 +534,9 @@ body {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
-                                                <!-- tv_programmes  -->
-                                              
+                                                    
+                                                    <!-- tv_programmes  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="tv_programmes_1" data-toggle="collapse"
                                                             data-target="#tv_programmes" aria-expanded="true"
@@ -541,10 +556,10 @@ body {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
-                                           
-                                                <!-- books  -->
-                                              
+                                                    
+                                                    
+                                                    <!-- books  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="books1" data-toggle="collapse"
                                                             data-target="#books" aria-expanded="true" aria-controls="books">
@@ -564,8 +579,8 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                <!-- games  -->
-                                              
+                                                    <!-- games  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="games_1" data-toggle="collapse"
                                                             data-target="#games" aria-expanded="true" aria-controls="games">
@@ -585,9 +600,9 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                
-                                                <!-- likes  -->
-                                                
+                                                    
+                                                    <!-- likes  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="likes_1" data-toggle="collapse"
                                                             data-target="#likes" aria-expanded="true" aria-controls="likes">
@@ -607,8 +622,8 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                <!-- events  -->
-                                              
+                                                    <!-- events  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="events_1" data-toggle="collapse"
                                                             data-target="#events" aria-expanded="true"
@@ -629,8 +644,8 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                <!-- questions  -->
-                                             
+                                                    <!-- questions  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="questions_1" data-toggle="collapse"
                                                             data-target="#questions" aria-expanded="true"
@@ -651,8 +666,8 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                <!-- reviews  -->
-                                               
+                                                    <!-- reviews  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="reviews_1" data-toggle="collapse"
                                                             data-target="#reviews" aria-expanded="true"
@@ -673,8 +688,8 @@ body {
                                                         </div>
                                                     </div>
                                                     
-                                                <!-- notes  -->
-                                               
+                                                    <!-- notes  -->
+                                                    
                                                     <div class="card">
                                                         <div class="card-header background-gradient-dark" id="notes_1" data-toggle="collapse"
                                                             data-target="#notes" aria-expanded="true" aria-controls="notes">
@@ -694,389 +709,388 @@ body {
                                                         </div>
                                                     </div>
                                                     
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- end realted tab  -->
+                                    <!-- start posts tab  -->
+                                    <div id="posts" class="tab-pane fade pb-5">
+                                        <div class="row">
+                                            {% for p in  profile.posts %}
+                                                <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
+                                                    Post # {{forloop.counter}}
+                                                </div>
+                                                <div class="col-md-12 post-wrapper">
+                                                    <div class="row border custom_border_color">
+                                                        <div class="col-md-2 m-0 p-0 custom-center-center">
+                                                            <img src="{{p.author_media_directory}}"
+                                                            style="height: 60px;width:60px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                        </div>
+                                                        <div class="col-md-2 custom-column-start-start pt-2 text_heading">
+                                                            <span> {{page.name}}</span>
+                                                            <span class="smaller-txt">{{p.timestamp}}</span>
+                                                        </div>
+                                                        <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
+                                                            <div class="smaller-txt w-100 text-left h-100">Post id:
+                                                                <span class="text_paragraph">{{p.post_id}}</span>
+                                                            </div>
+                                                            <div class="smaller-txt w-100 text-left h-100">Author Name:
+                                                                <span class="text_paragraph">{{p.author_name}}</span>
+                                                            </div>
+                                                            <div class="smaller-txt w-100 text-left h-100">Author Username:
+                                                                <span class="text_paragraph">{{p.author_username}}</span>
+                                                            </div>
+                                                            <div class="smaller-txt w-100 text-left h-100">Sentiment:
+                                                                <span class="text_paragraph">{{p.sentiment | default:"N/A"}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">
+                                                            {{p.post_text}}
+                                                        </div>
+                                                    </div>                                                    <!-- <div class="row">
+                                                    <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
+                                                        <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
+                                                    </div>
+                                                </div> -->
+                                                <div class="row" style="height:300px;">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">Post
+                                                        Pictures ({{p.picture_links | length}})</i>
+                                                    </div>
+                                                    {% for x in p.picture_links  %}
+                                                        <div class="col-md-12 text-center" style="height:300px;">
+                                                            <img src="{{x.url}}" class="img-fluid" />
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">Liked By
+                                                        ({{ p.reactions.like | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.like  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:100px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        Loved' By ({{ p.reactions.love | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.love  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        HAHA' By ({{ p.reactions.haha | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.haha  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        WOW' By ({{ p.reactions.wow | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.wow  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        ANGRY' By ({{ p.reactions.angry | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.angry  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        SAD' By ({{ p.reactions.sad | length}})</i>
+                                                    </div>
+                                                    {% for r in p.reactions.sad  %}
+                                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <img src="{{r.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{r.name}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{r.username}}</span>
+                                                                </span>
+                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{r.id}}</span>
+                                                                </span>
+                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <i class="material-icon text_heading" style="font-size:20px;">'Comments'
+                                                        By ({{ p.comments | length}})</i>
+                                                        
+                                                    </div>
+                                                    {% for r in p.comments  %}
+                                                        <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                            style="height:100px;">
+                                                            <div>
+                                                                
+                                                            </div>
+                                                            <img src=" {{r.commentor.media_directory}}"
+                                                            style="height: 80px;width:80px;border-radius: 50%;;"
+                                                            class="img-fluid">
+                                                            
+                                                            <div class="p-2">
+                                                                <span
+                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
+                                                                {{r.commentor.name}}</span>
+                                                                <span
+                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
+                                                                {{r.commentor.username}}</span>
+                                                                <span
+                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
+                                                                {{r.commentor.id}}</span>
+                                                                <a href="{{r.commentor.url}}"
+                                                                class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 border custom_border_color custom-center-center">
+                                                            {{r.comment_text}}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                                        class="fas fa-comments text_heading mr-1"></i>{{p.comments_statistics}}
+                                                    </div>
+                                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                                        class="fas fa-grin-hearts text_heading mr-1"></i>{{p.reactions_statistics}}
+                                                    </div>
+                                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                                        class="fas fa-share-alt text_heading mr-1"></i>{{p.shares_statistics}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                                <!-- end realted tab  -->
-                                <!-- start posts tab  -->
-                                <div id="posts" class="tab-pane fade pb-5">
+                                <!-- end posts tab  -->
+                                <!-- start checkins -->
+                                <div id="checkins" class="tab-pane fade pb-5">
+                                    <!-- <h4 class="text-warning">check_ins ({{profile.check_ins | length}})</h3> -->
                                     <div class="row">
-                                        {% for p in  profile.posts %}
-                                            <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
-                                                Post # {{forloop.counter}}
-                                            </div>
-                                            <div class="col-md-12 post-wrapper">
-                                                <div class="row border custom_border_color">
-                                                    <div class="col-md-2 m-0 p-0 custom-center-center">
-                                                        <img src="{{p.author_media_directory}}"
-                                                        style="height: 60px;width:60px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                        
-                                                    </div>
-                                                    <div class="col-md-2 custom-column-start-start pt-2 text_heading">
-                                                        <span> {{page.name}}</span>
-                                                        <span class="smaller-txt">{{p.timestamp}}</span>
-                                                    </div>
-                                                    <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
-                                                        <div class="smaller-txt w-100 text-left h-100">Post id:
-                                                            <span class="text_paragraph">{{p.post_id}}</span>
-                                                        </div>
-                                                        <div class="smaller-txt w-100 text-left h-100">Author Name:
-                                                            <span class="text_paragraph">{{p.author_name}}</span>
-                                                        </div>
-                                                        <div class="smaller-txt w-100 text-left h-100">Author Username:
-                                                            <span class="text_paragraph">{{p.author_username}}</span>
-                                                        </div>
-                                                        <div class="smaller-txt w-100 text-left h-100">Sentiment:
-                                                            <span class="text_paragraph">{{p.sentiment | default:"N/A"}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">
-                                                        {{p.post_text}}
-                                                    </div>
-                                                </div>                                                    <!-- <div class="row">
-                                                <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
-                                                    <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
-                                                </div>
-                                            </div> -->
-                                            <div class="row" style="height:300px;">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                    Pictures ({{p.picture_links | length}})</i>
-                                                </div>
-                                                {% for x in p.picture_links  %}
-                                                    <div class="col-md-12 text-center" style="height:300px;">
-                                                        <img src="{{x.url}}" class="img-fluid" />
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">Liked By
-                                                    ({{ p.reactions.like | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.like  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}" 
-                                                        style="height: 80px;width:100px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Reacted
-                                                    Loved' By ({{ p.reactions.love | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.love  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                        
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Reacted
-                                                    HAHA' By ({{ p.reactions.haha | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.haha  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                       
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Reacted
-                                                    WOW' By ({{ p.reactions.wow | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.wow  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                      
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Reacted
-                                                    ANGRY' By ({{ p.reactions.angry | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.angry  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                      
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Reacted
-                                                    SAD' By ({{ p.reactions.sad | length}})</i>
-                                                </div>
-                                                {% for r in p.reactions.sad  %}
-                                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                        <img src="{{r.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                        
-                                                        <div class="p-2">
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                <span class="text_paragraph">{{r.name}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                <span class="text_paragraph">{{r.username}}</span>
-                                                            </span>
-                                                            <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                <span class="text_paragraph">{{r.id}}</span>
-                                                            </span>
-                                                            <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">'Comments'
-                                                    By ({{ p.comments | length}})</i>
-                                                  
-                                                </div>
-                                                {% for r in p.comments  %}
-
-                                                    <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                        style="height:100px;">
-                                                      <div>
-                                                         
-                                                      </div>
-                                                        <img src=" {{r.commentor.media_directory}}"
-                                                        style="height: 80px;width:80px;border-radius: 50%;;"
-                                                        class="img-fluid">
-                                                        
-                                                        <div class="p-2">
-                                                            <span
-                                                                class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
-                                                            {{r.commentor.name}}</span>
-                                                            <span
-                                                                class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
-                                                            {{r.commentor.username}}</span>
-                                                            <span
-                                                                class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
-                                                            {{r.commentor.id}}</span>
-                                                            <a href="{{r.commentor.url}}"
-                                                            class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-8 border custom_border_color custom-center-center">
-                                                        {{r.comment_text}}
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                                    class="fas fa-comments text_heading mr-1"></i>{{p.comments_statistics}}
-                                                </div>
-                                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                                    class="fas fa-grin-hearts text_heading mr-1"></i>{{p.reactions_statistics}}
-                                                </div>
-                                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                                    class="fas fa-share-alt text_heading mr-1"></i>{{p.shares_statistics}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <!-- end posts tab  -->
-                            <!-- start checkins -->
-                            <div id="checkins" class="tab-pane fade pb-5">
-                                <!-- <h4 class="text-warning">check_ins ({{profile.check_ins | length}})</h3> -->
-                                <div class="row">
-                                    {% for c in profile.check_ins %}
-                                        <div class="col-md-6">
-                                           
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <div class="row">
-                                                        <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-                                                            <!-- <img src="{{c.media_directory}}"
-                                                            style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                                           
-                                                            <button class="btn btn-link text_heading" type="button" data-toggle="collapse"
-                                                            data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
-                                                            {{c.name}}
-                                                        </button></div>
-                                                        <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
-                                                            <div class="row text_heading">
-                                                                <div class="col-md-4">Date:</div>
-                                                                <div class="col-md-8 text_paragraph">{{c.details.date}}</div>
-                                                                <div class="col-md-4">Location:</div>
-                                                                <div class="col-md-8 text_paragraph">{{c.name}}</div>
-                                                                <div class="col-md-4">View:</div>
-                                                                <div class="col-md-8">
-                                                                    <a class="badge badge-sm custom_badge fa fa-search" href="{{c.url}}">view</a>
-                                                            </div>
-                                                                <div class="col-md-4">Linking Post:</div>
-                                                                <div class="col-md-8">
-                                                                    <a class="badge badge-sm custom_badge fa fa-search" href="{{c.linking_post}}">view</a>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        {% for c in profile.check_ins %}
+                                            <div class="col-md-6">
                                                 
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="row">
+                                                            <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+                                                                <!-- <img src="{{c.media_directory}}"
+                                                                style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                                
+                                                                <button class="btn btn-link text_heading" type="button" data-toggle="collapse"
+                                                                data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
+                                                                {{c.name}}
+                                                            </button></div>
+                                                            <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
+                                                                <div class="row text_heading">
+                                                                    <div class="col-md-4">Date:</div>
+                                                                    <div class="col-md-8 text_paragraph">{{c.details.date}}</div>
+                                                                    <div class="col-md-4">Location:</div>
+                                                                    <div class="col-md-8 text_paragraph">{{c.name}}</div>
+                                                                    <div class="col-md-4">View:</div>
+                                                                    <div class="col-md-8">
+                                                                        <a class="badge badge-sm custom_badge fa fa-search" href="{{c.url}}">view</a>
+                                                                    </div>
+                                                                    <div class="col-md-4">Linking Post:</div>
+                                                                    <div class="col-md-8">
+                                                                        <a class="badge badge-sm custom_badge fa fa-search" href="{{c.linking_post}}">view</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
-                                    {% endfor %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
+                                <!-- end checkin -->
                             </div>
-                            <!-- end checkin -->
+                            <!-- end tab content -->
                         </div>
-                        <!-- end tab content -->
                     </div>
                 </div>
+                <!-- end col-md-9 -->
             </div>
-            <!-- end col-md-9 -->
-        </div>
-        
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <script src="https://www.amcharts.com/lib/4/core.js"></script>
-        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-       <script>
-        var url = window.location.pathname;
-        var id = url.substring(url.lastIndexOf('/') + 1);
-        console.log(id)
-       var url= $('#download_as_pdf').attr('href')
-       var href=url+id+""
-       console.log(href)
-       </script>
-        <script>
-        am4core.ready(function () {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        var iconPath =
-        "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
-        var chart = am4core.create("profile_chart", am4charts.SlicedChart);
-        chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-        chart.data = [{
-        "name": "Friends",
-        "value": 354
-        }, {
-        "name": "Close Associates",
-        "value": 245
-        }, {
-        "name": "Posts",
-        "value": 187
-        }, {
-        "name": "Popularity",
-        "value": 123
-        }, {
-        "name": "Popularity",
-        "value": 87
-        }, {
-        "name": "Positivity",
-        "value": 45
-        }];
-        var series = chart.series.push(new am4charts.PictorialStackedSeries());
-        series.dataFields.value = "value";
-        series.dataFields.category = "name";
-        series.alignLabels = true;
-        series.maskSprite.path = iconPath;
-        series.ticks.template.locationX = 1;
-        series.ticks.template.locationY = 0.5;
-        series.labelsContainer.width = 200;
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "left";
-        chart.legend.valign = "bottom";
-        }); // end am4core.ready()
-        </script>
-    </body>
-</html>
+            
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+            </script>
+            <script src="https://www.amcharts.com/lib/4/core.js"></script>
+            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+            <script>
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            console.log(id)
+            var url= $('#download_as_pdf').attr('href')
+            var href=url+id+""
+            console.log(href)
+            </script>
+            <script>
+            am4core.ready(function () {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var iconPath =
+            "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+            var chart = am4core.create("profile_chart", am4charts.SlicedChart);
+            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+            chart.data = [{
+            "name": "Friends",
+            "value": 354
+            }, {
+            "name": "Close Associates",
+            "value": 245
+            }, {
+            "name": "Posts",
+            "value": 187
+            }, {
+            "name": "Popularity",
+            "value": 123
+            }, {
+            "name": "Popularity",
+            "value": 87
+            }, {
+            "name": "Positivity",
+            "value": 45
+            }];
+            var series = chart.series.push(new am4charts.PictorialStackedSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.maskSprite.path = iconPath;
+            series.ticks.template.locationX = 1;
+            series.ticks.template.locationY = 0.5;
+            series.labelsContainer.width = 200;
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "left";
+            chart.legend.valign = "bottom";
+            }); // end am4core.ready()
+            </script>
+        </body>
+    </html>
