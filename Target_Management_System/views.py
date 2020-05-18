@@ -33,15 +33,28 @@ class Bulk_Targets(View):
 
     def post(self,request,*args,**kwargs):
        
-        if request.method=="POST":
+        try:
             website=request.POST['website']
-            target_type=request.POST['target_type']
-            interval=request.POST['interval']
-            expired_on=request.POST['expired_on']
-            screenshots=request.POST['screenshots']
-            usernames=request.POST['usernames']
-            print(website,target_type,interval,expired_on, screenshots,usernames)
-            return redirect('/tms/bulk_targets')
+            target_type=int(request.POST['target_type'])
+            interval=int(request.POST['interval'])
+            expired_on= convert_expired_on_to_datetime(request.POST['expired_on'])
+            screenshots=request.POST.get('screenshots',False)
+
+
+            usernames=request.POST['usernames'].split(',')
+
+
+            print(website,target_type,interval,expired_on, screenshots,usernames,type(usernames))
+
+            resp = acq.add_bulk_targts(website_id=website,target_type_index=target_type,prime_argument_list=usernames,expired_on=expired_on,periodic_interval=interval)
+            publish('bulk target successfull for '+str(usernames).strip('[]'))
+
+
+        except Exception as e:
+            print(e)
+            publish(str(e),message_type='notification')
+
+        return redirect('/tms/bulk_targets')
 
 
 

@@ -90,12 +90,13 @@ class Acquistion_Manager(object):
 
                 if(not self.add_target(website_id,target_type_index,username=prime_argument,expired_on=expired_on,periodic_interval=periodic_interval)):
                     print('unable to add bulk target for '+prime_argument)
+                    publish('unable to add bulk target for '+prime_argument,message_type='notification')
 
             return True
 
         else:
 
-            publish('unable to add bulk target few arguments are missing ', message_type='alert', module_name=__name__)
+            publish('unable to add bulk target few arguments are missing ', message_type='notification', module_name=__name__)
             return False
 
 
