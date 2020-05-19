@@ -66,6 +66,40 @@
                             <a href="#" target="_blank" class="btn btn-outline-light font-weight-bold ">
                                 <i class="fas fa-download  mr-2"></i> Download PDF Report
                             </a>
+                    <div class="card-body border border-dark "style="border-radius:0px 0px 15px 15px">
+                        {% if x.query|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query  :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.query|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+                        {% if x.serp_title|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query Search title :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.serp_title|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+                        {% if x.meta_title|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Meta  title :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;"> {{x.meta_title|default:"N/A"}}</div>
+                        </div>
+                        {% endif %}
+
+                        {% if x.serp_url|length > 0 %}
+                        <div class="row">
+
+                            <div class="col-md-3"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
+                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank"> Block URL </a></div>
+                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a></div>
+                            <div class="col-md-3"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+
+                        </div>
+                        {% endif %}
+                        {% if x.serp_snippet|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Search Snippet :</span></div></div>
+                            <div class="col-md-10"style="font-size:12px;">  {{x.serp_snippet|default:"N/A"}}</div>
                         </div>
                     </div>
                     

@@ -98,8 +98,222 @@ class System_Stats(object):
 
 
 
+class Data_Queries(object):
+
+    def __init__(self):
+        pass
 
 
+    def get_facebook_close_associates(self,response_id):
+        pass
+
+    def get_twitter_followers(self,response_id):
+        pass
+
+    def get_instagram_followers(self,responces_id):
+
+        pass
+
+    def check_if_responces_is_supported(self,resp_obj):
+        supported_links = (('instagram',Instagram_Response_TMS),
+                           ('facebook',Facebook_Profile_Response_TMS),
+                           ('twitter',Twitter_Response_TMS)
+                           )
+
+        for title,cla in supported_links:
+            print(title,cla)
+            if(isinstance(resp_obj,cla)):
+                return title
+
+            return None
+
+    def get_object_website(self,object):
+
+        supported_links = ['instagram','facebook','twitter']
+
+        gtr_id = object.GTR
+        GTR = acq.get_gtr_by_id(gtr_id)
+
+        if(GTR.website.name.lower() in supported_links):
+            return GTR.website.name.lower()
+
+        return None
+
+    def portfolio_link_analysis(self,portfolio_id):
+        n_data_full = []
+
+        try:
+            supported_links = [Instagram_Response_TMS,Facebook_Profile_Response_TMS]
+            alpha_nodes_list = []
+
+
+            portfolio_obj = Portfolio_PMS.objects(id=portfolio_id).first()
+            linked_responses = Portfolio_Linked_PMS.objects(alpha_reference=portfolio_obj)
+            for response in linked_responses:
+                    website =  self.get_object_website(response.beta_reference)
+                    print(website)   #self.check_if_responces_is_supported(response.beta_reference)
+                    if(website):
+                        response_obj = response.beta_reference.to_mongo()
+                        alpha_node,beta_node_list = self.generalize_data_for_nodes(website,'profile',response_obj)
+                        alpha_nodes_list.append(alpha_node)
+                        n_data = self.convert_nodes_to_graph_data_for_portfolio(alpha_node,beta_node_list)
+                        print(len(linked_responses),website)
+                        n_data_full = n_data_full + n_data
+
+            p_node = {'name': portfolio_obj.name,
+                      'value': 1,
+                      'children': [],
+                      "linkWith": [],
+                      'collapsed': 'true',
+                      'fixed': 'false',
+                      "image": '',
+                      }
+
+            for alpha in alpha_nodes_list:
+                p_node['linkWith'].append(alpha['username'])
+
+            n_data_full.append(p_node)
+            print(n_data_full)
+
+            return json.dumps(n_data_full)
+
+        except Exception as e:
+            print(e)
+            return json.dumps(n_data_full)
+
+
+
+
+    def generalize_data_for_nodes(self,website,target_type,data_object):
+
+        beta_nodes_list = []
+        alpha_node = {}
+
+        if(website == 'facebook'):
+
+            alpha_node['username']  = data_object['username']
+            alpha_node['picture_url']  = data_object['profile_picture_url']['profile_picture']
+
+            for item in data_object['close_associates']:
+
+                if(len(item['username'])>0):
+                    temp_dic = {'username':item['username'],'picture_url':item['media_directory']}
+                    beta_nodes_list.append(temp_dic)
+                else:
+                    temp_dic = {'username': item['id'], 'picture_url': item['media_directory']}
+                    beta_nodes_list.append(temp_dic)
+            return (alpha_node,beta_nodes_list)
+
+        elif(website == 'instagram'):
+
+            alpha_node['username']  = data_object['username']
+            alpha_node['picture_url']  = data_object['profile_picture_url']
+
+            for item in data_object['followers']:
+                temp_dic = {'username':item['username'],'picture_url':item['picture_image_url']}
+                beta_nodes_list.append(temp_dic)
+
+            return (alpha_node,beta_nodes_list)
+
+        elif (website == 'twitter'):
+
+            alpha_node['username'] = data_object['author_account']
+            alpha_node['picture_url'] = data_object['profile_url']
+
+            for item in data_object['followers']:
+                temp_dic = {'username': item['username'], 'picture_url': item['avatar']}
+                beta_nodes_list.append(temp_dic)
+
+            return (alpha_node, beta_nodes_list)
+
+
+
+
+    def convert_nodes_to_graph_data(self,alpha_node,beta_nodes_list):
+
+        n_data = []
+
+        try:
+            a_node = {'name': alpha_node['username'],
+                        'value': 1,
+                        'children': [],
+                        "linkWith": [],
+                        'collapsed': 'true',
+                        'fixed': 'false',
+                        "image": alpha_node['picture_url'],
+                        }
+
+
+
+            for i, item in enumerate(beta_nodes_list):
+
+                print(item)
+
+                node = {'name': item['username'],
+                        'value': 0.2,
+                        'children': [],
+                        "linkWith": [],
+                        'collapsed': 'true',
+                        'fixed': 'false',
+                        "image": item['picture_url'],
+                        }
+
+                a_node['children'].append(node)
+
+                #n_data.append(node)
+
+            n_data.append(a_node)
+
+
+
+
+
+            print(n_data)
+            return json.dumps(n_data)
+        except Exception as e:
+            print(e)
+            return json.dumps(n_data)
+
+    def convert_nodes_to_graph_data_for_portfolio(self,alpha_node,beta_nodes_list):
+
+        n_data = []
+
+        a_node = {'name': alpha_node['username'],
+                    'value': 1,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": alpha_node['picture_url'],
+                    }
+
+
+
+        for i, item in enumerate(beta_nodes_list):
+
+            print(item)
+
+            node = {'name': item['username'],
+                    'value': 0.2,
+                    'children': [],
+                    "linkWith": [],
+                    'collapsed': 'true',
+                    'fixed': 'false',
+                    "image": item['picture_url'],
+                    }
+
+            a_node['children'].append(node)
+
+            #n_data.append(node)
+
+        n_data.append(a_node)
+
+
+
+
+
+        print(n_data)
+        return n_data
 
 
 

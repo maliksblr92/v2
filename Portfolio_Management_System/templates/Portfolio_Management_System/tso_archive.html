@@ -38,12 +38,12 @@
                             <div class=" row small_card_warpper glowing_border ">
                                 
                                    
-                            <div class="col-md-1 glowing_border  small_card_scroll  ">
+                            <div class="col-md-1 glowing_border  small_card_scroll" style="height: 300px !important;">
                                
                                  
-                                   <a href="{% url 'Portfolio_Management_System:add_information' portfolio.id %}" class=" mt-1 rotate  custom_icons badge badge-success " role="button" aria-pressed="true"style="font-size:11px;">i     ADD INFO </a>
-                                   <a href="{% url 'Portfolio_Management_System:portfolio_links' portfolio.id %}" class=" rotate mt-1 custom_icons badge badge-success " role="button" aria-pressed="true"style="font-size:11px;">i     LINK INFO </a>
-                    
+                                   <a href="{% url 'Portfolio_Management_System:add_information' portfolio.id %}" target="_blank" class=" mt-1 rotate  custom_icons badge badge-success " role="button" aria-pressed="true"style="font-size:11px;">i     ADD INFO </a>
+                                   <a href="{% url 'Portfolio_Management_System:portfolio_links' portfolio.id %}" target="_blank" class=" rotate mt-1 custom_icons badge badge-success " role="button" aria-pressed="true"style="font-size:11px;">i     LINK INFO </a>
+                                    <a href="{% url 'Portfolio_Management_System:portfolio_links_analysis' portfolio.id %}" target="_blank" class=" rotate mt-1 custom_icons badge badge-success " role="button" aria-pressed="true"style="font-size:11px;">i     Link Analysis </a>
                                 
                                
                             </div>
@@ -51,7 +51,7 @@
                                 <img src="{% static 'images/profile-avatar-png-5.png' %}" class="profile_card_avatar">
                                
                             </div>
-                            <div class="col-md-7  d-flex flex-column justify-content-center align-items-start    small_card_right_wrapper">
+                            <div class="col-md-7  d-flex flex-column justify-content-center align-items-start    small_card_right_wrapper" style="height: 300px;">
                                 <ul class="mt-2">
                                     <li class="d-flex flex-column" ><span class="text-white font-weight-bold badge badge-dark" style="width:100px;"> Title :</span>
                                         <span class="text-white font-weight-bold "style="font-size:12px;">{{ portfolio.name }}</span></li>
@@ -65,6 +65,7 @@
                                         <span class="text-white font-weight-bold "style="font-size:12px;">{{ portfolio.created_on}}</span></li>
 
                                 </ul>
+                            </div>
                             </div>
                         </div>
                     </div>

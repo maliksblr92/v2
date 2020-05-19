@@ -224,48 +224,12 @@ class Instagram_Response_TMS(Document):
     #created_on = DateTimeField()
     target_update_count = LongField()
     profile_summary = StringField()
-    behaviour= StringField()
-    common_words= ListField()
-    sentiments= ListField()
-    emotions= ListField()
-    followers = ListField(default=[])
-    
-    posts = ListField(EmbeddedDocumentField(Instagram_Posts))
-    @classmethod
-    def pre_save(cls, sender, document, **kwargs):
-        print('.........................................MongoSignal..............................................')
-
-#signals.pre_save.connect(Instagram_Person.pre_save, sender=Instagram_Person)
-class Facebook_Posts(EmbeddedDocument):
-
-    post_id = IntField()
-    author_name = StringField()
-    auther_id = IntField()
-    author_url = StringField()
-    author_media_directory = StringField()
-    post_link = URLField()
-    entity_type= StringField()
-    associated_links= ListField()
-    headline= StringField()
-    post_text= StringField()
-    complete_time= DateTimeField()
-    reactions_statistics= IntField()
-    comments_statistics= IntField()
-    shares_statistics= IntField()
-    picture_directory= ListField()
-    sentiment=StringField()
-    video_directory= ListField()
-    reactions= DictField()
-    comments= ListField()
-    categorization= ListField()
-
 class Page_Posts(EmbeddedDocument):
     post_id=  LongField()
     author_username= StringField()
     author_name= StringField()
     media_directory= StringField()
     tags= ListField()
-    post_link= URLField()
     associated_links= ListField()
     headline= StringField()
     timestamp= DateTimeField()

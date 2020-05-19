@@ -2,65 +2,60 @@
 {% load static %}
 {% load osint_custom_tags %}
 {% block head_dep %}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_marktarget.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_marktarget.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-8 d-flex" style="">
-        <div class="col-md-1">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
+            </div>
         </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
-            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-            <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
-        </div>
+        <div class="col-md-1"></div>
     </div>
-    <div class="col-md-1"></div>
-</div>
 {% endblock %}
 
 <!-- style="background-color:#012847; border-radius:15px 15px 0 0;" -->
 
 {% block belly %}
-<div class="row ">
-    <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
-        <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
-    </div>
-    <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
-        <!-- TOP MANU BAR -->
-        <nav>
-            <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link {% if data.target_site == 'reddit' %} active {% endif %}"
-                    id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i style="color:white; opacity:0.8;"
-                        class="fab fa-reddit-square fa-2x"></i></a>
-                <a class="nav-item nav-link {% if data.target_site == 'linkedin' %} active {% endif %}"
-                    id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
-                        style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i></a>
-                <a class="nav-item nav-link {% if data.target_site == 'instagram' %} active {% endif %}"
-                    id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
+    <div class="row ">
+        <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
+            <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
+        </div>
+        <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
+            <!-- TOP MANU BAR -->
+            <nav>
+                <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link {% if data.target_site == 'reddit' %} active {% endif %}"  id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
+                    style="color:white; opacity:0.8;" class="fab fa-reddit-square fa-2x"></i></a>
+                    <a class="nav-item nav-link {% if data.target_site == 'linkedin' %} active {% endif %}" id="nav-linkedin-tab" data-toggle="tab" href="#linkedin" role="tab"><i
+                    style="color:white; opacity:0.8;" class="fab fa-linkedin fa-2x"></i></a>
+                    <a class="nav-item nav-link {% if data.target_site == 'instagram' %} active {% endif %}" id="nav-instagram-tab" data-toggle="tab" href="#instagram" role="tab">
                     <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i></a>
-                <a class="nav-item nav-link {% if data.target_site == 'facebook' or not data.target_site%} active {% endif %}"
-                    id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
+                    <a class="nav-item nav-link {% if data.target_site == 'facebook' or not data.target_site%} active {% endif %}" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
                     <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
                 <a class="nav-item nav-link" {% if data.target_site == 'twitter' %} active {% endif %}
                     id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
@@ -319,26 +314,21 @@ opacity:0.9; padding:7px 9px 0 10px;height:35px;width:110px;">Screenshots
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block foot_script %}
 <script>
 
-
-function cleanForm(){
-    var allInputs = $( ":input" );
-    $(allInputs).val('')
-    console.log("formed cleaned")
-}
+        console.log("hiding icon");
+        $('#loading_icon').hide()
 
 
-    var tabpane_name = "{{platform.name|lower}}";
-    console.log("tab_name ==  " + tabpane_name)
-    $(tabpane_name + " #loading_icon").hide()
-    $(tabpane_name + ' #smart_search_response').hide()
     //start of document ready
     document.addEventListener('DOMContentLoaded', function () {
         let smartsearch = $('.smartsearch')
         // smart search
         smartsearch.click((event) => {
-            $(tabpane_name + " #loading_icon").show()
+            $('#loading_icon').show()
 
             // console.log(event.target)
             let website = event.target.getAttribute('x-target-name')
@@ -408,7 +398,47 @@ function cleanForm(){
                 })
             
 
+    console.log(author_type)
+             console.log(author_type)
+            // console.log(website, author_account)
+            // let author_account = $('#author-account').val()
+            let data = {
+                'author_account': author_account,
+                'search_site': website,
+                'target_type': author_type
+            }
+            $.ajax({
+                dataType: "json",
+                url: "/tms/smartsearch/",
+                data: data,
+                success: (response) => {
+                    // console.log(response)
+                    $(`#${website}-authoruserid`).val(response['author_userid'])
+                    $(`#${website}-authorusername`).val(response['author_username'])
+                    document.getElementById(`${website}-profile_image`).src = response['profile_url']
+                    switch (website) {
+                        case 'reddit':
+                            $(`#${website}-authoruserurl`).val(`http://www.reddit.com/${author_account}`)
+                            break;
+                        case 'linkedin':
+                            $(`#${website}-authoruserurl`).val(`http://www.linkedin.com/in/${author_account}`)
+                            break;
+                        case 'instagram':
+                            $(`#${website}-authoruserurl`).val(`http://www.instagram.com/${author_account}`)
+                            break;
+                        case 'facebook':
+                            $(`#${website}-authoruserurl`).val(`http://www.facebook.com/${author_account}`)
+                            break;
+                        case 'twitter':
+                            $(`#${website}-authoruserurl`).val(`http://www.twitter.com/${author_account}`)
+                            break;
+                        default:
+                            break;
+                    }
+                    $('#loading_icon').hide()
 
+                }
+            })
         })
         // clear form btn functionality
         let clearformbtn = $('.clearform-btn')
@@ -419,13 +449,11 @@ function cleanForm(){
             $(`#${pf}`).trigger('reset')
         })
 
-        
-
-
+        // add target form
+        // let addtargetform = $("#addtarget")
+        // addtargetform.submit((event) => {
+        //     event.preventDefault()
+        // })
     }) // document ready
 </script>
-{% endblock %}
-
-{% block foot_script %}
-
 {% endblock %}

@@ -166,6 +166,14 @@ class Index(View):
         age = request.POST['age']
         resp=ess.fake_identitity_generator(nationality,gender,age)
         return render(request, 'Data_Processing_Unit/index.html',{'resp':resp})
+        print("nationality == ", nationality)
+        print("gender == ", gender)
+        print("age == ", age)
+
+        resp = ess.fake_identitity_generator(nationality,gender,age)
+
+        print(resp)
+        return redirect('/dpu/index/')
 
 
 class Index_Darkweb(View):
