@@ -55,7 +55,7 @@ class PictureEvidenceFile(EmbeddedDocument):
     """
     details of pictures associated with the case
     """
-    name = StringField()
+    name = StringField(required=True)
     picture_location = URLField()
     picture_description = StringField()
     source = StringField()
@@ -67,7 +67,7 @@ class VideoEvidenceFile(EmbeddedDocument):
     of what is contained in the video, its server location,
     source of the video
     """
-    name = StringField()
+    name = StringField(required=True)
     video_location = URLField()
     video_description = StringField()
     source = StringField()
@@ -82,7 +82,7 @@ class PhysicalEvidence(EmbeddedDocument):
     object_storage_location = StringField()
     datetime_of_evidence_collection = DateTimeField()
     object_collection_location = EmbeddedDocumentField(LocationOfInterest)
-    object_picture = EmbeddedDocumentField(PictureEvidenceFile)
+    object_picture_location = URLField()
 
 class Language(EmbeddedDocument):
     """
@@ -138,39 +138,70 @@ class CaseCMS(Document):
     physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
 
     def create_case(self, case_number, case_title, incident_datetime, case_type, case_state):
+        """
+        creates a case
+        """
         self.case_number = case_number
         self.case_title = case_title
         self.incident_datetime = incident_datetime
         self.case_type = case_type
         self.case_state = case_state
         self.save()
-    
+
     def store_location(self, location, address, description):
+        """
+        store location specific to case
+        """
         location_of_interest = LocationOfInterest(location, address, description)
         self.locations_of_interest.append(location_of_interest)
         self.save()
 
     @staticmethod
     def get_all_cases_id_and_title():
+        """
+        get all cases for select menu
+        """
         return CaseCMS.objects().fields(case_number=1, case_title=1)
 
     @staticmethod
     def get_object_by_id(document_id):
+        """
+        get a CaseCMS object by its document id
+        """
         return CaseCMS.objects(id=document_id).first()
 
 class AllLocationsOfInterest(Document):
-    """md
+    """
     All Locations ever added to the police database
     """
     locations = EmbeddedDocumentListField(LocationOfInterest)
 
     def store_location(self, location, address, description):
+        """
+        stores location to a global collection
+        """
         location_of_interest = LocationOfInterest(location, address, description)
         self.locations.append(location_of_interest)
         self.save()
 
 class AllPeopleOfInterest(Document):
-    """md
+    """
     All people ever stored in the police database
     """
     people = EmbeddedDocumentListField(PersonOfInterest)
+
+    def store_poi(self, first_name, middle_name, last_name,
+                  gender, languages, portfolio, poi_category):
+        """
+        store poi to a global collection
+        """
+        poi = PersonOfInterest(
+            first_name,
+            middle_name,
+            last_name,
+            gender,
+            languages,
+            portfolio,
+            poi_category)
+        self.people.append(poi)
+        self.save()

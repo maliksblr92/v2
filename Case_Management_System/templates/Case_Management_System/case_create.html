@@ -33,8 +33,7 @@
                 <a class="nav-item nav-link active" data-toggle="tab" href="#create-case-tab">Create
                     Case</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#location-details-tab">Location</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#case-files-tab">Case
-                    Files</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#evidence-tab">Evidence</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#evidence-tab">Evidence</a>
             </div>
         </nav>
@@ -193,6 +192,111 @@
                             </div>
                         </div>
                         <!-- end of location details tab -->
+                        <!-- evidence tab -->
+                        <div class="tab-pane fade" id="evidence-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="virtual-evidence">
+                                        {% csrf_token %}
+                                        <!-- radio buttons for case files, picture, video -->
+                                        <div class="row mt-2">
+                                            <div class="col-centered">
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                    <label class="btn btn-secondary active">
+                                                        <input type="radio" name="et-ve-category" checked
+                                                            value="case-file">Case File
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="et-ve-category"
+                                                            value="picture">Picture
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="et-ve-category" value="video">Video
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of radio buttons -->
+                                        <!-- associated case -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="et-ve-case" class="custom-select newinput">
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- name of evidence -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Name</span>
+                                            </div>
+                                            <input type="text" name="et-ve-name" class="form-control newinputdesign"
+                                                placeholder="FIR Report for Shakeel">
+                                        </div>
+                                        <!-- end of name of evidence -->
+                                        <!-- evidence location -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Server
+                                                    Location</span>
+                                            </div>
+                                            <input type="url" name="et-ve-location" class="form-control newinputdesign"
+                                                placeholder="http://www.hello.com/files/shakeel.pdf">
+                                        </div>
+                                        <!-- end of evidence location -->
+                                        <!-- evidence description -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Evidence
+                                                    Description</span>
+                                            </div>
+                                            <textarea name="et-ve-description" class="form-control" rows="5"></textarea>
+                                        </div>
+                                        <!-- end of evidence description -->
+                                        <!-- evidence source -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Evidence
+                                                    Source</span>
+                                            </div>
+                                            <input type="text" name="et-ve-source" class="form-control newinputdesign"
+                                                placeholder="Crime Scene">
+                                        </div>
+                                        <!-- end of evidence source -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                    <form id="physical-evidence">
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-4 mb-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of evidence tab -->
                     </div>
                     <!-- end of nav tab content -->
                 </div>

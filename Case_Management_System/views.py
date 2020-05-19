@@ -99,12 +99,18 @@ class CreateCase(View):
         renders the Case Creation Form
         """
         cases = json.loads(CaseCMS.get_all_cases_id_and_title().to_json())
+        loi = json.loads(CaseCMS.get_all_locations.to_json())
         ctx = {}
         ctx['cases'] = []
         for case in cases:
             ctx['cases'].append([
                 case['_id']['$oid'],
                 case['case_number'] + ' | ' + case['case_title']
+            ])
+        ctx['loi'] = []
+        for location in loi:
+            ctx['loi'].append([
+                location['']
             ])
         print(ctx)
         return render(request, f'{APP_NAME}/case_create.html', ctx)
