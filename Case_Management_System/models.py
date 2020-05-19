@@ -37,6 +37,13 @@ class LocationOfInterest(Document):
         """
         return LocationOfInterest.objects().fields(address=1)
 
+    @staticmethod
+    def get_location_by_id(location_id):
+        """
+        return a location
+        """
+        return LocationOfInterest.objects(id=location_id).first()
+
 class Investigator(Document):
     """
     Embedded Doc that contains details of each investigator
@@ -71,6 +78,13 @@ class PictureEvidenceFile(Document):
     def get_all_pictures():
         return PictureEvidenceFile.objects().fields(name=1, picture_description=1)
 
+    @staticmethod
+    def get_picture_by_id(picture_id):
+        """
+        return a specific picture
+        """
+        return PictureEvidenceFile.objects(id=picture_id).first()
+
 class VideoEvidenceFile(Document):
     """
     Embedded Doc that contains details of each video
@@ -87,6 +101,13 @@ class VideoEvidenceFile(Document):
     def get_all_videos():
         return VideoEvidenceFile.objects().fields(name=1, video_description=1)
 
+    @staticmethod
+    def get_video_by_id(video_id):
+        """
+        return a reference to specific video
+        """
+        return VideoEvidenceFile.objects(id=video_id).first()
+
 class PhysicalEvidence(Document):
     """
     Characteristics of physical evidence obtained by police
@@ -99,6 +120,21 @@ class PhysicalEvidence(Document):
     object_collection_location = ReferenceField(LocationOfInterest)
     object_pictures = ListField(ReferenceField(PictureEvidenceFile))
     object_videos = ListField(ReferenceField(VideoEvidenceFile))
+
+    def create_physical_evidence(self, object_name, object_description, object_storage_location,
+                                 datetime_of_evidence_collection, object_collection_location,
+                                 object_pictures, object_videos):
+        """
+        creates a physical evidence object
+        """
+        self.object_name = object_name
+        self.object_description = object_description
+        self.object_storage_location = object_storage_location
+        self.datetime_of_evidence_collection = datetime_of_evidence_collection
+        self.object_collection_location = object_collection_location
+        self.object_pictures.extend(object_pictures)
+        self.object_videos.extend(object_videos)
+        self.save()
 
 class Language(EmbeddedDocument):
     """

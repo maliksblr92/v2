@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let form_data = $(pe_form).serializeArray();
         console.log(form_data);
         $.ajax({
-            url: "/cms/virtualevidence/",
+            url: "/cms/physicalevidence/",
             method: "POST",
             data: form_data,
             success: (result) => {

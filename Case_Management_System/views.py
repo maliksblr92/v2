@@ -274,4 +274,50 @@ class StoreAndRetrievePhysicalEvidence(View):
         receives data from frontend
         """
         print(request.POST)
+        case = request.POST.get('pe-case')
+        if request.POST.get('pe-name'):
+            object_name = request.POST.get('pe-name')
+        else:
+            object_name = None
+        if request.POST.get('pe-description'):
+            object_description = request.POST.get('pe-description')
+        else:
+            object_description = None
+        if request.POST.get('pe-storage-location'):
+            object_storage_location = request.POST.get('pe-storage-location')
+        else:
+            object_storage_location = None
+        try:
+            if request.POST.get('pe-collecton-dt'):
+                object_collecton_dt = datetime.strptime(request.POST.get('pe-collecton-dt').strip(), '%m/%d/%Y %H:%M:%S')
+            else:
+                object_collecton_dt = None
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        if request.POST.get('pe-extraction-location'):
+            object_collecton_location = LocationOfInterest.get_location_by_id(request.POST.get('pe-extraction-location'))
+        else:
+            object_collecton_location = None
+        if request.POST.get('pe-pictures'):
+            object_pictures = [PictureEvidenceFile.get_picture_by_id(picture_id) for picture_id in request.POST.getlist('pe-pictures')]
+        else:
+            object_pictures = None
+        if request.POST.get('pe-videos'):
+            object_videos = [VideoEvidenceFile.get_video_by_id(video_id) for video_id in request.POST.getlist('pe-videos')]
+        else:
+            object_videos = None
+        try:
+            physical_evidence = PhysicalEvidence()
+            physical_evidence.create_physical_evidence(
+                object_name,
+                object_description,
+                object_storage_location,
+                object_collecton_dt,
+                object_collecton_location,
+                object_pictures,
+                object_videos)
+            case_cms = CaseCMS.get_object_by_id(case)
+            case_cms.store_physical_evidence(physical_evidence)
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
         return JsonResponse({'success': 200})
