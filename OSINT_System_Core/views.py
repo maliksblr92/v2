@@ -971,8 +971,14 @@ def mainHeatMap(request):
 
 
 def newsMonitor(request):
-    news_json = News.objects().limit(1)
-    return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': news_json})
+    ary = News.objects(Q(channel='ARY')).order_by('-id').first()
+    dawn = News.objects(Q(channel='DAWN')).order_by('-id').first()
+    ndtv = News.objects(Q(channel='NDTV')).order_by('-id').first()
+    india_today = News.objects(Q(channel='INDIATODAY')).order_by('-id').first()
+    abp = News.objects(Q(channel='ABP')).order_by('-id').first()
+    zee = News.objects(Q(channel='ZEE')).order_by('-id').first()
+    new_json = [ary, dawn, ndtv, india_today, abp, zee]
+    return render(request, 'OSINT_System_Core/additional_templates/news_monitoring.html', {'news_json': new_json})
 
 
 def topNews(request):

@@ -1,5 +1,5 @@
-# from django.db import models
-# from django.utils import timezone
+#from django.db import models
+#from django.utils import timezone
 # Create your models here.
 import datetime
 
@@ -13,29 +13,30 @@ PASSWORD = ''
 HOST_IP = ''
 PORT = ''
 
-# disconnect('default')
-# CONNECT TO MONGO DB
-# connect(db='OSINT_Core',host='192.168.18.20', port=27017, username='ocs', password='rapidev')
-connect(db='OSINT_System', host='192.168.18.20', port=27017)
+#disconnect('default')
+#CONNECT TO MONGO DB
+#connect(db='OSINT_Core',host='192.168.18.20', port=27017, username='ocs', password='rapidev')
+connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
-
-# connect('OSINT_Core')
+#connect('OSINT_Core')
 
 class Raw_Data(Document):
+
     GTR = StringField()
     CTR = IntField()
     data = DictField()
 
 
 class Change_Record(Document):
+
     GTR = StringField()
     CTR = IntField()
-    recent_CTR = IntField()
+    recent_CTR= IntField()
     changes = StringField(default="")
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
-
+    
 """
 class experiment(Document):
     GTR= IntField()
@@ -54,12 +55,11 @@ class News_Fetched_Data(Document):
     target_update_count = LongField()
     created_on = DateTimeField()
 """
-
-
 class Person_Tweets(EmbeddedDocument):
-    tweet_type = StringField(max_length=50)  # it can be off refference, to , from type
+
+    tweet_type = StringField(max_length=50) # it can be off refference, to , from type
     username_tweet = StringField(max_length=50)
-    id = IntField()
+    id  = IntField()
     text = StringField()
     url = StringField()
     retweeet_count = IntField()
@@ -70,7 +70,7 @@ class Person_Tweets(EmbeddedDocument):
     is_retweet = BooleanField()
     sentiment = StringField()
     user_id = StringField(max_length=50)
-    categorization = ListField()
+    categorization= ListField()
 
 
 """
@@ -99,8 +99,6 @@ class Twitter_Search(Document):
     tweets = ListField(EmbeddedDocumentField(Search_Tweets))
     created_on = DateTimeField()
 """
-
-
 class Twitter_Response_TMS(Document):
     GTR = StringField()
     author_account = LongField()
@@ -108,7 +106,7 @@ class Twitter_Response_TMS(Document):
     location = StringField()
     profile_url = StringField()
     biodata = StringField()
-    # interests = ListField()
+    #interests = ListField()
     frequent_hashtags = ListField()
     website = StringField()
     joined_twitter = StringField()
@@ -117,22 +115,21 @@ class Twitter_Response_TMS(Document):
     following_count = StringField()
     likes_count = StringField()
     moments = StringField()
-    # close_associates = ListField()
+    #close_associates = ListField()
     profile_summary = StringField()
     post_frequency_graph = ListField()
     target_update_count = LongField()
-    behaviour = StringField()
-    common_words = ListField()
-    sentiments = ListField()
-    emotions = ListField()
+    behaviour= StringField()
+    common_words= ListField()
+    sentiments= ListField()
+    emotions= ListField()
     posting_time_charts = ListField()
     tweets = ListField(EmbeddedDocumentField(Person_Tweets))
     followers = ListField(default=[])
 
-
 class Linkedin_Profile_Response_TMS(Document):
     GTR = StringField()
-    target_type = StringField()
+    target_type= StringField()
     name = StringField()
     headline = StringField()
     company = StringField()
@@ -151,14 +148,16 @@ class Linkedin_Profile_Response_TMS(Document):
     experience = DictField()
     interests = ListField()
     accomplishments = DictField()
-    field_of_interest = ListField()
-    experience_education_graph = ListField()
-    linked_to = DictField()
+    field_of_interest= ListField()
+    experience_education_graph= ListField()
+    linked_to= DictField()
 
 
+
+    
 class Linkedin_Company_Response_TMS(Document):
     GTR = StringField()
-    target_type = StringField()
+    target_type= StringField()
     name = StringField()
     image_url = StringField()
     websites = StringField()
@@ -172,8 +171,7 @@ class Linkedin_Company_Response_TMS(Document):
     specialties = StringField()
     number_of_employees = IntField()
     jobs = DictField()
-    linked_to = DictField()
-
+    linked_to= DictField()
 
 """
 class Linkedin_Company(Document):
@@ -195,18 +193,20 @@ class Linkedin_Company(Document):
     jobs = DictField()
 """
 
-
 class Instagram_Posts(EmbeddedDocument):
+
     owner_id = IntField()
     owner_username = StringField()
     caption = StringField()
     comments_count = IntField()
     likes_count = IntField()
     display_url = URLField()
-    categorization = ListField()
+    categorization= ListField()
+
 
 
 class Instagram_Response_TMS(Document):
+
     GTR = StringField()
     target_type = StringField()
     biography = StringField()
@@ -221,76 +221,76 @@ class Instagram_Response_TMS(Document):
     is_verified = BooleanField()
     profile_picture_url = URLField()
     connected_fb_page = URLField()
-    # created_on = DateTimeField()
+    #created_on = DateTimeField()
     target_update_count = LongField()
     profile_summary = StringField()
-    behaviour = StringField()
-    common_words = ListField()
-    sentiments = ListField()
-    emotions = ListField()
+    behaviour= StringField()
+    common_words= ListField()
+    sentiments= ListField()
+    emotions= ListField()
     followers = ListField(default=[])
-
+    
     posts = ListField(EmbeddedDocumentField(Instagram_Posts))
-
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
         print('.........................................MongoSignal..............................................')
 
-
-# signals.pre_save.connect(Instagram_Person.pre_save, sender=Instagram_Person)
+#signals.pre_save.connect(Instagram_Person.pre_save, sender=Instagram_Person)
 class Facebook_Posts(EmbeddedDocument):
+
     post_id = IntField()
     author_name = StringField()
     auther_id = IntField()
     author_url = StringField()
     author_media_directory = StringField()
     post_link = URLField()
-    entity_type = StringField()
-    associated_links = ListField()
-    headline = StringField()
-    post_text = StringField()
-    complete_time = DateTimeField()
-    reactions_statistics = IntField()
-    comments_statistics = IntField()
-    shares_statistics = IntField()
-    picture_directory = ListField()
-    sentiment = StringField()
-    video_directory = ListField()
-    reactions = DictField()
-    comments = ListField()
-    categorization = ListField()
-
+    entity_type= StringField()
+    associated_links= ListField()
+    headline= StringField()
+    post_text= StringField()
+    complete_time= DateTimeField()
+    reactions_statistics= IntField()
+    comments_statistics= IntField()
+    shares_statistics= IntField()
+    picture_directory= ListField()
+    sentiment=StringField()
+    video_directory= ListField()
+    reactions= DictField()
+    comments= ListField()
+    categorization= ListField()
 
 class Page_Posts(EmbeddedDocument):
-    post_id = LongField()
-    author_username = StringField()
-    author_name = StringField()
-    media_directory = StringField()
-    tags = ListField()
-    post_link = URLField()
-    associated_links = ListField()
-    headline = StringField()
-    timestamp = DateTimeField()
-    content_type = DictField()
-    post_text = StringField()
-    picture_links = ListField()
-    video_links = ListField()
-    reactions_statistics = IntField()
-    comments_statistics = IntField()
-    shares_statistics = IntField()
-    reactions = DictField()
-    comments = ListField()
-    sentiment = StringField()
-    categorization = ListField()
+    post_id=  LongField()
+    author_username= StringField()
+    author_name= StringField()
+    media_directory= StringField()
+    tags= ListField()
+    post_link= URLField()
+    associated_links= ListField()
+    headline= StringField()
+    timestamp= DateTimeField()
+    content_type= DictField()
+    post_text= StringField()
+    picture_links= ListField()
+    video_links= ListField()
+    reactions_statistics= IntField()
+    comments_statistics= IntField()
+    shares_statistics= IntField()
+    reactions= DictField()
+    comments= ListField()
+    sentiment= StringField()
+    categorization= ListField()
+
+
 
 
 class Facebook_Profile_Response_TMS(Document):
     GTR = StringField()
     name = StringField()
-    username = StringField()
+    username= StringField()
     author_id = IntField()
-    target_type = StringField()
-    # author_account = StringField()
+    target_type= StringField()
+    #author_account = StringField()
     profile_picture_url = DictField()
     work = ListField()
     education = ListField()
@@ -302,17 +302,16 @@ class Facebook_Profile_Response_TMS(Document):
     relationship = StringField()
     family = ListField()
     events = ListField()
-    friends = ListField()
+    friends= ListField()
     posts = ListField(EmbeddedDocumentField(Facebook_Posts))
-
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
         print('.........................................MongoSignal..............................................')
 
-    # comments= DictField()
-    # mentions= ListField()
+    #comments= DictField()
+    #mentions= ListField()
     close_associates = ListField()
-    # pictures= ListField()
+    #pictures= ListField()
     check_ins = ListField()
     interests = DictField()
     profile_overview_summary = StringField()
@@ -320,187 +319,186 @@ class Facebook_Profile_Response_TMS(Document):
     profile_interest_summary = StringField()
     profile_close_associates_summary = StringField()
     posting_time_charts = ListField()
-    sentiments = ListField()
-    behaviour = StringField()
-    common_words = ListField()
-    emotions = ListField()
+    sentiments= ListField()
+    behaviour= StringField()
+    common_words= ListField()
+    emotions= ListField()
     target_update_count = LongField()
-    linked_to = ListField()
+    linked_to= ListField()
+    
+
 
 
 class Facebook_Page_Response_TMS(Document):
     GTR = StringField()
     target_update_count = LongField()
-    username = StringField()
+    username= StringField()
     name = StringField()
-    target_type = StringField()
-    owner = StringField()
-    scope = StringField()
-    facebook_type = StringField()
-    statistics = DictField()
-    page_info = ListField()
+    target_type= StringField()
+    owner= StringField()
+    scope= StringField()
+    facebook_type=  StringField()
+    statistics= DictField()
+    page_info= ListField()
     contact_information = ListField()
-    additional_info = ListField()
-    countries_involved = ListField()
-    page_history = ListField()
-    ads_status = StringField()
-    liked_pages = ListField()
-    page_posts = ListField(EmbeddedDocumentField(Page_Posts))
-
+    additional_info= ListField()
+    countries_involved= ListField()
+    page_history= ListField()
+    ads_status= StringField()
+    liked_pages= ListField()
+    page_posts= ListField(EmbeddedDocumentField(Page_Posts))
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
         print('.........................................MongoSignal..............................................')
-
     posting_time_charts = ListField()
-    sentiments = ListField()
-    behaviour = StringField()
-    common_words = ListField()
+    sentiments= ListField()
+    behaviour= StringField()
+    common_words= ListField()
     close_associates = ListField()
-    linked_to = ListField()
+    linked_to= ListField()
+    
+    
+    
+
 
 
 class Facebook_Group_Response_TMS(Document):
     GTR = StringField()
     target_update_count = LongField()
-    username = StringField()
+    username= StringField()
     name = StringField()
-    target_type = StringField()
-    description = StringField()
-    group_privacy = StringField()
-    group_visibility = StringField()
-    group_category = StringField()
-    group_posting_stats = DictField()
-    group_members_stats = DictField()
-    group_creator = DictField()
-    group_timestamp = DateTimeField()
-    group_history = ListField()
-    group_rules = ListField()
-    group_admins = ListField()
-    group_moderators = ListField()
-    num_admins = IntField()
-    num_moderators = IntField()
+    target_type= StringField()
+    description= StringField()
+    group_privacy= StringField()
+    group_visibility= StringField()
+    group_category= StringField()
+    group_posting_stats= DictField()
+    group_members_stats= DictField()
+    group_creator= DictField()
+    group_timestamp= DateTimeField()
+    group_history= ListField()
+    group_rules= ListField()
+    group_admins= ListField()
+    group_moderators= ListField()
+    num_admins= IntField()
+    num_moderators= IntField()
     events = ListField()
-    page_members = ListField()
+    page_members= ListField()
     close_associates = ListField()
-    posts = ListField()
+    posts= ListField()
     posting_time_charts = ListField()
-    sentiments = ListField()
-    behaviour = StringField()
-    common_words = ListField()
-    linked_to = ListField()
-
+    sentiments= ListField()
+    behaviour= StringField()
+    common_words= ListField()
+    linked_to= ListField()
 
 class Trends(Document):
-    trend_type = StringField()
-    trend_graph = DictField()
-    popular_hashtag = ListField()
-    top_Trends = ListField()
-    country = StringField()
-    wordcloud = ListField()
-    common_words = ListField()
-    spelling_variants = ListField()
-
+    trend_type= StringField()
+    trend_graph= DictField()
+    popular_hashtag= ListField()
+    top_Trends= ListField()
+    country= StringField()
+    wordcloud= ListField()
+    common_words= ListField()
+    spelling_variants= ListField()
 
 class News(Document):
-    GTR = StringField()
-    CTR = IntField()
-    channel = StringField()
-    most_used_hashtags = ListField()
-    wordcloud = StringField()
-    most_emerging_news = ListField()
-    news = ListField()
-    common_words = ListField()
-    spelling_variants = ListField()
+    GTR= StringField()
+    CTR= IntField()
+    channel= StringField()
+    most_used_hashtags= ListField()
+    wordcloud= StringField()
+    most_emerging_news= ListField()
+    news= ListField()
+    common_words= ListField()
+    spelling_variants= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
-
+    
 class Dynamic_Crawling_Response_TMS(Document):
-    GTR = StringField()
-    CTR = IntField()
-    name = StringField()
-    registrar = StringField()
-    creation_date = DateTimeField()
-    expiration_date = DateTimeField()
-    data = ListField()
+    GTR= StringField()
+    CTR= IntField()
+    name= StringField()
+    registrar=StringField()
+    creation_date=DateTimeField()
+    expiration_date=DateTimeField()
+    data=ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
-
 
 class Keybase_Response_TMS(Document):
     GTR = StringField()
-    CTR = IntField()
-    data = ListField()
+    CTR= IntField()
+    data= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
-
 
 class Temp(Document):
-    GTR = StringField()
-    CTR = StringField()
+    GTR= StringField()
+    CTR= StringField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
-    categorization = ListField(default=[])
+    categorization= ListField(default= [])
 
 
 class Youtube_Response_TMS(Document):
-    GTR = StringField()
-    CTR = IntField()
-    overview = DictField()
-    videos = DictField()
-    channels = DictField()
-    playlists = ListField()
-    posts = ListField()
+    GTR= StringField()
+    CTR= IntField()
+    overview= DictField()
+    videos= DictField()
+    channels= DictField()
+    playlists= ListField()
+    posts= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
 
 class Reddit_Profile_Response_TMS(Document):
-    GTR = StringField()
-    CTR = IntField()
-    reddit_id = StringField()
-    profile_id = StringField()
-    username = StringField()
-    url = StringField()
-    description = StringField()
-    icon_media_directory = StringField()
-    timestamp_created = StringField()
-    karma_points = DictField()
-    subscribers = IntField()
-    custom_feeds = ListField()
-    subreddits = ListField()
-    posts = ListField()
+    GTR= StringField()
+    CTR= IntField()
+    reddit_id= StringField()
+    profile_id= StringField()
+    username= StringField()
+    url= StringField()
+    description= StringField()
+    icon_media_directory= StringField()
+    timestamp_created= StringField()
+    karma_points= DictField()
+    subscribers= IntField()
+    custom_feeds= ListField()
+    subreddits= ListField()
+    posts= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
-
 
 class Reddit_Subreddit_Response_TMS(Document):
-    GTR = StringField()
-    CTR = IntField()
-    subreddit_id = StringField()
-    name = StringField()
-    url = StringField()
-    category = StringField()
-    subreddit_type = StringField()
-    description = StringField()
-    num_subscribers = IntField()
-    currently_active = IntField()
-    timestamp_created = StringField()
-    icon_media_directory = StringField()
-    num_moderators = IntField()
-    top_moderators = ListField()
-    posts = ListField()
+    GTR= StringField()
+    CTR= IntField()
+    subreddit_id= StringField()
+    name= StringField()
+    url= StringField()
+    category= StringField()
+    subreddit_type= StringField()
+    description= StringField()
+    num_subscribers= IntField()
+    currently_active= IntField()
+    timestamp_created= StringField()
+    icon_media_directory= StringField()
+    num_moderators= IntField()
+    top_moderators= ListField()
+    posts= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
-
-
+    
+    
 """
     def __str__(self):
         return self.name
     def __repr__(self):
         return str(self.name)
 
-
+  
 
 class Profile_Analysis_Data(Document):
     GTR = IntField()

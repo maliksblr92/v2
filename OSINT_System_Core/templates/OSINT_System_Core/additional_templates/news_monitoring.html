@@ -158,26 +158,31 @@
                           <div class="" style="height:400px;overflow-y:auto">
                             
                             {% for i in x.news %}
-                              <div class="accordion " id="accordionExample">
-                                <div class="card background-gradient">
-                                  <div class="card-header" id="headingOne">
-                                    <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#ida{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
-                                      <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-white">{{forloop.counter}} # </span>{{i.HeadLine}}</div>
-                                      <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{i.Time | default_if_none:"No content availble "}}</div>
-                                    </a>
-                                  </div>
-                                  <div id="ida{{forloop.counter}}" class="collapse card-header background-gradient-dark" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                      <div  class="w-100 text_paragraph "style="font-size:12px;">
-                                        {{i.Description}}
-                                      </div>
-                                    </div>
-                                    <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#ida{{forloop.counter}}" aria-expanded="true" aria-controls="ida{{forloop.counter}}">
-                                      <span> <i class="fas fa-chevron-circle-up text_paragraph fa-2x"></i></span><a class="badge custom_badge" href="{{i.Link}}">View</a>
-                                    </a>
+                          {% for x in i.News%}
+                          <div class="accordion " id="accordionExample">
+                            <div class="card background-gradient">
+                              <div class="card-header" id="headingOne">
+                                <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#ida{{forloop.counter}}" aria-expanded="true" aria-controls="id{{forloop.counter}}">
+                                  <div align="left" class="text-white w-75" style="font-size:12px;"> <span class="text-white">{{forloop.counter}} # </span>{{x.HeadLine}}</div>
+                                  <div  class="w-25 badge badge-light p-2"style="font-size:10px;">  {{x.Time | default_if_none:"No content availble "}}</div>
+                                </a>
+                              </div>
+                              <div id="ida{{forloop.counter}}" class="collapse card-header background-gradient-dark" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                  <div  class="w-100 text_paragraph "style="font-size:12px;">
+                                    {{x.Description}}
                                   </div>
                                 </div>
+                                <a class="d-flex flex-row justify-content-around  align-items-center" type="button" data-toggle="collapse" data-target="#ida{{forloop.counter}}" aria-expanded="true" aria-controls="ida{{forloop.counter}}">
+                                  <span> <i class="fas fa-chevron-circle-up text_paragraph fa-2x"></i></span><a class="badge custom_badge" href="{{x.Link}}">View</a>
+                                </a>
                               </div>
+                            </div>
+                          </div>
+                       
+
+                          {% endfor %}
+                              
                             {% endfor %}
                           </div>
                         </div>

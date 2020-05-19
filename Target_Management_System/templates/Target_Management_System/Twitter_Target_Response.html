@@ -391,7 +391,6 @@
         categoryAxis.renderer.labels.template.horizontalCenter = "right";
         categoryAxis.renderer.labels.template.fontWeight = 500;
         categoryAxis.renderer.labels.template.fontSize = 10;
-
         categoryAxis.renderer.labels.template.adapter.add("fill", function(fill, target) {
         return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
         });
@@ -401,10 +400,10 @@
         valueAxis.renderer.grid.template.strokeOpacity = 0;
         valueAxis.min = 0;
         valueAxis.renderer.labels.template.fontSize = 10;
-       
+        
         valueAxis.max = 100;
         valueAxis.strictMinMax = true;
-     
+        
         // Create series
         var series1 = chart.series.push(new am4charts.RadarColumnSeries());
         series1.dataFields.valueX = "full";
@@ -441,32 +440,49 @@
             background-size: cover;
             ">
             <div class="container-fluid">
+                <div class="row p-2">
+                    <div class="col-md-4 text-left">
+                        <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                            <i class="fab fa-twitter mr-2"></i> Twitter
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
+                            <i class="fas fa-users mr-2"></i> Twitter Target
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                            <i class="fas fa-download  mr-2"></i> Download PDF Report
+                        </a>
+                    </div>
+                </div>
                 
-            <div class="row pl-5 pr-5 pt-3">
-                
-                <div class="col-md-8">
-                    <div class="twPc-div">
-                        <a class="twPc-bg twPc-block"></a>
-                        <div class="bg-white">
-                            <div class="twPc-button">
-                                <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+                <div class="row pl-5 pr-5 pt-3">
+                    
+                    <div class="col-md-8">
+                        <div class="twPc-div">
+                            <a class="twPc-bg twPc-block"></a>
+                            <div class="bg-white">
+                                <div class="twPc-button">
+                                    <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+                                    
+                                    <script>
+                                    ! function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0],
+                                    p = /^http:/.test(d.location) ? 'http' : 'https';
+                                    if (!d.getElementById(id)) {
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = p + '://platform.twitter.com/widgets.js';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                    }(document, 'script', 'twitter-wjs');
+                                    </script>
+                                    <!-- Twitter Button -->
+                                </div>
                                 
-                                <script>
-                                ! function (d, s, id) {
-                                var js, fjs = d.getElementsByTagName(s)[0],
-                                p = /^http:/.test(d.location) ? 'http' : 'https';
-                                if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = p + '://platform.twitter.com/widgets.js';
-                                fjs.parentNode.insertBefore(js, fjs);
-                                }
-                                }(document, 'script', 'twitter-wjs');
-                                </script>
-                                <!-- Twitter Button -->
-                            </div>
-                            
-                            <div class="d-flex flex-row justify-content-start align-items-center">  <!-- style="margin-top:-48px;" -->
+                                <div class="d-flex flex-row justify-content-start align-items-center">  <!-- style="margin-top:-48px;" -->
                                 <a title="Mert S. Kaplan"
                                     href="#"
                                     class="twPc-avatarLink">
@@ -488,7 +504,6 @@
                                     <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
                                         class="twitter-follow-button text-primary nav-link ml-5 " data-show-count="false" data-size="large"
                                     data-show-screen-name="false" class="" data-dnt="true">Webiste @{{tweets.website}}</a>
-                                <a type="button" class="btn  btn-sm btn-success float-right"style="margin-top:2px;"  href="{% url 'Target_Management_System:twitter_follower_tree_graph' object_gtr_id=tweets.GTR %}" id="download_as_pdf">Followers Graph</a>
                                 </div>
                                 
                                 <div class="twPc-divStats">

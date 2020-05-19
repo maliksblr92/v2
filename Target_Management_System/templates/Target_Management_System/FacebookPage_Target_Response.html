@@ -432,6 +432,13 @@
                                                                 <div class="d-inline">
                                                                     {{c.name}}
                                                                 </div>
+                                                                {% if c.username %}
+                                                                    <div class="badge custom_badge">
+                                                                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}">
+                                                                            <i class="fa fa-link"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                {% endif %}
                                                             </div>
                                                             <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne"
                                                                 data-parent="#accordionExample">

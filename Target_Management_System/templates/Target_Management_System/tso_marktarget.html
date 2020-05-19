@@ -57,24 +57,26 @@
                     <i style="color:white; opacity:0.8;" class="fab fa-instagram fa-2x"></i></a>
                     <a class="nav-item nav-link {% if data.target_site == 'facebook' or not data.target_site%} active {% endif %}" id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
                     <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
-                    <a class="nav-item nav-link"  {% if data.target_site == 'twitter' %} active {% endif %} id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
-                    style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
-                    <a class="nav-item nav-link"  {% if data.target_site == 'youtube' %} active {% endif %} id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
-                    style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
-                </div>
-            </nav>
-            <!-- END OF TOP MANU BAR -->
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg">
-            <div class="">
-                <!-- RPW FOR SOCIAL MEDIA -->
-                <div class="row ">
-                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
-                        <!-- this is content -->
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                            {% for platform in data.social %}
+                <a class="nav-item nav-link" {% if data.target_site == 'twitter' %} active {% endif %}
+                    id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
+                <a class="nav-item nav-link" {% if data.target_site == 'youtube' %} active {% endif %}
+                    id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
+                        style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
+            </div>
+        </nav>
+        <!-- END OF TOP MANU BAR -->
+    </div>
+    <!-- end of top row -->
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+            <div class="row ">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
+                    <!-- this is content -->
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        {% for platform in data.social %}
                                 <div class="tab-pane fade {% if data.target_site %}
                                                             {% if platform.name|lower == data.target_site %}active show{% endif %}
 
@@ -231,29 +233,51 @@
 
                                             <!-- end of 2 column div for date and time-->
 
-                                            <div class="input-group   mt-2 mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                              opacity:0.9; padding:7px 9px 0 10px;">Screenshots
-                                                    </span>
-                                                </div>
-                                                <input type="radio" class="form-control  newinputdesign"
-                                                    placeholder="Yes/ No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2"
-                                                    id="{{platform.name|lower}}-screenshot"
-                                                    name="{{platform.name|lower}}_screenshot"
-                                                    value="1">
-                                                 <label for="male">Yes</label><br>
-                                                <input type="radio" class="form-control  newinputdesign"
-                                                    placeholder="Yes/ No" aria-label="Recipient's username"
-                                                    aria-describedby="basic-addon2"
-                                                    id="{{platform.name|lower}}-screenshot"
-                                                    name="{{platform.name|lower}}_screenshot"
-                                                    value="0">
-                                                 <label for="male">No</label><br>
-                                                <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
-                                                <input type="hidden" name="portfolio_id" value="{{data.portfolio_id}}">
-                                            </div>
+                                            
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group-prepend">
+            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+opacity:0.9; padding:7px 9px 0 10px;height:35px;width:110px;">Screenshots
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-6 mt-2">
+      <label class="d-flex flex-row justify-content-center align-items-center">
+          <input type="radio" id="{{platform.name|lower}}-screenshot"
+          name="{{platform.name|lower}}_screenshot" value="1"
+          required="required" />
+          <span class="badge badge-success ml-2">   Yes</span>
+      </label>
+    </div>
+
+    <div class="col-md-6 mt-2">
+        <label class="d-flex flex-row justify-content-center align-items-center ">
+          <input type="radio" id="{{platform.name|lower}}-screenshot"
+          name="{{platform.name|lower}}_screenshot" value="0"
+          required="required"  />
+<span class="badge badge-danger ml-2">          No</span>
+      </label>
+    </div>
+</div>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
+    <input type="hidden" name="portfolio_id" value="{{data.portfolio_id}}">
+      
+    </div>
+
+
+
+
+
+
+                                            
                                         </div>
 
                                         <!-- TWO BUTTON BOTTOM-->
@@ -311,7 +335,68 @@
             let author_account = event.target.parentElement.parentElement.querySelector('input').value
             let target_type = "{{platform.name|lower}}"
             //console.log(website)
+            console.log("target_type == "+target_type)
             var author_type = $(`#${website}_authortype option:selected`).val();
+            console.log("author_type == "+author_type)
+
+                let data = {
+                    'author_account': author_account,
+                    'search_site': website,
+                    'target_type': author_type
+                }
+                console.log(data)
+                $.ajax({
+                    dataType: "json",
+                    url: "/tms/smartsearch/",
+                    data: data,
+                    success: (response) => {
+                        console.log("Smart Search == in success function ")
+                        // console.log(response)
+                        $(`#${website}-authoruserid`).val(response['author_userid'])
+                        $(`#${website}-authorusername`).val(response['author_username'])
+                        document.getElementById(`${website}-profile_image`).src = response[
+                            'profile_url']
+                        switch (website) {
+                            case 'reddit':
+                                $(`#${website}-authoruserurl`).val(
+                                    `http://www.reddit.com/${author_account}`)
+                                break;
+                            case 'linkedin':
+                                $(`#${website}-authoruserurl`).val(
+                                    `http://www.linkedin.com/in/${author_account}`)
+                                break;
+                            case 'instagram':
+                                $(`#${website}-authoruserurl`).val(
+                                    `http://www.instagram.com/${author_account}`)
+                                break;
+                            case 'facebook':
+                                $(`#${website}-authoruserurl`).val(
+                                    `http://www.facebook.com/${author_account}`)
+                                break;
+                            case 'twitter':
+                                $(`#${website}-authoruserurl`).val(
+                                    `http://www.twitter.com/${author_account}`)
+                                break;
+                            default:
+                                break;
+                        }
+                        $(tabpane_name + " #loading_icon").hide()
+                        $(tabpane_name + ' #smart_search_response').show()
+                        $(tabpane_name + ' #smart_search_response').empty().append(
+                            " Operation successfull   ")
+                        $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                    },
+                    error: function () {
+                        console.log("Smart Search == in error function ")
+                        $(tabpane_name + ' #smart_search_response').show()
+                        $(tabpane_name + ' #smart_search_response').empty().append(
+                            " Operation Unsuccessfull  ! Please Try Again ")
+                        $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                        $(tabpane_name + " #loading_icon").hide()
+                        cleanForm()
+                    }
+                })
+            
 
     console.log(author_type)
              console.log(author_type)
