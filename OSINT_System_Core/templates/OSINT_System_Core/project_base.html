@@ -74,6 +74,33 @@
         visibility: hidden;
       }
     }
+    .custom_badge{
+      border: 1px solid #000;
+      border-radius: 5px;
+      margin: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+      93deg,
+      rgba(24, 72, 116, 1) 0%,
+      rgba(6, 17, 26, 1) 100%);
+      }
+      .topcontentbar {
+              border-radius: 20px 20px 0 0;
+              background: linear-gradient(
+              90deg,
+              rgba(0, 32, 44, 90%) 0%,
+              rgba(0, 46, 69, 90%) 28%,
+              rgba(0, 83, 135, 82%) 72%,
+              rgba(0, 113, 188, 80%) 100%
+              );
+              border-bottom: 1px solid #707070;
+              }
+              .background{
+              background: #012847 !important;
+              }
 
     </style>
     <!-- container fluid div -->
@@ -102,14 +129,14 @@
                         <div class="col-lg-6  list list-inline custom_center "
                           style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
                           <li class="nav-item">
-                            <a class="btn  nav_btn  topnavitem" href="{% url 'Target_Management_System:tms_marktarget' %}"
-                            style="color:#fff; letter-spacing: normal;">TARGET</a>
+                            <a class="btn  nav_btn  " href="{% url 'Target_Management_System:tms_marktarget' %}"
+                            style=" letter-spacing: normal;"id="nav_target_btn">TARGET</a>
                           </li>
                         </div>
                         <div class="col-lg-6  list list-inline custom_center "
                           style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
                           <li class="nav-item">
-                            <a class="   btn   nav_btn" href="{% url 'Portfolio_Management_System:create_portfolio' %}" >PORTFOLIO</a>
+                            <a class="   btn   nav_btn" href="{% url 'Portfolio_Management_System:create_portfolio' %}" id="nav_porfolio_btn" >PORTFOLIO</a>
                           </li>
                         </div>
                       </div>
@@ -122,13 +149,13 @@
                         <div class="col-lg-6  list list-inline custom_center "
                           style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
                           <li class="nav-item">
-                            <a class="   btn   nav_btn" href="#" >CASE</a>
+                            <a class="   btn   nav_btn" href="#" id="nav_case_btn" >CASE</a>
                           </li>
                         </div>
                         <div class="col-lg-6  list list-inline custom_center "
                           style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
                           <li class="nav-item">
-                            <a class="   btn   nav_btn" href="{% url 'Keybase_Management_System:kms_create' %}" >KEYBASE</a>
+                            <a class="   btn   nav_btn" href="{% url 'Keybase_Management_System:kms_create' %}"  id="nav_keybase_btn" >KEYBASE</a>
                           </li>
                         </div>
                       </div>
@@ -435,12 +462,12 @@
             <div class="row" id="search_result">
             </div>
             <div class="row" >
-              <div class="alert alert-light" id="share_response" role="alert">h
+              <div class="alert alert-light" id="share_response" role="alert">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" onclick="submit_share()" class="btn btn-primary">Share</button>
+            <button type="button" onclick="submit_share()"  class="text-white custom_badge">Share</button>
           </div>
         </div>
       </div>
@@ -844,6 +871,35 @@ console.log("i m clicked")
           
           }); // end am4core.ready()
     
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        var url=window.location.href;
+        console.log(url)
+        var sub_string='core';
+        if(url.includes(sub_string)){
+         
+
+        }
+        if(url.includes('tms'))
+        {
+       
+        $('#nav_target_btn').addClass("active btn-outline-light  ")
+        }
+        if(url.includes("case")){
+         
+          $('#nav_case_btn').addClass("active btn-outline-light")
+        }
+        if(url.includes('pms'))
+        {
+       
+        $('#nav_porfolio_btn').addClass("active btn-outline-light ")
+        }
+        if(url.includes("kms")){
+          $('#nav_keybase_btn').addClass("active btn-outline-light ")
+        }
+      })
     </script>
   </body>
 </html>

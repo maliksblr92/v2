@@ -164,10 +164,8 @@ class Index(View):
         nationality = request.POST['nationality']
         gender = request.POST['gender']
         age = request.POST['age']
-        print("nationality == ", nationality)
-        print("gender == ", gender)
-        print("age == ", age)
-        return redirect('/dpu/index/')
+        resp=ess.fake_identitity_generator(nationality,gender,age)
+        return render(request, 'Data_Processing_Unit/index.html',{'resp':resp})
 
 
 class Index_Darkweb(View):
@@ -178,6 +176,8 @@ class Index_Darkweb(View):
     def post(self, request, *args, **kwargs):
         query = request.POST['query']
         resp=ess.dark_web_search(query)
+        if len(resp)  == 0:
+            print("No response ")
         return render(request, 'Data_Processing_Unit/index_darkweb.html',{'resp':resp})
 
 
@@ -753,7 +753,7 @@ class Get_Hashtag_Tweets(View):
             'source':item[30],
             'reply_to':item[31],
                 })
-            print(dic)
+            # print(dic)
             # if(len(dic) > 0 ):
             #     messages.success(
             #           request, 'Query Executed Successfully --Phrase Search ')
@@ -802,14 +802,14 @@ class Ip_Tools(View):
 
         elif query_type=='domains_ip_info':
             domain=request.POST['domain']
+            print(domain)
             resp = ess.get_domains_ip_info(domain)
-
             print(resp)
 
         elif query_type == 'domains_info':
             domain = request.POST['domain']
             resp = ess.get_domains_info(domain)
 
-            print(resp)
+
 
         return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})

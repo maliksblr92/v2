@@ -1,516 +1,499 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css"
-        integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous">
-    <style>
-        .text_10px {
-            font-size: 10px !important;
-        }
-
-        .text_12px {
-            font-size: 12px;
-            ;
-        }
-
-        .text_13px {
-            font-size: 13px !important;
-        }
-
-        .text_14px {
-            font-size: 14px;
-            ;
-        }
-
-        .text_15px {
-            font-size: 15px;
-            ;
-        }
-
-        .text_20px {
-            font-size: 20px;
-            ;
-        }
-
-        .text_25px {
-            font-size: 25px;
-            ;
-        }
-
-        .border_radius_5px {
-            border-radius: 5px !important;
-        }
-
-
-        .background-gradient-dark {
-            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
-        }
-
-        .no_decoration {
-            text-decoration: none !important;
-        }
-
-        .border_right {
-            border-right: 1px solid black;
-            ;
-        }
-
-        .border_left {
-            border-left: 1px solid black;
-            ;
-        }
-
-        .custom-start-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .custom-start-center {
-            display: flex !important;
-            justify-content: start !important;
-            align-items: center !important;
-        }
-
-        .custom-end-center {
-            display: flex !important;
-            justify-content: end !important;
-            align-items: center !important;
-        }
-
-        .d-flex flex-row justify-content-start align-items-center {
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-
-        .custom-column-center-center {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-
-        .custom-column-start-start {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: start !important;
-            align-items: start !important;
-        }
-
-        .custom-column-start-center {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: start !important;
-            align-items: center !important;
-        }
-
-        .full_space {
-            height: 100% !important;
-            width: 100% !important;
-        }
-
-        .ellipsis {
-            text-overflow: hidden;
-        }
-    </style>
-    <style>
-        html {
-            --scrollbarBG: #CFD8DC;
-            --thumbBG: #90A4AE;
-        }
-
-        ::-webkit-scrollbar {
-            width: 7px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--scrollbarBG);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--thumbBG);
-            border-radius: 6px;
-            border: 3px solid var(--scrollbarBG);
-        }
-    </style>
-    <style>
-        .profile-img-wrapper {
-            border: 4px solid white;
-            height: 250px;
-            width: 250px;
-            border-radius: 10px;
-        }
-
-        .label {
-            color: white
-        }
-
-        .header-wrapper {}
-
-        .stats-box-upper {
-            border-radius: 5px 5px 0px 0px;
-            text-align: center;
-            font-weight: bold;
-            color: red
-        }
-
-        .stats-box-lower {
-            border-radius: 0px 0px 5px 5px;
-            text-align: center;
-            color: blue
-        }
-
-        .post-wrapper {
-            height: 700px;
-            overflow-y: auto;
-        }
-
-        .header-icons {
-            border: 1px solid white;
-            padding: 5px;
-            border-radius: 5px;
-            background-color: white;
-            ;
-        }
-
-        .header-text {
-            font-size: 16px !important;
-            ;
-            width: 200px;
-            ;
-            text-align: left;
-        }
-
-        .card-body-label {
-            width: 100px;
-            ;
-            text-align: left;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container-fluid wrapper background-gradient-dark">
-        <div class="row ">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="row p-2">
-                    <div class="col-md-4 text-left">
-                        <a href="#" target="_blank" class="btn btn-info font-weight-bold">
-                            <i class="fas fa-spider mr-2"></i> Dynamic Crawling
-                        </a>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
-                            <i class="fas fa-users mr-2"></i> Dynamic Crawling Target
-                        </a>
-                    </div>
-                    <div class="col-md-4 text-right">
-                        <a href="#" target="_blank" class="btn btn-success font-weight-bold">
-                            <i class="fas fa-download  mr-2"></i> Download PDF Report
-                        </a>
-                    </div>
-                </div>
-                <div class="row background-gradient-dark border_radius_5px ">
-                   
-                    <div class="col-md-7  background-gradient-dark p-5">
-                        <div class="row  p-2">
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Name
-                                </label>
-                            </div>
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <span class="badge badge-light header-text">
-                                        {{target.name|default:"N/A"}}
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="row  p-2">
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Registrar
-                                </label>
-                            </div>
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <span class="badge badge-light header-text">
-                                        {{target.registrar|default:"N/A"}}
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-
-
-                        <div class="row  p-2">
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Creation Date
-                                </label>
-                            </div>
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <span class="badge badge-light header-text">
-                                        {{target.creation_date|default:"N/A"}}
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <div class="row  p-2">
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>View Site
-                                </label>
-                            </div>
-                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                <label class="label text_15px font-weight-bold ">
-                                    <a href="{{target.name}}" target="_blank" class="badge badge-success" >
-                                            <i class="fa fa-eye fa-2x"></i>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css"
+                integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous">
+                <style>
+                .text_10px {
+                font-size: 10px !important;
+                }
+                .text_12px {
+                font-size: 12px;
+                ;
+                }
+                .text_13px {
+                font-size: 13px !important;
+                }
+                .text_14px {
+                font-size: 14px;
+                ;
+                }
+                .text_15px {
+                font-size: 15px;
+                ;
+                }
+                .text_20px {
+                font-size: 20px;
+                ;
+                }
+                .text_25px {
+                font-size: 25px;
+                ;
+                }
+                .border_radius_5px {
+                border-radius: 5px !important;
+                }
+                .background-gradient-dark {
+                background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+                }
+                .no_decoration {
+                text-decoration: none !important;
+                }
+                .border_right {
+                border-right: 1px solid black;
+                ;
+                }
+                .border_left {
+                border-left: 1px solid black;
+                ;
+                }
+                .custom-start-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+                .custom-start-center {
+                display: flex !important;
+                justify-content: start !important;
+                align-items: center !important;
+                }
+                .custom-end-center {
+                display: flex !important;
+                justify-content: end !important;
+                align-items: center !important;
+                }
+                .d-flex flex-row justify-content-start align-items-center {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                align-items: center !important;
+                }
+                .custom-column-center-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                }
+                .custom-column-start-start {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: start !important;
+                }
+                .custom-column-start-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: center !important;
+                }
+                .full_space {
+                height: 100% !important;
+                width: 100% !important;
+                }
+                .ellipsis {
+                text-overflow: hidden;
+                }
+                </style>
+                <style>
+                html {
+                --scrollbarBG: #CFD8DC;
+                --thumbBG: #90A4AE;
+                }
+                ::-webkit-scrollbar {
+                width: 7px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+                }
+                ::-webkit-scrollbar-track {
+                background: var(--scrollbarBG);
+                }
+                ::-webkit-scrollbar-thumb {
+                background-color: var(--thumbBG);
+                border-radius: 6px;
+                border: 3px solid var(--scrollbarBG);
+                }
+                </style>
+                <style>
+                .profile-img-wrapper {
+                border: 4px solid white;
+                height: 250px;
+                width: 250px;
+                border-radius: 10px;
+                }
+                .label {
+                color: white
+                }
+                .header-wrapper {}
+                .stats-box-upper {
+                border-radius: 5px 5px 0px 0px;
+                text-align: center;
+                font-weight: bold;
+                color: red
+                }
+                .stats-box-lower {
+                border-radius: 0px 0px 5px 5px;
+                text-align: center;
+                color: blue
+                }
+                .post-wrapper {
+                height: 700px;
+                overflow-y: auto;
+                }
+                .header-icons {
+                border: 1px solid white;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: white;
+                ;
+                }
+                .header-text {
+                font-size: 16px !important;
+                ;
+                width: 200px;
+                ;
+                text-align: left;
+                }
+                .card-body-label {
+                width: 100px;
+                ;
+                text-align: left;
+                }
+                .topcontentbar {
+                border-radius: 20px 20px 0 0;
+                background: linear-gradient(
+                90deg,
+                rgba(0, 32, 44, 90%) 0%,
+                rgba(0, 46, 69, 90%) 28%,
+                rgba(0, 83, 135, 82%) 72%,
+                rgba(0, 113, 188, 80%) 100%
+                );
+                border-bottom: 1px solid #707070;
+                }
+                .background{
+                background: #012847 !important;
+                }
+                .custom_badge{
+                background-color: #06111a !important;
+                color: #ffffff !important;
+                }
+                </style>
+            </head>
+            <body>
+                <div class="container-fluid wrapper background-gradient-dark">
+                    <div class="row ">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="row p-2">
+                                <div class="col-md-4 text-left">
+                                    <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                                        <i class="fas fa-spider mr-2"></i> Dynamic Crawling
                                     </a>
-                                </label>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
+                                        <i class="fas fa-users mr-2"></i> Dynamic Crawling Target
+                                    </a>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                                        <i class="fas fa-download  mr-2"></i> Download PDF Report
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row background-gradient-dark border_radius_5px ">
+                                
+                                <div class="col-md-7  background-gradient-dark p-5">
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Name
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{target.name|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Registrar
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{target.registrar|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Creation Date
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{target.creation_date|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>View Site
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <a href="{{target.name}}" target="_blank" class="badge badge-light" >
+                                                    <i class="fa fa-eye fa-2x"></i>
+                                                </a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                                <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
+                                    <div id="profile_chart" style="height:400px;width:100%"></div>
+                                </div>
+                            </div>
+                            <!--
+                            -->
+                            <div class="row ">
+                                <div class="col-md-12 m-0 p-0">
+                                    <div class="row m-0 p-0">
+                                        {% if target.data %}
+                            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                                            {% for i in target.data %}
+                                                <!------ /////////////////////////////////////////////////////////////////// -->
+                                                <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border pt-3 pb-2">
+                                                    <h4 class="topheading text-white">
+                                                    {{i.title.0}}
+                                                    </h4>
+                                                </div>
+                                                <div class="card-body border border-dark background glowing_border mb-2"style="border-radius:0px 0px 15px 15px">
+                                                    <!-- <div class="row">
+                                                        <div class="col-md-2">
+                                                            <div class="col-md-12" >
+                                                                <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold"> {{i.title.0}}</div>
+                                                    </div> -->
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-2">
+                                                            <div class="col-md-12" >
+                                                                <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold">
+                                                            {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge custom_badge" >
+                                                                <i class="fa fa-eye fa-2x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-2">
+                                                            <div class="col-md-12" >
+                                                                <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:250px;overflow-y:auto;border-radius:3px;">
+                                                            {% for content in i.content %}
+                                                                <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
+                                                                
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-2">
+                                                            <div class="col-md-12" >
+                                                                <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:350px;overflow-y:auto;border-radius:3px;"> 
+                                                            {% for image_url in i.image_urls %}
+                                                                    <div class="col-md-6">
+                                                                        <div> <span class="badge badge-info">{{forloop.counter}}</span>
+                                                                        <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                                <!------ /////////////////////////////////////////////////////////////////// -->
+                                                <!-- <div class="col-md-12 card p-5 ">
+                                                    
+                                                    <div class="row mt-2">
+                                                        <div class="col-md-2">
+                                                            <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
+                                                        </div>
+                                                        <div class="col-md-10 text_14px font-weight-bold">
+                                                            {{i.title.0}}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="row mt-2">
+                                                        <div class="col-md-2">
+                                                            <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
+                                                        </div>
+                                                        <div class="col-md-10 text_14px font-weight-bold">
+                                                            {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge badge-success" >
+                                                                <i class="fa fa-eye fa-2x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="row mt-2">
+                                                        <div class="col-md-2">
+                                                            <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
+                                                        </div>
+                                                        <div class="col-md-10 text_14px p-3 border "style="height:400px;overflow-y:auto;">
+                                                            {% for content in i.content %}
+                                                                <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
+                                                                
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="row mt-2">
+                                                        <div class="col-md-2">
+                                                            <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                        </div>
+                                                        <div class="col-md-10 text_12px p-3 border"style="height:400px;overflow-y:auto;">
+                                                            <div class="row">
+                                                                
+                                                                {% for image_url in i.image_urls %}
+                                                                    <div class="col-md-6">
+                                                                        <div> <span class="badge badge-info">{{forloop.counter}}</span>
+                                                                        <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-
-
-                       
-
-                       
-                       
                     </div>
-                    <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
-                        <div id="profile_chart" style="height:400px;width:100%"></div>
-                    </div>
-                </div>
-                <!-- 
-
-         -->
-                <div class="row ">
-                    <div class="col-md-12 m-0 p-0">
-                        
-                        
-                           
-                              <div class="row m-0 p-0">
-                                  {% if target.data %}
-                                {% for i in target.data %}
-                                  <div class="col-md-12 card p-5 ">
-                                   
-<div class="row mt-2">
- <div class="col-md-2">
-    <span class="badge badge-primary  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>  
- </div>
- <div class="col-md-10 text_14px font-weight-bold">
-    {{i.title.0}}
- </div>
-</div>
-                                  
-
-                                   
-<div class="row mt-2">
-    <div class="col-md-2">
-       <span class="badge badge-primary  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>  
-    </div>
-    <div class="col-md-10 text_14px font-weight-bold">
-       {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge badge-success" >
-        <i class="fa fa-eye fa-2x"></i>
-</a>
-    </div>
-   </div>
-                                            
-                                   
-   <div class="row mt-2">
-    <div class="col-md-2">
-       <span class="badge badge-primary  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>  
-    </div>
-    <div class="col-md-10 text_14px p-3 border "style="height:400px;overflow-y:auto;">
-        {% for content in i.content %}
-   <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
-   
-    {% endfor %}
-    </div>
-</div>
-
-         
-
-                                
-<div class="row mt-2">
-    <div class="col-md-2">
-       <span class="badge badge-primary  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>  
-    </div>
-    <div class="col-md-10 text_12px p-3 border"style="height:400px;overflow-y:auto;">
-        <div class="row">
-           
-                {% for image_url in i.image_urls %}
-                <div class="col-md-6">
-   <div> <span class="badge badge-info">{{forloop.counter}}</span> 
-<img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
-</div>
-</div> 
-    {% endfor %}
-  
-        </div>
-    </div>
-</div>
-
-
-
-                                 
-
-
-
-                                   
-                                   
-                                   
-                                  
-                                </div>
-                                {% endfor %}
-                                {% endif %}
-                              </div>
-
-
-
-
-
-
-
-
-
-
-                      
-                    
+                    <div class="col-md-1"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
-    </div>
-    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <script>
-        am4core.ready(function () {
-
-            // Themes begin
-            am4core.useTheme(am4themes_dark);
-            am4core.useTheme(am4themes_animated);
-            // Themes end
-
-            var chart = am4core.create("profile_chart", am4charts.RadarChart);
-            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
-            
-
-            var dic = [
-
-                {
-                    category: "Posts",
-                    value1: "{{ profile.posts|length }}",
-
-                },
-
-                
-                
-                {
-                    category: "Target Update ",
-                    value1: "{{ profile.target_update_count }}",
-
-                },
-
-                {
-                    category: "Followers",
-                    value1: "{{ profile.follow }}",
-
-                },
-                {
-                    category: "Followed By",
-                    value1: "{{ profile.followed_by }}",
-
-                },
-
-            ]
-
-            chart.data = dic
-
-            //chart.padding(20, 20, 20, 20);
-            chart.colors.step = 4;
-
-            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-            categoryAxis.dataFields.category = "category";
-            categoryAxis.renderer.labels.template.location = 0.5;
-            categoryAxis.renderer.labels.template.horizontalCenter = "right";
-            categoryAxis.renderer.labels.template.fontSize = 10;
-            categoryAxis.renderer.grid.template.location = 0;
-            categoryAxis.renderer.tooltipLocation = 0.5;
-            categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
-            categoryAxis.renderer.axisFills.template.disabled = true;
-            categoryAxis.interactionsEnabled = false;
-            categoryAxis.renderer.minGridDistance = 10;
-
-            var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-            valueAxis.tooltip.disabled = true;
-            valueAxis.renderer.labels.template.horizontalCenter = "left";
-            valueAxis.min = 0;
-            valueAxis.max = 1000;
-            valueAxis.strictMinMax = true;
-            valueAxis.renderer.maxLabelPosition = 0.99;
-            valueAxis.renderer.minGridDistance = 10;
-            valueAxis.renderer.grid.template.strokeOpacity = 0.07;
-            valueAxis.renderer.axisFills.template.disabled = true;
-            valueAxis.interactionsEnabled = false;
-
-            var series1 = chart.series.push(new am4charts.RadarColumnSeries());
-            series1.columns.template.tooltipText = "{name}: {valueX.value}";
-            series1.name = "Counts";
-            series1.dataFields.categoryY = "category";
-            series1.dataFields.valueX = "value1";
-            series1.stacked = true;
-
-
-
-            chart.seriesContainer.zIndex = -1;
-
-            chart.scrollbarX = new am4core.Scrollbar();
-            chart.scrollbarX.exportable = false;
-            chart.scrollbarY = new am4core.Scrollbar();
-            chart.scrollbarY.exportable = false;
-
-            chart.cursor = new am4charts.RadarCursor();
-            chart.cursor.lineY.disabled = true;
-
-        }); // end am4core.ready()
+    am4core.ready(function () {
+    // Themes begin
+    am4core.useTheme(am4themes_dark);
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    var chart = am4core.create("profile_chart", am4charts.RadarChart);
+    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    
+    var dic = [
+    {
+    category: "Posts",
+    value1: "{{ profile.posts|length }}",
+    },
+    
+    
+    {
+    category: "Target Update ",
+    value1: "{{ profile.target_update_count }}",
+    },
+    {
+    category: "Followers",
+    value1: "{{ profile.follow }}",
+    },
+    {
+    category: "Followed By",
+    value1: "{{ profile.followed_by }}",
+    },
+    ]
+    chart.data = dic
+    //chart.padding(20, 20, 20, 20);
+    chart.colors.step = 4;
+    var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "category";
+    categoryAxis.renderer.labels.template.location = 0.5;
+    categoryAxis.renderer.labels.template.horizontalCenter = "right";
+    categoryAxis.renderer.labels.template.fontSize = 10;
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.tooltipLocation = 0.5;
+    categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
+    categoryAxis.renderer.axisFills.template.disabled = true;
+    categoryAxis.interactionsEnabled = false;
+    categoryAxis.renderer.minGridDistance = 10;
+    var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+    valueAxis.tooltip.disabled = true;
+    valueAxis.renderer.labels.template.horizontalCenter = "left";
+    valueAxis.min = 0;
+    valueAxis.max = 1000;
+    valueAxis.strictMinMax = true;
+    valueAxis.renderer.maxLabelPosition = 0.99;
+    valueAxis.renderer.minGridDistance = 10;
+    valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+    valueAxis.renderer.axisFills.template.disabled = true;
+    valueAxis.interactionsEnabled = false;
+    var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+    series1.columns.template.tooltipText = "{name}: {valueX.value}";
+    series1.name = "Counts";
+    series1.dataFields.categoryY = "category";
+    series1.dataFields.valueX = "value1";
+    series1.stacked = true;
+    chart.seriesContainer.zIndex = -1;
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarX.exportable = false;
+    chart.scrollbarY = new am4core.Scrollbar();
+    chart.scrollbarY.exportable = false;
+    chart.cursor = new am4charts.RadarCursor();
+    chart.cursor.lineY.disabled = true;
+    }); // end am4core.ready()
     </script>
 </body>
-
 </html>
