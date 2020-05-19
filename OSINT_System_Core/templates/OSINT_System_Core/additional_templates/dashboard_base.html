@@ -642,9 +642,16 @@
             $('#trends_by_country').empty();
             for (var x = 0; x < len; x++) {
               var names=e[x].name
+              var first_char=names.charAt(0);
+              console.log(first_char)
+              if(first_char=='#'){
+             var  names=names.substring(1)
+             console.log('hashtah symbol removed ')
+              }
+              
              
               var href = 'href="{% url "Data_Processing_Unit:get_hashtag_tweets" hashtag_name=12345 %}"'.replace(/12345/, names.toString());
-
+             
               var html =
                 '<div class="col-md-12 mt-1"><div class="row"><div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">' +
                 e[x].count +
@@ -654,7 +661,7 @@
               console.log(html)
             }
 
-
+console.log(" %3FP(%3FP%23کبھی_کبھی%5B0-9%5D+)%5C/$/")
           },
           error: function (error) {
 
