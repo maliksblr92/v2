@@ -8,7 +8,8 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 
-from Case_Management_System.models import CaseCMS, AllLocationsOfInterest
+from Case_Management_System.models import CaseCMS
+from Case_Management_System.models import LocationOfInterest
 
 APP_NAME = 'Case_Management_System'
 
@@ -91,26 +92,30 @@ def convert_json_to_network_series(data,n=1):
     return json.dumps(n_series_data)
 
 class CreateCase(View):
-    """md
+    """
     case creation view
     """
+
     def get(self, request, *args, **kwargs):
-        """md
+        """
         renders the Case Creation Form
         """
         cases = json.loads(CaseCMS.get_all_cases_id_and_title().to_json())
-        loi = json.loads(CaseCMS.get_all_locations.to_json())
+        loi = json.loads(LocationOfInterest.get_all_locations().to_json())
         ctx = {}
+        # store all cases to context
         ctx['cases'] = []
         for case in cases:
             ctx['cases'].append([
                 case['_id']['$oid'],
                 case['case_number'] + ' | ' + case['case_title']
             ])
+        # store all locations to context
         ctx['loi'] = []
         for location in loi:
             ctx['loi'].append([
-                location['']
+                location['_id']['$oid'],
+                location['address']
             ])
         print(ctx)
         return render(request, f'{APP_NAME}/case_create.html', ctx)
@@ -180,13 +185,14 @@ class StoreAndRetrieveLocation(View):
         else:
             description = None
         try:
-            # store location data to individual cms
+            # store location data to global collection and associate with case
             if case_doc_id:
                 case_cms = CaseCMS().get_object_by_id(case_doc_id)
                 case_cms.store_location(location, address, description)
-            # store location data to separate location collection
-            all_locations = AllLocationsOfInterest()
-            all_locations.store_location(location, address, description)
+            else:
+                # store location data only to globat location collection
+                location_of_interest = LocationOfInterest(location, address, description)
+                location_of_interest.save()
         except Exception as exc:
             return JsonResponse({'error': str(exc)})
         return JsonResponse({'success':200})

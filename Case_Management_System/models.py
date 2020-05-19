@@ -19,9 +19,9 @@ from Portfolio_Management_System.models import Portfolio_PMS
 disconnect('default')
 connect(db='OSINT_System')
 
-class LocationOfInterest(EmbeddedDocument):
+class LocationOfInterest(Document):
     """
-    Embedded Doc that contains the specifics of each location
+    MongoEngine Document that contains the specifics of each location
     pertinent to a case. There will be multiple of these locations.
     Notes and important details of each location will be stored in
     `description`
@@ -30,7 +30,14 @@ class LocationOfInterest(EmbeddedDocument):
     address = StringField()
     description = StringField()
 
-class Investigator(EmbeddedDocument):
+    @staticmethod
+    def get_all_locations():
+        """
+        return all locations
+        """
+        return LocationOfInterest.objects().fields(address=1)
+
+class Investigator(Document):
     """
     Embedded Doc that contains details of each investigator
     associated with the case
@@ -41,7 +48,7 @@ class Investigator(EmbeddedDocument):
     cell_phone = StringField()
     email = EmailField()
 
-class CaseFile(EmbeddedDocument):
+class CaseFile(Document):
     """
     Embedded Doc that contains details of each file
     associated with the case
@@ -51,7 +58,7 @@ class CaseFile(EmbeddedDocument):
     document_description = StringField()
     source = StringField()
 
-class PictureEvidenceFile(EmbeddedDocument):
+class PictureEvidenceFile(Document):
     """
     details of pictures associated with the case
     """
@@ -60,7 +67,7 @@ class PictureEvidenceFile(EmbeddedDocument):
     picture_description = StringField()
     source = StringField()
 
-class VideoEvidenceFile(EmbeddedDocument):
+class VideoEvidenceFile(Document):
     """
     Embedded Doc that contains details of each video
     associated with the case, such as short description
@@ -72,7 +79,7 @@ class VideoEvidenceFile(EmbeddedDocument):
     video_description = StringField()
     source = StringField()
 
-class PhysicalEvidence(EmbeddedDocument):
+class PhysicalEvidence(Document):
     """
     Characteristics of physical evidence obtained by police
     from the crime scene as well other sources
@@ -81,8 +88,8 @@ class PhysicalEvidence(EmbeddedDocument):
     object_description = StringField()
     object_storage_location = StringField()
     datetime_of_evidence_collection = DateTimeField()
-    object_collection_location = EmbeddedDocumentField(LocationOfInterest)
-    object_picture_location = URLField()
+    object_collection_location = ReferenceField(LocationOfInterest)
+    object_pictures = ListField(ReferenceField(PictureEvidenceFile))
 
 class Language(EmbeddedDocument):
     """
@@ -96,7 +103,7 @@ class Language(EmbeddedDocument):
     can_speak = BooleanField()
     speaking_fluency = StringField(choices=SPOKEN_LANGUAGE_FLUENCY)
 
-class PersonOfInterest(EmbeddedDocument):
+class PersonOfInterest(Document):
     """
     Embedded Doc that contains details of a person of interest.
     """
@@ -127,15 +134,15 @@ class CaseCMS(Document):
     # state of the case i.e. pending, under_investigation,
     #  closed_resolved, closed_unresolved
     case_state = StringField(required=True, choices=CASE_STATES)
-    investigators = EmbeddedDocumentListField(Investigator)
+    investigators = ListField(ReferenceField(Investigator))
     # references portfolios of people from PMS
-    people_of_interest = EmbeddedDocumentListField(PersonOfInterest)
-    locations_of_interest = EmbeddedDocumentListField(LocationOfInterest)
+    people_of_interest = ListField(ReferenceField(PersonOfInterest))
+    locations_of_interest = ListField(ReferenceField(LocationOfInterest))
     # police case files, server location (url)
-    case_files = EmbeddedDocumentListField(CaseFile)
-    pictures = EmbeddedDocumentListField(PictureEvidenceFile)
-    videos = EmbeddedDocumentListField(VideoEvidenceFile)
-    physical_evidence = EmbeddedDocumentListField(PhysicalEvidence)
+    case_files = ListField(ReferenceField(CaseFile))
+    pictures = ListField(ReferenceField(PictureEvidenceFile))
+    videos = ListField(ReferenceField(VideoEvidenceFile))
+    physical_evidence = ListField(ReferenceField(PhysicalEvidence))
 
     def create_case(self, case_number, case_title, incident_datetime, case_type, case_state):
         """
@@ -150,9 +157,11 @@ class CaseCMS(Document):
 
     def store_location(self, location, address, description):
         """
-        store location specific to case
+        store location to global location collection
+        and store a reference to it in the Case Object
         """
         location_of_interest = LocationOfInterest(location, address, description)
+        location_of_interest.save()
         self.locations_of_interest.append(location_of_interest)
         self.save()
 
@@ -169,39 +178,3 @@ class CaseCMS(Document):
         get a CaseCMS object by its document id
         """
         return CaseCMS.objects(id=document_id).first()
-
-class AllLocationsOfInterest(Document):
-    """
-    All Locations ever added to the police database
-    """
-    locations = EmbeddedDocumentListField(LocationOfInterest)
-
-    def store_location(self, location, address, description):
-        """
-        stores location to a global collection
-        """
-        location_of_interest = LocationOfInterest(location, address, description)
-        self.locations.append(location_of_interest)
-        self.save()
-
-class AllPeopleOfInterest(Document):
-    """
-    All people ever stored in the police database
-    """
-    people = EmbeddedDocumentListField(PersonOfInterest)
-
-    def store_poi(self, first_name, middle_name, last_name,
-                  gender, languages, portfolio, poi_category):
-        """
-        store poi to a global collection
-        """
-        poi = PersonOfInterest(
-            first_name,
-            middle_name,
-            last_name,
-            gender,
-            languages,
-            portfolio,
-            poi_category)
-        self.people.append(poi)
-        self.save()
