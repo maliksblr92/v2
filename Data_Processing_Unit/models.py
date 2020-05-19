@@ -127,6 +127,7 @@ class Twitter_Response_TMS(Document):
     emotions = ListField()
     posting_time_charts = ListField()
     tweets = ListField(EmbeddedDocumentField(Person_Tweets))
+    followers = ListField(default=[])
 
 
 class Linkedin_Profile_Response_TMS(Document):
@@ -227,6 +228,7 @@ class Instagram_Response_TMS(Document):
     common_words = ListField()
     sentiments = ListField()
     emotions = ListField()
+    followers = ListField(default=[])
 
     posts = ListField(EmbeddedDocumentField(Instagram_Posts))
 

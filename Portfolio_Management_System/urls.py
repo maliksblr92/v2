@@ -12,5 +12,6 @@ urlpatterns = [
     path('archive/', views.Archive.as_view(), name='archive'),
     path('overview/', views.Overview.as_view(), name='overview'),
     path('explore/', views.Explore.as_view(), name='explore'),
-    path('portfolio_links/<str:portfolio_id>', views.Portfolio_Links.as_view(), name='portfolio_links')
+    path('portfolio_links/<str:portfolio_id>', views.Portfolio_Links.as_view(), name='portfolio_links'),
+    path('portfolio_links_analysis/<str:portfolio_id>', views.Portfolio_Link_Analysis.as_view(), name='portfolio_links_analysis')
 ]

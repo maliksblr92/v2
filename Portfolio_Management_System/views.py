@@ -15,9 +15,13 @@ from OSINT_System_Core.Data_Sharing import Portfolio_Link, Portfolio_Include,Vis
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
+from System_Log_Management_Unit.system_log_manager import Data_Queries
+
 from django.conf import settings as djangoSettings
 
 acq = Acquistion_Manager()
+dq = Data_Queries()
+
 # ahmed imports
 from django.views.generic import TemplateView
 from Portfolio_Management_System.models import Portfolio_PMS
@@ -181,7 +185,22 @@ class Archive(View):
         return render(request,'Portfolio_Management_System/tso_archive.html',{'portfolios':portfolios})
 
 
+class Portfolio_Link_Analysis(View):
+    def get(self,request,*args,**kwargs):
 
+        object_id = kwargs.get('portfolio_id',None)
+
+        #print(data_object['linked_to'][1])
+        #data = convert_facebook_indirect_links_to_graph(link_data)
+
+        if(object_id is not None):
+
+            resp = dq.portfolio_link_analysis(object_id)
+
+            print(resp)
+            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+        else:
+            return render(request, 'Target_Management_System/link_analysis.html', {})
 
 
 class Link_Portfolio(View):
