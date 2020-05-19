@@ -85,11 +85,14 @@
         <tr>
 
           <th scope="col">Title</th>
-          <th scope="col">Input URL</th>
-          <th scope="col">Tracking Code</th>
-          <th scope="col">is_logged</th>
+          <th scope="col">IP</th>
+          <th scope="col">Referrer</th>
+          <th scope="col">Time Stamp</th>
+            <th scope="col">UserAgent</th>
           <th scope="col">Created_on</th>
-          <th scope="col">Action</th>
+
+
+            <th scope="col">Action</th>
 
         </tr>
       </thead>
@@ -99,13 +102,14 @@
         <tr>
 
           <th  style="font-size:12px;" scope="row">{{logger.title}}</th>
-          <td  style="font-size:12px;">{{logger.input_url}}</td>
-          <td  style="font-size:12px;">{{logger.payload_data.tracking_code}}</td>
-          <td  style="font-size:12px;"> {{ logger.is_ip_logged }}</td>
+          <td  style="font-size:12px;">{{logger.logged_response.ip_addr}}</td>
+            <td  style="font-size:12px;"><a href="{{logger.logged_response.referrer|truncatechars:100}}" target="_blank">click to see</a></td>
+            <td  style="font-size:12px;">{{logger.logged_response.timestamp}}</td>
+            <td  style="font-size:12px;">{{logger.logged_response.user_agent|truncatechars:50}}</td>
           <td style="font-size:10px;" ><span class="text-truncate">{{logger.created_on}}</span></td>
 
 
-          <td>View<a class="btn" href=""><i class="fa fa-trash text-white" ></i></a></td>
+          <td><a class="btn" href=""><i class="fa fa-trash text-white" ></i></a></td>
         </tr>
         {% endfor %}
       </tbody>

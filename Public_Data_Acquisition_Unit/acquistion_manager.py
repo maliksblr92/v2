@@ -626,11 +626,11 @@ class Acquistion_Manager(object):
         try:
             resp = ess.create_payload(input_url)
             if(resp):
-                if(resp['data']['is_successful']):
-                    obj = Ip_Logger(title=title,description=description,input_url=input_url,payload_data=resp['data'])
+                if(resp['data']['data']):
+                    obj = Ip_Logger(title=title,description=description,input_url=input_url,payload_data=resp['data']['data'])
                     obj.save()
                     publish('payload created successfully', message_type='notification')
-                    return resp['data']['payload_url']
+                    return resp['data']['data']['payload_url']
                 else:
                     publish('payload creation got failed by ESS',message_type='notification')
                     return None
@@ -650,11 +650,13 @@ class Acquistion_Manager(object):
             for logger in loggers:
                 resp = ess.track_ip(code=logger.payload_data['tracking_code'],start_date=str(logger.start_date),end_date=str(datetime.date.today()))
                 if(resp):
-                    if(resp['data']['data']):
-                        logger.logged_response = resp['data']['data']
-                        logger.updated_on = datetime.datetime.utcnow()
-                        logger.is_ip_logged = True
-                        logger.save()
+                    if(len(resp['data']['data'])>0):
+                        if(resp['data']['data'][0]):
+                            logger.logged_response = resp['data']['data'][0]
+                            logger.updated_on = datetime.datetime.utcnow()
+                            logger.is_ip_logged = True
+                            logger.save()
+                            publish('ip tracked for target'+logger.title,message_type='notification')
 
 
         except Exception as e:
