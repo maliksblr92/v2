@@ -294,7 +294,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="newlabeldesign">Case</span>
                                             </div>
-                                            <select name="ve-case" class="custom-select newinput">
+                                            <select name="pe-case" class="custom-select newinput">
                                                 {% for case in cases %}
                                                 <option value="{{case.0}}"
                                                     {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}
@@ -340,9 +340,43 @@
                                         </div>
                                         <!-- end of collection date and time -->
                                         <!-- extraction location -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Extraction Location</span>
+                                            </div>
+                                            <select name="pe-extraction-location" class="custom-select newinput">
+                                                {% for location in loi %}
+                                                <option value="{{location.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{location.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                         <!-- end of extraction location -->
                                         <!-- associated pictures -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Pictures</span>
+                                            </div>
+                                            <select name="pe-pictures" class="custom-select newinput" multiple>
+                                                {% for pic in pictures %}
+                                                <option value="{{pic.0}}">{{pic.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                         <!-- end of associated pictures -->
+                                        <!-- associated videos if any -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Videos</span>
+                                            </div>
+                                            <select name="pe-videos" class="custom-select newinput" multiple>
+                                                {% for vid in videos %}
+                                                <option value="{{vid.0}}">{{vid.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated videos -->
                                         <!-- reset and submit button -->
                                         <div class="row mt-2">
                                             <div class="col-md-6 col-lg-6 col-xl-6 text-center">

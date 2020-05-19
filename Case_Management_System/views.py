@@ -99,7 +99,8 @@ class CreateCase(View):
 
     def get(self, request, *args, **kwargs):
         """
-        renders the Case Creation Form
+        renders the Case Creation
+        and its sub tabs
         """
         cases = json.loads(CaseCMS.get_all_cases_id_and_title().to_json())
         loi = json.loads(LocationOfInterest.get_all_locations().to_json())
