@@ -128,47 +128,58 @@ class Data_Queries(object):
             return None
 
     def get_object_website(self,object):
+
+        supported_links = ['instagram','facebook','twitter']
+
         gtr_id = object.GTR
         GTR = acq.get_gtr_by_id(gtr_id)
-        return GTR.website.name.lower()
+
+        if(GTR.website.name.lower() in supported_links):
+            return GTR.website.name.lower()
+
+        return None
 
     def portfolio_link_analysis(self,portfolio_id):
-
-        supported_links = [Instagram_Response_TMS,Facebook_Profile_Response_TMS]
-        alpha_nodes_list = []
         n_data_full = []
 
-        portfolio_obj = Portfolio_PMS.objects(id=portfolio_id).first()
-        linked_responses = Portfolio_Linked_PMS.objects(alpha_reference=portfolio_obj)
-        for response in linked_responses:
-                website =  self.get_object_website(response.beta_reference)
-                print(website)   #self.check_if_responces_is_supported(response.beta_reference)
-                if(website):
-                    response_obj = response.beta_reference.to_mongo()
-                    alpha_node,beta_node_list = self.generalize_data_for_nodes(website,'profile',response_obj)
-                    alpha_nodes_list.append(alpha_node)
-                    n_data = self.convert_nodes_to_graph_data_for_portfolio(alpha_node,beta_node_list)
-                    print(len(linked_responses),website)
-                    n_data_full = n_data_full + n_data
-
-        p_node = {'name': portfolio_obj.name,
-                  'value': 1,
-                  'children': [],
-                  "linkWith": [],
-                  'collapsed': 'true',
-                  'fixed': 'false',
-                  "image": '',
-                  }
-
-        for alpha in alpha_nodes_list:
-            p_node['linkWith'].append(alpha['username'])
-
-        n_data_full.append(p_node)
-        print(n_data_full)
-
-        return json.dumps(n_data_full)
+        try:
+            supported_links = [Instagram_Response_TMS,Facebook_Profile_Response_TMS]
+            alpha_nodes_list = []
 
 
+            portfolio_obj = Portfolio_PMS.objects(id=portfolio_id).first()
+            linked_responses = Portfolio_Linked_PMS.objects(alpha_reference=portfolio_obj)
+            for response in linked_responses:
+                    website =  self.get_object_website(response.beta_reference)
+                    print(website)   #self.check_if_responces_is_supported(response.beta_reference)
+                    if(website):
+                        response_obj = response.beta_reference.to_mongo()
+                        alpha_node,beta_node_list = self.generalize_data_for_nodes(website,'profile',response_obj)
+                        alpha_nodes_list.append(alpha_node)
+                        n_data = self.convert_nodes_to_graph_data_for_portfolio(alpha_node,beta_node_list)
+                        print(len(linked_responses),website)
+                        n_data_full = n_data_full + n_data
+
+            p_node = {'name': portfolio_obj.name,
+                      'value': 1,
+                      'children': [],
+                      "linkWith": [],
+                      'collapsed': 'true',
+                      'fixed': 'false',
+                      "image": '',
+                      }
+
+            for alpha in alpha_nodes_list:
+                p_node['linkWith'].append(alpha['username'])
+
+            n_data_full.append(p_node)
+            print(n_data_full)
+
+            return json.dumps(n_data_full)
+
+        except Exception as e:
+            print(e)
+            return json.dumps(n_data_full)
 
 
 
@@ -222,42 +233,46 @@ class Data_Queries(object):
 
         n_data = []
 
-        a_node = {'name': alpha_node['username'],
-                    'value': 1,
-                    'children': [],
-                    "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": alpha_node['picture_url'],
-                    }
+        try:
+            a_node = {'name': alpha_node['username'],
+                        'value': 1,
+                        'children': [],
+                        "linkWith": [],
+                        'collapsed': 'true',
+                        'fixed': 'false',
+                        "image": alpha_node['picture_url'],
+                        }
 
 
 
-        for i, item in enumerate(beta_nodes_list):
+            for i, item in enumerate(beta_nodes_list):
 
-            print(item)
+                print(item)
 
-            node = {'name': item['username'],
-                    'value': 0.2,
-                    'children': [],
-                    "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": item['picture_url'],
-                    }
+                node = {'name': item['username'],
+                        'value': 0.2,
+                        'children': [],
+                        "linkWith": [],
+                        'collapsed': 'true',
+                        'fixed': 'false',
+                        "image": item['picture_url'],
+                        }
 
-            a_node['children'].append(node)
+                a_node['children'].append(node)
 
-            #n_data.append(node)
+                #n_data.append(node)
 
-        n_data.append(a_node)
-
-
+            n_data.append(a_node)
 
 
 
-        print(n_data)
-        return json.dumps(n_data)
+
+
+            print(n_data)
+            return json.dumps(n_data)
+        except Exception as e:
+            print(e)
+            return json.dumps(n_data)
 
     def convert_nodes_to_graph_data_for_portfolio(self,alpha_node,beta_nodes_list):
 

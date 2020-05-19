@@ -89,9 +89,11 @@
 
                         {% if x.serp_url|length > 0 %}
                         <div class="row">
-                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
-                            <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank">Block</a>
-                            <div class="col-md-7"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+
+                            <div class="col-md-3"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
+                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank"> Block URL </a></div>
+                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a></div>
+                            <div class="col-md-3"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
 
                         </div>
                         {% endif %}

@@ -321,9 +321,16 @@ class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
 class Dyanamic_Crawling(RequireLoginMixin, IsTSO, View):
 
     def get(self, request, *args, **kwargs):
+
+        url = None
+        if('url' in kwargs): url = kwargs['url']
+        if(url is not None):
+            url = url.replace(' ','/')
+
+
         return render(request,
                       'Target_Management_System/tso_dynamiccrawling.html',
-                      {'app': 'target'})
+                      {'app': 'target','url':url})
 
     def post(self, request, *args, **kwargs):
 

@@ -816,8 +816,8 @@ class Timeline_Manager(object):
                                 gtr_id = str(gtr.id)
                                 username = obj.name
                                 posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.tweets)
-                                if (len(obj.tweets) > 0):
-                                    posts = obj.tweets
+                                if (len(posts) < 1):
+                                    return None
 
                                 tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
                                                     username=username, posts=posts)

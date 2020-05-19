@@ -187,7 +187,8 @@ class Archive(View):
 
 class Portfolio_Link_Analysis(View):
     def get(self,request,*args,**kwargs):
-        object_id = ObjectId("5eb13734ac912c6acd9e4a62") #kwargs['object_gtr_id']
+
+        object_id = kwargs.get('portfolio_id',None)
 
         #print(data_object['linked_to'][1])
         #data = convert_facebook_indirect_links_to_graph(link_data)
