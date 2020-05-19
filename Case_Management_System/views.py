@@ -8,8 +8,9 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 
-from Case_Management_System.models import CaseCMS
-from Case_Management_System.models import LocationOfInterest
+from Case_Management_System.models import CaseCMS, VideoEvidenceFile
+from Case_Management_System.models import LocationOfInterest, PhysicalEvidence
+from Case_Management_System.models import CaseFile, PictureEvidenceFile
 
 APP_NAME = 'Case_Management_System'
 
@@ -102,6 +103,9 @@ class CreateCase(View):
         """
         cases = json.loads(CaseCMS.get_all_cases_id_and_title().to_json())
         loi = json.loads(LocationOfInterest.get_all_locations().to_json())
+        pictures = json.loads(PictureEvidenceFile.get_all_pictures().to_json())
+        videos = json.loads(VideoEvidenceFile.get_all_videos().to_json())
+
         ctx = {}
         # store all cases to context
         ctx['cases'] = []
@@ -116,6 +120,20 @@ class CreateCase(View):
             ctx['loi'].append([
                 location['_id']['$oid'],
                 location['address']
+            ])
+        # store all pictures to context
+        ctx['pictures'] = []
+        for pic in pictures:
+            ctx['pictures'].append([
+                pic['_id']['$oid'],
+                pic['name'] + ' | ' + pic['picture_description']
+            ])
+        # store all videos to context
+        ctx['videos'] = []
+        for vid in videos:
+            ctx['videos'].append([
+                vid['_id']['$oid'],
+                vid['name'] + ' | ' + vid['video_description']
             ])
         print(ctx)
         return render(request, f'{APP_NAME}/case_create.html', ctx)
@@ -196,3 +214,63 @@ class StoreAndRetrieveLocation(View):
         except Exception as exc:
             return JsonResponse({'error': str(exc)})
         return JsonResponse({'success':200})
+
+class StoreAndRetrieveVirtualEvidence(View):
+    """
+    handles storing of documents, pictures
+    and videos
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        receives data from frontend
+        """
+        print(request.POST)
+        category = request.POST.get('ve-category')
+        case = request.POST.get('ve-case')
+        if request.POST.get('ve-name'):
+            name = request.POST.get('ve-name')
+        else:
+            name = None
+        if request.POST.get('ve-location'):
+            server_location = request.POST.get('ve-location')
+        else:
+            server_location = None
+        if request.POST.get('ve-description'):
+            description = request.POST.get('ve-description')
+        else:
+            description = None
+        if request.POST.get('ve-source'):
+            source = request.POST.get('ve-source')
+        else:
+            source = None
+        try:
+            case_cms = CaseCMS.get_object_by_id(case)
+            if category == 'document':
+                case_file = CaseFile(name, server_location, description, source)
+                case_file.save()
+                case_cms.store_case_file(case_file)
+            elif category == 'picture':
+                picture = PictureEvidenceFile(name, server_location, description, source)
+                picture.save()
+                case_cms.store_picture(picture)
+            elif category == 'video':
+                video = VideoEvidenceFile(name, server_location, description, source)
+                video.save()
+                case_cms.store_video(video)
+            else:
+                return JsonResponse({'error': 'unknown category of virtual evidence'})
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        return JsonResponse({'success': 200})
+
+class StoreAndRetrievePhysicalEvidence(View):
+    """
+    handles storing of physical evidence
+    objects
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        receives data from frontend
+        """
+        print(request.POST)
+        return JsonResponse({'success': 200})

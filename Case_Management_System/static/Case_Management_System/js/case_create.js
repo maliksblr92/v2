@@ -31,6 +31,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         event.preventDefault();
     });
-    //evidence form
-    //person of interest form
+    //virtual evidence form
+    let ve_form = "#virtual-evidence-form";
+    $(ve_form).submit((event) => {
+        let form_data = $(ve_form).serializeArray();
+        console.log(form_data);
+        $.ajax({
+            url: "/cms/virtualevidence/",
+            method: "POST",
+            data: form_data,
+            success: (result) => {
+                console.log(result);
+                $(ve_form).trigger("reset");
+            },
+        });
+        event.preventDefault();
+    });
+
+    //physical evidence form
+    let pe_form = "#physical-evidence-form";
+    $(pe_form).submit((event) => {
+        let form_data = $(pe_form).serializeArray();
+        console.log(form_data);
+        $.ajax({
+            url: "/cms/virtualevidence/",
+            method: "POST",
+            data: form_data,
+            success: (result) => {
+                console.log(result);
+                $(pe_form).trigger("reset");
+            },
+        });
+        event.preventDefault();
+    });
 });

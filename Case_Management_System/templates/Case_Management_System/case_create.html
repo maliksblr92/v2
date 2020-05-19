@@ -35,6 +35,8 @@
                 <a class="nav-item nav-link" data-toggle="tab" href="#location-details-tab">Location</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#virtual-evidence-tab">Virtual Evidence</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#physical-evidence-tab">Physical Evidence</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#poi-tab">Person Of Interest</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#investigator-tab">Investigators</a>
             </div>
         </nav>
         <!-- end of sub menu -->
@@ -196,22 +198,21 @@
                         <div class="tab-pane fade" id="virtual-evidence-tab">
                             <div class="row">
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form id="virtual-evidence">
+                                    <form id="virtual-evidence-form">
                                         {% csrf_token %}
                                         <!-- radio buttons for case files, picture, video -->
                                         <div class="row mt-2">
                                             <div class="col-centered">
                                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <label class="btn btn-secondary active">
-                                                        <input type="radio" name="et-ve-category" checked
-                                                            value="case-file">Case File
+                                                        <input type="radio" name="ve-category" checked
+                                                            value="document">Documents
                                                     </label>
                                                     <label class="btn btn-secondary">
-                                                        <input type="radio" name="et-ve-category"
-                                                            value="picture">Picture
+                                                        <input type="radio" name="ve-category" value="picture">Picture
                                                     </label>
                                                     <label class="btn btn-secondary">
-                                                        <input type="radio" name="et-ve-category" value="video">Video
+                                                        <input type="radio" name="ve-category" value="video">Video
                                                     </label>
                                                 </div>
                                             </div>
@@ -222,7 +223,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="newlabeldesign">Case</span>
                                             </div>
-                                            <select name="et-ve-case" class="custom-select newinput">
+                                            <select name="ve-case" class="custom-select newinput">
                                                 {% for case in cases %}
                                                 <option value="{{case.0}}"
                                                     {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}
@@ -235,7 +236,7 @@
                                         <div class="input-group mt-2">
                                             <div class="input-group-prepend"><span class="newlabeldesign">Name</span>
                                             </div>
-                                            <input type="text" name="et-ve-name" class="form-control newinputdesign"
+                                            <input type="text" name="ve-name" class="form-control newinputdesign"
                                                 placeholder="FIR Report for Shakeel">
                                         </div>
                                         <!-- end of name of evidence -->
@@ -244,7 +245,7 @@
                                             <div class="input-group-prepend"><span class="newlabeldesign">Server
                                                     Location</span>
                                             </div>
-                                            <input type="url" name="et-ve-location" class="form-control newinputdesign"
+                                            <input type="url" name="ve-location" class="form-control newinputdesign"
                                                 placeholder="http://www.hello.com/files/shakeel.pdf">
                                         </div>
                                         <!-- end of evidence location -->
@@ -253,7 +254,7 @@
                                             <div class="input-group-prepend"><span class="newlabeldesign">Evidence
                                                     Description</span>
                                             </div>
-                                            <textarea name="et-ve-description" class="form-control" rows="5"></textarea>
+                                            <textarea name="ve-description" class="form-control" rows="5"></textarea>
                                         </div>
                                         <!-- end of evidence description -->
                                         <!-- evidence source -->
@@ -261,7 +262,7 @@
                                             <div class="input-group-prepend"><span class="newlabeldesign">Evidence
                                                     Source</span>
                                             </div>
-                                            <input type="text" name="et-ve-source" class="form-control newinputdesign"
+                                            <input type="text" name="ve-source" class="form-control newinputdesign"
                                                 placeholder="Crime Scene">
                                         </div>
                                         <!-- end of evidence source -->
@@ -293,7 +294,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="newlabeldesign">Case</span>
                                             </div>
-                                            <select name="et-ve-case" class="custom-select newinput">
+                                            <select name="ve-case" class="custom-select newinput">
                                                 {% for case in cases %}
                                                 <option value="{{case.0}}"
                                                     {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}

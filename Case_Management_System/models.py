@@ -67,6 +67,10 @@ class PictureEvidenceFile(Document):
     picture_description = StringField()
     source = StringField()
 
+    @staticmethod
+    def get_all_pictures():
+        return PictureEvidenceFile.objects().fields(name=1, picture_description=1)
+
 class VideoEvidenceFile(Document):
     """
     Embedded Doc that contains details of each video
@@ -79,6 +83,10 @@ class VideoEvidenceFile(Document):
     video_description = StringField()
     source = StringField()
 
+    @staticmethod
+    def get_all_videos():
+        return VideoEvidenceFile.objects().fields(name=1, video_description=1)
+
 class PhysicalEvidence(Document):
     """
     Characteristics of physical evidence obtained by police
@@ -90,6 +98,7 @@ class PhysicalEvidence(Document):
     datetime_of_evidence_collection = DateTimeField()
     object_collection_location = ReferenceField(LocationOfInterest)
     object_pictures = ListField(ReferenceField(PictureEvidenceFile))
+    object_videos = ListField(ReferenceField(VideoEvidenceFile))
 
 class Language(EmbeddedDocument):
     """
@@ -163,6 +172,31 @@ class CaseCMS(Document):
         location_of_interest = LocationOfInterest(location, address, description)
         location_of_interest.save()
         self.locations_of_interest.append(location_of_interest)
+        self.save()
+
+    def store_case_file(self, case_file: CaseFile):
+        """
+        stores a reference to case document
+        """
+        self.case_files.append(case_file)
+        self.save()
+    
+    def store_picture(self, picture: PictureEvidenceFile):
+        """
+        stores a reference to picture
+        """
+        self.pictures.append(picture)
+        self.save()
+
+    def store_video(self, video: VideoEvidenceFile):
+        """
+        stores a reference to video
+        """
+        self.videos.append(video)
+        self.save()
+
+    def store_physical_evidence(self, physical_evidence: PhysicalEvidence):
+        self.physical_evidence.append(physical_evidence)
         self.save()
 
     @staticmethod
