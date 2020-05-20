@@ -216,7 +216,9 @@
                         </a>
                     </div>
                     <div class="col-md-4 text-center">
-                        <a type="button" class="btn  btn-sm btn-success float-right"style="margin-top:2px;"  href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}" id="download_as_pdf">Followers Graph</a>
+                        <a type="button" class="btn  btn-sm btn-success float-right" style="margin-top:2px;"
+                            href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}"
+                            id="download_as_pdf">Followers Graph</a>
                     </div>
                     <div class="col-md-4 text-right">
                         <a href="#" target="_blank" class="btn btn-success font-weight-bold">
@@ -227,12 +229,10 @@
                 <div class="row background-gradient-dark border_radius_5px ">
                     <div class="col-md-2  custom-column-center-center">
                         <div class="profile-img-wrapper ">
-                            <img src="{{profile.profile_picture_url}}"
-                                class="border_radius_5px img-fluid full_space">
+                            <img src="{{profile.profile_picture_url}}" class="border_radius_5px img-fluid full_space">
                         </div>
                         <div>
-                            <a href="" target="_blank"
-                                class="badge badge-success text_14px mt-2">
+                            <a href="" target="_blank" class="badge badge-success text_14px mt-2">
                                 <i class="fa fa-eye text-dark header-icons mr-2"></i> View profile
                             </a>
                         </div>
@@ -309,7 +309,7 @@
                             <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                 <label class="label text_15px font-weight-bold ">
                                     <span class="badge badge-light header-text">
-                                        {{profile.biography|default:"N/A"}}
+                                        {{profile.biography|default:"N/A"|truncatechars:"15"}}
                                     </span>
                                 </label>
                             </div>
@@ -330,11 +330,11 @@
                             </div>
                         </div>
 
-                        
+
                         <div class="row p-2">
                             <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                 <label class="label text_15px font-weight-bold ">
-                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Behaviour 
+                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Behaviour
                                 </label>
                             </div>
                             <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
@@ -345,8 +345,8 @@
                                 </label>
                             </div>
                         </div>
-                        
-                       
+
+
                     </div>
                     <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
                         <div id="profile_chart" style="height:400px;width:100%"></div>
@@ -362,116 +362,181 @@
                                 <ul class="nav nav-tabs">
                                     <li class="nav-link active">
                                         <a data-toggle="tab" href="#profile">
-                                           Profile
+                                            Profile
                                         </a>
                                     </li>
 
 
                                     <li class="nav-link active">
                                         <a data-toggle="tab" href="#posts">
-                                           Posts
+                                            Posts
                                         </a>
                                     </li>
-                                    
+
+
+                                    <li class="nav-link active">
+                                        <a data-toggle="tab" href="#followers">
+                                            Followers
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
                         <div class="tab-content">
                             <div id="profile" class="tab-pane fade in active show">
-                             
-                                  <div class="col-md-12 card p-5">
-                                      <div class="card-header">
+
+                                <div class="col-md-12 card p-5">
+                                    <div class="card-header">
                                         Profile Summary
-                                      </div>
-                                      <div class="card-body">
+                                    </div>
+                                    <div class="card-body">
                                         {{profile.profile_summary|default:"N/A"}}
-                                      </div>
+                                    </div>
 
 
-                                      <div class="card-header">
-Sentiments
-                                       </div>
-                                       <div class="card-body">
-                                         {% for sentiment in profile.sentiments %}
-                                         <span class="badge badge-info ">{{sentiment}}</span>
-                                         {% endfor %}
-                                       </div>
+                                    <div class="card-header">
+                                        Sentiments
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50">
+                                            <i class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span
+                                                class="badge "> {{profile.sentiments.0}}</span></div>
+                                        <div class="d-flex flex-row justify-content-start align-items-center mt-2"><i
+                                                class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> : <span
+                                                class="badge ">{{profile.sentiments.1}}</span></div>
+                                    </div>
 
 
-                                       <div class="card-header">
-                                        Common words 
-                                       </div>
-                                       <div class="card-body">
-                                         {% for sentiment in profile.comm %}
-                                         <span class="badge badge-info ">{{sentiment}}</span>
-                                         {% endfor %}
-                                       </div>
+                                    <div class="card-header">
+                                        Common words
+                                    </div>
+                                    <div class="card-body">
+                                        {% for sentiment in profile.comm %}
+                                        <span class="badge badge-info ">{{sentiment}}</span>
+                                        {% endfor %}
+                                    </div>
 
 
-                                       
 
-                                  <div class="card-footer">
 
-                                  </div>
-                                  </div>
+                                    <div class="card-footer">
+
+                                    </div>
+                                </div>
 
 
                             </div>
 
 
 
-<!-- instagram posts  -->
+                            <!-- instagram posts  -->
                             <div id="posts" class="tab-pane fade">
-                             
-                         <div class="row m-0 p-0 ">
 
-                             
-                                 {% for post in profile.posts %}
-                                 <div class="col-md-3 card">
-                                 <div class="card">
-                                     <div class="card-header bg-info">
-                                         <div class="row">
-                                             <div class="col-md-4 text_14px"><span class="text-white font-weight-bold">Post # {{forloop.counter}}</span></div>
-                                             <div class="col-md-4 text_14px"> <span class="badge badge-light">{{post.owner_username}}</span></div>
-                                             <div class="col-md-4  text-right">
-                                                <i class="fab fa-instagram fa-2x text-white"></i>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="card-body">
-                                         <div class="row">
-                                             <div class="col-md-12 text-center m-0 p-0">
-                                                 <img src="{{post.display_url}}" class="img-fluid img-responsive" style="height:250px;width:100%;" >
-                                             </div>
+                                <div class="row m-0 p-0 ">
 
-                                             <div class="col-md-12 text_12px m-0 p-0">
-                                                {{post.caption}}
+
+                                    {% for post in profile.posts %}
+                                    <div class="col-md-3 card">
+                                        <div class="card">
+                                            <div class="card-header bg-info">
+                                                <div class="row">
+                                                    <div class="col-md-4 text_14px"><span
+                                                            class="text-white font-weight-bold">Post #
+                                                            {{forloop.counter}}</span></div>
+                                                    <div class="col-md-4 text_14px"> <span
+                                                            class="badge badge-light">{{post.owner_username}}</span>
+                                                    </div>
+                                                    <div class="col-md-4  text-right">
+                                                        <i class="fab fa-instagram fa-2x text-white"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                         </div>
-                                       
-                                      
-    
-                                       
-                                        
-                                       
-                                     </div>
-                                     <div class="card-footer">
-                                   <span class="badge badge-info float-left">  Likes :  {{post.likes_count}}</span>
-                                   <span class="badge badge-info float-right"> Comments : {{post.comments_count}}</span>
-                                     </div>
-                                 </div>
-                                    
-                                    
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center m-0 p-0">
+                                                        <img src="{{post.display_url}}" class="img-fluid img-responsive"
+                                                            style="height:250px;width:100%;">
+                                                    </div>
 
+                                                    <div class="col-md-12 text_12px m-0 p-0">
+                                                        {{post.caption}}
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+                                            <div class="card-footer">
+                                                <span class="badge badge-info float-left"> Likes :
+                                                    {{post.likes_count}}</span>
+                                                <span class="badge badge-info float-right"> Comments :
+                                                    {{post.comments_count}}</span>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                 {% endfor %}
+
+                            </div>
+
+                            <!-- end instagram posts -->
+
+
+
+                            <!-- followers tabs  -->
+                            <div id="followers" class="tab-pane fade">
+
+                                <div class="row m-0 p-0 ">
+
+
+                                    {% for i in profile.followers %}
+                                    <div class="col-md-3 bg-white">
+                                        <div class="card mt-3">
+                                            <div class="card-header m-0 p-0 ">
+                                                {% if i.picture_image_url %}
+                                                <img src="{{i.picture_image_url}}" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                {% else %}
+                                                <img src="/static/images/heliports_image_placeholder.jpg" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-body">
+                                                              
+                                                <div class="row">
+                                                    <div class="col-md-12 m-0 p-0 ">
+                                                       <div><span class="badge badge-primary w-25 text-left">Full Name:</span> <span class="badge badge-light">{{i.full_name}}</span></div>                                  
+                                                       <div><span class="badge badge-primary w-25 text-left">User-Name:</span> <span class="badge badge-light">{{i.username}}</span></div>
+                                                       <div><span class="badge badge-primary w-25 text-left">URL:</span> <a  href="{{i.url}}" class="badge badge-success"><i class="fa fa-eye "></i></a></div>
+                                                       
+                                                       
+                                                    </div>
+                       
+                                                   
+                                                </div>
+                       
+                                                                                 
+                                                                                   
+                                                                                   
+                                                                                
+                                                                               </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                           
-                          </div>
 
-<!-- end instagram posts -->
-                            
+                            </div>
 
+                            <!-- end followers pane -->
 
 
 
@@ -515,7 +580,7 @@ Sentiments
             var chart = am4core.create("profile_chart", am4charts.RadarChart);
             chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-            
+
 
             var dic = [
 
@@ -525,8 +590,8 @@ Sentiments
 
                 },
 
-                
-                
+
+
                 {
                     category: "Target Update ",
                     value1: "{{ profile.target_update_count }}",
