@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from Case_Management_System.models import CaseCMS, VideoEvidenceFile
 from Case_Management_System.models import LocationOfInterest, PhysicalEvidence
 from Case_Management_System.models import CaseFile, PictureEvidenceFile
+from Case_Management_System.models import PersonOfInterest
 
 APP_NAME = 'Case_Management_System'
 
@@ -106,6 +107,7 @@ class CreateCase(View):
         loi = json.loads(LocationOfInterest.get_all_locations().to_json())
         pictures = json.loads(PictureEvidenceFile.get_all_pictures().to_json())
         videos = json.loads(VideoEvidenceFile.get_all_videos().to_json())
+        pois = json.loads(PersonOfInterest.get_all_poi().to_json())
 
         ctx = {}
         # store all cases to context
@@ -135,6 +137,13 @@ class CreateCase(View):
             ctx['videos'].append([
                 vid['_id']['$oid'],
                 vid['name'] + ' | ' + vid['video_description']
+            ])
+        # store all person of interest
+        ctx['pois'] = []
+        for poi in pois:
+            ctx['pois'].append([
+                poi['_id']['$oid'],
+                f'{poi["first_name"]} {poi["last_name"]}'
             ])
         print(ctx)
         return render(request, f'{APP_NAME}/case_create.html', ctx)
@@ -318,6 +327,62 @@ class StoreAndRetrievePhysicalEvidence(View):
                 object_videos)
             case_cms = CaseCMS.get_object_by_id(case)
             case_cms.store_physical_evidence(physical_evidence)
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        return JsonResponse({'success': 200})
+
+class StoreAndRetrievePersonOfInterest(View):
+    """
+    Stores and Presents a view of People of Interest
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        receives data from frontend
+        """
+        print(request.POST)
+        if request.POST.get('poi-case'):
+            case = request.POST.get('poi-case')
+        else:
+            case = None
+        if request.POST.get('poi-first-name'):
+            first_name = request.POST.get('poi-first-name')
+        else:
+            first_name = None
+        if request.POST.get('poi-middle-name'):
+            middle_name = request.POST.get('poi-middle-name')
+        else:
+            middle_name = None
+        if request.POST.get('poi-last-name'):
+            last_name = request.POST.get('poi-last-name')
+        else:
+            last_name = None
+        if request.POST.get('poi-phone'):
+            phone = request.POST.get('poi-phone')
+        else:
+            phone = None
+        if request.POST.get('poi-email'):
+            email = request.POST.get('poi-email')
+        else:
+            email = None
+        if request.POST.getlist('poi-category'):
+            category = request.POST.getlist('poi-category')
+        else:
+            category = None
+        if request.POST.get('poi-gender'):
+            gender = request.POST.get('poi-gender')
+        else:
+            gender = None
+        try:
+            if case:
+                person_of_interest = PersonOfInterest()
+                person_of_interest.create_poi(
+                    first_name, middle_name, last_name, gender, email, phone, category)
+                case_cms = CaseCMS.get_object_by_id(case)
+                case_cms.store_person_of_interest(person_of_interest)
+            else:
+                person_of_interest = PersonOfInterest()
+                person_of_interest.create_poi(
+                    first_name, middle_name, last_name, gender, email, phone, category)
         except Exception as exc:
             return JsonResponse({'error': str(exc)})
         return JsonResponse({'success': 200})

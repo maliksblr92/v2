@@ -394,6 +394,141 @@
                             </div>
                         </div>
                         <!-- end of physical evidence tab -->
+                        <div class="tab-pane fade" id="poi-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="poi-form">
+                                        {% csrf_token %}
+                                        <!-- associated case -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="poi-case" class="custom-select newinput">
+                                                <option value="" selected>None</option>
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}">{{case.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- first and middle name -->
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's first name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend"><span class="newlabeldesign">First
+                                                            Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-first-name"
+                                                        class="form-control newinputdesign" placeholder="First Name ..."
+                                                        required>
+                                                </div>
+                                                <!-- end of person's first name -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's middle name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Middle Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-middle-name"
+                                                        class="form-control newinputdesign"
+                                                        placeholder="Middle Name ...">
+                                                </div>
+                                                <!-- end of person's middle name -->
+                                            </div>
+                                        </div>
+                                        <!-- last name and phone -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's last name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Last Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-last-name"
+                                                        class="form-control newinputdesign" placeholder="Last Name ..."
+                                                        required>
+                                                </div>
+                                                <!-- end of person's last name -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- phone number -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Phone</span>
+                                                    </div>
+                                                    <input type="text" name="poi-phone"
+                                                        class="form-control newinputdesign"
+                                                        placeholder="Phoe Number ...">
+                                                </div>
+                                                <!-- end of phone number -->
+                                            </div>
+                                        </div>
+                                        <!-- end of last name and phone -->
+                                        <!-- person of interest category -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Category</span>
+                                            </div>
+                                            <select name="poi-category" class="custom-select newinput" multiple>
+                                                <option value="r">Case Reporter</option>
+                                                <option value="w">Witness</option>
+                                                <option value="a">Accused</option>
+                                                <option value="s">Suspect</option>
+                                                <option value="g">Guilty</option>
+                                                <option value="i">Innocent</option>
+                                            </select>
+                                        </div>
+                                        <!-- end of poi category -->
+                                        <!-- email and gender -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's email -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Email</span>
+                                                    </div>
+                                                    <input type="email" name="poi-email"
+                                                        class="form-control newinputdesign" placeholder="xyz@gmail.com"
+                                                        required>
+                                                </div>
+                                                <!-- end of person's email -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- gender -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Gender</span>
+                                                    </div>
+                                                    <select name="poi-gender" class="custom-select newinput">
+                                                        <option value="m" selected>Male</option>
+                                                        <option value="f">Female</option>
+                                                        <option value="t">Transgender</option>
+                                                        <option value="o">Other</option>
+                                                    </select>
+                                                </div>
+                                                <!-- end of gender -->
+                                            </div>
+                                        </div>
+                                        <!-- end of email and gender -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- end of nav tab content -->
                 </div>

@@ -4,10 +4,10 @@ fluency levels to be imported into CMS models.py
 """
 
 GENDERS = (
-    ('male', 'Male'),
-    ('female', 'Female'),
-    ('transgender', 'Transgender'),
-    ('other', 'Other')
+    ('m', 'Male'),
+    ('f', 'Female'),
+    ('t', 'Transgender'),
+    ('o', 'Other')
 )
 
 SPOKEN_LANGUAGE_FLUENCY = (

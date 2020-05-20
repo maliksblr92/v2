@@ -64,4 +64,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         event.preventDefault();
     });
+
+    // person of interest form
+    let poi_form = "#poi-form";
+    $(poi_form).submit((event) => {
+        let form_data = $(poi_form).serializeArray();
+        console.log(form_data);
+        $.ajax({
+            url: "/cms/poi/",
+            method: "POST",
+            data: form_data,
+            success: (result) => {
+                console.log(result);
+                $(poi_form).trigger("reset");
+            },
+        });
+        event.preventDefault();
+    });
 });

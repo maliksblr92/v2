@@ -6,7 +6,7 @@ from datetime import datetime
 from mongoengine import disconnect, connect, Document
 from mongoengine import EmbeddedDocument, EmbeddedDocumentListField
 from mongoengine import PointField, StringField, URLField
-from mongoengine import BooleanField, EmailField, EmbeddedDocumentField
+from mongoengine import BooleanField, EmailField
 from mongoengine import ReferenceField, ListField, DateTimeField
 
 from Case_Management_System.constants import LANGUAGES, GENDERS
@@ -156,9 +156,37 @@ class PersonOfInterest(Document):
     middle_name = StringField()
     last_name = StringField(required=True)
     gender = StringField(required=True, choices=GENDERS)
+    email = EmailField()
+    phone = StringField()
     languages = EmbeddedDocumentListField(Language)
     portfolio = ReferenceField(Portfolio_PMS)
     poi_category = ListField(StringField(choices=POI_CATEGORY))
+
+    def create_poi(self, first_name, middle_name, last_name, gender, email, phone, poi_category):
+        """
+        custom create function
+        """
+        self.first_name = first_name
+        self.middle_name = middle_name
+        self.last_name = last_name
+        self.gender = gender
+        self.email = email
+        self.phone = phone
+        self.poi_category.extend(poi_category)
+        self.save()
+
+    def get_poi_by_id(self, poi_id):
+        """
+        return a reference to a specific poi
+        """
+        return PersonOfInterest.objects(id=poi_id).first()
+
+    @staticmethod
+    def get_all_poi():
+        """
+        return all person of interest
+        """
+        return PersonOfInterest.objects().fields(first_name=1, last_name=1)
 
 class CaseCMS(Document):
     """
@@ -232,7 +260,24 @@ class CaseCMS(Document):
         self.save()
 
     def store_physical_evidence(self, physical_evidence: PhysicalEvidence):
+        """
+        stores a reference to physical evidence
+        """
         self.physical_evidence.append(physical_evidence)
+        self.save()
+
+    def store_person_of_interest(self, poi: PersonOfInterest):
+        """
+        store a reference to person of interest
+        """
+        self.people_of_interest.append(poi)
+        self.save()
+
+    def store_investigator(self, investigator: Investigator):
+        """
+        Stores a reference to an investigator
+        """
+        self.investigators.append(investigator)
         self.save()
 
     @staticmethod
