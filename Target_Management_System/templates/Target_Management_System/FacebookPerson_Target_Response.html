@@ -740,11 +740,18 @@ body {
                                                 <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
                                                     <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
                                                 </div>
-                                            </div> -->
+                                                 </div> -->
+                                            <div class="text-center">
+                                                {% if p.picture_directory %}
+                                                <img src="{{ p.picture_directory.0.url}}" style="height:650px;width:100%;overflow-y:auto" class="img-fluid " >
+
+                                                {% endif  %}
+                                            </div>
+
                                             <div class="row" style="height:300px;">
                                                 <div class="col-md-12">
                                                     <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                    Pictures ({{p.picture_links | length}})</i>
+                                                    Pictures ({{p.picture_directory | length}})</i>
                                                 </div>
                                                 {% for x in p.picture_links  %}
                                                     <div class="col-md-12 text-center" style="height:300px;">
