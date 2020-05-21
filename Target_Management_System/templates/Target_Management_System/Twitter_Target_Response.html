@@ -134,215 +134,90 @@
             .card-body{
             font-size: 14px;;
             }
+            /***
+            *
+            * Author: Osama Mumtaz
+            *
+            ***/
+            .custom_button{
+            background: rgb(24, 72, 116);
+            background: linear-gradient(
+            93deg,
+            rgba(24, 72, 116, 1) 0%,
+            rgba(6, 17, 26, 1) 100%
+            );
+            font-size: 16px;
+            border-radius: 13px;
+            padding: 3px 40px;
+            border: 1 solid #707070;
+            }
+            .custom_header{
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(
+            90deg,
+            rgba(0, 32, 44, 90%) 0%,
+            rgba(0, 46, 69, 90%) 28%,
+            rgba(0, 83, 135, 82%) 72%,
+            rgba(0, 113, 188, 80%) 100%
+            ) !important;
+            border-bottom: 1px solid #707070;
+            }
+            .custom_background{
+            background-color: #012847 !important;
+            }
+            .custom_bagde{
+            background-color: #06111a !important;
+            color: #ffffff !important;
+            }
+            .custom_icon{
+            border: 1px solid #fff;
+            width: 40px;
+            border-radius: 5px;
+            height: 40px;
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+            93deg,
+            rgba(24, 72, 116, 1) 0%,
+            rgba(6, 17, 26, 1) 100%);
+            }
             </style>
+            <!-- categorization styling  -->
+            <style>
+            .stamp {
+            transform: rotate(12deg);
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 700;
+            border: 0.25rem solid #fff;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            text-transform: uppercase;
+            border-radius: 1rem;
+            font-family: 'Courier';
+            -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+            -webkit-mask-size: 944px 604px;
+            }
+            .is-draft {
+            color: #C4C4C4;
+            border: 1rem double #C4C4C4;
+            transform: rotate(-5deg);
+            font-size: 1rem;
+            font-family: "Open sans", Helvetica, Arial, sans-serif;
+            border-radius: 0;
+            padding: 0.5rem;
+            }
+            </style>
+            <!-- end categorization styling  -->
         </head>
         <!-- Resources -->
         <script src="https://www.amcharts.com/lib/4/core.js"></script>
         <script src="https://www.amcharts.com/lib/4/charts.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-        <!-- Chart code -->
-        <!-- <script>
-        am4core.ready(function() {
-        // Themes begin
-        am4core.useTheme(am4themes_dark);
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        // Create chart
-        var chart = am4core.create("posting_time_charts", am4charts.XYChart);
-        chart.paddingRight = 20;
-        var data =  [{
-        "year": "1950",
-        "value": -0.307
-        }, {
-        "year": "1951",
-        "value": -0.168
-        }, {
-        "year": "1952",
-        "value": -0.073
-        }, {
-        "year": "1953",
-        "value": -0.027
-        }, {
-        "year": "1954",
-        "value": -0.251
-        }, {
-        "year": "1955",
-        "value": -0.281
-        }, {
-        "year": "1956",
-        "value": -0.348
-        }, {
-        "year": "1957",
-        "value": -0.074
-        }, {
-        "year": "1958",
-        "value": -0.011
-        }, {
-        "year": "1959",
-        "value": -0.074
-        }, {
-        "year": "1960",
-        "value": -0.124
-        }, {
-        "year": "1961",
-        "value": -0.024
-        }, {
-        "year": "1962",
-        "value": -0.022
-        }, {
-        "year": "1963",
-        "value": 0
-        }, {
-        "year": "1964",
-        "value": -0.296
-        }, {
-        "year": "1965",
-        "value": -0.217
-        }, {
-        "year": "1966",
-        "value": -0.147
-        }, {
-        "year": "1967",
-        "value": -0.15
-        }, {
-        "year": "1968",
-        "value": -0.16
-        }, {
-        "year": "1969",
-        "value": -0.011
-        }, {
-        "year": "1970",
-        "value": -0.068
-        }, {
-        "year": "1971",
-        "value": -0.19
-        }, {
-        "year": "1972",
-        "value": -0.056
-        }, {
-        "year": "1973",
-        "value": 0.077
-        }, {
-        "year": "1974",
-        "value": -0.213
-        }, {
-        "year": "1975",
-        "value": -0.17
-        }, {
-        "year": "1976",
-        "value": -0.254
-        }, {
-        "year": "1977",
-        "value": 0.019
-        }, {
-        "year": "1978",
-        "value": -0.063
-        }, {
-        "year": "1979",
-        "value": 0.05
-        }, {
-        "year": "1980",
-        "value": 0.077
-        }, {
-        "year": "1981",
-        "value": 0.12
-        }, {
-        "year": "1982",
-        "value": 0.011
-        }, {
-        "year": "1983",
-        "value": 0.177
-        }, {
-        "year": "1984",
-        "value": -0.021
-        }, {
-        "year": "1985",
-        "value": -0.037
-        }, {
-        "year": "1986",
-        "value": 0.03
-        }, {
-        "year": "1987",
-        "value": 0.179
-        }, {
-        "year": "1988",
-        "value": 0.18
-        }, {
-        "year": "1989",
-        "value": 0.104
-        }, {
-        "year": "1990",
-        "value": 0.255
-        }, {
-        "year": "1991",
-        "value": 0.21
-        }, {
-        "year": "1992",
-        "value": 0.065
-        }, {
-        "year": "1993",
-        "value": 0.11
-        }, {
-        "year": "1994",
-        "value": 0.172
-        }, {
-        "year": "1995",
-        "value": 0.269
-        }, {
-        "year": "1996",
-        "value": 0.141
-        }, {
-        "year": "1997",
-        "value": 0.353
-        }, {
-        "year": "1998",
-        "value": 0.548
-        }, {
-        "year": "1999",
-        "value": 0.298
-        }, {
-        "year": "2000",
-        "value": 0.267
-        }, {
-        "year": "2001",
-        "value": 0.411
-        }, {
-        "year": "2002",
-        "value": 0.462
-        }, {
-        "year": "2003",
-        "value": 0.47
-        }, {
-        "year": "2004",
-        "value": 0.445
-        }, {
-        "year": "2005",
-        "value": 0.47
-        }];
-        chart.data = data;
-        chart.dateFormatter.inputDateFormat = "yyyy";
-        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-        dateAxis.renderer.minGridDistance = 50;
-        dateAxis.renderer.labels.template.fontSize = 10;
-        dateAxis.baseInterval = {timeUnit:"year", count:1};
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis.tooltip.disabled = true;
-        valueAxis.renderer.labels.template.fontSize = 10;
-        var series = chart.series.push(new am4charts.StepLineSeries());
-        series.dataFields.dateX = "year";
-        series.dataFields.valueY = "value";
-        series.tooltipText = "{valueY.value}";
-        series.strokeWidth = 3;
-        chart.cursor = new am4charts.XYCursor();
-        chart.cursor.xAxis = dateAxis;
-        chart.cursor.fullWidthLineX = true;
-        chart.cursor.lineX.strokeWidth = 0;
-        chart.cursor.lineX.fill = chart.colors.getIndex(2);
-        chart.cursor.lineX.fillOpacity = 0.1;
-        chart.scrollbarX = new am4core.Scrollbar();
-        }); // end am4core.ready()
-        </script> -->
         <script>
         am4core.ready(function() {
         
@@ -561,9 +436,9 @@
                             <div class="col-md-12 text-center text-white text-success font-weight-bold ">
                                 Posting Time Chart
                             </div>
-                            <!-- <div class="col-md-12 m-0 p-0" style="height: 90%;width:100%;" id="posting_time_charts">
+                            <div class="col-md-12 m-0 p-0" style="height: 90%;width:100%;" id="myDiv">
                                 
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -643,7 +518,69 @@
                                     </div>
                                     <div id="common_words" class="collapse " aria-labelledby="headingOne"
                                         data-parent="#accordionExample">
-                                        <p class=" card-body "> {{tweets.sentiments}}</p>
+                                        <div class=" card-body  m-0 p-0">
+                                            
+                                            <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50" ><i class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span class="badge "> {{tweets.sentiments.0}}</span></div>
+                                            <div class="d-flex flex-row justify-content-start align-items-center mt-2" ><i class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> :  <span class="badge ">{{tweets.sentiments.1}}</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                        <button class="btn btn-link font-weight-bold" type="button" data-toggle="collapse"
+                                        data-target="#followers" aria-expanded="true" aria-controls="followers">
+                                        Followers ( {{tweets.followers|length}} )
+                                        </button>
+                                        </h2>
+                                    </div>
+                                    <div id="followers" class="collapse " aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        <p class=" card-body ">
+                                            <div class="row"style="height:400px;overflow-y:auto;">
+                                                {% for i in tweets.followers %}
+                                                    <div class="col-md-4 mt-2">
+                                                        <div class="card glowing_border custom_background">
+                                                            <div class="card-header d-flex flex-row justify-content-center align-items-center custom_header m-0 p-0 ">
+                                                                {% if i.avatar %}
+                                                                    <img src="{{i.avatar}}" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                                {% else %}
+                                                                    <img src="/static/images/heliports_image_placeholder.jpg" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="card-body">
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-6 m-0 p-0 ">
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Name:</span> <span class="badge badge-light">{{i.name|truncatechars:"12"}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">User-Name:</span> <span class="badge badge-light">{{i.username|truncatechars:"12"}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Location:</span> <span class="badge badge-light">{{i.location|truncatechars:"12"}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Join Date:</span> <span class="badge badge-light">{{i.join_date}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Join Time:</span> <span class="badge badge-light">{{i.join_time}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Tweet Count:</span> <span class="badge badge-light">{{i.tweets}}</span></div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="col-md-6 m-0 p-0 ">
+                                                                        
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Following :</span> <span class="badge badge-light">{{i.following}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Followers:</span> <span class="badge badge-light">{{i.followers}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Private:</span> <span class="badge badge-light">{{i.private}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Verified:</span> <span class="badge badge-light">{{i.verified}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Likes:</span> <span class="badge badge-light">{{i.likes}}</span></div>
+                                                                        <div><span class="badge custom_bagde w-50 text-left">Media Count:</span> <span class="badge badge-light">{{i.media}}</span></div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                            </div>
+                                                            <div class="card-footer"></div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -665,26 +602,33 @@
                     <div class="col-md-12">
                         <div class="row pl-3 pr-3 ">
                             {% for i in tweets.tweets %}
-                                <div class="col-md-4 bg-white " style="border: 2px solid #000000; border-radius:10px;">
-                                    <div class="row p-2">
+                                <div class="col-md-4 custom_background glowing_border" style="border-radius:20px 20px 10px 10px;">
+                                    <div class="row p-2 custom_header glowing_border">
                                         <div class="col-md-2 m-0 p-0 d-flex flex-column justify-content-center align-items-center"
                                             style="height:auto;">
                                             <img class="img-fluid " src="{{tweets.profile_url}}"
                                             style="height:50px;width:50px;border-radius:50%;" />
-                                            <p style="font-size:12px" class="text-primary font-weight-bold  ">
+                                            <p style="font-size:12px" class="text-white font-weight-bold  ">
                                                 Tweet # {{ forloop.counter }}
                                             </p>
                                         </div>
-                                        <div class="col-md-10 ">
-                                            <div class="row">
+                                        <div class="col-md-10 d-flex">
+                                            <div class="row w-100">
                                                 <div class="col-md-12 d-flex flex-row justify-content-around align-items-center">
-                                                    <b class="text-primary border m-0 p-0 col-md-4 " style="font-size:10px;">
-                                                    {{i.sentiment}}
+                                                    <b class="text-primary m-0 p-0 col-md-4 " style="font-size:10px;">
+                                                    {% if i.sentiment == 'Positive'%}
+                                                        <i class="fas fa-thumbs-up  text-success mr-2 ml-2"></i>
+                                                        <span class="text-success"> {{i.sentiment}}</span>
+                                                    {% else %}
+                                                        <i class="fas fa-thumbs-down  text-danger mr-2 ml-2"></i>
+                                                        <span class="text-danger"> {{i.sentiment}}</span>
+                                                    {% endif %}
+                                                    
                                                     </b>
-                                                    <span class="text-primary border m-0 p-0 col-md-4 " style="font-size:12px;">
+                                                    <span class="text-white m-0 p-0 col-md-4 " style="font-size:12px;">
                                                         @{{i.username_tweet}}.
                                                     </span>
-                                                    <span class="text-primary border m-0 p-0 col-md-4 " style="font-size:10px;">
+                                                    <span class="text-white m-0 p-0 col-md-4 " style="font-size:10px;">
                                                         {{i.datetime_created}}
                                                     </span>
                                                 </div>
@@ -692,39 +636,50 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 text-dark font-weight-bold "
+                                        <div class="col-md-12 text-white font-weight-bold "
                                             style="font-size:14px;height:150px;overflow:auto;">
                                             {{i.text}}
                                         </div>
                                         
                                     </div>
-                                    <div class="row " style="position:relative;bottom:0px;">
-                                        <div class="col-md-3 text-dark d-flex flex-row justify-content-around border m-0 p-0 align-items-center" style="border-radius: 0px 0px 0px 10px;">
-                                            <i class=" text-primary fas fa-comment">
+                                    {% if i.categorization %}
+                                        <div class="row">
+                                            <div class="col-md-12 ">
+                                                {% for category in i.categorization %}
+                                                    <span class="stamp  is-draft"><span>
+                                                        {{ category|default:"N/A" }}
+                                                    </span></span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="row  mt-2" style="position:relative;bottom:0px;">
+                                        <div class="col-md-3 text-white d-flex flex-row justify-content-around glowing_border m-0 p-0 align-items-center" style="border-radius: 0px 0px 0px 10px;">
+                                            <i class=" text-whi fas fa-comment">
                                             </i>
-                                            <span style="font-size: 9px;;">
+                                            <span style="font-size: 12px;;">
                                                 {{i.mentions}}
                                             </span>
                                         </div>
                                         <div
-                                            class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center">
-                                            <i aria-hidden="true" class=" text-primary fa fa-retweet">
+                                            class="col-md-3 text-white  d-flex flex-row justify-content-around glowing_border m-0 p-0 align-items-center">
+                                            <i aria-hidden="true" class=" text-white fa fa-retweet">
                                             </i>
                                             <span style="font-size: 12px;;">
                                                 {{i.replies_count}}
                                             </span>
                                         </div>
                                         <div
-                                            class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center">
-                                            <i class=" text-primary fas fa-heart">
+                                            class="col-md-3 text-white  d-flex flex-row justify-content-around glowing_border m-0 p-0 align-items-center">
+                                            <i class=" text-white fas fa-heart">
                                             </i>
                                             <span style="font-size: 12px;;">
                                                 {{i.likes_count}}
                                             </span>
                                         </div>
                                         <div
-                                            class="col-md-3 text-dark  d-flex flex-row justify-content-around border m-0 p-0 align-items-center" style="border-radius: 0px 0px 10px 0px;">
-                                            <i class=" text-primary fas fa-upload">
+                                            class="col-md-3 text-white  d-flex flex-row justify-content-around glowing_border m-0 p-0 align-items-center" style="border-radius: 0px 0px 10px 0px;">
+                                            <i class=" text-white fas fa-upload">
                                             </i>
                                             <span style="font-size: 12px;;">
                                                 {{i.retweeet_count}}
@@ -747,6 +702,28 @@
             </script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+            </script>
+            <!-- Latest compiled and minified plotly.js JavaScript -->
+            <script src="https://cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>
+            <!-- OR use a specific plotly.js release (e.g. version 1.52.3) -->
+            <script src="https://cdn.plot.ly/plotly-1.52.3.min.js" charset="utf-8"></script>
+            <!-- OR an un-minified version is also available -->
+            <script src="https://cdn.plot.ly/plotly-latest.js" charset="utf-8"></script>
+            <script >
+            
+            var list2=
+            console.log(list2)
+            var trace1 = {
+            y: {{ tweets.posting_time_charts.0|safe }},
+            x: {{ tweets.posting_time_charts.1|safe }},
+            type: 'scatter'
+            };
+            
+            
+            
+            var data = [trace1];
+            
+            Plotly.newPlot('myDiv', data);
             </script>
         </body>
     </html>
