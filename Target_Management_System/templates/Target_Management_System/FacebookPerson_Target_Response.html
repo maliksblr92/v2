@@ -220,6 +220,36 @@
             }
             </style>
             <!-- facebook person target css end -->
+<!-- categorization stamp -->
+            <style>
+
+                .stamp {
+                    transform: rotate(12deg);
+                      color: #555;
+                      font-size: 3rem;
+                      font-weight: 700;
+                      border: 0.25rem solid #555;
+                      display: inline-block;
+                      padding: 0.25rem 1rem;
+                      text-transform: uppercase;
+                      border-radius: 1rem;
+                      font-family: 'Courier';
+                      -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+                    -webkit-mask-size: 944px 604px;
+                    mix-blend-mode: multiply;
+                  }
+                  .is-draft {
+                    color: #C4C4C4;
+                    border: 1rem double #C4C4C4;
+                    transform: rotate(-5deg);
+                  font-size: 1rem;
+                  font-family: "Open sans", Helvetica, Arial, sans-serif;
+                  border-radius: 0;
+                  padding: 0.5rem;
+                } 
+            </style>
+
+            <!-- end categorization stamp -->
         </head>
         <body>
             <div class="container-fluid ">
@@ -719,53 +749,85 @@
                                         <div class="row">
                                             {% for p in  profile.posts %}
                                                 <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
+                                            <div class="row">
+                                                <div class="col-md-4">
                                                     Post # {{forloop.counter}}
+
                                                 </div>
+                                                <div class="col-md-4">
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    {% if p.categorization %}
+                                                  
+
+                                                     {% for category in p.categorization %}
+                                                            <span class="stamp  is-draft"><span>
+                                                                {{ category|default:"N/A" }}
+                                                            
+                                                    {% endfor %}
+                                                       {% else %}
+                                                       <span class="badge badge-warning">No Categorization Avaliable </span>
+                                                    {% endif %}    
+                                                </div>
+                                                    
+                                                </div>
+                                            </div>
                                                 <div class="col-md-12 post-wrapper">
                                                     <div class="row border custom_border_color">
                                                         <div class="col-md-2 m-0 p-0 custom-center-center">
                                                             <img src="{{p.author_media_directory}}"
-                                                            style="height: 60px;width:60px;border-radius: 50%;;"
+                                                            style="height: 70px;width:70px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             
                                                         </div>
-                                                        <div class="col-md-2 custom-column-start-start pt-2 text_heading">
-                                                            <span> {{page.name}}</span>
-                                                            <span class="smaller-txt">{{p.timestamp}}</span>
-                                                        </div>
+                                                       
                                                         <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
-                                                            <div class="smaller-txt w-100 text-left h-100">Post id:
-                                                                <span class="text_paragraph">{{p.post_id}}</span>
+                                                            <div class="badge w-100 text-left h-100">
+                                                              <span class="badge badge-primary w-25"> Post ID</span>
+                                                                <span class="badge">{{p.post_id}}</span>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Author Name:
-                                                                <span class="text_paragraph">{{p.author_name}}</span>
+                                                            <div class="badge w-100 text-left h-100">
+                                                             
+                                                                <span class="badge badge-primary w-25">    Author Name :</span>
+                                                                <span class="badge">{{p.author_name}}</span>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Author Username:
-                                                                <span class="text_paragraph">{{p.author_username}}</span>
+                                                            <div class="badge w-100 text-left h-100">
+                                                             
+                                                                <span class="badge badge-primary w-25">    Post Link:</span>
+                                                                <a href="{{p.post_link}}" class="badge badge-success "><i class="fa fa-eye "></i></a>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Sentiment:
-                                                                <span class="text_paragraph">{{p.sentiment | default:"N/A"}}</span>
+                                                            <div class="badge w-100 text-left h-100">
+                                                              <span class="badge badge-primary w-25">  Sentiment:</span>
+                                                                <span class="badge">{{p.sentiment | default:"N/A"}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">
-                                                            {{p.post_text}}
+                                                            {{p.post_text|default:"No Post Text Availible "}}
                                                         </div>
                                                     </div>                                                    <!-- <div class="row">
                                                     <div class="col-md-12 text-center"style="height:300px;overflow-y:auto">
                                                         <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
                                                     </div>
                                                 </div> -->
-                                                <div class="row" style="height:300px;">
+                                                {% if  p.picture_directory  %}
+                                                <div class="row" style="height:550px;">
                                                     <div class="col-md-12">
                                                         <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                        Pictures ({{p.picture_links | length}})</i>
+                                                        Pictures ({{p.picture_directory | length}})</i>
                                                     </div>
-                                                    {% for x in p.picture_links  %}
-                                                        <div class="col-md-12 text-center" style="height:300px;">
-                                                            <img src="{{x.url}}" class="img-fluid" />
-                                                        </div>
+                                                    {% for x in p.picture_directory  %}
+                                                    <div class="col-md-12 text-center">
+                                                        <img src="{{x.url}}"
+                                                    style="height: 500px;width:100%;"
+                                                    class="img-fluid">
+                                                    </div>
                                                     {% endfor %}
                                                 </div>
+                                                {% else %}
+                                               <span> No Post Pictures Availible </span>
+
+                                                {% endif %}
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <i class="material-icon text_heading" style="font-size:20px;">Liked By
@@ -775,7 +837,7 @@
                                                         <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
                                                             style="height:100px;">
                                                             <img src="{{r.media_directory}}"
-                                                            style="height: 80px;width:100px;border-radius: 50%;;"
+                                                            style="height: 80px;width:150px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">

@@ -607,13 +607,36 @@
                                         <div class="row">
                                             {% for p in  page.page_posts %}
                                                 <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
-                                                    Post # {{forloop.counter}}
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            Post # {{forloop.counter}}
+        
+                                                        </div>
+                                                        <div class="col-md-4">
+        
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            {% if p.categorization %}
+                                                          
+
+                                                             {% for category in p.categorization %}
+                                                                    <span class="stamp  is-draft"><span>
+                                                                        {{ category|default:"N/A" }}
+                                                                    
+                                                            {% endfor %}
+                                                               {% else %}
+                                                               <span class="badge badge-warning">No Categorization Avaliable </span>
+                                                            {% endif %}    
+                                                        </div>
+                                                   
+                                                            
+                                                        </div>
                                                 </div>
                                                 <div class="col-md-12 post-wrapper">
                                                     <div class="row border custom_border_color">
                                                         <div class="col-md-2 m-0 p-0 custom-center-center">
                                                             <img src="{{p.media_directory}}"
-                                                            style="height: 60px;width:60px;border-radius: 50%;;"
+                                                            style="height: 70px;width:70px;border-radius: 50%;;"
                                                             class="img-fluid">
                                                             <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
                                                         </div>
@@ -643,17 +666,24 @@
                                                         <img src="{{c.media_directory}}" class="img-fluid"/>
                                                     </div>
                                                 </div> -->
-                                                <div class="row" style="height:300px;">
+                                                {% if  p.picture_directory  %}
+                                                <div class="row" style="height:550px;">
                                                     <div class="col-md-12">
                                                         <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                        Pictures ({{p.picture_links | length}})</i>
+                                                        Pictures ({{p.picture_directory | length}})</i>
                                                     </div>
-                                                    {% for x in p.picture_links  %}
-                                                        <div class="col-md-12 text-center" style="height:300px;">
-                                                            <img src="{{x.url}}" class="img-fluid" />
-                                                        </div>
+                                                    {% for x in p.picture_directory  %}
+                                                    <div class="col-md-12 text-center">
+                                                        <img src="{{x.url}}"
+                                                    style="height: 500px;width:100%;"
+                                                    class="img-fluid">
+                                                    </div>
                                                     {% endfor %}
                                                 </div>
+                                                {% else %}
+                                               <span> No Post Pictures Availible </span>
+
+                                                {% endif %}
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <i class="material-icon text_heading" style="font-size:20px;">Liked By
@@ -888,76 +918,6 @@
            var href=url+id+""
            console.log(href)
            </script>
-        <!-- <script>
-        am4core.ready(function() {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
-        var chart = am4core.create("profile_chart", am4charts.SlicedChart);
-        chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-        chart.data = [{
-        "name": "Friedns",
-        "value": 354
-        }, {
-        "name": "Close Associates",
-        "value": 245
-        }, {
-        "name": "Posts",
-        "value": 187
-        }, {
-        "name": "Popularity",
-        "value": 123
-        }, {
-        "name": "Popularity",
-        "value": 87
-        }, {
-        "name": "Positivity",
-        "value": 45
-        }];
-        var series = chart.series.push(new am4charts.PictorialStackedSeries());
-        series.dataFields.value = "value";
-        series.dataFields.category = "name";
-        series.alignLabels = true;
-        series.maskSprite.path = iconPath;
-        series.ticks.template.locationX = 1;
-        series.ticks.template.locationY = 0.5;
-        series.labelsContainer.width = 200;
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "left";
-        chart.legend.valign = "bottom";
-        }); // end am4core.ready()
-        </script>
-
-
-
-
-
-
-
-
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1001,120 +961,5 @@
 
 
 
-
-
-<!-- 
-
-        
-        <script>
-        am4core.ready(function() {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        // create chart
-        var chart = am4core.create("sentiment_chart", am4charts.GaugeChart);
-        chart.hiddenState.properties.opacity = 0;
-        var axis = chart.xAxes.push(new am4charts.ValueAxis());
-        axis.min = 0;
-        axis.max = 160;
-        axis.strictMinMax = true;
-        axis.renderer.inside = true;
-        //axis.renderer.ticks.template.inside = true;
-        //axis.stroke = chart.colors.getIndex(3);
-        axis.renderer.radius = am4core.percent(97);
-        //axis.renderer.radius = 80;
-        axis.renderer.line.strokeOpacity = 1;
-        axis.renderer.line.strokeWidth = 5;
-        axis.renderer.line.stroke = chart.colors.getIndex(0);
-        axis.renderer.ticks.template.disabled = false
-        axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
-        axis.renderer.labels.template.radius = 35;
-        axis.renderer.ticks.template.strokeOpacity = 1;
-        axis.renderer.grid.template.disabled = true;
-        axis.renderer.ticks.template.length = 10;
-        axis.hiddenState.properties.opacity = 1;
-        axis.hiddenState.properties.visible = true;
-        axis.setStateOnChildren = true;
-        axis.renderer.hiddenState.properties.endAngle = 180;
-        var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
-        axis2.min = 0;
-        axis2.max = 240;
-        axis2.strictMinMax = true;
-        axis2.renderer.line.strokeOpacity = 1;
-        axis2.renderer.line.strokeWidth = 5;
-        axis2.renderer.line.stroke = chart.colors.getIndex(3);
-        axis2.renderer.ticks.template.stroke = chart.colors.getIndex(3);
-        axis2.renderer.ticks.template.disabled = false
-        axis2.renderer.ticks.template.strokeOpacity = 1;
-        axis2.renderer.grid.template.disabled = true;
-        axis2.renderer.ticks.template.length = 10;
-        axis2.hiddenState.properties.opacity = 1;
-        axis2.hiddenState.properties.visible = true;
-        axis2.setStateOnChildren = true;
-        axis2.renderer.hiddenState.properties.endAngle = 180;
-        var hand = chart.hands.push(new am4charts.ClockHand());
-        hand.fill = axis.renderer.line.stroke;
-        hand.stroke = axis.renderer.line.stroke;
-        hand.axis = axis;
-        hand.pin.radius = 14;
-        hand.startWidth = 10;
-        var hand2 = chart.hands.push(new am4charts.ClockHand());
-        hand2.fill = axis2.renderer.line.stroke;
-        hand2.stroke = axis2.renderer.line.stroke;
-        hand2.axis = axis2;
-        hand2.pin.radius = 10;
-        hand2.startWidth = 10;
-        setInterval(function() {
-        hand.showValue({{page.sentiments.positive}}, 1000, am4core.ease.cubicOut);
-        label.text = Math.round(hand.value).toString();
-        hand2.showValue({{page.sentiments.negitive}}, 1000, am4core.ease.cubicOut);
-        label2.text = Math.round(hand2.value).toString();
-        }, 9000);
-        var legend = new am4charts.Legend();
-        legend.isMeasured = false;
-        legend.y = am4core.percent(100);
-        legend.verticalCenter = "bottom";
-        legend.parent = chart.chartContainer;
-        legend.data = [{
-        "name": "Positive",
-        "fill": chart.colors.getIndex(0)
-        }, {
-        "name": "Negitive",
-        "fill": chart.colors.getIndex(3)
-        }];
-        legend.itemContainers.template.events.on("hit", function(ev) {
-        var index = ev.target.dataItem.index;
-        if (!ev.target.isActive) {
-        chart.hands.getIndex(index).hide();
-        chart.xAxes.getIndex(index).hide();
-        labelList.getIndex(index).hide();
-        }
-        else {
-        chart.hands.getIndex(index).show();
-        chart.xAxes.getIndex(index).show();
-        labelList.getIndex(index).show();
-        }
-        });
-        var labelList = new am4core.ListTemplate(new am4core.Label());
-        labelList.template.isMeasured = false;
-        labelList.template.background.strokeWidth = 2;
-        labelList.template.fontSize = 25;
-        labelList.template.padding(10, 20, 10, 20);
-        labelList.template.y = am4core.percent(50);
-        labelList.template.horizontalCenter = "middle";
-        var label = labelList.create();
-        label.parent = chart.chartContainer;
-        label.x = am4core.percent(40);
-        label.background.stroke = chart.colors.getIndex(0);
-        label.fill = chart.colors.getIndex(0);
-        label.text = "0";
-        var label2 = labelList.create();
-        label2.parent = chart.chartContainer;
-        label2.x = am4core.percent(60);
-        label2.background.stroke = chart.colors.getIndex(3);
-        label2.fill = chart.colors.getIndex(3);
-        label2.text = "0";
-        }); // end am4core.ready()
-        </script> -->
     </body>
 </html>

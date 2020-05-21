@@ -458,6 +458,8 @@ class Twitter(View):
                     return redirect('/dpu/twitter')
             else:
                 tweets_json = ess.tweets_negative(lower_letter_phrase)
+                print("printing negitive tweets ");
+                print(tweets_json)
                 if(len(tweets_json) > 0):
                     messages.success(request, 'Query executed successfully --Negitive Tweets')
                     print("=======================ESS REPLY=========================\n", tweets_json)
