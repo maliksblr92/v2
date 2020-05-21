@@ -1,0 +1,581 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css" integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous" />
+            <style>
+            
+            .text_10px {
+            font-size: 10px !important;
+            }
+            .text_12px {
+            font-size: 12px;
+            ;
+            }
+            .text_13px {
+            font-size: 13px !important;
+            }
+            .text_14px {
+            font-size: 14px;
+            ;
+            }
+            .text_15px {
+                font-size:15px;
+                ;
+                }
+            .text_20px {
+            font-size: 20px;
+            ;
+            }
+            .text_25px {
+            font-size: 25px;
+            ;
+            }
+            .border_radius_5px {
+            border-radius: 5px !important;
+            }
+
+            
+                .background-gradient-dark{
+                background: linear-gradient(0deg, rgba(24,72,116,1) 0%, rgba(6,17,26,1) 100%) !important;
+                }
+                
+                .no_decoration {
+                text-decoration: none !important;
+                }
+                .border_right {
+                border-right: 1px solid black;
+                ;
+                }
+                .border_left {
+                border-left: 1px solid black;
+                ;
+                }
+                .custom-start-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+                .custom-start-center {
+                display: flex !important;
+                justify-content: start !important;
+                align-items: center !important;
+                }
+                .custom-end-center {
+                display: flex !important;
+                justify-content: end !important;
+                align-items: center !important;
+                }
+                .d-flex flex-row justify-content-start align-items-center {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                align-items: center !important;
+                }
+                .custom-column-center-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                }
+                .custom-column-start-start {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: start !important;
+                }
+                .custom-column-start-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: center !important;
+                }
+                .full_space{
+                    height: 100%!important;
+                    width: 100%!important;
+                }
+                .dotted_text { text-overflow: ellipsis !important; }
+            </style>
+            <style>
+            html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+            }
+            ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+            }
+            </style>
+            <style>
+                .profile-img-wrapper{
+                    border:4px solid white;
+                    height: 250px;
+                    width: 250px;
+                    border-radius:10px;
+                }
+                .label{
+                   color:white 
+                }
+                .header-wrapper{
+            
+                }
+                .stats-box-upper{
+                    border-radius:5px 5px 0px 0px;
+                    text-align: center;
+                    font-weight: bold;
+                    color:red
+                }
+
+                .stats-box-lower{
+                    border-radius:0px 0px  5px 5px;
+                    text-align: center;
+                    color:blue
+                }
+                .post-wrapper{
+                    height: 700px;
+                    overflow-y: auto;
+                }
+                .header-icons{
+                    border:1px solid white;
+                    padding: 5px;
+                    border-radius:5px;
+                    background-color:white;;
+                }
+                .header-text{
+                    font-size: 16px!important;;
+                    width: auto;;
+                    text-align: left;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container-fluid wrapper background-gradient-dark">
+                
+              <div class="row ">
+
+
+<div class="col-md-1"></div>
+
+
+<div class="col-md-10">
+    <div class="row p-2">
+        <div class="col-md-4 text-left">
+            <a href="#" target="_blank" class="btn btn-info font-weight-bold"> <i class="fab fa-reddit-alien mr-2"></i> Reddit</a>
+            
+        </div>
+
+        <div class="col-md-4 text-center">
+            <a href="#" target="_blank" class="btn btn-primary font-weight-bold"> <i class="fas fa-users mr-2"></i> Reddit Profile Target</a>
+            
+        </div>
+
+
+        <div class="col-md-4 text-right">
+           
+            <a href="#" target="_blank" class="btn btn-success font-weight-bold"> <i class="fas fa-download  mr-2"></i> Download PDF Report</a>
+        </div>
+    </div>
+    <div class="row background-gradient-dark border_radius_5px ">
+        <div class="col-md-2  custom-column-center-center">
+            <div class="profile-img-wrapper ">
+                <img src="{{profile.icon_media_directory}}" class="border_radius_5px img-fluid full_space"  />
+                
+            </div>
+            <div>
+                <a  href="{{profile.url}}" target="_blank"class="badge badge-success text_14px mt-2"><i class="fa fa-eye text-dark header-icons mr-2"></i> View profile</a>
+            </div>
+           
+        </div>
+        <div class="col-md-5  background-gradient-dark p-5">
+
+
+
+            <div class="row  p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Username</label>
+                </div>
+         
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.username|default:"N/A"}}</span></label>
+                </div>
+            </div>
+
+
+
+        <div class="row p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i> Reddit ID </label>
+                </div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.reddit_id|default:"N/A"}}</span></label>
+                </div>
+            </div>
+
+
+            <div class="row p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>Subscribers </label>
+                </div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.subscribers|default:"N/A"}}</span></label>
+                </div>
+            </div>
+           
+
+
+
+            <div class="row p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Karma Post </label>
+                </div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.karma_points.post_karma|default:"N/A"}}</span></label>
+                </div>
+
+            </div>
+
+            <div class="row p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fas fa-clock text-dark header-icons fa-2x mr-2 "></i>Created On </label>
+                </div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.timestamp_created|default:"N/A"}}</span></label>
+                </div>
+
+            </div>
+
+
+           
+
+
+            <div class="row p-2">
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Karma Comments </label>
+                </div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                    <label class="label text_15px font-weight-bold " > <span class="badge badge-light header-text"> {{profile.karma_points.comment_karma|default:"N/A"}}</span></label>
+                </div>
+            </div>
+
+
+
+            </div>
+            <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
+                <div id="profile_chart" style="height:400px;width:100%"></div>
+            </div>
+        </div>
+
+
+        <!-- 
+
+         -->
+<div class="row ">
+    <div class="col-md-12 m-0 p-0">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs">
+                    <li class="nav-link active"><a data-toggle="tab" href="#reddit_posts">Reddit Posts</a></li>
+                    <li class="nav-link "><a data-toggle="tab" href="#subreddits">Sub-Reddits</a></li>
+                   
+                  </ul>
+            </div>
+        
+        </div>
+          
+          <div class="tab-content">
+            <div id="reddit_posts" class="tab-pane fade in active show">
+                <div class="card">
+                    
+                    <div class="card-body post-wrapper">
+                        <div class="row ">
+                            {% for post in profile.posts%}
+                            
+        
+                            <div class="col-md-6 p-3 ">
+                                <div class="border border_radius_5px">
+                                <div class="row  m-2">
+                                    <div class="col-md-2">
+                                        <a href="{{post.poster.url}}" target="_blank" class="badge badge-primary"> <i class="fa fa-eye text-dark mr-2"></i> View post</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="badge badge-primary">Posted : {{post.timestamp|default:"N/A"}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <span  class="badge badge-primary"> Posted by <span class="text-warning font-weight-bold text_14px">{{post.poster.username}}</span>
+                                            8 hours ago</span>
+                                    </div>
+                                </div>
+                             
+            <div class="row">
+                <div class="col-md-2">
+                    <span class="badge badge-primary ml-2">Title : </span> 
+                </div>
+                <span class="col-md-10">
+                 {{post.title |default:"N/A"}}</span>
+                </div>
+               
+           <div class="row">
+               <div class="col-md-6 d-flex flex-row justify-content-center align-item-center">
+                   {% if post.media is not None %}
+                <img src="{{post.media|default:'https://via.placeholder.com/150'}}" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                {% else %}
+                <img src="https://via.placeholder.com/150" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                {% endif%}
+               </div>
+               <div class="col-md-6 d-flex flex-row justify-content-start align-item-center p-3">
+                <span>
+                    {{post.text}}
+                </span>
+               </div>
+           </div>
+        
+        <div class="row m-0 p-0 ">
+            <div class="col-md-3 stats-box-upper border border-success"><span class="badge badge-primary">Up-Ratio</span></div>
+            <div class="col-md-3 stats-box-upper border border-success"><span class="badge badge-primary">Num Comments</span></div>
+            <div class="col-md-3 stats-box-upper border border-success"><span class="badge badge-primary">Num Crossposts</span></div>
+            <div class="col-md-3 stats-box-upper border border-success"><span class="badge badge-primary">Score</span></div>
+        </div>
+        
+        
+        <div class="row m-0 p-0">
+            <div class="col-md-3 stats-box-lower border border-success"><span class="badge badge-info">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
+            <div class="col-md-3 stats-box-lower border border-success"><span class="badge badge-info">{{post.statistics.num_comments|default:"N/A"}}</span></div>
+            <div class="col-md-3 stats-box-lower border border-success"><span class="badge badge-info">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
+            <div class="col-md-3 stats-box-lower border border-success"><span class="badge badge-info">{{post.statistics.score|default:"N/A"}}</span></div>
+        </div>
+            
+          
+                            </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="subreddits" class="tab-pane fade">
+                <div class="card">
+                    
+                    <div class="card-body post-wrapper">
+                        <div class="row">
+                            {% for subreddit in profile.subreddits%}
+                            
+        
+                            <div class="col-md-6 p-3 ">
+                                <div class="border border_radius_5px">
+                                <div class="row  m-2">
+                                    <div class="col-md-2">
+                                        <a href="{{subreddit.url}}" target="_blank" class="badge badge-primary"> <i class="fa fa-eye text-dark mr-2"></i> View post</a>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-4">
+                                      <span class="badge badge-primary"> Posted by <span class="text-warning font-weight-bold">{{subreddit.name}}</span>
+                                            8 hours ago</span>
+                                    </div>
+                                </div>
+                             
+            <div class="row">
+                <div class="col-md-2">
+                    <span class="badge badge-primary ml-2">Title : </span> 
+                </div>
+                <span class="col-md-10">
+                   {{subreddit.title|default:"N/A"}}</span>
+                </div>
+               
+           <div class="row">
+               <div class="col-md-6 d-flex flex-row justify-content-center align-item-center">
+                   {% if post.media is not None %}
+                <img src="{{post.media|default:'https://via.placeholder.com/150'}}" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                {% else %}
+                <img src="https://via.placeholder.com/150" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                {% endif%}
+               </div>
+               <div class="col-md-6 d-flex flex-row justify-content-start align-item-center p-3">
+                <span>
+                    {{post.text}}
+                </span>
+               </div>
+           </div>
+        
+        <div class="row m-0 p-0 ">
+            <div class="col-md-3 stats-box-upper border border-dark">Up-Ratio</div>
+            <div class="col-md-3 stats-box-upper border border-dark">Num Comments</div>
+            <div class="col-md-3 stats-box-upper border border-dark">Num Crossposts</div>
+            <div class="col-md-3 stats-box-upper border border-dark">Score</div>
+        </div>
+        
+        
+        <div class="row m-0 p-0">
+            <div class="col-md-3 stats-box-lower border border-dark">{{post.statistics.upvote_ratio|default:"N/A"}}</div>
+            <div class="col-md-3 stats-box-lower border border-dark">{{post.statistics.num_comments|default:"N/A"}}</div>
+            <div class="col-md-3 stats-box-lower border border-dark">{{post.statistics.num_crossposts|default:"N/A"}}</div>
+            <div class="col-md-3 stats-box-lower border border-dark">{{post.statistics.score|default:"N/A"}}</div>
+        </div>
+            
+          
+                            </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
+
+
+ 
+    </div>
+</div>
+
+
+        </div>
+</div>
+
+
+<div class="col-md-1"></div>
+            </div>
+     
+
+
+
+
+                  </div>
+              </div>
+            </div>
+       
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+       
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+        <script>
+            am4core.ready(function() {
+            
+            // Themes begin
+            am4core.useTheme(am4themes_dark);
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            
+            var chart = am4core.create("profile_chart", am4charts.RadarChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+            
+                var dic=[
+                
+                  {
+                    category: "Custom feeds",
+                    value1: "{{ profile.custom_feeds|length }}",
+                   
+                  },
+                 
+                  
+                  
+                  {
+                    category: "Subscribers",
+                    value1: "{{ profile.subscribers }}",
+                   
+                  },
+
+
+                  {
+                    category: "Sub-reddits",
+                    value1: "{{ profile.subreddits|length }}",
+                   
+                  },
+
+                  {
+                    category: "Posts",
+                    value1: "{{ profile.posts|length }}",
+                   
+                  },
+
+                  {
+                    category: "karma Posts",
+                    value1: "{{ profile.karma_points.comment_karma}}",
+                   
+                  },
+                  {
+                    category: "karma comments",
+                    value1: "{{ profile.karma_points.post_karma}}",
+                   
+                  },
+
+                ]
+
+            chart.data =dic
+            
+            //chart.padding(20, 20, 20, 20);
+            chart.colors.step = 4;
+            
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            categoryAxis.renderer.labels.template.location = 0.5;
+            categoryAxis.renderer.labels.template.horizontalCenter = "right";
+            categoryAxis.renderer.labels.template.fontSize = 10;
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.tooltipLocation = 0.5;
+            categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
+            categoryAxis.renderer.axisFills.template.disabled = true;
+            categoryAxis.interactionsEnabled = false;
+            categoryAxis.renderer.minGridDistance = 10;
+            
+            var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+            valueAxis.tooltip.disabled = true;
+            valueAxis.renderer.labels.template.horizontalCenter = "left";
+            valueAxis.min = 0;
+            valueAxis.max = 1000000;
+            valueAxis.strictMinMax = true;
+            valueAxis.renderer.maxLabelPosition = 0.99;
+            valueAxis.renderer.minGridDistance = 10;
+            valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+            valueAxis.renderer.axisFills.template.disabled = true;
+            valueAxis.interactionsEnabled = false;
+            
+            var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+            series1.columns.template.tooltipText = "{name}: {valueX.value}";
+            series1.name = "Counts";
+            series1.dataFields.categoryY = "category";
+            series1.dataFields.valueX = "value1";
+            series1.stacked = true;
+            
+           
+            
+            chart.seriesContainer.zIndex = -1;
+            
+            chart.scrollbarX = new am4core.Scrollbar();
+            chart.scrollbarX.exportable = false;
+            chart.scrollbarY = new am4core.Scrollbar();
+            chart.scrollbarY.exportable = false;
+            
+            chart.cursor = new am4charts.RadarCursor();
+            chart.cursor.lineY.disabled = true;
+            
+            }); // end am4core.ready()
+            </script>
+    </body>
+</html>

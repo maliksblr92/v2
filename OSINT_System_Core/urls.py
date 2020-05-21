@@ -57,7 +57,10 @@ urlpatterns = [
     path('find_object/',views.Find_Object.as_view(), name='find_object'),
     path('link_object/',views.Link_Object.as_view(), name='link_object'),
     path('share_resource/',views.Share_Resource.as_view(), name='share_resource'),
-path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
+    path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
+    path('logged_ips/', views.Logged_Ips.as_view(), name='logged_ips'),
+
+
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
     path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
@@ -65,12 +68,23 @@ path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
     path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
 
+
     # ahmed start
     path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('main/', views.main, name='main'),
     path('main_1/', views.main_1, name='main_1'),
     path('main/heatmap/', views.mainHeatMap, name='mainHeatMap'),
     path('newsmonitoring/', views.newsMonitor, name='newsMonitor'),
+    path('top_news/', views.topNews, name='topNews'),
+    path('getTrendsByCountry/', views.getTrendsByCountry, name='getTrendsByCountry'),
+    path('getYoutubeTrends/', views.getYoutubeTrends, name='getYoutubeTrends'),
+    path('update_micro_crawler_stats/',views.update_micro_crawler_stats,name='update_micro_crawler_stats'),
+    path('update_internet_stats/',views.update_internet_stats,name='update_internet_stats'),
+    path('update_dashboard_donutchart/',views.update_dashboard_donutchart,name='update_dashboard_donutchart'),
+    path('worldwide_twitter_hashtags/',views.get_worldwide_hashtags,name='worldwide_twitter_hashtags'),
+    path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
+    path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
+    path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
     # ahmed end
 ]
 

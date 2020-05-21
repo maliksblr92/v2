@@ -1,297 +1,248 @@
 {% extends 'OSINT_System_Core/additional_templates/dashboard_base.html' %}
- {% load static %}
-
-
+{% load static %}
 {% block content%}
-
-
-<div class="container-fluid">
-    <div class="row">
-   <div class="col-md-1"></div>
-   <div class="col-md-10 bg-dark text-center header m-0 p-0">
-   <img src=" {% static 'Additional_assets/dashboard/images/Asset 722.svg'%}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-   </div>
-      <div class="col-md-1"></div>
- </div>
-
-   <div class="row mt-2">
-     <div class="col-md-3  ">
-
-
-       <div class="row border border-warning card1_row ">
-        <div class="col-md-12 bg-white text-dark t text-center card_headers">Social Media </div>
-         <div class="col-md-12 card1_col2" >
-           <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div>
-         </div>
-       </div>
+  <div class="container-fluid">
+   
+      <div class="row mt-2">
+        <div class="col-md-3  ">
+          <div class="row border border-white card1_row ">
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Google Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"onclick="autoupdate_google_trends()" >
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <!-- <div class="hashtag_chart" style="background-color: transparent!important;height: 250px;" id="donut"></div> -->
+              
 
 
 
-       <div class="row border border-warning card1_row ">
-        <div class="col-md-12 bg-white text-dark text-center card_headers">Youtube Top Videos  </div>
-         <div class="col-md-12 card1_col2" >
 
-          <div class="row p-1" style="background-color: transparent!important;height: 250px;overflow-y:auto!important;overflow-x:hidden" id="youtube_trends">
-            {% for i in youtube_trends.trends %}
+            
+                <div class="col-md-12 card1_col2 " >
+                  <div class="row mt-1 pl-1 pr-1 "style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                    <div class="row mt-1 pl-1 pr-1 "  id="trends_by_google"  style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                      {% for i in  google_trends.top_Trends %}
+                      {% for x in i %}
+                      
+                    
+                     
+                        <div class="col-md-12 mt-1">
+                          <div class="row">
+                            
+                            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                              <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                            {% comment %} {{x.keywords}} 
+                            {% endcomment %}
+                            N/A
+                              </span>
+                              <!-- <a  href=""class="badge badge-light ">View</a> -->
+                            </div>
+                            <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                              <a target="_blank" class="text-white font-weight-bold nav-link" style="font-size: 12px;" href="{{x.article_link}}">{{x.article_name}}</a></div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        {% endfor  %}
+                      </div>
+                  </div>
+                </div>
+             
 
 
-  <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
-    <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">{{i.views}}
 
-    </span>
-    <a  href="{{i.video_link}}"class="badge badge-warning ">View</a>
-  </div>
-  <div class="col-md-9 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
-    <span class="text-white font-weight-bold d-flex flex-row justify-content-start     align-items-center"style="font-size:11px;">{{i.video_name}}</span>
-   <span class="w-100 d-flex flex-row justify-content-center align-items-center">
- <img src="{{i.thumbnail_directory}}" class="img-fluid w-25" style="height: 40px;width:40px;border-radius:5px;" />
-    <span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-start     align-items-center"style="font-size:11px;">Channel : {{i.channel_name}}</span>
-   </span>
-  </div>
 
-            {% endfor %}
 
+
+
+            </div>
           </div>
-
-         </div>
-       </div>
-
-
-
-
-
-
-       <div class="row border border-warning card1_row  mt-2">
-           <div class="col-md-12 bg-white text-dark   card_headers"><span class="text-white float-left"style="font-size:14px;">Twitter Top  Trends </span><button type="button" class="float-right btn btn-primary btn-sm m-1"id="refesh_world_wide_trends_btn">Refresh</button></div>
-         <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
-           <div class="row mt-1 pl-1 pr-1 " id="recent_trends_worldwide">
-
-            {% for i in  twitter_top_hastags %}
-            <div class="col-md-12 mt-1">
-              <div class="row">
-                <div class="col-md-2  m-0 p-0 custom_center">
-                  <span class="bg-dark text-white custom_center border border-warning font-weight-bold "style="border-radius:50%;height:40px;width:100%;font-size:12px;">{{i.count}}</span>
-                </div>
-                <div class="col-md-10 border border-warning m-0  social_posts_post custom_center"style="overflow: hidden;">
-                  <a class="text-white font-weight-bold nav-link" href="{{i.href}}">{{i.name}}"</a></div>
-                </div>
+          <div class="row border border-white card1_row ">
+            <div class="col-md-12 bg-white text-dark text-center card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Youtube Top Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn"id="refesh_youtube_trends">Refresh</button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <div class="row p-1" style="background-color: transparent!important;height: 280px;overflow-y:auto!important;overflow-x:hidden" id="youtube_trends">
+                {% for i in youtube_trends.top_Trends %}
+                  <div class="col-md-3 mt-1 d-flex flex-column justify-content-center align-items-center border border-white" style="border-radius:5px;">
+                    <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                      {{i.views}}
+                    </span>
+                    <a target="_blank"  href="{{i.video_link}}"class="badge badge-light ">View</a>
+                  </div>
+                  <div class="col-md-9 mt-1 d-flex flex-column justify-content-center align-items-center border border-white" style="border-radius:5px;">
+                    <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:11px;">
+                      {{i.video_name}}
+                    </span>
+                    <span class="w-100 d-flex flex-row justify-content-center align-items-center">
+                      <img src="{{i.thumbnail_directory}}" class="img-fluid w-25" style="height: 40px;width:40px;border-radius:5px; float: left;" />
+                      <span class="w-75 text-white font-weight-bold d-flex flex-row justify-content-end lign-items-center"style="font-size:11px;">
+                        Channel : {{i.channel_name}}
+                      </span>
+                    </span>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor  %}
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-md-6">
-
-
-            <div  id="chartdiv" style="width: 100%" ></div>
-
-
-     </div>
-
-     <div class="col-md-3 ">
-
-
-       <div class="row border border-warning card2_row">
-        <div class="col-md-12 bg-warning text-white text-center card_headers">Hastag Chart </div>
-         <div class="col-md-12 card1_col2" >
-           <div class=" " id="youtube_charts" style="background-color: transparent!important;height: 250px;"></div>
-
-       </div>
-     </div>
-
-
-     <div class="row border border-warning card2_row">
-      <div class="col-md-12 bg-warning text-white text-center card_headers">Reddit Top Trends </div>
-       <div class="col-md-12 card1_col2"style="height: 250px;" >
-
-     <div class="row"  id="reddit_trends">
-      {% for i in reddit_top_post.top_trends %}
-        <div class="col-md-12 " >
-          <div class="row p-1 ">
-            <div class="col-md-3 border "style="border-radius:5px">
-             <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center   "style="font-size:10px;">
-               {{i.author_fullname}}
-             </span>
-             <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">
-              {{i.count}}
-             </span>
-            </div>
-            <div class="col-md-9 border d-flex flex-row justify-content-start align-items-center "style="border-radius:5px">
-             <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">{{i.title}}</span>
             </div>
           </div>
+          <div class="row border border-white card1_row">
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">World-Wide Twitter Top Hashtags <br>
+                <span class="text-warning"style="font-size:10px;"id="worldwide_hashtags_updatedtime"></span></span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" onclick="autoupdate_world_wide_trends()"id="refesh_world_wide_trends_btn">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2 " >
+              <div class="row mt-1 pl-1 pr-1 " id="recent_trends_worldwide" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                <div class="row mt-1 pl-1 pr-1 " id="trends_by_world" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+                  {% for i in  worldwide_hashtags %}
+                    
+                    <div class="col-md-12 mt-1">
+                      <div class="row">
+                        
+                        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                          <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                            {{i.count}}
+                          </span>
+                          <a  href="{% url 'Data_Processing_Unit:get_hashtag_tweets' hashtag_name=i.name %}" onclick="" target="_blank"class="badge badge-light">View</a>
+                        </div>
+                        <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                          <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}" target="_blank">{{i.name}}</a></div>
+                        </div>
+                      </div>
+                    {% endfor  %}
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div  id="chartdiv" style="width: 100%" ></div>
+        </div>
+        <div class="col-md-3 ">
+          <div class="row border border-white  card1_row ">
+            <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Hastag Chart </div> -->
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Targets </span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="donut_chart_btn">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2" >
+              <div class=" " id="youtube_charts" style="background-color: transparent!important;height: 250px;"></div>
+            </div>
+          </div>
+          
+          <div class="row border border-white card1_row ">
+            <!-- <div class="col-md-12 bg-warning text-white text-center card_headers">Reddit Top Trends </div> -->
+            <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+              <span class="float-left"style="font-size:14px;">Reddit Top Trends</span>
+              <button type="button" class="float-right btn btn-primary btn-sm m-1 small_btn" id="">
+              Refresh
+              </button>
+            </div>
+            <div class="col-md-12 card1_col2"style="height: 280px;overflow-y:auto;" >
+              
+              <div class="row p-1"  id="reddit_trends" >
+                {% for x in reddit_trends.top_Trends %}
+                {% for i in x.trends %}
+         
+                  <div class="col-md-12 mt-1" >
+                    <div class="row">
+                      
+                      <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-column justify-content-center align-items-center"style="font-size:11px;">
+                          <span style="font-size:10px" class="text-center">Total Comments</span>
+                          <span>{{i.statistics.num_comments}}</span>
+                       
+                        </span>
+                        <span> <a  target="_blank" href="{{i.post_link}}"class="badge badge-light ">View</a></span>
+                       
+                      </div>
+                      <div class="col-md-9 border border-white m-0  social_posts_post_reddit"style="overflow-y: auto; flex-direction: column; font-size: 13px;">
+                        <div class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center" style="font-size:10px" > 
+                          <span class="text-warning"> Username: </span> <span>{{i.poster.username}}</span></div>
+                        <div class="text-white font-weight-bold d-flex flex-column" style="font-size:10px;">  <span class="text-warning">Post Text: </span><span>{{i.text}}</span></div>
+                        <div class="text-white font-weight-bold d-flex flex-row" style="font-size:10px;">  <span  class="text-warning">Sub Reddit Name : </span><span>{{i.subreddit.name}}</span><span >   <a style="font-size:10px;" href="{{i.subreddit.link}}"class="badge badge-light ">View Sub Reddit</a></span></div>
 
+                      </div>
+                      {% comment %}
+                      <div class="col-md-3 border border-white" style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center" style="font-size:10px;">
+                          {{i.author_fullname}}
+                        </span>
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center  "style="font-size:10px;">
+                          {{i.statistics.score}}
+                        </span>
+                      </div>
+                      <div class="col-md-9 border border-white d-flex flex-row justify-content-start align-items-center "style="border-radius:5px;">
+                        <span class="text-white font-weight-bold d-flex flex-row justify-content-start align-items-center"style="font-size:10px;">
+                          {{i.text}}
+                        </span>
+                      </div>
+                    {% endcomment %}
+                  </div>
+                  
+                </div>
+              {% endfor %}
+              {% endfor %}
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        <div class="row border border-white card1_row">
+          <div class="col-md-12 bg-white text-dark card_headers custom_card_header">
+            <span class="float-left"style="font-size:14px;">Twitter Country/State Top  Trends </span>
+            <select name="country_selector" id="country_selector"  required="required" class="form-control form-control-sm" style="width:150px;">
+              <option value="">Select Country</option>
+              {% for i in countries_list %}
+                <option value="{{i}}"> {{i}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-12 card1_col2 ">
+            <div class="row mt-1 pl-1 pr-1 " id="trends_by_country" style="height: 280px; overflow-y:auto!important;overflow-x:hidden">
+              {% for i in  twitter_country_hashtags %}
+                
+                <div class="col-md-12 mt-1">
+                  <div class="row">
+                    
+                    <div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;">
+                      <span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">
+                        {{i.count}}
+                      </span>
+                      <a target="_blank"  href="{% url 'Data_Processing_Unit:get_hashtag_tweets' hashtag_name=i.name%}" target="_blank"class="badge badge-light ">View</a>
+                    </div>
+                    <div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;">
+                      <a class="text-white font-weight-bold nav-link" style="font-size: 14px;" href="{{i.href}}" target="_blank">{{i.name}}</a></div>
+                    </div>
+                  </div>
+                {% endfor  %}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {% endfor %}
-
- </div>
-
-     </div>
-   </div>
-
-
-     <div class="row border border-warning card1_row  mt-2">
-        <div class="col-md-12 bg-warning text-white text-center card_headers">Social Posts </div>
-       <div class="col-md-12 card1_col2 " style="height: 295px;overflow-y: auto">
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-
-          <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-          <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-          <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-          <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-          <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-         <div class="row mt-1 pl-1 pr-1 ">
-           <div class="col-md-12">
-             <div class="row">
-               <div class="col-md-2  m-0 p-0 custom_center">
-                 <img src=" {% static 'Additional_assets/dashboard/images/profile woman (3).svg'%}"  class="m-0 p-0 social_posts_img" style="" alt="" />
-               </div>
-               <div class="col-md-10 border border-warning m-0  text-white social_posts_post"style="overflow: hidden;">
-                 ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-               </div>
-             </div>
-
-           </div>
-         </div>
-       </div>
-     </div>
-   </>
-     </div>
-     <div class="row mt-2">
-   <div class="col-md-1"></div>
-   <div class="col-md-10 bg-dark text-center footer  m-0 p-0">
-  <p class="font-weight-bold text-white mt-2">BIG VIEW </p>
-   </div>
-      <div class="col-md-1"></div>
- </div>
-
-   <div class="flexbox">
-   </div>
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <div class="flexbox">
+      </div>
+      
     {% endblock%}

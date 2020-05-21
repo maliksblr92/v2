@@ -1,0 +1,174 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_fetchtarget.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8 d-flex" style="">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
+            <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
+                <div class="row">
+                    <div class="mydiv col-md-12 glowing_border "
+                        style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
+                        <div class="row">
+                            <div class="col-md-12 markTargetDiv ">
+                                <!-- FIrst Row of the Main COntent-->
+                                <div class="row">
+                                    <!-- DIv for Mark Target Section-->
+                                    <div class="col-md-10 topcontentbar  " style="border-radius:15px 0 0 0;">
+                                        <h5 class=" myH5"> Target Fetch View</h5>
+                                    </div>
+                                    <div class="col-md-2"
+                                        style="background-color:#243F52;padding-left:1.5rem; border-top-right-radius:15px;">
+                                        <!--RIGHT SECTION FOR icons-->
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
+                                                <a href="#"><i style="color:white; opacity:0.8;"
+                                                        class="fas fa-list-ul fa-2x"></i> </a>
+
+                                            </div>
+                                            <div class="col-md-6 col-md-offset-1" style="padding:10px;">
+                                                <i style="color:white; opacity:0.8;"
+                                                    class="fas fa-grip-vertical fa-2x"></i>
+                                            </div>
+                                        </div>
+                                        <!--END OF GRID AND TILE VIEW RIGHT section -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- This is The Form Section below top-section-->
+                            <div class="row ml-4 mt-4 mr-4">
+                                <div class="col-md-12">
+                                    <div class="row">
+
+
+                                        <!-- Just like card 1  start looping here -->
+                                        {% for target in targets %}
+                                        <div class="col-md-6">
+                                            <!-- inside CaRD DIV-->
+                                            <div class="row mr-2">
+                                                <div class="col-md-2  glowing_border d-flex flex-column justify-content-around align-items-center"
+                                                    style="border-radius:15px 0px 0px 15px;">
+
+                                                    <button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#linkto_portfolio"><i class="fa fa-chain"></i></button>
+                                                
+                                                    <button type="button" class="btn btn-primary btn_share custom_icons" id="btn_share" data-id="{{ target.0.id }}" data-toggle="modal" data-target="#share_resource"><i class="fa fa-share"></i></button>
+                                                    
+                                                    {% if target.1.GTR|lower == 'facebook'%}
+                                                            {% if target.1.target_type|lower == 'profile'%}
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                            {% elif target.1.target_type|lower == 'page'%}
+                                                             <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                            {% elif target.1.target_type|lower == 'group'%}
+                                                            <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+
+                                                            {% endif %}
+                                                    {% elif target.1.GTR|lower == 'twitter'%}
+                                                    <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+
+                                                    {% elif target.1.GTR|lower == 'instagram'%}
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+
+                                                    {% elif target.1.GTR|lower == 'linkedin'%}
+
+
+                                                            {% if target.1.target_type|lower == 'profile'%}
+                                                                <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+                                                            {% elif target.1.target_type|lower == 'company'%}
+                                                            <a class="btn btn-primary custom_icons" href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}" role="button"><i class="fa fa-eye"></i></a>
+
+                                                            {% endif %}
+                                                    {% elif target.1.GTR|lower == 'reddit'%}
+
+
+                                                    {% else %}
+
+
+                                                    {% endif %}
+
+
+                                                    </div>
+                                                <!-- Div Right part-->
+                                                <div class="col-md-10 glowing_border"
+                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    <div class="row">
+                                                        <div class="col-md-4 d-flex flex-column justify-content-center">
+                                                            <img class=""
+                                                                style="height:120px; width:120px; border-radius: 50%;"
+                                                                {% if target.0.profile_picture_url.profile_picture %}
+                                                                  src="{{ target.0.profile_picture_url.profile_picture }}" alt="">
+                                                                 {% else %}
+                                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                                                {% endif %}
+
+                                                            <!-- src="" alt=""> -->
+
+
+
+
+                                                        </div>
+                                                        <div class="col-md-8">
+
+                                                            <ul class="" style="margin-top:5%;  color:white">
+                                                                <li>Name :{{ target.0.name }} </li>
+                                                                <li>Username :{{ target.0.username }} </li>
+                                                                <li>Website :{{ target.1.GTR }} </li>
+                                                                <li>Target Type :{{ target.1.target_type }}</li>
+                                                                <li>Added On :{{ target.1.created_on }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" style="width:140px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <!--END OF CARD 1-->
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--my code above-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

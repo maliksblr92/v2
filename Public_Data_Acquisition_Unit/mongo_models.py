@@ -1,6 +1,7 @@
 from mongoengine import *
 import datetime
 from OSINT_System_Core.publisher import publish
+import random
 
 DATABASE = ''
 USERNAME = ''
@@ -8,6 +9,7 @@ PASSWORD = ''
 HOST_IP = ''
 PORT = ''
 
+import os
 disconnect('default')
 #CONNECT TO MONGO DB
 connect(db='OSINT_System',host='192.168.18.20', port=27017)
@@ -152,7 +154,11 @@ class Supported_Website(Document):
 
     @staticmethod
     def get_all_supported_sites():
-        return Supported_Website.objects
+        return Supported_Website.objects()
+
+    @staticmethod
+    def get_target_type_by_index(website_name,index):
+        return Supported_Website.objects(name=website_name.capitalize()).first().target_type[int(index)]
 
 class Global_Target_Reference(Document):
 
@@ -206,6 +212,40 @@ class Global_Target_Reference(Document):
     def target_added_count_by_website(website_id):
         return Global_Target_Reference.objects(website__id=website_id)
 
+    @staticmethod
+    def get_targets_by_website_name_count(website='facebook'):
+        GTRS = Global_Target_Reference.objects
+        objects = []
+        for gtr in GTRS:
+            if (gtr.website.name.lower() == website):
+                objects.append(gtr)
+
+        return len(objects)
+
+    @staticmethod
+    def target_sites_percetage_share():
+        total_targets_count = len(Global_Target_Reference.targets_added_all_time())
+        sites = Supported_Website.get_all_supported_sites()
+        data_resp = []
+
+        for site in sites:
+            site_count = Global_Target_Reference.get_targets_by_website_name_count(site.name.lower())
+            temp_dict = {site.name.lower():(site_count/total_targets_count)*100}
+            data_resp.append(temp_dict)
+        return data_resp
+
+    @staticmethod
+    def target_count_for_all_sites():
+        sites = Supported_Website.get_all_supported_sites()
+        data_resp = []
+
+        for site in sites:
+            site_count = Global_Target_Reference.get_targets_by_website_name_count(site.name.lower())
+            temp_dict = {site.name.lower(): site_count}
+            data_resp.append(temp_dict)
+        return data_resp
+
+
 #.....................................................................BASE DOCUMENT SECTION STARTED...........................................................
 
 class Facebook_Target(Document):
@@ -254,6 +294,52 @@ class Facebook_Target(Document):
         return Facebook_Target.objects.order_by('created_on')
 
 
+
+
+class Youtube_Target(Document):
+
+
+    GTR = ReferenceField(Global_Target_Reference) # GTR should be unique for each facebook target
+    is_expired = BooleanField(default=False)
+    is_enabled = BooleanField(default=True)
+    need_screenshots = BooleanField(default=False)
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    expired_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
+
+    meta = {'allow_inheritance': True}
+
+    #def __init__(self):
+    #    super().__init__()
+
+    def initialize_basic(self,kwargs):
+
+        # initializing default attributes
+
+        if 'is_expired' in kwargs: self.is_expired = kwargs['is_expired']
+        if 'is_enabled' in kwargs: self.is_enabled = kwargs['is_enabled']
+        if 'need_screenshots' in kwargs: self.need_screenshots = kwargs['need_screenshots']
+        if 'created_on' in kwargs: self.created_on = kwargs['created_on']
+        if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
+        if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
+        if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+
+    """
+    define all the function related to all the targets of facebook in the bellow section of this class
+    """
+    def am_i_expired(self):
+        return self.is_expired
+
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
+
+
+    @staticmethod
+    def get_all_targets():
+        return Facebook_Target.objects.order_by('created_on')
 
 class Reddit_Target(Document):
 
@@ -474,6 +560,74 @@ class Facebook_Profile(Facebook_Target):
     
     """
 
+    meta = {'indexes': [
+        {'fields': ['$username', "$user_id"],
+         'default_language': 'english',
+         'weights': {'username': 10, 'user_id': 2}
+         }
+    ]}
+
+    @staticmethod
+    def find_object(query):
+        return Facebook_Profile.objects.search_text(query)
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Profile.objects(is_expired=True))
+
+class Youtube_Channel(Youtube_Target):
+    user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
+    username = StringField(default='null')  # make username unique for soul one facebook profile target
+    name = StringField(default='null')
+    url = StringField(default='null')
+    target_type = StringField(default='null')
+
+    # def __init__(self):
+    #    super().__init__()
+
+    def __str__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def __repr__(self):
+        return self.username if self.username != 'null' else self.user_id
+
+    def create(self, GTR, kwargs):
+        # super().__init__(GTR)
+        try:
+            if ('user_id' in kwargs or 'username' in kwargs):
+                # if(kwargs['user_id'] is not None or kwargs['username'] is not None):
+                # above condition confirms that username or user_id must be there to create a profile target
+
+                if 'user_id' in kwargs: self.user_id = kwargs['user_id']
+                if 'username' in kwargs: self.username = kwargs['username']
+                if 'name' in kwargs: self.name = kwargs['name']
+                if 'url' in kwargs: self.url = kwargs['url']
+                # if 'target_type' in kwargs : self.target_type = kwargs['target_type']
+
+                self.GTR = GTR
+                self.target_type = GTR.target_type
+                super().initialize_basic(kwargs)
+
+                self.save()
+                publish('target for {0} created successfully'.format(self.username), message_type='control',
+                        module_name=__name__)
+                return self
+            else:
+                # raise Exception('unable to create a facebook profile, username or user_id is not provided')
+                # print('unable to create a facebook profile, username or user_id is not provided')
+                publish('unable to create a youtube profile, username or user_id is not provided',
+                        message_type='warning', module_name=__name__)
+                return None
+        except Exception as e:
+            publish(str(e), message_type='error', module_name=__name__)
+
+    """
+    define all the function related to all the profile targets of facebook in the bellow section of this class
+
+    """
+    @staticmethod
+    def expired_targets_count():
+        return len(Youtube_Channel.objects(is_expired=True))
 
 class Facebook_Page(Facebook_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -525,6 +679,10 @@ class Facebook_Page(Facebook_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Page.objects(is_expired=True))
+
 
 class Facebook_Group(Facebook_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -576,6 +734,10 @@ class Facebook_Group(Facebook_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Facebook_Group.objects(is_expired=True))
+
 class Facebook_Search(Facebook_Target):
 
 
@@ -613,7 +775,7 @@ class Facebook_Search(Facebook_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format('facebook search'), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a facebook search, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -687,6 +849,9 @@ class Reddit_Profile(Reddit_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Reddit_Profile.objects(is_expired=True))
 
 class Reddit_Subreddit(Reddit_Target):
     user_id = StringField(default='null')  # make user_id unique for soul one facebook profile target
@@ -738,6 +903,9 @@ class Reddit_Subreddit(Reddit_Target):
     define all the function related to all the profile targets of reddit in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Reddit_Subreddit.objects(is_expired=True))
 
 #.....................................................................Twitter Targets Sections...........................................................
 
@@ -778,7 +946,7 @@ class Twitter_Profile(Twitter_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a twitter profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -790,6 +958,9 @@ class Twitter_Profile(Twitter_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Twitter_Profile.objects(is_expired=True))
 
 #.....................................................................Instagram Targets Sections...........................................................
 
@@ -829,7 +1000,7 @@ class Instagram_Profile(Instagram_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a instagram profile, username or user_id is not provided', message_type='warning', module_name=__name__)
@@ -840,6 +1011,10 @@ class Instagram_Profile(Instagram_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Instagram_Profile.objects(is_expired=True))
+
 #.....................................................................Linkedin Targets Sections...........................................................
 
 class Linkedin_Profile(Linkedin_Target):
@@ -880,7 +1055,7 @@ class Linkedin_Profile(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -893,6 +1068,10 @@ class Linkedin_Profile(Linkedin_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Linkedin_Profile.objects(is_expired=True))
 
 
 class Linkedin_Company(Linkedin_Target):
@@ -933,7 +1112,7 @@ class Linkedin_Company(Linkedin_Target):
 
                 self.save()
                 publish('target for {0} created successfully'.format(self.username), message_type='control',module_name=__name__)
-                return self.id
+                return self
             else:
                 # raise Exception('unable to create a facebook profile, username or user_id is not provided')
                 publish('unable to create a linkedin profile, username or user_id is not provided',message_type='warning', module_name=__name__)
@@ -946,6 +1125,10 @@ class Linkedin_Company(Linkedin_Target):
     define all the function related to all the profile targets of facebook in the bellow section of this class
 
     """
+    @staticmethod
+    def expired_targets_count():
+        return len(Linkedin_Company.objects(is_expired=True))
+
 
 #.....................................................................Custom Targets Sections...........................................................
 
@@ -1013,6 +1196,13 @@ class Keybase_Crawling(Document):
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
 
+    def make_me_expire(self):
+        self.is_expired = True
+        self.save()
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Keybase_Crawling.objects(is_expired=True))
 
 
 class Dynamic_Crawling(Document):
@@ -1099,6 +1289,10 @@ class Dynamic_Crawling(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    @staticmethod
+    def expired_targets_count():
+        return len(Dynamic_Crawling.objects(is_expired=True))
 #.....................................................................Periodic Targets Models...........................................................
 
 class Periodic_Targets(Document):
@@ -1117,6 +1311,12 @@ class Periodic_Targets(Document):
     @staticmethod
     def get_all_periodic_task():
         return Periodic_Targets.objects
+    
+
+    def delete_periodic_task(self):
+        self.target_reff.make_me_expire()
+        self.delete()
+   
 
 class Share_Resource(Document):
 
@@ -1146,9 +1346,8 @@ class Rabbit_Messages(Document):
 
     message_type = StringField(default='info')
     message_data = DictField()
+    process_id = IntField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
-
-
 
 
     @staticmethod
@@ -1161,7 +1360,183 @@ class Rabbit_Messages(Document):
 
     @staticmethod
     def get_top_messages(top=10,message_type='message'):
-        return Rabbit_Messages.objects(message_type=message_type).order_by('-created_on')[:top]
+
+        if(message_type == 'alert'):
+            return Rabbit_Messages.objects(Q(message_type=message_type)).order_by('-id')[:top]
+
+        else:
+            return Rabbit_Messages.objects(Q(message_type=message_type) & Q(process_id=os.getpid())).order_by('-id')[:top]
+
+class Ip_Logger(Document):
+
+    title = StringField()
+    description = StringField()
+    input_url = StringField()
+
+    payload_data = DictField()
+    is_ip_logged = BooleanField(default=False)
+    logged_response = DictField()
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+    start_date = DateField(default=datetime.date.today())
+    end_date = DateField(default=datetime.date.today())
+
+    @staticmethod
+    def get_all_loggers():
+        return Ip_Logger.objects()
+
+    @staticmethod
+    def get_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=True)
+
+    @staticmethod
+    def get_not_logged_loggers():
+        return Ip_Logger.objects(is_ip_logged=False)
+
+class Blocked_Urls(Document):
+
+    title = StringField()
+    description = StringField()
+    url = StringField()
+
+    created_on = DateField(default=datetime.datetime.utcnow())
+    updated_on = DateField(default=datetime.datetime.utcnow())
+
+    @staticmethod
+    def get_all_blocked_urls():
+        return Blocked_Urls.objects()
+
+    @staticmethod
+    def get_object_by_id(obj_id):
+        return Blocked_Urls.objects(id=obj_id)
+
+
+class Timeline_Posts(Document):
+
+    target_site = StringField()
+    target_type = StringField()
+    gtr_id = StringField(unique=True)
+
+    username = StringField(unique=True)
+    title = StringField()
+    posts = ListField()
+    all_seen = BooleanField(default=False)
+    seenn_indexes = ListField() # it stores the indexes of the "posts list field" indexes in this list will considered seen
+
+
+    @staticmethod
+    def get_qualified_objects():
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_objs = []
+
+        tl_objs = Timeline_Posts.objects(all_seen=False)
+        for obj in tl_objs:
+            for post in obj.posts:
+                if(not post['seen']):
+                    qualified_objs.append(obj)
+
+
+        return qualified_objs
+
+    @staticmethod
+    def get_qualified_posts(top=10):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        for obj in tl_objs:
+
+
+            for post in obj.posts:
 
 
 
+                if (not post['seen']):
+                    count = count +1
+                    qualified_posts.append({'post':post,'object_id':obj.id})
+                    post['seen'] = True
+                    obj.save()
+
+                if (count >= top):
+                    break
+
+        return qualified_posts
+
+    @staticmethod
+    def get_qualified_posts_randomly(top=20):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        for obj in tl_objs:
+
+            for index,post in enumerate(obj.posts):
+
+                if (not post['seen']):
+                    #count = count + 1
+
+                    if(random.randint(10,100)>50):
+
+                        qualified_posts.append({'post': post, 'object_id': obj.id,'post_index':index})
+                        post['seen'] = True
+                        obj.save()
+
+
+                if (len(qualified_posts) > top):
+                    break
+
+        return qualified_posts
+
+    @staticmethod
+    def get_qualified_posts_with_hard_random(top=20):
+        """
+        qulified objects are those objects which have atleast one unseen post
+
+        :return: objects
+        """
+
+        qualified_posts = []
+
+        tl_objs = Timeline_Posts.objects()
+        count = 0
+
+        while(len(qualified_posts) < top):
+            for obj in tl_objs:
+
+                r_index = random.randint(0,len(obj.posts)-1)
+                print(r_index,len(obj.posts))
+                post = obj.posts[r_index]
+
+                if (not post['seen']):
+                    # count = count + 1
+
+
+                    qualified_posts.append({'post': post, 'object_id': obj.id, 'post_index': r_index})
+                    post['seen'] = True
+                    obj.save()
+
+                if (len(qualified_posts) > top):
+                    break
+
+        return qualified_posts

@@ -2,11 +2,28 @@
 {% load static %}
 {% block page_title%}Keybase Create{%endblock%}
 {% block head_dep %}
+<!-- Stylesheet -->
+<link rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+      crossorigin="anonymous">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+
+<!--  -->
 <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
 <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
 {% endblock %}
 {% block smallnavbar %}
+<style>
+    #keywords{
+        width: 100%!important;
+        width: 500px!important;
+    }
+</style>
+
+
+
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 d-flex" style="">
@@ -17,6 +34,7 @@
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
             <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
         </div>
+        
     </div>
     <div class="col-md-4 col-lg-4 col-xl-4"></div>
 </div>
@@ -42,128 +60,149 @@
                             <div style="width:100%;" class="container input1">
                                 <!-- textfield 1 -->
                                 <!-- title -->
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Title</span>
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Title</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            {% if ctx.title %}
+                                            <input type="text" id="title" class="form-control newinputdesign w-100"
+                                                 name="title" value="{{ctx.title}}">
+                                            {% else %}
+                                            <input type="text" name="title" id="title" class="form-control newinputdesign w-100"
+                                                placeholder="enter title here">
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    {% if ctx.title %}
-                                    <input type="text" id="title" class="form-control newinputdesign"
-                                        placeholder=" enter text here" name="title" value="{{ctx.title}}">
-                                    {% else %}
-                                    <input type="text" name="title" id="title" class="form-control newinputdesign"
-                                        placeholder="enter title here">
-                                    {% endif %}
                                 </div>
-
+                            
                                 <!--Tetfield 2 -->
                                 <!-- Topic -->
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Topic
-                                        </span>
+                                <div class="input-group pb-4 mb-2 d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Topic</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            {% if ctx.topic %}
+                                            <input type="text" id="title" class="form-control newinputdesign w-100 "
+                                                 name="title" value="{{ctx.title}}">
+                                            {% else %}
+                                            <input type="text" name="topic" id="topic" class="form-control newinputdesign w-100 "
+                                                placeholder="enter topic here">
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    {% if ctx.topic %}
-                                    <input type="text" class="form-control  newinputdesign" placeholder="Please enter"
-                                        name="topic" value="{{ctx.topic}}">
-                                    {% else %}
-                                    <input type="text" name="topic" id="topic" class="form-control newinputdesign"
-                                        placeholder="enter topic here">
-                                    {% endif %}
+                                    
+                                    
                                 </div>
-                                <!-- textfield 3 -->
-                                <!-- keywords -->
-
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Keywords</span>
-                                    </div>
-                                    <input id="keywords" name="keywords" type="text"
-                                        class="form-control  newinputdesign" placeholder=" enter text here">
-                                </div>
+                               
 
                                 <!--KEYWORDS TEGS SECTION-->
 
-                                <div class="tegscontainer" id="forkeywords">
-                                    <!-- tags will be here-->
-                                    {% for keyword in ctx.keywords %}
-                                    <span class="eachtag">
-                                        {{keyword}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
+                               
+                                <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center mt-2">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">keywords</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" data-role="tagsinput" value="" class="newinputdesign" id="keywords" name="keywords"/>
+                                           
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                   
+                                    
                                 </div>
+                               
 
                                 <!--Mentions SECTION-->
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Mentions
-                                        </span>
+                                
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Mentions</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" data-role="tagsinput" value="" class="newinputdesign"  id="mentions" name="mentions"/>
+                                            
                                     </div>
-                                    <input type="text" id="mentions" name="mentions"
-                                        class="form-control  newinputdesign" placeholder=" enter text here"
-                                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    
+                                 
                                 </div>
-                                <div class="tegscontainer" id="formentions">
-                                    {% for mention in ctx.mentions %}
-                                    <span class="eachtag">
-                                        {{mention}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                            </div>
+                               
 
                                 <!--HASHTAGS TEGS SECTION-->
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Tags
-                                        </span>
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Tags</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" data-role="tagsinput" value="" class="newinputdesign"  id="tags" name="tags" />
+                                            
+                                        </div>
                                     </div>
-                                    <input type="text" id="tags" name="tags" class="form-control  newinputdesign"
-                                        placeholder=" enter text here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                    
+                                    
+                                   
                                 </div>
-                                <div class="tegscontainer" id="fortags">
-                                    {% for hashtag in ctx.hashtags %}
-                                    <span class="eachtag">
-                                        {{hashtag}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                               
 
                                 <!--PHRASES SECTION-->
-                                <div class="input-group mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text newlabeldesign">Phrase
-                                        </span>
+                                <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Phrase</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <input type="text" data-role="tagsinput" value="" class="newinputdesign"  id="phrases" name="phrases" />
+                                            
+                                        </div>
                                     </div>
-                                    <input id="phrase" name="phrases" type="text" class="form-control  newinputdesign"
-                                        placeholder=" enter text here" aria-label="Recipient's username"
-                                        aria-describedby="basic-addon2">
+                                    
+                                   
                                 </div>
-                                <div class="tegscontainer" id="forphrases">
-                                    {% for phrase in ctx.phrases %}
-                                    <span class="eachtag">
-                                        {{phrase}}
-                                        <i class="delspan fas fa-trash-alt fa-1x tegicon"></i>
-                                    </span>
-                                    {% endfor %}
-                                </div>
+                              
 
                                 <!--DATE SECTION-->
 
-                                <div class="input-group   mt-2 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign">Expire on
-                                        </span>
-                                    </div>
-                                    <div class="datepicker date input-group ">
-                                        <input style="width:50%;" class="form-control  newinputdesign" type="text"
-                                            placeholder="Choose a reservation date" id="reservationDate" name="date">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text px-4"><i class="fas fa-calendar"></i></span>
+                                <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100">Expire on</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <div class="datepicker date input-group ">
+                                                <input  class="form-control   newinputdesign" type="text"
+                                                    placeholder="Choose a reservation date" id="reservationDate" name="date">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text "><i class="fas fa-calendar fa-3x"style=""></i></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    
+                                    
+                                    
                                 </div>
 
                                 <!--SUBMIT BUTTON  -->
@@ -186,6 +225,17 @@
 </div>
 {% endblock %}
 {% block foot_dep %}
+
+<!-- JavaScript -->
+
+<script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
+
 <script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
 <script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+
+<script>
+  
+    
+    </script>
+
 {% endblock %}

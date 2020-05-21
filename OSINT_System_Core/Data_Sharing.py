@@ -262,6 +262,9 @@ class Portfolio_Link(object):
             print(e)
             return None
 
+    @staticmethod
+    def resolve_intell_refference(beta_ref,beta_path):
+        return Portfolio_Link.ds.resolve_intell_reference(beta_reference=beta_ref,beta_path=beta_path)
 
 class Case_Include(object):
     pass

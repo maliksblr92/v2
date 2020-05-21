@@ -1,0 +1,114 @@
+{% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}"> {% endblock %} {% block smallnavbar %} {% comment %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div> {% endcomment %} {% endblock %} {% block belly %}
+    <style>
+    .glowing_border {
+    border: 1px solid #1cb5e0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 4px #1cb5e0;
+    -moz-box-shadow: 0px 0px 4px #1cb5e0;
+    box-shadow: 0px 0px 4px #1cb5e0;
+    }
+    .transparent {
+    background: transparent!important;
+    }
+    .custom_icons {
+    border: 1px solid #fff;
+    width: 40px;
+    border-radius: 5px;
+    height: 40px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+    }
+    </style>
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Time Line</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="row" id="timeline_content">
+
+
+        </div>
+
+
+    </div>
+<div class="row">
+            <div class="col-md-4 text-center">
+
+
+            </div>
+            <div class="col-md-4 mt-2 text-center d-flex flex-row justify-content-between align-items-center">
+                <button type="button" class="btn btn-outline-light  btn-lg" onclick="fetch_timeline_content(20)">Load More</button>
+                <span> <i class="fas fa-spinner fa-pulse fa-4x text-white "id="loading_icon"></i></span>
+            </div>
+            <div class="col-md-4 text-center">
+
+
+            </div>
+        </div>
+        
+   
+{% endblock %}>
+
+{% block foot_script %}  <script>
+
+
+    $(document).ready(function(){
+        console.log("function called")
+        fetch_timeline_content(20)
+    })
+    
+function fetch_timeline_content(top) {
+
+console.log("in timline content func")
+$('#loading_icon').show()
+var data = {'top':top};
+$.ajax({
+    url: '{% url 'Target_Management_System:timeline_fetch' %}',
+    data: data,
+    'success': (resp) => {
+
+            $('#timeline_content').append(resp)
+             console.log(resp)
+             $('#loading_icon').hide()
+           },
+
+});
+}
+
+
+
+
+
+</script>{% endblock %}

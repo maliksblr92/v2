@@ -1,0 +1,972 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+            
+            <!--        <script type="text/javascript">
+            $(document).ready(function() {
+            $('.accordion-item-1 .accordion-content').show();
+            });
+            </script> -->
+            <!-- facebook person target css start -->
+            <style>
+            
+            body {
+            background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            }
+            html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+            }
+            ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+            }
+            ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+            }
+            </style>
+            <style>
+            .wrapper {
+            background: transparent !important;
+            }
+            .background-gradient{
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            }
+            .background-gradient-dark{
+            background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+            }
+            .circle-dot1 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f35d5b;
+            }
+            .circle-dot2 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f6bd3a;
+            }
+            .circle-dot3 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #44cc45;
+            }
+            .fb-cover-img {
+            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 300px;
+            /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
+            /* z-index: 1; */
+            }
+            .profile-image-wrapper{
+            height: 150px;
+            width: 150px;
+            margin-top: -120px;;
+            border:5px solid #FEC134;
+            border-radius: 10px;
+            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }
+            /*            .profile-image-wrapper {
+            height: 150px;
+            width: 100%;
+            margin-top: -120px;
+            border:5px solid #FEC134;
+            border-radius: 10px;
+            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }*/
+            .profile-image-name {
+            font-size: 25px;
+            font-weight: bold;
+            ;
+            color: black;
+            margin-top: -50px;
+            letter-spacing: 3px;
+            ;
+            }
+            .custom-1 {
+            height: 200px;
+            width: 100%;
+            border: 1px solid red;
+            background-color: white;
+            padding: 20px;
+            ;
+            }
+            .small-txt {
+            font-size: 11px !important;
+            }
+            .smaller-txt {
+            font-size: 10px !important;
+            }
+            .material-icons {
+            color: #007bff;
+            font-size: 16px;
+            ;
+            }
+            a {
+            text-decoration: none !important;
+            }
+            .border-right {
+            border-right: 1px solid black;
+            ;
+            }
+            .border-left {
+            border-left: 1px solid black;
+            ;
+            }
+            .custom-center-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+            .custom-start-center {
+            display: flex !important;
+            justify-content: start !important;
+            align-items: center !important;
+            }
+            .custom-end-center {
+            display: flex !important;
+            justify-content: end !important;
+            align-items: center !important;
+            }
+            .custom-row-center-center {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+            }
+            .custom-column-center-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            }
+            .custom-column-start-start {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: start !important;
+            }
+            .custom-column-start-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: center !important;
+            }
+            .custom_active_text > i{
+            color: #FEC134 !important;
+            }
+            .custom_active_text.active > i{
+            color: #FEC134 !important;
+            }
+            div.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            }
+            </style>
+            <!-- facebook person target css end -->
+        </head>
+        <body>
+            <div class="container-fluid wrapper "> <!-- DIV 1 SRART -->
+
+            <!-- start of tabs  -->
+            <div class="col-md-12 pl-5 pr-5">
+                <div class="row border border-warning mt-2 ml-1 mr-1" style="border-radius:10px 10px 10px 10px;">
+                    <div class="col-md-12  p-0 ">
+                        <!-- TABS START-->
+                        <div class="sticky">
+                            
+                            <ul class="nav nav-fix border nav-tabs m-0 p-0 d-flex flex-row justify-content-between background-gradient-dark align-items-center"
+                                style="height:40px;border-radius:10px 10px 0px 0px ;">
+                                <li class=" active   ">
+                                    <a class="nav-link custom_active_text" href="#profile">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
+                                        Profile Informnation
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class=" active   ">
+                                    <a class="nav-link custom_active_text" href="#friends">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
+                                        Friends
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class=" active  ">
+                                    <a class="nav-link custom_active_text" href="#related">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-info-circle text-warning fa-2x">
+                                        Related Informnation
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class=" active">
+                                    <a class="nav-link custom_active_text" href="#posts">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-sticky-note text-warning fa-2x">
+                                        Posts
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="active ">
+                                    <a class="nav-link custom_active_text" href="#close_asscoiates">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
+                                        Close Associates
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class=" active">
+                                    <a class="nav-link custom_active_text" href="#checkins">
+                                        <i class="material-icons text-dark font-weight-bold fa fa-check-double text-warning fa-2x">
+                                        Check-ins
+                                        </i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- TABS END -->
+                        <div class="background-gradient pl-4 pr-4">
+                            <!-- PROFILE START -->
+                            <div id="profile" class="row pt-5">
+                                <h1 class="text-white font-weight-bold">Profile</h1>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text-warning">Profile Overview Summary </i></h3>
+                                    <p class="text-white">{{profile.profile_overview_summary}}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text-warning">Profile Friends Summary </i></h3>
+                                    <p class="text-white">{{profile.profile_friends_summary}}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text-warning">Profile Intrest Summary </i></h3>
+                                    <p class="text-white">{{profile.profile_interest_summary}}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text-warning">Profile Close Associates Summary </i></h3>
+                                    <p class="text-white">{{profile.profile_close_associates_summary}}</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text-warning">Profile Behaviour Summary </i></h3>
+                                    <p class="text-white">{{profile.behaviour}}</p>
+                                </div>
+                                
+                            </div>
+                            <!-- PROFILE END -->
+                            <!-- FRIENDS START -->
+                            <div class="row pt-5" id="friends">
+                                <div class="col-md-12">
+                                    <h1 class="text-white font-weight-bold">Friends: {{profile.friends | length}}</h1>
+                                </div>
+                                {% for f in profile.friends  %}
+                                    <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                        style="height:100px;">
+                                        
+                                            <img src="{{f.media_directory}}" style="height:80px;width:80px;border-radius: 50%;" class="img-fluid" />
+                                            
+                                        
+                                     
+                                        <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                            <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                Name: {{f.name}}
+                                            </span>
+                                            <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                Id: {{f.id}}
+                                            </span>
+                                            <a href="{{f.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                <i class="fa fa-search">
+                                                View
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- FRIENDS END -->
+                            <!-- RELATED START -->
+                            <div class="row pt-5" id="related">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <h1 class="text-light font-weight-bold">Related Information</h1>
+                                    </div>
+                                    <div class="accordion" id="accordionExample">
+                                      
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="sports1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#sports" aria-expanded="true"
+                                                    aria-controls="sports">
+                                                    Sports ({{profile.interests.sports | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="sports" class="collapse show" aria-labelledby="sports1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="music1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#music" aria-expanded="true" aria-controls="music">
+                                                    music ({{profile.interests.music | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="music" class="collapse show " aria-labelledby="music1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="films1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#films" aria-expanded="true" aria-controls="films">
+                                                    films ({{profile.interests.films | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="films" class="collapse show " aria-labelledby="films1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="tv_programmes_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#tv_programmes" aria-expanded="true"
+                                                    aria-controls="tv_programmes">
+                                                    tv_programmes ({{profile.interests.tv_programmes | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="tv_programmes" class="collapse show " aria-labelledby="tv_programmes_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="books1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#books" aria-expanded="true" aria-controls="books">
+                                                    books ({{profile.interests.books | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="books" class="collapse show " aria-labelledby="books1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="games_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#games" aria-expanded="true" aria-controls="games">
+                                                    games ({{profile.interests.games | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="games" class="collapse  show" aria-labelledby="games_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="likes_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#likes" aria-expanded="true" aria-controls="likes">
+                                                    likes ({{profile.interests.likes | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="likes" class="collapse  show" aria-labelledby="likes_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="events_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#events" aria-expanded="true"
+                                                    aria-controls="events">
+                                                    events ({{profile.interests.events | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="events" class="collapse  show" aria-labelledby="events_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="questions_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#questions" aria-expanded="true"
+                                                    aria-controls="questions">
+                                                    questions ({{profile.interests.questions | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="questions" class="collapse  show" aria-labelledby="questions_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="reviews_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#reviews" aria-expanded="true"
+                                                    aria-controls="reviews">
+                                                    reviews ({{profile.interests.reviews | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="reviews" class="collapse  show" aria-labelledby="reviews_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                        {% for i in profile.interests.reviews %}
+                                                            {{i}}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        <!-- notes  -->
+                                      
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="notes_1">
+                                                    <h2 class="mb-0">
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#notes" aria-expanded="true" aria-controls="notes">
+                                                    notes ({{profile.interests.notes | length}})
+                                                    </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="notes" class="collapse show " aria-labelledby="notes_1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient text-white">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- RELATED END -->
+                            <!-- POSTS START  -->
+                            <div class="row pt-5" id="posts">
+                                <h1 class="text-light font-weight-bold">Posts</h1>
+                                {% for p in  profile.posts %}
+                                    <div class="border rounded-top col-md-12 text-center text-warning">
+                                        Post # {{forloop.counter}}
+                                    </div>
+                                    <div class="col-md-12 border post-wrapper">
+                                        <div class="row">
+                                            <div class="col-md-2 m-0 p-0 custom-center-center">
+                                               
+                                               <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> 
+                                            </div>
+                                            <div class="col-md-5 custom-column-start-start pt-2 text-white border-left border-right">
+                                                <span> {{profile.name}}</span>
+                                                <span class="smaller-txt">{{p.complete_time}}</span>
+                                            </div>
+                                            <div class="col-md-5  m-0 p-0 d-flex flex-column justify-content-around text-white align-items-center">
+                                                <div class="smaller-txt w-100 border-bottom text-left h-100">
+                                                    post_id: {{p.post_id}}
+                                                </div>
+                                                <div class="smaller-txt w-100 text-left h-100">
+                                                    author_id: {{p.auther_id}}
+                                                </div>
+                                                <div class="smaller-txt w-100 border-top text-left h-100">
+                                                    sentiment: {{p.sentiment | default:"N/A"}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center small-txt border">
+                                                {{p.post_text}}
+                                            </div>
+                                        </div>
+                                        <div class="row" style="height:300px;overflow-y:auto;">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">Post Pictures
+                                                ({{p.picture_directory | length}})</i>
+                                            </div>
+                                            {% for x in p.picture_directory  %}
+                                                <div class="col-md-12 text-center" style="height:300px;overflow-y:none">
+                                                    <img src="{{x.url}}" class="img-fluid" />
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">Liked By
+                                                ({{ p.reactions.like | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.like  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    <img src="{{r.media_directory}}"
+                                                    style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                                    
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                Loved' By ({{ p.reactions.love | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.love  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    
+                                                   <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Reacted HAHA'
+                                                By ({{ p.reactions.haha | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.haha  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    
+                                                  <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Reacted WOW'
+                                                By ({{ p.reactions.wow | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.wow  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Reacted
+                                                ANGRY' By ({{ p.reactions.angry | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.angry  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Reacted SAD'
+                                                By ({{ p.reactions.sad | length}})</i>
+                                            </div>
+                                            {% for r in p.reactions.sad  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <i class="material-icon text-warning" style="font-size:20px;">'Comments' By
+                                                ({{ p.comments | length}})</i>
+                                            </div>
+                                            {% for r in p.comments  %}
+                                                <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                                    style="height:100px;">
+                                                    
+                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Name: {{r.name}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            username: {{r.username}}
+                                                        </span>
+                                                        <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                            Id: {{r.id}}
+                                                        </span>
+                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
+                                                            <i class="fa fa-search">
+                                                            View
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 border text-white custom-center-center">
+                                                    {{r.comment_text}}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2 text-center small-txt border"><i
+                                                class="fas fa-comments text-warning mr-1"></i>{{p.comments_statistics}}
+                                            </div>
+                                            <div class="col-md-2 text-center small-txt border"><i
+                                                class="fas fa-grin-hearts text-warning mr-1"></i>{{p.reactions_statistics}}
+                                            </div>
+                                            <div class="col-md-2 text-center small-txt border"><i
+                                                class="fas fa-share-alt text-warning mr-1"></i>{{p.reactions_statistics}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- POSTS END  -->
+                            <!-- CLOSE ASSOCIATES START -->
+                            <div class="row pt-5" id="close_asscoiates">
+                                <h1 class="text-light font-weight-bold">Close Associates ({{profile.close_associates | length}})</h1>
+                                <div class="col-md-12">
+                                    <div class="accordion" id="accordionExample">
+                                        {% for c in profile.close_associates %}
+                                            <div class="card">
+                                                <div class="card-header background-gradient-dark" id="custom1">
+                                                    
+                                                <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> 
+                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                    data-target="#_{{c.id}}" aria-expanded="true"
+                                                    aria-controls="_{{c.id}}">
+                                                    {{c.name}}
+                                                    </button>
+                                                </div>
+                                                <div id="_{{c.id}}" class="collapse  show"  aria-labelledby="custom1"
+                                                    data-parent="#accordionExample">
+                                                    <div class="card-body background-gradient">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row text-white">
+                                                                    <div class="col-md-6"> Name:</div>
+                                                                    <div class="col-md-6"> {{c.name}}</div>
+                                                                    <div class="col-md-6"> Username:</div>
+                                                                    <div class="col-md-6"> {{c.username}}</div>
+                                                                    <div class="col-md-6"> is_friend:</div>
+                                                                    <div class="col-md-6"> {{c.is_friend}}</div>
+                                                                    <div class="col-md-6"> post_authors:</div>
+                                                                    <div class="col-md-6"> {{c.post_authors}}</div>
+                                                                    <div class="col-md-6"> post_target:</div>
+                                                                    <div class="col-md-6"> {{c.post_target}}</div>
+                                                                    <div class="col-md-6"> post_tags:</div>
+                                                                    <div class="col-md-6"> {{c.post_tags}}</div>
+                                                                    <div class="col-md-6"> post_comments:</div>
+                                                                    <div class="col-md-6"> {{c.post_comments}}</div>
+                                                                    <div class="col-md-6"> post_replies:</div>
+                                                                    <div class="col-md-6"> {{c.post_replies}}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row text-white">
+                                                                    <div class="col-md-6"> score:</div>
+                                                                    <div class="col-md-6"> {{c.score}}</div>
+                                                                    <div class="col-md-6"> post_mentions:</div>
+                                                                    <div class="col-md-6"> {{c.post_mentions}}</div>
+                                                                    <div class="col-md-6"> post_reactions:</div>
+                                                                    <div class="col-md-6"> {{c.post_reactions}}</div>
+                                                                    <div class="col-md-6"> mentioned_by_owner:</div>
+                                                                    <div class="col-md-6"> {{c.mentioned_by_owner}}</div>
+                                                                    <div class="col-md-6"> mentioned_owner:</div>
+                                                                    <div class="col-md-6"> {{c.mentioned_owner}}</div>
+                                                                    <div class="col-md-6"> replied_by_owner:</div>
+                                                                    <div class="col-md-6"> {{c.replied_by_owner}}</div>
+                                                                    <div class="col-md-6"> replied_owner:</div>
+                                                                    <div class="col-md-6">{{c.replied_owner}}</div>
+                                                                    <div class="col-md-6"> view:</div>
+                                                                    <div class="col-md-6 "><a
+                                                                        class="badge badge-success"
+                                                                    href="{{c.url}}" style="width: 80px;"><i class="fa fa-search">View</i></a></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CLOSE ASSOCIATES END -->
+                            <!-- CHECKIN START -->
+                            <div  class="row pt-5" id="checkins">
+                                <h1 class="text-light font-weight-bold">check_ins ({{profile.check_ins | length}})</h1>
+                                <div class="col-md-12">
+                                    {% for c in profile.check_ins %}
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark">
+                                                <div class="row">
+                                                    <div
+                                                        class="col-md-4 d-flex flex-column justify-content-start align-items-center">
+                                                        
+                                                          <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                                        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
+                                                        {{c.name}}
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-8 d-flex flex-row  justify-content-center align-items-center">
+                                                        <div class="row border text-white w-100" style="border-radius: 10px;">
+                                                            <div class="col-md-4 text-left">Date</div>
+                                                            <div class="col-md-8 text-right">{{c.details.date}}</div>
+                                                            <div class="col-md-4 text-left">Location</div>
+                                                            <div class="col-md-8 text-right">{{c.name}}</div>
+                                                            <div class="col-md-4 text-left">View</div>
+                                                            <div class="col-md-8 text-right"><a class="badge badge-success "
+                                                            href="{{c.url}}" style="width: 80px;"><i class="fa fa-search">View</i></a></div>
+                                                            <div class="col-md-4 text-left">Linking Post</div>
+                                                            <div class="col-md-8 text-right"><a class="badge badge-success "
+                                                            href="{{c.linking_post}}" style="width: 80px;"><i class="fa fa-search">View</i></a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- CHECKIN END -->
+                            
+                        </div>
+                        <!-- end tab content -->
+                    </div>
+                </div>
+            </div>
+            </div> <!-- DIV 1 END -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+            </script>
+            <script src="https://www.amcharts.com/lib/4/core.js"></script>
+            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+            <script>
+                $(document).ready(function(){
+
+                    window.print();
+                   
+                
+            });
+            </script>
+            <script>
+            am4core.ready(function () {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var iconPath =
+            "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+            var chart = am4core.create("profile_chart", am4charts.SlicedChart);
+            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+            chart.data = [{
+            "name": "Friedns",
+            "value": 354
+            }, {
+            "name": "Close Associates",
+            "value": 245
+            }, {
+            "name": "Posts",
+            "value": 187
+            }, {
+            "name": "Popularity",
+            "value": 123
+            }, {
+            "name": "Popularity",
+            "value": 87
+            }, {
+            "name": "Positivity",
+            "value": 45
+            }];
+            var series = chart.series.push(new am4charts.PictorialStackedSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.maskSprite.path = iconPath;
+            series.ticks.template.locationX = 1;
+            series.ticks.template.locationY = 0.5;
+            series.labelsContainer.width = 200;
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "left";
+            chart.legend.valign = "bottom";
+            }); // end am4core.ready()
+            </script>
+        </body>
+    </html>

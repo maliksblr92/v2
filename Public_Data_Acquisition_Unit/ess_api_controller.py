@@ -287,10 +287,11 @@ class Ess_Api_Controller(object):
             return {'response': 'ess replied null'}
 
 
-    def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook'):
+    def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook',entity_type='profile'):
         try:
             add_target_url = 'smart_search/'
-            payload = {'username': username,'category':search_site}
+            payload = {'username': username,'category':search_site,'entity_type':entity_type}
+            print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
@@ -337,13 +338,13 @@ class Ess_Api_Controller(object):
         try:
             add_target_url = 'generic/'
             payload = {'url': url,'ip_address':ip_address,'domain':domain,'pictures':pictures,'videos':videos,'heading':heading,'paragraphs':paragraphs,'links':links,'GTR':GTR,'CTR':CTR}
-
+            print(payload)
             response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
             print(response.json())
             return response.json()
         except Exception as e:
             print(e)
-            return {'response': 'ess replied null'}
+            return None
 
     def add_target(self,username,category,entity_type,GTR,CTR):
         try:
@@ -354,7 +355,7 @@ class Ess_Api_Controller(object):
             return response.json()
         except Exception as e:
             print(e)
-            return {'response': 'ess replied null'}
+            return None
 
     def news_crawling(self,top = 10,news_site='bbc'):
         try:
@@ -428,12 +429,23 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def youtube_target_identification(self,query):
+        try:
+            add_target_url = 'youtube_target_identifier/'
+            payload = {'query':query}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
     def microcrawler_status(self):
         try:
             add_target_url = 'crawler_status/'
             payload = {}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
-            print(response.json())
             return response.json()
 
         except Exception as e:
@@ -446,7 +458,7 @@ class Ess_Api_Controller(object):
             add_target_url = 'crawler_internet/'
             payload = {}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
-            print(response.json())
+            #print(response.json())
             return response.json()
 
         except Exception as e:
@@ -457,14 +469,129 @@ class Ess_Api_Controller(object):
 
         try:
             add_target_url = 'keybase/'
-            payload = {'keywords':keywords,'GTR':GTR,'CTR':CTR}
+
+            payload = {'keywords':keywords,'GTR':str(GTR),'CTR':str(CTR)}
+            print(type(keywords),keywords)
+            print(payload)
+            Header = {'Content-Type': 'application/json',
+                      'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
+            import json
+            payload_json = json.dumps(payload)
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return None
+
+    def get_rss_feed(self):
+        try:
+            add_target_url = 'rss_feeds'
+            payload = {'GTR':'','CTR':''}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_ip_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_ip_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def get_domains_info(self,domian='www.google.com'):
+        try:
+            add_target_url = 'domain_information'
+            payload = {'domain':domian}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            #print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+
+    def test_api(self,keywords,GTR,CTR):
+
+        try:
+            add_target_url = 'http://127.0.0.1:8000/core/test_api/'
+
+            payload = {'keywords':keywords,'GTR':GTR,'CTR':CTR}
+            print(payload)
+            Header = {'Content-Type': 'application/json'}
+            import json
+            payload_json = json.dumps(payload)
+            response = requests.get(add_target_url,headers=Header,json=payload_json)
             print(response.json())
             return response.json()
 
         except Exception as e:
             print(e)
         return {'response': 'ess replied null'}
+
+# ..................................................API For IP Lookup...................................................
+
+    def create_payload(self, url=''):
+        try:
+            add_target_url = 'ip_shortend_url'
+            payload = {'url': url}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+            return {'response': 'ess replied null'}
+
+    def track_ip(self, code, start_date, end_date):
+        try:
+            add_target_url = 'ip_tracking'
+            payload = {'code': code, 'start_date': start_date, 'end_date': end_date}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def image_reverse_lookup(self, image, url=''):
+        try:
+            #img = self.data["personal_info"]["image"]
+
+            #req = requests.post(url=API_ENDPOINT, files=files)
+            import json
+            add_target_url = 'image_lookup'
+            payload = {'image':image,'url': url}
+            #image = {'media': image}
+
+            #img = self.data["personal_info"]["image"]
+            #files = [('files', (img, open(img, 'rb'), 'application/octet')),('data', ('data', json.dumps(self.data), 'application/json')), ]
+
+            Header = {'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
+            #files = [('files', ('look_up_file', image, 'application/octet')),('data', ('data',json.dumps(payload), 'application/json'))]
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header,data={'url':url},files={'image':image})
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
 
 #................................................API For Avatar Actions................................................
 
@@ -517,11 +644,71 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def twitter_trends(self,country='pakistan'):
+        try:
+            add_target_url = 'twitter/trends'
+            payload = {'country':country}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def twitter_world_trends(self):
+        try:
+            add_target_url = 'twitter/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def youtube_trends(self):
+        try:
+            add_target_url = 'youtube/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def reddit_trends(self):
+        try:
+            add_target_url = 'reddit/trends'
+            payload = {}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
+    def google_trends(self,country='pakistan',realtime=False):
+        try:
+            add_target_url = 'google/trends'
+            payload = {'country':country,'realtime':realtime}
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+        return {'response': 'ess replied null'}
+
     #...................................Tools Api's.................................
 
     def fake_identitity_generator(self,nationality,gender,age):
         try:
-            add_target_url = 'identitygenerator/'
+            add_target_url = 'identitygenerator'
             payload = {'nationality':nationality,'gender':gender,'age':age}
             response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
             print(response.json())

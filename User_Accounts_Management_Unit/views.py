@@ -67,6 +67,9 @@ class User_Login(View):
         """
         get handler for login view
         """
+        if(request.user.is_authenticated):
+            return HttpResponseRedirect(reverse('OSINT_System_Core:tso-dashboard'))
+
         return render(request, 'User_Accounts_Management_Unit/login.html', {})
 
     def post(self, request):

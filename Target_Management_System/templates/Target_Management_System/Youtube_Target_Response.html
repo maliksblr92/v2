@@ -1,0 +1,1103 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css"
+        integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous">
+    <style>
+        .text_10px {
+            font-size: 10px !important;
+        }
+
+        .text_12px {
+            font-size: 12px;
+            ;
+        }
+
+        .text_13px {
+            font-size: 13px !important;
+        }
+
+        .text_14px {
+            font-size: 14px;
+            ;
+        }
+
+        .text_15px {
+            font-size: 15px;
+            ;
+        }
+
+        .text_20px {
+            font-size: 20px;
+            ;
+        }
+
+        .text_25px {
+            font-size: 25px;
+            ;
+        }
+
+        .border_radius_5px {
+            border-radius: 5px !important;
+        }
+
+
+        .background-gradient-dark {
+            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+        }
+
+        .no_decoration {
+            text-decoration: none !important;
+        }
+
+        .border_right {
+            border-right: 1px solid black;
+            ;
+        }
+
+        .border_left {
+            border-left: 1px solid black;
+            ;
+        }
+
+        .custom-start-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-start-center {
+            display: flex !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .custom-end-center {
+            display: flex !important;
+            justify-content: end !important;
+            align-items: center !important;
+        }
+
+        .d-flex flex-row justify-content-start align-items-center {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-center-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-start-start {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: start !important;
+        }
+
+        .custom-column-start-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .full_space {
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        .ellipsis {
+            text-overflow: hidden;
+        }
+    </style>
+    <style>
+        html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+        }
+    </style>
+    <style>
+        .profile-img-wrapper {
+            border: 4px solid white;
+            height: 250px;
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        .label {
+            color: white
+        }
+
+        .header-wrapper {}
+
+        .stats-box-upper {
+            border-radius: 5px 5px 0px 0px;
+            text-align: center;
+            font-weight: bold;
+            color: red
+        }
+
+        .stats-box-lower {
+            border-radius: 0px 0px 5px 5px;
+            text-align: center;
+            color: blue
+        }
+
+        .post-wrapper {
+            height: 700px;
+            overflow-y: auto;
+        }
+
+        .header-icons {
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: white;
+            ;
+        }
+
+        .header-text {
+            font-size: 16px !important;
+            ;
+            width: 200px;
+            ;
+            text-align: left;
+        }
+
+        .card-body-label {
+            width: 100px;
+            ;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid wrapper background-gradient-dark">
+        <div class="row ">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row p-2">
+                    <div class="col-md-4 text-left">
+                        <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                            <i class="fab fa-youtube mr-2"></i> Youtube
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
+                            <i class="fas fa-users mr-2"></i> Youtube Channel Target
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                            <i class="fas fa-download  mr-2"></i> Download PDF Report
+                        </a>
+                    </div>
+                </div>
+                <div class="row background-gradient-dark border_radius_5px ">
+                    <div class="col-md-2  custom-column-center-center">
+                        <div class="profile-img-wrapper ">
+                            <img src="{{channel.overview.media_directory}}"
+                                class="border_radius_5px img-fluid full_space">
+                        </div>
+                        <div>
+                            <a href="{{channel.overview.url}}" target="_blank"
+                                class="badge badge-success text_14px mt-2">
+                                <i class="fa fa-eye text-dark header-icons mr-2"></i> View channel
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5  background-gradient-dark p-5">
+                        <div class="row  p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Name
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.name|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fas fa-compass text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                    Location
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.location|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                    Subscribers
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.subscriber_count|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Views
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.total_views|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fas fa-clock text-dark header-icons fa-2x mr-2 "></i>
+                                    Joining date
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.joining_date|default:"N/A"}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <i class="fa fa-user-lock text-dark header-icons fa-2x mr-2  "></i>
+                                    Is Verified
+                                </label>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                <label class="label text_15px font-weight-bold ">
+                                    <span class="badge badge-light header-text">
+                                        {{channel.overview.is_verified}}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
+                        <div id="profile_chart" style="height:400px;width:100%"></div>
+                    </div>
+                </div>
+                <!-- 
+
+         -->
+                <div class="row ">
+                    <div class="col-md-12 m-0 p-0">
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-link active">
+                                        <a data-toggle="tab" href="#popular_videos">
+                                            Popular
+                                            Videos
+                                        </a>
+                                    </li>
+                                    <li class="nav-link ">
+                                        <a data-toggle="tab" href="#new_videos">New Videos</a>
+                                    </li>
+                                    <li class="nav-link ">
+                                        <a data-toggle="tab" href="#featured_channels"> Featured Channels</a>
+                                    </li>
+                                    <li class="nav-link ">
+                                        <a data-toggle="tab" href="#subscribed_channels"> Featured Channels</a>
+                                    </li>
+
+                                    <li class="nav-link ">
+                                        <a data-toggle="tab" href="#play_list"> Play List</a>
+                                    </li>
+
+                                    <li class="nav-link ">
+                                        <a data-toggle="tab" href="#posts"> Posts</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div id="popular_videos" class="tab-pane fade in active show">
+                                <div class="card">
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.videos.popular %}
+                                            <div class="col-md-4 p-3 ">
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Video #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                             fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card "
+                                                    style="height:400px;overflow-y:auto;overflow-x:hidden">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+
+                                                                Name
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+
+                                                                Link
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.link}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+
+                                                                length
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.video_length}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+
+                                                                Views
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.views}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+
+                                                                Created On
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.timestamp}}</span>
+                                                        </div>
+
+                                                        <div class="col-md-12 text-center">
+                                                            <span class="text_12px">
+                                                                {% if video.thumbnail_directory %}
+                                                                <img src="{{video.thumbnail_directory}}"
+                                                                    class="img-fluid img-thumbnail" alt=""
+                                                                    style="height:250px;">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No Popular Videos</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="new_videos" class="tab-pane fade">
+                                <div class="card">
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.videos.new %}
+                                            <div class="col-md-4 p-3 ">
+                                                <div class="border border_radius_5px">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Name
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Link
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.link}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                length
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.video_length}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Views
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.views}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Created On
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.timestamp}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Thumbnail
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {% if video.thumbnail_directory %}
+                                                                <img src="{{video.thumbnail_directory}}"
+                                                                    class="img-fluid img-thumbnail" alt="">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No New Videos</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div id="featured_channels" class="tab-pane fade">
+                                <div class="card">
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.channels.featured %}
+                                            <div class="col-md-4 p-3 ">
+                                                <div class="border border_radius_5px">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Name
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Link
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.link}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                length
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.video_length}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Views
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.views}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Created On
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.timestamp}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Thumbnail
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {% if video.thumbnail_directory %}
+                                                                <img src="{{video.thumbnail_directory}}"
+                                                                    class="img-fluid img-thumbnail" alt="">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No Featured Channels</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div id="subscribed_channels" class="tab-pane fade">
+                                <div class="card">
+
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.channels.subscribed %}
+                                            <div class="col-md-4 p-3 ">
+                                                <div class="border border_radius_5px">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Name
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Link
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.link}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                length
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.video_length}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Views
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.views}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Created On
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">{{video.timestamp}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary">
+                                                                Video
+                                                                Thumbnail
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {% if video.thumbnail_directory %}
+                                                                <img src="{{video.thumbnail_directory}}"
+                                                                    class="img-fluid img-thumbnail" alt="">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No Subscribed Channels</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                            <div id="play_list" class="tab-pane fade">
+                                <div class="card">
+
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.playlists %}
+                                            <div class="col-md-4 p-3 ">
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Video #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+                                                            {{video.name}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                             fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="border ">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+                                                                Video
+                                                                Name
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px ellipsis">{{video.name}}</span>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+                                                                Video
+                                                                Link
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.link}}
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <span class="badge badge-primary card-body-label">
+                                                                Video
+                                                                Views
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <span class="text_12px">
+                                                                {{video.num_videos}}
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="col-md-12 text-center">
+                                                            <span class="">
+                                                                {% if video.thumbnail_directory %}
+                                                                <img src="{{video.thumbnail_directory}}"
+                                                                    class="img-fluid img-thumbnail" alt=""
+                                                                    style="height:200px;">
+                                                                {% else %}
+                                                                {% endif %}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card-footer"></div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No Playlist Videos</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div id="posts" class="tab-pane fade">
+                                <div class="card">
+                                    <div class="card-header">
+                                    </div>
+                                    <div class="card-body post-wrapper">
+                                        <div class="row ">
+                                            {% for video in channel.posts %}
+                                            <div class="col-md-4 p-3 ">
+
+                                                <div class="card-header bg-info ">
+                                                    <div class="row">
+                                                        <div class="col-md-4 text-white font-weight-bold">Post #
+                                                            {{forloop.counter}}</div>
+                                                        <div class="col-md-4 text-white font-weight-bold text_12px">
+
+                                                            {{video.post_author.name}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-right "><i class="fab fa-youtube text-danger 
+                                                                    fa-2x"></i></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card border ">
+                                                    <div class="row  p-2">
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Author</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_author.name}}</span>
+                                                        </div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Link</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_link}}</span></div>
+
+
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Created</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.timestamp}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Likes</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_likes}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Type</span></div>
+                                                        <div class="col-md-9"><span class="badge">
+
+                                                                {% if video.post_type.is_text  %}
+                                                                <span> Has_Text</span>
+                                                                {% else %}
+                                                                <span> Non Text</span>
+                                                                {% endif %}
+                                                            </span>
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_picture  %}
+                                                                <span> Has_Picture</span>
+                                                                {% else %}
+                                                                <span> No Picture </span>
+                                                                {% endif %}
+                                                            </span>
+
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_video  %}
+                                                                <span> Has_Video</span>
+                                                                {% else %}
+                                                                <span> No Video</span>
+                                                                {% endif %}
+                                                            </span>
+
+                                                            <span class="badge">
+
+                                                                {% if video.post_type.is_vote  %}
+                                                                <span> Is_Voted</span>
+                                                                {% else %}
+                                                                <span> Not Voted</span>
+                                                                {% endif %}
+                                                            </span>
+
+
+
+
+                                                        </div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Text</span></div>
+                                                        <div class="col-md-9"><span
+                                                                class="text_12px">{{video.post_text}}</span></div>
+
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Post
+                                                                Comments</span></div>
+                                                        <div class="col-md-9"><span class="text_12px">
+                                                                {% if video.comments %}
+                                                                {% for c in video.comments %}
+                                                                {{c}}
+                                                                {% endfor %}
+                                                                {% else %}
+                                                                <span>No Comments</span>
+                                                                {% endif %}
+                                                            </span></div>
+
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Pictures
+                                                                Links </span></div>
+                                                        <div class="col-md-9">{% for i in video.picture_links %}
+                                                            <img src="{{i}}" class="img-fluid img-thumbnail" alt="">
+                                                            {% empty %}
+                                                            <span class="text_12px">No pictures</span>
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        {% comment %}
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Video Links
+                                                            </span></div>
+                                                        <div class="col-md-9">{% for i in video.video_links %}
+                                                            <iframe src="{{i}}"></iframe>
+                                                            {% empty %}
+                                                            <span class="text_12px">No Video Link</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endcomment %}
+                                                        {% comment %}
+                                                        <div class="col-md-3"><span
+                                                                class="badge badge-primary card-body-label">Others Links
+                                                            </span></div>
+                                                        <div class="col-md-9">{% for i in video.other_links %}
+                                                            <iframe src="{{i}}"></iframe>
+                                                            {% empty %}
+                                                            <span class="text_12px">No Video Link</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endcomment %}
+
+
+
+                                                    </div>
+                                                    <div class="card-footer">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            {% empty %}
+                                            <p>No Posts </p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>
+        am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_dark);
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            var chart = am4core.create("profile_chart", am4charts.RadarChart);
+            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+            var subscribers = "{{ channel.overview.subscriber_count|cut:'K' }}"
+            var subscribers = subscribers * 1000;
+
+            var dic = [
+
+                {
+                    category: "Videos",
+                    value1: "{{ channel.videos.popular|length }}",
+
+                },
+
+                {
+                    category: "Subscribers",
+                    value1: subscribers,
+
+                },
+                {
+                    category: "Views",
+                    value1: "{{ channel.overview.total_views }}",
+
+                },
+
+            ]
+
+            chart.data = dic
+
+            //chart.padding(20, 20, 20, 20);
+            chart.colors.step = 4;
+
+            var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "category";
+            categoryAxis.renderer.labels.template.location = 0.5;
+            categoryAxis.renderer.labels.template.horizontalCenter = "right";
+            categoryAxis.renderer.labels.template.fontSize = 10;
+            categoryAxis.renderer.grid.template.location = 0;
+            categoryAxis.renderer.tooltipLocation = 0.5;
+            categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
+            categoryAxis.renderer.axisFills.template.disabled = true;
+            categoryAxis.interactionsEnabled = false;
+            categoryAxis.renderer.minGridDistance = 10;
+
+            var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+            valueAxis.tooltip.disabled = true;
+            valueAxis.renderer.labels.template.horizontalCenter = "left";
+            valueAxis.min = 0;
+            valueAxis.max = 1000000000;
+            valueAxis.strictMinMax = true;
+            valueAxis.renderer.maxLabelPosition = 0.99;
+            valueAxis.renderer.minGridDistance = 10;
+            valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+            valueAxis.renderer.axisFills.template.disabled = true;
+            valueAxis.interactionsEnabled = false;
+
+            var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+            series1.columns.template.tooltipText = "{name}: {valueX.value}";
+            series1.name = "Counts";
+            series1.dataFields.categoryY = "category";
+            series1.dataFields.valueX = "value1";
+            series1.stacked = true;
+
+
+
+            chart.seriesContainer.zIndex = -1;
+
+            chart.scrollbarX = new am4core.Scrollbar();
+            chart.scrollbarX.exportable = false;
+            chart.scrollbarY = new am4core.Scrollbar();
+            chart.scrollbarY.exportable = false;
+
+            chart.cursor = new am4charts.RadarCursor();
+            chart.cursor.lineY.disabled = true;
+
+        }); // end am4core.ready()
+    </script>
+</body>
+
+</html>

@@ -1,778 +1,632 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-
-        <style>
-            /*
-        
-        All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
-                
-        The 'supports' rule will only run if your browser supports CSS grid.
-        
-        Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
-        
-        */
-        
-        /* Base Styles */
-        
-        :root {
-            font-size: 10px;
-        }
-        
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: "Open Sans", Arial, sans-serif;
-            min-height: 100vh;
-            background-color: #fafafa;
-            color: #262626;
-            padding-bottom: 3rem;
-        }
-        
-        img {
-            display: block;
-        }
-        
-        .container {
-            max-width: 93.5rem;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            font: inherit;
-            background: none;
-            border: none;
-            color: inherit;
-            padding: 0;
-            cursor: pointer;
-        }
-        
-        .btn:focus {
-            outline: 0.5rem auto #4d90fe;
-        }
-        
-        .visually-hidden {
-            position: absolute !important;
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-            clip: rect(1px, 1px, 1px, 1px);
-        }
-        
-        /* Profile Section */
-        
-        .profile {
-            padding: 5rem 0;
-        }
-        
-        .profile::after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-        
-        .profile-image {
-            float: left;
-            width: calc(33.333% - 1rem);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 3rem;
-        }
-        
-        .profile-image img {
-            border-radius: 50%;
-        }
-        
-        .profile-user-settings,
-        .profile-stats,
-        .profile-bio {
-            float: left;
-            width: calc(66.666% - 2rem);
-        }
-        
-        .profile-user-settings {
-            margin-top: 1.1rem;
-        }
-        
-        .profile-user-name {
-            display: inline-block;
-            font-size: 3.2rem;
-            font-weight: 300;
-        }
-        
-        .profile-edit-btn {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            border: 0.1rem solid #dbdbdb;
-            border-radius: 0.3rem;
-            padding: 0 2.4rem;
-            margin-left: 2rem;
-        }
-        
-        .profile-settings-btn {
-            font-size: 2rem;
-            margin-left: 1rem;
-        }
-        
-        .profile-stats {
-            margin-top: 2.3rem;
-        }
-        
-        .profile-stats li {
-            display: inline-block;
-            font-size: 1.6rem;
-            line-height: 1.5;
-            margin-right: 4rem;
-            cursor: pointer;
-        }
-        
-        .profile-stats li:last-of-type {
-            margin-right: 0;
-        }
-        
-        .profile-bio {
-            font-size: 1.6rem;
-            font-weight: 400;
-            line-height: 1.5;
-            margin-top: 2.3rem;
-        }
-        
-        .profile-real-name,
-        .profile-stat-count,
-        .profile-edit-btn {
-            font-weight: 600;
-        }
-        
-        /* Gallery Section */
-        
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            margin: -1rem -1rem;
-            padding-bottom: 3rem;
-        }
-        
-        .gallery-item {
-            position: relative;
-            flex: 1 0 22rem;
-            margin: 1rem;
-            color: #fff;
-            cursor: pointer;
-        }
-        
-        .gallery-item:hover .gallery-item-info,
-        .gallery-item:focus .gallery-item-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-        
-        .gallery-item-info {
-            display: none;
-        }
-        
-        .gallery-item-info li {
-            display: inline-block;
-            font-size: 1.7rem;
-            font-weight: 600;
-        }
-        
-        .gallery-item-likes {
-            margin-right: 2.2rem;
-        }
-        
-        .gallery-item-type {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2.5rem;
-            text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-        }
-        
-        .fa-clone,
-        .fa-comment {
-            transform: rotateY(180deg);
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Loader */
-        
-        .loader {
-            width: 5rem;
-            height: 5rem;
-            border: 0.6rem solid #999;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            margin: 0 auto;
-            animation: loader 500ms linear infinite;
-        }
-        
-        /* Media Query */
-        
-        @media screen and (max-width: 40rem) {
-            .profile {
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+            integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css"
+                integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous">
+                <style>
+                .text_10px {
+                font-size: 10px !important;
+                }
+                .text_12px {
+                font-size: 12px;
+                ;
+                }
+                .text_13px {
+                font-size: 13px !important;
+                }
+                .text_14px {
+                font-size: 14px;
+                ;
+                }
+                .text_15px {
+                font-size: 15px;
+                ;
+                }
+                .text_20px {
+                font-size: 20px;
+                ;
+                }
+                .text_25px {
+                font-size: 25px;
+                ;
+                }
+                .border_radius_5px {
+                border-radius: 5px !important;
+                }
+                .background-gradient-dark {
+                background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+                }
+                .no_decoration {
+                text-decoration: none !important;
+                }
+                .border_right {
+                border-right: 1px solid black;
+                ;
+                }
+                .border_left {
+                border-left: 1px solid black;
+                ;
+                }
+                .custom-start-center {
                 display: flex;
-                flex-wrap: wrap;
-                padding: 4rem 0;
-            }
-        
-            .profile::after {
-                display: none;
-            }
-        
-            .profile-image,
-            .profile-user-settings,
-            .profile-bio,
-            .profile-stats {
-                float: none;
-                width: auto;
-            }
-        
-            .profile-image img {
-                width: 7.7rem;
-            }
-        
-            .profile-user-settings {
-                flex-basis: calc(100% - 10.7rem);
-                display: flex;
-                flex-wrap: wrap;
-                margin-top: 1rem;
-            }
-        
-            .profile-user-name {
-                font-size: 2.2rem;
-            }
-        
-            .profile-edit-btn {
-                order: 1;
-                padding: 0;
-                text-align: center;
-                margin-top: 1rem;
-            }
-        
-            .profile-edit-btn {
-                margin-left: 0;
-            }
-        
-            .profile-bio {
-                font-size: 1.4rem;
-                margin-top: 1.5rem;
-            }
-        
-            .profile-edit-btn,
-            .profile-bio,
-            .profile-stats {
-                flex-basis: 100%;
-            }
-        
-            .profile-stats {
-                order: 1;
-                margin-top: 1.5rem;
-            }
-        
-            .profile-stats ul {
-                display: flex;
-                text-align: center;
-                padding: 1.2rem 0;
-                border-top: 0.1rem solid #dadada;
-                border-bottom: 0.1rem solid #dadada;
-            }
-        
-            .profile-stats li {
-                font-size: 1.4rem;
-                flex: 1;
-                margin: 0;
-            }
-        
-            .profile-stat-count {
-                display: block;
-            }
-        }
-        
-        /* Spinner Animation */
-        
-        @keyframes loader {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        /*
-        
-        The following code will only run if your browser supports CSS grid.
-        
-        Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
-        
-        */
-        
-        @supports (display: grid) {
-            .profile {
-                display: grid;
-                grid-template-columns: 1fr 2fr;
-                grid-template-rows: repeat(3, auto);
-                grid-column-gap: 3rem;
+                justify-content: center;
                 align-items: center;
-            }
-        
-            .profile-image {
-                grid-row: 1 / -1;
-            }
-        
-            .gallery {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-                grid-gap: 2rem;
-            }
-        
-            .profile-image,
-            .profile-user-settings,
-            .profile-stats,
-            .profile-bio,
-            .gallery-item,
-            .gallery {
-                width: auto;
-                margin: 0;
-            }
-        
-            @media (max-width: 40rem) {
-                .profile {
-                    grid-template-columns: auto 1fr;
-                    grid-row-gap: 1.5rem;
                 }
-        
-                .profile-image {
-                    grid-row: 1 / 2;
+                .custom-start-center {
+                display: flex !important;
+                justify-content: start !important;
+                align-items: center !important;
                 }
-        
-                .profile-user-settings {
-                    display: grid;
-                    grid-template-columns: auto 1fr;
-                    grid-gap: 1rem;
+                .custom-end-center {
+                display: flex !important;
+                justify-content: end !important;
+                align-items: center !important;
                 }
-        
-                .profile-edit-btn,
-                .profile-stats,
-                .profile-bio {
-                    grid-column: 1 / -1;
+                .d-flex flex-row justify-content-start align-items-center {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                align-items: center !important;
                 }
-        
-                .profile-user-settings,
-                .profile-edit-btn,
-                .profile-settings-btn,
-                .profile-bio,
-                .profile-stats {
-                    margin: 0;
+                .custom-column-center-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
                 }
-            }
-        }
-        
-          </style>
-</head>
-
-
-<body>
-    <h1>Instagram Target response !</h1>
-    <div class="container-fluid">
-
-        <div class="row ">
-
-            <div class="col-lg-12 pl-5 pr-5">
-                <nav class="navbar navbar-expand-lg " id="header">
-                    <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-                        data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon ">
-                            <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-                        </span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8 ">
-                            <div class="row">
-
-                                <div class="col-lg-4 p-3">
-                                    <div class="row">
-                                        <div class="col-lg-6  list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
-                                            <li class="nav-item">
-                                                <a class="   btn  font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                                            </li>
+                .custom-column-start-start {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: start !important;
+                }
+                .custom-column-start-center {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: start !important;
+                align-items: center !important;
+                }
+                .full_space {
+                height: 100% !important;
+                width: 100% !important;
+                }
+                .ellipsis {
+                text-overflow: hidden;
+                }
+                </style>
+                <style>
+                html {
+                --scrollbarBG: #CFD8DC;
+                --thumbBG: #90A4AE;
+                }
+                ::-webkit-scrollbar {
+                width: 7px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+                }
+                ::-webkit-scrollbar-track {
+                background: var(--scrollbarBG);
+                }
+                ::-webkit-scrollbar-thumb {
+                background-color: var(--thumbBG);
+                border-radius: 6px;
+                border: 3px solid var(--scrollbarBG);
+                }
+                </style>
+                <style>
+                .profile-img-wrapper {
+                border: 4px solid white;
+                height: 250px;
+                width: 250px;
+                border-radius: 10px;
+                }
+                .label {
+                color: white
+                }
+                .header-wrapper {}
+                .stats-box-upper {
+                border-radius: 5px 5px 0px 0px;
+                text-align: center;
+                font-weight: bold;
+                color: red
+                }
+                .stats-box-lower {
+                border-radius: 0px 0px 5px 5px;
+                text-align: center;
+                color: blue
+                }
+                .post-wrapper {
+                height: 700px;
+                overflow-y: auto;
+                }
+                .header-icons {
+                border: 1px solid white;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: white;
+                ;
+                }
+                .header-text {
+                font-size: 16px !important;
+                ;
+                width: 200px;
+                ;
+                text-align: left;
+                }
+                .card-body-label {
+                width: 100px;
+                ;
+                text-align: left;
+                }
+                /***
+                *
+                * Author: Osama Mumtaz
+                *
+                ***/
+                .custom_button{
+                background: rgb(24, 72, 116);
+                background: linear-gradient(
+                93deg,
+                rgba(24, 72, 116, 1) 0%,
+                rgba(6, 17, 26, 1) 100%
+                );
+                font-size: 16px;
+                border-radius: 13px;
+                padding: 3px 40px;
+                border: 1 solid #707070;
+                }
+                .custom_header{
+                border-radius: 20px 20px 0 0;
+                background: linear-gradient(
+                90deg,
+                rgba(0, 32, 44, 90%) 0%,
+                rgba(0, 46, 69, 90%) 28%,
+                rgba(0, 83, 135, 82%) 72%,
+                rgba(0, 113, 188, 80%) 100%
+                ) !important;
+                border-bottom: 1px solid #707070;
+                }
+                .custom_background{
+                background-color: #012847 !important;
+                }
+                .custom_bagde{
+                background-color: #06111a !important;
+                color: #ffffff !important;
+                }
+                .custom_icon{
+                border: 1px solid #fff;
+                border-radius: 5px;
+                margin: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(
+                93deg,
+                rgba(24, 72, 116, 1) 0%,
+                rgba(6, 17, 26, 1) 100%);
+                }
+                </style>
+                <!-- categorization styling  -->
+                <style>
+                .stamp {
+                transform: rotate(12deg);
+                color: #fff;
+                font-size: 3rem;
+                font-weight: 700;
+                border: 0.25rem solid #fff;
+                display: inline-block;
+                padding: 0.25rem 1rem;
+                text-transform: uppercase;
+                border-radius: 1rem;
+                font-family: 'Courier';
+                -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png');
+                -webkit-mask-size: 944px 604px;
+                /*mix-blend-mode: multiply;*/
+                }
+                .is-draft {
+                color: #C4C4C4;
+                border: 1rem double #C4C4C4;
+                transform: rotate(-5deg);
+                font-size: 1rem;
+                font-family: "Open sans", Helvetica, Arial, sans-serif;
+                border-radius: 0;
+                padding: 0.5rem;
+                }
+                </style>
+                <!-- end categorization styling  -->
+            </head>
+            <body>
+                <div class="container-fluid wrapper background-gradient-dark">
+                    <div class="row ">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="row p-2">
+                                <div class="col-md-4 text-left">
+                                    <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                                        <i class="fab fa-instagram mr-2"></i> Instagram
+                                    </a>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <a type="button" class="btn  btn-sm btn-success float-right" style="margin-top:2px;"
+                                        href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}"
+                                    id="download_as_pdf">Followers Graph</a>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                                        <i class="fas fa-download  mr-2"></i> Download PDF Report
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row background-gradient-dark border_radius_5px ">
+                                <div class="col-md-2  custom-column-center-center">
+                                    <div class="profile-img-wrapper ">
+                                        <img src="{{profile.profile_picture_url}}" class="border_radius_5px img-fluid full_space">
+                                    </div>
+                                    <div>
+                                        <a href="" target="_blank" class="badge badge-success text_14px mt-2">
+                                            <i class="fa fa-eye text-dark header-icons mr-2"></i> View profile
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5  background-gradient-dark p-5">
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Full Name
+                                            </label>
                                         </div>
-                                        <div class="col-lg-6  list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
-                                            <li class="nav-item">
-                                                <a class="   btn  font-weight-bold nav_btn" href="#">MONITOR</a>
-                                            </li>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.fullname|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row  p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>User Name
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.username|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fas fa-compass text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                                Followers
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.follow|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>
+                                                Followed By
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.followed_by|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Bio-Graphy
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.biography|default:"N/A"|truncatechars:"15"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Person ID
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.person_id|default:"N/A"}}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <i class="fa fa-eye text-dark header-icons fa-2x mr-2  "></i> Behaviour
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
+                                            <label class="label text_15px font-weight-bold ">
+                                                <span class="badge badge-light header-text">
+                                                    {{profile.behaviour|default:"N/A"}}
+                                                </span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 custom_center">
-                                    <img src="{% static 'Additional_assets/main/images/logo.svg' %}" height="120"
-                                        width="250" class=" m-0 p-0" />
+                                <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
+                                    <div id="profile_chart" style="height:400px;width:100%"></div>
                                 </div>
-                                <div class="col-lg-4 p-3">
-                                    <div class="row">
-                                        <div class="col-lg-6  list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
-                                            <li class="nav-item">
-                                                <a class="   btn  font-weight-bold nav_btn" href="#">FETCH</a>
-                                            </li>
+                            </div>
+                            <!--
+                            -->
+                            <div class="row ">
+                                <div class="col-md-12 m-0 p-0">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-link active custom_icon">
+                                                    <a data-toggle="tab" href="#profile" class="text-white fas fa-user">
+                                                        Profile
+                                                    </a>
+                                                </li>
+                                                <li class="nav-link active custom_icon">
+                                                    <a data-toggle="tab" href="#posts" class="text-white fa fa-sticky-note">
+                                                        Posts
+                                                    </a>
+                                                </li>
+                                                <li class="nav-link active custom_icon text-white">
+                                                    <a data-toggle="tab" href="#followers" class="text-white fa fa-users">
+                                                        Followers
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="col-lg-6  list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
-                                            <li class="nav-item">
-                                                <a class="   btn  font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                                            </li>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div id="profile" class="tab-pane fade in active show">
+                                            <div class="col-md-12 card p-2">
+                                                <div class="card-header custom_header text-white glowing_border" style="border-radius: 20px 20px 0px 0px;">
+                                                    Profile Summary
+                                                </div>
+                                                <div class="card-body custom_background text-white glowing_border">
+                                                    {{profile.profile_summary|default:"N/A"}}
+                                                </div>
+                                                <div class="card-header custom_header text-white glowing_border">
+                                                    Sentiments
+                                                </div>
+                                                <div class="card-body custom_background text-white glowing_border">
+                                                    <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50">
+                                                        <i class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span
+                                                        class="badge "> {{profile.sentiments.0}}</span></div>
+                                                        <div class="d-flex flex-row justify-content-start align-items-center mt-2"><i
+                                                            class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> : <span
+                                                            class="badge ">{{profile.sentiments.1}}</span></div>
+                                                        </div>
+                                                        <div class="card-header custom_header text-white glowing_border">
+                                                            Common words
+                                                        </div>
+                                                        <div class="card-body custom_background text-white glowing_border">
+                                                            {% for sentiment in profile.comm %}
+                                                                <span class="badge badge-info ">{{sentiment}}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- instagram posts  -->
+                                                <div id="posts" class="tab-pane fade">
+                                                    <div class="row m-0 p-0 bg-white">
+                                                        {% for post in profile.posts %}
+                                                            <div class="col-md-3 p-2">
+                                                                <div class="card glowing_border custom_background h-100 p-0 p-0">
+                                                                    <div class="card-header custom_header">
+                                                                        <div class="row d-flex flex-row justify-content-center align-items-center">
+                                                                            <div class="col-md-4 text_14px"><span
+                                                                                class="text-white font-weight-bold">Post #
+                                                                            {{forloop.counter}}</span></div>
+                                                                            <div class="col-md-4 text_14px d-flex flex-row justify-content-center align-items-center"> <span
+                                                                            class="badge badge-light">{{post.owner_username}}</span>
+                                                                        </div>
+                                                                        <div class="col-md-4  text-right">
+                                                                            <i class="fab fa-instagram fa-2x text-white"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row text-white">
+                                                                        <div class="col-md-12 text-center m-0 p-0">
+                                                                            <img src="{{post.display_url}}" class="img-fluid img-responsive"
+                                                                            style="height:250px;width:100%;">
+                                                                        </div>
+                                                                        <div class="col-md-12 text_12px m-0 p-0">
+                                                                            {{post.caption}}
+                                                                        </div>
+                                                                        {% if post.categorization  %}
+                                                                            
+                                                                            
+                                                                            <div class="col-md-12 mt-3">
+                                                                                {% for category in post.categorization %}
+                                                                                    <span class="stamp  is-draft"><span>
+                                                                                        {{ category|default:"N/A" }}
+                                                                                    </span></span>
+                                                                                {% endfor %}
+                                                                            </div>
+                                                                        {% else %}
+                                                                            <span class="stamp  is-draft"><span>
+                                                                                No-Categorization
+                                                                            </span></span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                    <span class="badge badge-light float-left"> Likes :
+                                                                    {{post.likes_count}}</span>
+                                                                    <span class="badge badge-light float-right"> Comments :
+                                                                    {{post.comments_count}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <!-- end instagram posts -->
+                                            <!-- followers tabs  -->
+                                            <div id="followers" class="tab-pane fade">
+                                                <div class="row m-0 p-0 bg-white">
+                                                    {% for i in profile.followers %}
+                                                        <div class="col-md-3 mt-2">
+                                                            <div class="card glowing_border custom_background">
+                                                                <div class="card-header d-flex flex-row justify-content-center align-items-center custom_header m-0 p-0 ">
+                                                                    {% if i.picture_image_url %}
+                                                                        <img src="{{i.picture_image_url}}" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                                    {% else %}
+                                                                        <img src="/static/images/heliports_image_placeholder.jpg" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 m-0 p-0 ">
+                                                                            <div><span class="badge custom_bagde w-25 text-left">Full Name:</span> <span class="badge badge-light">{{i.full_name}}</span></div>
+                                                                            <div><span class="badge custom_bagde w-25 text-left">User-Name:</span> <span class="badge badge-light">{{i.username}}</span></div>
+                                                                            <div><span class="badge custom_bagde w-25 text-left">URL:</span> <a  href="{{i.url}}" class="badge badge-success"><i class="fa fa-eye "></i></a></div>
+                                                                            
+                                                                            
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <!-- end followers pane -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-lg-2 "></div>
-
-
-
-
-
+                        <div class="col-md-1"></div>
                     </div>
-                </nav>
+                </div>
             </div>
         </div>
-        <div class="row">
-
-            <div class="col-md-12">
-
-                <header>
-
-                    <div class="container">
-                  
-                      <div class="profile">
-                  
-                        <div class="profile-image">
-                  
-                          <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
-                  
-                        </div>
-                  
-                        <div class="profile-user-settings">
-                  
-                          <h1 class="profile-user-name">janedoe_</h1>
-                  
-                          <button class="btn profile-edit-btn">Edit Profile</button>
-                  
-                          <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                  
-                        </div>
-                  
-                        <div class="profile-stats">
-                  
-                          <ul>
-                            <li><span class="profile-stat-count">164</span> posts</li>
-                            <li><span class="profile-stat-count">188</span> followers</li>
-                            <li><span class="profile-stat-count">206</span> following</li>
-                          </ul>
-                  
-                        </div>
-                  
-                        <div class="profile-bio">
-                  
-                          <p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
-                  
-                        </div>
-                  
-                      </div>
-                      <!-- End of profile section -->
-                  
-                    </div>
-                    <!-- End of container -->
-                  
-                  </header>
-                  
-                  <main>
-                  
-                    <div class="container">
-                  
-                      <div class="gallery">
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 42</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 38</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1498471731312-b6d2b8280c61?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 47</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 52</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 4</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 45</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 41</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                        <div class="gallery-item" tabindex="0">
-                  
-                          <img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt="">
-                  
-                          <div class="gallery-item-type">
-                  
-                            <span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-                  
-                          </div>
-                  
-                          <div class="gallery-item-info">
-                  
-                            <ul>
-                              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
-                              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-                            </ul>
-                  
-                          </div>
-                  
-                        </div>
-                  
-                      </div>
-                      <!-- End of gallery -->
-                  
-                      <div class="loader"></div>
-                  
-                    </div>
-                    <!-- End of container -->
-                  
-                  </main>
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="col-md-12 mt-2">
-          
-                <div class="row ">
-        
-                    <div class="col-lg-12 pl-5 pr-5">
-                        <nav class="navbar navbar-expand-lg " id="header">
-               
-        <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0s">
-            <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-        
-        
-                </div>
-                           
-                        </nav>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </div>
-   
-  
-</body>
-
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+        <script>
+        am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_dark);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        var chart = am4core.create("profile_chart", am4charts.RadarChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+        var dic = [
+        {
+        category: "Posts",
+        value1: "{{ profile.posts|length }}",
+        },
+        {
+        category: "Target Update ",
+        value1: "{{ profile.target_update_count }}",
+        },
+        {
+        category: "Followers",
+        value1: "{{ profile.follow }}",
+        },
+        {
+        category: "Followed By",
+        value1: "{{ profile.followed_by }}",
+        },
+        ]
+        chart.data = dic
+        //chart.padding(20, 20, 20, 20);
+        chart.colors.step = 4;
+        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "category";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.labels.template.horizontalCenter = "right";
+        categoryAxis.renderer.labels.template.fontSize = 10;
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.tooltipLocation = 0.5;
+        categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
+        categoryAxis.renderer.axisFills.template.disabled = true;
+        categoryAxis.interactionsEnabled = false;
+        categoryAxis.renderer.minGridDistance = 10;
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.labels.template.horizontalCenter = "left";
+        valueAxis.min = 0;
+        valueAxis.max = 1000;
+        valueAxis.strictMinMax = true;
+        valueAxis.renderer.maxLabelPosition = 0.99;
+        valueAxis.renderer.minGridDistance = 10;
+        valueAxis.renderer.grid.template.strokeOpacity = 0.07;
+        valueAxis.renderer.axisFills.template.disabled = true;
+        valueAxis.interactionsEnabled = false;
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.columns.template.tooltipText = "{name}: {valueX.value}";
+        series1.name = "Counts";
+        series1.dataFields.categoryY = "category";
+        series1.dataFields.valueX = "value1";
+        series1.stacked = true;
+        chart.seriesContainer.zIndex = -1;
+        chart.scrollbarX = new am4core.Scrollbar();
+        chart.scrollbarX.exportable = false;
+        chart.scrollbarY = new am4core.Scrollbar();
+        chart.scrollbarY.exportable = false;
+        chart.cursor = new am4charts.RadarCursor();
+        chart.cursor.lineY.disabled = true;
+        }); // end am4core.ready()
+        </script>
+    </body>
 </html>

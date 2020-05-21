@@ -22,26 +22,51 @@ PORTFOLIO_TYPES = (
 )
 
 
+class Photo(EmbeddedDocument):
+    photo = FileField()
+
+
+class Video(EmbeddedDocument):
+    video = FileField()
+
+class Visuals(EmbeddedDocument):
+
+    title = StringField()
+    description = StringField()
+
+    photos = ListField(EmbeddedDocumentField(Photo))
+    videos = ListField(EmbeddedDocumentField(Video))
+
+
+
+
 class Portfolio_PMS(Document):
 
     portfolio_type = StringField(choices=PORTFOLIO_TYPES)
     name = StringField(required=True)
-    dob = DateTimeField(null=True)
+    dob = DateField(null=True)
     religion = StringField(default='')
     sect = StringField(default='')
-
+    gender = StringField()
 
     addresses = ListField(default=[])
     phones = ListField(default=[])
     education = StringField()
 
     description = ListField(default=[])
+    visuals = ListField(EmbeddedDocumentField(Visuals))
 
     # if portfolio type is group it should have list of individual portfolios
     portfolios = ListField(default=[])
 
     #it saves ref of TMS target in list bellow
     social_targets = ListField()
+
+
+
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
 
     def __str__(self):
         return self.name
@@ -60,10 +85,13 @@ class Portfolio_PMS(Document):
             if 'sect' in kwargs: self.sect = kwargs['sect']
             if 'education' in kwargs: self.dob = kwargs['dob']
 
+
+            self.save()
             return self
 
         except Exception as e:
             publish(str(e),module_name=__name__,message_type='alert')
+            print(e)
             return None
 
     def add_address(self,address):
@@ -81,6 +109,15 @@ class Portfolio_PMS(Document):
     def add_description(self,description):
         self.description.append(description)
         self.save()
+
+    def add_phone(self,phone):
+        self.phones.append(phone)
+        self.save()
+
+    def add_visual(self,visual):
+        self.visuals.append(visual)
+        self.save()
+
 
 
     @staticmethod
@@ -103,6 +140,10 @@ class Portfolio_PMS(Document):
          'weights': {'name': 10, 'description': 2}
          }
     ]}
+
+    @staticmethod
+    def get_all_portfolios():
+        return Portfolio_PMS.objects()
 
     @staticmethod
     def find_object(query):
@@ -167,10 +208,10 @@ class Portfolio_Linked_PMS(Document):
     created_on = DateTimeField(default=datetime.datetime.utcnow())
 
     def __str__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def __repr__(self):
-        return self.alpha_reference.title + ' reference type' + str(type(self.beta_reference))
+        return self.alpha_reference.name + ' reference type' + str(type(self.beta_reference))
 
     def resolve_intell_reference(self,step_before=0):
 

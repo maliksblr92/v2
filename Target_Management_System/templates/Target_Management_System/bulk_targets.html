@@ -1,0 +1,212 @@
+{% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
+<!-- Stylesheet -->
+<link rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+      crossorigin="anonymous">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+   
+
+<!--  -->
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+
+
+{% endblock %} {% block smallnavbar %} {% comment %}
+   {% endcomment %} {% endblock %} {% block belly %}
+    <style>
+       .tofleft{ 
+        border-radius: 20px 0 0 0;
+        background: linear-gradient( 90deg, rgba(0, 113, 188, 20%) 0%, rgba(65, 130, 173, 29%) 50%, rgba(0, 0, 0, 40%) 100% );
+        border-bottom: 1px solid #707070;
+        color:white
+        
+    }
+    .topcontentbar {
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient( 90deg, rgba(0, 32, 44, 90%) 0%, rgba(0, 46, 69, 90%) 28%, rgba(0, 83, 135, 82%) 72%, rgba(0, 113, 188, 80%) 100% );
+        border-bottom: 1px solid #707070;
+    }
+    .toptitle {
+        font-size: 22px;
+        padding: 1rem auto;
+        letter-spacing: 0.1em;
+        color: white;
+        font-weight: lighter;
+    }
+    .newlabeldesign {
+        background: rgb(24, 72, 116);
+        background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
+        color  :white;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        padding: 10px;
+        letter-spacing: 5px;;
+        font-weight: bold;
+    }
+    .mymainbg {
+        background: linear-gradient( 0deg, rgba(242, 242, 242, 1) 0%, rgba(240, 240, 240, 1) 52%, rgba(221, 221, 221, 1) 77%, rgba(204, 204, 204, 1) 100% );
+        border: 1 solid #707070;
+    }
+ 
+    </style>
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading" style="color: white">Bulk Target</h4>
+        </div>
+         
+            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  mymainbg ">
+              
+                <form method="post" role="form" class="form mt-3"  action="/tms/bulk_targets/">
+                    {% csrf_token %}
+                        <div class="row form-group form-inline">
+                            <div class="col-md-4"  >
+                                <label class="newlabeldesign">Select Website</label>
+                           
+                            </div>
+                            <div class="col-md-8">
+                                <select name="website" id="website" class=" form-control w-100 " required="required">
+                                    <option value="">Select Website</option>
+                                    {% for i in social_sites %}
+                                  <p class="text-dark">  {{i.name}}</p>
+                                     <option value="{{ i.id}}">{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group form-inline">
+                            <div class="col-md-4"  ><label class="newlabeldesign">Target Type</label>
+                           
+                            </div>
+                            <div class="col-md-8 " id="target_type_div">
+                                <select name="target_type" id="target_type" class=" form-control w-100 " required="required">
+                                    <option value="">Select Target Type</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row form-group form-inline">
+                            <div class="col-md-4"  ><label class="newlabeldesign">Periodic Interval</label>
+                           
+                            </div>
+                            <div class="col-md-8">
+                                <select name="interval" id="interval" class=" form-control w-100 " required="required">
+                                    <option value="">Select Interval</option>
+                                    {% for interval in intervals.0 %}
+                                    <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group form-inline">
+                            <div class="col-md-4"  ><label class="newlabeldesign">User Names</label>
+                           
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" data-role="tagsinput" value="" class="newinputdesign" required="required" id="usernames" name="usernames"/>
+                            </div>
+                        </div>
+
+
+                       
+
+
+                        <div class=" row form-group form-inline">
+                            <div  class="col-md-4"   ><label class="newlabeldesign">Expired On</label>
+                               
+                            </div>
+                            <div class="col-md-8">
+                                <input type="date" class="form-control" id="expired_on" name="expired_on"  required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="row form-group   form-inline">
+                           
+                                <div class="col-md-4"><label  class="newlabeldesign">Screenshots</label></div>
+                                <div class="col-md-8  radio-group d-flex flex-row justify-content-around align-items-center">
+                                    <label  class="text-success">Yes <input type="checkbox" id="screenshots" name="screenshots"   value="1" /></label>
+                                    <label  class="text-success" >No <input type="checkbox" id="screenshots" name="screenshots"  value="0"  /></label>
+                                </div>
+                           
+                          
+                        </div>
+
+                        
+                        
+                        <div class="row form-group   form-inline">
+                            <div class="col-md-8"></div>
+                                    <div class="col-md-4  radio-group d-flex flex-row justify-content-around align-items-center">
+                                        <input type="submit" class="btn btn-success" id="submit" value="submit" name="submit" />
+                                    </div>
+                        </div>
+                  
+
+                  
+
+
+                    
+            </div>
+         
+               
+           
+        </form>
+           
+        </div>
+        
+   
+{% endblock %}
+{% block foot_dep %}
+
+<!-- JavaScript -->
+
+<script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
+
+<script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
+<script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+
+<script>
+  $(document).ready(function(){
+
+    $("#website").change(function(){
+        var website = $(this).children("option:selected").text();
+        if(website=='Facebook'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="1">page</option><option value="0">person</option><option value="2">group</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+
+        else if(website=='Twitter'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="0">profile</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+
+        else if(website=='Instagram'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="0">profile</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+
+        else if(website=='Linkedin'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="0">profile</option><option value="1">company</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+        else if(website=='Reddit'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="0">profile</option><option value="1">subreddit</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+
+        else if(website=='Youtube'){
+            var html='<select name="target_type" id="target_type" required="required" class=" form-control w-100"><option value="">Select Target Type</option><option value="0">channel</option></select>'
+            $('#target_type_div').empty().append(html)
+        }
+  });
+});
+    
+    </script>
+
+{% endblock %}

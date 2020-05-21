@@ -27,6 +27,9 @@ urlpatterns = [
     path('index_textprocessing/', views.Index_Textprocessing.as_view(), name='index_textprocessing'),
     # ahmed twitter urls
     path('twitter/', views.Twitter.as_view(), name="Twitter"),
+    path('tweets/', views.Tweets.as_view(), name="Tweets"),
+    path('get_hashtag_tweets/?P(?P<hashtag_name>[0-9]+)\\/$/', views.Get_Hashtag_Tweets.as_view(), name="get_hashtag_tweets"),
+    path('iptools/', views.Ip_Tools.as_view(), name="iptools"),
 ]
 
 

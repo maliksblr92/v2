@@ -1,38 +1,44 @@
 {% load static %}
+<style>
+.side_text{
+color: #ffffff;
+}
+.background{
+background:linear-gradient(
+93deg,
+rgba(24, 72, 116, 1) 0%,
+rgba(6, 17, 26, 1) 100%
+);
+}
+</style>
+<!-- row 1 small cards starts -->
+<div class="row  m-1">
+    {% for user in users %}
+        <!-- small card col-md-3  -->
+        <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4  ">
+            <div class=" row small_card_warpper glowing_border" style="height: 180px">
+                <div class="col-md-1 d-flex flex-row justify-content-around align-items-center glowing_border background">
+                    
+                    {% if user.username %}
+                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.username user.target_site %}" class="badge badge-sm m-0 p-0 rotate side_text" ><i class="fas fa-link mr-1"></i>{{ user.username }}</a>
+                        {% elif user.userid %}
+                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' user.userid user.target_site  %}" class="badge badge-sm m-0 p-0 rotate side_text" ><i class="fas fa-link mr-1"></i>{{ user.userid }} </a>
 
- <!-- row 1 small cards starts -->
-                <div class="row  m-1">
-
-                    {% for user in users %}
-                    <!-- small card col-md-3  -->
-                    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4  ">
-                        <div class=" row small_card_warpper border">
-                            <div class="col-md-1 small_card_scroll m-0 p-0 ">
-                                <div class="w-100 h-25 text-center">
-                                    <i class="fas fa-link text-white chain_icon"></i>
-                                </div>
-                                <div class="w-100 h-50">
-                                    <button class="btn btn-sm" type="button" onclick="">T</button>
-
-                                </div>
-                                <div class="w-100 h-25 text-center">
-                                    <i class="fas fa-eye text-white eye_icon"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
-                                <img src="{{ user.profile_url }}" class="  profile_card_avatar" />
-                            </div>
-
-                            <div class="col-md-6 m-0 p-0 custom_center   small_card_right_wrapper">
-                                <div class=""><p>{{ user.id }}</p></div>
-                                <div class=""><p>{{ user.username }}</p></div>
-                                <div class=""><p>{{ user.fullname }}</p></div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end small card col-md-3 -->
-                    {% endfor %}
-
+                    {% endif %}
+                    
                 </div>
-                <!-- row 1 end of small cards   -->
+                <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
+                    <img src="{{ user.profile_url }}" class="  profile_card_avatar" />
+                </div>
+                <div class="col-md-5 m-0 p-0 custom_center   small_card_right_wrapper">
+                    <div class="badge badge-light">{{ user.id }}</div>
+                    <div class="badge badge-light mt-2">{{ user.username|truncatechars:"20"}}</div>
+                    <div class="badge badge-light mt-2">{{ user.fullname|truncatechars:"17"}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- end small card col-md-3 -->
+    {% endfor %}
+</div>
+<script></script>
+<!-- row 1 end of small cards   -->

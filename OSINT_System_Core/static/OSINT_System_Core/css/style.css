@@ -26,6 +26,106 @@
         transparent 75%,
         transparent
     );
+
+   
+
+}
+
+#alert-box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+#alert-box::-webkit-scrollbar {
+    width: 2px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+#alert-box::-webkit-scrollbar-thumb {
+    background-color: #3366ff;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.5) 75%,
+        transparent 75%,
+        transparent
+    );
+
+   
+
+}
+
+
+#notification-box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+#notification-box::-webkit-scrollbar {
+    width: 3px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+#notification-box::-webkit-scrollbar-thumb {
+    background-color: #3366ff;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.5) 75%,
+        transparent 75%,
+        transparent
+    );
+
+
+
+}
+
+
+
+
+#control-msg-box::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+#control-msg-box::-webkit-scrollbar {
+    width: 3px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+#control-msg-box::-webkit-scrollbar-thumb {
+    background-color: #3366ff;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0.5) 75%,
+        transparent 75%,
+        transparent
+    );
+
+
+
 }
 
 body {
@@ -37,6 +137,7 @@ body {
     background-size: cover;
     margin: 0 !important;
     padding: 0 !important;
+   overflow-x:hidden!important;
 }
 
 /* headers csss start */
@@ -76,17 +177,35 @@ body {
 .left_nav {
     width: 285px;
     height: 330px;
-    background-image: url("./../../../../static/images/left_notification_panel.svg");
+    background-image: url(./../../../../static/images/left_notification_panel.svg);
     background-repeat: no-repeat;
-    padding-bottom: 12%;
-    padding-left: 16%;
-    padding-right: 25%;
-    padding-top: 23%;
+    padding-bottom: 11%;
+    padding-left: 39px;
+    padding-right: 22%;
+    padding-top: 22%;
+    
+}
+#notification-box:hover{
+    border:1px solid white ;
+    border-radius:5px;
+    overflow-y: auto;
+
+}
+#notification-box{
+    font-size: 12px;;
+    overflow-y: hidden;
+    height:200px;
+    width:100%;
+    padding: 5px;;
+    font-weight: bold;;
+    border-radius:5px;
+
 }
 
 .left_nav_text {
     font-size: 12px;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
 }
 
 .left_buttons {
@@ -193,7 +312,7 @@ body {
 }
 
 .custom_progress_wrapper {
-    height: 50px;
+    height: 34px;
 }
 
 /* end righht side progress bar  */
@@ -212,11 +331,13 @@ body {
 
 .alert_1_text_header {
     font-size: 12px;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
 }
 
 .alert_1_text_wrapper {
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
     font-size: 10px;
 }
 
@@ -236,11 +357,13 @@ body {
 
 .alert_2_text_header {
     font-size: 12px;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
 }
 
 .alert_2_text_wrapper {
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
     font-size: 10px;
 }
 
@@ -295,7 +418,8 @@ body {
 
 .globe_icon_text {
     font-size: 10px;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
 }
 
 /*end globe icon and text on right side */
@@ -320,8 +444,8 @@ body {
 /* footer charts  */
 
 #chart_5 {
-    border-right: 15px solid#1cb5e0;
-    border-left: 15px solid#1cb5e0;
+    border-right: 5px solid#1cb5e0;
+    border-left: 5px solid#1cb5e0;
     border-top: 1px solid#1cb5e0;
     border-bottom: 1px solid#1cb5e0;
     border-radius: 5px;
@@ -411,7 +535,8 @@ body {
 
     .globe_icon_text {
         font-size: 10px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     /*end globe icon and text on right side */
@@ -441,8 +566,8 @@ body {
     /* footer charts  */
 
     #chart_5 {
-        border-right: 15px solid#1cb5e0;
-        border-left: 15px solid#1cb5e0;
+        border-right: 5px solid#1cb5e0;
+        border-left: 5px solid#1cb5e0;
         border-top: 1px solid#1cb5e0;
         border-bottom: 1px solid#1cb5e0;
         border-radius: 5px;
@@ -504,12 +629,12 @@ body {
     /* aler1 rights side */
 
     .alert_1 {
-        height: 164px;
+        height: 152px;
     }
 
     .alert_1_wrapper {
-        height: 118px;
-        width: 229px;
+        height: 132px;;;
+        width: 219px;
         border-radius: 5px;
     }
 
@@ -517,13 +642,15 @@ body {
         height: 100%;
         width: 100%;
         font-size: 12px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     .alert_1_text_wrapper {
         height: 100%;
         width: 100%;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
         font-size: 10px;
     }
 
@@ -531,29 +658,33 @@ body {
 
     /* aler1 rights side */
     .alert_2 {
-        height: 189px;
+        height: 176px;
     }
 
     .alert_2_wrapper {
-        width: 234px;
+        width: 235px;
 
         border-radius: 5px;
 
-        padding-right: 53px;
+        padding-right: 49px;
 
-        padding-left: 0px;
+        padding-left: 2px;
     }
 
     .alert_2_text_header {
         font-size: 12px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
 
         height: 100%;
         width: 100%;
     }
+    .alert-2_text{
+        padding-left: 9px;;
+    }
 
     .alert_2_text_wrapper {
-        overflow: hidden;
+        overflow-y: auto;
         font-size: 10px;
 
         height: 100%;
@@ -598,19 +729,31 @@ body {
     }
 
     .left_nav {
-        width: 195px;
-        height: 238px;
-        background-image: url("./../../../../static/images/left_notification_panel.svg");
+        width: 285px;
+        height: 330px;
+        background-image: url(./../../../../static/images/left_notification_panel.svg);
         background-repeat: no-repeat;
-        padding-bottom: 27%;
-        padding-left: 17%;
-        padding-right: 31%;
-        padding-top: 25%;
+        padding-bottom: 11%;
+        padding-left: 39px;
+        padding-right: 22%;
+        padding-top: 22%;
+        
     }
 
+    #notification-box:hover{
+        border:1px solid white ;
+        border-radius:5px;
+    }
+    #notification-box{
+        font-size: 12px;;
+        overflow-y: auto;
+        height:200px;width:100%;
+    }
+  
     .left_nav_text {
         font-size: 10px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     .left_buttons {
@@ -656,7 +799,8 @@ body {
 
     .globe_icon_text {
         font-size: 10px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     /* aler1 rights side */
@@ -679,11 +823,13 @@ body {
 
     .alert_2_text_header {
         font-size: 12px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     .alert_2_text_wrapper {
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
         font-size: 10px;
     }
 
@@ -695,11 +841,13 @@ body {
 
     .alert_1_text_header {
         font-size: 12px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     .alert_1_text_wrapper {
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
         font-size: 10px;
     }
 
@@ -716,11 +864,13 @@ body {
 
     .alert_2_text_header {
         font-size: 12px;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
     }
 
     .alert_2_text_wrapper {
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x:hidden;
         font-size: 10px;
     }
 

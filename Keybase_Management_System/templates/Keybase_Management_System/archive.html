@@ -15,11 +15,18 @@
         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
             <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
         </div>
+
     </div>
     <div class="col-md-4 col-lg-4 col-xl-4"></div>
 </div>
 {% endblock %}
 {% block belly %}
+<style>
+    #nav-tabContent{
+       height: 600px;
+       overflow-y :auto ; 
+    }
+</style>
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
         <!-- TOP MANU BAR -->
@@ -52,6 +59,7 @@
     </div>
     <!-- end of top row -->
 
+
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
         <div class="">
@@ -59,43 +67,170 @@
             <div class="row formbg ml-5">
                 <div class="col-md-11 col-lg-11 col-xl-11 col-sm-11">
                     <!-- this is content -->
-                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent" >
                         {% csrf_token %}
-                        {% for key, value in ctx.items %}
+                        {% for key, value in gtx.items %}
                         <div class="tab-pane fade {% if key == 'keywords' %}active show{% endif %}" id="nav-{{key}}"
                             role="tabpanel">
                             <!-- Each content tab #1 for keywords-->
                             <div class="row mt-2">
                                 <!-- divide the section into 2 columns -->
-                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                <div class="col-md-12 col-lg-12 col-xl-12">
                                     <div class="container">
-                                        {% for listitem in value|slice:"0:5" %}
-                                        {% for key_in, value_in in listitem.items %}
-                                        <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend pilleditdel">
-                                                <input type="hidden" value="{{key_in}}">
-                                                <span class="keybaseLabel">{{key}}</span>
-                                                <span class="rightlabel">{{value_in|join:", "}}</span>
+                                        <div class="row">
+                                            {% if key == 'keywords' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3 m-0">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
                                             </div>
-                                        </div>
-                                        {% endfor %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-4 col-xl-4">
-                                    <div class="container">
-                                        {% for listitem in value|slice:"5:10" %}
-                                        {% for key_in, value_in in listitem.items %}
-                                        <div class="input-group mt-2 mb-2">
-                                            <div class="input-group-prepend pilleditdel">
-                                                <input type="hidden" value="{{key_in}}">
-                                                <span class="keybaseLabel">{{key}}</span>
-                                                <span class="rightlabel">{{value_in|join:", "}}</span>
+                                            <div class="col-md-9 m-0">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.keywords|join:", "|default:"No Keywords available "}}</span>
+                                                    </div>
                                             </div>
+    
+                                        {% endfor %}
+                                        {% endif %}
                                         </div>
+
+                                   
+
+
+                                        <div class="row">
+                                            {% if key == 'mentions' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.mentions|join:", "|default:"No Mentions available "}}</span>
+                                                    </div>
+                                            </div>
+    
                                         {% endfor %}
+                                        {% endif %}
+                                        </div>
+
+                                   
+
+
+
+
+                                        <div class="row">
+                                            {% if key == 'topics' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.topic|join:", "|default:"N/A"}}</span>
+                                                    </div>
+                                            </div>
+    
                                         {% endfor %}
+                                        {% endif %}
+                                        </div>
+
+
+
+
+                                        <div class="row">
+                                            {% if key == 'phrases' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.phrases|join:", "|default:"No Phrases available "}}</span>
+                                                    </div>
+                                            </div>
+    
+                                        {% endfor %}
+                                        {% endif %}
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="row">
+                                            {% if key == 'tags' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.hashtags|join:", "|default:"No Hashtags available "}}</span>
+                                                    </div>
+                                            </div>
+    
+                                        {% endfor %}
+                                        {% endif %}
+                                        </div>
+
+                                        <div class="row">
+                                            {% if key == 'titles' %}
+                                            {% for i in ctx %}
+                                            <div class="col-md-3">
+                                                <div class="input-group mt-2 mb-2">
+                                                    <div class="input-group-prepend w-100 pilleditdel">
+                                                   <input type="hidden" value="{{key_in}}">
+                                                    <span class="keybaseLabel w-100 text-left font-weight-bold p-1">{{i.title|default:"N/A"}}</span>
+                                                   </div>
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="input-group-prepend w-100 pilleditdel mt-2 mb-2">
+                                                    <span class="rightlabel w-100" >{{i.title|default:"N/A"|default:"No Title available "}}</span>
+                                                    </div>
+                                            </div>
+    
+                                        {% endfor %}
+                                        {% endif %}
+                                        </div>
+
+
+
+
                                     </div>
+
+
+                                   
                                 </div>
                             </div>
                         </div>
@@ -109,15 +244,16 @@
                 <div class="col-md-1 col-lg-1 com-xl-1 col-sm-1 d-flex align-items-center">
                     <!-- Three verticle button -->
                     <div class="ml-4 d-flex flex-column align-items-end">
-                        <span class="editbutton"><i style="color: white; opacity: 0.8;" class="fas fa-edit fa-2x"></i>
+                        <span class="editbutton">
+                            <i style="color: white; opacity: 0.8;" class="fas fa-edit"></i>
                         </span>
 
-                        <span class="addbutton"><i style="color: white; opacity: 0.8;"
-                                class="fa fa-plus-circle fa-2x"></i>
+                        <span class="addbutton">
+                            <i style="color: white; opacity: 0.8;" class="fa fa-plus-circle"></i>
                         </span>
 
-                        <span class="deletebutton"><i style="color: white; opacity: 0.8;"
-                                class="fas fa-trash-alt fa-2x"></i>
+                        <span class="deletebutton">
+                            <i style="color: white; opacity: 0.8;" class="fas fa-trash-alt "></i>
                         </span>
                     </div>
                 </div>

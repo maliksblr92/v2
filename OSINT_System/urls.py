@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf.urls.static import static
+from django.conf import settings
 import multiprocessing
 import time
 import os
@@ -34,9 +36,9 @@ urlpatterns = [
     path('data_acquisition/', include('Public_Data_Acquisition_Unit.urls')),
     path('system_log/', include('System_Log_Management_Unit.urls')),
     path('accounts/', include('User_Accounts_Management_Unit.urls')),
-path('', include('User_Accounts_Management_Unit.urls')),
+    path('', include('User_Accounts_Management_Unit.urls')),
     path('tms/', include('Target_Management_System.urls')),
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),
     path('cms/', include('Case_Management_System.urls')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
