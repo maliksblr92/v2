@@ -7,22 +7,24 @@
 {% endblock %}
 
 {% block smallnavbar %}
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-8 d-flex" style="">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="">
        <div class="row border second_nav_row">
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/create">Create</a></div>
-            <div class="col-md-3 border-top m-0 p-0  "><a
+            <div class="col-md-6 m-0 p-0  ">
+                <a class="btn border-right  nav-link  second_nav_btn  h-100 text-white" href="/pms/create">Create</a>
+            </div>
+<!--            <div class="col-md-3 border-top m-0 p-0  "><a
                     class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/overview">Overview</a>
             </div>
             <div class="col-md-3  border-top m-0 p-0  "><a
-                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div>
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
+                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div> -->
+            <div class="col-md-6 m-0 p-0  ">
+                <a class="btn   nav-link  second_nav_btn  h-100 text-white active" href="/pms/archive">Archive</a>
+            </div>
         </div>
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-4"></div>
 </div>
 {% endblock %}
 {% block belly %}
@@ -31,29 +33,23 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
                 <div class="row">
-                    <div class="mydiv col-md-12 glowing_border "
-                        style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
+                    <div class="mydiv col-md-12 glowing_border ">
                         <div class="row">
                             <div class="col-md-12 markTargetDiv ">
                                 <!-- FIrst Row of the Main COntent-->
                                 <div class="row">
                                     <!-- DIv for Mark Target Section-->
-                                    <div class="col-md-6 topcontentbar  " style="border-radius:15px 0 0 0;">
-                                        <h5 class=" myH5"> Portfolio_links</h5>
-                                    </div>
-                                    <div class="col-md-6"
-                                        style="background-color:#243F52;padding-left:1.5rem; border-top-right-radius:15px;">
-                                        <!--RIGHT SECTION FOR icons-->
-
-                                        <!--END OF GRID AND TILE VIEW RIGHT section -->
+                                    <div class="col-md-12 topcontentbar  " style="border-radius:15px 0 0 0;">
+                                        <h5 class=" myH5"> Portfolio Links</h5>
                                     </div>
                                 </div>
                             </div>
                             <!-- This is The Form Section below top-section-->
-                            <div class="row ml-4 mt-4 mr-4">
+                            <div class="row ml-2 mt-4 mr-2"
+                        style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
                                 <div class="col-md-12">
-                                    <div class="row">
                                     <h5 class=" myH5">Linked Targets</h5>
+                                    <div class="row">
 
                                         <!-- Just like card 1  start looping here -->
                                         {% if targets|length > 0 %}
@@ -111,7 +107,7 @@
                                                     </div>
                                                 <!-- Div Right part-->
                                                 <div class="col-md-10 glowing_border"
-                                                    style="width:500px; border-radius:0px 15px 15px 0px;">
+                                                    style="height:200px; border-radius:0px 15px 15px 0px;">
                                                     <div class="row">
                                                         <div class="col-md-4 d-flex flex-column justify-content-center">
                                                             <img class=""
@@ -157,8 +153,8 @@
 
 
                                     </div>
-                                <div class="row">
-                                             <h5 class=" myH5">Linked Posts</h5>
+                                    <h5 class=" myH5">Linked Posts</h5>
+                                    <div class="row">
 
                                             {% for post in posts %}
             <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
