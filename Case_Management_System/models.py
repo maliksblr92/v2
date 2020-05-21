@@ -175,11 +175,12 @@ class PersonOfInterest(Document):
         self.poi_category.extend(poi_category)
         self.save()
 
-    def get_poi_by_id(self, poi_id):
+    def append_language(self, language: Language):
         """
-        return a reference to a specific poi
+        append language to list of languages
         """
-        return PersonOfInterest.objects(id=poi_id).first()
+        self.languages.append(language)
+        self.save()
 
     @staticmethod
     def get_all_poi():
@@ -187,6 +188,13 @@ class PersonOfInterest(Document):
         return all person of interest
         """
         return PersonOfInterest.objects().fields(first_name=1, last_name=1)
+
+    @staticmethod
+    def get_poi_by_id(poi_id):
+        """
+        return a reference to a specific poi
+        """
+        return PersonOfInterest.objects(id=poi_id).first()
 
 class CaseCMS(Document):
     """
