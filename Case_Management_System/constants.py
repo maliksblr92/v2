@@ -11,12 +11,12 @@ GENDERS = (
 )
 
 SPOKEN_LANGUAGE_FLUENCY = (
-    ('beginner', 'Beginner'),
-    ('elementary', 'Elementary'),
-    ('intermediate', 'Intermediate'),
-    ('upper intermediate', 'Upper Intermediate'),
-    ('advanced', 'Advanced'),
-    ('proficient', 'Proficient')
+    ('b', 'Beginner'),
+    ('e', 'Elementary'),
+    ('i', 'Intermediate'),
+    ('ui', 'Upper Intermediate'),
+    ('a', 'Advanced'),
+    ('p', 'Proficient')
 )
 
 LANGUAGES = (
