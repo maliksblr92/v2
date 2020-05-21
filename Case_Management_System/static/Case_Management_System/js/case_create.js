@@ -81,4 +81,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         event.preventDefault();
     });
+
+    // languages form
+    let l_form = "#languages-form";
+    $(l_form).submit((event) => {
+        let form_data = $(l_form).serializeArray();
+        console.log(form_data);
+        $.ajax({
+            url: "/cms/addlanguage/",
+            method: "POST",
+            data: form_data,
+            success: (result) => {
+                console.log(result);
+                $(l_form).trigger("reset");
+            },
+        });
+        event.preventDefault();
+    });
 });

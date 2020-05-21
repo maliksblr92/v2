@@ -11,7 +11,8 @@ from django.http import JsonResponse
 from Case_Management_System.models import CaseCMS, VideoEvidenceFile
 from Case_Management_System.models import LocationOfInterest, PhysicalEvidence
 from Case_Management_System.models import CaseFile, PictureEvidenceFile
-from Case_Management_System.models import PersonOfInterest
+from Case_Management_System.models import PersonOfInterest, Language
+from Case_Management_System.constants import LANGUAGES
 
 APP_NAME = 'Case_Management_System'
 
@@ -145,6 +146,8 @@ class CreateCase(View):
                 poi['_id']['$oid'],
                 f'{poi["first_name"]} {poi["last_name"]}'
             ])
+        # store all languages to context
+        ctx['languages'] = LANGUAGES
         print(ctx)
         return render(request, f'{APP_NAME}/case_create.html', ctx)
 
@@ -383,6 +386,60 @@ class StoreAndRetrievePersonOfInterest(View):
                 person_of_interest = PersonOfInterest()
                 person_of_interest.create_poi(
                     first_name, middle_name, last_name, gender, email, phone, category)
+        except Exception as exc:
+            return JsonResponse({'error': str(exc)})
+        return JsonResponse({'success': 200})
+
+class AddLanguagesToPOI(View):
+    """
+    store an embedded language object
+    to person of interest
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        handles data received from frontend
+        """
+        print(request.POST)
+        if request.POST.get('ls-poi'):
+            poi = request.POST.get('ls-poi')
+        else:
+            poi = None
+        if not poi:
+            return JsonResponse({'error': 'select person of interest'})
+        if request.POST.get('ls-language-name'):
+            language_name = request.POST.get('ls-language-name')
+        else:
+            language_name = None
+        if request.POST.get('ls-accent'):
+            accent = request.POST.get('ls-accent')
+        else:
+            accent = None
+        if request.POST.get('ls-can-read'):
+            can_read = request.POST.get('ls-can-read')
+        else:
+            can_read = None
+        if request.POST.get('ls-can-write'):
+            can_write = request.POST.get('ls-can-write')
+        else:
+            can_write = None
+        if request.POST.get('ls-can-speak'):
+            can_speak = request.POST.get('ls-can-speak')
+        else:
+            can_speak = None
+        if request.POST.get('ls-fluency'):
+            fluency = request.POST.get('ls-fluency')
+        else:
+            fluency = None
+        try:
+            language = Language(
+                language_name,
+                accent,
+                can_read,
+                can_write,
+                can_speak,
+                fluency)
+            person_of_interest = PersonOfInterest.get_poi_by_id(poi)
+            person_of_interest.append_language(language)
         except Exception as exc:
             return JsonResponse({'error': str(exc)})
         return JsonResponse({'success': 200})

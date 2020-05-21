@@ -36,6 +36,7 @@
                 <a class="nav-item nav-link" data-toggle="tab" href="#virtual-evidence-tab">Virtual Evidence</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#physical-evidence-tab">Physical Evidence</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#poi-tab">Person Of Interest</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#languages-tab">Languages</a>
                 <a class="nav-item nav-link" data-toggle="tab" href="#investigator-tab">Investigators</a>
             </div>
         </nav>
@@ -394,6 +395,7 @@
                             </div>
                         </div>
                         <!-- end of physical evidence tab -->
+                        <!-- person of interest tab -->
                         <div class="tab-pane fade" id="poi-tab">
                             <div class="row">
                                 <div class="col-md-9 col-lg-9 col-xl-9">
@@ -529,6 +531,102 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- end of person of interest tab -->
+                        <!-- languages tab -->
+                        <div class="tab-pane fade" id="languages-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="languages-form">
+                                        {% csrf_token %}
+                                        <!-- associated person of interest -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Person of Interest</span>
+                                            </div>
+                                            <select name="ls-poi" class="custom-select newinput">
+                                                {% for poi in pois %}
+                                                <option value="{{poi.0}}">{{poi.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated person of interest -->
+                                        <!-- name of the language -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Language</span>
+                                            </div>
+                                            <select name="ls-language-name" class="custom-select newinput">
+                                                {% for language in languages %}
+                                                <option value="{{language.0}}">{{language.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of language name -->
+                                        <!-- accent -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Accent</span>
+                                            </div>
+                                            <input type="text" class="form-control newinputdesign" name="ls-accent"
+                                                placeholder="Accent Please ...">
+                                        </div>
+                                        <!-- end of accent -->
+                                        <!-- can read -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Read</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-read">
+                                        </div>
+                                        <!-- end of can read -->
+                                        <!-- can write -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Write</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-write">
+                                        </div>
+                                        <!-- end of can write -->
+                                        <!-- can speak -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Speak</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-speak">
+                                        </div>
+                                        <!-- end of can speak -->
+                                        <!-- fluency -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Level</span>
+                                            </div>
+                                            <select name="ls-fluency" class="custom-select newinput">
+                                                <option value="b" selected>Beginner</option>
+                                                <option value="e">Elementary</option>
+                                                <option value="i">Intermediate</option>
+                                                <option value="ui">Upper Intermediate</option>
+                                                <option value="a">Advanced</option>
+                                                <option value="p">Proficient</option>
+                                            </select>
+                                        </div>
+                                        <!-- end of fluency -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of languages tab -->
                     </div>
                     <!-- end of nav tab content -->
                 </div>
