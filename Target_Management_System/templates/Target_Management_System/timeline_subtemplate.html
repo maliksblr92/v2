@@ -1,3 +1,5 @@
+
+{% load osint_custom_tags %}
 {% for post in posts %}
             <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
                 <div class="card text-center glowing_border transparent">
@@ -9,6 +11,19 @@
                         <p class="card-text text-white">{{ post.post.text }}</p>
                         <div class="row">
                             <div class="col-md-12">
+
+                            {% if post.post.t_site == 'youtube' %}
+
+                                {% if post.post.link|length > 0 %}
+                                <iframe width="100%" height="720" src="https://www.youtube.com/embed/{{ post.post.link|get_vedio_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                {% else %}
+                                    <img class="img-fluid border" src="{{ post.post.picture }}">
+
+
+                                {% endif %}
+
+                            {% else %}
+
                                 {% if post.post.picture|length > 0 %}
                                 <img class="img-fluid border" src="{{ post.post.picture }}">
                                 {% else %}
@@ -16,6 +31,8 @@
 
 
                                 {% endif %}
+
+                            {% endif %}
                             </div>
                         </div>
                         <a href="{{ post.post.link }}" target="_blank" class="btn btn-outline-light  ">Post</a>

@@ -708,7 +708,7 @@ class Timeline_Manager(object):
             print(e)
             publish(str(e),module_name=__name__,message_type='error')
 
-    def encode_posts_packet(self,target_site,target_type,author,posts):
+    def encode_posts_packet(self,target_site,target_type,author,posts,**kwargs):
 
         posts_list = []
 
@@ -722,7 +722,7 @@ class Timeline_Manager(object):
                             if len(post.picture_directory) > 0 : p_dir = post.picture_directory[0]['url']
                             if len(post.video_directory) > 0: v_dir = post.video_directory[0]['url']
 
-                            print(post.picture_directory[0]['url'])
+                            #print(post.picture_directory[0]['url'])
                             temp_dic = {'link':post.post_link,
                                       'text':post.post_text,
                                       'picture':p_dir,
@@ -800,10 +800,80 @@ class Timeline_Manager(object):
                             print(e)
                     return posts_list
 
+            elif (target_site == 'reddit'):
+                if(target_type=='subreddit'):
+                    for post in posts :
+                        try:
+                            print('..................Reddit ........')
+                            temp_dic = {'link':post['post_link'],
+                                      'text':post['text'],
+                                      'picture':post['media'],
+                                      'vedio': '',
+                                        'author':author,
+                                      'a_url':kwargs['a_url'],
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
+
+                elif(target_type=='profile'):
+                    for post in posts :
+                        try:
+                            print('..................Reddit Profile ........')
+                            temp_dic = {'link':post['post_link'],
+                                      'text':post['text'],
+                                      'picture':post['media'],
+                                      'vedio': '',
+                                        'author':author,
+                                      'a_url':kwargs['a_url'],
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
+
+            elif (target_site == 'youtube'):
+                if(target_type=='channel'):
+                    for post in posts :
+                        try:
+                            print('.................................................................Youtube ..............................................')
+                            temp_dic = {'link':post['link'],
+                                      'text':post['name'],
+                                      'picture':post['thumbnail_directory'],
+                                      'vedio': '',
+                                        'author':author,
+                                      'a_url':kwargs['a_url'],
+                                      't_site':target_site,
+                                      't_type':target_type,
+                                      'seen':False
+                                      }
+
+
+
+                            posts_list.append(temp_dic)
+
+                        except Exception as e:
+                            print(e)
+                    return posts_list
 
     def update_timeline_posts(self,gtr = None):
 
-        sites_to_avoid = ['Linkedin','Reddit','Youtube']
+        sites_to_avoid = ['Linkedin']
 
 
         if(gtr is not None):
@@ -818,6 +888,58 @@ class Timeline_Manager(object):
                                 gtr_id = str(gtr.id)
                                 username = obj.name
                                 posts = self.encode_posts_packet(target_site.lower(),target_type.lower(),username,obj.tweets)
+                                if (len(posts) < 1):
+                                    return None
+
+                                tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                    username=username, posts=posts)
+                                tl.save()
+                                print('timeline updated')
+
+
+                            elif (gtr.website.name == 'Youtube'):
+
+                                target_site = gtr.website.name
+
+                                target_type = gtr.target_type
+
+                                gtr_id = str(gtr.id)
+
+                                username = obj.overview['name']
+
+                                posts = self.encode_posts_packet(target_site.lower(), target_type.lower(), username,
+
+                                                                 obj.videos['popular'], a_url=obj.overview['url'])
+
+                                print('..................Youtube ........')
+
+                                if (len(posts) < 1):
+                                    return None
+
+                                tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+
+                                                    username=username, posts=posts)
+
+                                tl.save()
+
+                                print('timeline updated')
+
+                            elif (gtr.website.name == 'Reddit'):
+
+                                target_site = gtr.website.name
+                                target_type = gtr.target_type
+                                gtr_id = str(gtr.id)
+
+                                print(obj, '.....................Reddit......................')
+
+                                if(target_type.lower() == 'profile'):
+                                    username = obj.username
+                                else:
+                                    username = obj.name
+
+                                posts = self.encode_posts_packet(target_site.lower(), target_type.lower(), username,
+                                                                 obj.posts, a_url=obj.url)
+
                                 if (len(posts) < 1):
                                     return None
 
@@ -842,17 +964,18 @@ class Timeline_Manager(object):
                                 tl.save()
                                 print('timeline updated')
                         except Exception as e:
-                            print(e)
+                            print('')
 
                     else:
                         print('given gtr has no response attatched')
             except Exception as e:
-                print(e)
+                print('')
         else:
 
             GTRs = Global_Target_Reference.objects()
 
             for gtr in GTRs:
+
                 try:
                     if (not gtr.website.name in sites_to_avoid):
                         obj = self.acq.get_data_response_object_by_gtr_id(gtr.id)
@@ -872,6 +995,48 @@ class Timeline_Manager(object):
                                     tl.save()
                                     print('timeline updated')
 
+                                elif (gtr.website.name == 'Youtube'):
+
+                                    target_site = gtr.website.name
+                                    target_type = gtr.target_type
+                                    gtr_id = str(gtr.id)
+
+                                    username = obj.overview['name']
+
+                                    posts = self.encode_posts_packet(target_site.lower(), target_type.lower(), username,
+                                                                     obj.videos['popular'], a_url=obj.overview['url'])
+                                    print('..................Youtube ........')
+                                    if (len(posts) < 1):
+                                        continue
+
+                                    tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                        username=username, posts=posts)
+                                    tl.save()
+                                    print('timeline updated')
+
+                                elif (gtr.website.name == 'Reddit'):
+
+                                    target_site = gtr.website.name
+                                    target_type = gtr.target_type
+                                    gtr_id = str(gtr.id)
+
+                                    print(obj,'.....................Reddit......................')
+
+                                    if (target_type.lower() == 'profile'):
+                                        username = obj.username
+                                    else:
+                                        username = obj.name
+
+                                    posts = self.encode_posts_packet(target_site.lower(), target_type.lower(), username,
+                                                                     obj.posts, a_url=obj.url)
+
+                                    if (len(posts) < 1):
+                                        continue
+
+                                    tl = Timeline_Posts(target_type=target_type, target_site=target_site, gtr_id=gtr_id,
+                                                        username=username, posts=posts)
+                                    tl.save()
+                                    print('timeline updated')
                                 else:
 
                                     target_site = gtr.website.name
@@ -891,7 +1056,7 @@ class Timeline_Manager(object):
                         else:
                             print('given gtr has no response attatched')
                 except Exception as e:
-                    print(e)
+                    print('')
 
 
 
