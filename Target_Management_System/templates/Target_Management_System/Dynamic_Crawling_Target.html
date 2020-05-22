@@ -187,6 +187,30 @@
                 color: #ffffff !important;
                 }
                 </style>
+                <style>
+                    .clip_btn{
+                        height: 25px;
+                        width: 25px;
+                        border:1px solid black;
+                        background-color:white;
+                     
+                    }
+                </style>
+                <script src="{% static  'jquery/clipboard.min.js' %}">
+                    new ClipboardJS('.btn');
+                    Clipboard.on('success', function(e) {
+                        console.info('Action:', e.action);
+                        console.info('Text:', e.text);
+                        console.info('Trigger:', e.trigger);
+                    
+                        e.clearSelection();
+                    });
+                    
+                    clipboard.on('error', function(e) {
+                        console.error('Action:', e.action);
+                        console.error('Trigger:', e.trigger);
+                    });
+                </script>
             </head>
             <body>
                 <div class="container-fluid wrapper background-gradient-dark">
@@ -210,8 +234,13 @@
                                     </a>
                                 </div>
                             </div>
+
+                            <
+
+                            
                             <div class="row background-gradient-dark border_radius_5px ">
-                                
+                                <!-- Target -->
+
                                 <div class="col-md-7  background-gradient-dark p-5">
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
@@ -221,8 +250,11 @@
                                         </div>
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                             <label class="label text_15px font-weight-bold ">
-                                                <span class="badge badge-light header-text">
+                                                <span class="badge badge-light header-text" id="foo">
                                                     {{target.name|default:"N/A"}}
+                                                    <button class="btn btn-sm " data-clipboard-target="#foo">
+                                                        <img src="{% static '/clippy.svg'%}" alt="Copy to clipboard" >
+                                                    </button>
                                                 </span>
                                             </label>
                                         </div>
@@ -276,7 +308,7 @@
                                 <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
                                     <div id="profile_chart" style="height:400px;width:100%"></div>
                                 </div>
-                            </div>
+                            </>
                             <!--
                             -->
                             <div class="row ">
@@ -307,7 +339,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold">
-                                                            {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge custom_badge" >
+                                                            {{i.page}}  <a href="{{i.page}}" target="_blank" class="badge custom_badge" >
                                                                 <i class="fa fa-eye fa-2x"></i>
                                                             </a>
                                                         </div>
@@ -426,6 +458,8 @@
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    
+
     <script>
     am4core.ready(function () {
     // Themes begin

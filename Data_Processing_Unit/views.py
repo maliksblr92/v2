@@ -237,37 +237,31 @@ class Index_Textprocessing(View):
 
         if (task_name == 'common_words'):
             text = request.POST['text']
-            print("text ===    ", text)
             print("common words form submitted ")
             common_words=ais.text_analytics(text,task_name)
             print(common_words)
-            # return redirect('/dpu/index_textprocessing',{'common_words':common_words})
-            return render(request,'Data_Processing_Unit/common_words.html',{'common_words':common_words})
+            return render(request,'Data_Processing_Unit/index_textprocessing.html',{'common_words':common_words})
 
         elif (task_name == 'sentiments'):
             text = request.POST['text']
-            print("text ===    ", text)
+            sentiments=ais.text_analytics(text,task_name)
             print("sentiments form submitted ")
-            return redirect('/dpu/index_textprocessing')
+            print(sentiments)
+            return render(request,'Data_Processing_Unit/index_textprocessing.html',{'sentiments':sentiments})
 
-        elif (task_name == 'sentiments'):
+       
+        elif (task_name == 'most_used_hashtags'):
             text = request.POST['text']
-            print("text ===    ", text)
-            print("sentiments form submitted ")
-            return redirect('/dpu/index_textprocessing')
-
-        elif (task_name == 'most_used_hastags'):
-            text = request.POST['text']
-            print("text ===    ", text)
-            print("most_used_hastags form submitted ")
-            return redirect('/dpu/index_textprocessing')
+            most_used_hashtags=ais.text_analytics(text,task_name)
+            print("most_used_hashtags form submitted ")
+            print(most_used_hashtags)
+            return render(request,'Data_Processing_Unit/index_textprocessing.html',{'most_used_hashtags':most_used_hashtags})
 
         elif (task_name == 'wordcloud'):
             text = request.POST['text']
-            print("text ===    ", text)
+            wordcloud=ais.text_analytics(text,task_name)
             print("wordcloud form submitted ")
-            return redirect('/dpu/index_textprocessing')
-
+            return render(request,'Data_Processing_Unit/index_textprocessing.html',{'wordcloud':wordcloud})
 
 class Twitter(View):
     def get(self, request, *args, **kwargs):
@@ -457,13 +451,13 @@ class Twitter(View):
                         "=======================ESS REPLY=========================\n", tweets_json)
                     return redirect('/dpu/twitter')
             else:
-                tweets_json = ess.tweets_negative(lower_letter_phrase)
+                tweets_json = ess.tweets_negative(phrase)
                 print("printing negitive tweets ");
                 print(tweets_json)
                 if(len(tweets_json) > 0):
                     messages.success(request, 'Query executed successfully --Negitive Tweets')
                     print("=======================ESS REPLY=========================\n", tweets_json)
-                    return redirect('/dpu/twitter', {'tweets_json': tweets_json})
+                    return render(request, 'Data_Processing_Unit/sentiment_tweets.html', {'tweets_json': tweets_json})
 
                 else:
                     messages.error(request, 'Query execution failed')
