@@ -15,6 +15,13 @@ def encode_url(obj):
 
     return obj.replace('/',' ')
 
+@register.filter(name='get_vedio_id')
+def get_vedio_id(url):
+    print('encoding url')
+
+
+    return url.split('=')[1]
+
 
 @register.filter(name='data_type')
 def data_type(obj):
