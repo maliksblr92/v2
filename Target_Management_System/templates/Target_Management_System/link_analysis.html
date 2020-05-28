@@ -1,17 +1,35 @@
 {% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Link Ananlysis | PMS</title>
+        
 <style>
-#chartdiv {
-  width: 100%;
-  height: 100%;
-}
-</style>
+   #chartdiv {
+      width:100%;
+      min-width:1000px;
+      height:1000px;
+      overflow:scroll!important;
+      background-color: #252729 !important;background-color: #252729 !important;
+   }
+   </style>
+  </head>
+  <body>
+
 
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/plugins/forceDirected.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -22,7 +40,11 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 var chart = am4core.create("chartdiv", am4plugins_forceDirected.ForceDirectedTree);
+chart.maskBullets = false;
 
+// Remove padding
+chart.paddingBottom = 0;
+chart.paddingTop = 0;
 //chart.layoutAlgorithm = chart.sliceDice;
 //chart.horizontalMouseWheelBehavior = "zoomx";
 
@@ -50,17 +72,42 @@ networkSeries.dataFields.children = "children";
 networkSeries.nodes.template.tooltipText = "{name}:{value}";
 networkSeries.nodes.template.fillOpacity = 1;
 networkSeries.dataFields.id = "name";
+
+
 //networkSeries.dataFields.fixed = "fixed"
 networkSeries.dataFields.linkWith = "linkWith";
 networkSeries.links.template.strokeWidth = 3;
 networkSeries.links.template.strokeOpacity = 1;
 
-networkSeries.nodes.template.label.text = "{name}"
-networkSeries.fontSize = 30;
+
+
+
+
+
+//add label of node 
+networkSeries.nodes.template.label.text = "{name}";
+networkSeries.fontSize = 10;
+//end add label below a node
+
+
+
+// controls size of circles
+networkSeries.nodes.template.label.hidden = true;
+networkSeries.minRadius = 30;
+networkSeries.maxRadius = 30;
+//end controls size of nodes
+
+
 
 networkSeries.manyBodyStrength = -50;
 networkSeries.links.template.distance = 1;
-networkSeries.links.template.strength = 0.1;  // maximum should be 1
+networkSeries.links.template.strength = 0.5;  // maximum should be 1
+
+
+
+
+networkSeries.data = JSON.parse('{{ data | escapejs }}');
+
 
 
 
@@ -70,7 +117,7 @@ networkSeries.links.template.strength = 0.1;  // maximum should be 1
 var selectedNode;
 
 var label = chart.createChild(am4core.Label);
-label.text = ""
+label.text = "{name}"
 label.x = 50;
 label.y = 50;
 label.isMeasured = false;
@@ -144,16 +191,6 @@ networkSeries.nodes.template.events.on("rightclick", function (event) {
   }
 })
 */
-// Configure icons
-var icon = networkSeries.nodes.template.createChild(am4core.Image);
-icon.propertyFields.href = "image";
-icon.horizontalCenter = "middle";
-icon.verticalCenter = "middle";
-icon.width = 60;
-icon.height = 60;
-
-networkSeries.data = JSON.parse('{{ data | escapejs }}');
-
 
 /*
 networkSeries.data = [
@@ -218,8 +255,32 @@ networkSeries.data = [
 ];
 */
 
+networkSeries.nodes.template.circle.disabled = false;
+networkSeries.nodes.template.outerCircle.disabled = false;
+
+// Configure icons
+var icon = networkSeries.nodes.template.createChild(am4plugins_bullets.PinBullet);
+icon.image = new am4core.Image();
+icon.image.propertyFields.href = "image";
+icon.circle.radius = am4core.percent(100);
+icon.circle.strokeWidth = 0;
+icon.background.pointerLength = 0;
+icon.background.disabled = true;
+
+
+
 }); // end am4core.ready()
 </script>
 
 <!-- HTML -->
 <div id="chartdiv"></div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
