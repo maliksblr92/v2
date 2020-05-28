@@ -24,8 +24,8 @@ import os
 
 from OSINT_System_Core.rabbit_thread import Rabbit_Consumer
 
-consumer = Rabbit_Consumer(1)
-consumer.start()
+#consumer = Rabbit_Consumer(1)
+#consumer.start()
 
 
 urlpatterns = [
@@ -41,4 +41,5 @@ urlpatterns = [
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),
     path('cms/', include('Case_Management_System.urls')),
+    path('bi_tools/', include('Bi_Tools.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
