@@ -38,18 +38,17 @@ class Mongo_Serializer(object):
             if(self.is_supported(self.find_model_of_object(objects_list[0]))):
 
                 for obj in objects_list:
-                    obj = DotMap(obj.to_mongo())
-                    obj_data_list = obj.data
-                    temp_in = {}
+                    obj = obj.to_mongo()
+                    obj_data_list = obj['data']
                     for obj_data in obj_data_list:
+                        temp_in = {}
                         for k,v in obj_data.items():
                             temp_in[k] = v
 
 
-
+                        print({"fields":temp_in})
                         data.append({"fields":temp_in})
-
+                        del(temp_in)
         print(len(data))
-        print(data)
         return data
 

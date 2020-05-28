@@ -26,7 +26,7 @@ def dashboard_with_pivot(request):
 
 def pivot_data(request):
 
-    objects_list = Keybase_Response_TMS.objects()
+    objects_list = Keybase_Response_TMS.objects(GTR='5eb865882fda2ff3b13089cd')
     print(objects_list)
 
     #data = [{'Title':'Awais','Value':50},{'Title':'Nouman','Value':67}] #JSONEncoder().encode(supported_sites[0].to_mongo()) #serializers.serialize('json', supported_sites)

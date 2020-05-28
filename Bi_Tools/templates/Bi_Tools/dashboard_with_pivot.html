@@ -16,46 +16,28 @@
     var result = []
     dataset = JSON.parse(dataset);
     dataset.forEach(item => result.push(item.fields));
+    console.log(result)
     return result;
 }
 $.ajax({
     url: $("#pivot-table-container").attr("data-url"),
     dataType: 'json',
     success: function(data) {
-        new Flexmonster({
-            container: "#pivot-table-container",
-            componentFolder: "https://cdn.flexmonster.com/",
-            width: "100%",
-            height: 430,
+         new Flexmonster({
+        container: "#pivot-table-container",
+        componentFolder: "https://cdn.flexmonster.com/",
+              width: "100%",
+            height: "100%",
             toolbar: true,
-            report: {
-                dataSource: {
-                    type: "json",
-                    data: processData(data)
-                },
-                slice: {}
+        report: {
+            dataSource: {
+                type: "json",
+                data: processData(data)
             }
-        });
-        new Flexmonster({
-            container: "#pivot-chart-container",
-            componentFolder: "https://cdn.flexmonster.com/",
-            width: "100%",
-            height: 430,
-            //toolbar: true,
-            report: {
-                dataSource: {
-                    type: "json",
-                    data: processData(data)
-                },
-                slice: {},
-                "options": {
-                    "viewType": "charts",
-                    "chart": {
-                        "type": "pie"
-                    }
-                }
-            }
-        });
+        },
+        licenseKey: "Z7GC-XBDJ43-65471O-1X144W"
+    });
+
     }
 });
 </script>
