@@ -2,7 +2,9 @@ import sys
 from Data_Processing_Unit.models import *
 from Public_Data_Acquisition_Unit.mongo_models import *
 from dotmap import DotMap
-
+import json
+from bson import ObjectId
+import datetime
 
 class Mongo_Serializer(object):
 
@@ -52,3 +54,29 @@ class Mongo_Serializer(object):
         print(len(data))
         return data
 
+    def keybase_responce_tms_serializer_nested(self,objects_list):
+
+        data = []
+
+        if(len(objects_list) > 0):
+            if(self.is_supported(self.find_model_of_object(objects_list[0]))):
+
+                for obj in objects_list:
+                    obj = JSONEncoder().encode(obj.to_mongo())
+
+
+
+
+                    data.append({"fields":obj})
+
+        print(len(data))
+        return data
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        if isinstance(o,datetime.datetime):
+            return str(o)
+
+        return json.JSONEncoder.default(self, o)
