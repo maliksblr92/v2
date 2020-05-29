@@ -734,3 +734,5 @@ class Subreddit_Target_Resposne(View):
         subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(subreddit_profile.to_mongo())
         return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})
+
+
