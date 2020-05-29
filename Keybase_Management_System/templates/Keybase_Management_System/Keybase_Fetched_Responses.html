@@ -89,10 +89,10 @@
                         {% if x.serp_url|length > 0 %}
                         <div class="row">
 
-                            <div class="col-md-3"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
-                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank"> Block URL </a></div>
-                            <div class="col-md-3"style="font-size:12px;"><a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a></div>
-                            <div class="col-md-3"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+                            <div class="col-md-6"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
+                            <div class="col-md-2"style="font-size:12px;"><a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank"> Block</a></div>
+                            <div class="col-md-2"style="font-size:12px;"><a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a></div>
+                            <div class="col-md-2"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success" target="_blank"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
 
                         </div>
                         {% endif %}
@@ -101,6 +101,7 @@
                             <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Search Snippet :</span></div></div>
                             <div class="col-md-10"style="font-size:12px;">  {{x.serp_snippet|default:"N/A"}}</div>
                         </div>
+                    {% endif %}
                     </div>
                     
                 </div>
@@ -143,8 +144,12 @@
                                         {% if x.serp_url|length > 0 %}
                                             <div class="row">
                                                 <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">URL :</span></div></div>
-                                                <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" class="text-white" target="_blank" style="font-size: 12px;">Block</a>
-                                                <div class="col-md-7"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge custom_badge"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+
+                                                <div class="col-md-6" style="font-size:12px;">
+                                                    <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" class="text-white" target="_blank" style="font-size: 12px;">Block</a>
+                                                <a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a>
+
+                                                    <a href="{{x.serp_url}}" class="badge custom_badge"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
                                             </div>
                                         {% endif %}
                                         {% if x.serp_snippet|length > 0 %}
