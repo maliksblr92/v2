@@ -165,12 +165,13 @@ class Data_Queries(object):
                         n_data_full = n_data_full + n_data
 
             p_node = {'name': portfolio_obj.name,
+                      'hero': portfolio_obj.name,
                       'value': 1,
                       'children': [],
                       "linkWith": [],
-                      'collapsed': 'true',
-                      'fixed': 'false',
-                      "image": '',
+                    #   'collapsed': 'true',
+                    #   'fixed': 'false',
+                      "img": '',
                       }
 
             for alpha in alpha_nodes_list:
@@ -238,13 +239,13 @@ class Data_Queries(object):
         n_data = []
 
         try:
-            a_node = {'name': alpha_node['username'],
+            a_node = {'hero': alpha_node['username'],
                         'value': 1,
                         'children': [],
                         "linkWith": [],
-                        'collapsed': 'true',
-                        'fixed': 'false',
-                        "image": alpha_node['picture_url'],
+                        # 'collapsed': 'true',
+                        # 'fixed': 'false',
+                        "img": alpha_node['picture_url'],
                         }
 
 
@@ -253,13 +254,13 @@ class Data_Queries(object):
 
                 print(item)
 
-                node = {'name': item['username'],
+                node = {'hero': item['username'],
                         'value': 0.2,
                         'children': [],
                         "linkWith": [],
-                        'collapsed': 'true',
-                        'fixed': 'false',
-                        "image": item['picture_url'],
+                        # 'collapsed': 'true',
+                        # 'fixed': 'false',
+                        "img": item['picture_url'],
                         }
 
                 a_node['children'].append(node)
@@ -282,13 +283,13 @@ class Data_Queries(object):
 
         n_data = []
 
-        a_node = {'name': alpha_node['username'],
+        a_node = {'hero': alpha_node['username'],
                     'value': 1,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": alpha_node['picture_url'],
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": alpha_node['picture_url'],
                     }
 
 
@@ -297,13 +298,13 @@ class Data_Queries(object):
 
             print(item)
 
-            node = {'name': item['username'],
+            node = {'hero': item['username'],
                     'value': 0.2,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": item['picture_url'],
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": item['picture_url'],
                     }
 
             a_node['children'].append(node)

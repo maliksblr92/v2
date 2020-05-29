@@ -85,6 +85,7 @@ path(
     path('target/youtube/<str:object_gtr_id>/', Youtube_Target_Response.as_view(), name="youtube_target_response"),
     path('target/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Target.as_view(), name="dynamic_crawling_target"),
 
-    path('target/sub_reddit/<str:object_gtr_id>/',Subreddit_Target_Resposne.as_view(), name="subreddit_target_resposne")
+    path('target/sub_reddit/<str:object_gtr_id>/',Subreddit_Target_Resposne.as_view(), name="subreddit_target_resposne"),
+
     
 ]
