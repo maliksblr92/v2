@@ -214,7 +214,6 @@
         </head>
         <body>
             <div class="container-fluid wrapper "> <!-- DIV 1 SRART -->
-
             <!-- start of tabs  -->
             <div class="col-md-12 pl-5 pr-5">
                 <div class="row border border-warning mt-2 ml-1 mr-1" style="border-radius:10px 10px 10px 10px;">
@@ -270,6 +269,33 @@
                         </div>
                         <!-- TABS END -->
                         <div class="background-gradient pl-4 pr-4">
+                            <!-- WORK DETAILS START-->
+                            <div class="row p-1">
+                                <h1 class="text-white font-weight-bold">Work Details</h1>
+                                <div class="col-md-12 " >
+                                    <!--  -->
+                                    <div class="row mt-1 ">
+                                        {% for f in profile.work %}
+                                            <div class="col-md-4 border" style="height:80px;">
+                                                <div class="row">
+                                                    <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                        <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Organization</span>
+                                                    </div>
+                                                    <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.organisation}}</div>
+                                                    <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                        <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Details</span>
+                                                    </div>
+                                                    <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.details}}</div>
+                                                </div>
+                                            </div>
+                                            {% empty %}
+                                            <p>No freinds to display </p>
+                                        {% endfor %}
+                                    </div>
+                                    <!--  -->
+                                </div>
+                            </div>
+                            <!-- WORK DETAILS END -->
                             <!-- PROFILE START -->
                             <div id="profile" class="row pt-5">
                                 <h1 class="text-white font-weight-bold">Profile</h1>
@@ -303,12 +329,12 @@
                                 </div>
                                 {% for f in profile.friends  %}
                                     <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                        style="height:100px;">
+                                        style="height:130px;">
                                         
-                                            <img src="{{f.media_directory}}" style="height:80px;width:80px;border-radius: 50%;" class="img-fluid" />
-                                            
+                                        <img src="{{f.media_directory}}" style="height:80px;width:80px;border-radius: 50%;" class="img-fluid" />
                                         
-                                     
+                                        
+                                        
                                         <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                             <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                 Name: {{f.name}}
@@ -333,193 +359,193 @@
                                         <h1 class="text-light font-weight-bold">Related Information</h1>
                                     </div>
                                     <div class="accordion" id="accordionExample">
-                                      
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="sports1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#sports" aria-expanded="true"
-                                                    aria-controls="sports">
-                                                    Sports ({{profile.interests.sports | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="sports" class="collapse show" aria-labelledby="sports1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="sports1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#sports" aria-expanded="true"
+                                                aria-controls="sports">
+                                                Sports ({{profile.interests.sports | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="sports" class="collapse show" aria-labelledby="sports1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="music1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#music" aria-expanded="true" aria-controls="music">
-                                                    music ({{profile.interests.music | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="music" class="collapse show " aria-labelledby="music1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="music1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#music" aria-expanded="true" aria-controls="music">
+                                                music ({{profile.interests.music | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="music" class="collapse show " aria-labelledby="music1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                           
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="films1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#films" aria-expanded="true" aria-controls="films">
-                                                    films ({{profile.interests.films | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="films" class="collapse show " aria-labelledby="films1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="films1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#films" aria-expanded="true" aria-controls="films">
+                                                films ({{profile.interests.films | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="films" class="collapse show " aria-labelledby="films1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="tv_programmes_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#tv_programmes" aria-expanded="true"
-                                                    aria-controls="tv_programmes">
-                                                    tv_programmes ({{profile.interests.tv_programmes | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="tv_programmes" class="collapse show " aria-labelledby="tv_programmes_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="tv_programmes_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#tv_programmes" aria-expanded="true"
+                                                aria-controls="tv_programmes">
+                                                tv_programmes ({{profile.interests.tv_programmes | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="tv_programmes" class="collapse show " aria-labelledby="tv_programmes_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="books1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#books" aria-expanded="true" aria-controls="books">
-                                                    books ({{profile.interests.books | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="books" class="collapse show " aria-labelledby="books1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="books1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#books" aria-expanded="true" aria-controls="books">
+                                                books ({{profile.interests.books | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="books" class="collapse show " aria-labelledby="books1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="games_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#games" aria-expanded="true" aria-controls="games">
-                                                    games ({{profile.interests.games | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="games" class="collapse  show" aria-labelledby="games_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="games_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#games" aria-expanded="true" aria-controls="games">
+                                                games ({{profile.interests.games | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="games" class="collapse  show" aria-labelledby="games_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="likes_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#likes" aria-expanded="true" aria-controls="likes">
-                                                    likes ({{profile.interests.likes | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="likes" class="collapse  show" aria-labelledby="likes_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="likes_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#likes" aria-expanded="true" aria-controls="likes">
+                                                likes ({{profile.interests.likes | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="likes" class="collapse  show" aria-labelledby="likes_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="events_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#events" aria-expanded="true"
-                                                    aria-controls="events">
-                                                    events ({{profile.interests.events | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="events" class="collapse  show" aria-labelledby="events_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="events_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#events" aria-expanded="true"
+                                                aria-controls="events">
+                                                events ({{profile.interests.events | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="events" class="collapse  show" aria-labelledby="events_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="questions_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#questions" aria-expanded="true"
-                                                    aria-controls="questions">
-                                                    questions ({{profile.interests.questions | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="questions" class="collapse  show" aria-labelledby="questions_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="questions_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#questions" aria-expanded="true"
+                                                aria-controls="questions">
+                                                questions ({{profile.interests.questions | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="questions" class="collapse  show" aria-labelledby="questions_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="reviews_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#reviews" aria-expanded="true"
-                                                    aria-controls="reviews">
-                                                    reviews ({{profile.interests.reviews | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="reviews" class="collapse  show" aria-labelledby="reviews_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                        {% for i in profile.interests.reviews %}
-                                                            {{i}}
-                                                        {% endfor %}
-                                                    </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="reviews_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#reviews" aria-expanded="true"
+                                                aria-controls="reviews">
+                                                reviews ({{profile.interests.reviews | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="reviews" class="collapse  show" aria-labelledby="reviews_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
+                                                    {% for i in profile.interests.reviews %}
+                                                        {{i}}
+                                                    {% endfor %}
                                                 </div>
                                             </div>
-                                            
+                                        </div>
+                                        
                                         <!-- notes  -->
-                                      
-                                            <div class="card">
-                                                <div class="card-header background-gradient-dark" id="notes_1">
-                                                    <h2 class="mb-0">
-                                                    <button class="btn btn-link text-white" type="button" data-toggle="collapse"
-                                                    data-target="#notes" aria-expanded="true" aria-controls="notes">
-                                                    notes ({{profile.interests.notes | length}})
-                                                    </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="notes" class="collapse show " aria-labelledby="notes_1"
-                                                    data-parent="#accordionExample">
-                                                    <div class="card-body background-gradient text-white">
-                                                    </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="notes_1">
+                                                <h2 class="mb-0">
+                                                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                                                data-target="#notes" aria-expanded="true" aria-controls="notes">
+                                                notes ({{profile.interests.notes | length}})
+                                                </button>
+                                                </h2>
+                                            </div>
+                                            <div id="notes" class="collapse show " aria-labelledby="notes_1"
+                                                data-parent="#accordionExample">
+                                                <div class="card-body background-gradient text-white">
                                                 </div>
                                             </div>
-                                            
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -534,8 +560,8 @@
                                     <div class="col-md-12 border post-wrapper">
                                         <div class="row">
                                             <div class="col-md-2 m-0 p-0 custom-center-center">
-                                               
-                                               <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> 
+                                                
+                                                <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid">
                                             </div>
                                             <div class="col-md-5 custom-column-start-start pt-2 text-white border-left border-right">
                                                 <span> {{profile.name}}</span>
@@ -576,7 +602,7 @@
                                             </div>
                                             {% for r in p.reactions.like  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     <img src="{{r.media_directory}}"
                                                     style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                                     
@@ -590,11 +616,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -606,9 +627,9 @@
                                             </div>
                                             {% for r in p.reactions.love  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     
-                                                   <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -619,11 +640,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -635,9 +651,9 @@
                                             </div>
                                             {% for r in p.reactions.haha  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     
-                                                  <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -648,11 +664,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -664,9 +675,9 @@
                                             </div>
                                             {% for r in p.reactions.wow  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     
-                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -677,11 +688,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -693,8 +699,8 @@
                                             </div>
                                             {% for r in p.reactions.angry  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
-                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    style="height:130px;">
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -705,11 +711,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -721,9 +722,9 @@
                                             </div>
                                             {% for r in p.reactions.sad  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     
-                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -734,11 +735,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -750,9 +746,9 @@
                                             </div>
                                             {% for r in p.comments  %}
                                                 <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                                    style="height:100px;">
+                                                    style="height:130px;">
                                                     
-                                                     <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> 
+                                                    <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/>
                                                     <div class="p-2 h-100 d-flex flex-column justify-content-start ">
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Name: {{r.name}}
@@ -763,11 +759,6 @@
                                                         <span class="d-block text-white w-100 h-100 text-left m-0" style="font-size: 14px;">
                                                             Id: {{r.id}}
                                                         </span>
-                                                        <a href="{{r.url}}" target="_blank" class="d-block smaller-txt badge badge-success  m-0" style="width: 80px;">
-                                                            <i class="fa fa-search">
-                                                            View
-                                                            </i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 border text-white custom-center-center">
@@ -799,7 +790,7 @@
                                             <div class="card">
                                                 <div class="card-header background-gradient-dark" id="custom1">
                                                     
-                                                <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> 
+                                                    <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                                     <button class="btn btn-link text-white" type="button" data-toggle="collapse"
                                                     data-target="#_{{c.id}}" aria-expanded="true"
                                                     aria-controls="_{{c.id}}">
@@ -872,7 +863,7 @@
                                                     <div
                                                         class="col-md-4 d-flex flex-column justify-content-start align-items-center">
                                                         
-                                                          <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                                        <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                                         <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
                                                         {{c.name}}
                                                         </button>
@@ -920,11 +911,10 @@
             <script src="https://www.amcharts.com/lib/4/charts.js"></script>
             <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
             <script>
-                $(document).ready(function(){
-
-                    window.print();
-                   
-                
+            $(document).ready(function(){
+            window.print();
+            
+            
             });
             </script>
             <script>

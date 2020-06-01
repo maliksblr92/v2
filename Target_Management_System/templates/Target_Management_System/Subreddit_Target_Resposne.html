@@ -209,6 +209,28 @@
             rgba(24, 72, 116, 1) 0%,
             rgba(6, 17, 26, 1) 100%);
             }
+            .dropdown-content a:hover {background-color: #f1f1f1;}
+            .dropdown:hover .dropdown-content {
+            display: block;
+            }
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+            .dropdown-content > a {
+            min-width: 120px;
+            }
+            li.dropdown {
+            display: inline-block;
+            }
+            li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            }
             </style>
         </head>
         <body>
@@ -217,7 +239,25 @@
                 <div class="row ">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <div class="row p-2">
+                        <div class="row pl-2 pr-2">
+                            <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                                <div class="row">
+                                    <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-reddit-alien mr-2 "></i>Sub-Reddit Target Profile </span></div>
+                                    
+                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
+                                            <div class="dropdown-content">
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="" id="download_as_pdf">PDF Downlaod</a>
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="" id="download_as_pdf">Link Analysis</a>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="row p-2">
                             <div class="col-md-4 text-left">
                                 <a href="#" target="_blank" class="btn btn-info font-weight-bold"> <i class="fab fa-reddit-alien mr-2"></i> Sub-Reddit</a>
                                 
@@ -230,7 +270,7 @@
                                 
                                 <a href="#" target="_blank" class="btn btn-success font-weight-bold"> <i class="fas fa-download  mr-2"></i> Download PDF Report</a>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row background-gradient-dark border_radius_5px ">
                             <div class="col-md-2  custom-column-center-center">
                                 <div class="profile-img-wrapper ">
@@ -413,15 +453,15 @@
                                                                 <span class="badge custom_bagde"> Moderator # {{forloop.counter}}</span>
                                                             </div>
                                                             <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4 text-left"><span class="badge custom_bagde ">Moderator Name</span></div>
-                                                                        <div class="col-md-8 text-right"><span class="badge badge-light "><i class="fa fa-user mr-2 ">{{moderator.name}}</i></span></div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="row">
-                                                                        <div class="col-md-4 text-right"><span class="badge custom_bagde  ">Moderator Link</span></div>
-                                                                        <div class="col-md-8 text-right"><span class="badge badge-light "><a  href="{{moderator.link}}" target="_blank" ><i class="fa fa-eye text-dark "></i></a></span></div>
-                                                                    </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 text-left"><span class="badge custom_bagde ">Moderator Name</span></div>
+                                                                    <div class="col-md-8 text-right"><span class="badge badge-light "><i class="fa fa-user mr-2 ">{{moderator.name}}</i></span></div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-4 text-right"><span class="badge custom_bagde  ">Moderator Link</span></div>
+                                                                    <div class="col-md-8 text-right"><span class="badge badge-light "><a  href="{{moderator.link}}" target="_blank" ><i class="fa fa-eye text-dark "></i></a></span></div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

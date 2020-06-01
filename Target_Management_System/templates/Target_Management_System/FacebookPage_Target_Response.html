@@ -11,12 +11,12 @@
         <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
             integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css" integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css" integrity="sha256-CuUPKpitgFmSNQuPDL5cEfPOOJT/+bwUlhfumDJ9CI4=" crossorigin="anonymous" />
             <style>
             .small-txt {
             font-size: 13px !important;
             }
-            .smaller-txt {
+            .smaller-txt{
             font-size: 10px !important;
             }
             .text-12 {
@@ -221,25 +221,57 @@
             border-color: #06111a !important;
             }
             .ellipsis { text-overflow: ellipsis !important; }
+            .dropdown-content a:hover {background-color: #f1f1f1;}
+            .dropdown:hover .dropdown-content {
+            display: block;
+            }
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+            .dropdown-content > a {
+            min-width: 120px;
+            }
+            li.dropdown {
+            display: inline-block;
+            }
+            li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            }
             </style>
         </head>
         <body>
             <div class="container-fluid wrapper background-gradient-dark">
-              <div>
-                 
-              </div>
+                <div>
+                    
+                </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
-                    <div class="col-md-12 bg-white  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                    <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
                         <div class="row">
-                         <div class="col-md-6 text-right"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
-                        
-                         <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                             <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white" style="margin-top:2px;"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}" id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
-                         <a type="button" class="btn  btn-sm btn-success float-right text-white"style="margin-top:2px;" >Link Analysis</a>
-                         </div>
+                            <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+                            
+                            <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
+                                    <div class="dropdown-content">
+                                        <a type="button" target="_blank" class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}" id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                                        <a type="button" target="_blank" class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white"style="margin-top:2px;" >Link Analysis</a>
+                                        
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white" style="margin-top:2px;"  href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}" id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                                <a type="button" class="btn  btn-sm btn-success float-right text-white"style="margin-top:2px;" >Link Analysis</a>
+                            </div>
                         </div>
- 
-                     </div>
+                        
+                    </div>
                     
                 </div>
                 <div class="row ml-1 mr-1 pl-5 pr-5">
@@ -263,6 +295,45 @@
                 <div class="row ml-1 mr-1 pl-5 pr-5">
                     <div class="col-md-3">
                         <!-- card1 start -->
+<!-- WORK DETAILS START-->
+                        <div class="row border custom_border_color background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
+                            <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                                <i class="fas fa-user-friends text-white fa-2x"></i>
+                                <span class="ml-2 text-white" style="font-size:18px;">
+                                    <span class="font-weight-bold">Work Details</span>
+                                </span>
+                            </div>
+                            <div class="col-md-2 text-white mt-1">{{profile.friends | length}}</div>
+                        </div>
+                        <div class="row p-1 border custom_border_color bg-white" style="height:300px;overflow-y:auto;">
+                            <div class="col-md-12 " >
+                                <!--  -->
+                                {% for f in profile.work %}
+                                    <div class="row mt-1 ">
+                                        <div class="col-md-12 border custom_border_color rounded d-flex flex-column justify-content-around" style="height:80px;">
+                                            <div class="row ">
+                                                <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                    <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Organization</span>
+                                                </div>
+                                                <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.organisation}}</div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                    <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Details</span>
+                                                </div>
+                                                <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.details}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <p>No Work to display </p>
+                                {% endfor %}
+                                <!--  -->
+                            </div>
+                        </div>
+                        <!-- WORK DETAILS END -->
+
                         <!-- //////////////////////////////////////////////////////////// -->
                         <div class="row border bg-white custom_border_color mt-2" style="border-radius:10px 0px 0px 0px;">
                             <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
@@ -361,7 +432,7 @@
                                         <span class="text_paragraph font-weight-bold small-txt">
                                             {{page.contact_information.0.value}}
                                         </span>
-                                        <a href="{{page.contact_information.0.value}}" class="badge custom_badge">view</a>
+                                        <a href="{{page.contact_information.0.value}}" target="_blank" class="badge custom_badge">view</a>
                                     </div>
                                     
                                 </div>
@@ -383,7 +454,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="row border custom_border_color mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
-                            <div class="col-md-12  p-0 " style="height:995px;overflow-y:hidden">
+                            <div class="col-md-12  p-0 " style="height:1567px;overflow-y:hidden">
                                 <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"style="height:40px;border-radius:0px 10px 0px 0px;">
                                     <li class=" active   ">
                                         <a data-toggle="tab" class="nav-link custom_active_text" href="#profile">
@@ -417,7 +488,7 @@
                                 <div class="tab-content bg-white pl-4 pr-4 pt-2" style="height:100%;overflow-y:auto;">
                                     <!-- start close associates tab  -->
                                     <div id="close_asscoiates" class="tab-pane fade">
-                                        <p>Close Associates ({{page.close_associates | length}})</p>
+                                        <!-- <p>Close Associates ({{page.close_associates | length}})</p> -->
                                         <div class="row">
                                             {% for c in page.close_associates %}
                                                 <div class="col-md-6">
@@ -434,8 +505,8 @@
                                                                 </div>
                                                                 {% if c.username %}
                                                                     <div class="badge custom_badge">
-                                                                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}">
-                                                                            <i class="fa fa-link"></i>
+                                                                        <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}" target="_blank">
+                                                                            <i class="fa fa-link text-white"></i>
                                                                         </a>
                                                                     </div>
                                                                 {% endif %}
@@ -487,7 +558,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6 text-14 text_heading"> URL:</div>
                                                                                 <div class="col-md-6 text-14 text_paragraph">
-                                                                                    <a class="badge custom_badge fa fa-search" href="{{c.url}}">View</a>
+                                                                                    <a class="badge custom_badge fa fa-search" href="{{c.url}}" target="_blank">View</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -533,7 +604,7 @@
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Page Info </i></h3>
                                                 <p class="text_paragraph">{{page.page_info|default:"N/A"}}</p>
-                                               
+                                                
                                             </div>
                                             <div class="col-md-12">
                                                 <h3><i class="material-icon text_heading">Countries Involved </i></h3>
@@ -547,90 +618,89 @@
                                                 <h3><i class="material-icon text_heading">Page Histroy </i></h3>
                                                 {%  for i in page.page_history %}
                                                 <p class="text_paragraph">{{i.event}} : {{i.timestamp}}</p>
-                                               
+                                                
                                             {% endfor %}
-                                            </div>
-                                            <div class="col-md-12">
-                                                <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
-                                                <p class="text_paragraph">{{page.behaviour}}</p>
-                                            </div>
-                                            <div class="col-md-12 pb-4">
-                                                <h3><i class="material-icon text_heading">Posting Time </i></h3>
-                                                <p class="text_paragraph">{{page.posting_time_charts}}</p>
-                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
+                                            <p class="text_paragraph">{{page.behaviour}}</p>
+                                        </div>
+                                        <div class="col-md-12 pb-4">
+                                            <h3><i class="material-icon text_heading">Posting Time </i></h3>
+                                            <p class="text_paragraph">{{page.posting_time_charts}}</p>
                                         </div>
                                     </div>
-                                    <!-- end profile tab  -->
-                                    <!-- start liked_pages tab   -->
-                                    <div id="liked_pages" class="tab-pane fade ">
-                                        <div class="row">
-                                            {% for c in page.liked_pages %}
-                                                <div class="col-md-6">
-                                                    <div class="accordion" id="accordionExample">
-                                                        <div class="card">
-                                                            <div class="card-header bg-white" id="headingOne">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <img src="{{c.media_directory}}"
-                                                                                style="height: 60px;width:60px;border-radius: 50%;"
-                                                                                class="img-fluid">
-                                                                            </div>
-                                                                            <div class="col-md-12">
-                                                                                <button class="btn btn-link text_heading text-truncate" type="button"
-                                                                                data-toggle="collapse" data-target="#sports"
-                                                                                aria-expanded="true" aria-controls="sports">
-                                                                                {{c.name}}
-                                                                                </button>
-                                                                            </div>
+                                </div>
+                                <!-- end profile tab  -->
+                                <!-- start liked_pages tab   -->
+                                <div id="liked_pages" class="tab-pane fade ">
+                                    <div class="row">
+                                        {% for c in page.liked_pages %}
+                                            <div class="col-md-6">
+                                                <div class="accordion" id="accordionExample">
+                                                    <div class="card">
+                                                        <div class="card-header bg-white" id="headingOne">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <img src="{{c.media_directory}}"
+                                                                            style="height: 60px;width:60px;border-radius: 50%;"
+                                                                            class="img-fluid">
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <button class="btn btn-link text_heading text-truncate" type="button"
+                                                                            data-toggle="collapse" data-target="#sports"
+                                                                            aria-expanded="true" aria-controls="sports">
+                                                                            {{c.name}}
+                                                                            </button>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6 d-flex flex-column text-white">
-                                                                        <span class="text_heading">page id : <span class="text_paragraph">{{c.id}}</span></span>
-                                                                        <span class="text_heading">page username : <span class="text_paragraph text-truncate">{{c.username}}</span></span>
-                                                                        <span><a href="{{c.url}}" class="badge custom_badge">view
-                                                                        page</a></span>
-                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 d-flex flex-column text-white">
+                                                                    <span class="text_heading">page id : <span class="text_paragraph">{{c.id}}</span></span>
+                                                                    <span class="text_heading">page username : <span class="text_paragraph text-truncate">{{c.username}}</span></span>
+                                                                    <span><a href="{{c.url}}" target="_blank" class="badge custom_badge">view
+                                                                    page</a></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {% empty %}
-                                            {% endfor %}
-                                        </div>
+                                            </div>
+                                            {% empty %}
+                                        {% endfor %}
                                     </div>
-                                    <!-- end realted tab  -->
-                                    <!-- start posts tab  -->
-                                    <div id="page_posts" class="tab-pane fade ">
-                                        <div class="row">
-                                            {% for p in  page.page_posts %}
-                                                <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            Post # {{forloop.counter}}
-        
-                                                        </div>
-                                                        <div class="col-md-4">
-        
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            {% if p.categorization %}
-                                                          
-
-                                                             {% for category in p.categorization %}
-                                                                    <span class="stamp  is-draft"><span>
-                                                                        {{ category|default:"N/A" }}
-                                                                    
-                                                            {% endfor %}
-                                                               {% else %}
-                                                               <span class="badge badge-warning">No Categorization Avaliable </span>
-                                                            {% endif %}    
-                                                        </div>
-                                                   
+                                </div>
+                                <!-- end realted tab  -->
+                                <!-- start posts tab  -->
+                                <div id="page_posts" class="tab-pane fade ">
+                                    <div class="row">
+                                        {% for p in  page.page_posts %}
+                                            <div class="border custom_border_color col-md-12 text-center text_paragraph" style="border-radius: 10px 10px 0px 0px;">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        Post # {{forloop.counter}}
+                                                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        {% if p.categorization %}
                                                             
+                                                            {% for category in p.categorization %}
+                                                                <span class="stamp  is-draft"><span>
+                                                                    {{ category|default:"N/A" }}
+                                                                    
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <span class="badge badge-warning">No Categorization Avaliable </span>
+                                                            {% endif %}
                                                         </div>
+                                                        
+                                                        
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-12 post-wrapper">
                                                     <div class="row border custom_border_color">
@@ -645,16 +715,16 @@
                                                             <span class="smaller-txt">{{p.timestamp}}</span>
                                                         </div>
                                                         <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
-                                                            <div class="smaller-txt w-100 text-left h-100">Post id:
+                                                            <div class="badge badge-sm text_heading w-100 text-left h-100">Post id:
                                                                 <span class="text_paragraph">{{p.post_id}}</span>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Author Name:
+                                                            <div class="badge badge-sm text_heading w-100 text-left h-100">Author Name:
                                                                 <span class="text_paragraph">{{p.author_name}}</span>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Author Username:
+                                                            <div class="badge badge-sm text_heading w-100 text-left h-100">Author Username:
                                                                 <span class="text_paragraph">{{p.author_username}}</span>
                                                             </div>
-                                                            <div class="smaller-txt w-100 text-left h-100">Sentiment:
+                                                            <div class="badge badge-sm text_heading w-100 text-left h-100">Sentiment:
                                                                 <span class="text_paragraph">{{p.sentiment | default:"N/A"}}</span>
                                                             </div>
                                                         </div>
@@ -667,26 +737,25 @@
                                                     </div>
                                                 </div> -->
                                                 {% if  p.picture_directory  %}
-                                                <div class="row" style="height:550px;">
-                                                    <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                        Pictures ({{p.picture_directory | length}})</i>
+                                                    <div class="row" style="height:550px;">
+                                                        <div class="col-md-12">
+                                                            <i class="material-icon text_heading" style="font-size:20px;">Post
+                                                            Pictures ({{p.picture_directory | length}})</i>
+                                                        </div>
+                                                        {% for x in p.picture_directory  %}
+                                                            <div class="col-md-12 text-center">
+                                                                <img src="{{x.url}}"
+                                                                style="height: 500px;width:100%;"
+                                                                class="img-fluid">
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
-                                                    {% for x in p.picture_directory  %}
-                                                    <div class="col-md-12 text-center">
-                                                        <img src="{{x.url}}"
-                                                    style="height: 500px;width:100%;"
-                                                    class="img-fluid">
-                                                    </div>
-                                                    {% endfor %}
-                                                </div>
                                                 {% else %}
-                                               <span> No Post Pictures Availible </span>
-
+                                                    <span> No Post Pictures Availible </span>
                                                 {% endif %}
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">Liked By
+                                                        <i class="material-icon text_heading" style="font-size:18px;">Liked By
                                                         ({{ p.reactions.like | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.like  %}
@@ -697,23 +766,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                                         Loved' By ({{ p.reactions.love | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.love  %}
@@ -724,23 +793,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                                         HAHA' By ({{ p.reactions.haha | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.haha  %}
@@ -751,23 +820,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                                         WOW' By ({{ p.reactions.wow | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.wow  %}
@@ -778,23 +847,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                                         ANGRY' By ({{ p.reactions.angry | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.angry  %}
@@ -805,23 +874,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Reacted
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                                         SAD' By ({{ p.reactions.sad | length}})</i>
                                                     </div>
                                                     {% for r in p.reactions.sad  %}
@@ -832,23 +901,23 @@
                                                             class="img-fluid">
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                                                     <span class="text_paragraph">{{r.name}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                                                     <span class="text_paragraph">{{r.username}}</span>
                                                                 </span>
-                                                                <span class="smaller-txt badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                                                     <span class="text_paragraph">{{r.id}}</span>
                                                                 </span>
-                                                                <a href="{{r.url}}" class="smaller-txt badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
+                                                                <a href="{{r.url}}" target="_blank" class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i class="fa fa-search">View</i></a>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <i class="material-icon text_heading" style="font-size:20px;">'Comments'
+                                                        <i class="material-icon text_heading" style="font-size:18px;">'Comments'
                                                         By ({{ p.comments | length}})</i>
                                                     </div>
                                                     {% for r in p.comments  %}
@@ -860,16 +929,16 @@
                                                             <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
                                                             <div class="p-2">
                                                                 <span
-                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
+                                                                    class="badge badge-sm w-100 h-100 text-left m-0 text-white">Name:
                                                                 {{r.name}}</span>
                                                                 <span
-                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">username:
+                                                                    class="badge badge-sm w-100 h-100 text-left m-0 text-white">username:
                                                                 {{r.username}}</span>
                                                                 <span
-                                                                    class="smaller-txt badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
+                                                                    class="badge badge-sm w-100 h-100 text-left m-0 text-white">Id:
                                                                 {{r.id}}</span>
-                                                                <a href="{{r.url}}"
-                                                                class="smaller-txt badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                                <a href="{{r.url}}" target="_blank"
+                                                                class="badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8 border custom-center-center">
@@ -911,19 +980,13 @@
         <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
         <script>
-            var url = window.location.pathname;
-            var id = url.substring(url.lastIndexOf('/') + 1);
-            console.log(id)
-           var url= $('#download_as_pdf').attr('href')
-           var href=url+id+""
-           console.log(href)
-           </script>
-
-
-
-
-
-
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        console.log(id)
+        var url= $('#download_as_pdf').attr('href')
+        var href=url+id+""
+        console.log(href)
+        </script>
         <script>
         am4core.ready(function() {
         // Themes begin
@@ -954,12 +1017,5 @@
         
         }); // end am4core.ready()
         </script>
-
-
-
-
-
-
-
     </body>
 </html>

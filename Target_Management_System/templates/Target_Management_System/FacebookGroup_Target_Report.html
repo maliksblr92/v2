@@ -245,6 +245,33 @@
                   </ul>
                 </div>
                 <div class="tab-content background-gradient pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
+                  <!-- WORK DETAILS START-->
+                                    <div class="row p-1">
+                                        <h1 class="text-white font-weight-bold">Work Details</h1>
+                                        <div class="col-md-12 " >
+                                            <!--  -->
+                                            <div class="row mt-1 ">
+                                                {% for f in profile.work %}
+                                                    <div class="col-md-4 border" style="height:80px;">
+                                                        <div class="row">
+                                                            <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                                <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Organization</span>
+                                                            </div>
+                                                            <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.organisation}}</div>
+                                                            <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                                <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Details</span>
+                                                            </div>
+                                                            <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.details}}</div>
+                                                        </div>
+                                                    </div>
+                                                    {% empty %}
+                                                    <p class="text-white">No Work to display </p>
+                                                {% endfor %}
+                                            </div>
+                                            <!--  -->
+                                        </div>
+                                    </div>
+                                    <!-- WORK DETAILS END -->
                   <!-- start profile tab  -->
                   <div id="profile" class="">
                     <h1 class="text-white font-weight-bold pt-5">Profile</h1>
