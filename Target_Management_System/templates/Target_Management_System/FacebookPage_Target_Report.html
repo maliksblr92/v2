@@ -271,21 +271,15 @@
                                             <!--  -->
                                             <div class="row mt-1 ">
                                                 {% for f in profile.work %}
-                                                    <div class="col-md-4 border" style="height:80px;">
-                                                        <div class="row">
-                                                            <div class="col-md-4 m-0 p-0 small-txt text_heading">
-                                                                <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Organization</span>
-                                                            </div>
-                                                            <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.organisation}}</div>
-                                                            <div class="col-md-4 m-0 p-0 small-txt text_heading">
-                                                                <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Details</span>
-                                                            </div>
-                                                            <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.details}}</div>
-                                                        </div>
-                                                    </div>
-                                                    {% empty %}
-                                                    <p class="text-white">No Work to display </p>
-                                                {% endfor %}
+
+                                      <div class="row">
+                                      <div class="col-md-12 text-left"><span class="badge badge-dark text-white">{{f.organisation}}</span></div>
+                                        <div class="col-md-12"><span class="badge text-white ">{{f.details}}</span></div>
+                                      </div>
+                                    {% empty %}
+                                    <p>data from databse is broken  </p>
+                                {% endfor %}
+                                <p>No Work Details </p>
                                             </div>
                                             <!--  -->
                                         </div>
@@ -826,9 +820,9 @@
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+         <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
         <script src="https://www.amcharts.com/lib/4/core.js"></script>
         <script src="https://www.amcharts.com/lib/4/charts.js"></script>
         <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
