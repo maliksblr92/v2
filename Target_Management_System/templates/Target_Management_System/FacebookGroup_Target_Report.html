@@ -245,27 +245,210 @@
                   </ul>
                 </div>
                 <div class="tab-content background-gradient pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
-                  <!-- WORK DETAILS START-->
-                                    <div class="row p-1">
-                                        <h1 class="text-white font-weight-bold">Work Details</h1>
-                                        <div class="col-md-12 " >
-                                            <!--  -->
-                                            <div class="row mt-1 ">
-                                                {% for f in profile.work %}
+                     <!-- WORK DETAILS START-->
+            <div class="row border custom_border_color background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
+               <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                  <i class="fas fa-user-friends text-white fa-2x"></i>
+                  <span class="ml-2 text-white" style="font-size:18px;">
+                  <span class="font-weight-bold">Perosnal Details</span>
+                  </span>
+               </div>
+               <div class="col-md-2 text-white mt-1"></div>
+            </div>
+            <div class="row p-1 border custom_border_color bg-white" id="work_details_div" style="height:300px;overflow-y:auto;" >
+               <!-- start --> 
+               <div class="col-md-12  d-flex flex-row justify-content-around align-items-start" >
+                                         
+                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="work_details_btn" href="#work_details" role="button" aria-expanded="false" aria-controls="work_details">
+                  Work Details
+                  </a>
+                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="family_details_btn" href="#family_details" role="button" aria-expanded="false" aria-controls="family_details">
+                  family Details
+                  </a>
 
-                                      <div class="row">
-                                      <div class="col-md-12 text-left"><span class="badge badge-dark text-white">{{f.organisation}}</span></div>
-                                        <div class="col-md-12"><span class="badge text-white ">{{f.details}}</span></div>
-                                      </div>
-                                    {% empty %}
-                                    <p>data from databse is broken  </p>
-                                {% endfor %}
-                                <p>No Work Details </p>
-                                            </div>
-                                            <!--  -->
-                                        </div>
-                                    </div>
-                                    <!-- WORK DETAILS END -->
+                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="websites_details_btn" href="#websites_details" role="button" aria-expanded="false" aria-controls="websites_details">
+                  Web Links Details
+                  </a>
+
+                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false" aria-controls="social_links_details">
+                  Social Links Details
+                  </a>
+
+ </div>
+
+ <div class="col-md-12">
+                  <div class="collapse show m-0 p-0" id="work_details">
+                     <div class="card card-body p-0 m-0 ">
+                        {% for work in profile.work %}
+                        <div class="row  ">
+                           <div class="col-md-12"><span class="badge badge-primary"style="font-size:12px;font-weight:bold;">{{forloop.counter}}#{{work.organisation|default:"N/A"}}</span></div>
+                           <div class="col-md-12 mt-1"style="font-size:12px;">
+                              <p class="font-weight-bold">{{work.details|default:"N/A"}}</p>
+                           </div>
+                        </div>
+                        {% empty %}
+                        <p>No Work Details </p>
+                        {% endfor %}
+                     </div>
+                  
+                  </div>
+              
+                 <!-- end -->  
+
+
+  <!-- start -->
+               
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="family_details">
+                     <div class="card card-body p-0 m-0 ">
+                        {% for family in profile.family %}
+                        <div class="row   mt-2">
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Enitity Type :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.entity_type|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Username :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.username|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           ID :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.id|default:"N/A"}}</span>
+                           </div>
+
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Name :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.name|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           URL :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <a target="_blank"class="badge badge-success" href="{{family.url}}"><i class="fa fa-eye"></i></a>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Profile Picture :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                             <img src="{{family.media_directory}}" class="img-fluid" style="height:100px;;width:100px;;" />
+                           </div>
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                          Relation :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                               <span class="font-weight-bold">{{family.relation|default:"N/A"}}</span>
+                           </div>
+
+
+
+                        </div>
+                        <hr>
+                        {% empty %}
+                        <p>No Family Details </p>
+                        {% endfor %}
+                     </div>
+                    
+                  </div>
+             
+                <!-- end --> 
+
+
+
+                <!-- start -->
+               
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="websites_details">
+                    
+                     
+                        {% for webistes in profile.web_links.websites %}
+                        <div class="row">
+                        <div class="col-md-12">
+                        <span class="badge "> {{forloop.counter}} # ) {{webistes}}</span>
+                        <a href="{{webistes}}"target="_blank" class="badge badge-success float-right "><i class="fa fa-eye"></i></a>
+                        </div>
+                        
+                      </div>
+                        {% empty %}
+                        <p>No Websites Details </p>
+                        {% endfor %}
+                   
+                    
+                
+               </div>
+                <!-- end --> 
+
+
+
+
+<!-- start -->
+             
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="social_links_details">
+                     <div class="card card-body p-0 m-0 ">
+                      
+                        {% for social_links in profile.web_links.social_links %}
+                       <div class="row mt-2">
+                        <div class="col-md-4"><span class="badge">Name</span></div>
+                         <div class="col-md-8">
+                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.link|default:"N/A"}}</span>
+                         </div>
+                         
+                          <div class="col-md-4"><span class="badge">URL</span></div>
+                         <div class="col-md-8">
+                         <a href="{{social_links.url}}"  target="_blank"class="badge badge-success "><i class="fa fa-eye"></i></a>
+                         </div>
+
+                          <div class="col-md-4"><span class="badge">Details</span></div>
+                         <div class="col-md-8">
+                         
+                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.details|default:"N/A"}}</span>
+                         </div>
+                        
+                        <hr>
+                    
+                      </div>
+                        {% empty %}
+                        <p>No Social Link Details </p>
+                        {% endfor %}
+                   
+                    
+                  </div>
+               </div>
+                <!-- end --> 
+
+
+
+
+
+
+
+
+
+            </div>
+               </div>
+            <!-- WORK DETAILS END -->
                   <!-- start profile tab  -->
                   <div id="profile" class="">
                     <h1 class="text-white font-weight-bold pt-5">Profile</h1>
@@ -508,6 +691,107 @@
                   
               });
           </script>
+          <script>
+$(document).ready(function(){
+
+
+$('#work_details_btn').removeClass("badge-primary");
+$('#work_details_btn').addClass("badge-success");
+
+$('#family_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#social_links_details').removeClass("show");
+//
+$('#family_details_btn').removeClass("badge-primary");
+$('#family_details_btn').addClass("badge-success");
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+
+
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+})
+
+$('#social_links_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#family_details').removeClass("show");
+//
+$('#social_links_details_btn').removeClass("badge-primary");
+$('#social_links_details_btn').addClass("badge-success");
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+
+
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+})
+
+
+
+$('#work_details_btn').on('click',function(){
+
+$('#social_links_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#family_details').removeClass("show");
+
+$('#work_details_btn').removeClass("badge-primary");
+$('#work_details_btn').addClass("badge-success");
+
+
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+
+
+
+})
+
+
+
+$('#websites_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#social_links_details').removeClass("show");
+$('#family_details').removeClass("show");
+
+$('#websites_details_btn').removeClass("badge-primary");
+$('#websites_details_btn').addClass("badge-success");
+
+//all Others
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+})
+
+});
+
+</script>
             <script>
             am4core.ready(function() {
             // Themes begin
