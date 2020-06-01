@@ -24,7 +24,16 @@
       a:visited { color: #EE3124; }
       a:hover { color: #A4CD39; text-decoration: underline;}
       a:active { color: #EE3124; }
+     
+
       body{
+        background: url(/static/images/background_gradient.svg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+      #svg{
       background: url(/static/images/background_gradient.svg) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
@@ -70,7 +79,8 @@ var vis = d3.select("#vis")
 vis.append('svg:rect')
   .attr('width', w)
   .attr('height', h)
-  .attr('fill', 'white');
+  .attr('fill','transparent');
+  
 
 function redraw() {
 //console.log("here", d3.event.translate, d3.event.scale);
@@ -82,19 +92,11 @@ vis.attr("transform",
 var data=JSON.parse('{{ data | escapejs }}')
 ;
 var json=data;
-console.log(data);
-var dic={
-  "name": "marvel",
-  "img": "http://marvel-force-chart.surge.sh/marvel_force_chart_img/marvel.png",
-  "children": data,
-}
-console.log(dic);
+console.log(data['name']);
 
 
 
-;
-
-  root = dic;
+  root = data;
   root.fixed = true;
   root.x = w / 2;
   root.y = h / 4;
@@ -169,13 +171,13 @@ function update() {
         .attr("x", "0")
         .attr("y", "0")
         .append("image")
-          .attr("height",  function(d) {if(d.name=="marvel")return 60; else return 2* 100; })//changes made for images sizes
-          .attr("width",  function(d) {if(d.name=="marvel")return 60; else return 2* 100; })//changes made for images sizes
+          .attr("height",  function(d) {if(d.name==data['name'])return 60; else return 2* 20; })//changes made for images sizes
+          .attr("width",  function(d) {if(d.name==data['name'])return 60; else return 2* 20; })//changes made for images sizes
           .attr("xlink:href",  function(d){if(d.img)return d.img+""; else null; })
 
        // Append a circle
       var images = nodeEnter.append("svg:circle")
-           .attr("r", function(d) { if(d.name=="marvel")return 30; else return 1* 100; })//changes made for images sizes
+           .attr("r", function(d) { if(d.name==data['name'])return 30; else return 1* 20; })//changes made for images sizes
            .attr("fill", function(d){ if(d.img)return "url(#"+d.img.replace(/[/|.|:]/g, "")+")" ; else null; });
 
   // make the image grow a little on mouse over and add the text details on click
@@ -211,7 +213,7 @@ function update() {
       .attr("class", "nodetext")
       .attr("x", x_browser)
       .attr("y", y_browser +15)
-      .attr("fill", tcBlack)
+      .attr("fill", '#eee')
       .text(function(d) { return d.hero; });
 
 

@@ -186,30 +186,52 @@
                 background-color: #06111a !important;
                 color: #ffffff !important;
                 }
+                .dropdown-content a:hover {background-color: #f1f1f1;}
+                .dropdown:hover .dropdown-content {
+                display: block;
+                }
+                .dropdown-content {
+                display: none;
+                position: absolute;
+                min-width: 130px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                }
+                .dropdown-content > a {
+                min-width: 120px;
+                }
+                li.dropdown {
+                display: inline-block;
+                }
+                li a, .dropbtn {
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+                }
                 </style>
                 <style>
-                    .clip_btn{
-                        height: 25px;
-                        width: 25px;
-                        border:1px solid black;
-                        background-color:white;
-                     
-                    }
+                .clip_btn{
+                height: 25px;
+                width: 25px;
+                border:1px solid black;
+                background-color:white;
+                
+                }
                 </style>
                 <script src="{% static  'jquery/clipboard.min.js' %}">
-                    new ClipboardJS('.btn');
-                    Clipboard.on('success', function(e) {
-                        console.info('Action:', e.action);
-                        console.info('Text:', e.text);
-                        console.info('Trigger:', e.trigger);
-                    
-                        e.clearSelection();
-                    });
-                    
-                    clipboard.on('error', function(e) {
-                        console.error('Action:', e.action);
-                        console.error('Trigger:', e.trigger);
-                    });
+                new ClipboardJS('.btn');
+                Clipboard.on('success', function(e) {
+                console.info('Action:', e.action);
+                console.info('Text:', e.text);
+                console.info('Trigger:', e.trigger);
+                
+                e.clearSelection();
+                });
+                
+                clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+                });
                 </script>
             </head>
             <body>
@@ -217,7 +239,25 @@
                     <div class="row ">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            <div class="row p-2">
+                            <div class="row pl-2 pr-2">
+                                <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fas fa-spider mr-2 "></i>Dynamic Crawling Target Profile </span></div>
+                                        
+                                        <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                            <li class="dropdown">
+                                                <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
+                                                <div class="dropdown-content">
+                                                    <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="">PDF Downlaod</a>
+                                                    <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="" id="download_as_pdf">Link Analysis</a>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- <div class="row p-2">
                                 <div class="col-md-4 text-left">
                                     <a href="#" target="_blank" class="btn btn-info font-weight-bold">
                                         <i class="fas fa-spider mr-2"></i> Dynamic Crawling
@@ -233,14 +273,11 @@
                                         <i class="fas fa-download  mr-2"></i> Download PDF Report
                                     </a>
                                 </div>
-                            </div>
-
-                            <
-
+                            </div> -->
+                            
                             
                             <div class="row background-gradient-dark border_radius_5px ">
                                 <!-- Target -->
-
                                 <div class="col-md-7  background-gradient-dark p-5">
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
@@ -253,7 +290,7 @@
                                                 <span class="badge badge-light header-text" id="foo">
                                                     {{target.name|default:"N/A"}}
                                                     <button class="btn btn-sm " data-clipboard-target="#foo">
-                                                        <img src="{% static '/clippy.svg'%}" alt="Copy to clipboard" >
+                                                    <img src="{% static '/clippy.svg'%}" alt="Copy to clipboard" >
                                                     </button>
                                                 </span>
                                             </label>
@@ -308,133 +345,133 @@
                                 <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
                                     <div id="profile_chart" style="height:400px;width:100%"></div>
                                 </div>
-                            </>
-                            <!--
-                            -->
-                            <div class="row ">
-                                <div class="col-md-12 m-0 p-0">
-                                    <div class="row m-0 p-0">
-                                        {% if target.data %}
-                            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
-                                            {% for i in target.data %}
-                                                <!------ /////////////////////////////////////////////////////////////////// -->
-                                                <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border pt-3 pb-2">
-                                                    <h4 class="topheading text-white">
-                                                    {{i.title.0}}
-                                                    </h4>
-                                                </div>
-                                                <div class="card-body border border-dark background glowing_border mb-2"style="border-radius:0px 0px 15px 15px">
-                                                    <!-- <div class="row">
-                                                        <div class="col-md-2">
-                                                            <div class="col-md-12" >
+                                </>
+                                <!--
+                                -->
+                                <div class="row w-100">
+                                    <div class="col-md-12 m-0 p-0">
+                                        <div class="row m-0 p-0">
+                                            {% if target.data %}
+                                                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                                                    {% for i in target.data %}
+                                                        <!------ /////////////////////////////////////////////////////////////////// -->
+                                                        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border pt-3 pb-2">
+                                                            <h4 class="topheading text-white">
+                                                            {{i.title.0}}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="card-body border border-dark background glowing_border mb-2"style="border-radius:0px 0px 15px 15px">
+                                                            <!-- <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <div class="col-md-12" >
+                                                                        <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold"> {{i.title.0}}</div>
+                                                            </div> -->
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-2">
+                                                                    <div class="col-md-12" >
+                                                                        <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold">
+                                                                    {{i.page}}  <a href="{{i.page}}" target="_blank" class="badge custom_badge" >
+                                                                        <i class="fa fa-eye fa-2x"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-2">
+                                                                    <div class="col-md-12" >
+                                                                        <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:250px;overflow-y:auto;border-radius:3px;">
+                                                                    {% for content in i.content %}
+                                                                        <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
+                                                                        
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-2">
+                                                                    <div class="col-md-12" >
+                                                                        <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:350px;overflow-y:auto;border-radius:3px;">
+                                                                    {% for image_url in i.image_urls %}
+                                                                        <div class="col-md-6">
+                                                                            <div> <span class="badge badge-info">{{forloop.counter}}</span>
+                                                                            <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                    </div>
+                                                    <!------ /////////////////////////////////////////////////////////////////// -->
+                                                    <!-- <div class="col-md-12 card p-5 ">
+                                                        
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-2">
                                                                 <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
                                                             </div>
+                                                            <div class="col-md-10 text_14px font-weight-bold">
+                                                                {{i.title.0}}
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold"> {{i.title.0}}</div>
-                                                    </div> -->
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-2">
-                                                            <div class="col-md-12" >
+                                                        
+                                                        
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-2">
                                                                 <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
                                                             </div>
+                                                            <div class="col-md-10 text_14px font-weight-bold">
+                                                                {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge badge-success" >
+                                                                    <i class="fa fa-eye fa-2x"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold">
-                                                            {{i.page}}  <a href="{{i.page}}" target="_blank" class="badge custom_badge" >
-                                                                <i class="fa fa-eye fa-2x"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-2">
-                                                            <div class="col-md-12" >
+                                                        
+                                                        
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-2">
                                                                 <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:250px;overflow-y:auto;border-radius:3px;">
-                                                            {% for content in i.content %}
-                                                                <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
-                                                                
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-2">
-                                                            <div class="col-md-12" >
-                                                                <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                            <div class="col-md-10 text_14px p-3 border "style="height:400px;overflow-y:auto;">
+                                                                {% for content in i.content %}
+                                                                    <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
+                                                                    
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:350px;overflow-y:auto;border-radius:3px;"> 
-                                                            {% for image_url in i.image_urls %}
-                                                                    <div class="col-md-6">
-                                                                        <div> <span class="badge badge-info">{{forloop.counter}}</span>
-                                                                        <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
+                                                        
+                                                        
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-2">
+                                                                <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                            </div>
+                                                            <div class="col-md-10 text_12px p-3 border"style="height:400px;overflow-y:auto;">
+                                                                <div class="row">
+                                                                    
+                                                                    {% for image_url in i.image_urls %}
+                                                                        <div class="col-md-6">
+                                                                            <div> <span class="badge badge-info">{{forloop.counter}}</span>
+                                                                            <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    
-                                                </div>
-                                                <!------ /////////////////////////////////////////////////////////////////// -->
-                                                <!-- <div class="col-md-12 card p-5 ">
-                                                    
-                                                    <div class="row mt-2">
-                                                        <div class="col-md-2">
-                                                            <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
-                                                        </div>
-                                                        <div class="col-md-10 text_14px font-weight-bold">
-                                                            {{i.title.0}}
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    
-                                                    <div class="row mt-2">
-                                                        <div class="col-md-2">
-                                                            <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
-                                                        </div>
-                                                        <div class="col-md-10 text_14px font-weight-bold">
-                                                            {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge badge-success" >
-                                                                <i class="fa fa-eye fa-2x"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    
-                                                    <div class="row mt-2">
-                                                        <div class="col-md-2">
-                                                            <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
-                                                        </div>
-                                                        <div class="col-md-10 text_14px p-3 border "style="height:400px;overflow-y:auto;">
-                                                            {% for content in i.content %}
-                                                                <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
+                                                                {% endfor %}
                                                                 
-                                                            {% endfor %}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    
-                                                    
-                                                    <div class="row mt-2">
-                                                        <div class="col-md-2">
-                                                            <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
-                                                        </div>
-                                                        <div class="col-md-10 text_12px p-3 border"style="height:400px;overflow-y:auto;">
-                                                            <div class="row">
-                                                                
-                                                                {% for image_url in i.image_urls %}
-                                                                    <div class="col-md-6">
-                                                                        <div> <span class="badge badge-info">{{forloop.counter}}</span>
-                                                                        <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
-                                                                    </div>
-                                                                </div>
-                                                            {% endfor %}
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                        {% endfor %}
-                                    </div>
+                                                </div> -->
+                                            {% endfor %}
+                                        </div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -445,21 +482,14 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     
-
     <script>
     am4core.ready(function () {
     // Themes begin

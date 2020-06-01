@@ -433,6 +433,7 @@ def convert_expired_on_to_datetime(expired_on):
 
 
 # ahmed code
+# INSTAGRAM
 class Instagram_Target_Response(TemplateView):
        template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
        def get(self, request, *args, **kwargs):
@@ -441,11 +442,18 @@ class Instagram_Target_Response(TemplateView):
             print(profile.to_mongo())
             return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'profile': profile})
 
+class Instagram_Target_Report(TemplateView):
+       template_name = "Target_Management_System/InstagramPerson_Target_Report.html"
+       def get(self, request, *args, **kwargs):
+            object_gtr_id = kwargs['object_gtr_id']
+            profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+            print(profile.to_mongo())
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Report.html', {'profile': profile})
 
 
 
 
-
+# LINKEDIN
 class LinkedinCompany_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
@@ -458,14 +466,39 @@ class LinkedinCompany_Target_Response(TemplateView):
         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': data_object})
 
 
-
-
-
-class FacebookPerson_Target_Response(TemplateView):
+class LinkedinCompany_Target_Report(TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(data_object.to_mongo())
+        with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
+            company = json.load(f)
+        return render(request, 'Target_Management_System/LinkedinCompany_Target_Report.html', {'company': data_object})
+    
+class LinkedinPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
+
+class LinkedinPerson_Target_Report(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Report.html', {'profile': data_object})
+
+# FACEBOOK
+class FacebookPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.work)
 
 
         with open('static/Target_Json/facebook_person_data.json', 'r') as f:
@@ -488,51 +521,9 @@ class FacebookGroup_Target_Response(TemplateView):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(data_object.to_mongo())
-
         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
         return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': data_object})
-
-
-
-
-
-
-# this json wasnot according to format to formatted here
-class Twitter_Target_Response(TemplateView):
-    def get(self, request, *args, **kwargs):
-
-        object_gtr_id = kwargs['object_gtr_id']
-        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(data_object.to_mongo())
-
-
-
-
-        #print(tweets)
-        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
-
-
-
-
-# this json wasnot according to format to formatted here
-class LinkedinPerson_Target_Response(TemplateView):
-    def get(self, request, *args, **kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(data_object.to_mongo())
-
-
-        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
-
-
-class Index(TemplateView):
-    def get(self, request, *args, **kwargs):
-          with open('static/Target_Json/facebook_person_data.json', 'r') as f:
-            profile = json.load(f)
-            return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile':profile})
-
-
 
 class FacebookPersonReport(TemplateView):
     def get(self,request,*args,**kwargs):
@@ -567,6 +558,41 @@ class FacebookGroupReport(TemplateView):
          with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
          return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
+
+
+
+# TWITTER
+
+# this json wasnot according to format to formatted here
+class Twitter_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+
+
+        #print(tweets)
+        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
+
+
+
+
+class Twitter_Target_Report(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         return render(request,'Target_Management_System/Twitter_Target_Report.html',{'tweets':data_object})
+
+    
+
+
+# this json wasnot according to format to formatted here
+
 
 
 #view for link analysis graph
@@ -639,6 +665,68 @@ class Twitter_Follower_Tree_Graph(View):
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
 
+# REDDIT 
+class Reddit_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(profile.to_mongo())
+        return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
+    
+    
+class Reddit_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(profile.to_mongo())
+        return render(request,'Target_Management_System/Reddit_Target_Report.html',{'profile':profile})
+    
+   # YOUTUBE  
+class Youtube_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(channel.to_mongo())
+
+        return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
+ 
+class Youtube_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(channel.to_mongo())
+
+        return render(request,'Target_Management_System/Youtube_Target_Report.html',{'channel':channel})
+  
+  # DYNAMIC CRAWLING   
+class Dynamic_Crawling_Target(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(target.to_mongo())
+        return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
+    
+# SUBREDDIT 
+
+class Subreddit_Target_Resposne(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(subreddit_profile.to_mongo())
+        return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})
+
+
+
+
+class Subreddit_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(subreddit_profile.to_mongo())
+        return render(request,'Target_Management_System/Subreddit_Target_Report.html',{'subreddit_profile':subreddit_profile})
+
+
+
 
 def convert_facebook_indirect_links_to_graph(data):
 
@@ -701,38 +789,5 @@ def username_exists(username,n_data):
 
     return False
 
-
-
-class Reddit_Target_Response(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(profile.to_mongo())
-        return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
-    
-    
-class Youtube_Target_Response(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(channel.to_mongo())
-
-        return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
-    
-class Dynamic_Crawling_Target(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(target.to_mongo())
-        return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
-    
-    
-
-class Subreddit_Target_Resposne(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(subreddit_profile.to_mongo())
-        return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})
 
 

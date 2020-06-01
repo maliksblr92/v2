@@ -4,7 +4,7 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
         <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
@@ -209,129 +209,58 @@
             rgba(24, 72, 116, 1) 0%,
             rgba(6, 17, 26, 1) 100%);
             }
-            .dropdown-content a:hover {background-color: #f1f1f1;}
-            .dropdown:hover .dropdown-content {
-            display: block;
-            }
-            .dropdown-content {
-            display: none;
-            position: absolute;
-            min-width: 130px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            }
-            .dropdown-content > a {
-            min-width: 120px;
-            }
-            li.dropdown {
-            display: inline-block;
-            }
-            li a, .dropbtn {
-            display: inline-block;
-            text-align: center;
-            text-decoration: none;
-            }
             </style>
         </head>
         <body>
-            <div class="container-fluid wrapper background-gradient-dark">
+            <div class="container-fluid ">
                 
                 <div class="row ">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <div class="row pl-2 pr-2">
-                            <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                                <div class="row">
-                                    <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-reddit-alien mr-2 "></i>Sub-Reddit Target Profile </span></div>
-                                    
-                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                                        <li class="dropdown">
-                                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
-                                            <div class="dropdown-content">
-                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="{% url 'Target_Management_System:Subreddit_Target_Report' object_gtr_id=subreddit_profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
-                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="" id="download_as_pdf">Link Analysis</a>
-                                            </div>
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <!-- <div class="row p-2">
-                            <div class="col-md-4 text-left">
-                                <a href="#" target="_blank" class="btn btn-info font-weight-bold"> <i class="fab fa-reddit-alien mr-2"></i> Sub-Reddit</a>
-                                
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <a href="#" target="_blank" class="btn btn-primary font-weight-bold"> <i class="fas fa-users mr-2"></i> Sub-Reddit Profile Target</a>
-                                
-                            </div>
-                            <div class="col-md-4 text-right">
-                                
-                                <a href="#" target="_blank" class="btn btn-success font-weight-bold"> <i class="fas fa-download  mr-2"></i> Download PDF Report</a>
-                            </div>
-                        </div> -->
-                        <div class="row background-gradient-dark border_radius_5px ">
-                            <div class="col-md-2  custom-column-center-center">
+                        <div class="row border_radius_5px ">
+                            <div class="col-md-4  custom-column-center-center">
                                 <div class="profile-img-wrapper ">
-                                    <img src="{{subreddit_profile.icon_media_directory}}" class="border_radius_5px img-fluid full_space"  />
+                                    <img src="{{profile.icon_media_directory}}" class="border_radius_5px img-fluid full_space"  />
                                     
                                 </div>
                                 <div>
-                                    <a  href="{{subreddit_profile.url}}" target="_blank"class="badge badge-success text_14px mt-2"><i class="fa fa-eye text-dark header-icons mr-2"></i> View Sub-Reddit</a>
+                                    <a  href="{{profile.url}}" target="_blank"class="badge badge-success text_14px mt-2"><i class="fa fa-eye text-dark header-icons mr-2"></i> View profile</a>
                                 </div>
                                 
                             </div>
-                            <div class="col-md-5  background-gradient-dark p-5">
+                            <div class="col-md-8  p-5">
                                 <div class="row  p-2">
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                         <label class="label text_15px font-weight-bold " ><i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Username</label>
                                     </div>
                                     
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.name|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.username|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i> Sub-Reddit ID </label>
+                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i> Reddit ID </label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.subreddit_id|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.reddit_id|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>Sub-Reddit Type </label>
-                                    </div>
-                                    <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.subreddit_type|default:"N/A"}}</span></label>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>Moderators </label>
-                                    </div>
-                                    <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.num_moderators|default:"N/A"}}</span></label>
-                                    </div>
-                                </div>
-                                
                                 <div class="row p-2">
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                         <label class="label text_15px font-weight-bold " ><i class="fa fa-fingerprint text-dark header-icons fa-2x mr-2  mr-2"></i>Subscribers </label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.num_subscribers|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.subscribers|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
                                 
                                 <div class="row p-2">
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Currently Active </label>
+                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Karma Post </label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.currently_active|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.karma_points.post_karma|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -339,58 +268,46 @@
                                         <label class="label text_15px font-weight-bold " ><i class="fas fa-clock text-dark header-icons fa-2x mr-2 "></i>Created On </label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{subreddit_profile.timestamp_created|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " ><span class="badge badge-light header-text"> {{profile.timestamp_created|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
                                 
                                 <div class="row p-2">
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Description </label>
+                                        <label class="label text_15px font-weight-bold " ><i class="fa fa-blog text-dark header-icons fa-2x mr-2  "></i> Karma Comments </label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                        <label class="label text_15px font-weight-bold " > <span class="badge badge-light header-text"> {{subreddit_profile.description|default:"N/A"}}</span></label>
+                                        <label class="label text_15px font-weight-bold " > <span class="badge badge-light header-text"> {{profile.karma_points.comment_karma|default:"N/A"}}</span></label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
-                                <div id="profile_chart" style="height:400px;width:100%"></div>
                             </div>
                         </div>
                         <!--
                         -->
                         <div class="row ">
-                            <div class="col-md-12 m-0 p-0">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-link custom_icon"><a data-toggle="tab" href="#sub_reddit_posts" class="text-white fa">Sub-Reddit Posts</a></li>
-                                            <li class="nav-link custom_icon"><a data-toggle="tab" href="#subreddits" class="text-white fa">Top Moderators </a></li>
-                                            
-                                        </ul>
-                                    </div>
-                                    
-                                </div>
-                                
+                            <div class="col-md-12 m-0 p-0">                            
                                 <div class="tab-content">
-                                    <div id="sub_reddit_posts" class="tab-pane fade in active show">
+                                    <div id="reddit_posts" class="">
+                                        
                                         <div class="card">
+                                            <h2 class="text-dark">Reddit Posts</h2>
                                             
-                                            <div class="card-body post-wrapper">
+                                            <div class="card-body">
                                                 <div class="row ">
-                                                    {% for post in subreddit_profile.posts%}
+                                                    {% for post in profile.posts%}
                                                         
                                                         
-                                                        <div class="col-md-6 p-3 ">
+                                                        <div class="col-md-6 p-3">
                                                             <div class="glowing_border custom_background border_radius_5px">
-                                                                <div class="row m-0 card-header custom_header">
-                                                                    <div class="col-md-2">
-                                                                        <a href="{{post.poster.url}}" target="_blank" class="badge custom_bagde"> <i class="fa fa-eye text-success mr-2"></i> View post</a>
+                                                                <div class="row   m-0 card-header custom_header">
+                                                                    <div class="col-md-5">
+                                                                        <a href="{{post.poster.url}}" target="_blank" class="custom_bagde"> <i class="fa fa-eye text-success mr-2"></i> View post</a>
                                                                     </div>
-                                                                    <div class="col-md-4">
-                                                                        <span class="badge custom_bagde">Posted : {{post.timestamp|default:"N/A"}}</span>
+                                                                    <div class="col-md-7">
+                                                                        <span class="custom_bagde">Posted : {{post.timestamp|default:"N/A"}}</span>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <span  class="badge custom_bagde float-right"> Posted by <span class="text-warning font-weight-bold text_14px">{{post.poster.username}}</span>
+                                                                    <div class="col-md-12">
+                                                                        <span  class="custom_bagde"> Posted by <span class="text-warning font-weight-bold text_14px">{{post.poster.username}}</span>
                                                                     8 hours ago</span>
                                                                 </div>
                                                             </div>
@@ -419,18 +336,18 @@
                                                             </div>
                                                             
                                                             <div class="row m-0 p-0 ">
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Up-Ratio</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Comments</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Crossposts</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Score</span></div>
+                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Up-Ratio</span></div>
+                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Num Comments</span></div>
+                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Num Crossposts</span></div>
+                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Score</span></div>
                                                             </div>
                                                             
                                                             
                                                             <div class="row m-0 p-0">
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_comments|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.score|default:"N/A"}}</span></div>
+                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
+                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.num_comments|default:"N/A"}}</span></div>
+                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
+                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.score|default:"N/A"}}</span></div>
                                                             </div>
                                                             
                                                             
@@ -441,46 +358,85 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="subreddits" class="tab-pane fade">
+                                <div id="subreddits" class="">
                                     <div class="card">
+                                        <h2 class="text-dark">Sub Reddits</h2>
                                         
-                                        <div class="card-body post-wrapper">
+                                        <div class="card-body">
                                             <div class="row">
-                                                {% for moderator in subreddit_profile.top_moderators%}
-                                                    <div class="col-md-3 mt-2">
-                                                        <div class="card glowing_border custom_background">
-                                                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center ">
-                                                                <span class="badge custom_bagde"> Moderator # {{forloop.counter}}</span>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 text-left"><span class="badge custom_bagde ">Moderator Name</span></div>
-                                                                    <div class="col-md-8 text-right"><span class="badge badge-light "><i class="fa fa-user mr-2 ">{{moderator.name}}</i></span></div>
+                                                {% for subreddit in profile.subreddits%}
+                                                    
+                                                    
+                                                    <div class="col-md-6 p-3 ">
+                                                        <div class="glowing_border custom_background border_radius_5px">
+                                                            <div class="row  m-0 card-header custom_header">
+                                                                <div class="col-md-2">
+                                                                    <a href="{{subreddit.url}}" target="_blank" class="badge custom_bagde"> <i class="fa fa-eye text-success mr-2"></i> View post</a>
                                                                 </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="col-md-4 text-right"><span class="badge custom_bagde  ">Moderator Link</span></div>
-                                                                    <div class="col-md-8 text-right"><span class="badge badge-light "><a  href="{{moderator.link}}" target="_blank" ><i class="fa fa-eye text-dark "></i></a></span></div>
-                                                                </div>
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4">
+                                                                    <span class="badge custom_bagde"> Posted by <span class="text-warning font-weight-bold">{{subreddit.name}}</span>
+                                                                8 hours ago</span>
                                                             </div>
                                                         </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <span class="badge custom_bagde ml-2">Title : </span>
+                                                            </div>
+                                                            <span class="col-md-10 text-white">
+                                                            {{subreddit.title|default:"N/A"}}</span>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-6 d-flex flex-row justify-content-center align-item-center">
+                                                                {% if post.media is not None %}
+                                                                    <img src="{{post.media|default:'https://via.placeholder.com/150'}}" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                                                                {% else %}
+                                                                    <img src="https://via.placeholder.com/150" class="border_radius_5px img-fluid" style="height:200px;width:200px">
+                                                                {% endif%}
+                                                            </div>
+                                                            <div class="col-md-6 d-flex flex-row justify-content-start align-item-center p-3">
+                                                                <span class="text-white">
+                                                                    {{post.text}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row m-0 p-0 ">
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Up-Ratio</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Num Comments</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Num Crossposts</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="custom_bagde text_12px">Score</span></div>
+                                                        </div>
+                                                        
+                                                        
+                                                        <div class="row m-0 p-0">
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.num_comments|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="custom_bagde text_12px">{{post.statistics.score|default:"N/A"}}</span></div>
+                                                        </div>
+                                                        
+                                                        
                                                     </div>
-                                                {% endfor %}
-                                            </div>
+                                                </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                             
                         </div>
+                        
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
-        
+        <div class="col-md-1"></div>
     </div>
+    
+</div>
 </div>
 </div>
  <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
@@ -490,6 +446,15 @@
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+ <script>
+            $(document).ready(function(){
+                console.log("ready")
+            window.print();
+            
+            
+            });
+            </script>
+       
 <script>
 am4core.ready(function() {
 // Themes begin
@@ -500,20 +465,28 @@ var chart = am4core.create("profile_chart", am4charts.RadarChart);
 chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 var dic=[
 {
+category: "Custom feeds",
+value1: "{{ profile.custom_feeds|length }}",
+},
+{
 category: "Subscribers",
-value1: "{{ subreddit_profile.num_subscribers }}",
+value1: "{{ profile.subscribers }}",
 },
 {
-category: "Active",
-value1: "{{ subreddit_profile.currently_active }}",
-},
-{
-category: "Moderator",
-value1: "{{ subreddit_profile.num_moderators }}",
+category: "Sub-reddits",
+value1: "{{ profile.subreddits|length }}",
 },
 {
 category: "Posts",
-value1: "{{ subreddit_profile.posts|length }}",
+value1: "{{ profile.posts|length }}",
+},
+{
+category: "karma Posts",
+value1: "{{ profile.karma_points.comment_karma}}",
+},
+{
+category: "karma comments",
+value1: "{{ profile.karma_points.post_karma}}",
 },
 ]
 chart.data =dic
@@ -534,7 +507,7 @@ var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
 valueAxis.tooltip.disabled = true;
 valueAxis.renderer.labels.template.horizontalCenter = "left";
 valueAxis.min = 0;
-valueAxis.max = 100000;
+valueAxis.max = 1000000;
 valueAxis.strictMinMax = true;
 valueAxis.renderer.maxLabelPosition = 0.99;
 valueAxis.renderer.minGridDistance = 10;

@@ -164,6 +164,7 @@ class Data_Queries(object):
                         print(len(linked_responses),website)
                         n_data_full = n_data_full + n_data
 
+            print(portfolio_obj);
             p_node = {'name': portfolio_obj.name,
                       'hero': portfolio_obj.name,
                       'value': 1,
@@ -177,10 +178,16 @@ class Data_Queries(object):
             for alpha in alpha_nodes_list:
                 p_node['linkWith'].append(alpha['username'])
 
-            n_data_full.append(p_node)
-            print(n_data_full)
-
-            return json.dumps(n_data_full)
+            # n_data_full.append(p_node)
+            dic={
+                "name":portfolio_obj.name,
+                "hero":portfolio_obj.name,
+                "img":"/static/images/anonymous_logo.jpg",
+                "children":n_data_full,
+            }
+            
+            print(dic)
+            return json.dumps(dic)
 
         except Exception as e:
             print(e)

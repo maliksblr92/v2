@@ -216,28 +216,6 @@
                 rgba(24, 72, 116, 1) 0%,
                 rgba(6, 17, 26, 1) 100%);
                 }
-                .dropdown-content a:hover {background-color: #f1f1f1;}
-                .dropdown:hover .dropdown-content {
-                display: block;
-                }
-                .dropdown-content {
-                display: none;
-                position: absolute;
-                min-width: 150px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                z-index: 1;
-                }
-                .dropdown-content > a {
-                min-width: 140px;
-                }
-                li.dropdown {
-                display: inline-block;
-                }
-                li a, .dropbtn {
-                display: inline-block;
-                text-align: center;
-                text-decoration: none;
-                }
                 </style>
                 <!-- categorization styling  -->
                 <style>
@@ -273,45 +251,8 @@
                     <div class="row ">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            
-                            <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                                <div class="row">
-                                    <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-instagram mr-2 "></i>Instagram Target Profile </span></div>
-                                    
-                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                                        <li class="dropdown">
-                                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
-                                            <div class="dropdown-content">
-                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="{% url 'Target_Management_System:Instagram_Target_Report' object_gtr_id=profile.GTR %}"id="download_as_pdf">PDF Downlaod</a>
-                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}" id="download_as_pdf">Followers Graph</a>
-                                            </div>
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                            
-
-                            <!-- <div class="row p-2">
-                                <div class="col-md-4 text-left">
-                                    <a href="#" target="_blank" class="btn btn-info font-weight-bold">
-                                        <i class="fab fa-instagram mr-2"></i> Instagram
-                                    </a>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <a type="button" class="btn  btn-sm btn-success float-right" style="margin-top:2px;"
-                                        href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}"
-                                    id="download_as_pdf">Followers Graph</a>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <a href="#" target="_blank" class="btn btn-success font-weight-bold">
-                                        <i class="fas fa-download  mr-2"></i> Download PDF Report
-                                    </a>
-                                </div>
-                            </div> -->
-                            
-
                             <div class="row background-gradient-dark border_radius_5px ">
-                                <div class="col-md-2  custom-column-start-center mt-5">
+                                <div class="col-md-4  custom-column-center-center">
                                     <div class="profile-img-wrapper ">
                                         <img src="{{profile.profile_picture_url}}" class="border_radius_5px img-fluid full_space">
                                     </div>
@@ -321,7 +262,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-5  background-gradient-dark p-5">
+                                <div class="col-md-8  background-gradient-dark p-5">
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
                                             <label class="label text_15px font-weight-bold ">
@@ -423,38 +364,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
-                                    <div id="profile_chart" style="height:400px;width:100%"></div>
-                                </div>
                             </div>
                             <!--
                             -->
                             <div class="row ">
                                 <div class="col-md-12 m-0 p-0">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <ul class="nav nav-tabs">
-                                                <li class="nav-link active custom_icon">
-                                                    <a data-toggle="tab" href="#profile" class="text-white fas fa-user">
-                                                        Profile
-                                                    </a>
-                                                </li>
-                                                <li class="nav-link active custom_icon">
-                                                    <a data-toggle="tab" href="#posts" class="text-white fa fa-sticky-note">
-                                                        Posts
-                                                    </a>
-                                                </li>
-                                                <li class="nav-link active custom_icon text-white">
-                                                    <a data-toggle="tab" href="#followers" class="text-white fa fa-users">
-                                                        Followers
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <div class="tab-content">
-                                        <div id="profile" class="tab-pane fade in active show">
+                                        <div id="profile" class="">
                                             <div class="col-md-12 card p-2">
+                                            <h2 class="text-dark">Profile</h2>
                                                 <div class="card-header custom_header text-white glowing_border" style="border-radius: 20px 20px 0px 0px;">
                                                     Profile Summary
                                                 </div>
@@ -485,10 +403,11 @@
                                                     </div>
                                                 </div>
                                                 <!-- instagram posts  -->
-                                                <div id="posts" class="tab-pane fade">
+                                                <div id="posts" class="bg-white">
+                                                    <h2 class="text-dark">Posts</h2>
                                                     <div class="row m-0 p-0 bg-white">
                                                         {% for post in profile.posts %}
-                                                            <div class="col-md-3 p-2">
+                                                            <div class="col-md-4 p-2">
                                                                 <div class="card glowing_border custom_background h-100 p-0 p-0">
                                                                     <div class="card-header custom_header">
                                                                         <div class="row d-flex flex-row justify-content-center align-items-center">
@@ -544,10 +463,11 @@
                                             </div>
                                             <!-- end instagram posts -->
                                             <!-- followers tabs  -->
-                                            <div id="followers" class="tab-pane fade">
+                                            <div id="followers" class="bg-white">
+                                                    <h2 class="text-dark">Followers</h2>
                                                 <div class="row m-0 p-0 bg-white">
                                                     {% for i in profile.followers %}
-                                                        <div class="col-md-3 mt-2">
+                                                        <div class="col-md-4 mt-2">
                                                             <div class="card glowing_border custom_background">
                                                                 <div class="card-header d-flex flex-row justify-content-center align-items-center custom_header m-0 p-0 ">
                                                                     {% if i.picture_image_url %}
@@ -557,23 +477,13 @@
                                                                     {% endif %}
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    
                                                                     <div class="row">
                                                                         <div class="col-md-12 m-0 p-0 ">
                                                                             <div><span class="badge custom_bagde w-25 text-left">Full Name:</span> <span class="badge badge-light">{{i.full_name}}</span></div>
                                                                             <div><span class="badge custom_bagde w-25 text-left">User-Name:</span> <span class="badge badge-light">{{i.username}}</span></div>
                                                                             <div><span class="badge custom_bagde w-25 text-left">URL:</span> <a  href="{{i.url}}" class="badge badge-success"><i class="fa fa-eye "></i></a></div>
-                                                                            
-                                                                            
                                                                         </div>
-                                                                        
-                                                                        
                                                                     </div>
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -598,6 +508,13 @@
         <script src="https://www.amcharts.com/lib/4/charts.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
         <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+         <script>
+            $(document).ready(function(){
+            window.print();
+            
+            
+            });
+            </script>
         <script>
         am4core.ready(function () {
         // Themes begin

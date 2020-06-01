@@ -218,6 +218,28 @@
       justify-content: start!important;
       align-items: center!important;
       }
+      .dropdown-content a:hover {background-color: #f1f1f1;}
+      .dropdown:hover .dropdown-content {
+      display: block;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 130px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      }
+      .dropdown-content > a {
+      min-width: 120px;
+      }
+      li.dropdown {
+      display: inline-block;
+      }
+      li a, .dropbtn {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      }
       </style>
     </head>
     <body class="background-gradient">
@@ -305,6 +327,210 @@
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <!-- Left Card Start -->
           <div class="col-md-3">
+               <!-- WORK DETAILS START-->
+            <div class="row border custom_border_color background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
+               <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                  <i class="fas fa-user-friends text-white fa-2x"></i>
+                  <span class="ml-2 text-white" style="font-size:18px;">
+                  <span class="font-weight-bold">Perosnal Details</span>
+                  </span>
+               </div>
+               <div class="col-md-2 text-white mt-1"></div>
+            </div>
+            <div class="row p-1 border custom_border_color bg-white" id="work_details_div" style="height:300px;overflow-y:auto;" >
+               <!-- start --> 
+               <div class="col-md-12  d-flex flex-row justify-content-around align-items-start" >
+                                         
+                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="work_details_btn" href="#work_details" role="button" aria-expanded="false" aria-controls="work_details">
+                  Work Details
+                  </a>
+                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="family_details_btn" href="#family_details" role="button" aria-expanded="false" aria-controls="family_details">
+                  family Details
+                  </a>
+
+                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="websites_details_btn" href="#websites_details" role="button" aria-expanded="false" aria-controls="websites_details">
+                  Web Links Details
+                  </a>
+
+                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false" aria-controls="social_links_details">
+                  Social Links Details
+                  </a>
+
+ </div>
+
+ <div class="col-md-12">
+                  <div class="collapse show m-0 p-0" id="work_details">
+                     <div class="card card-body p-0 m-0 ">
+                        {% for work in profile.work %}
+                        <div class="row  ">
+                           <div class="col-md-12"><span class="badge badge-primary"style="font-size:12px;font-weight:bold;">{{forloop.counter}}#{{work.organisation|default:"N/A"}}</span></div>
+                           <div class="col-md-12 mt-1"style="font-size:12px;">
+                              <p class="font-weight-bold">{{work.details|default:"N/A"}}</p>
+                           </div>
+                        </div>
+                        {% empty %}
+                        <p>No Work Details </p>
+                        {% endfor %}
+                     </div>
+                  
+                  </div>
+              
+                 <!-- end -->  
+
+
+  <!-- start -->
+               
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="family_details">
+                     <div class="card card-body p-0 m-0 ">
+                        {% for family in profile.family %}
+                        <div class="row   mt-2">
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Enitity Type :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.entity_type|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Username :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.username|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           ID :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.id|default:"N/A"}}</span>
+                           </div>
+
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Name :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <span class="font-weight-bold">{{family.name|default:"N/A"}}</span>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           URL :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                              <a target="_blank"class="badge badge-success" href="{{family.url}}"><i class="fa fa-eye"></i></a>
+                           </div>
+
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                           Profile Picture :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                             <img src="{{family.media_directory}}" class="img-fluid" style="height:100px;;width:100px;;" />
+                           </div>
+
+                           <div class="col-md-4"><span class="badge "
+                           style="font-size:12px;font-weight:bold;">
+                          Relation :</span></div>
+                           <div class="col-md-8"style="font-size:12px;">
+                               <span class="font-weight-bold">{{family.relation|default:"N/A"}}</span>
+                           </div>
+
+
+
+                        </div>
+                        <hr>
+                        {% empty %}
+                        <p>No Family Details </p>
+                        {% endfor %}
+                     </div>
+                    
+                  </div>
+             
+                <!-- end --> 
+
+
+
+                <!-- start -->
+               
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="websites_details">
+                    
+                     
+                        {% for webistes in profile.web_links.websites %}
+                        <div class="row">
+                        <div class="col-md-12">
+                        <span class="badge "> {{forloop.counter}} # ) {{webistes}}</span>
+                        <a href="{{webistes}}"target="_blank" class="badge badge-success float-right "><i class="fa fa-eye"></i></a>
+                        </div>
+                        
+                      </div>
+                        {% empty %}
+                        <p>No Websites Details </p>
+                        {% endfor %}
+                   
+                    
+                
+               </div>
+                <!-- end --> 
+
+
+
+
+<!-- start -->
+             
+                                           
+                 
+                  <div class="collapse m-0 p-0" id="social_links_details">
+                     <div class="card card-body p-0 m-0 ">
+                      
+                        {% for social_links in profile.web_links.social_links %}
+                       <div class="row mt-2">
+                        <div class="col-md-4"><span class="badge">Name</span></div>
+                         <div class="col-md-8">
+                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.link|default:"N/A"}}</span>
+                         </div>
+                         
+                          <div class="col-md-4"><span class="badge">URL</span></div>
+                         <div class="col-md-8">
+                         <a href="{{social_links.url}}"  target="_blank"class="badge badge-success "><i class="fa fa-eye"></i></a>
+                         </div>
+
+                          <div class="col-md-4"><span class="badge">Details</span></div>
+                         <div class="col-md-8">
+                         
+                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.details|default:"N/A"}}</span>
+                         </div>
+                        
+                        <hr>
+                    
+                      </div>
+                        {% empty %}
+                        <p>No Social Link Details </p>
+                        {% endfor %}
+                   
+                    
+                  </div>
+               </div>
+                <!-- end --> 
+
+
+
+
+
+
+
+
+
+            </div>
+               </div>
+            <!-- WORK DETAILS END -->
             <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
               <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
                 <div class="row">
@@ -471,9 +697,9 @@
                               <div class="card">
                                 <div class="card-header background-gradient-dark" id="headingOne" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
                                   <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                     <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                  <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                   <div class="d-inline">
-                                  {{c.name}}
+                                    {{c.name}}
                                   </div>
                                 </div>
                                 <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -508,7 +734,7 @@
                                           <div class="col-md-6 text-14"> Post Reactions:</div>
                                           <div class="col-md-6 text-14 text_paragraph"> {{c.post_reactions}}</div>
                                           <div class="col-md-6 text-14"> URL:</div>
-                                          <div class="col-md-6 text-14"> 
+                                          <div class="col-md-6 text-14">
                                             <a class="badge custom_badge fa fa-search" href="{{c.url}}">View</a>
                                           </div>
                                         </div>
@@ -601,13 +827,114 @@
             </div>
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+             <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
             <script src="https://www.amcharts.com/lib/4/core.js"></script>
             <script src="https://www.amcharts.com/lib/4/charts.js"></script>
             <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
             <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+            <script>
+$(document).ready(function(){
+
+
+$('#work_details_btn').removeClass("badge-primary");
+$('#work_details_btn').addClass("badge-success");
+
+$('#family_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#social_links_details').removeClass("show");
+//
+$('#family_details_btn').removeClass("badge-primary");
+$('#family_details_btn').addClass("badge-success");
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+
+
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+})
+
+$('#social_links_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#family_details').removeClass("show");
+//
+$('#social_links_details_btn').removeClass("badge-primary");
+$('#social_links_details_btn').addClass("badge-success");
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+
+
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+})
+
+
+
+$('#work_details_btn').on('click',function(){
+
+$('#social_links_details').removeClass("show");
+$('#websites_details').removeClass("show");
+$('#family_details').removeClass("show");
+
+$('#work_details_btn').removeClass("badge-primary");
+$('#work_details_btn').addClass("badge-success");
+
+
+//all Others
+$('#websites_details_btn').removeClass("badge-success");
+$('#websites_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+
+
+
+})
+
+
+
+$('#websites_details_btn').on('click',function(){
+
+$('#work_details').removeClass("show");
+$('#social_links_details').removeClass("show");
+$('#family_details').removeClass("show");
+
+$('#websites_details_btn').removeClass("badge-primary");
+$('#websites_details_btn').addClass("badge-success");
+
+//all Others
+$('#work_details_btn').removeClass("badge-success");
+$('#work_details_btn').addClass("badge-primary");
+
+$('#family_details_btn').removeClass("badge-success");
+$('#family_details_btn').addClass("badge-primary");
+
+$('#social_links_details_btn').removeClass("badge-success");
+$('#social_links_details_btn').addClass("badge-primary");
+})
+
+})
+
+</script>
             <script>
             am4core.ready(function() {
             // Themes begin

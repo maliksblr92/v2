@@ -1134,4 +1134,8 @@ class Delete_Periodic_Target_DB(View):
         if fetch_object_for_deletion:
             fetch_object_for_deletion.delete_periodic_task()
         return redirect('/core/periodic_target')
-    
+
+
+
+def design_test(request):
+  return render(request,'OSINT_System_Core/design_test.html')
