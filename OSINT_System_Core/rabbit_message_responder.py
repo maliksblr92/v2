@@ -3,9 +3,10 @@ from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
 import os
 
-from Public_Data_Acquisition_Unit.acquistion_manager import Timeline_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Timeline_Manager,Acquistion_Manager
 
 tm = Timeline_Manager()
+acq = Acquistion_Manager()
 
 
 def on_messege_recived(data,**kwargs):
@@ -75,6 +76,8 @@ def on_ais_message(data):
             GTR_id = data['arguments']['GTR']
             print('.....................GOT GTR ID AIS........................')
             tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
+            acq.add_recursive_crawling_target(GTR_id)
+            
 
 
 def on_ess_message(data):

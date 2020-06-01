@@ -128,8 +128,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             url = request.POST[plateform+'_authoruserurl']
             expire_on = request.POST[plateform+'_expirydate']
             interval = int(request.POST[plateform+'_interval'])
-            screen_shot = False
-
+            screen_shot = bool(int(request.POST[plateform+'_screenshot']))
+            print(screen_shot)
 
 
 
@@ -142,7 +142,7 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
 
 
             print(website_id,target_type_index,username,user_id)
-            acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,need_screenshots=screen_shot)
+            acq.add_target(website_id, target_type_index,portfolio_id=portfolio_id,username=username, user_id=user_id,name=name,url=url,expired_on=expire_on,periodic_interval=interval,recursive=screen_shot)
             #publish('target created successfully', message_type='notification')
 
             if(portfolio_id is not None):
