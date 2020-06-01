@@ -5,10 +5,12 @@ import json
 from Public_Data_Acquisition_Unit.mongo_models import *
 from Data_Processing_Unit.models import *
 from Bi_Tools.mongo_serializer import Mongo_Serializer
-
+from Bi_Tools.visualizations import Visualisation_Mangager
+from Bi_Tools.response_visualizations import Instagram_Response_TMS_visualization
 
 
 from bokeh.resources import CDN
+from bokeh.layouts import row
 from bokeh.plotting import figure,output_file,show
 from bokeh.embed import components
 
@@ -17,6 +19,7 @@ from django.core import serializers
 from bson import ObjectId
 
 ms = Mongo_Serializer()
+vm = Visualisation_Mangager()
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -51,25 +54,15 @@ def pivot_data(request):
 
 
 def simple_chart(request):
-    plot = figure()
-    plot.circle([1, 2], [3, 4])
 
-    script, div = components(plot)
-
-    # prepare some data
-    x = [1, 2, 3, 4, 5]
-    y = [6, 7, 2, 4, 5]
-
-    # output to static HTML file
-    output_file("lines.html")
-
-    # create a new plot with a title and axis labels
-    p = figure(title="simple line example", x_axis_label='x', y_axis_label='y')
-
-    # add a line renderer with legend and line thickness
-    p.line(x, y, legend_label="Temp.", line_width=2)
-
-    # show the results
-    #show(p)
-
+    script,div = vm.simple_chart()
+    print('...............visual sent ..................')
     return render(request, "Bi_Tools/simple_chart.html", {"the_script": script, "the_div": div})
+
+def keybase_visualization(request):
+
+
+    a_script,a_div = Instagram_Response_TMS_visualization.content_categorization_piechart()
+    b_script, b_div = vm.simple_chart()
+    #show(row(s1,s2,s3))
+    return render(request,'Bi_Tools/keybase_visualization.html',{"a_script": a_script, "a_div": a_div,"b_script": b_script, "b_div": b_div})
