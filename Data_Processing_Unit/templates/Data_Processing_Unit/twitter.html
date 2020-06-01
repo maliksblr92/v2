@@ -31,14 +31,7 @@
     font-weight: bolder;
     font-size: 12px;;
     }
-    textarea::placeholder{
-    color:black!important;
-    font-size: 16px!important;;
-    }
-    textarea{
-    color:black!important;
-    font-size: 16px!important;;
-    }
+
     #success_message{
     position: absolute;;
     width: 350px;
@@ -54,7 +47,16 @@
     top: 0px;
     right: 0px;;
     }
+    .text_12{
+        font-size:12px!important;
+        }
     
+        .text_10{
+            font-size:10px!important;
+            }
+        .text_14{
+         font-size:14px!important;   
+        }
     </style>
     <!-- message for success -->
     {% if messages %}
@@ -79,32 +81,32 @@
             {%endfor%}
             {%endif%}
            
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" style="">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
-                <a  href="/dpu/index" class="btn secondnavitems "style="font-size:10px!important">   FAKE IDIENTITY GENEARTOR</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="/dpu/index_darkweb" class="btn secondnavitems "style="font-size:12px!important;">    DARK WEB</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="/dpu/index_scrapper" class="btn secondnavitems "style="font-size:12px!important;">  DATA SCRAPPERS</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="/dpu/index_textprocessing" class="btn secondnavitems "style="font-size:12px!important;"> TEXT PROCESSING</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive ">
-                <a href="/dpu/twitter" class="btn secondnavitems "style="font-size:12px!important;">  TWITTER</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="/dpu/iptools" class="btn secondnavitems "style="font-size:12px!important;"> LOOKUP TOOLS</a>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 d-flex" style="">
+                  <div class="col-md-1">
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+                    <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">   IDIENTITY GENEARTOR</a>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                    <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                    <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold ">  DATA SCRAPPERS</a>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                    <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT PROCESSING</a>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+                    <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                    <a href="/dpu/iptools"  class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
+                  </div>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
         {% endblock %}
         {% block belly %}
             <div class="row">
@@ -114,7 +116,8 @@
                             <p class="card_header_text">TWITTER SEARCHES </p>
                         </div>
                         
-                        <div class="card-body m-4 main_card glowing_border">
+                        <div class="card-body main_card glowing_border">
+                            
                             <div class="container-fluid ">
                                 <ul class="nav nav-pills row">
                                     
