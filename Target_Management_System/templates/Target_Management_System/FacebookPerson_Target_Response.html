@@ -328,6 +328,8 @@
                   Social Links Details
                   </a>
 
+                 
+
  </div>
 
  <div class="col-md-12">
@@ -513,7 +515,7 @@
                </div>
                <div class="col-md-2 text-white mt-1">{{profile.friends | length}}</div>
             </div>
-            <div class="row p-1 border custom_border_color bg-white" style="height:300px;overflow-y:auto;">
+            <div class="row p-1 border custom_border_color bg-white" style="height:322px;overflow-y:auto;">
                <div class="col-md-12 " >
                   <!--  -->
                   {% for f in profile.friends %}
@@ -679,6 +681,30 @@
                         <div class="row">
                            <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
                               </div> -->
+                              <div class="col-md-4">
+                              <p>GENERAL INFORMATION :</p>
+                              <p> <span class="badge badge-primary mr-2 w-25">Name  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.name|default:"N/A"}}<span></p>
+                              <p><span class="badge badge-primary mr-2 w-25">Birthday  : </span>
+                               
+                               <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.birthday|default:"N/A"}}<span>
+                               </p>
+                              <p>
+                              <span class="badge badge-primary mr-2 w-25">Authro ID  : </span> 
+                
+                               <span class="font-weight-bold"style="font-size:12px;">{{profile.author_id|default:"N/A"}}<span>
+                              </p>
+                                <p><span class="badge badge-primary mr-2 w-25">Gender  : </span>
+                                
+                                 <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.gender|default:"N/A"}}<span>
+                                </p>
+                                 
+                              </div>
+
+                               <div class="col-md-5">
+                              <p>GENERAL INFORMATION :</p>
+<p> <span class="badge badge-primary w-25 mr-2">languages  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.languages|default:"N/A"}}<span></p>
+                              <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.religious_views|default:"N/A"}}<span></p>
+                              </div>
                            <div class="col-md-12">
                               <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
                               <p class="text_paragraph text-justify">{{profile.profile_overview_summary|default:"N/A"}}</p>
