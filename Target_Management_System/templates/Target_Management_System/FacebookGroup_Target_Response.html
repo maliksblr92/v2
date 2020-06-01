@@ -218,6 +218,28 @@
       justify-content: start!important;
       align-items: center!important;
       }
+      .dropdown-content a:hover {background-color: #f1f1f1;}
+      .dropdown:hover .dropdown-content {
+      display: block;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 130px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      }
+      .dropdown-content > a {
+      min-width: 120px;
+      }
+      li.dropdown {
+      display: inline-block;
+      }
+      li a, .dropbtn {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      }
       </style>
     </head>
     <body class="background-gradient">
@@ -305,6 +327,44 @@
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <!-- Left Card Start -->
           <div class="col-md-3">
+            <!-- WORK DETAILS START-->
+                        <div class="row border custom_border_color background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
+                            <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                                <i class="fas fa-user-friends text-white fa-2x"></i>
+                                <span class="ml-2 text-white" style="font-size:18px;">
+                                    <span class="font-weight-bold">Work Details</span>
+                                </span>
+                            </div>
+                            <div class="col-md-2 text-white mt-1">{{profile.friends | length}}</div>
+                        </div>
+                        <div class="row p-1 border custom_border_color bg-white" style="height:300px;overflow-y:auto;">
+                            <div class="col-md-12 " >
+                                <!--  -->
+                                {% for f in profile.work %}
+                                    <div class="row mt-1 ">
+                                        <div class="col-md-12 border custom_border_color rounded d-flex flex-column justify-content-around" style="height:80px;">
+                                            <div class="row ">
+                                                <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                    <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Organization</span>
+                                                </div>
+                                                <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.organisation}}</div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-4 m-0 p-0 small-txt text_heading">
+                                                    <span class="badge custom_badge" style="width: 100px !important; font-size: 12px;">Details</span>
+                                                </div>
+                                                <div class="col-md-8 m-0 p-0 small-txt text_paragraph" style="font-size: 12px !important;">{{f.details}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <p>No Work to display </p>
+                                {% endfor %}
+                                <!--  -->
+                            </div>
+                        </div>
+                        <!-- WORK DETAILS END -->
             <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
               <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
                 <div class="row">
@@ -471,9 +531,9 @@
                               <div class="card">
                                 <div class="card-header background-gradient-dark" id="headingOne" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
                                   <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                     <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                  <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                   <div class="d-inline">
-                                  {{c.name}}
+                                    {{c.name}}
                                   </div>
                                 </div>
                                 <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -508,7 +568,7 @@
                                           <div class="col-md-6 text-14"> Post Reactions:</div>
                                           <div class="col-md-6 text-14 text_paragraph"> {{c.post_reactions}}</div>
                                           <div class="col-md-6 text-14"> URL:</div>
-                                          <div class="col-md-6 text-14"> 
+                                          <div class="col-md-6 text-14">
                                             <a class="badge custom_badge fa fa-search" href="{{c.url}}">View</a>
                                           </div>
                                         </div>

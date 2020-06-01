@@ -209,7 +209,28 @@
             rgba(24, 72, 116, 1) 0%,
             rgba(6, 17, 26, 1) 100%);
             }
-
+            .dropdown-content a:hover {background-color: #f1f1f1;}
+            .dropdown:hover .dropdown-content {
+            display: block;
+            }
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+            .dropdown-content > a {
+            min-width: 120px;
+            }
+            li.dropdown {
+            display: inline-block;
+            }
+            li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            }
             </style>
         </head>
         <body>
@@ -218,7 +239,27 @@
                 <div class="row ">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
-                        <div class="row p-2">
+                        <div class="row pl-2 pr-2">
+                            <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                                <div class="row">
+                                    <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fab fa-reddit-alien mr-2 "></i>Reddit Target Profile </span></div>
+                                    
+                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
+                                            <div class="dropdown-content">
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="" id="download_as_pdf">PDF Downlaod</a>
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="" id="download_as_pdf">Link Analysis</a>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+                        <!-- <div class="row p-2">
                             <div class="col-md-4 text-left">
                                 <a href="#" target="_blank" class="btn btn-info font-weight-bold"> <i class="fab fa-reddit-alien mr-2"></i> Reddit</a>
                                 
@@ -231,7 +272,8 @@
                                 
                                 <a href="#" target="_blank" class="btn btn-success font-weight-bold"> <i class="fas fa-download  mr-2"></i> Download PDF Report</a>
                             </div>
-                        </div>
+                        </div> -->
+
                         <div class="row background-gradient-dark border_radius_5px ">
                             <div class="col-md-2  custom-column-center-center">
                                 <div class="profile-img-wrapper ">
@@ -430,19 +472,19 @@
                                                         </div>
                                                         
                                                         <div class="row m-0 p-0 ">
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Up-Ratio</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Comments</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Crossposts</span></div>
-                                                                <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Score</span></div>
-                                                            </div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Up-Ratio</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Comments</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Num Crossposts</span></div>
+                                                            <div class="col-md-3 stats-box-upper glowing_border"><span class="badge custom_bagde">Score</span></div>
+                                                        </div>
                                                         
                                                         
                                                         <div class="row m-0 p-0">
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_comments|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
-                                                                <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.score|default:"N/A"}}</span></div>
-                                                            </div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.upvote_ratio|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_comments|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.num_crossposts|default:"N/A"}}</span></div>
+                                                            <div class="col-md-3 stats-box-lower glowing_border"><span class="badge custom_bagde">{{post.statistics.score|default:"N/A"}}</span></div>
+                                                        </div>
                                                         
                                                         
                                                     </div>
@@ -465,67 +507,50 @@
 </div>
 </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
-
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 <script>
 am4core.ready(function() {
-
 // Themes begin
 am4core.useTheme(am4themes_dark);
 am4core.useTheme(am4themes_animated);
 // Themes end
-
 var chart = am4core.create("profile_chart", am4charts.RadarChart);
 chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
 var dic=[
-
 {
 category: "Custom feeds",
 value1: "{{ profile.custom_feeds|length }}",
-
 },
-
-
-
 {
 category: "Subscribers",
 value1: "{{ profile.subscribers }}",
-
 },
 {
 category: "Sub-reddits",
 value1: "{{ profile.subreddits|length }}",
-
 },
 {
 category: "Posts",
 value1: "{{ profile.posts|length }}",
-
 },
 {
 category: "karma Posts",
 value1: "{{ profile.karma_points.comment_karma}}",
-
 },
 {
 category: "karma comments",
 value1: "{{ profile.karma_points.post_karma}}",
-
 },
 ]
 chart.data =dic
-
 //chart.padding(20, 20, 20, 20);
 chart.colors.step = 4;
-
 var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "category";
 categoryAxis.renderer.labels.template.location = 0.5;
@@ -537,7 +562,6 @@ categoryAxis.renderer.grid.template.strokeOpacity = 0.07;
 categoryAxis.renderer.axisFills.template.disabled = true;
 categoryAxis.interactionsEnabled = false;
 categoryAxis.renderer.minGridDistance = 10;
-
 var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
 valueAxis.tooltip.disabled = true;
 valueAxis.renderer.labels.template.horizontalCenter = "left";
@@ -549,26 +573,19 @@ valueAxis.renderer.minGridDistance = 10;
 valueAxis.renderer.grid.template.strokeOpacity = 0.07;
 valueAxis.renderer.axisFills.template.disabled = true;
 valueAxis.interactionsEnabled = false;
-
 var series1 = chart.series.push(new am4charts.RadarColumnSeries());
 series1.columns.template.tooltipText = "{name}: {valueX.value}";
 series1.name = "Counts";
 series1.dataFields.categoryY = "category";
 series1.dataFields.valueX = "value1";
 series1.stacked = true;
-
-
-
 chart.seriesContainer.zIndex = -1;
-
 chart.scrollbarX = new am4core.Scrollbar();
 chart.scrollbarX.exportable = false;
 chart.scrollbarY = new am4core.Scrollbar();
 chart.scrollbarY.exportable = false;
-
 chart.cursor = new am4charts.RadarCursor();
 chart.cursor.lineY.disabled = true;
-
 }); // end am4core.ready()
 </script>
 </body>
