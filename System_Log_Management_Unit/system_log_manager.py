@@ -185,7 +185,7 @@ class Data_Queries(object):
                 "img":"/static/images/anonymous_logo.jpg",
                 "children":n_data_full,
             }
-            
+       
             print(dic)
             return json.dumps(dic)
 
@@ -235,6 +235,11 @@ class Data_Queries(object):
             for item in data_object['followers']:
                 temp_dic = {'username': item['username'], 'picture_url': item['avatar']}
                 beta_nodes_list.append(temp_dic)
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
 
             return (alpha_node, beta_nodes_list)
 
@@ -276,12 +281,14 @@ class Data_Queries(object):
 
             n_data.append(a_node)
 
+            dic={
+                "name":alpha_node['username'],
+                "hero":alpha_node['username'],
+                "img":"/static/images/anonymous_logo.jpg",
+                "children":n_data,
+            }
 
-
-
-
-            print(n_data)
-            return json.dumps(n_data)
+            return json.dumps(dic)
         except Exception as e:
             print(e)
             return json.dumps(n_data)

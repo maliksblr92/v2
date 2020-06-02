@@ -24,8 +24,8 @@ import os
 
 from OSINT_System_Core.rabbit_thread import Rabbit_Consumer
 
-consumer = Rabbit_Consumer(1)
-consumer.start()
+# consumer = Rabbit_Consumer(1)
+# consumer.start()
 
 
 urlpatterns = [
