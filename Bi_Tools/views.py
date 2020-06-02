@@ -73,3 +73,55 @@ def keybase_visualization(request):
                                                                  "c_script": c_script,"c_div": c_div,
                                                                  "d_script": d_script,"d_div": d_div,
                                                                  })
+
+def visualization(request,content_type):
+
+    print(content_type)
+    #content_type = request.GET.get('content_type',None)
+
+
+
+
+    if(content_type =='keybase'):
+
+        print('i have called ')
+        a_script, a_div = Keybase_Response_TMS_visualization.content_categorization_piechart()
+        b_script, b_div = Keybase_Response_TMS_visualization.keywords_results()
+        c_script, c_div = Keybase_Response_TMS_visualization.keywords_status_chart()
+        d_script, d_div = Keybase_Response_TMS_visualization.no_of_keywords()
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "c_script": c_script, "c_div": c_div,
+                                                                        "d_script": d_script, "d_div": d_div,
+                                                                        "content_type": content_type
+                                                                        })
+
+
+    elif(content_type =='instagram'):
+        a_script, a_div = Instagram_Response_TMS_visualization.content_categorization_piechart()
+        #b_script, b_div = Instagram_Response_TMS_visualization.most_active_users_chart()
+        #c_script, c_div = Instagram_Response_TMS_visualization.circle_pack_common_categorization()
+
+        #show(row(s1,s2,s3))
+        return render(request,'Bi_Tools/visualization_template.html',{"a_script": a_script, "a_div": a_div,
+                                                                      "content_type": content_type
+
+
+
+                                                                     })
+
+    elif(content_type =='twitter'):
+
+        print('i have called ')
+        a_script, a_div = Keybase_Response_TMS_visualization.content_categorization_piechart()
+        b_script, b_div = Keybase_Response_TMS_visualization.keywords_results()
+        c_script, c_div = Keybase_Response_TMS_visualization.keywords_status_chart()
+        d_script, d_div = Keybase_Response_TMS_visualization.no_of_keywords()
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "c_script": c_script, "c_div": c_div,
+                                                                        "d_script": d_script, "d_div": d_div,
+                                                                        "content_type": content_type
+                                                                        })
