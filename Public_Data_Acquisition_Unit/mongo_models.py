@@ -122,6 +122,12 @@ NEWS_SITES = (
         ('dawn', ('DAWN News')),
 )
 
+HOP = 2
+BREADTH = 3
+
+
+
+
 #.....................................................................DOCUMENTS COMMON TO ALL Sections...........................................................
 class Supported_Website(Document):
     """
@@ -133,12 +139,16 @@ class Supported_Website(Document):
     url = StringField(unique=True)
     website_type = StringField(choices=WEBSITE_TYPE)
     target_type = ListField()
+    recursive_crawling = BooleanField(default=False)
 
     def __str__(self):
         return self.name+'_'+self.website_type
 
     def __repr__(self):
         return self.name+'_'+self.website_type
+
+    def recursive_crawling_supported(self):
+        return self.recursive_crawling
 
     @staticmethod
     def get_all_social_websites():
@@ -255,6 +265,10 @@ class Facebook_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
+
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -277,6 +291,7 @@ class Facebook_Target(Document):
         if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+        if 'recursive' in kwargs: self.recursive = kwargs['recursive']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
@@ -288,6 +303,8 @@ class Facebook_Target(Document):
         self.is_expired = True
         self.save()
 
+    def is_recursive(self):
+        return self.recursive
 
     @staticmethod
     def get_all_targets():
@@ -303,6 +320,9 @@ class Youtube_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -336,6 +356,8 @@ class Youtube_Target(Document):
         self.is_expired = True
         self.save()
 
+    def is_recursive(self):
+        return self.recursive
 
     @staticmethod
     def get_all_targets():
@@ -348,6 +370,9 @@ class Reddit_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -380,6 +405,9 @@ class Reddit_Target(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    def is_recursive(self):
+        return self.recursive
 
 
 class Twitter_Target(Document):
@@ -389,6 +417,9 @@ class Twitter_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -411,6 +442,7 @@ class Twitter_Target(Document):
         if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+        if 'recursive' in kwargs: self.recursive = kwargs['recursive']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
@@ -422,6 +454,9 @@ class Twitter_Target(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    def is_recursive(self):
+        return self.recursive
 
 class Instagram_Target(Document):
 
@@ -430,6 +465,9 @@ class Instagram_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -452,6 +490,7 @@ class Instagram_Target(Document):
         if 'expired_on' in kwargs: self.expired_on = kwargs['expired_on']
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
+        if 'recursive' in kwargs: self.recursive = kwargs['recursive']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
@@ -463,6 +502,9 @@ class Instagram_Target(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    def is_recursive(self):
+        return self.recursive
 
 class Linkedin_Target(Document):
 
@@ -471,6 +513,9 @@ class Linkedin_Target(Document):
     is_expired = BooleanField(default=False)
     is_enabled = BooleanField(default=True)
     need_screenshots = BooleanField(default=False)
+    recursive = BooleanField(default=False)
+    hop = IntField(default=HOP)
+    breadth = IntField(default=BREADTH)
 
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     expired_on = DateTimeField(default=datetime.datetime.utcnow())
@@ -504,6 +549,10 @@ class Linkedin_Target(Document):
     def make_me_expire(self):
         self.is_expired = True
         self.save()
+
+    def is_recursive(self):
+        return self.recursive
+
 #.....................................................................BASE TARGET SECTIONS ENDED.....................................................
 
 
