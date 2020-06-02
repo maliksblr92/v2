@@ -127,6 +127,25 @@ class Twitter_Response_TMS(Document):
     tweets = ListField(EmbeddedDocumentField(Person_Tweets))
     followers = ListField(default=[])
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
+    def get_top_associates(self, breadth):
+
+        objs = self.followers[0:breadth]
+        associates = []
+        for obj in objs:
+            if (len(obj['username']) > 0):
+                associates.append(obj['username'])
+            else:
+                associates.append(obj['id'])
+        return associates
+
+
+
 class Linkedin_Profile_Response_TMS(Document):
     GTR = StringField()
     target_type= StringField()
@@ -231,6 +250,24 @@ class Instagram_Response_TMS(Document):
     followers = ListField(default=[])
     
     posts = ListField(EmbeddedDocumentField(Instagram_Posts))
+
+    def __str__(self):
+        return self.username
+
+    def __repr__(self):
+        return self.username
+
+    def get_top_associates(self, breadth):
+
+        objs = self.followers[0:breadth]
+        associates = []
+        for obj in objs:
+            if (len(obj['username']) > 0):
+                associates.append(obj['username'])
+
+        return associates
+
+
     @classmethod
     def pre_save(cls, sender, document, **kwargs):
         print('.........................................MongoSignal..............................................')
@@ -326,7 +363,22 @@ class Facebook_Profile_Response_TMS(Document):
     target_update_count = LongField()
     linked_to= ListField()
     
+    def __str__(self):
+        return self.username or self.author_id
 
+    def __repr__(self):
+        return self.username or self.author_id
+
+    def get_top_associates(self,breadth):
+
+        objs = self.close_associates[0:breadth]
+        associates = []
+        for obj in objs:
+            if(len(obj['username']) > 0 ):
+                associates.append(obj['username'])
+            else:
+                associates.append(obj['id'])
+        return associates
 
 
 class Facebook_Page_Response_TMS(Document):
@@ -357,7 +409,22 @@ class Facebook_Page_Response_TMS(Document):
     close_associates = ListField()
     linked_to= ListField()
     
-    
+    def __str__(self):
+        return self.username
+
+    def __repr__(self):
+        return self.username
+
+    def get_top_associates(self,breadth):
+
+        objs = self.close_associates[0:breadth]
+        associates = []
+        for obj in objs:
+            if(len(obj['username']) > 0 ):
+                associates.append(obj['username'])
+            else:
+                associates.append(obj['id'])
+        return associates
     
 
 
@@ -391,6 +458,24 @@ class Facebook_Group_Response_TMS(Document):
     behaviour= StringField()
     common_words= ListField()
     linked_to= ListField()
+
+    def __str__(self):
+        return self.username
+
+    def __repr__(self):
+        return self.username
+
+    def get_top_associates(self, breadth):
+
+        objs = self.close_associates[0:breadth]
+        associates = []
+        for obj in objs:
+            if (len(obj['username']) > 0):
+                associates.append(obj['username'])
+            else:
+                associates.append(obj['id'])
+        return associates
+
 
 class Trends(Document):
     trend_type= StringField()
@@ -471,6 +556,10 @@ class Reddit_Profile_Response_TMS(Document):
     posts= ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+
+
 
 class Reddit_Subreddit_Response_TMS(Document):
     GTR= StringField()
