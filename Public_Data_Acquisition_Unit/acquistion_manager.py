@@ -66,7 +66,7 @@ class Acquistion_Manager(object):
             publish(e, message_type='error', module_name=__name__)
             return False
 
-    def add_bulk_targts(self,website_id,target_type_index,prime_argument_list,expired_on,periodic_interval):
+    def add_bulk_targts(self,website_id,target_type_index,prime_argument_list,expired_on,periodic_interval,**kwargs):
         """
         this method is to create multiple crawling targets in one go , it first creates a gtr and then call
         add targets and pass the minimum parameters required to submit a target
@@ -84,11 +84,21 @@ class Acquistion_Manager(object):
         """
         if(website_id and len(prime_argument_list)):
 
+            recursive = False
+            hop = 0
+            breadth = 0
+
+            if 'recursive' in kwargs: recursive = kwargs['recursive']
+            if 'hop' in kwargs: hop = kwargs['hop']
+            if 'breadth' in kwargs: breadth = kwargs['breadth']
 
             for prime_argument in prime_argument_list:
                 #gtr = self.get_gtr(website_id, target_type_index)
 
-                if(not self.add_target(website_id,target_type_index,username=prime_argument,expired_on=expired_on,periodic_interval=periodic_interval)):
+
+
+
+                if(not self.add_target(website_id,target_type_index,username=prime_argument,expired_on=expired_on,periodic_interval=periodic_interval,recursive=recursive,hop=hop,breadth=breadth)):
                     print('unable to add bulk target for '+prime_argument)
                     publish('unable to add bulk target for '+prime_argument,message_type='notification')
 
@@ -196,6 +206,69 @@ class Acquistion_Manager(object):
 
     def get_tasks_kwargs(self,gtr):
         pass
+
+
+    def get_target_type_index_by_type_name(self,website_id,type_name):
+        target_types = Supported_Website.objects(id=website_id).first().target_type
+        for index,type in enumerate(target_types):
+            if(type == type_name):
+                return index
+
+
+
+    def is_recursive_supported(self,website_name):
+        recursive_supported = ['facebook','twitter','instagram']
+
+        return website_name.lower() in recursive_supported
+
+    def add_recursive_crawling_target(self,gtr_id):
+        gtr = self.get_gtr_by_id(gtr_id)
+        if(gtr):
+            targ_obj = self.get_dataobject_by_gtr(gtr)
+            if(targ_obj):
+                print('target object found ' + str(targ_obj))
+                if(self.is_recursive_supported(targ_obj.GTR.website.name)):
+                    if(targ_obj.is_recursive()):
+                        hop = targ_obj.hop
+                        if(hop > 0):
+                            print('hop is '+str(hop))
+                            breadth = targ_obj.breadth
+                            resp_obj = self.get_data_response_object_by_gtr_id(gtr.id)
+                            if(resp_obj):
+                                print('response object found '+ str(resp_obj))
+                                user_list = resp_obj.get_top_associates(breadth)
+                                if(len(user_list)>0):
+                                    print('got user list ')
+                                    resp = self.add_bulk_targts(targ_obj.GTR.website.id,self.get_target_type_index_by_type_name(targ_obj.GTR.website.id,targ_obj.target_type),user_list,targ_obj.expired_on,targ_obj.periodic_interval,recursive=True,hop=hop-1,breadth=breadth)
+                                    if(resp):
+                                        targ_obj.hop = targ_obj.hop - 1
+                                        targ_obj.save()
+                                        publish('recursive crawling targets added for '+str(targ_obj),message_type='notification')
+
+                                    else:
+                                        print('failed to submit recursive crawling target')
+                                else:
+                                    print('userlist is empty')
+                            else:
+                                print('response object not found ')
+
+
+
+                        else:
+                            print('hop is satisfied')
+                    else:
+                        print('target does not support recursive crawling')
+                else:
+                    print('target website does not support recursive crawling')
+            else:
+                print('target object not found')
+
+
+
+
+
+
+
 
     def get_website_by_id(self,website_id):
         return Supported_Website.objects(id=website_id)[0]

@@ -128,8 +128,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             url = request.POST[plateform+'_authoruserurl']
             expire_on = request.POST[plateform+'_expirydate']
             interval = int(request.POST[plateform+'_interval'])
-            screen_shot = False
-
+            screen_shot = bool(int(request.POST[plateform+'_screenshot']))
+            print(screen_shot)
 
 
 

@@ -2,10 +2,12 @@ from django_eventstream import send_event
 from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages
 
 import os
+import sys
 
-from Public_Data_Acquisition_Unit.acquistion_manager import Timeline_Manager
+from Public_Data_Acquisition_Unit.acquistion_manager import Timeline_Manager,Acquistion_Manager
 
 tm = Timeline_Manager()
+acq = Acquistion_Manager()
 
 
 def on_messege_recived(data,**kwargs):
@@ -70,11 +72,29 @@ def on_messege_recived(data,**kwargs):
 
 def on_ais_message(data):
     print(data['arguments'])
+    IN_CELERY_WORKER_PROCESS = sys.argv and sys.argv[0].endswith('celery') and 'worker' in sys.argv
+    IN_CELERY_BEAT_PROCESS = sys.argv and sys.argv[0].endswith('celery') and 'beat' in sys.argv
+
+
     if(data['arguments']):
-        if('GTR' in data['arguments']):
-            GTR_id = data['arguments']['GTR']
-            print('.....................GOT GTR ID AIS........................')
-            tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
+        if(not IN_CELERY_WORKER_PROCESS and not IN_CELERY_BEAT_PROCESS):
+
+            if('GTR' in data['arguments']):
+                GTR_id = data['arguments']['GTR']
+                if(GTR_id is not None):
+                    gtr = acq.get_gtr_by_id(GTR_id)
+                    targ_obj = acq.get_dataobject_by_gtr(gtr)
+
+                    if(targ_obj.is_recursive() and acq.get_data_response_object_by_gtr_id(gtr.id)):
+                        acq.add_recursive_crawling_target(GTR_id)
+                    print('.....................GOT GTR ID AIS........................')
+                    tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
+        else:
+            if IN_CELERY_BEAT_PROCESS:
+                print('.......celery beat.........')
+            if IN_CELERY_WORKER_PROCESS:
+                print('.......celery worker.........')
+            
 
 
 def on_ess_message(data):
