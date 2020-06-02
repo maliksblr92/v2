@@ -122,7 +122,7 @@ NEWS_SITES = (
         ('dawn', ('DAWN News')),
 )
 
-HOP = 3
+HOP = 2
 BREADTH = 2
 
 

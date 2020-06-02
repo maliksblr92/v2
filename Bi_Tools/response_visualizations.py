@@ -42,7 +42,7 @@ def content_categorization_piechart(modelname):
         data['angle'] = data['value'] / sum(x.values()) * 2 * pi
         data['color'] = chart_colors[:len(x)]
 
-        p = figure(plot_height=350, title="Content Categorization Statistics", toolbar_location=None)
+        p = figure(title="Content Categorization Statistics", toolbar_location=None)
 
         p.wedge(x=0, y=1, radius=0.28,
                 start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
@@ -89,7 +89,7 @@ def most_active_users(modelname):
     data['angle'] = data['value'] / data['value'].sum() * 2 * pi
     data['color'] = Category20c[len(x)]
 
-    p = figure(plot_height=350, title="Most Active Users", toolbar_location=None,
+    p = figure(title="Most Active Users", toolbar_location=None,
                tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 
     p.wedge(x=0, y=1, radius=0.4,
@@ -184,7 +184,7 @@ def common_categorization_profiles(modelname):
 
         output_file("multiple.html")
 
-        p = figure(plot_width=400, plot_height=400)
+        p = figure(plot_width=400)
 
         # add both a line and circles on the same plot
         p.line(x, y, line_width=2)
@@ -246,7 +246,7 @@ def keywords_no_barplot(modelname):
     data['angle'] = data['value'] / sum(x.values()) * 2 * pi
     data['color'] = Category20c[len(x)]
 
-    p = figure(plot_height=350, title="Keybase Fetched Results Statistics ", toolbar_location=None,
+    p = figure(title="Keybase Fetched Results Statistics ", toolbar_location=None,
                tools="hover", tooltips="@country: @value")
 
     p.wedge(x=0, y=1, radius=0.4,
@@ -295,7 +295,7 @@ def keywords_results_barplot(modelname):
     # sorting the bars means sorting the range factors
     sorted_fruits = sorted(fruits, key=lambda x: counts[fruits.index(x)])
 
-    p = figure(x_range=sorted_fruits, plot_height=350, title="Keybase Content Frequency",
+    p = figure(x_range=sorted_fruits, title="Keybase Content Frequency",
                toolbar_location=None, tools="")
 
     p.vbar(x=fruits, top=counts, width=0.9)
@@ -376,7 +376,7 @@ def keywords_availability(modelname):
 
     source = ColumnDataSource(data=dict(x=x, counts=counts))
 
-    p = figure(x_range=FactorRange(*x), plot_height=250, title="Keybase Fetched Sites Status",
+    p = figure(x_range=FactorRange(*x), title="Keybase Fetched Sites Status",
                toolbar_location=None, tools="")
 
     p.vbar(x='x', top='counts', width=0.9, source=source)
