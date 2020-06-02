@@ -24,7 +24,7 @@ from .views import Dynamic_Crawling_Target
 from .views import Subreddit_Target_Resposne
 from .views import Subreddit_Target_Report
 from .views import Twitter_Target_Report
-
+from .views import Dynamic_Crawling_Report
 
 
 # end ahmed imports
@@ -58,10 +58,7 @@ urlpatterns = [
         views.Dyanamic_Crawling.as_view(),
         name="tms_dynamiccrawling"),
     path('crawl_prime/<str:url>',views.Dyanamic_Crawling.as_view(),name="dynamic_crawling_prime"),
-path(
-        'keybase_crawling/',
-        views.Keybase_Crawling.as_view(),
-        name="tms_keybase_crawling"),
+    path('keybase_crawling/',views.Keybase_Crawling.as_view(),name="tms_keybase_crawling"),
     path('targets_created/', views.Created_Targets.as_view(), name="tms_targetscreated"),
     path('facebook_target_response/', views.Facebook_Target_Response.as_view(), name="facebook_target_response"),
     # ajax urls
@@ -108,6 +105,7 @@ path(
     path('target/youtube/<str:object_gtr_id>/', Youtube_Target_Response.as_view(), name="Youtube_Target_Response"),
     # Dynamic  reports and targets pages 
     path('target/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Target.as_view(), name="dynamic_crawling_target"),
+    path('report/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Report.as_view(), name="dynamic_crawling_report"),
     path('bulk_targets/',Bulk_Targets.as_view(), name="bulk_targets"),
     
    

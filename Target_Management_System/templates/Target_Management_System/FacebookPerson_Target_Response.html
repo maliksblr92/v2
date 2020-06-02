@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -94,6 +95,7 @@
          }
          .custom_border_color{
          border-color: #06111a !important;
+         border-radius:5px!important;
          }
          .circle-dot1 {
          width: 15px;
@@ -271,7 +273,8 @@
                      <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
                      <div class="dropdown-content">
                         <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="{% url 'Target_Management_System:FacebookPersonReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
-                        <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="download_as_pdf">Link Analysis</a>
+                        <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="{% url 'Target_Management_System:link_analysis' object_gtr_id=profile.GTR %}" id="">Link Analysis</a>
+                        <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=profile.GTR %}" id="">Close Associates</a>
                      </div>
                   </li>
                </div>
@@ -327,6 +330,8 @@
                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false" aria-controls="social_links_details">
                   Social Links Details
                   </a>
+
+                 
 
  </div>
 
@@ -513,7 +518,7 @@
                </div>
                <div class="col-md-2 text-white mt-1">{{profile.friends | length}}</div>
             </div>
-            <div class="row p-1 border custom_border_color bg-white" style="height:300px;overflow-y:auto;">
+            <div class="row p-1 border custom_border_color bg-white" style="height:322px;overflow-y:auto;">
                <div class="col-md-12 " >
                   <!--  -->
                   {% for f in profile.friends %}
@@ -523,16 +528,18 @@
                      </div>
                      <div class="col-md-8 border custom_border_color rounded" style="height:80px;">
                         <div class="row h-100 d-flex flex-row text-white justify-content-center align-items-center">
-                           <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Name:</div>
-                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.name}}</div>
-                           <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Id:</div>
-                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.id}}</div>
+                           <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Name :</div>
+                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.name|default:"N/A"}}</div>
+                            <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Score :</div>
+                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.scrore|default:"N/A"}}</div>
+                           <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">ID:</div>
+                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">{{f.id|default:"N/A"}}</div>
                            <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading">Visit:</div>
                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph"><a target="_black" href="{{f.url}}"
                               class="badge custom_badge fa fa-search">View</a></div>
-                           <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading"></div>
-                           {% if f.username %}
-                           <div class="col-md-6 m-0 p-0 small-txt text_paragraph">
+                              <div class="col-md-4 m-0 p-0 ml-1 small-txt text_heading"></div>
+                              {% if f.username %}
+                            <div class="col-md-6 m-0 p-0 small-txt text_paragraph">
                               <a target="_blank" href="{% url 'Target_Management_System:tms_marktarget_prime' f.username 'facebook' %}"
                                  class="badge custom_badge">
                               <i class="fa fa-link fa-2x"></i>
@@ -607,13 +614,14 @@
                                        <img src="{{c.media_directory}}"
                                           style="height: 80px;width:80px;border-radius: 50%;;"
                                           class="img-fluid">
-                                       <button class="btn btn-link text-white" type="button" >
+                                       <button class="btn btn-link text-white" type="button" ></button>
                                        {{c.name}}
                                        </button>
+                                       <span class="badge text-white"><i class="fas fa-star mr-2 text-warning"></i>Score : {{ c.score }}</span>
                                        {% if c.username %}
-                                       <div class="badge custom_badge">
+                                       <div class="badge  float-right">
                                           <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}" target="_blank">
-                                          <i class="fa fa-link text-light"></i>
+                                          <i class="fa fa-link  fa-2x text-light"></i>
                                           </a>
                                        </div>
                                        {% endif %}
@@ -644,7 +652,7 @@
                                              </div>
                                              <div class="col-md-6">
                                                 <div class="row text_heading">
-                                                   <div class="col-md-6">Sscore:</div>
+                                                   <div class="col-md-6">score:</div>
                                                    <div class="col-md-6 text_paragraph"> {{c.score}}</div>
                                                    <div class="col-md-6">Post Mentions:</div>
                                                    <div class="col-md-6 text_paragraph"> {{c.post_mentions}}</div>
@@ -679,6 +687,30 @@
                         <div class="row">
                            <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
                               </div> -->
+                              <div class="col-md-4">
+                              <p>GENERAL INFORMATION :</p>
+                              <p> <span class="badge badge-primary mr-2 w-25">Name  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.name|default:"N/A"}}<span></p>
+                              <p><span class="badge badge-primary mr-2 w-25">Birthday  : </span>
+                               
+                               <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.birthday|default:"N/A"}}<span>
+                               </p>
+                              <p>
+                              <span class="badge badge-primary mr-2 w-25">Authro ID  : </span> 
+                
+                               <span class="font-weight-bold"style="font-size:12px;">{{profile.author_id|default:"N/A"}}<span>
+                              </p>
+                                <p><span class="badge badge-primary mr-2 w-25">Gender  : </span>
+                                
+                                 <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.gender|default:"N/A"}}<span>
+                                </p>
+                                 
+                              </div>
+
+                               <div class="col-md-5">
+                              <p>GENERAL INFORMATION :</p>
+<p> <span class="badge badge-primary w-25 mr-2">languages  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.languages|default:"N/A"}}<span></p>
+                              <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.religious_views|default:"N/A"}}<span></p>
+                              </div>
                            <div class="col-md-12">
                               <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
                               <p class="text_paragraph text-justify">{{profile.profile_overview_summary|default:"N/A"}}</p>
@@ -722,6 +754,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.sports %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                          {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Sports Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -741,6 +775,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.music %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Music Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -760,6 +796,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.films %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Films Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -780,6 +818,8 @@
                                        <div class="card-body  text_paragraph">
                                           {% for i in profile.interests.tv_programmes %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                          {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Tv Programmes Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -799,6 +839,8 @@
                                        <div class="card-body  text_paragraph">
                                           {% for i in profile.interests.books %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                            {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Books Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -818,6 +860,8 @@
                                        <div class="card-body  text_paragraph">
                                           {% for i in profile.interests.games %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Games Intrests</small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -837,6 +881,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.likes %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Likes </small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -857,6 +903,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.events %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                             {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Events </small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -877,6 +925,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.questions %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                             {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Questions </small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -897,6 +947,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.reviews %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Reviews </small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -916,6 +968,8 @@
                                        <div class="card-body text_paragraph">
                                           {% for i in profile.interests.notes %}
                                           <a target="_blank" href="{{i.link}}" target="_blank">{{i.name|linebreaks}}</a>
+                                           {% empty %}
+                              <small class="bg-info p-1 text-white font-weight-bold">No Notes </small>
                                           {% endfor %}
                                        </div>
                                     </div>
@@ -966,21 +1020,46 @@
                                      <img src="/static/images/VIaL8H.jpg" class="img-fluid"/>
                                  </div>
                                  </div> -->
-                              <div class="row" style="height:300px;">
+                              <div class="row" >
                                  <div class="col-md-12">
                                     <i class="material-icon text_heading" style="font-size:18px;">Post
-                                    Pictures ({{p.picture_links | length}})</i>
+                                    Pictures ({{p.picture_directory | length}})</i>
                                  </div>
-                                 {% for x in p.picture_links  %}
+                                 {% for x in p.picture_directory  %}
                                  <div class="col-md-12 text-center" style="height:300px;">
                                     <img src="{{x.url}}" class="img-fluid" />
                                  </div>
+                                 {% empty %}
+                                 <div class="col-md-12 text-center text-dark " >
+                                 <p class="alert alert-info">This post has No picture attachment</p>
+                              </div>
                                  {% endfor %}
                               </div>
+
+                              
+
                               <div class="row">
                                  <div class="col-md-12">
+                                    <i class="material-icon text_heading" style="font-size:18px;">
+                                    Post Text ({{p.post_text | length}})</i>
+                                 </div>
+                                 {% if p.post_text%}
+                                 {%else %}
+                                 <div class="col-md-12 text-center text-dark " >
+                                    <p class="alert alert-info">This post has No text attachment</p>
+                                 </div>
+                                 {% endif %}
+                              </div>
+
+                             
+
+                              <div class="row">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">Liked By
                                     ({{ p.reactions.like | length}})</i>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was liked by following users </small>
                                  </div>
                                  {% for r in p.reactions.like  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1004,10 +1083,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                     Loved' By ({{ p.reactions.love | length}})</i>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted by following users </small>
                                  </div>
                                  {% for r in p.reactions.love  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1030,10 +1112,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                     HAHA' By ({{ p.reactions.haha | length}})</i>
+                                 </div>
+                                  <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "HAHA" by following users </small>
                                  </div>
                                  {% for r in p.reactions.haha  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1056,10 +1141,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                     WOW' By ({{ p.reactions.wow | length}})</i>
+                                 </div>
+                                  <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "WOW" by following users </small>
                                  </div>
                                  {% for r in p.reactions.wow  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1082,10 +1170,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                     ANGRY' By ({{ p.reactions.angry | length}})</i>
+                                 </div>
+                                  <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "ANGRY" by following users </small>
                                  </div>
                                  {% for r in p.reactions.angry  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1108,10 +1199,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Reacted
                                     SAD' By ({{ p.reactions.sad | length}})</i>
+                                 </div>
+                                   <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "SAD" by following users </small>
                                  </div>
                                  {% for r in p.reactions.sad  %}
                                  <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
@@ -1134,10 +1228,13 @@
                                  </div>
                                  {% endfor %}
                               </div>
-                              <div class="row">
-                                 <div class="col-md-12">
+                              <div class="row mt-5">
+                                 <div class="col-md-6">
                                     <i class="material-icon text_heading" style="font-size:18px;">'Comments'
                                     By ({{ p.comments | length}})</i>
+                                 </div>
+                                  <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5"> Following users commented on the post </small>
                                  </div>
                                  {% for r in p.comments  %}
                                  <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
@@ -1177,7 +1274,7 @@
                                     class="fas fa-share-alt text_heading mr-1"></i>{{p.shares_statistics}}
                                  </div>
                               </div>
-                           </div>
+                           </p>
                            {% endfor %}
                         </div>
                      </div>
