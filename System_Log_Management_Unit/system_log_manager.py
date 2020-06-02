@@ -185,7 +185,7 @@ class Data_Queries(object):
                 "img":"/static/images/anonymous_logo.jpg",
                 "children":n_data_full,
             }
-            
+            print("diccccc")
             print(dic)
             return json.dumps(dic)
 
