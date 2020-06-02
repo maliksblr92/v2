@@ -194,8 +194,17 @@ def common_categorization_profiles(modelname):
         return complete
 
 
+def getList(dict):
+    return dict.keys()
+
+
+def getListv(dict):
+    return dict.keys()
+
+
 def profiles_similar_location(modelname):
     locations = []
+    c_loc = []
     for each_target in modelname.objects:
         name = each_target['name']
         location_details = each_target['location_details']
@@ -211,7 +220,14 @@ def profiles_similar_location(modelname):
                 details = each_checkedins['details']
                 date = details['date']
                 locations.append({"name": name, "location": checkedin, "detail": date})
-    return locations
+    for each in locations:
+        eachs = each['location']
+        c_loc.append(eachs)
+
+    d = Counter(c_loc)
+    xs = dict(d)
+
+    return xs
 
 
 def keywords_no_barplot(modelname):
@@ -289,6 +305,90 @@ def keywords_results_barplot(modelname):
     return components(p)
 
 
+def keywords_availability(modelname):
+    from bokeh.io import output_file, show
+    from bokeh.models import ColumnDataSource, FactorRange
+    from bokeh.plotting import figure
+    output_file("bars.html")
+    queries = []
+    check = []
+    for each_target in modelname.objects:
+        data = each_target.data
+        if (len(data) != 0):
+            for each_data in data:
+                query = each_data['query']
+
+                try:
+                    statuss = each_data['status']
+                    if statuss == 200:
+                        status = 'unblocked'
+                    else:
+                        status = 'blocked'
+                except:
+                    status = "unblocked"
+
+                if query not in check:
+                    queries.append({"query": query, "status": [status]})
+                    check.append(query)
+                else:
+                    for each_q in queries:
+                        if (each_q['query'] == query):
+                            v = each_q['status']
+                            v.append(status)
+    fruits = []
+    queries_blocked = []
+    queries_unblocked = []
+    for eachq in queries:
+        eachquery = eachq['query']
+        eachstatus = eachq['status']
+        eachstatuscount = Counter(eachstatus)
+        eachstatuscount = dict(eachstatuscount)
+        try:
+            if (eachstatuscount['blocked']):
+                print("blocked exists")
+        except:
+            eachstatuscount['blocked'] = 0
+        try:
+            if (eachstatuscount['unblocked']):
+                print("unblocked exists")
+        except:
+            eachstatuscount['unblocked'] = 0
+        fruits.append(eachquery)
+        queries_blocked.append(eachstatuscount['blocked'])
+        queries_unblocked.append(eachstatuscount['unblocked'])
+
+    from bokeh.io import output_file, show
+    from bokeh.models import ColumnDataSource, FactorRange
+    from bokeh.plotting import figure
+
+    output_file("bars.html")
+
+    years = ['blocked', 'unblocked']
+
+    data = {'fruits': fruits,
+            'blocked': queries_blocked,
+            'unblocked': queries_unblocked
+            }
+
+    # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
+    x = [(fruit, year) for fruit in fruits for year in years]
+    counts = sum(zip(data['blocked'], data['unblocked']), ())  # like an hstack
+
+    source = ColumnDataSource(data=dict(x=x, counts=counts))
+
+    p = figure(x_range=FactorRange(*x), plot_height=250, title="Keybase Fetched Sites Status",
+               toolbar_location=None, tools="")
+
+    p.vbar(x='x', top='counts', width=0.9, source=source)
+
+    p.y_range.start = 0
+    p.x_range.range_padding = 0.1
+    p.xaxis.major_label_orientation = 1
+    p.xgrid.grid_line_color = None
+
+    return components(p)
+
+
 class Instagram_Response_TMS_visualization:
     def content_categorization_piechart():
         return content_categorization_piechart(Instagram_Response_TMS)
@@ -357,6 +457,9 @@ class Keybase_Response_TMS_visualization:
 
     def keywords_results():
         return keywords_results_barplot(Keybase_Response_TMS)
+
+    def keywords_status_chart():
+        return keywords_availability(Keybase_Response_TMS)
 
 
 class Youtube_Response_TMS_visualization:

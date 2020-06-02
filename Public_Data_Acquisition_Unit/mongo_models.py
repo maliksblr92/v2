@@ -122,8 +122,8 @@ NEWS_SITES = (
         ('dawn', ('DAWN News')),
 )
 
-HOP = 2
-BREADTH = 3
+HOP = 3
+BREADTH = 2
 
 
 
@@ -292,6 +292,8 @@ class Facebook_Target(Document):
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
         if 'recursive' in kwargs: self.recursive = kwargs['recursive']
+        if 'hop' in kwargs: self.hop = kwargs['hop']
+        if 'breadth' in kwargs: self.breadth = kwargs['breadth']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
@@ -443,6 +445,8 @@ class Twitter_Target(Document):
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
         if 'recursive' in kwargs: self.recursive = kwargs['recursive']
+        if 'hop' in kwargs: self.hop = kwargs['hop']
+        if 'breadth' in kwargs: self.breadth = kwargs['breadth']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
@@ -491,6 +495,8 @@ class Instagram_Target(Document):
         if 'updated_on' in kwargs: self.updated_on = kwargs['updated_on']
         if 'periodic_interval' in kwargs: self.periodic_interval = kwargs['periodic_interval']
         if 'recursive' in kwargs: self.recursive = kwargs['recursive']
+        if 'hop' in kwargs: self.hop = kwargs['hop']
+        if 'breadth' in kwargs: self.breadth = kwargs['breadth']
 
     """
     define all the function related to all the targets of facebook in the bellow section of this class
