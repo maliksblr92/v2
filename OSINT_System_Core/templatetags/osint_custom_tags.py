@@ -34,3 +34,16 @@ def data_type(obj):
 
     else:
         return 'var'
+
+#ahmed code 
+@register.filter(name='data_type')
+def split(obj):
+
+    if(isinstance(obj,(list))):
+        return 'list'
+
+    elif(isinstance(obj,dict)):
+        return 'dict'
+
+    else:
+        return 'var'
