@@ -162,7 +162,7 @@ class Response_Changes_View(View):
     def get(self,request):
 
         resp_changes = []
-        changes = Change_Record.objects()
+        changes = Change_Record.objects().order_by('-created_on')
         for change in changes:
             resp_obj = acq.get_dataobject_by_gtr(acq.get_gtr_by_id(change.GTR))
             resp_changes.append({'resp_obj':resp_obj,'ctr':change.CTR,'detected_on':change.created_on})
