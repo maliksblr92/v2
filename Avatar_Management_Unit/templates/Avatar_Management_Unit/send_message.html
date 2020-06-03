@@ -1,0 +1,220 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title%}Keybase Create{%endblock%}
+{% block head_dep %}
+<!-- Stylesheet -->
+<link rel="stylesheet" 
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+      crossorigin="anonymous">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+
+<!--  -->
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<style>
+    #keywords{
+        width: 100%!important;
+        width: 500px!important;
+    }
+</style>
+
+<style>
+    tr {
+       width: 100%;
+       display: inline-table;
+       table-layout: fixed;
+     }
+   
+     table {
+       height: 300px!important;
+       display: -moz-groupbox;
+     }
+   
+     tbody {
+       overflow-y: scroll!important;
+       height: 200px!important;
+       width: 100%;
+   
+     }
+   @media screen and (max-width: 767px) {
+     .table-responsive {
+       width: 100%;
+       margin-bottom: 15px;
+       overflow-y: hidden;
+       -ms-overflow-style: -ms-autohiding-scrollbar;
+       border: 1px solid #ddd;
+     }
+     .table-responsive > .table {
+       margin-bottom: 0;
+     }
+     .table-responsive > .table > thead > tr > th,
+     .table-responsive > .table > tbody > tr > th,
+     .table-responsive > .table > tfoot > tr > th,
+     .table-responsive > .table > thead > tr > td,
+     .table-responsive > .table > tbody > tr > td,
+     .table-responsive > .table > tfoot > tr > td {
+       white-space: nowrap;
+     }
+     .table-responsive > .table-bordered {
+       border: 0;
+     }
+     .table-responsive > .table-bordered > thead > tr > th:first-child,
+     .table-responsive > .table-bordered > tbody > tr > th:first-child,
+     .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+     .table-responsive > .table-bordered > thead > tr > td:first-child,
+     .table-responsive > .table-bordered > tbody > tr > td:first-child,
+     .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+       border-left: 0;
+     }
+     .table-responsive > .table-bordered > thead > tr > th:last-child,
+     .table-responsive > .table-bordered > tbody > tr > th:last-child,
+     .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+     .table-responsive > .table-bordered > thead > tr > td:last-child,
+     .table-responsive > .table-bordered > tbody > tr > td:last-child,
+     .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+       border-right: 0;
+     }
+     .table-responsive > .table-bordered > tbody > tr:last-child > th,
+     .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+     .table-responsive > .table-bordered > tbody > tr:last-child > td,
+     .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+       border-bottom: 0;
+     }
+   }
+   #submit{
+    border-radius: 12px;
+    background: rgb(24, 72, 116);
+    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
+    padding: 4px 3rem;
+    letter-spacing: 0.1rem;
+    font-size: 16px;"
+   }
+   </style>
+
+<div class="row">
+
+    <div class="col-md-4 col-lg-4 col-xl-4"></div>
+</div>
+{% endblock %}
+
+{% block belly %}
+<div class="row  ">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <h4 class="topheading">Avatar Send Message</h4>
+    </div>
+    <!-- end of top row -->
+
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+        <div class="">
+            <!-- RPW FOR SOCIAL MEDIA -->
+            <div class="row formbg ml-5">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                    <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Avatar_Management_Unit:send_message' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="row input_wrapper_row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-9">
+
+
+                        <div class="row">
+                            <!-- title -->
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100 font-weight-bold">Target Username</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            {% if target_username %}
+                                            <input type="text" id="username" class="form-control newinputdesign w-75"
+                                                 name="username" value="{{ target_username }}" required="required">
+                                            {% else %}
+                                            <input type="text" id="username" class="form-control newinputdesign w-75"
+                                                 name="username" value="" required="required">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <!-- Description -->
+                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                    <div class="row w-100">
+                                        <div class="col-md-3 p-0">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign w-100 font-weight-bold">Message</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 p-0">
+                                            <div class="col-md-9 p-0">
+                                                <textarea name="message" class="form-control newinputdesign w-100" cols="20" rows="10" required="required">
+
+                                                </textarea>
+
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-1 ">
+                    </div>
+                </div>
+
+                <div class="row input_wrapper_row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">
+                        <input type="submit" class="font-weight-bold btn-sm w-100  text-white" value="send"
+                        name="submit" id="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+                </div>
+            </div>
+            <!-- Second row-->
+            <!-- END OF second row-->
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--  -->
+
+
+
+
+
+
+</div>
+</div>
+<!-- inside main container -->
+
+{% endblock %}
+{% block foot_dep %}
+
+
+{% endblock %}
