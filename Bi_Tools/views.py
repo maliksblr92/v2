@@ -100,11 +100,13 @@ def visualization(request,content_type):
 
     elif(content_type =='instagram'):
         a_script, a_div = Instagram_Response_TMS_visualization.content_categorization_piechart()
-        #b_script, b_div = Instagram_Response_TMS_visualization.most_active_users_chart()
+        b_script, b_div = Instagram_Response_TMS_visualization.most_active_users_chart()
         #c_script, c_div = Instagram_Response_TMS_visualization.circle_pack_common_categorization()
 
         #show(row(s1,s2,s3))
         return render(request,'Bi_Tools/visualization_template.html',{"a_script": a_script, "a_div": a_div,
+                                                                      "b_script": b_script, "b_div": b_div,
+
                                                                       "content_type": content_type
 
 
@@ -114,14 +116,77 @@ def visualization(request,content_type):
     elif(content_type =='twitter'):
 
         print('i have called ')
-        a_script, a_div = Keybase_Response_TMS_visualization.content_categorization_piechart()
-        b_script, b_div = Keybase_Response_TMS_visualization.keywords_results()
-        c_script, c_div = Keybase_Response_TMS_visualization.keywords_status_chart()
-        d_script, d_div = Keybase_Response_TMS_visualization.no_of_keywords()
+        a_script, a_div = Twitter_Response_TMS_visualization.most_active_users_chart()
+        b_script, b_div = Twitter_Response_TMS_visualization.content_categorization_piechart()
+
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "content_type": content_type
+                                                                        })
+
+    elif (content_type == 'facebook'):
+        try:
+            print('i have called ')
+            a_script, a_div = Facebook_Profile_Response_TMS_visualization.content_categorization_piechart()
+            b_script, b_div = Facebook_Profile_Response_TMS_visualization.most_active_users_chart()
+            c_script, c_div = Facebook_Page_Response_TMS_visualization.most_active_users_chart()
+            d_script, d_div = Facebook_Group_Response_TMS_visualization.content_categorization_piechart()
+
+
+            return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                            "b_script": b_script, "b_div": b_div,
+                                                                            "c_script": c_script, "c_div": c_div,
+                                                                            "d_script": d_script, "d_div": d_div,
+                                                                            "content_type": content_type
+                                                                                    })
+        except Exception as e:
+            print(e)
+            return render(request, 'Bi_Tools/visualization_template.html', {})
+
+
+
+    elif (content_type == 'youtube'):
+
+        print('i have called ')
+        a_script, a_div = Youtube_Response_TMS_visualization.content_categorization_piechart()
+        b_script, b_div = Youtube_Response_TMS_visualization.most_active_users_chart()
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "content_type": content_type
+                                                                        })
+    elif (content_type == 'reddit'):
+
+        print('i have called ')
+        a_script, a_div = Reddit_Profile_Response_TMS_visualization.most_active_users_chart()
+        b_script, b_div = Reddit_Profile_Response_TMS_visualization.content_categorization_piechart()
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "content_type": content_type
+                                                                        })
+
+    elif (content_type == 'subreddit'):
+
+        print('i have called ')
+        a_script, a_div = Reddit_Subreddit_Response_TMS_visualization.content_categorization_piechart()
+        b_script, b_div = Reddit_Subreddit_Response_TMS_visualization.most_active_users_chart()
+
+        return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
+                                                                        "b_script": b_script, "b_div": b_div,
+                                                                        "content_type": content_type
+                                                                        })
+
+    elif (content_type == 'trends'):
+
+        print('i have called ')
+        a_script, a_div = Trends_visualization.country_wise_trends()
+        b_script, b_div = Trends_visualization.top_trend_detail()
+        c_script, c_div = Trends_visualization.trends_type_frequency()
 
         return render(request, 'Bi_Tools/visualization_template.html', {"a_script": a_script, "a_div": a_div,
                                                                         "b_script": b_script, "b_div": b_div,
                                                                         "c_script": c_script, "c_div": c_div,
-                                                                        "d_script": d_script, "d_div": d_div,
                                                                         "content_type": content_type
                                                                         })
