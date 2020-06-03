@@ -42,7 +42,7 @@ def content_categorization_piechart(modelname):
         data['angle'] = data['value'] / sum(x.values()) * 2 * pi
         data['color'] = chart_colors[:len(x)]
 
-        p = figure(title="Pie Chart", toolbar_location=None,)
+        p = figure(title="Content Categorization Statistics", toolbar_location=None)
 
         p.wedge(x=0, y=1, radius=0.28,
                 start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
@@ -84,9 +84,24 @@ def most_active_users(modelname):
             name = each_target.name
         labels.append(name)
         values.append(len(posts))
-    print(labels)
-    print(values)
-    return labels, values
+    x = dict(zip(labels, values))
+    data = pd.Series(x).reset_index(name='value').rename(columns={'index': 'country'})
+    data['angle'] = data['value'] / data['value'].sum() * 2 * pi
+    data['color'] = Category20c[len(x)]
+
+    p = figure(title="Most Active Users", toolbar_location=None,
+               tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
+
+    p.wedge(x=0, y=1, radius=0.4,
+            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            line_color="white", fill_color='color', legend_field='country', source=data)
+
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
+
+    show(p)
+    return components(p)
     """
     print(labels)
     print(values)
@@ -129,7 +144,6 @@ def common_categorization_profiles(modelname):
         else:
             posts = each_target.posts
             name = each_target.name
-        print(len(posts))
         if (len(posts) != 0):
             for each_post in posts:
                 categorization = each_post['categorization']
@@ -160,12 +174,37 @@ def common_categorization_profiles(modelname):
                             if name not in f:
                                 complete.append({"name": name, "category": "anti-state"})
                             f.append(name)
+        x = []
+        y = []
+        for each in complete:
+            k = each['name']
+            v = each['category']
+            x.append(k)
+            y.append(v)
 
+        output_file("multiple.html")
+
+        p = figure(plot_width=400)
+
+        # add both a line and circles on the same plot
+        p.line(x, y, line_width=2)
+        p.circle(x, y, fill_color="white", size=8)
+
+        show(p)
         return complete
+
+
+def getList(dict):
+    return dict.keys()
+
+
+def getListv(dict):
+    return dict.keys()
 
 
 def profiles_similar_location(modelname):
     locations = []
+    c_loc = []
     for each_target in modelname.objects:
         name = each_target['name']
         location_details = each_target['location_details']
@@ -181,7 +220,173 @@ def profiles_similar_location(modelname):
                 details = each_checkedins['details']
                 date = details['date']
                 locations.append({"name": name, "location": checkedin, "detail": date})
-    return locations
+    for each in locations:
+        eachs = each['location']
+        c_loc.append(eachs)
+
+    d = Counter(c_loc)
+    xs = dict(d)
+
+    return xs
+
+
+def keywords_no_barplot(modelname):
+    queries = []
+    for each_target in modelname.objects:
+        data = each_target.data
+        if (len(data) != 0):
+            for each_data in data:
+                query = each_data['query']
+                queries.append(query)
+    d = Counter(queries)
+    x = dict(d)
+    # print(x)
+    data = pd.DataFrame.from_dict(dict(x), orient='index').reset_index().rename(index=str, columns={0: 'value',
+                                                                                                    'index': 'country'})
+    data['angle'] = data['value'] / sum(x.values()) * 2 * pi
+    data['color'] = Category20c[len(x)]
+
+    p = figure(title="Keybase Fetched Results Statistics ", toolbar_location=None,
+               tools="hover", tooltips="@country: @value")
+
+    p.wedge(x=0, y=1, radius=0.4,
+            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            line_color="white", fill_color='color', legend='country', source=data)
+
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
+
+    # show(p)
+
+    return components(p)
+
+
+def keywords_results_barplot(modelname):
+    queries = []
+    check = []
+    for each_target in modelname.objects:
+        data = each_target.data
+        if (len(data) != 0):
+            for each_data in data:
+                query = each_data['query']
+                url = each_data['serp_url']
+                if query not in check:
+                    queries.append({"query": query, "url": [url]})
+                    check.append(query)
+                else:
+                    for each_q in queries:
+                        if (each_q['query'] == query):
+                            v = each_q['url']
+                            v.append(url)
+    queries_record = []
+    fruits = []
+    counts = []
+    for each in queries:
+        qu = each['query']
+        val = each['url']
+        val_len = len(val)
+        queries_record.append({"query": qu, "count": val_len})
+    for each in queries_record:
+        fruits.append(each['query'])
+        counts.append(each['count'])
+
+    output_file("bar_sorted.html")
+    # sorting the bars means sorting the range factors
+    sorted_fruits = sorted(fruits, key=lambda x: counts[fruits.index(x)])
+
+    p = figure(x_range=sorted_fruits, title="Keybase Content Frequency",
+               toolbar_location=None, tools="")
+
+    p.vbar(x=fruits, top=counts, width=0.9)
+
+    p.xgrid.grid_line_color = None
+    p.y_range.start = 0
+    return components(p)
+
+
+def keywords_availability(modelname):
+    from bokeh.io import output_file, show
+    from bokeh.models import ColumnDataSource, FactorRange
+    from bokeh.plotting import figure
+    output_file("bars.html")
+    queries = []
+    check = []
+    for each_target in modelname.objects:
+        data = each_target.data
+        if (len(data) != 0):
+            for each_data in data:
+                query = each_data['query']
+
+                try:
+                    statuss = each_data['status']
+                    if statuss == 200:
+                        status = 'unblocked'
+                    else:
+                        status = 'blocked'
+                except:
+                    status = "unblocked"
+
+                if query not in check:
+                    queries.append({"query": query, "status": [status]})
+                    check.append(query)
+                else:
+                    for each_q in queries:
+                        if (each_q['query'] == query):
+                            v = each_q['status']
+                            v.append(status)
+    fruits = []
+    queries_blocked = []
+    queries_unblocked = []
+    for eachq in queries:
+        eachquery = eachq['query']
+        eachstatus = eachq['status']
+        eachstatuscount = Counter(eachstatus)
+        eachstatuscount = dict(eachstatuscount)
+        try:
+            if (eachstatuscount['blocked']):
+                print("blocked exists")
+        except:
+            eachstatuscount['blocked'] = 0
+        try:
+            if (eachstatuscount['unblocked']):
+                print("unblocked exists")
+        except:
+            eachstatuscount['unblocked'] = 0
+        fruits.append(eachquery)
+        queries_blocked.append(eachstatuscount['blocked'])
+        queries_unblocked.append(eachstatuscount['unblocked'])
+
+    from bokeh.io import output_file, show
+    from bokeh.models import ColumnDataSource, FactorRange
+    from bokeh.plotting import figure
+
+    output_file("bars.html")
+
+    years = ['blocked', 'unblocked']
+
+    data = {'fruits': fruits,
+            'blocked': queries_blocked,
+            'unblocked': queries_unblocked
+            }
+
+    # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
+    x = [(fruit, year) for fruit in fruits for year in years]
+    counts = sum(zip(data['blocked'], data['unblocked']), ())  # like an hstack
+
+    source = ColumnDataSource(data=dict(x=x, counts=counts))
+
+    p = figure(x_range=FactorRange(*x), title="Keybase Fetched Sites Status",
+               toolbar_location=None, tools="")
+
+    p.vbar(x='x', top='counts', width=0.9, source=source)
+
+    p.y_range.start = 0
+    p.x_range.range_padding = 0.1
+    p.xaxis.major_label_orientation = 1
+    p.xgrid.grid_line_color = None
+
+    return components(p)
 
 
 class Instagram_Response_TMS_visualization:
@@ -220,6 +425,7 @@ class Facebook_Profile_Response_TMS_visualization:
         return common_categorization_profiles(Facebook_Profile_Response_TMS)
 
 
+# print(Facebook_Profile_Response_TMS_visualization.most_active_users_chart())
 class Facebook_Group_Response_TMS_visualization:
     def content_categorization_piechart():
         return content_categorization_piechart(Facebook_Group_Response_TMS)
@@ -245,6 +451,15 @@ class Facebook_Page_Response_TMS_visualization:
 class Keybase_Response_TMS_visualization:
     def content_categorization_piechart():
         return content_categorization_piechart(Keybase_Response_TMS)
+
+    def no_of_keywords():
+        return keywords_no_barplot(Keybase_Response_TMS)
+
+    def keywords_results():
+        return keywords_results_barplot(Keybase_Response_TMS)
+
+    def keywords_status_chart():
+        return keywords_availability(Keybase_Response_TMS)
 
 
 class Youtube_Response_TMS_visualization:

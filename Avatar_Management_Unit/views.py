@@ -5,8 +5,11 @@ from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse,render
 from bson import ObjectId
 from Avatar_Management_Unit.models import *
+from Avatar_Management_Unit.avatar_action_manager import Avatar_Action
 import datetime
 import json
+
+aa = Avatar_Action('majidahmed.123@outlook.com','someonesomeone','facebook')
 
 class Create_Avatar(View):
 
@@ -409,3 +412,25 @@ class Actions_Archive(View):
         actions = Action_Schedule_AMS.get_all_actions()
 
         return None
+
+class Action_Send_Message(View):
+
+    def get(self,request,*args,**kwargs):
+
+        target_username = None
+
+        if('target_username' in kwargs):
+            target_username = kwargs['target_username']
+
+        print(target_username)
+        return render(request,'Avatar_Management_Unit/send_message.html',{'target_username':target_username})
+
+    def post(self,request):
+        print(request.POST)
+
+        target_username = request.POST.get('username',None)
+        message = request.POST.get('message')
+        aa.message(target_username,message)
+
+
+        return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))

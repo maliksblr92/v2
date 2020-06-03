@@ -226,19 +226,24 @@ class Acquistion_Manager(object):
         if(gtr):
             targ_obj = self.get_dataobject_by_gtr(gtr)
             if(targ_obj):
-
+                print('target object found ' + str(targ_obj))
                 if(self.is_recursive_supported(targ_obj.GTR.website.name)):
                     if(targ_obj.is_recursive()):
                         hop = targ_obj.hop
                         if(hop > 0):
+                            print('hop is '+str(hop))
                             breadth = targ_obj.breadth
                             resp_obj = self.get_data_response_object_by_gtr_id(gtr.id)
                             if(resp_obj):
+                                print('response object found '+ str(resp_obj))
                                 user_list = resp_obj.get_top_associates(breadth)
                                 if(len(user_list)>0):
+                                    print('got user list ')
                                     resp = self.add_bulk_targts(targ_obj.GTR.website.id,self.get_target_type_index_by_type_name(targ_obj.GTR.website.id,targ_obj.target_type),user_list,targ_obj.expired_on,targ_obj.periodic_interval,recursive=True,hop=hop-1,breadth=breadth)
                                     if(resp):
-                                        publish('recursive crawling targets added for '+str(targ_obj),message_type='messege')
+                                        targ_obj.hop = targ_obj.hop - 1
+                                        targ_obj.save()
+                                        publish('recursive crawling targets added for '+str(targ_obj),message_type='notification')
 
                                     else:
                                         print('failed to submit recursive crawling target')
@@ -247,8 +252,7 @@ class Acquistion_Manager(object):
                             else:
                                 print('response object not found ')
 
-                            targ_obj.hop = targ_obj.hop - 1
-                            targ_obj.save()
+
 
                         else:
                             print('hop is satisfied')
@@ -374,14 +378,16 @@ class Acquistion_Manager(object):
         pass
 
     def get_picture_by_facebook_username(self,username):
-        obj =  Facebook_Profile.find_object(username).first()
-        if(obj):
-            res_obj = Facebook_Profile_Response_TMS.objects(Q(username=obj.username) | Q(author_id=obj.user_id)).first()
-            if(res_obj is not None):
-                res_obj_json = res_obj.to_mongo()
-                print(res_obj_json)
-                return res_obj_json['profile_picture_url']['profile_picture']
-
+        try:
+            obj =  Facebook_Profile.find_object(username).first()
+            if(obj):
+                res_obj = Facebook_Profile_Response_TMS.objects(Q(username=obj.username) | Q(author_id=int(bool(obj.user_id)))).first()
+                if(res_obj is not None):
+                    res_obj_json = res_obj.to_mongo()
+                    print(res_obj_json)
+                    return res_obj_json['profile_picture_url']['profile_picture']
+        except:
+            return ''
 
 
     def get_gtr_by_id(self,gtr_id):

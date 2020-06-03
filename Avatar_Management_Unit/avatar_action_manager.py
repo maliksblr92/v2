@@ -3,6 +3,7 @@ import datetime
 #connect this class to the avatar ess apis to perform these actions
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
 from Avatar_Management_Unit.models import Action_Schedule_AMS
+from OSINT_System_Core.publisher import publish
 
 ess = Ess_Api_Controller()
 
@@ -32,6 +33,14 @@ class Avatar_Action(object):
 
     def share(self,text,target_post_url):
         ess.action_share(text,target_post_url,self.social_media,self.username,self.password)
+
+    def message(self,target_username,message):
+        resp = ess.action_send_message(self.social_media,target_username,message,self.username,self.password)
+        if(resp is not None):
+            publish('message sent successfully',message_type='notification')
+        else:
+            publish('message send failed', message_type='notification')
+
 
 
 #beta class for perforing or processing the actions instaed of into the task
