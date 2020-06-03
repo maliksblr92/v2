@@ -12,6 +12,7 @@ from xhtml2pdf import pisa
 # Create your views here.
 
 from io import BytesIO
+from Data_Processing_Unit.models import Change_Record
 
 from django.template.loader import get_template
 from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
@@ -154,6 +155,19 @@ class Generate_Reports(object):
         if not pdf.err:
             return HttpResponse(result.getvalue(), content_type='application/pdf')
         return None
+
+
+class Response_Changes_View(View):
+
+    def get(self,request):
+
+        resp_changes = []
+        changes = Change_Record.objects()
+        for change in changes:
+            resp_obj = acq.get_dataobject_by_gtr(acq.get_gtr_by_id(change.GTR))
+            resp_changes.append({'resp_obj':resp_obj,'ctr':change.CTR,'detected_on':change.created_on})
+        return render(request,'Data_Processing_Unit/response_changes_view.html',{'resp_changes':resp_changes})
+
 
 
 class Index(View):
