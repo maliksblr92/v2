@@ -8,14 +8,18 @@
                         <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}" target="_blank">Author: {{ post.post.author }}</a></h5>
                     </div>
                     <div class="card-body " style="height:auto!important">
-                        <p class="card-text text-white">{{ post.post.text }}</p>
+
                         <div class="row">
+{#                        Changes by ahmed#}
+                        <div class="col-md-12">
+                            <p class="card-text text-white">{{ post.post.text }}</p>
+                        </div>
                             <div class="col-md-12">
 
                             {% if post.post.t_site == 'youtube' %}
 
                                 {% if post.post.link|length > 0 %}
-                                <iframe width="100%" height="720" src="https://www.youtube.com/embed/{{ post.post.link|get_vedio_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="720" height="720" src="https://www.youtube.com/embed/{{ post.post.link|get_vedio_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 {% else %}
                                     <img class="img-fluid border" src="{{ post.post.picture }}">
 
@@ -27,7 +31,7 @@
                                 {% if post.post.picture|length > 0 %}
                                 <img class="img-fluid border" src="{{ post.post.picture }}">
                                 {% else %}
-                                    <img class="img-fluid border" src="{{ post.post.link }}">
+                                    <img  class="img-fluid border" src="{{ post.post.link }}">
 
 
                                 {% endif %}
