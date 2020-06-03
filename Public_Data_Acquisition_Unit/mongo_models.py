@@ -1482,6 +1482,29 @@ class Timeline_Posts(Document):
 
 
     @staticmethod
+    def refactor_timeline_posts():
+
+
+        tl_objs = Timeline_Posts.objects()
+
+
+
+        for obj in tl_objs:
+            disqualified = True
+            if(obj.all_seen == False):
+                for post in obj.posts:
+                    if (not post['seen']):
+                        disqualified = False
+
+                if(disqualified):
+                    print('disqualifying '+obj.username)
+                    obj.all_seen = True
+                    obj.save()
+
+
+
+
+    @staticmethod
     def get_qualified_objects():
         """
         qulified objects are those objects which have atleast one unseen post
@@ -1501,28 +1524,31 @@ class Timeline_Posts(Document):
         return qualified_objs
 
     @staticmethod
-    def get_qualified_posts(top=10):
+    def get_qualified_posts(top=20):
         """
         qulified objects are those objects which have atleast one unseen post
 
         :return: objects
         """
 
+        Timeline_Posts.refactor_timeline_posts()
+
         qualified_posts = []
 
-        tl_objs = Timeline_Posts.objects()
+
+        tl_objs = Timeline_Posts.objects(all_seen=False)
         count = 0
 
         for obj in tl_objs:
 
 
-            for post in obj.posts:
+            for index,post in enumerate(obj.posts):
 
 
 
                 if (not post['seen']):
                     count = count +1
-                    qualified_posts.append({'post':post,'object_id':obj.id})
+                    qualified_posts.append({'post': post, 'object_id': obj.id,'post_index':index})
                     post['seen'] = True
                     obj.save()
 
@@ -1539,9 +1565,11 @@ class Timeline_Posts(Document):
         :return: objects
         """
 
+        Timeline_Posts.refactor_timeline_posts()
+
         qualified_posts = []
 
-        tl_objs = Timeline_Posts.objects()
+        tl_objs = Timeline_Posts.objects(all_seen=False)
         count = 0
 
         for obj in tl_objs:
@@ -1570,28 +1598,37 @@ class Timeline_Posts(Document):
 
         :return: objects
         """
+        iteration_count = 0
+        Timeline_Posts.refactor_timeline_posts()
 
         qualified_posts = []
 
-        tl_objs = Timeline_Posts.objects()
+        tl_objs = Timeline_Posts.objects(all_seen=False)
         count = 0
 
-        while(len(qualified_posts) < top):
-            for obj in tl_objs:
+        if(len(tl_objs)>0):
+            while(len(qualified_posts) < top):
+                for obj in tl_objs:
 
-                r_index = random.randint(0,len(obj.posts)-1)
-                print(r_index,len(obj.posts))
-                post = obj.posts[r_index]
+                    r_index = random.randint(0,len(obj.posts)-1)
+                    print(r_index,len(obj.posts),iteration_count)
+                    post = obj.posts[r_index]
 
-                if (not post['seen']):
-                    # count = count + 1
+                    if (not post['seen']):
+                        # count = count + 1
 
 
-                    qualified_posts.append({'post': post, 'object_id': obj.id, 'post_index': r_index})
-                    post['seen'] = True
-                    obj.save()
+                        qualified_posts.append({'post': post, 'object_id': obj.id, 'post_index': r_index})
+                        post['seen'] = True
+                        obj.save()
 
-                if (len(qualified_posts) > top):
+                    if (len(qualified_posts) > top):
+                        break
+
+
+                iteration_count = iteration_count+1
+
+                if(iteration_count >= 100):
                     break
 
         return qualified_posts
