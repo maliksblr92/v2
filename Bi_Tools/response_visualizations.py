@@ -10,7 +10,7 @@ from bokeh.embed import components
 import collections, functools, operator
 from operator import itemgetter
 
-PLOT_HEIGHT = 350
+PLOT_HEIGHT = 500
 BACKGROUND_COLOR = 'white'
 
 
@@ -120,11 +120,8 @@ def country_trends(modelname):
     p.y_range.start = 0
     p.background_fill_color = BACKGROUND_COLOR
 
-    #show(p)
+    # show(p)
     return components(p)
-
-
-country_trends(Trends)
 
 
 def content_categorization_piechart(modelname):
@@ -171,6 +168,7 @@ def content_categorization_piechart(modelname):
         p.grid.grid_line_color = None
 
         p.background_fill_color = BACKGROUND_COLOR
+        # show(p)
         return components(p)
         """
         fig = go.Figure(data=[go.Pie(labels=list(a), values=list(b))])
@@ -204,10 +202,15 @@ def most_active_users(modelname):
             name = each_target.name
         com[name] = len(posts)
     x = dict(sorted(com.items(), key=itemgetter(1), reverse=True)[:18])
+    if (len(x) == 1):
+        x[''] = 0
+        x[' '] = 0
+    if (len(x) == 2):
+        x[''] = 0
     data = pd.Series(x).reset_index(name='value').rename(columns={'index': 'country'})
     data['angle'] = data['value'] / data['value'].sum() * 2 * pi
     data['color'] = Category20c[len(x)]
-    p = figure(title="Most Active Users", toolbar_location=None,
+    p = figure(title="Most Active Users", toolbar_location=None,plot_height=PLOT_HEIGHT,
                tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 
     p.wedge(x=0, y=1, radius=0.4,
@@ -288,7 +291,7 @@ def common_categorization_profiles(modelname):
 
         output_file("multiple.html")
 
-        p = figure(plot_width=400, plot_height=PLOT_HEIGHT)
+        p = figure(plot_height=PLOT_HEIGHT)
 
         # add both a line and circles on the same plot
         p.line(x, y, line_width=2)
@@ -328,9 +331,37 @@ def profiles_similar_location(modelname):
         c_loc.append(eachs)
 
     d = Counter(c_loc)
-    xs = dict(d)
+    x = dict(d)
+    x = dict(sorted(x.items(), key=itemgetter(1), reverse=True)[:18])
 
-    return xs
+    # print(x)
+    data = pd.DataFrame.from_dict(dict(x), orient='index').reset_index().rename(index=str, columns={0: 'value',
+                                                                                                    'index': 'country'})
+    data['angle'] = data['value'] / sum(x.values()) * 2 * pi
+    if (len(x) == 1):
+        x[''] = 0
+        x[' '] = 0
+    if (len(x) == 2):
+        x[''] = 0
+    data['color'] = Category20c[len(x)]
+
+    p = figure(plot_height=PLOT_HEIGHT, title="Most Popular Locations ", toolbar_location=None,
+               tools="hover", tooltips="@country: @value")
+
+    p.wedge(x=0, y=1, radius=0.4,
+            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            line_color="white", fill_color='color', legend='country', source=data)
+
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
+    p.background_fill_color = BACKGROUND_COLOR
+    # show(p)
+
+    return components(p)
+
+
+profiles_similar_location(Facebook_Profile_Response_TMS)
 
 
 def keywords_no_barplot(modelname):
@@ -343,10 +374,16 @@ def keywords_no_barplot(modelname):
                 queries.append(query)
     d = Counter(queries)
     x = dict(d)
+    x = dict(sorted(x.items(), key=itemgetter(1), reverse=True)[:18])
     # print(x)
     data = pd.DataFrame.from_dict(dict(x), orient='index').reset_index().rename(index=str, columns={0: 'value',
                                                                                                     'index': 'country'})
     data['angle'] = data['value'] / sum(x.values()) * 2 * pi
+    if (len(x) == 1):
+        x[''] = 0
+        x[' '] = 0
+    if (len(x) == 2):
+        x[''] = 0
     data['color'] = Category20c[len(x)]
 
     p = figure(plot_height=PLOT_HEIGHT, title="Keybase Fetched Results Statistics ", toolbar_location=None,
@@ -614,10 +651,10 @@ class Reddit_Profile_Response_TMS_visualization:
 
 class Reddit_Subreddit_Response_TMS_visualization:
     def content_categorization_piechart():
-        return content_categorization_piechart(Reddit_Subreddit_Response_TMS_visualization)
+        return content_categorization_piechart(Reddit_Subreddit_Response_TMS)
 
     def most_active_users_chart():
-        return most_active_users(Reddit_Subreddit_Response_TMS_visualization)
+        return most_active_users(Reddit_Subreddit_Response_TMS)
 
     """   
     def circle_pack_common_categorization():
