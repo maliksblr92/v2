@@ -193,12 +193,12 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                                             opacity:0.9; padding:5px 9px 0 10px;">Interval
                                         </span>
                                     </div>
-                                    <select
+                                    <select 
                                         class="custom-select newinput col-md-9 form-control  newinputdesign"
                                         id="{{platform.name|lower}}-interval"
                                         name="{{platform.name|lower}}_interval">
                                         {% for interval in data.intervals %}
-                                            <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+                                            <option class="text-white" value="{{ interval.0 }}">{{ interval.1 }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -269,8 +269,25 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
 </div>
 </div>
 </div>
+
 {% endblock %}
 {% block foot_script %}
+
+<script>
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    
+
+   
+    
+        console.log("setting default date ")
+        console.log(new Date().toDateInputValue())
+        
+       
+</script>
 <script>
 function cleanForm(){
 var allInputs = $( ":input" );
@@ -338,6 +355,17 @@ $(tabpane_name + " #loading_icon").hide()
 $(tabpane_name + ' #smart_search_response').show()
 $(tabpane_name + ' #smart_search_response').empty().append(
 " Operation successfull   ")
+var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    var today = month + '-' + day + '-' + now.getFullYear();
+  
+    $('#facebook-expirydate').val(today);
+    $('#facebook-expirydate').val(new Date().toDateInputValue());
 $(tabpane_name + ' #smart_search_response').fadeOut(8000)
 },
 error: function () {
@@ -345,6 +373,17 @@ console.log("Smart Search == in error function ")
 $(tabpane_name + ' #smart_search_response').show()
 $(tabpane_name + ' #smart_search_response').empty().append(
 " Operation Unsuccessfull  ! Please Try Again ")
+var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+    if (month < 10) 
+        month = "0" + month;
+    if (day < 10) 
+        day = "0" + day;
+    var today = month + '-' + day + '-' + now.getFullYear();
+  
+    $('#'+tabpane_name+'-expirydate').val(today);
+    $('#'+tabpane_name+'-expirydate').val(new Date().toDateInputValue());
 $(tabpane_name + ' #smart_search_response').fadeOut(8000)
 $(tabpane_name + " #loading_icon").hide()
 }
@@ -360,4 +399,5 @@ $(`#${pf}`).trigger('reset')
 })
 }) // document ready
 </script>
+
 {% endblock %}
