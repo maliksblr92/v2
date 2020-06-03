@@ -235,76 +235,37 @@
                 </script>
             </head>
             <body>
-                <div class="container-fluid wrapper background-gradient-dark">
+                <div class="container-fluid bg-white">
                     <div class="row ">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            <div class="row pl-2 pr-2">
-                                <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left"> <span class="btn btn-primary btn-sm  "style="margin-top:2px;"> <i class="fas fa-spider mr-2 "></i>Dynamic Crawling Target Profile </span></div>
-                                        
-                                        <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                                            <li class="dropdown">
-                                                <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
-                                                <div class="dropdown-content">
-                                                    <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="{% url 'Target_Management_System:dynamic_crawling_report' object_gtr_id=target.GTR %}"id="download_as_pdf">PDF Downlaod</a>
-                                                    <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="" id="download_as_pdf">Link Analysis</a>
-                                                </div>
-                                            </li>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <!-- <div class="row p-2">
-                                <div class="col-md-4 text-left">
-                                    <a href="#" target="_blank" class="btn btn-info font-weight-bold">
-                                        <i class="fas fa-spider mr-2"></i> Dynamic Crawling
-                                    </a>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
-                                        <i class="fas fa-users mr-2"></i> Dynamic Crawling Target
-                                    </a>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <a href="#" target="_blank" class="btn btn-success font-weight-bold">
-                                        <i class="fas fa-download  mr-2"></i> Download PDF Report
-                                    </a>
-                                </div>
-                            </div> -->
                             
-                            
-                            <div class="row background-gradient-dark border_radius_5px ">
+                            <div class="row border_radius_5px ">
                                 <!-- Target -->
-                                <div class="col-md-7  background-gradient-dark p-5">
+                                <div class="col-md-12  p-5">
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
+                                            <label class="label text_15px font-weight-bold text-dark">
                                                 <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i> Name
                                             </label>
                                         </div>
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
-                                                <span class="badge badge-light header-text" id="foo">
+                                            <label class="label text_15px font-weight-bold text-dark">
+                                                <span class="header-text" id="foo">
                                                     {{target.name|default:"N/A"}}
-                                                    <button class="btn btn-sm " data-clipboard-target="#foo">
-                                                    <img src="{% static '/clippy.svg'%}" alt="Copy to clipboard" >
-                                                    </button>
                                                 </span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
+                                            <label class="label text_15px font-weight-bold text-dark">
                                                 <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Registrar
                                             </label>
                                         </div>
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
-                                                <span class="badge badge-light header-text">
+                                            <label class="label text_15px font-weight-bold text-dark">
+                                                <span class="header-text">
                                                     {{target.registrar|default:"N/A"}}
                                                 </span>
                                             </label>
@@ -312,40 +273,19 @@
                                     </div>
                                     <div class="row  p-2">
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
+                                            <label class="label text_15px font-weight-bold text-dark">
                                                 <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>Creation Date
                                             </label>
                                         </div>
                                         <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
-                                                <span class="badge badge-light header-text">
+                                            <label class="label text_15px font-weight-bold text-dark">
+                                                <span class="header-text">
                                                     {{target.creation_date|default:"N/A"}}
                                                 </span>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="row  p-2">
-                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
-                                                <i class="fa fa-user text-dark header-icons fa-2x mr-2 "></i>View Site
-                                            </label>
-                                        </div>
-                                        <div class="col-md-6 d-flex flex-row justify-content-start align-items-center">
-                                            <label class="label text_15px font-weight-bold ">
-                                                <a href="{{target.name}}" target="_blank" class="badge badge-light" >
-                                                    <i class="fa fa-eye fa-2x"></i>
-                                                </a>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    
                                 </div>
-                                <div class="col-md-5 d-flex flex-row justify-content-center align-items-center">
-                                    <div id="profile_chart" style="height:400px;width:100%"></div>
-                                </div>
-                                </>
                                 <!--
                                 -->
                                 <div class="row w-100">
@@ -355,39 +295,29 @@
                                                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
                                                     {% for i in target.data %}
                                                         <!------ /////////////////////////////////////////////////////////////////// -->
-                                                        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border pt-3 pb-2">
-                                                            <h4 class="topheading text-white">
+                                                        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 pt-3 pb-2">
+                                                            <h4 class="topheading text-dark">
                                                             {{i.title.0}}
                                                             </h4>
                                                         </div>
-                                                        <div class="card-body border border-dark background glowing_border mb-2"style="border-radius:0px 0px 15px 15px">
-                                                            <!-- <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <div class="col-md-12" >
-                                                                        <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold"> {{i.title.0}}</div>
-                                                            </div> -->
+                                                        <div class="card-body border border-dark mb-2"style="border-radius:0px 0px 15px 15px">
                                                             <div class="row mb-2">
                                                                 <div class="col-md-2">
                                                                     <div class="col-md-12" >
-                                                                        <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
+                                                                        <span class="card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-10 text-white p-0 m-0 text_14px font-weight-bold">
-                                                                    {{i.page}}  <a href="{{i.page}}" target="_blank" class="badge custom_badge" >
-                                                                        <i class="fa fa-eye fa-2x"></i>
-                                                                    </a>
+                                                                <div class="col-md-10 p-0 m-0 text_14px font-weight-bold">
+                                                                    {{i.page}} 
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-2">
                                                                 <div class="col-md-2">
                                                                     <div class="col-md-12" >
-                                                                        <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
+                                                                        <span class="card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:250px;overflow-y:auto;border-radius:3px;">
+                                                                <div class="col-md-10 p-2 text_14px"style="border-radius:3px;">
                                                                     {% for content in i.content %}
                                                                         <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
                                                                         
@@ -397,10 +327,10 @@
                                                             <div class="row mb-2">
                                                                 <div class="col-md-2">
                                                                     <div class="col-md-12" >
-                                                                        <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
+                                                                        <span class="card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-10 glowing_border p-2 text-white text_14px"style="height:350px;overflow-y:auto;border-radius:3px;">
+                                                                <div class="col-md-10 p-2 text_14px"style="border-radius:3px;">
                                                                     {% for image_url in i.image_urls %}
                                                                         <div class="col-md-6">
                                                                             <div> <span class="badge badge-info">{{forloop.counter}}</span>
@@ -413,63 +343,6 @@
                                                         
                                                         
                                                     </div>
-                                                    <!------ /////////////////////////////////////////////////////////////////// -->
-                                                    <!-- <div class="col-md-12 card p-5 ">
-                                                        
-                                                        <div class="row mt-2">
-                                                            <div class="col-md-2">
-                                                                <span class="badge custom_badge  card-body-label"> <i class="fas fa-heading fa-2x mr-2"></i>Title</span>
-                                                            </div>
-                                                            <div class="col-md-10 text_14px font-weight-bold">
-                                                                {{i.title.0}}
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <div class="row mt-2">
-                                                            <div class="col-md-2">
-                                                                <span class="badge custom_badge  card-body-label"><i class="far fa-file fa-2x mr-2"></i>Page</span>
-                                                            </div>
-                                                            <div class="col-md-10 text_14px font-weight-bold">
-                                                                {{i.page}}  <a href="{{target.name}}" target="_blank" class="badge badge-success" >
-                                                                    <i class="fa fa-eye fa-2x"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <div class="row mt-2">
-                                                            <div class="col-md-2">
-                                                                <span class="badge custom_badge  card-body-label"> <i class="fas fa-database fa-2x mr-2"></i>Content</span>
-                                                            </div>
-                                                            <div class="col-md-10 text_14px p-3 border "style="height:400px;overflow-y:auto;">
-                                                                {% for content in i.content %}
-                                                                    <div class="mt-2"> <span class="badge badge-info">{{forloop.counter}}</span> {{content}}</div>
-                                                                    
-                                                                {% endfor %}
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <div class="row mt-2">
-                                                            <div class="col-md-2">
-                                                                <span class="badge custom_badge  card-body-label"><i class="fas fa-images fa-2x mr-2 "></i>Images </span>
-                                                            </div>
-                                                            <div class="col-md-10 text_12px p-3 border"style="height:400px;overflow-y:auto;">
-                                                                <div class="row">
-                                                                    
-                                                                    {% for image_url in i.image_urls %}
-                                                                        <div class="col-md-6">
-                                                                            <div> <span class="badge badge-info">{{forloop.counter}}</span>
-                                                                            <img src="{{image_url}}" class="img-fluid img-thumbnail" style="height:200px;width:100%" alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                {% endfor %}
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
                                             {% endfor %}
                                         </div>
                                     {% endif %}
@@ -489,7 +362,9 @@
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-    
+    <script>
+        window.print()
+    </script>
     <script>
     am4core.ready(function () {
     // Themes begin

@@ -706,6 +706,13 @@ class Dynamic_Crawling_Target(View):
         print(target.to_mongo())
         return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
     
+class Dynamic_Crawling_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(target.to_mongo())
+        return render(request,'Target_Management_System/Dynamic_Crawling_Report.html',{'target':target})
+    
 # SUBREDDIT 
 
 class Subreddit_Target_Resposne(View):

@@ -28,7 +28,11 @@ rgba(6, 17, 26, 1) 100%
                     
                 </div>
                 <div class="col-md-5 m-0 p-0  small_card_left_wrapper">
-                    <img src="{{ user.profile_url }}" class="  profile_card_avatar" />
+                    {% if user.profile_url %}
+                        <img src="{{ user.profile_url }}" class="  profile_card_avatar" />
+                    {% else %}
+                        <img src="{% static 'images/profile-avatar-png-5.png' %}" class="  profile_card_avatar" />
+                    {% endif %}
                 </div>
                 <div class="col-md-5 m-0 p-0 custom_center   small_card_right_wrapper">
                     <div class="badge badge-light">{{ user.id }}</div>
