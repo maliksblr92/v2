@@ -644,6 +644,23 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
+    def action_send_message(self,social_site,target_username,message,username='majidahmed.123@outlook.com',password='someonesomeone'):
+        try:
+            add_target_url = 'avatar/message/'
+            payload = {'social_site':social_site,'target_username':target_username,'email':username,'password':password,'message':message}
+            print(payload)
+            response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,data=payload)
+            print(response.json())
+            return response.json()
+
+        except Exception as e:
+            print(e)
+            return None
+
+
+
+
+
     def twitter_trends(self,country='pakistan'):
         try:
             add_target_url = 'twitter/trends'

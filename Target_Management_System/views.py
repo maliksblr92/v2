@@ -131,8 +131,6 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             screen_shot = bool(int(request.POST[plateform+'_screenshot']))
             print(screen_shot)
 
-
-
             print(portfolio_id)
 
 
