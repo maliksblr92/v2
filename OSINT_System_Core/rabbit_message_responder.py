@@ -88,10 +88,13 @@ def on_ais_message(data):
                         gtr = acq.get_gtr_by_id(GTR_id)
                         targ_obj = acq.get_dataobject_by_gtr(gtr)
 
-                        if(targ_obj.is_recursive() and acq.get_data_response_object_by_gtr_id(gtr.id)):
-                            acq.add_recursive_crawling_target(GTR_id)
+                        if(targ_obj.is_recursive() or acq.get_data_response_object_by_gtr_id(gtr.id)):
+                            #acq.add_recursive_crawling_target(GTR_id)
+                            tm.update_timeline_posts()
+
                         print('.....................GOT GTR ID AIS........................')
-                        tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
+                        #tm.update_timeline_posts_by_gtr_id(gtr_id=GTR_id)
+
             else:
                 if IN_CELERY_BEAT_PROCESS:
                     print('.......celery beat.........')
