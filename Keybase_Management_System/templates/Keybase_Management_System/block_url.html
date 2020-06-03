@@ -1,217 +1,304 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
-{% block page_title%}Keybase Create{%endblock%}
+{% block page_title %}Keybase Create{% endblock %}
 {% block head_dep %}
-<!-- Stylesheet -->
-<link rel="stylesheet" 
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
-      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
-      crossorigin="anonymous">
-<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
 
-<!--  -->
-<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-<link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+    <!--  -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<style>
-    #keywords{
-        width: 100%!important;
-        width: 500px!important;
-    }
-</style>
+    <style>
+        #keywords {
+            width: 100% !important;
+            width: 500px !important;
+        }
+    </style>
 
-<style>
-    tr {
-       width: 100%;
-       display: inline-table;
-       table-layout: fixed;
-     }
-   
-     table {
-       height: 300px!important;
-       display: -moz-groupbox;
-     }
-   
-     tbody {
-       overflow-y: scroll!important;
-       height: 200px!important;
-       width: 100%;
-   
-     }
-   @media screen and (max-width: 767px) {
-     .table-responsive {
-       width: 100%;
-       margin-bottom: 15px;
-       overflow-y: hidden;
-       -ms-overflow-style: -ms-autohiding-scrollbar;
-       border: 1px solid #ddd;
-     }
-     .table-responsive > .table {
-       margin-bottom: 0;
-     }
-     .table-responsive > .table > thead > tr > th,
-     .table-responsive > .table > tbody > tr > th,
-     .table-responsive > .table > tfoot > tr > th,
-     .table-responsive > .table > thead > tr > td,
-     .table-responsive > .table > tbody > tr > td,
-     .table-responsive > .table > tfoot > tr > td {
-       white-space: nowrap;
-     }
-     .table-responsive > .table-bordered {
-       border: 0;
-     }
-     .table-responsive > .table-bordered > thead > tr > th:first-child,
-     .table-responsive > .table-bordered > tbody > tr > th:first-child,
-     .table-responsive > .table-bordered > tfoot > tr > th:first-child,
-     .table-responsive > .table-bordered > thead > tr > td:first-child,
-     .table-responsive > .table-bordered > tbody > tr > td:first-child,
-     .table-responsive > .table-bordered > tfoot > tr > td:first-child {
-       border-left: 0;
-     }
-     .table-responsive > .table-bordered > thead > tr > th:last-child,
-     .table-responsive > .table-bordered > tbody > tr > th:last-child,
-     .table-responsive > .table-bordered > tfoot > tr > th:last-child,
-     .table-responsive > .table-bordered > thead > tr > td:last-child,
-     .table-responsive > .table-bordered > tbody > tr > td:last-child,
-     .table-responsive > .table-bordered > tfoot > tr > td:last-child {
-       border-right: 0;
-     }
-     .table-responsive > .table-bordered > tbody > tr:last-child > th,
-     .table-responsive > .table-bordered > tfoot > tr:last-child > th,
-     .table-responsive > .table-bordered > tbody > tr:last-child > td,
-     .table-responsive > .table-bordered > tfoot > tr:last-child > td {
-       border-bottom: 0;
-     }
-   }
-   #submit{
-    border-radius: 12px;
-    background: rgb(24, 72, 116);
-    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
-    padding: 4px 3rem;
-    letter-spacing: 0.1rem;
-    font-size: 16px;"
-   }
-   </style>
+    <style>
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
 
-<div class="row">
+        table {
+            height: 300px !important;
+            display: -moz-groupbox;
+        }
 
-    <div class="col-md-4 col-lg-4 col-xl-4"></div>
-</div>
+        tbody {
+            overflow-y: scroll !important;
+            height: 200px !important;
+            width: 100%;
+
+        }
+
+        @media screen and (max-width: 767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-y: hidden;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
+
+            .table-responsive > .table {
+                margin-bottom: 0;
+            }
+
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > th,
+            .table-responsive > .table > tfoot > tr > th,
+            .table-responsive > .table > thead > tr > td,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space: nowrap;
+            }
+
+            .table-responsive > .table-bordered {
+                border: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+            .table-responsive > .table-bordered > thead > tr > td:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+            .table-responsive > .table-bordered > thead > tr > td:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right: 0;
+            }
+
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom: 0;
+            }
+        }
+
+        .mainbutton {
+            background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+            font-size: 16px;
+            border-radius: 13px;
+            padding: 3px 40px;
+            border: 1px solid #707070;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-md-4 col-lg-4 col-xl-4"></div>
+    </div>
 {% endblock %}
 
 {% block belly %}
-<div class="row  ">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-        <h4 class="topheading">Block URL</h4>
-    </div>
-    <!-- end of top row -->
+    <div class="row  ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Block URL</h4>
+        </div>
+        <!-- end of top row -->
 
-    <!-- inside main container -->
-    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
-        <div class="">
-            <!-- RPW FOR SOCIAL MEDIA -->
-            <div class="row formbg ml-5">
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
-                    <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Keybase_Management_System:block_url' %}" method="POST">
-                {% csrf_token %}
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+            <div class="">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <div class="row formbg ml-5">
+                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                        <form name="portfolio_create_form" id="portfolio_create_form"
+                              action="{% url 'Keybase_Management_System:block_url' %}" method="POST">
+                            {% csrf_token %}
 
-                <div class="row input_wrapper_row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-9">
+                            <div class="row input_wrapper_row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-9">
 
+                                    <!-- TITLE BLOCK START-->
+                                    <div class="row">
+                                        <!-- title -->
+                                        <div class="input-group w-100 d-flex flex-row justify-content-between align-items-center ">
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign w-100" style="font-size:13px;letter-spacing:0.1em;
+                                                        opacity:0.9; padding:7px 9px 0 10px;">Title
+                                                    </span>
+                                                </div>
+                                                <input type="text" id="username"
+                                                       class="col-md-9 form-control newinputdesign"
+                                                       name="title" value=""
+                                                       required="required">
 
-                        <div class="row">
-                            <!-- title -->
-                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
-                                    <div class="row w-100">
-                                        <div class="col-md-3 p-0">
-                                            <div class="input-group-prepend">
-                                                <span class="newlabeldesign w-100 font-weight-bold">Title</span>
                                             </div>
-                                        </div>
-                                        <div class="col-md-9 p-0">
-
-                                            <input type="text" id="title" class="form-control newinputdesign w-75"
-                                                 name="title" value="" required="required">
 
                                         </div>
                                     </div>
-                                </div>
-                        </div>
-                        <div class="row">
-                            <!-- Description -->
-                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
-                                    <div class="row w-100">
-                                        <div class="col-md-3 p-0">
-                                            <div class="input-group-prepend">
-                                                <span class="newlabeldesign w-100 font-weight-bold">Description</span>
+                                    {#                                    <div class="row">#}
+                                    {#                                        <!-- title -->#}
+                                    {#                                        <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">#}
+                                    {#                                            <div class="row w-100">#}
+                                    {#                                                <div class="col-md-3 p-0">#}
+                                    {#                                                    <div class="input-group-prepend">#}
+                                    {#                                                        <span class="newlabeldesign w-100 font-weight-bold">Title</span>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                                <div class="col-md-9 p-0">#}
+                                    {##}
+                                    {#                                                    <input type="text" id="title"#}
+                                    {#                                                           class="form-control newinputdesign w-75"#}
+                                    {#                                                           name="title" value="" required="required">#}
+                                    {##}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                    {#                                    </div>#}
+                                    <!-- TITLE BLOCK END -->
+
+                                    <!-- DESCRIPTION BLOCK START -->
+
+                                    <div class="row">
+                                        <div class="input-group  mb-3">
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="newlabeldesign w-100 d-flex flex-column justify-content-center align-items-start"
+                                                  style="font-size:13px;letter-spacing:0.1em;
+                                                opacity:0.9; padding:7px 9px 0 10px;">Description
+                                            </span>
+                                                </div>
+                                                <div class="col-md-9 p-0">
+                                            <textarea name="description" class="form-control newinputdesign w-100"
+                                                      cols="20" placeholder="Type Message Here" rows="10"
+                                                      required="required">
+                                            </textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-9 p-0">
-                                            <div class="col-md-9 p-0">
-                                                <textarea name="description" class="form-control newinputdesign w-100" cols="20" rows="10" required="required">
 
-                                                </textarea>
-
-
-                                        </div>
                                         </div>
                                     </div>
-                                </div>
 
-                        </div>
-                        <div class="row">
+                                    {#                                    <div class="row">#}
+                                    {#                                        <!-- Description -->#}
+                                    {#                                        <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">#}
+                                    {#                                            <div class="row w-100">#}
+                                    {#                                                <div class="col-md-3 p-0">#}
+                                    {#                                                    <div class="input-group-prepend">#}
+                                    {#                                                        <span class="newlabeldesign w-100 font-weight-bold">Description</span>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                                <div class="col-md-9 p-0">#}
+                                    {#                                                    <div class="col-md-9 p-0">#}
+                                    {#                                                <textarea name="description" class="form-control newinputdesign w-100"#}
+                                    {#                                                          cols="20" rows="10" required="required">#}
+                                    {##}
+                                    {#                                                </textarea>#}
+                                    {##}
+                                    {##}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                    {##}
+                                    {#                                    </div>#}
+                                    <!-- DESCRIPTION BLOCK END -->
 
-                                <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
-                                    <div class="row w-100">
-                                        <div class="col-md-3 p-0">
-                                            <div class="input-group-prepend">
-                                                <span class="newlabeldesign w-100 font-weight-bold">URL</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-9 p-0">
-                                            <div class="col-md-9 p-0">
-                                            {% if b_url %}
-                                            <input type="text" id="url" class="form-control newinputdesign w-100"
-                                                 name="url" value="{{ b_url }}" required="required">
-                                            {% else %}
-                                                <input type="text" id="url" class="form-control newinputdesign w-100"
-                                                 name="url" value=""  required="required">
+                                    <!-- URL BLOCK START -->
+                                    <div class="row">
+                                        <!-- title -->
+                                        <div class="input-group w-100 d-flex flex-row justify-content-between align-items-center ">
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign w-100" style="font-size:13px;letter-spacing:0.1em;
+                                                        opacity:0.9; padding:7px 9px 0 10px;">URL
+                                                    </span>
+                                                </div>
+                                                {% if b_url %}
+                                                    <input type="text" id="url"
+                                                           class="col-md-9 form-control newinputdesign"
+                                                           name="url" value="{{ b_url }}" required="required">
+                                                {% else %}
+                                                    <input type="text" id="url"
+                                                           class="col-md-9 form-control newinputdesign"
+                                                           name="url" value="" required="required">
                                                 {% endif %}
-                                        </div>
+
+
+
+                                            </div>
+
                                         </div>
                                     </div>
+
+{#                                    <div class="row">#}
+{##}
+{#                                        <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">#}
+{#                                            <div class="row w-100">#}
+{#                                                <div class="col-md-3 p-0">#}
+{#                                                    <div class="input-group-prepend">#}
+{#                                                        <span class="newlabeldesign w-100 font-weight-bold">URL</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                                <div class="col-md-9 p-0">#}
+{#                                                    <div class="col-md-9 p-0">#}
+{#                                                        {% if b_url %}#}
+{#                                                            <input type="text" id="url"#}
+{#                                                                   class="form-control newinputdesign w-100"#}
+{#                                                                   name="url" value="{{ b_url }}" required="required">#}
+{#                                                        {% else %}#}
+{#                                                            <input type="text" id="url"#}
+{#                                                                   class="form-control newinputdesign w-100"#}
+{#                                                                   name="url" value="" required="required">#}
+{#                                                        {% endif %}#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{##}
+{#                                    </div>#}
+                                    <!-- URL BLOCK END -->
+
+
                                 </div>
+                                <div class="col-md-1 ">
+                                </div>
+                            </div>
 
-                        </div>
-
-
+                            <div class="row input_wrapper_row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <input type="submit" class="btn-sm w-100 mainbutton text-white"
+                                           value="submit"
+                                           name="submit" id="submit">
+                                </div>
+                            </div>
                     </div>
-                    <div class="col-md-1 ">
-                    </div>
-                </div>
-
-                <div class="row input_wrapper_row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-2">
-                        <input type="submit" class="font-weight-bold btn-sm w-100  text-white" value="submit"
-                        name="submit" id="submit">
-                    </div>
-                </div>
-            </div>
-        </form>
+                    </form>
 
                 </div>
             </div>
             <!-- Second row-->
             <!-- END OF second row-->
+        </div>
+
+
     </div>
 
 
-</div>
 
 
 
@@ -220,62 +307,60 @@
 
 
 
-
-
-<!--  -->
+    <!--  -->
 
 
 
-<div class="row  mt-2">
-    <div class="col-md-12   topcontentbar"style="border-radius:15px 15px 0px 0px;">
-        <h4 class="topheading">All Blocked URLS </h4>
-    </div>
-    <!-- end of top row -->
+    <div class="row  mt-2">
+        <div class="col-md-12   topcontentbar" style="border-radius:15px 15px 0px 0px;">
+            <h4 class="topheading">All Blocked URLS </h4>
+        </div>
+        <!-- end of top row -->
 
-    <!-- inside main container -->
-    <div class="col-md-12 border  "style="border-radius:0px 0px 15px 15px; ">
+        <!-- inside main container -->
+        <div class="col-md-12 border  " style="border-radius:0px 0px 15px 15px; ">
             <div class="row ">
                 <div class="col-md-12 p-5 ">
-                    
+
                     <table class="table mt-2" style="color: white">
                         <thead>
-                            <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Url</th>
-                                <th scope="col">Blocked On</th>
-                                <th scope="col">Action</th>
-                
-                            </tr>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Url</th>
+                            <th scope="col">Blocked On</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
                         </thead>
                         <tbody>
-                            {% for url in urls %}
-                
+                        {% for url in urls %}
+
                             <tr>
-                
-                                <th style="font-size:12px;" scope="row">{{url.title}}</th>
-                                <td style="font-size:12px;">{{url.description}}</td>
-                                <td style="font-size:12px;"><a class="text-white" href="{{url.url}}" target="_blank">{{url.url|truncatechars:'15'}}<span class="badge badge-light"><i class="fa fa-eye fa-2x"></i></span> </a> </td>
-                                <td style="font-size:12px;">{{url.created_on}}</td>
-                
-                
-                
+
+                                <th style="font-size:12px;" scope="row">{{ url.title }}</th>
+                                <td style="font-size:12px;">{{ url.description }}</td>
+                                <td style="font-size:12px;"><a class="text-white" href="{{ url.url }}"
+                                                               target="_blank">{{ url.url|truncatechars:'15' }}<span
+                                        class="badge badge-light"><i class="fa fa-eye fa-2x"></i></span> </a></td>
+                                <td style="font-size:12px;">{{ url.created_on }}</td>
+
+
                                 <td><a class="btn" href="{% url 'Keybase_Management_System:delete_url' url.id %}"><i
-                                            class="fa fa-trash text-white"></i></a></td>
+                                        class="fa fa-trash text-white"></i></a></td>
                             </tr>
-                            {% endfor %}
+                        {% endfor %}
                         </tbody>
-                      </table>
+                    </table>
                 </div>
             </div>
             <!-- Second row-->
             <!-- END OF second row-->
 
 
-
-</div>
-</div>
-<!-- inside main container -->
+        </div>
+    </div>
+    <!-- inside main container -->
 
 {% endblock %}
 {% block foot_dep %}
