@@ -129,16 +129,16 @@
                                                                     class="btn btn-secondary searchbutton smartsearch">
                                                                 SMART
                                                                 SEARCH <span> <i class="fas fa-spinner fa-spin"
-                                                                    style="font-size:20px;" id="loading_icon"></i></span>
+                                                                    style="font-size:20px;" id="{{ platform.name | lower }}-loading_icon"></i></span>
                                                             </button>
                                                         </div>
-                                                        <div class="alert alert-info col-md-12" id="alert__autheruseraccount"style="height:40px;font-weight:bold;font-size:12px;"></div>
+                                                        <div class="alert alert-info col-md-12" id="{{ platform.name | lower }}-alert__autheruseraccount"style="height:40px;font-weight:bold;font-size:12px;"></div>
                                                         {% now "SHORT_DATE_FORMAT" as today %}
 
 
                                                     </div>
                                                     <div>
-                                                        <span id="smart_search_response"
+                                                        <span id="{{ platform.name | lower }}-smart_search_response"
                                                               class="alert alert-info font-weight-bold "
                                                               style="font-size:13px;"></span></div>
 
@@ -158,7 +158,7 @@
                                                                 <option value="{{ forloop.counter0 }}">{{ choice }}</option>
                                                             {% endfor %}
                                                         </select>
-                                                        <div class="alert alert-info col-md-12" id="alert__authortype"style="height:40px;font-weight:bold;font-size:12px;"></div>
+                                                      
                                                     </div>
                                                     <!-- author user id -->
                                                     <div class="row input-group mt-4 mb-3">
@@ -174,7 +174,7 @@
                                                                aria-label="Recipient's username"
                                                                aria-describedby="basic-addon2" required="required" />
 
-
+                                                               <input type="hidden" id="platform_name" value="{{ platform.name|lower }}">
                                                     </div>
 
                                                     <input type="hidden" name="platform"
@@ -332,20 +332,21 @@
         });
 
 
-        console.log("setting default date ")
-        console.log(new Date().toDateInputValue())
+        
 
         function hideErrorAlerts(){
-            $('#alert__autheruseraccount').hide()
-            $('#alert__authortype').hide()
+            var p_name = $('#platform_name').val();
+            $('#'+p_name+'-alert__autheruseraccount').hide()
+          
             
         }
         function validate(){
             var flag =0;
-            if( $('._autheruseraccount').val()==''){
-               $('#alert__autheruseraccount').show()
-               $('#alert__autheruseraccount').empty().append('<i class="fa fa-info-circle mr-2" aria-hidden="true"></i>  <strong>Author account is required </strong>')
-               $('#alert__autheruseraccount').fadeOut(8000);
+             var p_name = $('#platform_name').val();
+            if( $('#'+p_name+'_autheruseraccount').val()==''){
+               $('#'+p_name+'-alert__autheruseraccount').show()
+               $('#'+p_name+'-alert__autheruseraccount').empty().append('<i class="fa fa-info-circle mr-2" aria-hidden="true"></i>  <strong>Author account is required </strong>')
+               $('#'+p_name+'-alert__autheruseraccount').fadeOut(8000);
                flag=1;
             }
            
@@ -364,30 +365,30 @@
             console.log("formed cleaned")
         }
 
-        var tabpane_name = "{{platform.name|lower}}";
+        var tabpane_name = $('#platform_name').val();
         console.log("tab_name ==  " + tabpane_name)
-        $(tabpane_name + " #loading_icon").hide()
-        $(tabpane_name + '#smart_search_response').hide()
+        $('#'+tabpane_name + "-loading_icon").hide()
+        $('#'+tabpane_name +'-smart_search_response').hide()
         //start of document ready
         document.addEventListener('DOMContentLoaded', function () {
             let smartsearch = $('.smartsearch')
 // smart searchc
             smartsearch.click((event) => {
-                $(tabpane_name + '#smart_search_response').show()
-                $(tabpane_name + '#smart_search_response').empty().append("Please wait ! Server is proccessing request")
-                $(tabpane_name + "#loading_icon").show()
+              
+                $('#'+tabpane_name + "-loading_icon").show()
                var flag= validate();
                if(flag==1){
                    console.log(flag)
-                   console.log("Request denied -- author id is required for smart search")
-                   $(tabpane_name + "#loading_icon").hide()
-                  
+                   console.log("Request denied -- author id is required for smart search")    
+                $('#'+tabpane_name + "-loading_icon").hide()
                }
                else{
                
 // console.log(event.target)
 let website = event.target.getAttribute('x-target-name')
 var name=website;
+var tabpane_name = $('#platform_name').val();
+console.log( ('#'+tabpane_name + "-loading_icon"))
 console.log($('._autheruseraccount').val())
 
 let author_account = event.target.parentElement.parentElement.querySelector('input').value
@@ -406,12 +407,11 @@ $.ajax({
     data: data,
     success: (response) => {
     if(response['author_userid'] == '') {
+        $('#'+tabpane_name +'-smart_search_response').show()
+        $('#'+tabpane_name +'-smart_search_response').empty().append("<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Error in author account ! please try again with correct username  ")  
+        $('#'+tabpane_name +'-smart_search_response').fadeOut('slow');
+        $('#'+tabpane_name + "-loading_icon").hide();
         cleanForm();
-        $(tabpane_name + '#smart_search_response').show()
-        $(tabpane_name + '#smart_search_response').empty().append(
-            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Error in author account ! please try again with correct username  ")  
-        $(tabpane_name + '#smart_search_response').fadeOut(8000)
-        $(tabpane_name + "#loading_icon").hide()
        
     }
     else{
@@ -445,21 +445,23 @@ $.ajax({
                                     default:
                                         break;
                                 }
-                                $(tabpane_name + "#loading_icon").hide()
-                                $(tabpane_name + '#smart_search_response').show()
-                                $(tabpane_name + '#smart_search_response').empty().append(
+                                
+                $('#'+tabpane_name + "-loading_icon").hide()
+                                $('#'+tabpane_name +'-smart_search_response').show()
+                                $('#'+tabpane_name +'-smart_search_response').empty().append(
                                     "<i class='fa fa-check mr-2' aria-hidden='true'></i> Operation successfull   ")
-                                $(tabpane_name + '#smart_search_response').fadeOut(8000)
+                                $('#'+tabpane_name +'-smart_search_response').fadeOut(8000)
     }
         
     },
     error: function () {
         console.log("Smart Search == in error function ")
-        $(tabpane_name + '#smart_search_response').show()
-        $(tabpane_name + '#smart_search_response').empty().append(
+        $('#'+tabpane_name +'-smart_search_response').show()
+        $('#'+tabpane_name +'-smart_search_response').empty().append(
             "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Operation Unsuccessfull  ! Please Try Again ")  
-        $(tabpane_name + '#smart_search_response').fadeOut(8000)
-        $(tabpane_name + "#loading_icon").hide()
+        $('#'+tabpane_name +'-smart_search_response').fadeOut(8000)
+        
+                $('#'+tabpane_name + "-loading_icon").hide()
     }
 })
                }

@@ -242,8 +242,8 @@
                                                                 <!-- Div Right part-->
                                                                 <div class="col-md-10 glowing_border"
                                                                      style="width:500px; border-radius:0px 15px 15px 0px;">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4 d-flex flex-column justify-content-center">
+                                                                    <div class="row h-100">
+                                                                        <div class="col-md-4 h-100 d-flex flex-column justify-content-center align-items-center">
                                                                             <img class=""
                                                                                  style="height:120px; width:120px; border-radius: 50%;"
                                                                                     {% if target.0.profile_picture_url.profile_picture %}
@@ -277,24 +277,21 @@
                                                                                         " alt="">
                                                                                     {% endif %}
                                                                         </div>
-                                                                        <div class="col-md-8">
+                                                                        <div class="col-md-8 h-100 d-flex flex-row justify-content-center align-items-center">
 
-                                                                            <ul class=""
+                                                                            <ul class="my-auto"
                                                                                 style="margin-top:5%;  color:white">
-                                                                                <li>Name :{{ target.0.name }}</li>
-                                                                                <li>Username :{% if target.0.username %}
+                                                                                <li class="badge"><span class="text-warning">Name :</span>{{ target.0.name|truncatechars:"20" }}</li>
+                                                                                <li class="badge"><span class="text-warning">Username :</span>{% if target.0.username %}
                                                                                     {{ target.0.username }} {% else %}
                                                                                     {{ target.1.title }}{% endif %} </li>
-                                                                                <li>Website :{{ target.1.GTR }} </li>
-                                                                                <li>Target Type
-                                                                                    :{{ target.1.target_type }}</li>
-                                                                                <li>Added On
-                                                                                    :{{ target.1.created_on }}</li>
+                                                                                <li class="badge"><span class="text-warning">Website :</span>{{ target.1.GTR }} </li>
+                                                                                <li class="badge"><span class="text-warning">Type :</span>{{ target.1.target_type }}</li>
+                                                                                <li class="badge"><span class="text-warning">Created at :</span>{{ target.1.created_on }}</li>
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-8" style="width:140px;">
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
