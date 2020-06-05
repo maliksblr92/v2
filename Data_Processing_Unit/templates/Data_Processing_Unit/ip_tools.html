@@ -140,13 +140,16 @@
                                 id="query_type" name="query_type" value="image_reverse_lookup" readonly="readonly"
                                 required="required">
                               </label>
+                              <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>This tool will perform image reverse lookup  </small>
                             </div>
                             <div class="col-md-12  form-group form-inline w-100 h-100 b">
                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                               class="input_text">URL </span>
                               <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="url"
                               name="url">
+                              
                             </label>
+                            <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>Provide a valid URL of a image </small>
                           </div>
                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
                             <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
@@ -154,6 +157,7 @@
                             <input type="file" class=" ml-2 form-control form-control-sm form_input w-100"
                             id="image" name="image[]">
                           </label>
+                          <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>Upload image in case no URL to image is avalible   </small>
                         </div>
                       </div>
                       <input type="hidden" name="form_name" value="google_scholar" id="form_name" />
@@ -241,29 +245,33 @@
                           class="input_text">Query Type </span>
                           <input type="text" class=" ml-2 form-control form-control-sm form_input w-100"
                           id="query_type" name="query_type" value="ip_shortend" readonly="readonly"
-                          required="required">
-                        </label>
+                          required="required" />
+                          </label>
+                        <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>This application will generate short ip tracking payloads </small>bel>
                       </div>
                       <div class="col-md-12  form-group form-inline w-100 h-100 b">
                         <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                         class="input_text">Payload Title </span>
                         <input type="text" class=" ml-2 form-control form-control-sm form_input w-100"
-                        id="title" name="title" required="required">
+                        id="title" name="title" required="required" />
                       </label>
+                      <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>Provide a payload title </small>
                     </div>
                     <div class="col-md-12  form-group form-inline w-100 h-100 b">
                       <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                       class="input_text">Description</span>
                       <input type="text" class=" ml-2 form-control form-control-sm form_input w-100"
-                      id="description" name="description" required="required">
+                      id="description" name="description" required="required" />
                     </label>
+                    <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>Provide payload description</small>
                   </div>
                   <div class="col-md-12  form-group form-inline w-100 h-100 b">
                     <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
                     class="input_text">URL </span>
                     <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="url"
-                    name="url" required="required">
+                    name="url" required="required" />
                   </label>
+                  <small class="font-weight-bold text-warning "style="padding-left:180px;"><i class="fas fa-info mr-2 text-white"></i>Provide a payload URL </small>
                 </div>
               </div>
               <input type="hidden" name="form_name" value="e_market_scrapper_form" id="form_name" />
@@ -281,12 +289,7 @@
           </div>
         </div>
       </form>
-      <strong>
-      <p style="color: white">
-        <a href="{{ response }} " target="_blank">{{ response }}</a>
-      </p>
-      
-      </strong>
+    
       <!-- ip short response -->
       {% if response and query_type == 'ip_shortend' %}
         <div class="row d-flex flex-row justify-content-start align-items-center">
@@ -563,7 +566,7 @@ class="tab-pane {% if query_type == 'domains_info' %}in active show {% else %} f
 <!-- domains info  -->
 <div class="row">
   <div class="col-md-12 text-white">
-{% if query_type == "domains_info" and response.data  %}
+{% if query_type == "domains_info" and response.data.code == 1  %}
 
 <div class="row">
   <!--  -->

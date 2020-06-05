@@ -849,9 +849,10 @@ class Ip_Tools(View):
             print("#####################################################################################")
             print(resp)
             if(resp['code'] == 0 ):
-                messages.success(request, 'No Response for the given domain ip ')
+                messages.warning(request, 'No Response for the given domain ip ')
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
             else:
+                messages.success(request, 'Query Successfull ! Showing response for  '+domain)
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
 
 

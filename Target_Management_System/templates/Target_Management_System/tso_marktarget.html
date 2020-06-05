@@ -1,6 +1,8 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% load osint_custom_tags %}
+
+{% load osint_custom_tags %}
 {% block head_dep %}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -125,6 +127,10 @@
                                                                 SEARCH
                                                             </button>
                                                         </div>
+                                                        {% now "SHORT_DATE_FORMAT" as today %}
+                                                       
+                         
+                                                       
                                                     </div>
                                                     <div><span> <i class="fas fa-spinner fa-spin"
                                                                    style="font-size:25px;" id="loading_icon"></i></span>
@@ -208,8 +214,9 @@
                                                                 <input type="date"
                                                                        class="col-md-9 form-control  newinputdesign"
                                                                        id="{{ platform.name|lower }}-expirydate"
-                                                                       name="{{ platform.name|lower }}_expirydate">
-                                                            </div>
+                                                                       name="{{ platform.name|lower }}_expirydate"  min="2020-01-01" max="2020-12-31" value='{{today|to_and}}' />
+                                                                      
+                                                                    </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <!--INTERVAL SECTION-->
@@ -335,7 +342,7 @@
         //start of document ready
         document.addEventListener('DOMContentLoaded', function () {
             let smartsearch = $('.smartsearch')
-// smart search
+// smart searchc
             smartsearch.click((event) => {
                 $(tabpane_name + " #loading_icon").show()
 // console.log(event.target)
@@ -389,35 +396,13 @@
                         $(tabpane_name + ' #smart_search_response').show()
                         $(tabpane_name + ' #smart_search_response').empty().append(
                             " Operation successfull   ")
-                        var now = new Date();
-                        var month = (now.getMonth() + 1);
-                        var day = now.getDate();
-                        if (month < 10)
-                            month = "0" + month;
-                        if (day < 10)
-                            day = "0" + day;
-                        var today = month + '-' + day + '-' + now.getFullYear();
-
-                        $('#facebook-expirydate').val(today);
-                        $('#facebook-expirydate').val(new Date().toDateInputValue());
                         $(tabpane_name + ' #smart_search_response').fadeOut(8000)
                     },
                     error: function () {
                         console.log("Smart Search == in error function ")
                         $(tabpane_name + ' #smart_search_response').show()
                         $(tabpane_name + ' #smart_search_response').empty().append(
-                            " Operation Unsuccessfull  ! Please Try Again ")
-                        var now = new Date();
-                        var month = (now.getMonth() + 1);
-                        var day = now.getDate();
-                        if (month < 10)
-                            month = "0" + month;
-                        if (day < 10)
-                            day = "0" + day;
-                        var today = month + '-' + day + '-' + now.getFullYear();
-
-                        $('#' + tabpane_name + '-expirydate').val(today);
-                        $('#' + tabpane_name + '-expirydate').val(new Date().toDateInputValue());
+                            " Operation Unsuccessfull  ! Please Try Again ")  
                         $(tabpane_name + ' #smart_search_response').fadeOut(8000)
                         $(tabpane_name + " #loading_icon").hide()
                     }
