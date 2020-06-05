@@ -73,6 +73,7 @@ class Person_Tweets(EmbeddedDocument):
     sentiment = StringField()
     user_id = StringField(max_length=50)
     categorization = ListField()
+    images = ListField()
 
 
 """

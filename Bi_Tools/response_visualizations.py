@@ -11,7 +11,7 @@ import collections, functools, operator
 from operator import itemgetter
 
 PLOT_HEIGHT = 350
-BACKGROUND_COLOR = 'white'
+BACKGROUND_COLOR = 'blue'
 
 
 def top_trends_visualization(modelname):
