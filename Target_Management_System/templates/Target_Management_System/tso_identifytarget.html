@@ -134,7 +134,7 @@
                     Search
                     </button>
                       <div class=" col-md-1 p-0 m-0">
-                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_linkedin" style="margin: 7px 0px 0px 20px"></i>
+                          <i class="fas fa-circle-notch fa-spin" id="loading_icon_linkedin" style="margin: 7px 0px 0px 20px"></i>
                       </div>
                 </div>
                 <div class="container othercontainer d-flex justify-content-center" id="linkedin_response" style="border:none;">
@@ -178,6 +178,7 @@
         </div>
     </div>
     <script>
+    window.document.title = "Target";
           function hideLoadingIcons(){
     console.log("hide all icons")
 
@@ -202,7 +203,7 @@ document.getElementById("loading_icon_youtube").style.display = "none";
             $('#loading_icon_reddit').show()
         }
         if(website == 'linkedin'){
-            $('#loading_icon_linked').show()
+            $('#loading_icon_linkedin').show()
         }
 
         if(website == 'twitter'){
@@ -212,7 +213,7 @@ document.getElementById("loading_icon_youtube").style.display = "none";
         if(website == 'youtube'){
             $('#loading_icon_youtube').show()
         }
-        
+
     var query = document.getElementById("hid_query").value
     $.ajax({
     url: "/tms/identifytarget_request/",
@@ -222,13 +223,13 @@ document.getElementById("loading_icon_youtube").style.display = "none";
     },
     'success': (response) => {
     //console.log('i am called    ss  s')
-   
+
     if(website == 'instagram'){
-     
+
         $('#instagram_response').empty().append(response)
         $('#loading_icon_instagram').hide()
     }
-    if(website == 'twitter'){  
+    if(website == 'twitter'){
     $('#twitter_response').empty().append(response)
     $('#loading_icon_twitter').hide()
     }
@@ -240,10 +241,10 @@ document.getElementById("loading_icon_youtube").style.display = "none";
     $('#linkedin_response').empty().append(response)
     $('#loading_icon_linkedin').hide()
     }
-    if(website == 'facebook'){ 
+    if(website == 'facebook'){
     $('#facebook_response').empty().append(response)
     $('#loading_icon_facebook').hide()
-  
+
 
     }
     if(website == 'youtube'){
@@ -255,7 +256,7 @@ document.getElementById("loading_icon_youtube").style.display = "none";
     //console.log(response)
     }
     });
-  
+
     }
 
        
