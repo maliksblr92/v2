@@ -1,18 +1,68 @@
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Experiment with Bokeh</title>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.2.min.js" integrity="sha384-ufR9RFnRs6lniiaFvtJziE0YeidtAgBRH6ux2oUItHw5WTvE1zuk9uzhUU/FJXDp" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            Bokeh.set_log_level("info");
-        </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+       <script type="text/javascript" src="{% static 'Bi_Tools/colorschemes.js' %}"></script>
 
 </head>
 <body>
+<canvas id="myChart" width="400" height="400"></canvas>
 
-    {{ the_div|safe }}
-
-    {{ the_script|safe }}
 </body>
 </html>
+
+
+<!-- Styles -->
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+
+            borderWidth: 1
+        },{
+            label: '# of Votes',
+            data: [124, 169, 35, 5, 2, 3],
+
+            borderWidth: 1
+        }]
+
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+
+        animation: {
+					animateRotate: false,
+					animateScale: true
+				},
+        plugins: {
+
+      colorschemes: {
+
+        scheme: 'brewer.Paired12'
+
+      }
+
+    }
+    }
+});
+</script>
+<!-- HTML -->
