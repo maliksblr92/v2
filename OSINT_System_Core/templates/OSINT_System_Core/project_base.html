@@ -860,7 +860,7 @@
         series.maxCount = 200;
         series.minWordLength = 2;
         series.labels.template.margin(4, 4, 4, 4);
-        series.maxFontSize = am4core.percent(30);
+        series.maxFontSize = am4core.percent(80);
         var z = "{{ context.top_profiles_with_negative_behavior }}"
         series.text = z
 
@@ -871,9 +871,9 @@
         series.angles = [0, -90];
         series.fontWeight = "700"
 
-        setInterval(function () {
-            series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-        }, 10000)
+       // setInterval(function () {
+     //       series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+       // }, 10000)
 
     }); // end am4core.ready()
 

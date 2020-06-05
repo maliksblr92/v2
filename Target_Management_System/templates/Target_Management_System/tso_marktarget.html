@@ -118,13 +118,16 @@
                                                         </div>
                                                         <input type="text" class="form-control newinputdesign"
                                                                name="{{ platform.name|lower }}_autheruseraccount"
+                                                               id="{{ platform.name|lower }}_autheruseraccount"
                                                                value="{{ data.prime_argument }}" required="required"/>
+                                                               <span class="alert" id="alert__autheruseraccount"></span>
                                                         <div class="input-group-append">
                                                             <button type="button"
                                                                     x-target-name="{{ platform.name|lower }}"
                                                                     class="btn btn-secondary searchbutton smartsearch">
                                                                 SMART
-                                                                SEARCH
+                                                                SEARCH <span> <i class="fas fa-spinner fa-spin"
+                                                                    style="font-size:20px;" id="loading_icon"></i></span>
                                                             </button>
                                                         </div>
                                                         {% now "SHORT_DATE_FORMAT" as today %}
@@ -132,8 +135,7 @@
                          
                                                        
                                                     </div>
-                                                    <div><span> <i class="fas fa-spinner fa-spin"
-                                                                   style="font-size:25px;" id="loading_icon"></i></span>
+                                                    <div>
                                                         <span id="smart_search_response"
                                                               class="alert alert-info font-weight-bold "
                                                               style="font-size:13px;"></span></div>
@@ -329,6 +331,7 @@
 
     </script>
     <script>
+        
         function cleanForm() {
             var allInputs = $(":input");
             $(allInputs).val('')
@@ -344,9 +347,14 @@
             let smartsearch = $('.smartsearch')
 // smart searchc
             smartsearch.click((event) => {
-                $(tabpane_name + " #loading_icon").show()
+               
+               
+
 // console.log(event.target)
                 let website = event.target.getAttribute('x-target-name')
+                console.log(website);
+                console.log($(`#${website}-authoruserid`).val())
+                console.log($("#"+webiste+"-authoruserid").val())
                 let author_account = event.target.parentElement.parentElement.querySelector('input').value
                 let target_type = "{{platform.name|lower}}"
 //console.log(website)
@@ -362,47 +370,57 @@
                     url: "/tms/smartsearch/",
                     data: data,
                     success: (response) => {
-                        console.log("Smart Search == in success function ")
-// console.log(response)
-                        $(`#${website}-authoruserid`).val(response['author_userid'])
-                        $(`#${website}-authorusername`).val(response['author_username'])
-                        document.getElementById(`${website}-profile_image`).src = response[
-                            'profile_url']
-                        switch (website) {
-                            case 'reddit':
-                                $(`#${website}-authoruserurl`).val(
-                                    `http://www.reddit.com/${author_account}`)
-                                break;
-                            case 'linkedin':
-                                $(`#${website}-authoruserurl`).val(
-                                    `http://www.linkedin.com/in/${author_account}`)
-                                break;
-                            case 'instagram':
-                                $(`#${website}-authoruserurl`).val(
-                                    `http://www.instagram.com/${author_account}`)
-                                break;
-                            case 'facebook':
-                                $(`#${website}-authoruserurl`).val(
-                                    `http://www.facebook.com/${author_account}`)
-                                break;
-                            case 'twitter':
-                                $(`#${website}-authoruserurl`).val(
-                                    `http://www.twitter.com/${author_account}`)
-                                break;
-                            default:
-                                break;
-                        }
-                        $(tabpane_name + " #loading_icon").hide()
+                    if(response['author_userid'] == '') {
                         $(tabpane_name + ' #smart_search_response').show()
                         $(tabpane_name + ' #smart_search_response').empty().append(
-                            " Operation successfull   ")
+                            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Error in author account ! please try again with correct username  ")  
                         $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                        $(tabpane_name + " #loading_icon").hide()
+                    }
+                    else{
+                        console.log("Smart Search == in success function else condition ** user name is returend not null  ")
+                        // console.log(response)
+                                                $(`#${website}-authoruserid`).val(response['author_userid'])
+                                                $(`#${website}-authorusername`).val(response['author_username'])
+                                                document.getElementById(`${website}-profile_image`).src = response[
+                                                    'profile_url']
+                                                switch (website) {
+                                                    case 'reddit':
+                                                        $(`#${website}-authoruserurl`).val(
+                                                            `http://www.reddit.com/${author_account}`)
+                                                        break;
+                                                    case 'linkedin':
+                                                        $(`#${website}-authoruserurl`).val(
+                                                            `http://www.linkedin.com/in/${author_account}`)
+                                                        break;
+                                                    case 'instagram':
+                                                        $(`#${website}-authoruserurl`).val(
+                                                            `http://www.instagram.com/${author_account}`)
+                                                        break;
+                                                    case 'facebook':
+                                                        $(`#${website}-authoruserurl`).val(
+                                                            `http://www.facebook.com/${author_account}`)
+                                                        break;
+                                                    case 'twitter':
+                                                        $(`#${website}-authoruserurl`).val(
+                                                            `http://www.twitter.com/${author_account}`)
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                                $(tabpane_name + " #loading_icon").hide()
+                                                $(tabpane_name + ' #smart_search_response').show()
+                                                $(tabpane_name + ' #smart_search_response').empty().append(
+                                                    "<i class='fa fa-check mr-2' aria-hidden='true'></i> Operation successfull   ")
+                                                $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                    }
+                        
                     },
                     error: function () {
                         console.log("Smart Search == in error function ")
                         $(tabpane_name + ' #smart_search_response').show()
                         $(tabpane_name + ' #smart_search_response').empty().append(
-                            " Operation Unsuccessfull  ! Please Try Again ")  
+                            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Operation Unsuccessfull  ! Please Try Again ")  
                         $(tabpane_name + ' #smart_search_response').fadeOut(8000)
                         $(tabpane_name + " #loading_icon").hide()
                     }
