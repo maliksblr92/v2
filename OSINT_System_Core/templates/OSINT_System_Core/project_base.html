@@ -28,7 +28,7 @@
     body {
         -webkit-transition: background-color 1s;
         transition: background-color 1s;
-    }
+        font-family: 'Raleway'!important;    }
 
 
 </style>
@@ -111,6 +111,14 @@
 
     .background {
         background: #012847 !important;
+    }
+
+    .notification_border_white {
+        border-color: #D5D5D5 !important;
+    }
+
+    .notification_border_blue {
+        border-color: #2A77B2 !important;
     }
 
 </style>
@@ -212,26 +220,26 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <span class=" badge chart_label ">Control Box</span>
+                                    <span class=" badge chart_label ">Subsystem Notifications</span>
                                 </div>
                             </div>
 
                             <div class="col-lg-6  m-0 p-3">
                                 <div class="row">
                                     <div class="col-lg-4 d-flex flex-column">
-                                        <div id="chart_6" class="m-0 p-0 "></div>
+                                        <div id="chart_66" class="m-0 p-0 "></div>
                                         <div class="text-center">
                                             <span class=" badge chart_label  ">Upload Speed</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 d-flex flex-column">
-                                        <div id="chart_7" class="m-0 p-0 "></div>
+                                        <div id="chart_77" class="m-0 p-0 "></div>
                                         <div class="text-center">
                                             <span class=" badge  chart_label ">Downlaod Speed</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 m-0 p-0 d-flex flex-column">
-                                        <div id="chart_8" class="m-0 p-0 "></div>
+                                        <div id="chart_88" class="m-0 p-0 "></div>
                                         <div class="text-center">
                                             <span class=" badge  chart_label">Tasks</span>
                                         </div>
@@ -312,48 +320,48 @@
                         control_msg_box = $('#notification-box')
 
                         function notify() {
-                            control_msg_box.addClass(" border border-success")
+                            control_msg_box.addClass(" border notification_border_white")
                             setTimeout(function () {
 
-                                control_msg_box.removeClass("border border-success")
-                                control_msg_box.addClass(" border border-primary")
+                                control_msg_box.removeClass("border notification_border_blue")
+                                control_msg_box.addClass(" border notification_border_white")
                                 setTimeout(function () {
 
-                                    control_msg_box.removeClass("border border-primary")
-                                    control_msg_box.addClass(" border border-warning")
+                                    control_msg_box.removeClass("border notification_border_white")
+                                    control_msg_box.addClass(" border notification_border_blue")
                                     setTimeout(function () {
 
-                                        control_msg_box.removeClass("border border-warning")
-                                        control_msg_box.addClass("border border-success")
+                                        control_msg_box.removeClass("border notification_border_blue")
+                                        control_msg_box.addClass("border notification_border_white")
                                         setTimeout(function () {
 
-                                            control_msg_box.removeClass("border border-success")
-                                            control_msg_box.addClass(" border border-primary")
+                                            control_msg_box.removeClass("border notification_border_white")
+                                            control_msg_box.addClass(" border notification_border_blue")
                                             setTimeout(function () {
 
-                                                control_msg_box.removeClass("border border-primary")
-                                                control_msg_box.addClass("border border-success")
+                                                control_msg_box.removeClass("border notification_border_blue")
+                                                control_msg_box.addClass("border notification_border_white")
                                                 setTimeout(function () {
 
-                                                    control_msg_box.removeClass("border border-success")
-                                                    control_msg_box.addClass("border border-primary")
+                                                    control_msg_box.removeClass("border notification_border_white")
+                                                    control_msg_box.addClass("border notification_border_blue")
 
                                                     setTimeout(function () {
-                                                        control_msg_box.removeClass("border border-primary")
-                                                        control_msg_box.addClass("border border-warning")
+                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                        control_msg_box.addClass("border notification_border_white")
                                                         setTimeout(function () {
-                                                            control_msg_box.removeClass("border border-warning")
-                                                            control_msg_box.addClass("border border-success")
+                                                            control_msg_box.removeClass("border notification_border_white")
+                                                            control_msg_box.addClass("border notification_border_blue")
                                                             setTimeout(function () {
-                                                                control_msg_box.removeClass("border border-success")
-                                                                control_msg_box.addClass("border border-primary")
+                                                                control_msg_box.removeClass("border notification_border_blue")
+                                                                control_msg_box.addClass("border notification_border_white")
                                                                 setTimeout(function () {
-                                                                    control_msg_box.removeClass("border border-primary")
-                                                                    control_msg_box.addClass("border border-warning")
+                                                                    control_msg_box.removeClass("border notification_border_white")
+                                                                    control_msg_box.addClass("border notification_border_blue")
                                                                     setTimeout(function () {
-                                                                        control_msg_box.removeClass("border border-warning")
-                                                                        control_msg_box.addClass("border border-success")
-                                                                        control_msg_box.removeClass("border border-success")
+                                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                                        control_msg_box.addClass("border notification_border_white")
+                                                                        control_msg_box.removeClass("border notification_border_blue")
                                                                     }, 1000)
                                                                 }, 1000)
                                                             }, 1000)
@@ -860,7 +868,7 @@
         series.maxCount = 200;
         series.minWordLength = 2;
         series.labels.template.margin(4, 4, 4, 4);
-        series.maxFontSize = am4core.percent(30);
+        series.maxFontSize = am4core.percent(80);
         var z = "{{ context.top_profiles_with_negative_behavior }}"
         series.text = z
 
@@ -871,9 +879,9 @@
         series.angles = [0, -90];
         series.fontWeight = "700"
 
-        setInterval(function () {
-            series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-        }, 10000)
+       // setInterval(function () {
+     //       series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+       // }, 10000)
 
     }); // end am4core.ready()
 

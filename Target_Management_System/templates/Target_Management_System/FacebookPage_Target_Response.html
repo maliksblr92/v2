@@ -336,7 +336,7 @@
         </div>
         <div class="col-md-8 ">
             <div class="profile-image-name text-white ">
-                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name }}</span>
+                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }}</span>
             </div>
         </div>
     </div>
@@ -563,7 +563,7 @@
                             <i class="fas fa-chart-bar text-white fa-2x"></i>
                             <span class=" text-white ml-2" style="font-size:18px;">
                                             <span class="font-weight-bold">
-                                                {{ page.name }}
+                                                {{ page.name|truncatechars:"25" }}
                                             </span>
                                             Statistics
                                         </span>
@@ -641,7 +641,7 @@
                             <i class="fas fa-address-card fa-2x text-white"></i>
                             <span class="text-white ml-2" style="font-size:18px;">
                                             <span class="font-weight-bold">
-                                                {{ page.name }}
+                                                {{ page.name|truncatechars:"25" }}
                                             </span>
                                             Contact
                                         </span>
@@ -663,7 +663,11 @@
                                         <span class="text_paragraph font-weight-bold small-txt">
                                             {{ page.contact_information.0.value }}
                                         </span>
-                            <a href="{{ page.contact_information.0.value }}" target="_blank" class="badge custom_badge">view</a>
+                                        {% if page.contact_information.0.value in not Null %}
+                            <a href="{{ page.contact_information.0.value }}" target="_blank" class="badge custom_badge text-dark">{{ page.contact_information }}</a>
+                            {% else %}
+                                    <span>N/A</span>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -1012,7 +1016,7 @@
                                                 <!--   <img src="{{p.author_media_directory}}" style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid"> -->
                                             </div>
                                             <div class="col-md-5 custom-column-start-start pt-2 text_heading">
-                                                <span> {{ page.name }}</span>
+                                                <span> {{ page.name|truncatechars:"25" }}</span>
                                                 <span class="smaller-txt">{{ p.timestamp }}</span>
                                             </div>
                                             <div class="col-md-5  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">

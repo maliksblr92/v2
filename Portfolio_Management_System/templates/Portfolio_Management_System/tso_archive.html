@@ -31,20 +31,20 @@
     <div class="row">
         <div class="col-md-12  m-0 p-0">
             <div class="w-100 h-100 glowing_border" style="border-radius: 20px 20px 0px 0px;">
-                <div class="card-header main_card_header m-0 p-0 ">
+                <div class="card-header custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
                     <p class="card_header_text">Profile Archive </p>
                 </div>
-                <div class="card-body main_card">
+                <div class="card-body main_card custom_main_background">
                     <!-- row 1 small cards starts -->
                     <div class="row  m-1">
                         {% for portfolio in portfolios %}
                             <!-- small card col-md-3  -->
                             <div class="col-md-4  ">
-                                <div class=" row small_card_warpper border">
-                                    <div class=" row small_card_warpper glowing_border ">
+                                <div class=" m-1 row small_card_warpper border">
+                                    <div class=" row small_card_warpper custom_card_body_background glowing_border ">
 
 
-                                        <div class="col-md-1 glowing_border  small_card_scroll"
+                                        <div class="col-md-1 glowing_border custom_card_body_background small_card_scroll"
                                              style="height: 300px !important;">
 
 
@@ -71,24 +71,24 @@
                                              style="height: 300px;">
                                             <ul class="mt-2">
                                                 <li class="d-flex flex-column"><span
-                                                        class="text-white font-weight-bold badge custom_bagde"
+                                                        class=" font-weight-bold badge badge-light"
                                                         style="width:100px;"> Title :</span>
                                                     <span class="text-white font-weight-bold "
                                                           style="font-size:12px;">{{ portfolio.name }}</span></li>
                                                 <li class="d-flex flex-column"><span
-                                                        class="text-white font-weight-bold badge custom_bagde"
+                                                        class=" font-weight-bold badge badge-light"
                                                         style="width:100px;">Portfolio type :</span>
                                                     <span class="text-white font-weight-bold "
                                                           style="font-size:12px;">{{ portfolio.portfolio_type }}</span>
                                                 </li>
                                                 <li class="d-flex flex-column"><span
-                                                        class="text-white font-weight-bold badge custom_bagde"
+                                                        class=" font-weight-bold badge badge-light"
                                                         style="width:100px;">Created on :</span>
                                                     <span class="text-white font-weight-bold "
                                                           style="font-size:12px;"> {{ portfolio.created_on }}</span>
                                                 </li>
                                                 <li class="d-flex flex-column"><span
-                                                        class="text-white font-weight-bold badge custom_bagde"
+                                                        class=" font-weight-bold badge badge-light"
                                                         style="width:100px;">Updated on :</span>
                                                     <span class="text-white font-weight-bold "
                                                           style="font-size:12px;">{{ portfolio.created_on }}</span></li>

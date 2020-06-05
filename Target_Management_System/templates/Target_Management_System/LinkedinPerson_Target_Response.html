@@ -162,7 +162,13 @@
           <div class="col-md-1"></div>
           <div class="col-md-2">
             <div class="prodile_pic_wrapper">
-              <img  src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100" style="width: 100%;height: 100%;"class="img-fluid" />
+                {% if profile.image_url %}
+                    <img src="{{ profile.image_url }}" style="width: 100%;height: 100%;" class="img-fluid"/>
+                {% else %}
+                    <img src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"
+                         style="width: 100%;height: 100%;" class="img-fluid"/>
+                {% endif %}
+
             </div>
           </div>
           
@@ -204,7 +210,7 @@
               <span class="float-left text-muted">
                 <strong>Phone</strong>
               </span>
-              {{profile.phone | default:"051-250648"}}
+              {{profile.phone | default:"N/A"}}
             </li>
             <li class="list-group-item text-right">
               <span class="float-left text-muted">
