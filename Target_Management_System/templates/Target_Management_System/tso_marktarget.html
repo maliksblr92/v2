@@ -131,9 +131,8 @@
                                                             </button>
                                                         </div>
                                                         {% now "SHORT_DATE_FORMAT" as today %}
-                                                       
-                         
-                                                       
+
+
                                                     </div>
                                                     <div>
                                                         <span id="smart_search_response"
@@ -216,9 +215,11 @@
                                                                 <input type="date"
                                                                        class="col-md-9 form-control  newinputdesign"
                                                                        id="{{ platform.name|lower }}-expirydate"
-                                                                       name="{{ platform.name|lower }}_expirydate"  min="2020-01-01" max="2020-12-31" value='{{today|to_and}}' />
-                                                                      
-                                                                    </div>
+                                                                       name="{{ platform.name|lower }}_expirydate"
+                                                                       min="2020-01-01" max="2020-12-31"
+                                                                       value='{{ today|to_and }}'/>
+
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <!--INTERVAL SECTION-->
@@ -318,6 +319,7 @@
 {% block foot_script %}
 
     <script>
+        window.document.title = "Mark Target";
         Date.prototype.toDateInputValue = (function () {
             var local = new Date(this);
             local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -420,7 +422,11 @@
                         console.log("Smart Search == in error function ")
                         $(tabpane_name + ' #smart_search_response').show()
                         $(tabpane_name + ' #smart_search_response').empty().append(
+<<<<<<< HEAD
                             "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Operation Unsuccessfull  ! Please Try Again ")  
+=======
+                            " Operation Unsuccessfull  ! Please Try Again ")
+>>>>>>> 08c364f6037aa82b040b0b72f254fbe346a73271
                         $(tabpane_name + ' #smart_search_response').fadeOut(8000)
                         $(tabpane_name + " #loading_icon").hide()
                     }

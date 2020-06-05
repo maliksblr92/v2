@@ -113,6 +113,14 @@
         background: #012847 !important;
     }
 
+    .notification_border_white {
+        border-color: #D5D5D5 !important;
+    }
+
+    .notification_border_blue {
+        border-color: #2A77B2 !important;
+    }
+
 </style>
 <!-- container fluid div -->
 <div class="container-fluid">
@@ -212,7 +220,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <span class=" badge chart_label ">Control Box</span>
+                                    <span class=" badge chart_label ">Subsystem Notifications</span>
                                 </div>
                             </div>
 
@@ -312,48 +320,48 @@
                         control_msg_box = $('#notification-box')
 
                         function notify() {
-                            control_msg_box.addClass(" border border-success")
+                            control_msg_box.addClass(" border notification_border_white")
                             setTimeout(function () {
 
-                                control_msg_box.removeClass("border border-success")
-                                control_msg_box.addClass(" border border-primary")
+                                control_msg_box.removeClass("border notification_border_blue")
+                                control_msg_box.addClass(" border notification_border_white")
                                 setTimeout(function () {
 
-                                    control_msg_box.removeClass("border border-primary")
-                                    control_msg_box.addClass(" border border-warning")
+                                    control_msg_box.removeClass("border notification_border_white")
+                                    control_msg_box.addClass(" border notification_border_blue")
                                     setTimeout(function () {
 
-                                        control_msg_box.removeClass("border border-warning")
-                                        control_msg_box.addClass("border border-success")
+                                        control_msg_box.removeClass("border notification_border_blue")
+                                        control_msg_box.addClass("border notification_border_white")
                                         setTimeout(function () {
 
-                                            control_msg_box.removeClass("border border-success")
-                                            control_msg_box.addClass(" border border-primary")
+                                            control_msg_box.removeClass("border notification_border_white")
+                                            control_msg_box.addClass(" border notification_border_blue")
                                             setTimeout(function () {
 
-                                                control_msg_box.removeClass("border border-primary")
-                                                control_msg_box.addClass("border border-success")
+                                                control_msg_box.removeClass("border notification_border_blue")
+                                                control_msg_box.addClass("border notification_border_white")
                                                 setTimeout(function () {
 
-                                                    control_msg_box.removeClass("border border-success")
-                                                    control_msg_box.addClass("border border-primary")
+                                                    control_msg_box.removeClass("border notification_border_white")
+                                                    control_msg_box.addClass("border notification_border_blue")
 
                                                     setTimeout(function () {
-                                                        control_msg_box.removeClass("border border-primary")
-                                                        control_msg_box.addClass("border border-warning")
+                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                        control_msg_box.addClass("border notification_border_white")
                                                         setTimeout(function () {
-                                                            control_msg_box.removeClass("border border-warning")
-                                                            control_msg_box.addClass("border border-success")
+                                                            control_msg_box.removeClass("border notification_border_white")
+                                                            control_msg_box.addClass("border notification_border_blue")
                                                             setTimeout(function () {
-                                                                control_msg_box.removeClass("border border-success")
-                                                                control_msg_box.addClass("border border-primary")
+                                                                control_msg_box.removeClass("border notification_border_blue")
+                                                                control_msg_box.addClass("border notification_border_white")
                                                                 setTimeout(function () {
-                                                                    control_msg_box.removeClass("border border-primary")
-                                                                    control_msg_box.addClass("border border-warning")
+                                                                    control_msg_box.removeClass("border notification_border_white")
+                                                                    control_msg_box.addClass("border notification_border_blue")
                                                                     setTimeout(function () {
-                                                                        control_msg_box.removeClass("border border-warning")
-                                                                        control_msg_box.addClass("border border-success")
-                                                                        control_msg_box.removeClass("border border-success")
+                                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                                        control_msg_box.addClass("border notification_border_white")
+                                                                        control_msg_box.removeClass("border notification_border_blue")
                                                                     }, 1000)
                                                                 }, 1000)
                                                             }, 1000)
