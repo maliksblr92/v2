@@ -48,7 +48,7 @@
 {% block belly %}
     <div class="row ">
         <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
-            <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
+            <h5 class=" mt-4 ml-3 toptitle">MARK TARGET</h5>
         </div>
         <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
             <!-- TOP MANU BAR -->
@@ -97,7 +97,7 @@
                                     <div class="row formbg">
                                         <div class="col-md-4 d-flex flex-column justify-content-around align-items-center">
                                             <div class="">
-                                                <img id="{{ platform.name|lower }}-profile_image" class="ml-5"
+                                                <img id="{{ platform.name|lower }}-profile_image" class="ml-5 profile_image"
                                                      style="height:150px; width:150px; border-radius: 50%;"
                                                      src="{% static 'images/testimonial.png' %}" alt="">
                                             </div>
@@ -116,11 +116,13 @@
                                     opacity:0.9; padding:5px 9px 0 10px;">Author Account
                                 </span>
                                                         </div>
-                                                        <input type="text" class="form-control newinputdesign"
+                                                        <input type="text" class="form-control newinputdesign _autheruseraccount"
                                                                name="{{ platform.name|lower }}_autheruseraccount"
                                                                id="{{ platform.name|lower }}_autheruseraccount"
-                                                               value="{{ data.prime_argument }}" required="required"/>
-                                                               <span class="alert" id="alert__autheruseraccount"></span>
+                                                               value="{{ data.prime_argument }}" 
+                                                               
+                                                               required="required"/>
+                          
                                                         <div class="input-group-append">
                                                             <button type="button"
                                                                     x-target-name="{{ platform.name|lower }}"
@@ -130,6 +132,7 @@
                                                                     style="font-size:20px;" id="loading_icon"></i></span>
                                                             </button>
                                                         </div>
+                                                        <div class="alert alert-info col-md-12" id="alert__autheruseraccount"style="height:40px;font-weight:bold;font-size:12px;"></div>
                                                         {% now "SHORT_DATE_FORMAT" as today %}
 
 
@@ -147,13 +150,15 @@
                                                         </div>
                                                         <select
                                                                 style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                                class="custom-select newinput col-md-9 form-control newinputdesign"
+                                                                class="custom-select newinput col-md-9 form-control newinputdesign _authortype"
                                                                 name="{{ platform.name|lower }}_authortype"
-                                                                id="{{ platform.name|lower }}_authortype">
+                                                                id="{{ platform.name|lower }}_authortype"
+                                                                class="">
                                                             {% for choice in platform.target_type %}
                                                                 <option value="{{ forloop.counter0 }}">{{ choice }}</option>
                                                             {% endfor %}
                                                         </select>
+                                                        <div class="alert alert-info col-md-12" id="alert__authortype"style="height:40px;font-weight:bold;font-size:12px;"></div>
                                                     </div>
                                                     <!-- author user id -->
                                                     <div class="row input-group mt-4 mb-3">
@@ -167,7 +172,7 @@
                                                                id="{{ platform.name|lower }}-authoruserid"
                                                                name="{{ platform.name|lower }}_authoruserid"
                                                                aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2">
+                                                               aria-describedby="basic-addon2" required="required" />
 
 
                                                     </div>
@@ -186,7 +191,7 @@
                                                                id="{{ platform.name|lower }}-authorusername"
                                                                name="{{ platform.name|lower }}_authorusername"
                                                                aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2">
+                                                               aria-describedby="basic-addon2" required="required">
                                                     </div>
                                                     <!--AUTHUR URL-->
                                                     <div class="row input-group mt-4 mb-3">
@@ -200,7 +205,7 @@
                                                                id="{{ platform.name|lower }}-authoruserurl"
                                                                name="{{ platform.name|lower }}_authoruserurl"
                                                                aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2">
+                                                               aria-describedby="basic-addon2" required="required">
                                                     </div>
                                                     <!-- DATE AND TIME 2 column div -->
                                                     <div class="row">
@@ -217,7 +222,7 @@
                                                                        id="{{ platform.name|lower }}-expirydate"
                                                                        name="{{ platform.name|lower }}_expirydate"
                                                                        min="2020-01-01" max="2020-12-31"
-                                                                       value='{{ today|to_and }}'/>
+                                                                       value='{{ today|to_and }}' required="required"/>
 
                                                             </div>
                                                         </div>
@@ -232,7 +237,7 @@
                                                                 <select
                                                                         class="custom-select newinput col-md-9 form-control  newinputdesign"
                                                                         id="{{ platform.name|lower }}-interval"
-                                                                        name="{{ platform.name|lower }}_interval">
+                                                                        name="{{ platform.name|lower }}_interval" required="required">
                                                                     {% for interval in data.intervals %}
                                                                         <option class="text-white"
                                                                                 value="{{ interval.0 }}">{{ interval.1 }}</option>
@@ -330,6 +335,24 @@
         console.log("setting default date ")
         console.log(new Date().toDateInputValue())
 
+        function hideErrorAlerts(){
+            $('#alert__autheruseraccount').hide()
+            $('#alert__authortype').hide()
+            
+        }
+        function validate(){
+            var flag =0;
+            if( $('._autheruseraccount').val()==''){
+               $('#alert__autheruseraccount').show()
+               $('#alert__autheruseraccount').empty().append('<i class="fa fa-info-circle mr-2" aria-hidden="true"></i>  <strong>Author account is required </strong>')
+               $('#alert__autheruseraccount').fadeOut(8000);
+               flag=1;
+            }
+           
+           return flag;
+        }
+        hideErrorAlerts();
+        
 
     </script>
     <script>
@@ -337,100 +360,112 @@
         function cleanForm() {
             var allInputs = $(":input");
             $(allInputs).val('')
+            var img= $('.profile_image').attr("src","/static/images/testimonial.png");
             console.log("formed cleaned")
         }
 
         var tabpane_name = "{{platform.name|lower}}";
         console.log("tab_name ==  " + tabpane_name)
         $(tabpane_name + " #loading_icon").hide()
-        $(tabpane_name + ' #smart_search_response').hide()
+        $(tabpane_name + '#smart_search_response').hide()
         //start of document ready
         document.addEventListener('DOMContentLoaded', function () {
             let smartsearch = $('.smartsearch')
 // smart searchc
             smartsearch.click((event) => {
+                $(tabpane_name + '#smart_search_response').show()
+                $(tabpane_name + '#smart_search_response').empty().append("Please wait ! Server is proccessing request")
+                $(tabpane_name + "#loading_icon").show()
+               var flag= validate();
+               if(flag==1){
+                   console.log(flag)
+                   console.log("Request denied -- author id is required for smart search")
+                   $(tabpane_name + "#loading_icon").hide()
+                  
+               }
+               else{
                
+// console.log(event.target)
+let website = event.target.getAttribute('x-target-name')
+var name=website;
+console.log($('._autheruseraccount').val())
+
+let author_account = event.target.parentElement.parentElement.querySelector('input').value
+let target_type = "{{platform.name|lower}}"
+//console.log(website)
+var author_type = $(`#${website}_authortype option:selected`).val();
+console.log(author_type)
+let data = {
+    'author_account': author_account,
+    'search_site': website,
+    'target_type': author_type
+}
+$.ajax({
+    dataType: "json",
+    url: "/tms/smartsearch/",
+    data: data,
+    success: (response) => {
+    if(response['author_userid'] == '') {
+        cleanForm();
+        $(tabpane_name + '#smart_search_response').show()
+        $(tabpane_name + '#smart_search_response').empty().append(
+            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Error in author account ! please try again with correct username  ")  
+        $(tabpane_name + '#smart_search_response').fadeOut(8000)
+        $(tabpane_name + "#loading_icon").hide()
+       
+    }
+    else{
+        console.log("Smart Search == in success function else condition ** user name is returend not null  ")
+        // console.log(response)
+                                $(`#${website}-authoruserid`).val(response['author_userid'])
+                                $(`#${website}-authorusername`).val(response['author_username'])
+                                document.getElementById(`${website}-profile_image`).src = response[
+                                    'profile_url']
+                                switch (website) {
+                                    case 'reddit':
+                                        $(`#${website}-authoruserurl`).val(
+                                            `http://www.reddit.com/${author_account}`)
+                                        break;
+                                    case 'linkedin':
+                                        $(`#${website}-authoruserurl`).val(
+                                            `http://www.linkedin.com/in/${author_account}`)
+                                        break;
+                                    case 'instagram':
+                                        $(`#${website}-authoruserurl`).val(
+                                            `http://www.instagram.com/${author_account}`)
+                                        break;
+                                    case 'facebook':
+                                        $(`#${website}-authoruserurl`).val(
+                                            `http://www.facebook.com/${author_account}`)
+                                        break;
+                                    case 'twitter':
+                                        $(`#${website}-authoruserurl`).val(
+                                            `http://www.twitter.com/${author_account}`)
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                $(tabpane_name + "#loading_icon").hide()
+                                $(tabpane_name + '#smart_search_response').show()
+                                $(tabpane_name + '#smart_search_response').empty().append(
+                                    "<i class='fa fa-check mr-2' aria-hidden='true'></i> Operation successfull   ")
+                                $(tabpane_name + '#smart_search_response').fadeOut(8000)
+    }
+        
+    },
+    error: function () {
+        console.log("Smart Search == in error function ")
+        $(tabpane_name + '#smart_search_response').show()
+        $(tabpane_name + '#smart_search_response').empty().append(
+            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Operation Unsuccessfull  ! Please Try Again ")  
+        $(tabpane_name + '#smart_search_response').fadeOut(8000)
+        $(tabpane_name + "#loading_icon").hide()
+    }
+})
+               }
+
                
 
-// console.log(event.target)
-                let website = event.target.getAttribute('x-target-name')
-                console.log(website);
-                console.log($(`#${website}-authoruserid`).val())
-                console.log($("#"+webiste+"-authoruserid").val())
-                let author_account = event.target.parentElement.parentElement.querySelector('input').value
-                let target_type = "{{platform.name|lower}}"
-//console.log(website)
-                var author_type = $(`#${website}_authortype option:selected`).val();
-                console.log(author_type)
-                let data = {
-                    'author_account': author_account,
-                    'search_site': website,
-                    'target_type': author_type
-                }
-                $.ajax({
-                    dataType: "json",
-                    url: "/tms/smartsearch/",
-                    data: data,
-                    success: (response) => {
-                    if(response['author_userid'] == '') {
-                        $(tabpane_name + ' #smart_search_response').show()
-                        $(tabpane_name + ' #smart_search_response').empty().append(
-                            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Error in author account ! please try again with correct username  ")  
-                        $(tabpane_name + ' #smart_search_response').fadeOut(8000)
-                        $(tabpane_name + " #loading_icon").hide()
-                    }
-                    else{
-                        console.log("Smart Search == in success function else condition ** user name is returend not null  ")
-                        // console.log(response)
-                                                $(`#${website}-authoruserid`).val(response['author_userid'])
-                                                $(`#${website}-authorusername`).val(response['author_username'])
-                                                document.getElementById(`${website}-profile_image`).src = response[
-                                                    'profile_url']
-                                                switch (website) {
-                                                    case 'reddit':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.reddit.com/${author_account}`)
-                                                        break;
-                                                    case 'linkedin':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.linkedin.com/in/${author_account}`)
-                                                        break;
-                                                    case 'instagram':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.instagram.com/${author_account}`)
-                                                        break;
-                                                    case 'facebook':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.facebook.com/${author_account}`)
-                                                        break;
-                                                    case 'twitter':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.twitter.com/${author_account}`)
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                $(tabpane_name + " #loading_icon").hide()
-                                                $(tabpane_name + ' #smart_search_response').show()
-                                                $(tabpane_name + ' #smart_search_response').empty().append(
-                                                    "<i class='fa fa-check mr-2' aria-hidden='true'></i> Operation successfull   ")
-                                                $(tabpane_name + ' #smart_search_response').fadeOut(8000)
-                    }
-                        
-                    },
-                    error: function () {
-                        console.log("Smart Search == in error function ")
-                        $(tabpane_name + ' #smart_search_response').show()
-                        $(tabpane_name + ' #smart_search_response').empty().append(
-<<<<<<< HEAD
-                            "<i class='fa fa-exclamation-triangle mr-2' aria-hidden='true'></i> Operation Unsuccessfull  ! Please Try Again ")  
-=======
-                            " Operation Unsuccessfull  ! Please Try Again ")
->>>>>>> 08c364f6037aa82b040b0b72f254fbe346a73271
-                        $(tabpane_name + ' #smart_search_response').fadeOut(8000)
-                        $(tabpane_name + " #loading_icon").hide()
-                    }
-                })
             })
 // clear form btn functionality
             let clearformbtn = $('.clearform-btn')
