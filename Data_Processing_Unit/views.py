@@ -19,6 +19,7 @@ from Public_Data_Acquisition_Unit.ess_api_controller import Ess_Api_Controller
 from Public_Data_Acquisition_Unit.ais_api_controller import Ais_Api_Controller
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from django.template import Context
+from django.contrib import messages
 
 p_manager = Processing_Manager()
 ess = Ess_Api_Controller()
@@ -162,7 +163,7 @@ class Response_Changes_View(View):
     def get(self,request):
 
         resp_changes = []
-        changes = Change_Record.objects()
+        changes = Change_Record.objects().order_by('-created_on')
         for change in changes:
             resp_obj = acq.get_dataobject_by_gtr(acq.get_gtr_by_id(change.GTR))
             resp_changes.append({'resp_obj':resp_obj,'ctr':change.CTR,'detected_on':change.created_on})
@@ -291,7 +292,24 @@ class Twitter(View):
         if search_type == 'phrase_near_location':
             location = request.POST['location']
             phrase = request.POST['phrase']
+            limit = request.POST['limit']
+            radius = request.POST['radius']
             print(phrase, location)
+            geolocator = Nominatim()
+            location1 = geolocator.geocode(location)
+            lat=str(location1.latitude)
+            lon=str(location1.longitude)
+            rad=str(radius)
+            dic=LocationSearchTweets(phrase,limit,lat,lon,rad)
+            print(dic)
+            if(len(dic) > 0 ):
+                messages.success(
+                    request, 'Query Executed Successfully --Location Search With Phrase and  Radius ')
+                return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
+            else:
+                messages.error(request, 'Query execution failed')
+               
+                return redirect('/dpu/twitter')
             return redirect('/dpu/twitter')
 
 
@@ -783,10 +801,6 @@ class Ip_Tools(View):
         return render(request,'Data_Processing_Unit/ip_tools.html')
     
     def post(self,request,*args,**kwargs):
-
-        print(request.POST)
-        #print(request.POST['query_type'],request.POST['domain'])
-
         query_type=request.POST['query_type']
         if query_type=='image_reverse_lookup':
             print("Query Type "+query_type)
@@ -820,14 +834,173 @@ class Ip_Tools(View):
 
         elif query_type=='domains_ip_info':
             domain=request.POST['domain']
-            print(domain)
             resp = ess.get_domains_ip_info(domain)
             print(resp)
+            if(resp['code'] == 0 ):
+                messages.success(request, 'No Response for the given domain ip ')
+                return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
+            else:
+                return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
+    
 
         elif query_type == 'domains_info':
             domain = request.POST['domain']
             resp = ess.get_domains_info(domain)
-
+            print("#####################################################################################")
+            print(resp)
+            if(resp['code'] == 0 ):
+                messages.warning(request, 'No Response for the given domain ip ')
+                return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
+            else:
+                messages.success(request, 'Query Successfull ! Showing response for  '+domain)
+                return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
 
 
         return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
+    
+    
+def LocationSearchTweets(_phrase,_limit,_lat,_lon,_rad):
+    
+
+    # # c.Hide_output = True
+    # c.Output = True
+    asyncio.set_event_loop(asyncio.new_event_loop())
+    c = twint.Config()
+    c.Limit =_limit
+    c.Geo=""+_lat+","+_lon+","+_rad+"km"
+    if _phrase!='':
+        c.Search = ""+_phrase
+        c.Images = True
+    # c.Output = False
+    c.Store_object = True
+    # print(_tweet_type)
+    # if _tweet_type =='both':
+    #     c.Images = False
+    #     print("image=false")
+    # if _tweet_type=='img':
+    #     c.Images = True
+    #     print("image=true")
+    # if _tweet_type=='text':
+    #     c.Images = False
+    #     print("image=false")
+# lists
+    id=[]
+    id_str=[]
+    conversation_id=[]
+    datetime=[]
+    datestamp=[]
+    timestamp=[]
+    user_id=[]
+    user_id_str=[]
+    username=[]
+    name=[]
+    place=[]
+    timezone=[]
+    img=[]
+    mentions=[]
+    urls=[]
+    photos=[]
+    video=[]
+    text=[]
+    hashtags=[]
+    cashtags=[]
+    replies_count=[]
+    retweets_count=[]
+    likes_count=[]
+    link=[]
+    user_rt_id=[]
+    retweet=[]
+    retweet_id=[]
+    retweet_date=[]
+    quote_url=[]
+    near=[]
+    geo=[]
+    source=[]
+    reply_to=[]
+# Search starts here
+    twint.output.clean_lists()
+    twint.run.Search(c)
+    tweets = twint.output.tweets_list
+    for tweet in tweets:
+      id.append(tweet.id)
+      id_str.append(tweet.id_str)
+      conversation_id.append(tweet.conversation_id)
+      datetime.append(tweet.datetime)
+      datestamp.append(tweet.datestamp)
+      timestamp.append(tweet.timestamp)
+      user_id.append(tweet.user_id)
+      user_id_str.append(tweet.user_id_str)
+      username.append(tweet.username)
+      name.append(tweet.name)
+      place.append(tweet.place)
+      timezone.append(tweet.timezone)
+      mentions.append(tweet.mentions)
+      urls.append(tweet.urls)
+      photos.append(tweet.photos)
+      video.append(tweet.video)
+      text.append(tweet.tweet)
+      hashtags.append(tweet.hashtags)
+      cashtags.append(tweet.cashtags)
+      replies_count.append(tweet.replies_count)
+      retweets_count.append(tweet.retweets_count)
+      likes_count.append(tweet.likes_count)
+      link.append(tweet.link)
+      user_rt_id.append(tweet.user_rt_id)
+      retweet.append(tweet.retweet)
+      retweet_id.append(tweet.retweet_id)
+      retweet_date.append(tweet.retweet_date)
+      quote_url.append(tweet.quote_url)
+      near.append(tweet.near)
+      geo.append(tweet.geo)
+      source.append(tweet.source)
+      reply_to.append(tweet.reply_to)
+
+    # Construct Dictionary of Tweets
+    dic = []
+    for item in zip(id,id_str,conversation_id,datetime,
+                datestamp,timestamp,user_id,user_id_str,username
+                ,name,place,timezone,mentions,urls,photos,
+                 video,text,hashtags,cashtags,replies_count,likes_count,retweets_count,link
+               ,user_rt_id,retweet,retweet_id,retweet_date,quote_url,near,geo,
+                source,reply_to
+               ):
+
+        dic.append({
+            'id':item[0],
+            'id_str':item[1],
+            'conversation_id':item[2],
+            'datetime':item[3],
+            'datestamp':item[4],
+            'timestamp':item[5],
+            'user_id':item[6],
+            'user_id_str':item[7],
+            'username':item[8],
+            'name':item[9],
+            'place':item[10],
+            'timezone':item[11],
+            'mentions':item[12],
+            'urls':item[13],
+            'photos':item[14],
+            'video':item[15],
+            'text':item[16],
+            'hashtags':item[17],
+            'cashtags':item[18],
+            'replies_count':item[19],
+            'likes_count':item[20],
+            'retweets_count':item[21],
+            'link':item[22],
+            'user_rt_id':item[23],
+            'retweet':item[24],
+            'retweet_id':item[25],
+            'retweet_date':item[26],
+            'quote_url':item[27],
+            'near':item[28],
+            'geo':item[29],
+            'source':item[30],
+            'reply_to':item[31],
+                })
+
+
+
+
+    return dic
