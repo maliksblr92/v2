@@ -92,6 +92,7 @@ urlpatterns = [
     path('target/facebook/group/<str:object_gtr_id>', FacebookGroup_Target_Response.as_view(), name="FacebookGroup_Target_Response"),
     path('report/facebook/person/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPersonReport.as_view(), name="FacebookPersonReport"),
     path('report/facebook/page/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookPageReport.as_view(), name="FacebookPageReport"),
+    path('report/facebook/group/?P(?P<object_gtr_id>[0-9]+)\\/$/', FacebookGroupReport.as_view(), name="FacebookGroupReport"),
     
     # Reddit reports and targets pages 
     path('report/target/reddit/?P(?P<object_gtr_id>[0-9]+)\\/$/', Reddit_Target_Report.as_view(), name="Reddit_Target_Report"),

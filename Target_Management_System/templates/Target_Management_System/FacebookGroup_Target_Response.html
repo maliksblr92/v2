@@ -306,7 +306,7 @@
             <div class="circle-dot1 ml-2"></div>
             <div class="circle-dot2 ml-1"></div>
             <div class="circle-dot3 ml-1"></div>
-            <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=profile.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+            <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}" id="download_as_pdf">PDF Downlaod</a>
           </div>
         </div>
         <div class="row ml-1 mr-1 pl-5 pr-5">
@@ -328,209 +328,214 @@
           <!-- Left Card Start -->
           <div class="col-md-3">
                <!-- WORK DETAILS START-->
-            <div class="row border custom_border_color background-gradient-dark mt-2 p-2" style="border-radius:10px 0px 0px 0px;">
-               <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                  <i class="fas fa-user-friends text-white fa-2x"></i>
-                  <span class="ml-2 text-white" style="font-size:18px;">
-                  <span class="font-weight-bold">Perosnal Details</span>
-                  </span>
+            <div class="row border custom_border_color background-gradient-dark mt-2 p-2"
+            style="border-radius:10px 0px 0px 0px;">
+           <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+               <i class="fas fa-user-friends text-white fa-2x"></i>
+               <span class="ml-2 text-white" style="font-size:18px;">
+             <span class="font-weight-bold">Perosnal Details</span>
+             </span>
+           </div>
+           <div class="col-md-2 text-white mt-1"></div>
+       </div>
+       <div class="row p-1 border custom_border_color bg-white" id="work_details_div"
+            style="height:300px;overflow-y:auto;">
+           <!-- start -->
+           <div class="col-md-12  d-flex flex-row justify-content-around align-items-start">
+
+               <a class="badge custom_badge border-radius-none p-2" data-toggle="collapse" id="work_details_btn"
+                  href="#work_details" role="button" aria-expanded="false" aria-controls="work_details">
+                   <i class="fas fa-briefcase mr-2"></i>Work
+               </a>
+               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
+                  id="family_details_btn"
+                  href="#family_details" role="button" aria-expanded="false" aria-controls="family_details">
+                   <i class="fas fa-briefcase mr-2"></i>Family
+               </a>
+
+               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
+                  id="websites_details_btn"
+                  href="#websites_details" role="button" aria-expanded="false" aria-controls="websites_details">
+                   <i class="fas fa-globe mr-2"></i>Web Links
+               </a>
+
+               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
+                  id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false"
+                  aria-controls="social_links_details">
+                   <i class="fas fa-share-alt mr-2"></i>Social Links
+               </a>
+
+
+           </div>
+
+           <div class="col-md-12">
+               <div class="collapse show m-0 p-0" id="work_details">
+                   <div class="card-body p-0 m-0 ">
+                       {% for work in profile.work %}
+                           <div class="row  ">
+                               <div class="col-md-12"><span class="badge custom_badge"
+                                                            style="font-size:12px;font-weight:bold;">{{ forloop.counter }}#{{ work.organisation|default:"N/A" }}</span>
+                               </div>
+                               <div class="col-md-12 mt-1" style="font-size:12px;">
+                                   <p class="font-weight-bold text_paragraph">{{ work.details|default:"N/A" }}</p>
+                               </div>
+                           </div>
+                       {% empty %}
+                           <p>No Work Details </p>
+                       {% endfor %}
+                   </div>
+
                </div>
-               <div class="col-md-2 text-white mt-1"></div>
-            </div>
-            <div class="row p-1 border custom_border_color bg-white" id="work_details_div" style="height:322px;overflow-y:auto;" >
-               <!-- start --> 
-               <div class="col-md-12  d-flex flex-row justify-content-around align-items-start" >
-                                         
-                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="work_details_btn" href="#work_details" role="button" aria-expanded="false" aria-controls="work_details">
-                  Work Details
-                  </a>
-                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="family_details_btn" href="#family_details" role="button" aria-expanded="false" aria-controls="family_details">
-                  family Details
-                  </a>
 
-                   <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="websites_details_btn" href="#websites_details" role="button" aria-expanded="false" aria-controls="websites_details">
-                  Web Links Details
-                  </a>
+               <!-- end -->
 
-                  <a class="badge badge-primary border-radius-none" data-toggle="collapse" id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false" aria-controls="social_links_details">
-                  Social Links Details
-                  </a>
 
- </div>
+               <!-- start -->
 
- <div class="col-md-12">
-                  <div class="collapse show m-0 p-0" id="work_details">
-                     <div class="card card-body p-0 m-0 ">
-                        {% for work in profile.work %}
-                        <div class="row  ">
-                           <div class="col-md-12"><span class="badge badge-primary"style="font-size:12px;font-weight:bold;">{{forloop.counter}}#{{work.organisation|default:"N/A"}}</span></div>
-                           <div class="col-md-12 mt-1"style="font-size:12px;">
-                              <p class="font-weight-bold">{{work.details|default:"N/A"}}</p>
+
+               <div class="collapse m-0 p-0" id="family_details">
+                   <div class="card-body p-0 m-0 ">
+                       {% for family in profile.family %}
+                           <div class="row   mt-2">
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      Enitity Type :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <span class="font-weight-bold text_paragraph">{{ family.entity_type|default:"N/A" }}</span>
+                               </div>
+
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      Username :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <span class="font-weight-bold text_paragraph">{{ family.username|default:"N/A" }}</span>
+                               </div>
+
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      ID :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <span class="font-weight-bold text_paragraph">{{ family.id|default:"N/A" }}</span>
+                               </div>
+
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      Name :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <span class="font-weight-bold text_paragraph">{{ family.name|default:"N/A" }}</span>
+                               </div>
+
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      URL :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <a target="_blank" class="badge custom_badge" href="{{ family.url }}"><i
+                                           class="fa fa-eye"></i></a>
+                               </div>
+
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                      Profile Picture :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <img src="{{ family.media_directory }}" class="img-fluid"
+                                        style="height:100px;;width:100px;;"/>
+                               </div>
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="font-size:12px;font-weight:bold; width: 100px;">
+                     Relation :</span></div>
+                               <div class="col-md-8" style="font-size:12px;">
+                                   <span class="font-weight-bold text_paragraph">{{ family.relation|default:"N/A" }}</span>
+                               </div>
+
+
                            </div>
-                        </div>
-                        {% empty %}
-                        <p>No Work Details </p>
-                        {% endfor %}
-                     </div>
-                  
-                  </div>
-              
-                 <!-- end -->  
+                           <hr>
+                       {% empty %}
+                           <p>No Family Details </p>
+                       {% endfor %}
+                   </div>
 
-
-  <!-- start -->
-               
-                                           
-                 
-                  <div class="collapse m-0 p-0" id="family_details">
-                     <div class="card card-body p-0 m-0 ">
-                        {% for family in profile.family %}
-                        <div class="row   mt-2">
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           Enitity Type :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                              <span class="font-weight-bold">{{family.entity_type|default:"N/A"}}</span>
-                           </div>
-
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           Username :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                              <span class="font-weight-bold">{{family.username|default:"N/A"}}</span>
-                           </div>
-
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           ID :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                              <span class="font-weight-bold">{{family.id|default:"N/A"}}</span>
-                           </div>
-
-
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           Name :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                              <span class="font-weight-bold">{{family.name|default:"N/A"}}</span>
-                           </div>
-
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           URL :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                              <a target="_blank"class="badge badge-success" href="{{family.url}}"><i class="fa fa-eye"></i></a>
-                           </div>
-
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                           Profile Picture :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                             <img src="{{family.media_directory}}" class="img-fluid" style="height:100px;;width:100px;;" />
-                           </div>
-
-                           <div class="col-md-4"><span class="badge "
-                           style="font-size:12px;font-weight:bold;">
-                          Relation :</span></div>
-                           <div class="col-md-8"style="font-size:12px;">
-                               <span class="font-weight-bold">{{family.relation|default:"N/A"}}</span>
-                           </div>
-
-
-
-                        </div>
-                        <hr>
-                        {% empty %}
-                        <p>No Family Details </p>
-                        {% endfor %}
-                     </div>
-                    
-                  </div>
-             
-                <!-- end --> 
-
-
-
-                <!-- start -->
-               
-                                           
-                 
-                  <div class="collapse m-0 p-0" id="websites_details">
-                    
-                     
-                        {% for webistes in profile.web_links.websites %}
-                        <div class="row">
-                        <div class="col-md-12">
-                        <span class="badge "> {{forloop.counter}} # ) {{webistes}}</span>
-                        <a href="{{webistes}}"target="_blank" class="badge badge-success float-right "><i class="fa fa-eye"></i></a>
-                        </div>
-                        
-                      </div>
-                        {% empty %}
-                        <p>No Websites Details </p>
-                        {% endfor %}
-                   
-                    
-                
                </div>
-                <!-- end --> 
+
+               <!-- end -->
 
 
+               <!-- start -->
 
 
-<!-- start -->
-             
-                                           
-                 
-                  <div class="collapse m-0 p-0" id="social_links_details">
-                     <div class="card card-body p-0 m-0 ">
-                      
-                        {% for social_links in profile.web_links.social_links %}
-                       <div class="row mt-2">
-                        <div class="col-md-4"><span class="badge">Name</span></div>
-                         <div class="col-md-8">
-                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.link|default:"N/A"}}</span>
-                         </div>
-                         
-                          <div class="col-md-4"><span class="badge">URL</span></div>
-                         <div class="col-md-8">
-                         <a href="{{social_links.url}}"  target="_blank"class="badge badge-success "><i class="fa fa-eye"></i></a>
-                         </div>
+               <div class="collapse m-0 p-0" id="websites_details">
 
-                          <div class="col-md-4"><span class="badge">Details</span></div>
-                         <div class="col-md-8">
-                         
-                         <span class="font-weight-bold"style="font-size:12px;">{{social_links.details|default:"N/A"}}</span>
-                         </div>
-                        
-                        <hr>
-                    
-                      </div>
-                        {% empty %}
-                        <p>No Social Link Details </p>
-                        {% endfor %}
-                   
-                    
-                  </div>
+
+                   {% for webistes in profile.web_links.websites %}
+                       <div class="row ">
+                           <div class="col-md-12">
+                               <span class="badge "> {{ forloop.counter }} # ) {{ webistes }}</span>
+                               <a href="{{ webistes }}" target="_blank" class="badge custom_badge float-right "><i
+                                       class="fa fa-eye"></i></a>
+                           </div>
+
+                       </div>
+                   {% empty %}
+                       <p>No Websites Details </p>
+                   {% endfor %}
+
+
                </div>
-                <!-- end --> 
+               <!-- end -->
 
 
+               <!-- start -->
 
 
+               <div class="collapse m-0 p-0" id="social_links_details">
+                   <div class="card card-body p-0 m-0 ">
+
+                       {% for social_links in profile.web_links.social_links %}
+                           <div class="row mt-2">
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="width: 70px;">Name</span></div>
+                               <div class="col-md-8">
+                                   <span class="font-weight-bold text_paragraph"
+                                         style="font-size:12px;">{{ social_links.link|default:"N/A" }}</span>
+                               </div>
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="width: 70px;">URL</span></div>
+                               <div class="col-md-8">
+                                   <a href="{{ social_links.url }}" target="_blank" class="badge custom_badge"><i
+                                           class="fa fa-eye"></i></a>
+                               </div>
+
+                               <div class="col-md-4"><span class="badge custom_badge text-left"
+                                                           style="width: 70px;">Details</span></div>
+                               <div class="col-md-8">
+
+                                   <span class="font-weight-bold text_paragraph"
+                                         style="font-size:12px;">{{ social_links.details|default:"N/A" }}</span>
+                               </div>
+
+                               <hr>
+
+                           </div>
+                       {% empty %}
+                           <p>No Social Link Details </p>
+                       {% endfor %}
 
 
-
-
-
-            </div>
+                   </div>
                </div>
-            <!-- WORK DETAILS END -->
+               <!-- end -->
+
+
+           </div>
+       </div>
+       <!-- WORK DETAILS END -->
             <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
               <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
                 <div class="row">
@@ -792,8 +797,8 @@
                           <div class="col-md-6 m-0 p-0 text-center">
                             <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
                             <div class="row">
-                              <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;">
-                              </div>
+                              <!-- <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;"></div> -->
+                              
                             </div>
                           </div>
                           <div class="col-md-12">
