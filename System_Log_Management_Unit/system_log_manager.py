@@ -67,11 +67,14 @@ class System_Stats(object):
         try:
             responces = Twitter_Response_TMS.objects().order_by(''+count_type)[:top]
             for resp in responces:
-                resp.to_mongo()
-                data_list.append({'name':resp.name,'count':int(re.search(r'\d+', resp[count_type]).group())})
-
+                try:
+                    resp.to_mongo()
+                    data_list.append({'name':resp.name,'count':int(re.search(r'\d+', resp[count_type]).group())})
+                except:
+                    pass
             return sorted(data_list, key = lambda i: i['count'])
         except Exception as e:
+            print(e)
             return None
 
 
