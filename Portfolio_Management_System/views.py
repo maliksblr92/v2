@@ -347,13 +347,16 @@ class Portfolio_Links(RequireLoginMixin, IsTSO, View):
                 linked_objs = Portfolio_Linked_PMS.objects(alpha_reference=portfolio)
                 if(linked_objs):
                     for obj in linked_objs:
-                        if(not isinstance(obj.beta_reference,Timeline_Posts_Model)):
-                            gtr_list.append(obj.beta_reference.GTR)
-                        else:
-                            resource = Portfolio_Link.resolve_intell_refference(beta_ref=obj.beta_reference, beta_path=obj.beta_path)
-                            if(resource):
-                                posts.append(resource)
+                        try:
+                            if(not isinstance(obj.beta_reference,Timeline_Posts_Model)):
+                                gtr_list.append(obj.beta_reference.GTR)
+                            else:
+                                resource = Portfolio_Link.resolve_intell_refference(beta_ref=obj.beta_reference, beta_path=obj.beta_path)
+                                if(resource):
+                                    posts.append(resource)
 
+                        except :
+                            pass
 
                     resp = acq.get_linked_targets(link_type='portfolio',gtr_list=gtr_list)
                     print(posts)

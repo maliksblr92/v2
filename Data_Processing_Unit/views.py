@@ -161,14 +161,16 @@ class Generate_Reports(object):
 class Response_Changes_View(View):
 
     def get(self,request):
+        try:
+            resp_changes = []
+            changes = Change_Record.objects().order_by('-created_on')
+            for change in changes:
+                resp_obj = acq.get_dataobject_by_gtr(acq.get_gtr_by_id(change.GTR))
+                resp_changes.append({'resp_obj':resp_obj,'ctr':change.CTR,'detected_on':change.created_on})
+            return render(request,'Data_Processing_Unit/response_changes_view.html',{'resp_changes':resp_changes})
 
-        resp_changes = []
-        changes = Change_Record.objects().order_by('-created_on')
-        for change in changes:
-            resp_obj = acq.get_dataobject_by_gtr(acq.get_gtr_by_id(change.GTR))
-            resp_changes.append({'resp_obj':resp_obj,'ctr':change.CTR,'detected_on':change.created_on})
-        return render(request,'Data_Processing_Unit/response_changes_view.html',{'resp_changes':resp_changes})
-
+        except:
+            return render(request, 'Data_Processing_Unit/response_changes_view.html', {'resp_changes': ''})
 
 
 class Index(View):
