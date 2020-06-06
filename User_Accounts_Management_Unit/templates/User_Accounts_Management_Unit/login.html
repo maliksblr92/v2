@@ -293,7 +293,9 @@
         >
           <form action="/accounts/login/" method="POST">
             {% csrf_token %}
-              <p>{{ message }}</p>
+            {% if message %}
+              <p class="alert alert-danger"><i class="fa fa-unlock-alt mr-2 fa-2x" aria-hidden="true"></i>{{ message }}</p>
+              {% endif %}
 
             <br />
             <br />
