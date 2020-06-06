@@ -203,6 +203,8 @@ class Data_Queries(object):
 
     def generalize_data_for_nodes(self,website,target_type,data_object):
 
+        max_node_limit = 100
+
         beta_nodes_list = []
         alpha_node = {}
 
@@ -211,7 +213,7 @@ class Data_Queries(object):
             alpha_node['username']  = data_object['username']
             alpha_node['picture_url']  = data_object['profile_picture_url']['profile_picture']
 
-            for item in data_object['close_associates']:
+            for item in data_object['close_associates'][0:max_node_limit]:
 
                 if(len(item['username'])>0):
                     temp_dic = {'username':item['username'],'picture_url':item['media_directory']}
@@ -226,7 +228,7 @@ class Data_Queries(object):
             alpha_node['username']  = data_object['username']
             alpha_node['picture_url']  = data_object['profile_picture_url']
 
-            for item in data_object['followers']:
+            for item in data_object['followers'][0:max_node_limit]:
                 temp_dic = {'username':item['username'],'picture_url':item['picture_image_url']}
                 beta_nodes_list.append(temp_dic)
 
@@ -237,7 +239,7 @@ class Data_Queries(object):
             alpha_node['username'] = data_object['author_account']
             alpha_node['picture_url'] = data_object['profile_url']
 
-            for item in data_object['followers']:
+            for item in data_object['followers'][0:max_node_limit]:
                 temp_dic = {'username': item['username'], 'picture_url': item['avatar']}
                 beta_nodes_list.append(temp_dic)
             print("********************************************************************************************")
