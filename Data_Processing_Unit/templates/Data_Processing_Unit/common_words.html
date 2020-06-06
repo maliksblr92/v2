@@ -84,6 +84,8 @@ select{
 
 {% block belly %}
 
+
+{% if common_words %}
 <div class="row">
     <div class="col-md-12  ">
         <div class="w-100 h-100 " id="content_div">
@@ -125,6 +127,11 @@ select{
 
     </div>
 </div>
+{% endif %}
+
+{% if sentiments %}
+<span class="text-white ">{{sentiments.sentiments }}</span>
+{% endif %}
 
 
 {% endblock %}

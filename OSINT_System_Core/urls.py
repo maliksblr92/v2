@@ -85,7 +85,7 @@ urlpatterns = [
     path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
-    # ahmed end
+    path('design_test',views.design_test,name='design_test'),    # ahmed end
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

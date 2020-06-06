@@ -106,14 +106,14 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             <div class="input-group-append">
                                 <button type="button" x-target-name="{{platform.name|lower}}"
                                 class="btn btn-secondary searchbutton smartsearch">SMART
-                                SEARCH</button>
+                                SEARCH <span> <i class="fas fa-spinner fa-spin"style="font-size:25px;" id="loading_icon"></i></span></button>
                             </div>
                         </div>
-                        <div><span> <i class="fas fa-spinner fa-spin"style="font-size:25px;" id="loading_icon"></i></span>
+                        <div>
                         <span id="smart_search_response"
                             class="alert alert-info font-weight-bold "
                         style="font-size:13px;"></span></div>
-                        
+
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-3 p-0 input-group-prepend">
                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
@@ -123,7 +123,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             <select
                                 style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
                                 class="custom-select newinput col-md-9 form-control newinputdesign"
-                                name="{{platform.name|lower}}_authortype" id="{{platform.name|lower}}_authortype">
+                                name="{{platform.name|lower}}_authortype" id="{{platform.name|lower}}_authortype" required="required">
                                 {% for choice in platform.target_type %}
                                     <option value="{{forloop.counter0}}">{{choice}}</option>
                                 {% endfor %}
@@ -140,9 +140,9 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your number"
                             id="{{platform.name|lower}}-authoruserid"
                             name="{{platform.name|lower}}_authoruserid"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
 
-                            
+
                         </div>
 
                         <input type="hidden" name="platform" value="{{platform.name|lower}}">
@@ -157,7 +157,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your text"
                             id="{{platform.name|lower}}-authorusername"
                             name="{{platform.name|lower}}_authorusername"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
                         </div>
                         <!--AUTHUR URL-->
                         <div class="row input-group mt-4 mb-3">
@@ -170,19 +170,24 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your number"
                             id="{{platform.name|lower}}-authoruserurl"
                             name="{{platform.name|lower}}_authoruserurl"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
                         </div>
                         <!-- DATE AND TIME 2 column div -->
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- EXPIRED ON SECTION-->
+                                {% now "SHORT_DATE_FORMAT"  as date %}
+                              
                                 <div class="row input-group   mt-4 mb-3">
                                     <div class="col-md-3 p-0 input-group-prepend" >
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:5px 9px 0 10px;">Expire on
                                         </span>
                                     </div>
-                                    <input type="date" class="col-md-9 form-control  newinputdesign" id="{{platform.name|lower}}-expirydate" name="{{platform.name|lower}}_expirydate">
+                                    <input type="date" min='{{date|to_and}}' max='2020-31-12' value="{{date|to_and}}" class="col-md-9 form-control  newinputdesign"
+                                     id="{{platform.name|lower}}-expirydate"
+                                     required="required" name="{{platform.name|lower}}_expirydate"
+                                     >
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -196,7 +201,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                                     <select
                                         class="custom-select newinput col-md-9 form-control  newinputdesign"
                                         id="{{platform.name|lower}}-interval"
-                                        name="{{platform.name|lower}}_interval">
+                                        name="{{platform.name|lower}}_interval" required="required">
                                         {% for interval in data.intervals %}
                                             <option value="{{ interval.0 }}">{{ interval.1 }}</option>
                                         {% endfor %}
@@ -223,7 +228,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                                   <span class="badge badge-success ml-2">   Yes</span>
                               </label>
                             </div>
-                        
+
                             <div class="col-md-6 mt-2">
                                 <label class="d-flex flex-row justify-content-center align-items-center ">
                                   <input type="radio" id="{{platform.name|lower}}-screenshot"
@@ -235,11 +240,11 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                         </div>
                             </div>
                             <div class="col-md-3">
-                        
+
                             </div>
                             <input type="hidden" name="website_id" value="{{ platform|mongoid:'_id' }}">
                             <input type="hidden" name="portfolio_id" value="{{data.portfolio_id}}">
-                              
+
                             </div>
                     </div>
                     <!-- TWO BUTTON BOTTOM-->

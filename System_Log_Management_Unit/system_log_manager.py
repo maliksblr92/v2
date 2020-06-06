@@ -166,22 +166,30 @@ class Data_Queries(object):
                         print(len(linked_responses),website)
                         n_data_full = n_data_full + n_data
 
+            print(portfolio_obj);
             p_node = {'name': portfolio_obj.name,
+                      'hero': portfolio_obj.name,
                       'value': 1,
                       'children': [],
                       "linkWith": [],
-                      'collapsed': 'true',
-                      'fixed': 'false',
-                      "image": '',
+                    #   'collapsed': 'true',
+                    #   'fixed': 'false',
+                      "img": '',
                       }
 
             for alpha in alpha_nodes_list:
                 p_node['linkWith'].append(alpha['username'])
 
-            n_data_full.append(p_node)
-            print(n_data_full)
-
-            return json.dumps(n_data_full)
+            # n_data_full.append(p_node)
+            dic={
+                "name":portfolio_obj.name,
+                "hero":portfolio_obj.name,
+                "img":"/static/images/anonymous_logo.jpg",
+                "children":n_data_full,
+            }
+       
+            print(dic)
+            return json.dumps(dic)
 
         except Exception as e:
             print(e)
@@ -229,6 +237,11 @@ class Data_Queries(object):
             for item in data_object['followers']:
                 temp_dic = {'username': item['username'], 'picture_url': item['avatar']}
                 beta_nodes_list.append(temp_dic)
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
+            print("********************************************************************************************")
 
             return (alpha_node, beta_nodes_list)
 
@@ -240,13 +253,13 @@ class Data_Queries(object):
         n_data = []
 
         try:
-            a_node = {'name': alpha_node['username'],
+            a_node = {'hero': alpha_node['username'],
                         'value': 1,
                         'children': [],
                         "linkWith": [],
-                        'collapsed': 'true',
-                        'fixed': 'false',
-                        "image": alpha_node['picture_url'],
+                        # 'collapsed': 'true',
+                        # 'fixed': 'false',
+                        "img": alpha_node['picture_url'],
                         }
 
 
@@ -255,13 +268,13 @@ class Data_Queries(object):
 
                 print(item)
 
-                node = {'name': item['username'],
+                node = {'hero': item['username'],
                         'value': 0.2,
                         'children': [],
                         "linkWith": [],
-                        'collapsed': 'true',
-                        'fixed': 'false',
-                        "image": item['picture_url'],
+                        # 'collapsed': 'true',
+                        # 'fixed': 'false',
+                        "img": item['picture_url'],
                         }
 
                 a_node['children'].append(node)
@@ -270,12 +283,14 @@ class Data_Queries(object):
 
             n_data.append(a_node)
 
+            dic={
+                "name":alpha_node['username'],
+                "hero":alpha_node['username'],
+                "img":"/static/images/anonymous_logo.jpg",
+                "children":n_data,
+            }
 
-
-
-
-            print(n_data)
-            return json.dumps(n_data)
+            return json.dumps(dic)
         except Exception as e:
             print(e)
             return json.dumps(n_data)
@@ -284,13 +299,13 @@ class Data_Queries(object):
 
         n_data = []
 
-        a_node = {'name': alpha_node['username'],
+        a_node = {'hero': alpha_node['username'],
                     'value': 1,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": alpha_node['picture_url'],
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": alpha_node['picture_url'],
                     }
 
 
@@ -299,13 +314,13 @@ class Data_Queries(object):
 
             print(item)
 
-            node = {'name': item['username'],
+            node = {'hero': item['username'],
                     'value': 0.2,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": item['picture_url'],
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": item['picture_url'],
                     }
 
             a_node['children'].append(node)

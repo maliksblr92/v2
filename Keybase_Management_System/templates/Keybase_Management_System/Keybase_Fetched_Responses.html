@@ -1,189 +1,327 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% load osint_custom_tags %}
-{% block page_title%}Keybase Create{%endblock%}
-    {% block head_dep %}
-        <!-- Stylesheet -->
-        <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-            integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-            crossorigin="anonymous">
-            <link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
-            <!--  -->
-            <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
-            <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-            <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
-        {% endblock %}
-        {% block smallnavbar %}
-            <style>
-            #keywords{
-            width: 100%!important;
-            width: 500px!important;
-            }
-            .topcontentbar {
+{% block page_title %}Keybase Create{% endblock %}
+{% block head_dep %}
+    <!-- Stylesheet -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+    <!--  -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+    <style>
+        #keywords {
+            width: 100% !important;
+            width: 500px !important;
+        }
+
+        .topcontentbar {
             border-radius: 20px 20px 0 0;
             background: linear-gradient(
-            90deg,
-            rgba(0, 32, 44, 90%) 0%,
-            rgba(0, 46, 69, 90%) 28%,
-            rgba(0, 83, 135, 82%) 72%,
-            rgba(0, 113, 188, 80%) 100%
+                    90deg,
+                    rgba(0, 32, 44, 90%) 0%,
+                    rgba(0, 46, 69, 90%) 28%,
+                    rgba(0, 83, 135, 82%) 72%,
+                    rgba(0, 113, 188, 80%) 100%
             );
             border-bottom: 1px solid #707070;
-            }
-            .background{
+        }
+
+        .background {
             background: #012847 !important;
-            }
-            .custom_badge{
+        }
+
+        .custom_badge {
             background-color: #06111a !important;
             color: #ffffff !important;
-            }
-            </style>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8 d-flex" style="">
-                    <div class="col-md-4 col-lg-4 col-xl-4"></div>
-                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
-                        <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                        <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4 col-lg-4 col-xl-4"></div>
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content > a {
+            min-width: 120px;
+        }
+
+        li.dropdown {
+            display: inline-block;
+            display: inline-block;
+        }
+
+        li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-4 col-lg-4 col-xl-4"></div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+                <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
             </div>
-        {% endblock %}
-        {% block belly %}
-            <div class="row  ">
-                <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-                    
-                    <div class="row">
-                        <h4 class="col-md-6 topheading">
-                        Keybase Responses
-                        </h4>
-                        <div class=" col-md-6 text-right" style="margin: auto;">
-                            <a href="#" target="_blank" class="btn btn-outline-light font-weight-bold ">
-                                <i class="fas fa-download  mr-2"></i> Download PDF Report
-                            </a>
-                    <div class="card-body border border-dark "style="border-radius:0px 0px 15px 15px">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-4"></div>
+    </div>
+{% endblock %}
+{% block belly %}
+    <div class="row  ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+
+            <div class="row">
+                <h4 class="col-md-6 topheading">
+                    Keybase Responses
+                </h4>
+                <div class=" col-md-6 text-right" style="margin: auto;">
+                    {#            <a href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"#}
+                    {#               target="_blank" class="btn btn-outline-light font-weight-bold ">#}
+                    {#                <i class="fas fa-download  mr-2"></i> Download PDF Report#}
+                    {#            </a>#}
+                    <div class="text-right d-flex flex-row justify-content-end align-items-center">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
+                                    class="fa fa-cog mr-2"></i>Options</a>
+                            <div class="dropdown-content">
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"
+                                   id="download_as_pdf">PDF Downlaod</a>
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Bi_Tools:dashboard_with_pivot' %}"
+                                   id="">Bi Tool</a>
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Bi_Tools:visualization' content_type='keybase' %}"
+                                   id="">Statistics</a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="card-body border border-dark " style="border-radius:0px 0px 15px 15px">
                         {% if x.query|length > 0 %}
-                        <div class="row">
-                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query  :</span></div></div>
-                            <div class="col-md-10"style="font-size:12px;"> {{x.query|default:"N/A"}}</div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">Query  :</span></div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
+                            </div>
                         {% endif %}
                         {% if x.serp_title|length > 0 %}
-                        <div class="row">
-                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Query Search title :</span></div></div>
-                            <div class="col-md-10"style="font-size:12px;"> {{x.serp_title|default:"N/A"}}</div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Query Search title :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
+                            </div>
                         {% endif %}
                         {% if x.meta_title|length > 0 %}
-                        <div class="row">
-                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Meta  title :</span></div></div>
-                            <div class="col-md-10"style="font-size:12px;"> {{x.meta_title|default:"N/A"}}</div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">Meta  title :</span></div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
+                            </div>
                         {% endif %}
 
                         {% if x.serp_url|length > 0 %}
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-md-6"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">URL :</span></div></div>
-                            <div class="col-md-2"style="font-size:12px;"><a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" target="_blank"> Block</a></div>
-                            <div class="col-md-2"style="font-size:12px;"><a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a></div>
-                            <div class="col-md-2"style="font-size:12px;"> <a href="{{x.serp_url}}" class="badge badge-success" target="_blank"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">URL :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="font-size:12px;"><a
+                                        href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+                                        target="_blank"> Block</a></div>
+                                <div class="col-md-2" style="font-size:12px;"><a
+                                        href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
+                                        target="_blank"> Add Target </a></div>
+                                <div class="col-md-2" style="font-size:12px;"><a href="{{ x.serp_url }}"
+                                                                                 class="badge badge-success"
+                                                                                 target="_blank"><i
+                                        class="fa fa-eye text-white fa-2x"></i> </a></div>
 
-                        </div>
+                            </div>
                         {% endif %}
                         {% if x.serp_snippet|length > 0 %}
-                        <div class="row">
-                            <div class="col-md-2"><div class="col-md-12" > <span class="badge badge-primary"style="width:120px;">Search Snippet :</span></div></div>
-                            <div class="col-md-10"style="font-size:12px;">  {{x.serp_snippet|default:"N/A"}}</div>
-                        </div>
-                    {% endif %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Search Snippet :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10"
+                                     style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
+                            </div>
+                        {% endif %}
                     </div>
-                    
                 </div>
                 <!-- end of top row -->
                 <!-- inside main container -->
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  "style="height:500px;overflow-y:auto;">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  "
+                     style="height:500px;overflow-y:auto;">
                     <div class="">
                         <!-- RPW FOR SOCIAL MEDIA -->
                         <div class="row formbg ml-5">
                             <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
                                 {% for x in resp.data %}
-                                    
+
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border ">
-                                        <h4 class="topheading">      {{target_object}} Response
-                                        {% if x.serp_domain == "www.youtube.com" %}
-                                            <span class="float-right d-flex flex-row justify-content-center align-items-center bg-danger" style="border-radius:5px;height:40px;width:60px;"> <i class="fab fa-youtube   text-white  " style="font-size:25px;"></i></span>
+                                        <div class="row">
+                                            <h4 class="topheading col-md-8">      {{ target_object }} Response
+                                                {% if x.serp_domain == "www.youtube.com" %}
+                                                    <span class="float-right d-flex flex-row justify-content-center align-items-center bg-danger"
+                                                          style="border-radius:5px;height:40px;width:60px;"> <i
+                                                            class="fab fa-youtube   text-white  "
+                                                            style="font-size:25px;"></i></span>
+
+                                                    <p class="ml-3" style="font-size:12px;">
+                                                        <span
+                                                                class="badge badge-success"> Response Source :</span> {{ x.url|default:"N/A" }}
+                                                    </p>
+                                                {% endif %}
                                             </h4>
-                                            <p class="ml-3" style="font-size:12px;"> <span class="badge badge-success"> Response Source :</span> {{x.url|default:"N/A"}}</p>
-                                        {% endif %}</span>
+                                            {% if x.status == '800' %}
+                                                <span class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                                            <div class="badge badge-danger p-2">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                Blocked
+                                            </div>
+                                        </span>
+                                            {% elif x.status == '200' %}
+                                                <span class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                                            <div class="badge badge-success p-2">
+                                                <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                Accessable
+                                            </div>
+                                        </span>
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                    <div class="card-body border border-dark background glowing_border mb-2"style="border-radius:0px 0px 15px 15px">
+                                    <div class="card-body border border-dark background glowing_border mb-2"
+                                         style="border-radius:0px 0px 15px 15px">
                                         {% if x.query|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">Query  :</span></div></div>
-                                                <div class="col-md-10 text-white p-0 m-0"style="font-size:12px;"> {{x.query|default:"N/A"}}</div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12">
+                                                        <span class="badge custom_badge text-left" style="width:120px;">Query  :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
                                             </div>
                                         {% endif %}
                                         {% if x.serp_title|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">Query Search title :</span></div></div>
-                                                <div class="col-md-10 text-white p-0 m-0"style="font-size:12px;"> {{x.serp_title|default:"N/A"}}</div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Query Search title :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
                                             </div>
                                         {% endif %}
                                         {% if x.meta_title|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">Meta  title :</span></div></div>
-                                                <div class="col-md-10 text-white p-0 m-0"style="font-size:12px;"> {{x.meta_title|default:"N/A"}}</div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Meta  title :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0"
+                                                     style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
                                             </div>
                                         {% endif %}
                                         {% if x.serp_url|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">URL :</span></div></div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">URL :</span></div>
+                                                </div>
 
-                                                <div class="col-md-6" style="font-size:12px;">
-                                                    <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}" class="text-white" target="_blank" style="font-size: 12px;">Block</a>
-                                                <a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}" target="_blank"> Add Target </a>
+                                                <div class="col-md-6 d-flex flex-row justify-content-between align-items-center"
+                                                     style="font-size:12px;">
+                                                    <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+                                                        target="_blank"
+                                                       style="font-size: 12px;" class="badge custom_badge w-25">Block</a>
 
-                                                    <a href="{{x.serp_url}}" class="badge custom_badge"><i class="fa fa-eye text-white fa-2x"></i> </a></div>
+                                                    <a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
+                                                       target="_blank" class="badge custom_badge w-25" style="font-size: 12px;"> Add Target </a>
+
+                                                    <a href="{{ x.serp_url }}" class="badge custom_badge w-25" target="_blank"><i
+                                                            class="fa fa-eye text-white fa-2x"></i> </a></div>
                                             </div>
                                         {% endif %}
                                         {% if x.serp_snippet|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">Search Snippet :</span></div></div>
-                                                <div class="col-md-10 text-white p-0 m-0"style="font-size:12px;">  {{x.serp_snippet|default:"N/A"}}</div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Search Snippet :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
                                             </div>
                                         {% endif %}
                                         {% if x.text_raw|length > 0 %}
                                             <div class="row">
-                                                <div class="col-md-2"><div class="col-md-12" > <span class="badge custom_badge text-left"style="width:120px;">Raw Text :</span></div></div>
-                                                <div class="col-md-10 glowing_border p-2 text-white"style="font-size:12px;height:200px;overflow-y:auto;border-radius:3px;"> {{x.text_raw|linebreaksbr|default:"N/A"}}</div>
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Raw Text :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 glowing_border p-2 text-white d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;height:200px;overflow-y:auto;border-radius:3px;"> {{ x.text_raw|linebreaksbr|default:"N/A" }}</div>
                                             </div>
-                                            
+
                                         {% endif %}
-                                        
-                                        
                                     </div>
-                                    
+
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
-        {% endblock %}
-        {% block foot_dep %}
-            <!-- JavaScript -->
-            <script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
-            <script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
-            <script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
-            <script>
-            
-            
-            </script>
-        {% endblock %}
+
+        </div>
+    </div>
+{% endblock %}
+{% block foot_dep %}
+    <!-- JavaScript -->
+    <script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
+    <script defer src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
+    <script defer src="{% static 'Keybase_Management_System/js/creation.js' %}"></script>
+    <script>
+
+
+    </script>
+{% endblock %}

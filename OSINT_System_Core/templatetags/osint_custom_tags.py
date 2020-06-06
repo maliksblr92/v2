@@ -34,3 +34,29 @@ def data_type(obj):
 
     else:
         return 'var'
+
+#ahmed code 
+@register.filter(name='data_type')
+def split(obj):
+
+    if(isinstance(obj,(list))):
+        return 'list'
+
+    elif(isinstance(obj,dict)):
+        return 'dict'
+
+    else:
+        return 'var'
+    
+@register.filter(name='to_and')
+def to_and(value):
+    arr=value.split('/')
+    new_value=arr[2]+"-"+arr[0]+"-"+arr[1]
+    print(new_value)
+    return new_value
+
+@register.filter(name='img_count')
+def img_count(value):
+    length=len(value)
+    print(length)
+    return length

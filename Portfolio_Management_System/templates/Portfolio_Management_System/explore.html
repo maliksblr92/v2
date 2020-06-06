@@ -1,187 +1,210 @@
-{% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/explore.css' %}"> {% endblock %} {% block smallnavbar %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/explore.css' %}">
+
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">{% endblock %}
+{% block smallnavbar %}
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 ">
-            <div class="row border second_nav_row">
-                <div class="col-md-3 m-0 p-0  "><a class="btn border-right  nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
-                <div class="col-md-3 border-top m-0 p-0  "><a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
+            <div class="row">
+                <div class="col-md-3 m-0 p-0 border-bottom-left "><a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left"
+                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+                <div class="col-md-3 m-0 p-0 secondnavactive "><a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                        href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
+                </div>
+                <div class="col-md-3 m-0 p-0  "><a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                        href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
+                <div class="col-md-3 m-0 p-0 border-bottom-right"><a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right"
+                        href="/pms/archive">Archive</a></div>
             </div>
-            <div class="col-md-3  border-top m-0 p-0  "><a class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
-            <div class="col-md-3 m-0 p-0  "><a class="btn   nav-link  second_nav_btn w-100 h-100 text-white active" href="/pms/archive">Archive</a></div>
         </div>
+        <div class="col-md-2"></div>
     </div>
-    <div class="col-md-2"></div>
-</div>
 {% endblock %}
 {% block belly %}
-<div class="row">
-    <div class="col-md-12">
- 
-        
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12  ">
-        <div class="w-100 h-100  " id="content_div">
-            <div class="card-header  main_card_header m-0 p-0 ">
-                <p class="card_header_text">Explore Portfolio </p>
-            </div>
-            
-
-<div class="row">
-<div class="col-md-3">
-
-</div>
-<div class="col-md-6">
-    <div class=" row  mt-2 glowing_border ">
-        <div class="col-md-1 glowing_border    ">
-
-               
-           
-        </div>
-        <div class="col-md-3  m-0 p-0  small_card_left_wrapper">
-            <img src="{% static 'images/profile-avatar-png-5.png' %}" class="profile_card_avatar">
-           
-        </div>
-        <div class="col-md-8   d-flex flex-column justify-content-center align-items-start    ">
-            <ul class="">
-                <li class="text-white "> Title : {{ resp.name }}</li>
-                <li class="text-white "> Portfolio Type : {{ resp.portfolio_type }}</li>
-                <li class="text-white "> Relegion : {{ resp.relegion }}</li>
-                <li class="text-white "> Sect : {{ resp.sect }}</li>
-                <li class="text-white "> DOB : {{ resp.dob }}</li>
-                <li class="text-white "> Created On : {{ resp.created_on }}</li>
-                <li class="text-white "> Updated On : {{ resp.updated_on }}</li>
-           
-                    
-            </ul>
-            <ul class="mt-2">
-                <li class="d-flex flex-column" ></li>
-                
-                </li>
-                 
-
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="col-md-3"></div>
-</div>
-
-<div class="p-3">
-
-            <!-- all targets start -->
-            <div class="card transparent glowing_border mt-3">
-                <div class="card-header glowing_border text-white">All Targets</div>
-                <div class="card-body ">
-                    
-                    {% for address in resp.addresses %}
-                        <span class="badge badge-primary text-white font-weight-bold">  {{ address|default:"N/A" }}</span>
-                    {% endfor %}
-                      
-                </div>
-                
-            </div>
-            <!-- all targets end  -->
-            <!-- all phones start -->
-            <div class="card transparent glowing_border mt-3">
-                <div class="card-header glowing_border text-white ">All Phones</div>
-                <div class="card-body">
-                    
-                    
-                    
-                    
-                    {% for phone in resp.phones %}
-                        <span class="badge badge-primary text-white font-weight-bold">  {{ phone|default:"N/A" }}</span>
-                    {% endfor %}
-                    
-                    
-                    
-                    
-                    
-                    
-                </div>
-                
-            </div>
-            <!-- all phones end  -->
-            <!-- all description start -->
-            <div class="card transparent glowing_border mt-3">
-                <div class="card-header card-header glowing_border text-white">All Description</div>
-                <div class="card-body w-100 text-white"style="font-size:12px;">
-                    
-                    
-                    <ul>
-                        {% for description in resp.description %}
-                      
-                        <li>{{description|linebreaks|default:"N/A" }}</li>
-                        {% endfor %}
-                        </ul>
-                        
-                  
-                    
-                    
-                    
-                    
-                </div>
-                
-            </div>
-
-           
-            <!-- all description end  -->
-
-
-
-
-<!-- all portfolios start -->
-            <div class="card transparent glowing_border mt-3">
-                <div class="card-header card-header glowing_border text-white">All Portfolios</div>
-                <div class="card-body w-100 text-white">
-                    
-                    
-                    <ul>
-                        {% for x in resp.portfolios %}
-                      
-                        <li class="badge badge-primary">{{x|default:"N/A"}}</li>
-                        {% endfor %}
-                        </ul>               
-                </div>
-                
-            </div>
-
-           
-            <!-- all portfolios end  -->
-
-
-
-
-            <!-- all social_targets start -->
-            <div class="card transparent glowing_border mt-3">
-                <div class="card-header card-header glowing_border text-white">All Social Targets</div>
-                <div class="card-body w-100 text-white">
-                    
-                    
-                    <ul>
-                        {% for x in resp.social_targets %}
-                      
-                        <li class="badge badge-primary">{{x|default:"N/A"}}</li>
-                        {% endfor %}
-                        </ul>               
-                </div>
-                
-            </div>
-
-           
-            <!-- all social_targets end  -->
-</div>
-
-
-
+    <div class="row">
+        <div class="col-md-12">
 
 
         </div>
     </div>
-    
-</div>
+    <div class="row">
+        <div class="col-md-12  ">
+            <div class="w-100 h-100" id="content_div">
+                <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+                    <p class="card_header_text">Explore Portfolio </p>
+                </div>
+
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+
+                            <div class="justify-content-center custom_inner_background inner_form_margin_radius  pt-3 pb-5">
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class=" row custom_card_body_background mt-2 glowing_border ">
+                                            <div class="col-md-1 glowing_border dark_side_column">
+
+
+                                            </div>
+                                            <div class="col-md-3  m-0 p-0  small_card_left_wrapper d-flex flex-column justify-content-center align-items-center">
+                                                <img src="{% static 'images/profile-avatar-png-5.png' %}"
+                                                     class="profile_card_avatar">
+
+                                            </div>
+                                            <div class="col-md-8  d-flex flex-column justify-content-between align-items-start pl-0   ">
+                                                <ul class="">
+                                                    <li class="text-white "> Title : {{ resp.name }}</li>
+                                                    <li class="text-white "> Portfolio Type
+                                                        : {{ resp.portfolio_type }}</li>
+                                                    <li class="text-white "> Relegion : {{ resp.relegion }}</li>
+                                                    <li class="text-white "> Sect : {{ resp.sect }}</li>
+                                                    <li class="text-white "> DOB : {{ resp.dob }}</li>
+                                                    <li class="text-white "> Created On : {{ resp.created_on }}</li>
+                                                    <li class="text-white "> Updated On : {{ resp.updated_on }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+
+                                <div class="p-3">
+
+                                    <!-- all targets start -->
+                                    <div class="card transparent glowing_border mt-3">
+                                        <div class="card-header custom_header glowing_border text-white">All Targets</div>
+                                        <div class="card-body  custom_background">
+
+                                            {% if resp.addresses %}
+                                                {% for address in resp.addresses %}
+                                                    <span class="badge badge-light p-2 mr-3 font-weight-bold">  {{ address|default:"N/A" }}</span>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="text-white">No Target Exists</p>
+                                            {% endif %}
+
+
+                                        </div>
+
+                                    </div>
+                                    <!-- all targets end  -->
+                                    <!-- all phones start -->
+                                    <div class="card transparent glowing_border mt-3">
+                                        <div class="card-header glowing_border custom_header text-white ">All Phones</div>
+                                        <div class="card-body custom_background">
+
+                                            {% if resp.phones %}
+                                                {% for phone in resp.phones %}
+                                                    <span class="badge badge-light p-2 mr-3  font-weight-bold">  {{ phone|default:"N/A" }}</span>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="text-white">No Phones Exists</p>
+                                            {% endif %}
+
+
+                                        </div>
+
+                                    </div>
+                                    <!-- all phones end  -->
+                                    <!-- all description start -->
+                                    <div class="card transparent glowing_border mt-3">
+                                        <div class="card-header card-header glowing_border custom_header text-white">All Description
+                                        </div>
+                                        <div class="card-body custom_background w-100 text-white" style="font-size:12px;">
+
+
+                                            <ul style="list-style: none;">
+                                                {% if resp.description %}
+                                                    {% for description in resp.description %}
+                                                        <li class="d-flex flex-row"><i
+                                                                class="fas fa-info-circle text-white mr-2 d-inline pt-1"></i>{{ description|linebreaks|default:"N/A" }}
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <p class="text-white">No Description Exists</p>
+                                                {% endif %}
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- all description end  -->
+
+
+                                    <!-- all portfolios start -->
+                                    <div class="card transparent glowing_border mt-3">
+                                        <div class="card-header card-header glowing_border custom_header text-white">All Portfolios
+                                        </div>
+                                        <div class="card-body custom_background w-100 text-white">
+
+
+                                            <ul>
+                                                {% if resp.portfolios %}
+                                                    {% for x in resp.portfolios %}
+                                                        <li class="badge badge-primary">{{ x|default:"N/A" }}</li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <p class="text-white">No Portfolio Exists</p>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- all portfolios end  -->
+
+
+                                    <!-- all social_targets start -->
+                                    <div class="card transparent glowing_border mt-3">
+                                        <div class="card-header card-header glowing_border custom_header text-white">All Social
+                                            Targets
+                                        </div>
+                                        <div class="card-body custom_background w-100 text-white">
+
+
+                                            <ul>
+                                                {% if resp.social_targets %}
+                                                    {% for x in resp.social_targets %}
+                                                        <li class="badge badge-primary">{{ x|default:"N/A" }}</li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <p class="text-white">No Social Target Exists</p>
+                                                {% endif %}
+
+
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- all social_targets end  -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}

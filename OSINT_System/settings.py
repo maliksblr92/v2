@@ -96,6 +96,7 @@ TEMPLATES = [
                 'Data_Processing_Unit.context_processors.ess_ip',
                 'Data_Processing_Unit.context_processors.uis_ip',
             ],
+           
         },
     },
 ]
