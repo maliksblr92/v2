@@ -792,9 +792,38 @@
                                     <span class="badge custom_badge text-left w-25 mr-2">Relegion  : </span><span
                                         class="font-weight-bold text_paragraph"
                                         style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}</span></p>
+                                    </p>
+                                    <span class="badge custom_badge text-left w-25 mr-2">View Profile  : </span>
+                                    <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a>    
+                                </p>
+
+
+
                                 </div>
                                 <div class="col-md-12">
                                     <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
+                                    <div class="row">
+                                        {% for y in profile.events %}
+                                        <div class="col-md-4">
+                                            <span class="badge badge-primary">Year : {{y.year}}</span>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                {% for event in y.events  %}
+                                            <div class="col-md-12">   <span class="badge badge-info"> {{forloop.counter}} #</span>  {{event.event}} <a class="badge badge-success" target="_blank" href="{{event.url}}"><i class="fa fa-eye  mr-2"></i>view</a> </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div> 
+                                        {% endfor %}
+                                    </div>
+                               
+                                   
+                                   
+                                   
+                                </div>
+                                <div class="col-md-12">
+                                    <h3><i class="material-icon text_heading">Profile Events </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_overview_summary|default:"N/A" }}</p>
                                 </div>
                                 <div class="col-md-12">

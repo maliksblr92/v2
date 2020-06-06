@@ -295,8 +295,8 @@ body{
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
             <div class="row">
-                <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
-                        class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+                <div class="col-md-6 text-left"><a href="https://www.facebook.com/{{page.username}}" target="_blank" class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
+                        class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile</a></div>
 
                 <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
                     <li class="dropdown">
@@ -339,7 +339,9 @@ body{
         </div>
         <div class="col-md-8 ">
             <div class="profile-image-name text-white ">
-                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }}</span>
+                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }} 
+                     <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success">
+                        <i class="fa fa-eye mr-2"></i>view</a>
             </div>
         </div>
     </div>
@@ -875,9 +877,19 @@ body{
                                             class="font-weight-bold"
                                             style="font-size:12px;">{{ profile.general_information.languages|default:"N/A" }}<span>
                                     </p>
+                                    <p>
                                     <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span
                                         class="font-weight-bold"
                                         style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}<span></p>
+
+                                            <p>
+                                                <span class="badge badge-primary w-25 mr-2">Relegion  : </span> <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a>    </p>
+            
+
+                                            </p>
+                                          
+                                           
+                                       
                                 </div>
                                 <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
                                 </div> -->
