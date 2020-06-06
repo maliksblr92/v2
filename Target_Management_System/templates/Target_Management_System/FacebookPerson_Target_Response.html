@@ -304,8 +304,11 @@
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
             <div class="row">
-                <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
-                        class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+                <div class="col-md-6 text-left">
+                    <a class="btn btn-primary btn-sm" href='https://facebook.com/{{ profile.username }}' target="_blank"
+                       style="margin-top:2px;"> <i
+                            class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </a>
+                </div>
                 <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
@@ -335,13 +338,15 @@
         </div>
     </div>
     <div class="row ml-1 mr-1 pl-5 pr-5">
-        <div class="col-md-12 fb-cover-img background-gradient-dark">
+        <div class="col-md-12 fb-cover-img background-gradient-dark p-0 m-0">
+            <img src="{{ profile.profile_picture_url.cover_picture }}" style="height: 100%;width:100%;"
+                 class="img-fluid"/>
         </div>
     </div>
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-2">
             <div class="profile-image-wrapper custom_border_color">
-                <img src="{{ profile.posts.0.author_media_directory }}" style="height: 100%;width:100%;"
+                <img src="{{ profile.profile_picture_url.profile_picture }}" style="height: 100%;width:100%;"
                      class="img-fluid"/>
             </div>
         </div>
@@ -676,17 +681,24 @@
                                                     <img src="{{ c.media_directory }}"
                                                          style="height: 80px;width:80px;border-radius: 50%;;"
                                                          class="img-fluid">
-                                                    <button class="btn btn-link text-white" type="button"></button>
-                                                    {{ c.name }}
-                                                    </button>
-                                                    <span class="badge text-white"><i
-                                                            class="fas fa-star mr-2 text-warning"></i>Score : {{ c.score }}</span>
+                                                         <div class="d-inline">
+                                                            {{ c.name }} 
+                                                        </div>
+                                                        <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
                                                     {% if c.username %}
-                                                        <div class="badge  float-right">
-                                                            <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
-                                                               target="_blank">
-                                                                <i class="fa fa-link  fa-2x text-light"></i>
-                                                            </a>
+                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="badge custom_badge">
+                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-link  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="badge custom_badge mt-2">
+                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     {% endif %}
                                                 </div>
@@ -1406,212 +1418,212 @@
                                 {% endfor %}
                                 </div>
                             </div>
-                            <!-- end posts tab  -->
-                            <!-- start checkins -->
-                            <div id="checkins" class="tab-pane fade pb-5">
-                                <!-- <h4 class="text-warning">check_ins ({{profile.check_ins | length}})</h3> -->
-                                <div class="row">
-                                    {% for c in profile.check_ins %}
-                                        <div class="col-md-6">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <div class="row">
-                                                        <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-                                                            <!-- <img src="{{c.media_directory}}"
+                        </div>
+                        <!-- end posts tab  -->
+                        <!-- start checkins -->
+                        <div id="checkins" class="tab-pane fade pb-5">
+                            <div class="row">
+                                {% for c in profile.check_ins %}
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+                                                        <!-- <img src="{{c.media_directory}}"
                                              style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                                            <button class="btn btn-link text_heading" type="button"
-                                                                    data-toggle="collapse"
-                                                                    data-target="#_{{ c.id }}" aria-expanded="true"
-                                                                    aria-controls="_{{ c.id }}">
-                                                                {{ c.name }}
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
-                                                            <div class="row text_heading">
-                                                                <div class="col-md-4">Date:</div>
-                                                                <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
-                                                                <div class="col-md-4">Location:</div>
-                                                                <div class="col-md-8 text_paragraph">{{ c.name }}</div>
-                                                                <div class="col-md-4">View:</div>
-                                                                <div class="col-md-8">
-                                                                    <a class="badge badge-sm custom_badge fa fa-search"
-                                                                       href="{{ c.url }}">view</a>
-                                                                </div>
-                                                                <div class="col-md-4">Linking Post:</div>
-                                                                <div class="col-md-8">
-                                                                    <a class="badge badge-sm custom_badge fa fa-search"
-                                                                       href="{{ c.linking_post }}">view</a>
-                                                                </div>
+                                                        <button class="btn btn-link text_heading" type="button"
+                                                                data-toggle="collapse"
+                                                                data-target="#_{{ c.id }}" aria-expanded="true"
+                                                                aria-controls="_{{ c.id }}">
+                                                            {{ c.name }}
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
+                                                        <div class="row text_heading">
+                                                            <div class="col-md-4">Date:</div>
+                                                            <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
+                                                            <div class="col-md-4">Location:</div>
+                                                            <div class="col-md-8 text_paragraph">{{ c.name }}</div>
+                                                            <div class="col-md-4">View:</div>
+                                                            <div class="col-md-8">
+                                                                <a class="badge badge-sm custom_badge fa fa-search"
+                                                                   href="{{ c.url }}">view</a>
+                                                            </div>
+                                                            <div class="col-md-4">Linking Post:</div>
+                                                            <div class="col-md-8">
+                                                                <a class="badge badge-sm custom_badge fa fa-search"
+                                                                   href="{{ c.linking_post }}">view</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <!-- end checkin -->
                         </div>
-                        <!-- end tab content -->
+                        <!-- end checkin -->
                     </div>
+                    <!-- end tab content -->
                 </div>
             </div>
-            <!-- end col-md-9 -->
         </div>
-        <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
-        <script src="https://www.amcharts.com/lib/4/core.js"></script>
-        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-        <script>
-            var url = window.location.pathname;
-            var id = url.substring(url.lastIndexOf('/') + 1);
-            console.log(id)
-            var url = $('#download_as_pdf').attr('href')
-            var href = url + id + ""
-            console.log(href)
-        </script>
+        <!-- end col-md-9 -->
+    </div>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        console.log(id)
+        var url = $('#download_as_pdf').attr('href')
+        var href = url + id + ""
+        console.log(href)
+    </script>
 
-        <script>
-            $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
+
+            $('#work_details_btn').removeClass("badge-primary");
+            $('#work_details_btn').addClass("badge-success");
+
+            $('#family_details_btn').on('click', function () {
+
+                $('#work_details').removeClass("show");
+                $('#websites_details').removeClass("show");
+                $('#social_links_details').removeClass("show");
+//
+                $('#family_details_btn').removeClass("badge-primary");
+                $('#family_details_btn').addClass("badge-success");
+//all Others
+                $('#websites_details_btn').removeClass("badge-success");
+                $('#websites_details_btn').addClass("badge-primary");
+
+                $('#social_links_details_btn').removeClass("badge-success");
+                $('#social_links_details_btn').addClass("badge-primary");
+
+
+                $('#work_details_btn').removeClass("badge-success");
+                $('#work_details_btn').addClass("badge-primary");
+
+            })
+
+            $('#social_links_details_btn').on('click', function () {
+
+                $('#work_details').removeClass("show");
+                $('#websites_details').removeClass("show");
+                $('#family_details').removeClass("show");
+//
+                $('#social_links_details_btn').removeClass("badge-primary");
+                $('#social_links_details_btn').addClass("badge-success");
+//all Others
+                $('#websites_details_btn').removeClass("badge-success");
+                $('#websites_details_btn').addClass("badge-primary");
+
+                $('#family_details_btn').removeClass("badge-success");
+                $('#family_details_btn').addClass("badge-primary");
+
+
+                $('#work_details_btn').removeClass("badge-success");
+                $('#work_details_btn').addClass("badge-primary");
+
+            })
+
+
+            $('#work_details_btn').on('click', function () {
+
+                $('#social_links_details').removeClass("show");
+                $('#websites_details').removeClass("show");
+                $('#family_details').removeClass("show");
 
                 $('#work_details_btn').removeClass("badge-primary");
                 $('#work_details_btn').addClass("badge-success");
 
-                $('#family_details_btn').on('click', function () {
-
-                    $('#work_details').removeClass("show");
-                    $('#websites_details').removeClass("show");
-                    $('#social_links_details').removeClass("show");
-//
-                    $('#family_details_btn').removeClass("badge-primary");
-                    $('#family_details_btn').addClass("badge-success");
-//all Others
-                    $('#websites_details_btn').removeClass("badge-success");
-                    $('#websites_details_btn').addClass("badge-primary");
-
-                    $('#social_links_details_btn').removeClass("badge-success");
-                    $('#social_links_details_btn').addClass("badge-primary");
-
-
-                    $('#work_details_btn').removeClass("badge-success");
-                    $('#work_details_btn').addClass("badge-primary");
-
-                })
-
-                $('#social_links_details_btn').on('click', function () {
-
-                    $('#work_details').removeClass("show");
-                    $('#websites_details').removeClass("show");
-                    $('#family_details').removeClass("show");
-//
-                    $('#social_links_details_btn').removeClass("badge-primary");
-                    $('#social_links_details_btn').addClass("badge-success");
-//all Others
-                    $('#websites_details_btn').removeClass("badge-success");
-                    $('#websites_details_btn').addClass("badge-primary");
-
-                    $('#family_details_btn').removeClass("badge-success");
-                    $('#family_details_btn').addClass("badge-primary");
-
-
-                    $('#work_details_btn').removeClass("badge-success");
-                    $('#work_details_btn').addClass("badge-primary");
-
-                })
-
-
-                $('#work_details_btn').on('click', function () {
-
-                    $('#social_links_details').removeClass("show");
-                    $('#websites_details').removeClass("show");
-                    $('#family_details').removeClass("show");
-
-                    $('#work_details_btn').removeClass("badge-primary");
-                    $('#work_details_btn').addClass("badge-success");
-
 
 //all Others
-                    $('#websites_details_btn').removeClass("badge-success");
-                    $('#websites_details_btn').addClass("badge-primary");
+                $('#websites_details_btn').removeClass("badge-success");
+                $('#websites_details_btn').addClass("badge-primary");
 
-                    $('#family_details_btn').removeClass("badge-success");
-                    $('#family_details_btn').addClass("badge-primary");
+                $('#family_details_btn').removeClass("badge-success");
+                $('#family_details_btn').addClass("badge-primary");
 
-                    $('#social_links_details_btn').removeClass("badge-success");
-                    $('#social_links_details_btn').addClass("badge-primary");
+                $('#social_links_details_btn').removeClass("badge-success");
+                $('#social_links_details_btn').addClass("badge-primary");
 
-
-                })
-
-
-                $('#websites_details_btn').on('click', function () {
-
-                    $('#work_details').removeClass("show");
-                    $('#social_links_details').removeClass("show");
-                    $('#family_details').removeClass("show");
-
-                    $('#websites_details_btn').removeClass("badge-primary");
-                    $('#websites_details_btn').addClass("badge-success");
-
-//all Others
-                    $('#work_details_btn').removeClass("badge-success");
-                    $('#work_details_btn').addClass("badge-primary");
-
-                    $('#family_details_btn').removeClass("badge-success");
-                    $('#family_details_btn').addClass("badge-primary");
-
-                    $('#social_links_details_btn').removeClass("badge-success");
-                    $('#social_links_details_btn').addClass("badge-primary");
-                })
 
             })
 
-        </script>
 
-        <script>
-            am4core.ready(function () {
-                // Themes begin
-                am4core.useTheme(am4themes_animated);
-                // Themes end
-                var iconPath =
-                    "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
-                var chart = am4core.create("profile_chart", am4charts.SlicedChart);
-                chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-                chart.data = [{
-                    "name": "Friends",
-                    "value": 354
-                }, {
-                    "name": "Close Associates",
-                    "value": 245
-                }, {
-                    "name": "Posts",
-                    "value": 187
-                }, {
-                    "name": "Popularity",
-                    "value": 123
-                }, {
-                    "name": "Popularity",
-                    "value": 87
-                }, {
-                    "name": "Positivity",
-                    "value": 45
-                }];
-                var series = chart.series.push(new am4charts.PictorialStackedSeries());
-                series.dataFields.value = "value";
-                series.dataFields.category = "name";
-                series.alignLabels = true;
-                series.maskSprite.path = iconPath;
-                series.ticks.template.locationX = 1;
-                series.ticks.template.locationY = 0.5;
-                series.labelsContainer.width = 200;
-                chart.legend = new am4charts.Legend();
-                chart.legend.position = "left";
-                chart.legend.valign = "bottom";
-            }); // end am4core.ready()
-        </script>
+            $('#websites_details_btn').on('click', function () {
+
+                $('#work_details').removeClass("show");
+                $('#social_links_details').removeClass("show");
+                $('#family_details').removeClass("show");
+
+                $('#websites_details_btn').removeClass("badge-primary");
+                $('#websites_details_btn').addClass("badge-success");
+
+//all Others
+                $('#work_details_btn').removeClass("badge-success");
+                $('#work_details_btn').addClass("badge-primary");
+
+                $('#family_details_btn').removeClass("badge-success");
+                $('#family_details_btn').addClass("badge-primary");
+
+                $('#social_links_details_btn').removeClass("badge-success");
+                $('#social_links_details_btn').addClass("badge-primary");
+            })
+
+        })
+
+    </script>
+
+    <script>
+        am4core.ready(function () {
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+            var iconPath =
+                "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
+            var chart = am4core.create("profile_chart", am4charts.SlicedChart);
+            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+            chart.data = [{
+                "name": "Friends",
+                "value": 354
+            }, {
+                "name": "Close Associates",
+                "value": 245
+            }, {
+                "name": "Posts",
+                "value": 187
+            }, {
+                "name": "Popularity",
+                "value": 123
+            }, {
+                "name": "Popularity",
+                "value": 87
+            }, {
+                "name": "Positivity",
+                "value": 45
+            }];
+            var series = chart.series.push(new am4charts.PictorialStackedSeries());
+            series.dataFields.value = "value";
+            series.dataFields.category = "name";
+            series.alignLabels = true;
+            series.maskSprite.path = iconPath;
+            series.ticks.template.locationX = 1;
+            series.ticks.template.locationY = 0.5;
+            series.labelsContainer.width = 200;
+            chart.legend = new am4charts.Legend();
+            chart.legend.position = "left";
+            chart.legend.valign = "bottom";
+        }); // end am4core.ready()
+    </script>
 </body>
 </html>
