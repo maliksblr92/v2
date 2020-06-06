@@ -1,1318 +1,1438 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-      <!-- facebook person target css start -->
-      <style>
-      .small-txt{
-      font-size: 13px!important;
-      }
-      .smaller-txt{
-      font-size: 10px!important;
-      }
-      .text-12{
-      font-size: 12px;;
-      }
-      .text-12{
-      font-size: 12px;;
-      }
-      .text-14{
-      font-size: 14px;;
-      }
-      .text-20{
-      font-size: 20px;;
-      }
-      .text-25{
-      font-size: 25px;;
-      }
-      .border-radius-5-all{
-      border-radius: 5px!important;
-      }
-      </style>
-      <style>
-      body {
-      background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      margin: 0 !important;
-      padding: 0 !important;
-      font-family: 'Raleway'!important; 
-      }
-      html {
-      --scrollbarBG: #CFD8DC;
-      --thumbBG: #90A4AE;
-      }
-      ::-webkit-scrollbar {
-      width: 7px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-      }
-      ::-webkit-scrollbar-track {
-      background: var(--scrollbarBG);
-      }
-      ::-webkit-scrollbar-thumb {
-      background-color: var(--thumbBG) ;
-      border-radius: 6px;
-      border: 3px solid var(--scrollbarBG);
-      }
-      </style>
-      <style>
-      .wrapper{
-      }
-      .background-gradient{
-      background: linear-gradient(90deg, rgba(153,153,153,1) 0%, rgba(242,242,242,1) 33%, rgba(153,153,153,1) 66%, rgba(242,242,242,1) 100%) !important;
-      }
-      .background-gradient-dark{
-      background: linear-gradient(0deg, rgba(24,72,116,1) 0%, rgba(6,17,26,1) 100%) !important;
-      }
-      .custom_active_text > i{
-      color: #ffffff !important;
-      }
-      .custom_active_text.active > i{
-      color: #184874 !important;
-      }
-      .text_heading{
-      color: #06111a;
-      }
-      .text_paragraph{
-      color: #184874;
-      }
-      .custom_badge{
-      background-color: #06111a !important;
-      color: #ffffff !important;
-      }
-      .card-header{
-      border: 1px solid #06111a !important;
-      border-radius: 5px !important;
-      margin-bottom: 4px !important;
-      }
-      .custom_border_color{
-      border-color: #06111a !important;
-      }
-      .circle-dot1{
-      width: 15px;
-      height: 15px;
-      float: left;
-      margin: 6px;
-      border-radius: 50%;
-      cursor: pointer;
-      background-color: #f35d5b;
-      }
-      .circle-dot2{
-      width: 15px;
-      height: 15px;
-      float: left;
-      margin: 6px;
-      border-radius: 50%;
-      cursor: pointer;
-      background-color: #f6bd3a;
-      }
-      .circle-dot3{
-      width: 15px;
-      height: 15px;
-      float: left;
-      margin: 6px;
-      border-radius: 50%;
-      cursor: pointer;
-      background-color: #44cc45;
-      }
-      .fb-cover-img{
-      /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
-      background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      height: 300px;
-      /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
-      /* z-index: 1; */
-      }
-      .profile-image-wrapper{
-      height: 150px;
-      width: 150px;
-      margin-top: -120px;;
-      border:5px solid #FEC134;
-      border-radius: 10px;
-      background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      }
-      .profile-image-name{
-      font-size: 25px;
-      font-weight: bold;;
-      color:black;
-      margin-top: -50px;
-      letter-spacing: 3px;;
-      }
-      .custom-1{
-      height: 200px;
-      width: 100%;
-      border: 1px solid red;
-      background-color: white;
-      padding: 20px;;
-      }
-      .border-radius-5-all{
-      border-radius: 5px!important;
-      }
-      .material-icons{
-      color: #007bff;
-      font-size: 16px;;
-      }
-      a{
-      text-decoration: none!important;
-      }
-      .border-right{
-      border-right: 1px solid black;;
-      }
-      .border-left{
-      border-left: 1px solid black;;
-      }
-      .custom-center-center{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      }
-      .custom-start-center{
-      display: flex!important;
-      justify-content: start!important;
-      align-items: center!important;
-      }
-      .custom-end-center{
-      display: flex!important;
-      justify-content: end!important;
-      align-items: center!important;
-      }
-      .custom-row-center-center{
-      display: flex!important;
-      flex-direction: row!important;
-      justify-content: center!important;
-      align-items: center!important;
-      }
-      .custom-column-center-center{
-      display: flex!important;
-      flex-direction: column!important;
-      justify-content: center!important;
-      align-items: center!important;
-      }
-      .custom-column-start-start{
-      display: flex!important;
-      flex-direction: column!important;
-      justify-content: start!important;
-      align-items: start!important;
-      }
-      .custom-column-start-center{
-      display: flex!important;
-      flex-direction: column!important;
-      justify-content: start!important;
-      align-items: center!important;
-      }
-      .dropdown-content a:hover {background-color: #f1f1f1;}
-      .dropdown:hover .dropdown-content {
-      display: block;
-      }
-      .dropdown-content {
-      display: none;
-      position: absolute;
-      min-width: 130px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      }
-      .dropdown-content > a {
-      min-width: 120px;
-      }
-      li.dropdown {
-      display: inline-block;
-      }
-      li a, .dropbtn {
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      }
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+    <!-- facebook person target css start -->
+    <style>
+        .small-txt {
+            font-size: 13px !important;
+        }
 
-      .text_12{
-        font-weight:bold;
-        font-size:12px;
-      }
-      </style>
-    </head>
-    <body class="background-gradient">
-      <div class="container-fluid wrapper">
-      
-        </div>
-        <div class="row ml-1 mr-1 pl-5 pr-5">
-          <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-              <div class="row">
-                  <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
-                          class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
-  
-                  <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                      <li class="dropdown">
-                          <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
-                                  class="fa fa-cog mr-2"></i>Options</a>
-                          <div class="dropdown-content">
-                              <a type="button" target="_blank"
-                                 class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
-                                 href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}"
-                                 id="download_as_pdf"
-                                 id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
-                              <a type="button" target="_blank"
-                              href="{% url 'Target_Management_System:link_analysis' object_gtr_id=group.GTR %}"
-                                 class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;">Link
-                                  Analysis</a>
-                                  <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
-                               style="margin-top:2px;"
-                               href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=group.GTR %}"
-                               id="">Close Associates</a>
-  
-                          </div>
-                      </li>
-                  </div>
-                  <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
-                      <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white"
-                         style="margin-top:2px;"
-                        
-                         id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
-                      <a type="button" class="btn  btn-sm btn-success float-right text-white" style="margin-top:2px;">Link
-                          Analysis</a>
-                  </div>
-              </div>
-  
-          </div>
-  
-      </div>
-        <div class="row ml-1 mr-1 pl-5 pr-5">
-          <div class="col-md-12 fb-cover-img background-gradient-dark">
-          </div>
-        </div>
-        <div class="row ml-1 mr-1 pl-5 pr-5">
-          <div class="col-md-2">
-            <div class="profile-image-wrapper custom_border_color">
-              <img src="{{group.group_creator.media_directory}}" style="height:100%;width:100%;"class="img-fluid" alt="">
+        .smaller-txt {
+            font-size: 10px !important;
+        }
+
+        .text-12 {
+            font-size: 12px;;
+        }
+
+        .text-12 {
+            font-size: 12px;;
+        }
+
+        .text-14 {
+            font-size: 14px;;
+        }
+
+        .text-20 {
+            font-size: 20px;;
+        }
+
+        .text-25 {
+            font-size: 25px;;
+        }
+
+        .border-radius-5-all {
+            border-radius: 5px !important;
+        }
+    </style>
+    <style>
+        body {
+            background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Raleway' !important;
+        }
+
+        html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+        }
+    </style>
+    <style>
+        .wrapper {
+        }
+
+        .background-gradient {
+            background: linear-gradient(90deg, rgba(153, 153, 153, 1) 0%, rgba(242, 242, 242, 1) 33%, rgba(153, 153, 153, 1) 66%, rgba(242, 242, 242, 1) 100%) !important;
+        }
+
+        .background-gradient-dark {
+            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+        }
+
+        .custom_active_text > i {
+            color: #ffffff !important;
+        }
+
+        .custom_active_text.active > i {
+            color: #184874 !important;
+        }
+
+        .text_heading {
+            color: #06111a;
+        }
+
+        .text_paragraph {
+            color: #184874;
+        }
+
+        .custom_badge {
+            background-color: #06111a !important;
+            color: #ffffff !important;
+        }
+
+        .card-header {
+            border: 1px solid #06111a !important;
+            border-radius: 5px !important;
+            margin-bottom: 4px !important;
+        }
+
+        .custom_border_color {
+            border-color: #06111a !important;
+        }
+
+        .circle-dot1 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f35d5b;
+        }
+
+        .circle-dot2 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f6bd3a;
+        }
+
+        .circle-dot3 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #44cc45;
+        }
+
+        .fb-cover-img {
+            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 300px;
+            /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
+            /* z-index: 1; */
+        }
+
+        .profile-image-wrapper {
+            height: 150px;
+            width: 150px;
+            margin-top: -120px;;
+            border: 5px solid #FEC134;
+            border-radius: 10px;
+            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .profile-image-name {
+            font-size: 25px;
+            font-weight: bold;;
+            color: black;
+            margin-top: -50px;
+            letter-spacing: 3px;;
+        }
+
+        .custom-1 {
+            height: 200px;
+            width: 100%;
+            border: 1px solid red;
+            background-color: white;
+            padding: 20px;;
+        }
+
+        .border-radius-5-all {
+            border-radius: 5px !important;
+        }
+
+        .material-icons {
+            color: #007bff;
+            font-size: 16px;;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .border-right {
+            border-right: 1px solid black;;
+        }
+
+        .border-left {
+            border-left: 1px solid black;;
+        }
+
+        .custom-center-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-start-center {
+            display: flex !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .custom-end-center {
+            display: flex !important;
+            justify-content: end !important;
+            align-items: center !important;
+        }
+
+        .custom-row-center-center {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-center-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-start-start {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: start !important;
+        }
+
+        .custom-column-start-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content > a {
+            min-width: 120px;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .text_12 {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .text_14 {
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="background-gradient">
+<div class="container-fluid wrapper">
+
+</div>
+<div class="row ml-1 mr-1 pl-5 pr-5">
+    <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+        <div class="row">
+            <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
+                    class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+
+            <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
+                            class="fa fa-cog mr-2"></i>Options</a>
+                    <div class="dropdown-content">
+                        <a type="button" target="_blank"
+                           class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
+                           href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}"
+                           id="download_as_pdf"
+                           id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                        <a type="button" target="_blank"
+                           href="{% url 'Target_Management_System:link_analysis' object_gtr_id=group.GTR %}"
+                           class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;">Link
+                            Analysis</a>
+                        <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                           style="margin-top:2px;"
+                           href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=group.GTR %}"
+                           id="">Close Associates</a>
+
+                    </div>
+                </li>
             </div>
-          </div>
-          <div class="col-md-8 ">
-            <div class="profile-image-name text-white ">
-              <span class=""style="border-radius:2px;padding:10px;letter-spacing:4px;">  {{group.name}}</span>
+            <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white"
+                   style="margin-top:2px;"
+
+                   id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                <a type="button" class="btn  btn-sm btn-success float-right text-white" style="margin-top:2px;">Link
+                    Analysis</a>
             </div>
-          </div>
         </div>
-        <div class="row ml-1 mr-1 pl-5 pr-5">
-          <!-- Left Card Start -->
-          <div class="col-md-3">
-               <!-- WORK DETAILS START-->
-           
-       <!-- WORK DETAILS END -->
-            <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
-              <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
+
+    </div>
+
+</div>
+<div class="row ml-1 mr-1 pl-5 pr-5">
+    <div class="col-md-12 fb-cover-img background-gradient-dark">
+    </div>
+</div>
+<div class="row ml-1 mr-1 pl-5 pr-5">
+    <div class="col-md-2">
+        <div class="profile-image-wrapper custom_border_color">
+            <img src="{{ group.group_creator.media_directory }}" style="height:100%;width:100%;" class="img-fluid"
+                 alt="">
+        </div>
+    </div>
+    <div class="col-md-8 ">
+        <div class="profile-image-name text-white ">
+            <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">  {{ group.name }}</span>
+        </div>
+    </div>
+</div>
+<div class="row ml-1 mr-1 pl-5 pr-5">
+    <!-- Left Card Start -->
+    <div class="col-md-3">
+        <!-- WORK DETAILS START-->
+
+        <!-- WORK DETAILS END -->
+        <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
+            <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
                 <div class="row">
-                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                    <i class="fas fa-chart-bar text-white fa-2x"></i>
-                    <span class="text-white ml-2"style="font-size:18px;">
+                    <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                        <i class="fas fa-chart-bar text-white fa-2x"></i>
+                        <span class="text-white ml-2" style="font-size:18px;">
                       <span class="font-weight-bold">
-                        {{group.name}}
+                        {{ group.name }}
                       </span>
                       Statistics
                     </span>
-                  </div>
-                  <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
-                </div>
-              </div>
-              
-              <div class="col-md-12 mt-3 mb-3"style="height:auto;">
-                <div class="row">
-                  <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <span class="border border-radius-5-all custom_border_color custom-center-center "style="height:70px;width:70px">
-                      <i class="fas fa-users text_heading p-3"style="font-size:24px;"></i>
-                    </span>
-                  </div>
-                  <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text_paragraph font-weight-bold "> {{group.group_members_stats.current_members}} Member</span>
-                    <small class="text_paragraph"> {{group.group_members_stats.recent_members}}</small>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center text_heading"style="height:70px;width:70px">
-                      <span class="font-weight-bold">Today  </span>
-                      <span class="font-weight-bold">  posts</span>
                     </div>
-                  </div>
-                  <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text_paragraph font-weight-bold "> {{group.group_posting_stats.today_posts}}  posts a day</span>
-                  </div>
+                    <div class="col-md-2 text-white mt-1">{{ group.friends | length }}</div>
                 </div>
-                <div class="row">
-                  <div class="col-md-4 m-0 p-0  custom-center-center">
-                    <div class="border border-radius-5-all custom_border_color text_heading d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px">
-                      <span class="font-weight-bold">Recent  </span>
-                      <span class="font-weight-bold">  posts</span>
-                    </div>
-                  </div>
-                  <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                    <span class="text_paragraph font-weight-bold "> {{group.group_posting_stats.recent_posts}} </span>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="row border custom_border_color bg-white mt-2">
-              <div class="col-md-12 p-2 background-gradient-dark">
+
+            <div class="col-md-12 mt-3 mb-3" style="height:auto;">
                 <div class="row">
-                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-                    <i class="fas fa-chart-bar text-white fa-2x"></i>
-                    <span class="text-white ml-2"style="font-size:18px;">
-                      <span class="font-weight-bold">{{group.name}}</span>
+                    <div class="col-md-4 m-0 p-0  custom-center-center">
+                    <span class="border border-radius-5-all custom_border_color custom-center-center "
+                          style="height:70px;width:70px">
+                      <i class="fas fa-users text_heading p-3" style="font-size:24px;"></i>
+                    </span>
+                    </div>
+                    <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
+                        <span class="text_paragraph font-weight-bold "> {{ group.group_members_stats.current_members }} Member</span>
+                        <small class="text_paragraph"> {{ group.group_members_stats.recent_members }}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 m-0 p-0  custom-center-center">
+                        <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center text_heading"
+                             style="height:70px;width:70px">
+                            <span class="font-weight-bold">Today  </span>
+                            <span class="font-weight-bold">  posts</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
+                        <span class="text_paragraph font-weight-bold "> {{ group.group_posting_stats.today_posts }}  posts a day</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 m-0 p-0  custom-center-center">
+                        <div class="border border-radius-5-all custom_border_color text_heading d-flex flex-column justify-content-center align-items-center"
+                             style="height:70px;width:70px">
+                            <span class="font-weight-bold">Recent  </span>
+                            <span class="font-weight-bold">  posts</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
+                        <span class="text_paragraph font-weight-bold "> {{ group.group_posting_stats.recent_posts }} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border custom_border_color bg-white mt-2">
+            <div class="col-md-12 p-2 background-gradient-dark">
+                <div class="row">
+                    <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
+                        <i class="fas fa-chart-bar text-white fa-2x"></i>
+                        <span class="text-white ml-2" style="font-size:18px;">
+                      <span class="font-weight-bold">{{ group.name }}</span>
                       Owner Details
                     </span>
-                  </div>
-                  <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
+                    </div>
+                    <div class="col-md-2 text-white mt-1">{{ group.friends | length }}</div>
                 </div>
-              </div>
-              <div class="col-md-12 mt-3 mb-3"style="height:auto;">
+            </div>
+            <div class="col-md-12 mt-3 mb-3" style="height:auto;">
                 <div class="row p-2">
-                  <div class="col-md-12 "style="height:auto;">
-                    <div class="row">
-                      <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <div class="border border-radius-5-all d-flex custom_border_color flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Admin  </span>
-                        <span class="text_heading font-weight-bold">  count</span></div>
-                      </div>
-                      <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                        <span class="text_paragraph font-weight-bold "> {{group.num_admins}} Admin</span>
-                      </div>
+                    <div class="col-md-12 " style="height:auto;">
+                        <div class="row">
+                            <div class="col-md-4 m-0 p-0  custom-center-center">
+                                <div class="border border-radius-5-all d-flex custom_border_color flex-column justify-content-center align-items-center"
+                                     style="height:70px;width:70px"><span
+                                        class="text_heading font-weight-bold">Admin  </span>
+                                    <span class="text_heading font-weight-bold">  count</span></div>
+                            </div>
+                            <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
+                                <span class="text_paragraph font-weight-bold "> {{ group.num_admins }} Admin</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 m-0 p-0  custom-center-center">
+                                <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"
+                                     style="height:70px;width:70px"><span class="text_heading font-weight-bold"
+                                                                          style="font-size:13px;">Moderator  </span>
+                                    <span class="text_heading font-weight-bold" style="font-size:13px;">  count</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
+                                <span class="text_paragraph font-weight-bold "> {{ group.num_moderators }} Moderators</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold"style="font-size:13px;">Moderator  </span>
-                        <span class="text_heading font-weight-bold"style="font-size:13px;">  count</span></div>
-                      </div>
-                      <div class="col-md-8 m-0 p-0 d-flex flex-column  justify-content-center align-items-center">
-                        <span class="text_paragraph font-weight-bold "> {{group.num_moderators}} Moderators</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <div class="row border custom_border_color bg-white mt-2" style="border-radius:0px 0px 0px 10px;">
-              <div class="col-md-12 background-gradient-dark p-2">
+        </div>
+        <div class="row border custom_border_color bg-white mt-2" style="border-radius:0px 0px 0px 10px;">
+            <div class="col-md-12 background-gradient-dark p-2">
                 <div class="row">
-                  <div class="col-md-10 d-flex flex-row justify-content-start align-items-center"> <i class="fas fa-address-card fa-2x text-white"></i>
-                    <span class="text-white ml-2"style="font-size:18px;"><span class="font-weight-bold">{{group.name}}</span> Privacy Details</span></div>
-                    <div class="col-md-2 text-white mt-1">{{group.friends | length}}</div>
-                  </div>
+                    <div class="col-md-10 d-flex flex-row justify-content-start align-items-center"><i
+                            class="fas fa-address-card fa-2x text-white"></i>
+                        <span class="text-white ml-2" style="font-size:18px;"><span
+                                class="font-weight-bold">{{ group.name }}</span> Privacy Details</span></div>
+                    <div class="col-md-2 text-white mt-1">{{ group.friends | length }}</div>
                 </div>
-                <div class="col-md-12 mt-3 mb-3"style="height:auto;">
-                  <div class="row">
-                    <div class="col-md-4 m-0 p-0  custom-center-center">
-                      <div class="border  border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
-                      <span class="text_heading font-weight-bold">  privacy</span></div>
-                    </div>
-                    <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
-                      <span class="text_paragraph font-weight-bold small-txt"> {{group.group_privacy}}</span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 m-0 p-0  custom-center-center">
-                      <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
-                      <span class="text_heading font-weight-bold">  visibilty</span></div>
-                    </div>
-                    <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
-                      <span class="text_paragraph font-weight-bold small-txt"> {{group.group_visibility}}</span>
-                    </div>
-                  </div>
-                  {% for i in group.additional_info %}
-                    <div class="row mt-2">
-                      <div class="col-md-4 m-0 p-0  custom-center-center">
-                        <span class="border border-radius-5-all custom-center-center "style="height:70px;width:70px"><span class="text-uppercase text-warning font-weight-bold p-3"style="font-size:10px;"> {{i.type}}</span></span>
-                      </div>
-                      <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center border border-radius-5-all"style="height:120px;overflow-y:auto;">
-                        <span class="text-dark font-weight-bold smaller-txt p-2"> {{i.info}}</span>
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
             </div>
-            <!-- Left Card End -->
-            <div class="col-md-9">
-              <!-- /////////////////////////
-              /////////////////////////////
-              ///////////////////////////
-              //////////////////////////// -->
-              <div class="row border custom_border_color mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
-                <div class="col-md-12 p-0 "style="height:830px;overflow-y:hidden;">
-                  <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"style="height:40px;border-radius:0px 10px 0px 0px;">
+            <div class="col-md-12 mt-3 mb-3" style="height:auto;">
+                <div class="row">
+                    <div class="col-md-4 m-0 p-0  custom-center-center">
+                        <div class="border  border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"
+                             style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
+                            <span class="text_heading font-weight-bold">  privacy</span></div>
+                    </div>
+                    <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
+                        <span class="text_paragraph font-weight-bold small-txt"> {{ group.group_privacy }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 m-0 p-0  custom-center-center">
+                        <div class="border border-radius-5-all custom_border_color d-flex flex-column justify-content-center align-items-center"
+                             style="height:70px;width:70px"><span class="text_heading font-weight-bold">Group  </span>
+                            <span class="text_heading font-weight-bold">  visibilty</span></div>
+                    </div>
+                    <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center">
+                        <span class="text_paragraph font-weight-bold small-txt"> {{ group.group_visibility }}</span>
+                    </div>
+                </div>
+                {% for i in group.additional_info %}
+                    <div class="row mt-2">
+                        <div class="col-md-4 m-0 p-0  custom-center-center">
+                            <span class="border border-radius-5-all custom-center-center "
+                                  style="height:70px;width:70px"><span
+                                    class="text-uppercase text-warning font-weight-bold p-3"
+                                    style="font-size:10px;"> {{ i.type }}</span></span>
+                        </div>
+                        <div class="col-md-8 m-0 p-0  d-flex flex-column justify-content-center align-items-center border border-radius-5-all"
+                             style="height:120px;overflow-y:auto;">
+                            <span class="text-dark font-weight-bold smaller-txt p-2"> {{ i.info }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Left Card End -->
+    <div class="col-md-9">
+        <!-- /////////////////////////
+        /////////////////////////////
+        ///////////////////////////
+        //////////////////////////// -->
+        <div class="row border custom_border_color mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
+            <div class="col-md-12 p-0 " style="height:830px;overflow-y:hidden;">
+                <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"
+                    style="height:40px;border-radius:0px 10px 0px 0px;">
                     <li class="active">
-                      <a data-toggle="tab" class="nav-link custom_active_text" href="#profile" >
-                        <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
-                        Profile Informnation
-                        </i>
-                      </a>
+                        <a data-toggle="tab" class="nav-link custom_active_text" href="#profile">
+                            <i class="material-icons text-dark font-weight-bold fa fa-user text-warning fa-2x">
+                                Profile Informnation
+                            </i>
+                        </a>
                     </li>
                     <li class="">
-                      <a data-toggle="tab" class="nav-link custom_active_text" href="#close_asscoiates">
-                        
-                        <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
-                        Close Associates ({{group.close_associates | length}})
-                        </i>
-                      </a>
+                        <a data-toggle="tab" class="nav-link custom_active_text" href="#close_asscoiates">
+
+                            <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
+                                Close Associates ({{ group.close_associates | length }})
+                            </i>
+                        </a>
                     </li>
 
 
                     <li class="">
-                      <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
-                        
-                        <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
-                      Group Posts ({{group.posts | length}})
-                        </i>
-                      </a>
+                        <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
+
+                            <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
+                                Group Posts ({{ group.posts | length }})
+                            </i>
+                        </a>
                     </li>
-                  </ul>
-                  <div class="tab-content bg-white pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
-                                   <!-- start profile tab  -->
-                                   <div id="profile" class="tab-pane fade show in active ">
-                                    <div class="row">  
-                                      
-                                      <!-- general information start -->
-                                    <div class="col-md-8">
-                                     <div class="card">
-                                       <div class="card-header bg-dark text-center">
-                                        <span class="btn btn-primary ">  General Info  </span>
-                                       </div>
-                                       <div class="card-body"style="height:275px;">
-                                         <div class="row mt-2">
-                                           <!-- col-md-6 -->
-                                           <div class="col-md-6">
-                                             <!--  -->
-                                             <div class="row mt-2">
-                                               <div class="col-md-4 text_12">Username </div>
-                                               <div class="col-md-8  text-primary text_12">{{group.username|default:"N/A"}}</div>
-                                             </div>
-                                             <!--  -->
-                                              <!--  -->
-                                              <div class="row mt-2">
-                                                <div class="col-md-4 text_12">Name </div>
-                                                <div class="col-md-8  text-primary text_12">{{group.name|truncatechars:"30"|default:"N/A"}}</div>
-                                              </div>
-                                              <!--  -->
-                                                <!--  -->
-                                                <div class="row mt-2">
-                                                  <div class="col-md-4 text_12">Target Type </div>
-                                                  <div class="col-md-8  text-primary text_12">{{group.target_type|default:"N/A"}}</div>
-                                                </div>
-                                                <!--  -->
-                                    
-                                                 <!--  -->
-                                                 <div class="row mt-2">
-                                                  <div class="col-md-4 text_12">Group Description </div>
-                                                  <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
-                                                </div>
-                                                <!--  -->
-                                    
-                                    
-                                                   <!--  -->
-                                                   <div class="row mt-2">
-                                                    <div class="col-md-4 text_12"> Update Count </div>
-                                                    <div class="col-md-8  text-primary text_12"><p>{{group.target_update_count|default:"N/A"}}</p></div>
-                                                  </div>
-                                                  <!--  -->
-                                           </div>
-                                           <!-- col-md-6 -->
-                                    
+                </ul>
+                <div class="tab-content bg-white pl-4 pr-4 pt-2" style="height:100%;overflow-y:auto;">
+                    <!-- start profile tab  -->
+                    <div id="profile" class="tab-pane fade show in active ">
+                        <div class="row">
+
+                            <!-- general information start -->
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark text-center">
+                                        <span class="text-white text-20">  General Info  </span>
+                                    </div>
+                                    <div class="card-body" style="height:275px;">
+                                        <div class="row mt-2">
                                             <!-- col-md-6 -->
                                             <div class="col-md-6">
-                                              <!--  -->
-                                              <div class="row mt-2">
-                                                <div class="col-md-4 text_12">Group Privacy </div>
-                                                <div class="col-md-8  text-primary text_12">{{group.group_privacy|default:"N/A"}}</div>
-                                              </div>
-                                              <!--  -->
-                                               <!--  -->
-                                               <div class="row mt-2">
-                                                 <div class="col-md-4 text_12">Group Visibility </div>
-                                                 <div class="col-md-8  text-primary text_12">{{group.group_visibility|default:"N/A"}}</div>
-                                               </div>
-                                               <!--  -->
-                                                 <!--  -->
-                                                 <div class="row mt-2">
-                                                   <div class="col-md-4 text_12">Group Category </div>
-                                                   <div class="col-md-8  text-primary text_12">{{group.General|default:"N/A"}}</div>
-                                                 </div>
-                                                 <!--  -->
-                                     
-                                                  <!--  -->
-                                                  <div class="row mt-2">
-                                                   <div class="col-md-4 text_12">Group Description </div>
-                                                   <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
-                                                 </div>
-                                                 <!--  -->
-                                     
-                                     
-                                                   
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Username</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.username|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Name</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.name|truncatechars:"30"|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Target Type</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.target_type|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
+
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Group Description</div>
+                                                    <div class="col-md-8  text_paragraph text_14">
+                                                        <p>{{ group.description|default:"N/A" }}</p></div>
+                                                </div>
+                                                <!--  -->
+
+
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14"> Update Count</div>
+                                                    <div class="col-md-8  text_paragraph text_14">
+                                                        <p>{{ group.target_update_count|default:"N/A" }}</p></div>
+                                                </div>
+                                                <!--  -->
                                             </div>
                                             <!-- col-md-6 -->
-                                         </div>
-                                       </div>
-                                       <div class="card-footer bg-dark"></div>  
-                                     </div>
-                                    </div>
-                                    <!-- genreal inforamtion start  -->
 
-                                    <!-- posting timeline start  -->
-                                    <div class="col-md-4">
-                                      <div class="card ">
-                                    <div class="card-header  bg-dark  text-center">
-                                     <span class="btn btn-primary "> Posting Timeline</span>
-                                    </div>
-                                    <div class="card-body"style="height:250px;overflow-y:scroll;">
-                                      <div class="row">
-                                      
-                                    
-                                      <ul class="col-md-6"style="list-style:square;">
-                                        {% for i in group.posting_time_charts.1 %}
-                                        <li class="text_12">{{i}}</li>
-                                        {% endfor %}
-                                      </ul>
-                                      <ul class="col-md-6 "style="list-style:none;">
-                                        {% for i in group.posting_time_charts.0 %}
-                                        <li class="text_12">{{i}}</li>
-                                        {% endfor %}
-                                      </ul>
-                                    </div>
-                                    </div>
-                                    <div class="card-footer bg-dark">
-                                      <span class="badge badge-primary">Total posts : {{group.posting_time_charts.0|length}}</span>
-                                    </div>
-                                      </div>
-                                    </div>
-                                    <!-- posting timeline end  -->
-                                    
-                                    <!-- start group moderators  -->
-                                                              <div class="col-md-12 mt-3">
-                                                                <h3><i class="material-icon text_heading">Group Moderators  </i></h3>
-                                                                <div class="row">
-                                                                  
-                                                                    {% for i in group.group_moderators %}
-                                                                     <div class="col-md-4">
-                                                                       <div class="card ">
-                                                                         <div class="card-header text-center bg-dark"> 
-                                                                           <span class="btn btn-primary btn-sm ">Moderator # {{forloop.counter}}</span>
-                                                                         </div>
-                                                                         <div class="card-body">
-                                                                           <div class="row">
-                                                                             <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
-                                                                               <img src="{{i.media_directory}}" class="img-fluid" style="height:100px;width:100px;" />  
-                                                                             </div>
-                                                                             <div class="col-md-8">
-                                                                              <div class="row">
-                                                                                <div class="col-md-4"><span class="badge">Enitity Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
-                                                                                <div class="col-md-4"><span class="badge">User Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.username|default:"N/A"}}</span></div>
-                                                                                <div class="col-md-4"><span class="badge">Enitity ID</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.id|default:"N/A"}}</span></div>
-                                                                                <div class="col-md-4"><span class="badge">Enitity URL</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
+                                            <!-- col-md-6 -->
+                                            <div class="col-md-6">
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Group Privacy</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.group_privacy|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Group Visibility</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.group_visibility|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Group Category</div>
+                                                    <div class="col-md-8  text_paragraph text_14">{{ group.General|default:"N/A" }}</div>
+                                                </div>
+                                                <!--  -->
 
-                                                                                
-                                                                              </div>
-                                                                             </div>
-                                                                           </div>
-                                                                         </div>
-                                                                         <div class="card-footer bg-dark"></div>  
-                                                                       </div>
-                                                                     </div>
-                                                                      {% empty %}
-                                                                      <p>Group has no moderators  </p>
-                                                                    {% endfor %}
-                                                                 
-                                                                </div>
-                                                              </div>
-                                                              <!-- end group moderators -->
-                                    
-                                    
-                                                            <div class="col-md-6  m-0 p-0  text-center">
-                                                              <h3><i class="material-icon text_heading">Common Words </i></h3>
-                                                              <div class="row">
-                                                                {% if group.common_wrods is not Null %}
-                                                                  <div class="col-md-12 m-0 p-0 text_paragraph" id="common_words_chart" style="height: 400px;width: 100%;">
-                                                                  </div>
-                                                                {% else %}
-                                                                  <div class="col-md-12 text-center text_paragraph"><p>No common words to display </p></div>
-                                                                  {%endif%}
-                                                                </div>
-                                                              </div>
-                                                              <div class="col-md-6 m-0 p-0 text-center">
-                                                                <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
-                                                                <div class="row">
-                                                                  <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;"></div>
-                                                                  
-                                                                </div>
-                                                              </div>
-                                                            
-                                                              <div class="col-md-12">
-                                                                <h3><i class="material-icon text_heading">Group Rules  </i></h3>
-                                                                <div class="row">
-                                                                  <ul class="col-md-12 list-group list-unstyled">
-                                                                    {% for i in group.group_rules %}
-                                                                      <li class="list-group-item custom_border_color text_paragraph">{{forloop.counter}} # {{i.heading}}</li>
-                                                                      <div class="border custom_border_color p-3"><small class=" text_heading font-weight-bold"> {{i.body}} </small>
-                                                                      </div>
-                                                                      {% empty %}
-                                                                      <p>Group has defined no rules yet  </p>
-                                                                    {% endfor %}
-                                                                  </ul>
-                                                                </div>
-                                                              </div>
-                                                              <div class="col-md-12">
-                                                                <h3><i class="material-icon text_heading">Group Histroy </i></h3>
-                                                                <div class="row">
-                                                                  <ul class="col-md-12 list-group list-unstyled">
-                                                                    {% for i in group.group_history%}
-                                                                      <li class="list-group-item border custom_border_color text_paragraph">{{forloop.counter}} # {{i.event}}
-                                                                        <small class="float-right font-weight-bold">Timestamp :{{i.time_stamp}} </small>
-                                                                      </small>
-                                                                      {% endfor %}
-                                                                    </ul>
-                                                                  </div>
-                                                                </div>
-                                                                <div class="col-md-12 pb-4">
-                                                                  <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
-                                                                  <p class="text_paragraph">{{group.behaviour}}</p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                            <!-- end profile tab  -->
-                    <!-- start close associates tab  -->
-                    <div id="close_asscoiates"  class="tab-pane  text-white fade">
-                      <!-- <p>Close Associates ({{group.close_associates | length}})</p> -->
-                      <div class="row">
-                        {% for c in group.close_associates %}
-                          <div class="col-md-6">
-                            <div class="accordion" id="accordionExample">
-                              <div class="card">
-                                <div class="card-header background-gradient-dark" id="headingOne" data-toggle="collapse" data-target="#_{{c.id}}" aria-expanded="true" aria-controls="_{{c.id}}">
-                                  <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                  <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
-                                  <div class="d-inline">
-                                    {{ c.name }} 
-                                </div>
-                                <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
-                                </div>
-                                <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                  <div class="card-body bg-white">
-                                    <div class="row text_heading">
-                                      <div class="col-md-6">
-                                        <div class="row">
-                                          <div class="col-md-6 text-14"> Entity Type:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.entity_type}}</div>
-                                          <div class="col-md-6 text-14"> Username:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.username}}</div>
-                                          <div class="col-md-6 text-14"> Id:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.id}}</div>
-                                          <div class="col-md-6 text-14"> Is Admin:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_admin}}</div>
-                                          <div class="col-md-6 text-14"> is Moderator:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_moderator}}</div>
-                                          <div class="col-md-6 text-14"> Is Group Memeber:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.is_page_member}}</div>
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4 text_14">Group Description</div>
+                                                    <div class="col-md-8  text_paragraph text_14">
+                                                        <p>{{ group.description|default:"N/A" }}</p></div>
+                                                </div>
+                                                <!--  -->
+
+
+                                            </div>
+                                            <!-- col-md-6 -->
                                         </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <div class="row ">
-                                          <div class="col-md-6 text-14"> Post Authors:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_authors}}</div>
-                                          <div class="col-md-6 text-14"> Post Targets:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_target}}</div>
-                                          <div class="col-md-6 text-14"> Post Tags:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_tags}}</div>
-                                          <div class="col-md-6 text-14"> post_comments:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_comments}}</div>
-                                          <div class="col-md-6 text-14"> Post Reactions:</div>
-                                          <div class="col-md-6 text-14 text_paragraph"> {{c.post_reactions}}</div>
-                                          <div class="col-md-6 text-14"> URL:</div>
-                                          <div class="col-md-6 text-14">
-                                            <a class="badge custom_badge fa fa-search" href="{{c.url}}">View</a>
-                                          </div>
-                                        </div>
-                                      </div>
                                     </div>
-                                  </div>
+                                    <div class="card-footer background-gradient-dark">
+                                        <span class="badge custom_badge p-2">Total Members : {{ group.group_members_stats.current_members }}</span>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                          </div>
-                        {% endfor %}
-                      </div>
+                            <!-- genreal inforamtion start  -->
+
+                            <!-- posting timeline start  -->
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-header background-gradient-dark  text-center">
+                                        <span class="text-white text-20"> Posting Timeline</span>
+                                    </div>
+                                    <div class="card-body" style="height:275px;overflow-y:scroll;">
+                                        <div class="row">
+
+
+                                            <ul class="col-md-6" style="list-style:square;">
+                                                {% for i in group.posting_time_charts.1 %}
+                                                    <li class="text_14">{{ i }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="col-md-6 " style="list-style:none;">
+                                                {% for i in group.posting_time_charts.0 %}
+                                                    <li class="text_14">{{ i }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer background-gradient-dark">
+                                        <span class="badge custom_badge p-2">Total posts : {{ group.posting_time_charts.0|length }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- posting timeline end  -->
+
+                            <!-- start group moderators  -->
+                            <div class="col-md-12 mt-3">
+                                <h3><i class="material-icon text_heading">Group Moderators </i></h3>
+                                <div class="row">
+
+                                    {% for i in group.group_moderators %}
+                                        <div class="col-md-4">
+                                            <div class="card ">
+                                                <div class="card-header text-center background-gradient-dark">
+                                                    <span class="text-white text-20">Moderator # {{ forloop.counter }}</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                            <img src="{{ i.media_directory }}" class="img-fluid"
+                                                                 style="height:100px;width:100px;"/>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="row">
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">User Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.username|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity ID</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.id|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity URL</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer background-gradient-dark"></div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <p>Group has no moderators </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- end group moderators -->
+
+
+                            <div class="col-md-6  m-0 p-0  text-center">
+                                <h3><i class="material-icon text_heading">Common Words </i></h3>
+                                <div class="row">
+                                    {% if group.common_wrods is not Null %}
+                                        <div class="col-md-12 m-0 p-0 text_paragraph" id="common_words_chart"
+                                             style="height: 400px;width: 100%;">
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-12 text-center text_paragraph"><p>No common words to
+                                            display </p></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6 m-0 p-0 text-center">
+                                <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
+                                <div class="row">
+                                    <div class="col-md-12 m-0 p-0  " id="sentiment_chart"
+                                         style="height: 400px;width: 100%;"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <h3><i class="material-icon text_heading">Group Rules </i></h3>
+                                <div class="row">
+                                    <ul class="col-md-12 list-group list-unstyled">
+                                        {% for i in group.group_rules %}
+                                            <li class="list-group-item custom_border_color text_paragraph">{{ forloop.counter }}
+                                                # {{ i.heading }}</li>
+                                            <div class="border custom_border_color p-3"><small
+                                                    class=" text_heading font-weight-bold"> {{ i.body }} </small>
+                                            </div>
+                                        {% empty %}
+                                            <p>Group has defined no rules yet </p>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h3><i class="material-icon text_heading">Group Histroy </i></h3>
+                                <div class="row">
+                                    <ul class="col-md-12 list-group list-unstyled">
+                                        {% for i in group.group_history %}
+                                            <li class="list-group-item border custom_border_color text_paragraph">
+                                                {{ forloop.counter }} # {{ i.event }}
+                                                <small class="float-right font-weight-bold">Timestamp
+                                                    :{{ i.time_stamp }} </small>
+                                                </small>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pb-4">
+                                <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
+                                <p class="text_paragraph">{{ group.behaviour }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end profile tab  -->
+                    <!-- start close associates tab  -->
+                    <div id="close_asscoiates" class="tab-pane  text-white fade">
+                        <!-- <p>Close Associates ({{group.close_associates | length}})</p> -->
+                        <div class="row">
+                            {% for c in group.close_associates %}
+                                <div class="col-md-6">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card">
+                                            <div class="card-header background-gradient-dark" id="headingOne"
+                                                 data-toggle="collapse" data-target="#_{{ c.id }}" aria-expanded="true"
+                                                 aria-controls="_{{ c.id }}">
+                                                <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                <img src="{{ c.media_directory }}"
+                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                     class="img-fluid">
+                                                <div class="d-inline">
+                                                    {{ c.name }}
+                                                </div>
+                                                <!-- Addedd by osama start-->
+                                                <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                    <span class="badge badge-light float-right mb-2">Score : {{ c.score }}</span>
+                                                    {% if c.username %}
+                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="badge custom_badge">
+                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-link  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="badge custom_badge mt-2">
+                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <!-- Addedd by osama end-->
+                                            </div>
+                                            <div id="_{{ c.id }}" class="collapse " aria-labelledby="headingOne"
+                                                 data-parent="#accordionExample">
+                                                <div class="card-body bg-white">
+                                                    <div class="row text_heading">
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-6 text-14"> Entity Type:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.entity_type }}</div>
+                                                                <div class="col-md-6 text-14"> Username:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.username }}</div>
+                                                                <div class="col-md-6 text-14"> Id:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.id }}</div>
+                                                                <div class="col-md-6 text-14"> Is Admin:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.is_admin }}</div>
+                                                                <div class="col-md-6 text-14"> is Moderator:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.is_moderator }}</div>
+                                                                <div class="col-md-6 text-14"> Is Group Memeber:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.is_page_member }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="row ">
+                                                                <div class="col-md-6 text-14"> Post Authors:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.post_authors }}</div>
+                                                                <div class="col-md-6 text-14"> Post Targets:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.post_target }}</div>
+                                                                <div class="col-md-6 text-14"> Post Tags:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.post_tags }}</div>
+                                                                <div class="col-md-6 text-14"> post_comments:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.post_comments }}</div>
+                                                                <div class="col-md-6 text-14"> Post Reactions:</div>
+                                                                <div class="col-md-6 text-14 text_paragraph"> {{ c.post_reactions }}</div>
+                                                                <div class="col-md-6 text-14"> URL:</div>
+                                                                <div class="col-md-6 text-14">
+                                                                    <a class="badge custom_badge fa fa-search"
+                                                                       href="{{ c.url }}">View</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <!-- end close asscoiates  -->
 
 
                     <!-- startof group posts  -->
                     <div id="posts" class="tab-pane fade  ">
-                      <div class="row">
-                        {% for p in  group.posts %}
-                            <div class="border custom_border_color col-md-12 text-center text_paragraph"
-                                 style="border-radius: 10px 10px 0px 0px;">
-                                Post # {{ forloop.counter }}
-                            </div>
-                            <div class="col-md-12 post-wrapper">
-                            <div class="row border custom_border_color">
-                                <div class="col-md-2 m-0 p-0 custom-center-center">
-                                    <img src="{{ p.author_media_directory }}"
-                                         style="height: 60px;width:60px;border-radius: 50%;;"
-                                         class="img-fluid">
+                        <div class="row">
+                            {% for p in  group.posts %}
+                                <div class="border custom_border_color col-md-12 text-center text_paragraph"
+                                     style="border-radius: 10px 10px 0px 0px;">
+                                    Post # {{ forloop.counter }}
                                 </div>
-                                <div class="col-md-2 custom-column-start-start pt-2 text_heading">
-                                    <span> {{ page.name }}</span>
-                                    <span class="smaller-txt">{{ p.timestamp }}</span>
+                                <div class="col-md-12 post-wrapper">
+                                <div class="row border custom_border_color">
+                                    <div class="col-md-2 m-0 p-0 custom-center-center">
+                                        <img src="{{ p.author_media_directory }}"
+                                             style="height: 60px;width:60px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                    </div>
+                                    <div class="col-md-2 custom-column-start-start pt-2 text_heading">
+                                        <span> {{ page.name }}</span>
+                                        <span class="smaller-txt">{{ p.timestamp }}</span>
+                                    </div>
+                                    <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
+                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Post id:
+                                            <span class="text_paragraph">{{ p.post_id }}</span>
+                                        </div>
+                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
+                                            Name:
+                                            <span class="text_paragraph">{{ p.author_name }}</span>
+                                        </div>
+                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
+                                            Username:
+                                            <span class="text_paragraph">{{ p.author_username }}</span>
+                                        </div>
+                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">
+                                            Sentiment:
+                                            <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
+                                        </div>
+                                    </div>
+                                    {#                                        <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">#}
+                                    {#                                            {{ p.post_text }}#}
+                                    {#                                        </div>#}
                                 </div>
-                                <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
-                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Post id:
-                                        <span class="text_paragraph">{{ p.post_id }}</span>
-                                    </div>
-                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
-                                        Name:
-                                        <span class="text_paragraph">{{ p.author_name }}</span>
-                                    </div>
-                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
-                                        Username:
-                                        <span class="text_paragraph">{{ p.author_username }}</span>
-                                    </div>
-                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">
-                                        Sentiment:
-                                        <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
-                                    </div>
-                                </div>
-                                {#                                        <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">#}
-                                {#                                            {{ p.post_text }}#}
-                                {#                                        </div>#}
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <i class="material-icon text_heading" style="font-size:16px;">
-                                        Post Text</i>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text_heading" style="font-size:16px;">
+                                            Post Text</i>
+                                    </div>
+                                    {% if p.post_text %}
+                                        <div class="col-md-12 text-center text-dark ">
+                                            <p>{{ p.post_text }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-12 text-center text-dark ">
+                                            <p class="alert alert-info">This post has No text attachment</p>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                                {% if p.post_text %}
-                                    <div class="col-md-12 text-center text-dark ">
-                                        <p>{{ p.post_text }}</p>
-                                    </div>
-                                {% else %}
-                                    <div class="col-md-12 text-center text-dark ">
-                                        <p class="alert alert-info">This post has No text attachment</p>
-                                    </div>
-                                {% endif %}
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <i class="material-icon text_heading" style="font-size:16px;">Post
-                                        Pictures ({{ p.picture_directory | length }})</i>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text_heading" style="font-size:16px;">Post
+                                            Pictures ({{ p.picture_directory | length }})</i>
+                                    </div>
+                                    {% for x in p.picture_directory %}
+                                        <div class="col-md-12 text-center" style="">
+                                            <img src="{{ x.url }}" class="img-fluid"/>
+                                        </div>
+                                    {% empty %}
+                                        <div class="col-md-12 text-center text-dark ">
+                                            <p class="alert alert-info">This post has No picture attachment</p>
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                                {% for x in p.picture_directory %}
-                                    <div class="col-md-12 text-center" style="">
-                                        <img src="{{ x.url }}" class="img-fluid"/>
-                                    </div>
-                                {% empty %}
-                                    <div class="col-md-12 text-center text-dark ">
-                                        <p class="alert alert-info">This post has No picture attachment</p>
-                                    </div>
-                                {% endfor %}
-                            </div>
 
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">Liked By
-                                        ({{ p.reactions.like | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was liked by
-                                        following users </small>
-                                </div>
-                                {% for r in p.reactions.like %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:150px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
-                                        <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">Liked By
+                                            ({{ p.reactions.like | length }})</i>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was liked by
+                                            following users </small>
+                                    </div>
+                                    {% for r in p.reactions.like %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:150px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                            Loved' By ({{ p.reactions.love | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                        Loved' By ({{ p.reactions.love | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted by
-                                        following users </small>
-                                </div>
-                                {% for r in p.reactions.love %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:150px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted by
+                                            following users </small>
+                                    </div>
+                                    {% for r in p.reactions.love %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:150px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                            HAHA' By ({{ p.reactions.haha | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                        HAHA' By ({{ p.reactions.haha | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "HAHA"
-                                        by following users </small>
-                                </div>
-                                {% for r in p.reactions.haha %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "HAHA"
+                                            by following users </small>
+                                    </div>
+                                    {% for r in p.reactions.haha %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                            WOW' By ({{ p.reactions.wow | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                        WOW' By ({{ p.reactions.wow | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "WOW"
-                                        by following users </small>
-                                </div>
-                                {% for r in p.reactions.wow %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "WOW"
+                                            by following users </small>
+                                    </div>
+                                    {% for r in p.reactions.wow %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                            ANGRY' By ({{ p.reactions.angry | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                        ANGRY' By ({{ p.reactions.angry | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "ANGRY"
-                                        by following users </small>
-                                </div>
-                                {% for r in p.reactions.angry %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "ANGRY"
+                                            by following users </small>
+                                    </div>
+                                    {% for r in p.reactions.angry %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                            SAD' By ({{ p.reactions.sad | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                        SAD' By ({{ p.reactions.sad | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "SAD"
-                                        by following users </small>
-                                </div>
-                                {% for r in p.reactions.sad %}
-                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <img src="{{ r.media_directory }}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "SAD"
+                                            by following users </small>
+                                    </div>
+                                    {% for r in p.reactions.sad %}
+                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
                                <span class="text_paragraph">{{ r.name }}</span>
                                </span>
-                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
                                <span class="text_paragraph">{{ r.username }}</span>
                                </span>
-                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
                                <span class="text_paragraph">{{ r.id }}</span>
                                </span>
-                                            <a href="{{ r.url }}" target="_blank"
-                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                    class="fa fa-search">View</i></a>
+                                                <a href="{{ r.url }}" target="_blank"
+                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                        class="fa fa-search">View</i></a>
+                                            </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-md-6">
+                                        <i class="material-icon text_heading" style="font-size:16px;">'Comments'
+                                            By ({{ p.comments | length }})</i>
                                     </div>
-                                {% endfor %}
-                            </div>
-                            <div class="row mt-5">
-                                <div class="col-md-6">
-                                    <i class="material-icon text_heading" style="font-size:16px;">'Comments'
-                                        By ({{ p.comments | length }})</i>
-                                </div>
-                                <div class="col-md-6">
-                                    <small class=" bg-success p-1 text-white ml-5"> Following users commented on
-                                        the post </small>
-                                </div>
-                                {% for r in p.comments %}
-                                    <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                         style="height:100px;">
-                                        <div>
-                                        </div>
-                                        <img src=" {{ r.commentor.media_directory }}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                        <div class="p-2">
+                                    <div class="col-md-6">
+                                        <small class=" bg-success p-1 text-white ml-5"> Following users commented on
+                                            the post </small>
+                                    </div>
+                                    {% for r in p.comments %}
+                                        <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:100px;">
+                                            <div>
+                                            </div>
+                                            <img src=" {{ r.commentor.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;"
+                                                 class="img-fluid">
+                                            <div class="p-2">
                                <span
                                        class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
                                    {{ r.commentor.name }}</span>
-                                            <span
-                                                    class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
-                                                {{ r.commentor.username }}</span>
-                                            <span
-                                                    class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
-                                                {{ r.commentor.id }}</span>
-                                            <a href="{{ r.commentor.url }}"
-                                               class="badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                                <span
+                                                        class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
+                                                    {{ r.commentor.username }}</span>
+                                                <span
+                                                        class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
+                                                    {{ r.commentor.id }}</span>
+                                                <a href="{{ r.commentor.url }}"
+                                                   class="badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                            </div>
                                         </div>
+                                        <div class="col-md-8 border custom_border_color custom-center-center">
+                                            {{ r.comment_text }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                            class="fas fa-comments text_heading mr-1"></i>{{ p.comments_statistics }}
                                     </div>
-                                    <div class="col-md-8 border custom_border_color custom-center-center">
-                                        {{ r.comment_text }}
+                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                            class="fas fa-grin-hearts text_heading mr-1"></i>{{ p.reactions_statistics }}
                                     </div>
-                                {% endfor %}
+                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                            class="fas fa-share-alt text_heading mr-1"></i>{{ p.shares_statistics }}
+                                    </div>
+                                </div>
+                                </p>
+                            {% endfor %}
                             </div>
-                            <div class="row">
-                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                        class="fas fa-comments text_heading mr-1"></i>{{ p.comments_statistics }}
-                                </div>
-                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                        class="fas fa-grin-hearts text_heading mr-1"></i>{{ p.reactions_statistics }}
-                                </div>
-                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                        class="fas fa-share-alt text_heading mr-1"></i>{{ p.shares_statistics }}
-                                </div>
-                            </div>
-                            </p>
-                        {% endfor %}
                         </div>
                     </div>
-                      </div>
 
                     <!-- end of group posts -->
 
-     
-                      </div>
-                      <!-- end tab content -->
-                    </div>
-                  </div>
+
                 </div>
-                <!-- ////////////////////////////////
-                /////////////////////////////////////
-                ////////////////////////////////////
-                ///////////////////////////////// -->
-              </div>
+                <!-- end tab content -->
             </div>
-            
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-             <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
-            <script src="https://www.amcharts.com/lib/4/core.js"></script>
-            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-            <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
-            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-            <script>
-$(document).ready(function(){
+        </div>
+    </div>
+    <!-- ////////////////////////////////
+    /////////////////////////////////////
+    ////////////////////////////////////
+    ///////////////////////////////// -->
+</div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script>
+    $(document).ready(function () {
 
 
-$('#work_details_btn').removeClass("badge-primary");
-$('#work_details_btn').addClass("badge-success");
+        $('#work_details_btn').removeClass("badge-primary");
+        $('#work_details_btn').addClass("badge-success");
 
-$('#family_details_btn').on('click',function(){
+        $('#family_details_btn').on('click', function () {
 
-$('#work_details').removeClass("show");
-$('#websites_details').removeClass("show");
-$('#social_links_details').removeClass("show");
+            $('#work_details').removeClass("show");
+            $('#websites_details').removeClass("show");
+            $('#social_links_details').removeClass("show");
 //
-$('#family_details_btn').removeClass("badge-primary");
-$('#family_details_btn').addClass("badge-success");
+            $('#family_details_btn').removeClass("badge-primary");
+            $('#family_details_btn').addClass("badge-success");
 //all Others
-$('#websites_details_btn').removeClass("badge-success");
-$('#websites_details_btn').addClass("badge-primary");
+            $('#websites_details_btn').removeClass("badge-success");
+            $('#websites_details_btn').addClass("badge-primary");
 
-$('#social_links_details_btn').removeClass("badge-success");
-$('#social_links_details_btn').addClass("badge-primary");
+            $('#social_links_details_btn').removeClass("badge-success");
+            $('#social_links_details_btn').addClass("badge-primary");
 
 
-$('#work_details_btn').removeClass("badge-success");
-$('#work_details_btn').addClass("badge-primary");
+            $('#work_details_btn').removeClass("badge-success");
+            $('#work_details_btn').addClass("badge-primary");
 
-})
+        })
 
-$('#social_links_details_btn').on('click',function(){
+        $('#social_links_details_btn').on('click', function () {
 
-$('#work_details').removeClass("show");
-$('#websites_details').removeClass("show");
-$('#family_details').removeClass("show");
+            $('#work_details').removeClass("show");
+            $('#websites_details').removeClass("show");
+            $('#family_details').removeClass("show");
 //
-$('#social_links_details_btn').removeClass("badge-primary");
-$('#social_links_details_btn').addClass("badge-success");
+            $('#social_links_details_btn').removeClass("badge-primary");
+            $('#social_links_details_btn').addClass("badge-success");
 //all Others
-$('#websites_details_btn').removeClass("badge-success");
-$('#websites_details_btn').addClass("badge-primary");
+            $('#websites_details_btn').removeClass("badge-success");
+            $('#websites_details_btn').addClass("badge-primary");
 
-$('#family_details_btn').removeClass("badge-success");
-$('#family_details_btn').addClass("badge-primary");
-
-
-
-$('#work_details_btn').removeClass("badge-success");
-$('#work_details_btn').addClass("badge-primary");
-
-})
+            $('#family_details_btn').removeClass("badge-success");
+            $('#family_details_btn').addClass("badge-primary");
 
 
+            $('#work_details_btn').removeClass("badge-success");
+            $('#work_details_btn').addClass("badge-primary");
 
-$('#work_details_btn').on('click',function(){
+        })
 
-$('#social_links_details').removeClass("show");
-$('#websites_details').removeClass("show");
-$('#family_details').removeClass("show");
 
-$('#work_details_btn').removeClass("badge-primary");
-$('#work_details_btn').addClass("badge-success");
+        $('#work_details_btn').on('click', function () {
+
+            $('#social_links_details').removeClass("show");
+            $('#websites_details').removeClass("show");
+            $('#family_details').removeClass("show");
+
+            $('#work_details_btn').removeClass("badge-primary");
+            $('#work_details_btn').addClass("badge-success");
 
 
 //all Others
-$('#websites_details_btn').removeClass("badge-success");
-$('#websites_details_btn').addClass("badge-primary");
+            $('#websites_details_btn').removeClass("badge-success");
+            $('#websites_details_btn').addClass("badge-primary");
 
-$('#family_details_btn').removeClass("badge-success");
-$('#family_details_btn').addClass("badge-primary");
+            $('#family_details_btn').removeClass("badge-success");
+            $('#family_details_btn').addClass("badge-primary");
 
-$('#social_links_details_btn').removeClass("badge-success");
-$('#social_links_details_btn').addClass("badge-primary");
-
-
-
-})
+            $('#social_links_details_btn').removeClass("badge-success");
+            $('#social_links_details_btn').addClass("badge-primary");
 
 
+        })
 
-$('#websites_details_btn').on('click',function(){
 
-$('#work_details').removeClass("show");
-$('#social_links_details').removeClass("show");
-$('#family_details').removeClass("show");
+        $('#websites_details_btn').on('click', function () {
 
-$('#websites_details_btn').removeClass("badge-primary");
-$('#websites_details_btn').addClass("badge-success");
+            $('#work_details').removeClass("show");
+            $('#social_links_details').removeClass("show");
+            $('#family_details').removeClass("show");
+
+            $('#websites_details_btn').removeClass("badge-primary");
+            $('#websites_details_btn').addClass("badge-success");
 
 //all Others
-$('#work_details_btn').removeClass("badge-success");
-$('#work_details_btn').addClass("badge-primary");
+            $('#work_details_btn').removeClass("badge-success");
+            $('#work_details_btn').addClass("badge-primary");
 
-$('#family_details_btn').removeClass("badge-success");
-$('#family_details_btn').addClass("badge-primary");
+            $('#family_details_btn').removeClass("badge-success");
+            $('#family_details_btn').addClass("badge-primary");
 
-$('#social_links_details_btn').removeClass("badge-success");
-$('#social_links_details_btn').addClass("badge-primary");
-})
+            $('#social_links_details_btn').removeClass("badge-success");
+            $('#social_links_details_btn').addClass("badge-primary");
+        })
 
-})
+    })
 
 </script>
-         
-            <script>
-            am4core.ready(function() {
-            // Themes begin
-            am4core.useTheme(am4themes_animated);
-            // Themes end
-            // create chart
-            var chart = am4core.create("sentiment_chart", am4charts.GaugeChart);
-            chart.hiddenState.properties.opacity = 0;
-            var axis = chart.xAxes.push(new am4charts.ValueAxis());
-            axis.min = 0;
-            axis.max = 160;
-            axis.strictMinMax = true;
-            axis.renderer.inside = true;
-            //axis.renderer.ticks.template.inside = true;
-            //axis.stroke = chart.colors.getIndex(3);
-            axis.renderer.radius = am4core.percent(97);
-            //axis.renderer.radius = 80;
-            axis.renderer.line.strokeOpacity = 1;
-            axis.renderer.line.strokeWidth = 5;
-            axis.renderer.line.stroke = chart.colors.getIndex(0);
-            axis.renderer.ticks.template.disabled = false
-            axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
-            axis.renderer.labels.template.radius = 35;
-            axis.renderer.labels.template.fontColor = "#FFF";
-            axis.renderer.ticks.template.strokeOpacity = 1;
-            axis.renderer.grid.template.disabled = true;
-            axis.renderer.ticks.template.length = 10;
-            axis.hiddenState.properties.opacity = 1;
-            axis.hiddenState.properties.visible = true;
-            axis.setStateOnChildren = true;
-            axis.renderer.hiddenState.properties.endAngle = 180;
-            var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
-            axis2.min = 0;
-            axis2.max = 240;
-            axis2.strictMinMax = true;
-            axis2.renderer.line.strokeOpacity = 1;
-            axis2.renderer.line.strokeWidth = 5;
-            axis2.renderer.line.stroke = chart.colors.getIndex(3);
-            axis2.renderer.ticks.template.stroke = chart.colors.getIndex(3);
-            axis2.renderer.ticks.template.disabled = false
-            axis2.renderer.ticks.template.strokeOpacity = 1;
-            axis2.renderer.grid.template.disabled = true;
-            axis2.renderer.ticks.template.length = 10;
-            axis2.hiddenState.properties.opacity = 1;
-            axis2.hiddenState.properties.visible = true;
-            axis2.setStateOnChildren = true;
-            axis2.renderer.hiddenState.properties.endAngle = 180;
-            var hand = chart.hands.push(new am4charts.ClockHand());
-            hand.fill = axis.renderer.line.stroke;
-            hand.stroke = axis.renderer.line.stroke;
-            hand.axis = axis;
-            hand.pin.radius = 14;
-            hand.startWidth = 10;
-            var hand2 = chart.hands.push(new am4charts.ClockHand());
-            hand2.fill = axis2.renderer.line.stroke;
-            hand2.stroke = axis2.renderer.line.stroke;
-            hand2.axis = axis2;
-            hand2.pin.radius = 10;
-            hand2.startWidth = 10;
-            setInterval(function() {
+
+<script>
+    am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        // create chart
+        var chart = am4core.create("sentiment_chart", am4charts.GaugeChart);
+        chart.hiddenState.properties.opacity = 0;
+        var axis = chart.xAxes.push(new am4charts.ValueAxis());
+        axis.min = 0;
+        axis.max = 160;
+        axis.strictMinMax = true;
+        axis.renderer.inside = true;
+        //axis.renderer.ticks.template.inside = true;
+        //axis.stroke = chart.colors.getIndex(3);
+        axis.renderer.radius = am4core.percent(97);
+        //axis.renderer.radius = 80;
+        axis.renderer.line.strokeOpacity = 1;
+        axis.renderer.line.strokeWidth = 5;
+        axis.renderer.line.stroke = chart.colors.getIndex(0);
+        axis.renderer.ticks.template.disabled = false
+        axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
+        axis.renderer.labels.template.radius = 35;
+        axis.renderer.labels.template.fontColor = "#FFF";
+        axis.renderer.ticks.template.strokeOpacity = 1;
+        axis.renderer.grid.template.disabled = true;
+        axis.renderer.ticks.template.length = 10;
+        axis.hiddenState.properties.opacity = 1;
+        axis.hiddenState.properties.visible = true;
+        axis.setStateOnChildren = true;
+        axis.renderer.hiddenState.properties.endAngle = 180;
+        var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
+        axis2.min = 0;
+        axis2.max = 240;
+        axis2.strictMinMax = true;
+        axis2.renderer.line.strokeOpacity = 1;
+        axis2.renderer.line.strokeWidth = 5;
+        axis2.renderer.line.stroke = chart.colors.getIndex(3);
+        axis2.renderer.ticks.template.stroke = chart.colors.getIndex(3);
+        axis2.renderer.ticks.template.disabled = false
+        axis2.renderer.ticks.template.strokeOpacity = 1;
+        axis2.renderer.grid.template.disabled = true;
+        axis2.renderer.ticks.template.length = 10;
+        axis2.hiddenState.properties.opacity = 1;
+        axis2.hiddenState.properties.visible = true;
+        axis2.setStateOnChildren = true;
+        axis2.renderer.hiddenState.properties.endAngle = 180;
+        var hand = chart.hands.push(new am4charts.ClockHand());
+        hand.fill = axis.renderer.line.stroke;
+        hand.stroke = axis.renderer.line.stroke;
+        hand.axis = axis;
+        hand.pin.radius = 14;
+        hand.startWidth = 10;
+        var hand2 = chart.hands.push(new am4charts.ClockHand());
+        hand2.fill = axis2.renderer.line.stroke;
+        hand2.stroke = axis2.renderer.line.stroke;
+        hand2.axis = axis2;
+        hand2.pin.radius = 10;
+        hand2.startWidth = 10;
+        setInterval(function () {
             hand.showValue({{group.sentiments.positive}}, 1000, am4core.ease.cubicOut);
             label.text = Math.round(hand.value).toString();
             hand2.showValue({{group.sentiments.negitive}}, 1000, am4core.ease.cubicOut);
             label2.text = Math.round(hand2.value).toString();
-            }, 9000);
-            var legend = new am4charts.Legend();
-            legend.isMeasured = false;
-            legend.y = am4core.percent(100);
-            legend.verticalCenter = "bottom";
-            legend.parent = chart.chartContainer;
-            legend.data = [{
+        }, 9000);
+        var legend = new am4charts.Legend();
+        legend.isMeasured = false;
+        legend.y = am4core.percent(100);
+        legend.verticalCenter = "bottom";
+        legend.parent = chart.chartContainer;
+        legend.data = [{
             "name": "Positive",
             "fill": chart.colors.getIndex(0)
-            }, {
+        }, {
             "name": "Negitive",
             "fill": chart.colors.getIndex(3)
-            }];
-            legend.itemContainers.template.events.on("hit", function(ev) {
+        }];
+        legend.itemContainers.template.events.on("hit", function (ev) {
             var index = ev.target.dataItem.index;
             if (!ev.target.isActive) {
-            chart.hands.getIndex(index).hide();
-            chart.xAxes.getIndex(index).hide();
-            labelList.getIndex(index).hide();
+                chart.hands.getIndex(index).hide();
+                chart.xAxes.getIndex(index).hide();
+                labelList.getIndex(index).hide();
+            } else {
+                chart.hands.getIndex(index).show();
+                chart.xAxes.getIndex(index).show();
+                labelList.getIndex(index).show();
             }
-            else {
-            chart.hands.getIndex(index).show();
-            chart.xAxes.getIndex(index).show();
-            labelList.getIndex(index).show();
-            }
-            });
-            var labelList = new am4core.ListTemplate(new am4core.Label());
-            labelList.template.isMeasured = false;
-            labelList.template.background.strokeWidth = 2;
-            labelList.template.fontSize = 25;
-            labelList.template.padding(10, 20, 10, 20);
-            labelList.template.y = am4core.percent(50);
-            labelList.template.horizontalCenter = "middle";
-            var label = labelList.create();
-            label.parent = chart.chartContainer;
-            label.x = am4core.percent(40);
-            label.background.stroke = chart.colors.getIndex(0);
-            label.fill = chart.colors.getIndex(0);
-            label.text = "0";
-            var label2 = labelList.create();
-            label2.parent = chart.chartContainer;
-            label2.x = am4core.percent(60);
-            label2.background.stroke = chart.colors.getIndex(3);
-            label2.fill = chart.colors.getIndex(3);
-            label2.text = "0";
-            }); // end am4core.ready()
-            </script>
-            
-          </body>
-        </html>
+        });
+        var labelList = new am4core.ListTemplate(new am4core.Label());
+        labelList.template.isMeasured = false;
+        labelList.template.background.strokeWidth = 2;
+        labelList.template.fontSize = 25;
+        labelList.template.padding(10, 20, 10, 20);
+        labelList.template.y = am4core.percent(50);
+        labelList.template.horizontalCenter = "middle";
+        var label = labelList.create();
+        label.parent = chart.chartContainer;
+        label.x = am4core.percent(40);
+        label.background.stroke = chart.colors.getIndex(0);
+        label.fill = chart.colors.getIndex(0);
+        label.text = "0";
+        var label2 = labelList.create();
+        label2.parent = chart.chartContainer;
+        label2.x = am4core.percent(60);
+        label2.background.stroke = chart.colors.getIndex(3);
+        label2.fill = chart.colors.getIndex(3);
+        label2.text = "0";
+    }); // end am4core.ready()
+</script>
+
+</body>
+</html>

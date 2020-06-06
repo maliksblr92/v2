@@ -22,9 +22,9 @@
             margin: 0 !important;
             padding: 0 !important;
             overflow-x: hidden !important;
-            font-family: 'Raleway'!important; 
+            font-family: 'Raleway' !important;
         }
-       
+
 
         html {
             --scrollbarBG: #CFD8DC;
@@ -169,7 +169,7 @@
             background-size: cover;
         }
 
-        
+
         .profile-image-name {
             font-size: 25px;
             font-weight: bold;;
@@ -672,26 +672,30 @@
                                                     <img src="{{ c.media_directory }}"
                                                          style="height: 80px;width:80px;border-radius: 50%;;"
                                                          class="img-fluid">
-                                                         <div class="d-inline">
-                                                            {{ c.name }} 
-                                                        </div>
-                                                        <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
-                                                    {% if c.username %}
-                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
-                                                            <div class="badge custom_badge">
-                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-link  fa-2x text-light"></i>
-                                                                </a>
+                                                    <div class="d-inline">
+                                                        {{ c.name }}
+                                                    </div>
+                                                    <!-- Addedd by osama start-->
+                                                    <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                        <span class="badge badge-light float-right mb-2">Score : {{ c.score }}</span>
+                                                        {% if c.username %}
+                                                            <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                                <div class="badge custom_badge">
+                                                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-link  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="badge custom_badge mt-2">
+                                                                    <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                            <div class="badge custom_badge mt-2">
-                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- Addedd by osama end-->
                                                 </div>
                                                 <div id="_{{ c.id }}" class="collapse " aria-labelledby="custom1"
                                                      data-parent="#accordionExample">
