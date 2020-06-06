@@ -816,20 +816,24 @@
 
                                 </div>
                                 <div class="col-md-12">
-                                    <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
-                                    <div class="row">
+                                    <h3><i class="material-icon text_heading">Profile Events </i></h3>
+                                    <div class="row d-flex flex-row justify-content-center align-items-center">
                                         {% for y in profile.events %}
-                                        <div class="col-md-4">
+                                        <div class="col-md-1 mt-3 h-100 ">
                                             <span class="badge badge-primary">Year : {{y.year}}</span>
                                         </div>
 
-                                        <div class="col-md-8">
+                                        <div class="col-md-11 h-100 mt-3">
                                             <div class="row">
                                                 {% for event in y.events  %}
-                                            <div class="col-md-12">   <span class="badge badge-info"> {{forloop.counter}} #</span>  {{event.event}} <a class="badge badge-success" target="_blank" href="{{event.url}}"><i class="fa fa-eye  mr-2"></i>view</a> </div>
-                                                {% endfor %}
+                                            <div class="col-md-12 ">   <span class="badge ">  {{event.event|default:"N/A"}}</span>  <a class="badge badge-success" target="_blank" href="{{event.url}}"><i class="fa fa-eye  mr-2"></i>view</a> </div>
+                                               
+                                            {% endfor %}
                                             </div>
                                         </div> 
+                                    
+                                        {% empty %}
+                                        <p class="ml-3 text_paragraph">N/A </p>
                                         {% endfor %}
                                     </div>
                                
@@ -837,24 +841,24 @@
                                    
                                    
                                 </div>
-                                <div class="col-md-12">
-                                    <h3><i class="material-icon text_heading">Profile Events </i></h3>
+                                <div class="col-md-12 mt-3">
+                                    <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_overview_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Friends Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_friends_summary|default:"N/A" }}</p>
 
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Intrest Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_interest_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_close_associates_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Behaviour Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.behaviour|default:"N/A" }}</p>
                                 </div>
