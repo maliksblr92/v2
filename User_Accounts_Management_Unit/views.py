@@ -63,14 +63,15 @@ class User_Login(View):
     USER Login View
     """
 
-    def get(self, request):
+    def get(self, request,*args):
         """
         get handler for login view
         """
         if(request.user.is_authenticated):
             return HttpResponseRedirect(reverse('OSINT_System_Core:tso-dashboard'))
 
-        return render(request, 'User_Accounts_Management_Unit/login.html', {})
+
+        return render(request, 'User_Accounts_Management_Unit/login.html', {'message':''})
 
     def post(self, request):
         """
@@ -98,7 +99,8 @@ class User_Login(View):
                     return HttpResponseRedirect(
                         reverse('OSINT_System_Core:pao-dashboard'))
             else:
-                return HttpResponse('invalid credintial')
+                error_m = 'Invalid Credentials'
+                return render(request, 'User_Accounts_Management_Unit/login.html', {'message':error_m})
 
         else:
             return HttpResponse('form field might left empty')
