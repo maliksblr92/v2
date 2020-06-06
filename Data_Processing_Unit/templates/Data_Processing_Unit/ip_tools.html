@@ -11,9 +11,13 @@
         }
 
         #submit {
-            background: linear-gradient(93deg,
-            rgba(24, 72, 116, 1) 0%,
-            rgba(6, 17, 26, 1) 100%);
+            background: rgb(24, 72, 116);
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            color: #fff;
         }
 
         .custom_pills {
@@ -110,772 +114,853 @@
                 <div class="card-header  main_card_header m-0 p-0 ">
                     <p class="card_header_text">IP LOOKUP TOOLS </p>
                 </div>
-                <div class="card-body m-4 main_card glowing_border">
-                    <div class="container-fluid ">
-                        <ul class="nav nav-pills row">
-                            <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn w-100 text-white "
-                                                                          data-toggle="tab"
-                                                                          href="#ip_short_end">IP SHORT</a></li>
-                            <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white " data-toggle="tab"
-                                                                         href="#image_reverse_lookup">IMAGE REVERSE
-                                LOOKUP</a></li>
-                            <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white " data-toggle="tab"
-                                                                         href="#domain_ip_info">DOMAIN IP INFO</a></li>
-                            <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white " data-toggle="tab"
-                                                                         href="#domain_info">DOMAIN INFO</a></li>
-                        </ul>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {% if messages %}
-                                    {% for message in messages %}
-                                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
-                                             role="alert"><i class="fas fa-info-circle fa-2x mr-3"></i>{{ message }}
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                            <div class="card-body m-4 main_card custom_inner_background inner_form_margin_radiu">
+                                <div class="container-fluid ">
+                                    <ul class="nav nav-pills row">
+                                        <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                      data-toggle="tab"
+                                                                                      href="#ip_short_end">IP SHORT</a>
+                                        </li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#image_reverse_lookup">IMAGE
+                                            REVERSE
+                                            LOOKUP</a></li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#domain_ip_info">DOMAIN IP
+                                            INFO</a></li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#domain_info">DOMAIN INFO</a>
+                                        </li>
+                                    </ul>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                                                         role="alert"><i
+                                                            class="fas fa-info-circle fa-2x mr-3"></i>{{ message }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
                                         </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-md-12">
-                                <div class="tab-content" style="height:600px; overflow-x: hidden;">
-                                    <!-- TAB CONTENT START  -->
-                                    <div id="image_reverse_lookup"
-                                         class="tab-pane  {% if query_type == 'image_reverse_lookup' %}in active show {% else %} fade {% endif %} ">
-                                        <div class="card-body m-4 main_card border-0">
-                                            <form name="image_lookup_form" id="image_lookup_form"
-                                                  enctype="multipart/form-data"
-                                                  action="/dpu/iptools/" method="POST">
-                                                {% csrf_token %}
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-9">
-                                                        <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Query Type </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="query_type" name="query_type"
-                                                                           value="image_reverse_lookup"
-                                                                           readonly="readonly"
-                                                                           required="required">
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>This
-                                                                    tool will perform image reverse lookup </small>
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">URL </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="url"
-                                                                           name="url">
+                                        <div class="col-md-12">
+                                            <div class="tab-content" style="height:600px; overflow-x: hidden;">
+                                                <!-- TAB CONTENT START  -->
+                                                <div id="image_reverse_lookup"
+                                                     class="tab-pane  {% if query_type == 'image_reverse_lookup' %}in active show {% else %} fade {% endif %} ">
+                                                    <div class="card-body m-4 main_card border-0">
+                                                        <form name="image_lookup_form" id="image_lookup_form"
+                                                              enctype="multipart/form-data"
+                                                              action="/dpu/iptools/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
 
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Provide
-                                                                    a valid URL of a image </small>
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Image </span>
-                                                                    <input type="file"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="image" name="image[]">
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Upload
-                                                                    image in case no URL to image is avalible </small>
-                                                            </div>
-                                                        </div>
-                                                        <input type="hidden" name="form_name" value="google_scholar"
-                                                               id="form_name"/>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                    </div>
-                                                </div>
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-2">
-                                                        <input type="submit"
-                                                               class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                               value="submit" name="submit" id="submit">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        {% if response and query_type == 'image_reverse_lookup' %}
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card-header text-white  main_card_header ">
-                                                        Article Links
-                                                    </div>
-                                                    <div class="card-body">
-                                                        {% for i in  response.data.article_links %}
-                                                            <div class="row  ">
-                                                                <div class="col-md-2">
-                                                                    <span class="badge badge-light">Title : </span>
-                                                                </div>
-                                                                <div class="col-md-10 text-white"
-                                                                     style="font-size:13px;">
-                                                                    {{ i.title }}
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <span class="badge badge-light">View / Url : </span>
-                                                                </div>
-                                                                <div class="col-md-10 text-white"
-                                                                     style="font-size:13px;">
-                                                                    {{ i.url }}<a href="{{ i.url }}"
-                                                                                  class="badge badge-success float-right mr-2"><i
-                                                                        class="fa fa-eye">View</i></a>
-                                                                </div>
-                                                            </div>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="card-header text-white  main_card_header ">
-                                                        Simmilar Images
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row m-1">
-                                                            {% for i in  response.data.similar_images %}
-                                                                <!-- small card col-md-3  -->
-                                                                <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3  ">
-                                                                    <div class=" row small_card_warpper glowing_border m-1"
-                                                                         style="height: 180px">
-                                                                        <div
-                                                                                class="col-md-1 d-flex flex-row justify-content-around align-items-center glowing_border background">
-                                                                            <a href={{ i }} class="badge badge-sm m-0
-                                                                               p-0 rotate side_text"><i
-                                                                                class="fa fa-eye"></i>
-                                                                            View</a>
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Query Type
+                                                                        </span>
                                                                         </div>
-                                                                        <div class="col-md-10 m-0  small_card_left_wrapper">
-                                                                            <img src="{{ i }}"
-                                                                                 class="img-fluid img-thumbnail"
-                                                                                 style="width: 90% !important; height: 130px !important;"/>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field w-100"
+                                                                               id="query_type" name="query_type"
+                                                                               value="image_reverse_lookup"
+                                                                               readonly="readonly"
+                                                                               required="required">
+                                                                    </div>
+                                                                    <small class="font-weight-bold text-warning "
+                                                                           style="padding-left:180px;"><i
+                                                                            class="fas fa-info mr-2 text-white"></i>This
+                                                                        tool will perform image reverse lookup
+                                                                    </small>
+
+                                                                    <div class="row">
+                                                                        <!-- <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                             <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                     class="input_text">Query Type </span>
+                                                                                 <input type="text"
+                                                                                        class="col-md-9 form-control custom_input_field w-100"
+                                                                                        id="query_type" name="query_type"
+                                                                                        value="image_reverse_lookup"
+                                                                                        readonly="readonly"
+                                                                                        required="required">
+                                                                             </label>
+                                                                             <small class="font-weight-bold text-warning "
+                                                                                    style="padding-left:180px;"><i
+                                                                                     class="fas fa-info mr-2 text-white"></i>This
+                                                                                 tool will perform image reverse lookup
+                                                                             </small>
+                                                                         </div> -->
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">URL </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="url"
+                                                                                       name="url">
+
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Provide
+                                                                                a valid URL of a image </small>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Image </span>
+                                                                                <input type="file"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="image" name="image[]">
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Upload
+                                                                                image in case no URL to image is
+                                                                                avalible </small>
                                                                         </div>
                                                                     </div>
+                                                                    <input type="hidden" name="form_name"
+                                                                           value="google_scholar"
+                                                                           id="form_name"/>
                                                                 </div>
-                                                            {% endfor %}
-                                                        </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit" name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div id="ip_short_end"
-                                         class="tab-pane {% if query_type == 'ip_shortend' or query_type|length < 1 %}in active show {% else %} fade {% endif %} ">
-                                        <div class="card-body m-4 main_card border-0">
-                                            <form name="ip_shortend_form" id="ip_shortend_form" action="/dpu/iptools/"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-9">
+                                                    {% if response and query_type == 'image_reverse_lookup' %}
                                                         <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Query Type </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="query_type" name="query_type"
-                                                                           value="ip_shortend" readonly="readonly"
-                                                                           required="required"/>
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>This
-                                                                    application will generate short ip tracking payloads
-                                                                </small>bel>
+                                                            <div class="col-md-12">
+                                                                <div class="card-header text-white  main_card_header ">
+                                                                    Article Links
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    {% for i in  response.data.article_links %}
+                                                                        <div class="row  ">
+                                                                            <div class="col-md-2">
+                                                                                <span class="badge badge-light">Title : </span>
+                                                                            </div>
+                                                                            <div class="col-md-10 text-white"
+                                                                                 style="font-size:13px;">
+                                                                                {{ i.title }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2">
+                                                                                <span class="badge badge-light">View / Url : </span>
+                                                                            </div>
+                                                                            <div class="col-md-10 text-white"
+                                                                                 style="font-size:13px;">
+                                                                                {{ i.url }}<a href="{{ i.url }}"
+                                                                                              class="badge badge-success float-right mr-2"><i
+                                                                                    class="fa fa-eye">View</i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Payload Title </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="title" name="title" required="required"/>
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Provide
-                                                                    a payload title </small>
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Description</span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="description" name="description"
-                                                                           required="required"/>
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Provide
-                                                                    payload description</small>
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">URL </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="url"
-                                                                           name="url" required="required"/>
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Provide
-                                                                    a payload URL </small>
+                                                            <div class="col-md-12">
+                                                                <div class="card-header text-white  main_card_header ">
+                                                                    Simmilar Images
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row m-1">
+                                                                        {% for i in  response.data.similar_images %}
+                                                                            <!-- small card col-md-3  -->
+                                                                            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3  ">
+                                                                                <div class=" row small_card_warpper glowing_border m-1"
+                                                                                     style="height: 180px">
+                                                                                    <div
+                                                                                            class="col-md-1 d-flex flex-row justify-content-around align-items-center glowing_border background">
+                                                                                        <a href={{ i }} class="badge
+                                                                                           badge-sm m-0
+                                                                                           p-0 rotate side_text"><i
+                                                                                            class="fa fa-eye"></i>
+                                                                                        View</a>
+                                                                                    </div>
+                                                                                    <div class="col-md-10 m-0  small_card_left_wrapper">
+                                                                                        <img src="{{ i }}"
+                                                                                             class="img-fluid img-thumbnail"
+                                                                                             style="width: 90% !important; height: 130px !important;"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="form_name"
-                                                               value="e_market_scrapper_form" id="form_name"/>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                    </div>
+                                                    {% endif %}
                                                 </div>
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-2">
-                                                        <input type="submit"
-                                                               class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                               value="submit" name="submit" id="submit">
+                                                <div id="ip_short_end"
+                                                     class="tab-pane {% if query_type == 'ip_shortend' or query_type|length < 1 %}in active show {% else %} fade {% endif %} ">
+                                                    <div class="card-body m-4 main_card border-0">
+                                                        <form name="ip_shortend_form" id="ip_shortend_form"
+                                                              action="/dpu/iptools/"
+                                                              method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Query Type </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="query_type" name="query_type"
+                                                                                       value="ip_shortend"
+                                                                                       readonly="readonly"
+                                                                                       required="required"/>
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>This
+                                                                                application will generate short ip
+                                                                                tracking payloads
+                                                                            </small>bel>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Payload Title </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="title" name="title"
+                                                                                       required="required"/>
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Provide
+                                                                                a payload title </small>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Description</span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="description"
+                                                                                       name="description"
+                                                                                       required="required"/>
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Provide
+                                                                                payload description</small>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">URL </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="url"
+                                                                                       name="url" required="required"/>
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Provide
+                                                                                a payload URL </small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="form_name"
+                                                                           value="e_market_scrapper_form"
+                                                                           id="form_name"/>
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit" name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
+
+                                                    <!-- ip short response -->
+                                                    {% if response and query_type == 'ip_shortend' %}
+                                                        <div class="row d-flex flex-row justify-content-start align-items-center">
+                                                            <div class="text-white" id="response">
+                                                                {{ response }}
+
+                                                            </div>
+
+                                                            <button class="btn btn-sm ml-3 bg-white"
+                                                                    data-clipboard-target="#response">
+                                                                <img src="{% static 'images/clippy.svg' %}"
+                                                                     alt="Copy to clipboard">
+                                                            </button>
+                                                            <a class="btn btn-sm ml-3 bg-white" target="_blank"
+                                                               href="{% url 'Avatar_Management_Unit:send_message' %}">
+                                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                            </a>
+
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
-                                        </div>
-                                        </form>
-
-                                        <!-- ip short response -->
-                                        {% if response and query_type == 'ip_shortend' %}
-                                            <div class="row d-flex flex-row justify-content-start align-items-center">
-                                                <div class="text-white" id="response">
-                                                    {{ response }}
-
+                                                <div id="ip_tracking" class="tab-pane ">
+                                                    <div class="card-body m-4 main_card border-0">
+                                                        <form name="ip_tracking_form" id="ip_tracking_form"
+                                                              action="/dpu/iptools/"
+                                                              method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Query Type </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="query_type" name="query_type"
+                                                                                       value="ip_tracking"
+                                                                                       readonly="readonly"
+                                                                                       required="required">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Code </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="code"
+                                                                                       name="code" value=""
+                                                                                       required="required">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Code </span>
+                                                                                <input type="date"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="start_date" name="start_date"
+                                                                                       value=""
+                                                                                       required="required">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Code </span>
+                                                                                <input type="date"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="end_date" name="end_date"
+                                                                                       value=""
+                                                                                       required="required">
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="form_name"
+                                                                           value="daraz_data_scrapper_form"
+                                                                           id="form_name"/>
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit" name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    </form>
                                                 </div>
+                                                <div id="domain_ip_info"
+                                                     class="tab-pane {% if query_type == 'domains_ip_info' %}in active show {% else %} fade {% endif %}">
+                                                    <div class="card-body m-4 main_card border-0">
+                                                        <form name="domain_ip_info" id="domain_ip_info"
+                                                              action="/dpu/iptools/"
+                                                              method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Query Type </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="query_type" name="query_type"
+                                                                                       value="domains_ip_info"
+                                                                                       readonly="readonly"
+                                                                                       required="required">
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>This
+                                                                                tool will return information of domain
+                                                                                against it ip
+                                                                                address</small>
 
-                                                <button class="btn btn-sm ml-3 bg-white"
-                                                        data-clipboard-target="#response">
-                                                    <img src="{% static 'images/clippy.svg' %}" alt="Copy to clipboard">
-                                                </button>
-                                                <a class="btn btn-sm ml-3 bg-white" target="_blank"
-                                                   href="{% url 'Avatar_Management_Unit:send_message' %}">
-                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                                </a>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Domain</span>
+                                                                                <input type="text" minlength="7"
+                                                                                       maxlength="15"
+                                                                                       size="15"
+                                                                                       pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="domain" name="domain"
+                                                                                       value=""
+                                                                                       required="required">
 
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div id="ip_tracking" class="tab-pane ">
-                                        <div class="card-body m-4 main_card border-0">
-                                            <form name="ip_tracking_form" id="ip_tracking_form" action="/dpu/iptools/"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-9">
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Domain
+                                                                                ip example : google.com is
+                                                                                8.8.8.8</small>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="form_name"
+                                                                           value="domain_ip_info"
+                                                                           id="form_name"/>
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="query" name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    </form>
+                                                    <!-- domain info response  -->
+                                                    {% if response.data.asn is not Null and query_type == 'domains_ip_info' %}
                                                         <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Query Type </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="query_type" name="query_type"
-                                                                           value="ip_tracking" readonly="readonly"
-                                                                           required="required">
-                                                                </label>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge badge-primary text-left"
+                                                                    style="width:170px;">ASN</span></div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn }}</span>
                                                             </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Code </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="code"
-                                                                           name="code" value="" required="required">
-                                                                </label>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge   badge-primary  text-left"
+                                                                    style="width:170px;">ASN_CIDR</span>
                                                             </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Code </span>
-                                                                    <input type="date"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="start_date" name="start_date" value=""
-                                                                           required="required">
-                                                                </label>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn_cidr }}</span>
                                                             </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Code </span>
-                                                                    <input type="date"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="end_date" name="end_date" value=""
-                                                                           required="required">
-                                                                </label>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  badge-primary  text-left"
+                                                                    style="width:170px;">ASN COUNTRY CODE</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn_country_code }}</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  badge-primary  text-left"
+                                                                    style="width:170px;">ASN DATE</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn_date }}</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  badge-primary  text-left"
+                                                                    style="width:170px;">ASN DESCRIPTION</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn_description }}</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge badge-primary   text-left"
+                                                                    style="width:170px;">ASN REGISTRY</span>
+                                                            </div>
+                                                            <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                    class="badge  text-left">{{ response.data.asn_registry }}</span>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="form_name"
-                                                               value="daraz_data_scrapper_form" id="form_name"/>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                    </div>
-                                                </div>
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-2">
-                                                        <input type="submit"
-                                                               class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                               value="submit" name="submit" id="submit">
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div id="domain_ip_info"
-                                         class="tab-pane {% if query_type == 'domains_ip_info' %}in active show {% else %} fade {% endif %}">
-                                        <div class="card-body m-4 main_card border-0">
-                                            <form name="domain_ip_info" id="domain_ip_info" action="/dpu/iptools/"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-9">
                                                         <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Query Type </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="query_type" name="query_type"
-                                                                           value="domains_ip_info" readonly="readonly"
-                                                                           required="required">
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>This
-                                                                    tool will return information of domain against it ip
-                                                                    address</small>
-
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Domain</span>
-                                                                    <input type="text" minlength="7" maxlength="15"
-                                                                           size="15"
-                                                                           pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="domain" name="domain" value=""
-                                                                           required="required">
-
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Domain
-                                                                    ip example : google.com is 8.8.8.8</small>
-
-                                                            </div>
-                                                        </div>
-                                                        <input type="hidden" name="form_name" value="domain_ip_info"
-                                                               id="form_name"/>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                    </div>
-                                                </div>
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-2">
-                                                        <input type="submit"
-                                                               class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                               value="query" name="submit" id="submit">
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        </form>
-                                        <!-- domain info response  -->
-                                        {% if response.data.asn is not Null and query_type == 'domains_ip_info' %}
-                                            <div class="row">
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge badge-primary text-left"
-                                                        style="width:170px;">ASN</span></div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn }}</span></div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge   badge-primary  text-left" style="width:170px;">ASN_CIDR</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn_cidr }}</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  badge-primary  text-left" style="width:170px;">ASN COUNTRY CODE</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn_country_code }}</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  badge-primary  text-left" style="width:170px;">ASN DATE</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn_date }}</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  badge-primary  text-left" style="width:170px;">ASN DESCRIPTION</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn_description }}</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge badge-primary   text-left" style="width:170px;">ASN REGISTRY</span>
-                                                </div>
-                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                        class="badge  text-left">{{ response.data.asn_registry }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                {% for i in response.data.nets %}
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Address</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.address }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">CIDR</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.cidr }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">CITY</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.city }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">COUNTRY</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.city }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Created At </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1">
+                                                            {% for i in response.data.nets %}
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Address</span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.address }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">CIDR</span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.cidr }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">CITY</span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.city }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">COUNTRY</span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.city }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Created At </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1">
   <span
           class="badge  text-left">
     <span class="badge badge-warning">
       <i class="fas fa-clock"></i>
     </span>
-                                                        {{ i.created }}</div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Handle </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.handle }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Name </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.name }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Postal Code </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.postal_code }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Range </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.range }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Query </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.query }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">State </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  text-left">{{ i.state }}</span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Updated </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1">
+                                                                    {{ i.created }}</div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Handle </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.handle }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Name </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.name }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Postal Code </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.postal_code }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Range </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.range }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Query </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.query }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">State </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  text-left">{{ i.state }}</span>
+                                                                </div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Updated </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1">
     <span
             class="badge  text-left">
       <span class="badge badge-warning">
         <i class="fas fa-clock"></i>
       </span>
-                                                        {{ i.updated }}</div>
+                                                                    {{ i.updated }}</div>
 
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1"><span
-                                                            class="badge  badge-primary  text-left"
-                                                            style="width:170px;">Emails </span></div>
-                                                    <div class="col-md-3 text-white d-flex flex-column mt-1">
-                                                        {% for x in i.emails %}
-                                                            <span
-                                                                    class="badge  text-left">
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1"><span
+                                                                        class="badge  badge-primary  text-left"
+                                                                        style="width:170px;">Emails </span></div>
+                                                                <div class="col-md-3 text-white d-flex flex-column mt-1">
+                                                                    {% for x in i.emails %}
+                                                                        <span
+                                                                                class="badge  text-left">
           <span class="badge badge-warning">
             <i class="fas fa-envelope"></i>      {{ forloop.counters }}
           </span>
 
 
-                                                                {{ x }}</span>
-                                                        {% endfor %}
+                                                                            {{ x }}</span>
+                                                                    {% endfor %}
+                                                                </div>
+
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        <p class="text-white">no response</p>
+
+
+                                                    {% endif %}
+                                                </div>
+                                                <!-- END TAB PANE -->
+                                                <div id="domain_info"
+                                                     class="tab-pane {% if query_type == 'domains_info' %}in active show {% else %} fade {% endif %}">
+                                                    <div class="card-body m-4 main_card border-0">
+                                                        <form name="domain_info" id="domain_info" action="/dpu/iptools/"
+                                                              method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Query Type </span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="query_type" name="query_type"
+                                                                                       value="domains_info"
+                                                                                       readonly="readonly"
+                                                                                       required="required">
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>This
+                                                                                tool will return all inforamtion of
+                                                                                valid domain
+                                                                            </small>
+                                                                        </div>
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 ">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Domain</span>
+                                                                                <input type="text"
+                                                                                       class=" ml-2 form-control form-control-sm form_input w-100"
+                                                                                       id="domain" name="domain"
+                                                                                       placehodler="Domain example : google.com "
+                                                                                       required="required">
+
+                                                                            </label>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Domain
+                                                                                example : google.com </small>
+                                                                            <small class="font-weight-bold text-warning "
+                                                                                   style="padding-left:180px;"><i
+                                                                                    class="fas fa-info mr-2 text-white"></i>Add
+                                                                                a
+                                                                                domain without "www" prefix </small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" name="form_name"
+                                                                       value="domain_info"
+                                                                       id="form_name"/>
+                                                            </div>
+                                                            <div class="col-md-1 ">
+                                                            </div>
                                                     </div>
-
-                                                {% endfor %}
-                                            </div>
-
-                                            <p class="text-white">no response</p>
-
-
-                                        {% endif %}
-                                    </div>
-                                    <!-- END TAB PANE -->
-                                    <div id="domain_info"
-                                         class="tab-pane {% if query_type == 'domains_info' %}in active show {% else %} fade {% endif %}">
-                                        <div class="card-body m-4 main_card border-0">
-                                            <form name="domain_info" id="domain_info" action="/dpu/iptools/"
-                                                  method="POST">
-                                                {% csrf_token %}
-                                                <div class="row input_wrapper_row">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-9">
-                                                        <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Query Type </span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="query_type" name="query_type"
-                                                                           value="domains_info" readonly="readonly"
-                                                                           required="required">
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>This
-                                                                    tool will return all inforamtion of valid domain
-                                                                </small>
-                                                            </div>
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 ">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Domain</span>
-                                                                    <input type="text"
-                                                                           class=" ml-2 form-control form-control-sm form_input w-100"
-                                                                           id="domain" name="domain"
-                                                                           placehodler="Domain example : google.com "
-                                                                           required="required">
-
-                                                                </label>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Domain
-                                                                    example : google.com </small>
-                                                                <small class="font-weight-bold text-warning "
-                                                                       style="padding-left:180px;"><i
-                                                                        class="fas fa-info mr-2 text-white"></i>Add a
-                                                                    domain without "www" prefix </small>
-                                                            </div>
-
+                                                    <div class="row input_wrapper_row">
+                                                        <div class="col-md-6"></div>
+                                                        <div class="col-md-4"></div>
+                                                        <div class="col-md-2">
+                                                            <input type="submit"
+                                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                   value="submit" name="submit" id="submit">
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="form_name" value="domain_info"
-                                                           id="form_name"/>
                                                 </div>
-                                                <div class="col-md-1 ">
-                                                </div>
-                                        </div>
-                                        <div class="row input_wrapper_row">
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-4"></div>
-                                            <div class="col-md-2">
-                                                <input type="submit"
-                                                       class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                       value="submit" name="submit" id="submit">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </form>
-                                    <!-- domains info  -->
-                                    <div class="row">
-                                        <div class="col-md-12 text-white">
-                                            {% if query_type == "domains_info" and response.data.code == 1 %}
-
+                                                </form>
+                                                <!-- domains info  -->
                                                 <div class="row">
-                                                    <!--  -->
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Address</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.address|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                    <div class="col-md-12 text-white">
+                                                        {% if query_type == "domains_info" and response.data.code == 1 %}
+
+                                                            <div class="row">
+                                                                <!--  -->
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Address</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.address|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">City</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.city|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">City</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.city|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Country</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.country|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Country</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.country|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Creation Date</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Creation Date</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Status</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Status</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Orginization Name  </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.org|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Orginization Name  </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.org|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Registrar  </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.registrar|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Registrar  </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.registrar|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">State  </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.state|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">Zipcode   </span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.zipcode|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
-                                                            <!--  -->
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary text-white font-weight-bold">DNS Section</span>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge  text-white font-weight-bold">{{ response.data.dnssec|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">State  </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.state|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">Zipcode   </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.zipcode|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge badge-primary text-white font-weight-bold">DNS Section</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.dnssec|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
 
-                                                        </div>
-                                                        <!-- 2nd coliumnd -->
-                                                    </div>
-                                                    <!--  -->
-                                                    <div class="col-md-6">
-                                                        <div class="row">
+                                                                    </div>
+                                                                    <!-- 2nd coliumnd -->
+                                                                </div>
+                                                                <!--  -->
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
 
-                                                            <!--  -->
-                                                            <div class="col-md-4">
-                                                                <span class="badge text-white badge-primary font-weight-bold">Domain Names </span>
-                                                            </div>
-                                                            <div class="col-md-8">
+                                                                        <!--  -->
+                                                                        <div class="col-md-4">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">Domain Names </span>
+                                                                        </div>
+                                                                        <div class="col-md-8">
   <span class=" font-weight-bold"> {% for i in response.data.domain_name %}
       <li class="text_12">{{ i }}</li>
   {% endfor %}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-4">
-                                                                <span class="badge text-white badge-primary font-weight-bold">Emails</span>
-                                                            </div>
-                                                            <div class="col-md-8">
+                                                                        <!--  -->
+                                                                        <div class="col-md-4">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">Emails</span>
+                                                                        </div>
+                                                                        <div class="col-md-8">
   <span class=" font-weight-bold"> {% for i in response.data.emails %}
       <li class="text_12">{{ i }}</li>
   {% endfor %}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        </div>
+                                                                        <!--  -->
 
-                                                            <!--  -->
-                                                            <div class="col-md-4">
-                                                                <span class="badge text-white badge-primary font-weight-bold">Status</span>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <ul class=" font-weight-bold">
-                                                                    {% for i in response.data.status %}
-                                                                        <li class="text_12">{{ i }}</li>
-                                                                    {% endfor %}</ul>
-                                                            </div>
-                                                            <!--  -->
-
-
-                                                            <!--  -->
-                                                            <div class="col-md-4">
-                                                                <span class="badge text-white badge-primary font-weight-bold">Name Servers</span>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <ul class=" font-weight-bold">
-                                                                    {% for i in response.data.name_servers %}
-                                                                        <li class="text_12">{{ i }}</li>
-                                                                    {% endfor %}</ul>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-4">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">Status</span>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <ul class=" font-weight-bold">
+                                                                                {% for i in response.data.status %}
+                                                                                    <li class="text_12">{{ i }}</li>
+                                                                                {% endfor %}</ul>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                            <!--  -->
-                                                            <div class="col-md-4">
-                                                                <span class="badge text-white badge-primary font-weight-bold">Whois Server  </span>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <span class="badge text-white badge-primary font-weight-bold">{{ response.data.whois_server|default:"N/A" }}</span>
-                                                            </div>
-                                                            <!--  -->
+                                                                        <!--  -->
+                                                                        <div class="col-md-4">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">Name Servers</span>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <ul class=" font-weight-bold">
+                                                                                {% for i in response.data.name_servers %}
+                                                                                    <li class="text_12">{{ i }}</li>
+                                                                                {% endfor %}</ul>
+                                                                        </div>
+                                                                        <!--  -->
 
 
-                                                        </div>
+                                                                        <!--  -->
+                                                                        <div class="col-md-4">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">Whois Server  </span>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <span class="badge text-white badge-primary font-weight-bold">{{ response.data.whois_server|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--  -->
+
+                                                            </div>
+
+                                                        {% endif %}
+
                                                     </div>
-
-                                                    <!--  -->
-
                                                 </div>
-
-                                            {% endif %}
-
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

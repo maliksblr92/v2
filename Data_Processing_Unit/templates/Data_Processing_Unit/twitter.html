@@ -6,56 +6,63 @@
 {% endblock %}
 {% block smallnavbar %}
     <style>
-    select{
-    color:white!important;
-    }
-    #submit{
-    background: linear-gradient(
-    93deg,
-    rgba(24, 72, 116, 1) 0%,
-    rgba(6, 17, 26, 1) 100%
-    );
-    }
-    .custom_pills{
-    background: linear-gradient(
-    93deg,
-    rgba(24, 72, 116, 1) 0%,
-    rgba(6, 17, 26, 1) 100%
-    );
-    text-align: center;
-    border: 1px solid #707070;
-    
-    }
-    .custom_pills a{
-    text-decoration: none;;
-    font-weight: bolder;
-    font-size: 12px;;
-    }
-
-    #success_message{
-    position: absolute;;
-    width: 350px;
-    height: 60px;
-    top: 0px;
-    right: 0px;;
-    }
-    
-    #warning_message{
-    position: absolute;;
-    width: 350px;
-    height: 60px;
-    top: 0px;
-    right: 0px;;
-    }
-    .text_12{
-        font-size:12px!important;
+        select {
+            color: white !important;
         }
-    
-        .text_10{
-            font-size:10px!important;
-            }
-        .text_14{
-         font-size:14px!important;   
+
+        #submit {
+            background: rgb(24, 72, 116);
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            color: #fff;
+        }
+
+        .custom_pills {
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            text-align: center;
+            border: 1px solid #707070;
+
+        }
+
+        .custom_pills a {
+            text-decoration: none;;
+            font-weight: bolder;
+            font-size: 12px;;
+        }
+
+        #success_message {
+            position: absolute;;
+            width: 350px;
+            height: 60px;
+            top: 0px;
+            right: 0px;;
+        }
+
+        #warning_message {
+            position: absolute;;
+            width: 350px;
+            height: 60px;
+            top: 0px;
+            right: 0px;;
+        }
+
+        .text_12 {
+            font-size: 12px !important;
+        }
+
+        .text_10 {
+            font-size: 10px !important;
+        }
+
+        .text_14 {
+            font-size: 14px !important;
         }
     </style>
     <!-- message for success -->
@@ -63,344 +70,623 @@
         {% for message in messages %}
             {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                 <div id="success_message" class=" alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+                    <strong><i class="fas fa-check 2x "></i>!</strong> {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            {% endif  %}
+            {% endif %}
             <!-- message for warning -->
             {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                 <div id="warning_message" class=" alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong><i class="fas fa-check 2x "></i>!</strong> {{message}}
+                    <strong><i class="fas fa-check 2x "></i>!</strong> {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            {% endif  %}
-            {%endfor%}
-            {%endif%}
-           
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8 d-flex" style="">
-                  <div class="col-md-1">
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
-                    <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">   IDIENTITY GENEARTOR</a>
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                    <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                    <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold ">  DATA SCRAPPERS</a>
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                    <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT PROCESSING</a>
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
-                    <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
-                  </div>
-                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                    <a href="/dpu/iptools"  class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
-                  </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+                <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold "> IDIENTITY GENEARTOR</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
+                    PROCESSING</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+                <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+{% block belly %}
+    <div class="row">
+        <div class="col-md-12  ">
+            <div class="w-100 h-100 " id="content_div">
+                <div class="card-header  main_card_header m-0 p-0 ">
+                    <p class="card_header_text">TWITTER SEARCHES </p>
                 </div>
-                <div class="col-md-2"></div>
-              </div>
-        {% endblock %}
-        {% block belly %}
-            <div class="row">
-                <div class="col-md-12  ">
-                    <div class="w-100 h-100 " id="content_div">
-                        <div class="card-header  main_card_header m-0 p-0 ">
-                            <p class="card_header_text">TWITTER SEARCHES </p>
-                        </div>
-                        
-                        <div class="card-body main_card glowing_border">
-                            
-                            <div class="container-fluid ">
-                                <ul class="nav nav-pills row">
-                                    
-                                    <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#geo_location_tab"> GEO-LOCATION </a></li>
-                                    <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#distance_geo_locations">DISTANCE GEO_LOCATIONS </a></li>
-                                    <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#phrase_search">PHRASE ONLY</a></li>
-                                    <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "data-toggle="tab" href="#phrase_sentiments">SENTIMENTS SEARCH </a></li>
-                                </ul>
-                                
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="tab-content">
-                                            <div id="phrase_search" class="tab-pane   ">
-                                                
-                                                <div class="card-body m-4 main_card border-0">
-                                                    
-                                                    <form name="phrase_search_from" id="phrase_search_from" action="/dpu/twitter/" method="POST">
-                                                        {% csrf_token %}
-                                                        <div class="row input_wrapper_row">
-                                                            <div class="col-md-2"></div>
-                                                            <div class="col-md-9">
-                                                                < <div class="row">
-                                                                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                        class="input_text">Search Type </span>
-                                                                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="search_type"
-                                                                        name="search_type" value="phrase_search"  readonly required="required">
-                                                                    </label>
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                            <div class="card-body main_card custom_inner_background inner_form_margin_radius">
+
+                                <div class="container-fluid ">
+                                    <ul class="nav nav-pills row">
+
+                                        <li class="custom_pills  col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                      data-toggle="tab"
+                                                                                      href="#geo_location_tab">
+                                            GEO-LOCATION </a></li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#distance_geo_locations">DISTANCE
+                                            GEO_LOCATIONS </a></li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#phrase_search">PHRASE
+                                            ONLY</a></li>
+                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
+                                                                                     data-toggle="tab"
+                                                                                     href="#phrase_sentiments">SENTIMENTS
+                                            SEARCH </a></li>
+                                    </ul>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="tab-content">
+                                                <div id="phrase_search" class="tab-pane   ">
+
+                                                    <div class="card-body m-4 main_card border-0">
+
+                                                        <form name="phrase_search_from" id="phrase_search_from"
+                                                              action="/dpu/twitter/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Search Type
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="search_type"
+                                                                               name="search_type"
+                                                                               value="phrase_search"
+                                                                               readonly required="required">
+                                                                    </div>
+
+                                                                    <!--<div class="row">
+                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                    class="input_text">Search Type </span>
+                                                                                <input type="text"
+                                                                                       class="col-md-9 form-control custom_input_field"
+                                                                                       id="search_type"
+                                                                                       name="search_type"
+                                                                                       value="phrase_search"
+                                                                                       readonly required="required">
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>-->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Phrase
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="phrase"
+                                                                               name="phrase" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Phrase </span>
+                                                                                   <input type="text"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="phrase"
+                                                                                          name="phrase" value=""
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Tweets Limit
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="number"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="limit"
+                                                                               name="limit" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--    <div class="row">
+                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                        class="input_text">Tweets Limit </span>
+                                                                                    <input type="number"
+                                                                                           class="col-md-9 form-control custom_input_field"
+                                                                                           id="limit"
+                                                                                           name="limit" value=""
+                                                                                           required="required">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div> -->
+
+
+                                                                </div>
+                                                                <div class="col-md-1 ">
                                                                 </div>
                                                             </div>
-                                                            
-                                                            <div class="row">
-                                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                    class="input_text">Phrase </span>
-                                                                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="phrase"
-                                                                    name="phrase" value=""   required="required">
-                                                                </label>
+
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit"
+                                                                           name="submit" id="submit">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        
-                                                        <div class="row">
-                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                class="input_text">Tweets Limit </span>
-                                                                <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
-                                                                name="limit" value=""   required="required">
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    
-                                                    
-                                                    
-                                                </div>
-                                                <div class="col-md-1 ">
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="row input_wrapper_row">
-                                                <div class="col-md-6"></div>
-                                                <div class="col-md-4"></div>
-                                                <div class="col-md-2">
-                                                    <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                                                    name="submit" id="submit">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <div id="geo_location_tab" class="tab-pane in active show">
-                                    <div class="card-body m-4 main_card border-0">
-                                        
-                                        <form name="phrase_location_form" id="phrase_location_form" action="/dpu/twitter/" method="POST">
-                                            {% csrf_token %}
-                                            <div class="row input_wrapper_row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-9">
-                                                    <div class="row">
-                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                            class="input_text">Search Type </span>
-                                                            <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="search_type"
-                                                            name="search_type" value="phrase_near_location"  readonly required="required">
-                                                        </label>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                        class="input_text">Phrase </span>
-                                                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="phrase"
-                                                        name="phrase" value=""   required="required">
-                                                    </label>
+
+                                                <div id="geo_location_tab" class="tab-pane in active show">
+                                                    <div class="card-body m-4 main_card border-0">
+
+                                                        <form name="phrase_location_form" id="phrase_location_form"
+                                                              action="/dpu/twitter/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Search Type
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="search_type"
+                                                                               name="search_type"
+                                                                               value="phrase_near_location"
+                                                                               readonly
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--    <div class="row">
+                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                        class="input_text">Search Type </span>
+                                                                                    <input type="text"
+                                                                                           class="col-md-9 form-control custom_input_field"
+                                                                                           id="search_type"
+                                                                                           name="search_type"
+                                                                                           value="phrase_near_location"
+                                                                                           readonly
+                                                                                           required="required">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Phrase
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="phrase"
+                                                                               name="phrase" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Phrase </span>
+                                                                                   <input type="text"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="phrase"
+                                                                                          name="phrase" value=""
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Location
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="location"
+                                                                               name="location" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--    <div class="row">
+                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                        class="input_text">Location </span>
+                                                                                    <input type="text"
+                                                                                           class="col-md-9 form-control custom_input_field"
+                                                                                           id="location"
+                                                                                           name="location" value=""
+                                                                                           required="required">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Default Radius
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="radius"
+                                                                               name="radius" value="100"
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!-- <div class="row">
+                                                                         <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                             <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                     class="input_text">Default Radius </span>
+                                                                                 <input type="text"
+                                                                                        class="col-md-9 form-control custom_input_field"
+                                                                                        id="radius"
+                                                                                        name="radius" value="100"
+                                                                                        required="required">
+                                                                             </label>
+                                                                         </div>
+                                                                     </div> -->
+
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Tweets Limit
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="number"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="limit"
+                                                                               name="limit" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--    <div class="row">
+                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                        class="input_text">Tweets Limit </span>
+                                                                                    <input type="number"
+                                                                                           class="col-md-9 form-control custom_input_field"
+                                                                                           id="limit"
+                                                                                           name="limit" value=""
+                                                                                           required="required">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div> -->
+
+
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit"
+                                                                           name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <div id="distance_geo_locations" class="tab-pane ">
+                                                    <div class="card-body m-4 main_card border-0">
+
+                                                        <form name="distance_geo_locations_form"
+                                                              id="distance_geo_locations_form"
+                                                              action="/dpu/twitter/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Search Type
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="search_type"
+                                                                               name="search_type"
+                                                                               value="near_location_within_miles"
+                                                                               readonly
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Search Type </span>
+                                                                                   <input type="text"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="search_type"
+                                                                                          name="search_type"
+                                                                                          value="near_location_within_miles"
+                                                                                          readonly
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Location
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="location"
+                                                                               name="location" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Location </span>
+                                                                                   <input type="text"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="location"
+                                                                                          name="location" value=""
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Distance
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="number"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="distance"
+                                                                               name="distance" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Distance </span>
+                                                                                   <input type="number"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="distance"
+                                                                                          name="distance" value=""
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Tweets Limit
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="number"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="limit"
+                                                                               name="limit" value=""
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Tweets Limit </span>
+                                                                                   <input type="number"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="limit"
+                                                                                          name="limit" value=""
+                                                                                          required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit"
+                                                                           name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div id="phrase_sentiments" class="tab-pane  ">
+                                                    <div class="card-body m-4 main_card border-0">
+
+                                                        <form name="phrase_sentiments_from" id="phrase_sentiments_from"
+                                                              action="/dpu/twitter/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-9">
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Search Type
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="search_type"
+                                                                               name="search_type"
+                                                                               value="sentiments_search"
+                                                                               readonly required="required">
+                                                                    </div>
+
+                                                                    <!--   <div class="row">
+                                                                           <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                               <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                       class="input_text">Search Type </span>
+                                                                                   <input type="text"
+                                                                                          class="col-md-9 form-control custom_input_field"
+                                                                                          id="search_type"
+                                                                                          name="search_type"
+                                                                                          value="sentiments_search"
+                                                                                          readonly required="required">
+                                                                               </label>
+                                                                           </div>
+                                                                       </div> -->
+
+                                                                    <!-- inputfield 2 -->
+                                                                    <div class="row input-group mt-4 mb-3">
+                                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                            opacity:0.9; padding:7px 9px 0 10px;">Phrase
+                                                                        </span>
+                                                                        </div>
+                                                                        <input type="text"
+                                                                               class="col-md-9 form-control custom_input_field"
+                                                                               id="phrase"
+                                                                               name="phrase"
+                                                                               required="required">
+                                                                    </div>
+
+                                                                    <!--    <div class="row">
+                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                                        class="input_text">Phrase </span>
+                                                                                    <input type="text"
+                                                                                           class="col-md-9 form-control custom_input_field"
+                                                                                           id="phrase"
+                                                                                           name="phrase"
+                                                                                           required="required">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    <div class="row">
+                                                                        <div class="col-md-12  form-group d-flex flex-row ">
+                <span class="text-dark d-flex flex-row w-50">Postive Tweets<input type="radio"
+                                                                                  class=" ml-2 form-control form-control-sm form_input w-50"
+                                                                                  id="sentiment"
+                                                                                  name="sentiment" value="positive"
+                                                                                  required="required"></span>
+                                                                            <span class="text-dark d-flex flex-row w-50">Negitive Tweets <input
+                                                                                    type="radio"
+                                                                                    class=" ml-2 form-control form-control-sm form_input w-50"
+                                                                                    id="sentiment"
+                                                                                    name="sentiment" value="negitive"
+                                                                                    required="required"></span>
+
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="col-md-1 ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row input_wrapper_row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-4"></div>
+                                                                <div class="col-md-2">
+                                                                    <input type="submit"
+                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                                           value="submit"
+                                                                           name="submit" id="submit">
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                    class="input_text">Location </span>
-                                                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="location"
-                                                    name="location" value=""   required="required">
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                class="input_text">Default Radius </span>
-                                                <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="radius"
-                                                name="radius" value="100"  required="required">
-                                            </label>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                            class="input_text">Tweets Limit </span>
-                                            <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
-                                            name="limit" value=""   required="required">
-                                        </label>
-                                    </div>
-                                </div>
-                                
-                                
-                                
-                                
-                                
-                                
-                            </div>
-                            <div class="col-md-1 ">
-                            </div>
-                        </div>
-                        
-                        <div class="row input_wrapper_row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                                name="submit" id="submit">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            
-            <div id="distance_geo_locations" class="tab-pane ">
-                <div class="card-body m-4 main_card border-0">
-                    
-                    <form name="distance_geo_locations_form" id="distance_geo_locations_form" action="/dpu/twitter/" method="POST">
-                        {% csrf_token %}
-                        <div class="row input_wrapper_row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                        class="input_text">Search Type </span>
-                                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="search_type"
-                                        name="search_type" value="near_location_within_miles"  readonly required="required">
-                                    </label>
                                 </div>
                             </div>
-                            
-                            
-                            
-                            <div class="row">
-                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                    class="input_text">Location </span>
-                                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="location"
-                                    name="location" value=""   required="required">
-                                </label>
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                class="input_text">Distance </span>
-                                <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="distance"
-                                name="distance" value=""   required="required">
-                            </label>
                         </div>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                            class="input_text">Tweets Limit </span>
-                            <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="limit"
-                            name="limit" value=""   required="required">
-                        </label>
-                    </div>
-                </div>
-                
-                
-                
-                
-                
-            </div>
-            <div class="col-md-1 ">
-            </div>
-        </div>
-        
-        <div class="row input_wrapper_row">
-            <div class="col-md-6"></div>
-            <div class="col-md-4"></div>
-            <div class="col-md-2">
-                <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                name="submit" id="submit">
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-<div id="phrase_sentiments" class="tab-pane  ">
-<div class="card-body m-4 main_card border-0">
-    
-    <form name="phrase_sentiments_from" id="phrase_sentiments_from" action="/dpu/twitter/" method="POST">
-        {% csrf_token %}
-        <div class="row input_wrapper_row">
-            <div class="col-md-2"></div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                        class="input_text">Search Type </span>
-                        <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="search_type"
-                        name="search_type" value="sentiments_search"  readonly required="required">
-                    </label>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                    class="input_text">Phrase </span>
-                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="phrase"
-                    name="phrase"   required="required">
-                </label>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-md-12  form-group d-flex flex-row ">
-                <span class="text-white d-flex flex-row w-50" >Postive Tweets<input type="radio" class=" ml-2 form-control form-control-sm form_input w-50" id="sentiment"
-                name="sentiment" value="positive"   required="required"></span>
-                <span class="text-white d-flex flex-row w-50" >Negitive Tweets <input type="radio" class=" ml-2 form-control form-control-sm form_input w-50" id="sentiment"
-                name="sentiment" value="negitive"  required="required"></span>
-                
-                
-                
-            </div>
-        </div>
-        
-        
-        
-        
-        
-        
     </div>
-    <div class="col-md-1 ">
-    </div>
-</div>
-<div class="row input_wrapper_row">
-    <div class="col-md-6"></div>
-    <div class="col-md-4"></div>
-    <div class="col-md-2">
-        <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-        name="submit" id="submit">
-    </div>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 {% endblock %}
