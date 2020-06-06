@@ -846,6 +846,50 @@
                             </div>
                         </div>
                         <!-- end profile tab  -->
+                              <!-- start checkins -->
+                              <div id="checkins" class="tab-pane fade pb-5">
+                                <div class="row">
+                                    {% for c in profile.check_ins %}
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row">
+                                                        <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+                                                            <!-- <img src="{{c.media_directory}}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                            <button class="btn btn-link text_heading" type="button"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#_{{ c.id }}" aria-expanded="true"
+                                                                    aria-controls="_{{ c.id }}">
+                                                                {{ c.name }}
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
+                                                            <div class="row text_heading">
+                                                                <div class="col-md-4">Date:</div>
+                                                                <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
+                                                                <div class="col-md-4">Location:</div>
+                                                                <div class="col-md-8 text_paragraph">{{ c.name }}</div>
+                                                                <div class="col-md-4">View:</div>
+                                                                <div class="col-md-8">
+                                                                    <a class="badge badge-sm custom_badge fa fa-search"
+                                                                       href="{{ c.url }}">view</a>
+                                                                </div>
+                                                                <div class="col-md-4">Linking Post:</div>
+                                                                <div class="col-md-8">
+                                                                    <a class="badge badge-sm custom_badge fa fa-search"
+                                                                       href="{{ c.linking_post }}">view</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- end checkin -->
                         <!-- start related tab   -->
                         <div id="related" class="tab-pane fade pb-5">
                             <div class="row">
@@ -1444,50 +1488,7 @@
                             </div>
                         </div>
                         <!-- end posts tab  -->
-                        <!-- start checkins -->
-                        <div id="checkins" class="tab-pane fade pb-5">
-                            <div class="row">
-                                {% for c in profile.check_ins %}
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <div class="row">
-                                                    <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-                                                        <!-- <img src="{{c.media_directory}}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                                        <button class="btn btn-link text_heading" type="button"
-                                                                data-toggle="collapse"
-                                                                data-target="#_{{ c.id }}" aria-expanded="true"
-                                                                aria-controls="_{{ c.id }}">
-                                                            {{ c.name }}
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
-                                                        <div class="row text_heading">
-                                                            <div class="col-md-4">Date:</div>
-                                                            <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
-                                                            <div class="col-md-4">Location:</div>
-                                                            <div class="col-md-8 text_paragraph">{{ c.name }}</div>
-                                                            <div class="col-md-4">View:</div>
-                                                            <div class="col-md-8">
-                                                                <a class="badge badge-sm custom_badge fa fa-search"
-                                                                   href="{{ c.url }}">view</a>
-                                                            </div>
-                                                            <div class="col-md-4">Linking Post:</div>
-                                                            <div class="col-md-8">
-                                                                <a class="badge badge-sm custom_badge fa fa-search"
-                                                                   href="{{ c.linking_post }}">view</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <!-- end checkin -->
+                  
                     </div>
                     <!-- end tab content -->
                 </div>
