@@ -79,7 +79,7 @@ AUTHOR_TYPE_NEWS = (
 
 
 PERIODIC_INTERVALS = (
-        (0,('on time only')),
+        (0,('one time only')),
         (5,('once per 5 minutes ')),
         (10, ('once per 10 minutes ')),
         (15, ('once per 15 minutes ')),
