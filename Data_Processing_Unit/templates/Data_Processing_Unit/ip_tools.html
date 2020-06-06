@@ -998,7 +998,7 @@
                                                 <!-- domains info  -->
                                                 <div class="row">
                                                     <div class="col-md-12 text-white">
-                                                        {% if query_type == "domains_info" and response.data.code == 1 %}
+                                                        {% if query_type == "domains_info" and response.data %}
 
                                                             <div class="row">
                                                                 <!--  -->
@@ -1006,94 +1006,94 @@
                                                                     <div class="row">
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Address</span>
+                                                                            <span class="badge custom_badge  font-weight-bold">Address</span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.address|default:"N/A" }}</span>
-                                                                        </div>
-                                                                        <!--  -->
-
-
-                                                                        <!--  -->
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">City</span>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.city|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.address|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
 
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Country</span>
+                                                                            <span class="badge custom_badge font-weight-bold">City</span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.country|default:"N/A" }}</span>
-                                                                        </div>
-                                                                        <!--  -->
-
-
-                                                                        <!--  -->
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Creation Date</span>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.city|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
 
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Status</span>
+                                                                            <span class="badge custom_badge font-weight-bold">Country</span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
-                                                                        </div>
-                                                                        <!--  -->
-
-                                                                        <!--  -->
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Orginization Name  </span>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.org|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.country|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
 
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Registrar  </span>
+                                                                            <span class="badge custom_badge  font-weight-bold">Creation Date</span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.registrar|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+
+
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge custom_badge font-weight-bold">Status</span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.creation_date.0|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">State  </span>
+                                                                            <span class="badge custom_badge font-weight-bold">Orginization Name  </span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.state|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.org|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+
+
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge custom_badge font-weight-bold">Registrar  </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.registrar|default:"N/A" }}</span>
+                                                                        </div>
+                                                                        <!--  -->
+
+                                                                        <!--  -->
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge custom_badge font-weight-bold">State  </span>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.state|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">Zipcode   </span>
+                                                                            <span class="badge custom_badge font-weight-bold">Zipcode   </span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.zipcode|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.zipcode|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
                                                                         <!--  -->
                                                                         <div class="col-md-6">
-                                                                            <span class="badge badge-primary text-white font-weight-bold">DNS Section</span>
+                                                                            <span class="badge custom_badge font-weight-bold">DNS Section</span>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <span class="badge  text-white font-weight-bold">{{ response.data.dnssec|default:"N/A" }}</span>
+                                                                            <span class="badge  text-dark font-weight-bold">{{ response.data.dnssec|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
@@ -1106,10 +1106,10 @@
 
                                                                         <!--  -->
                                                                         <div class="col-md-4">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">Domain Names </span>
+                                                                            <span class="badge custom_badge font-weight-bold">Domain Names </span>
                                                                         </div>
                                                                         <div class="col-md-8">
-  <span class=" font-weight-bold"> {% for i in response.data.domain_name %}
+  <span class=" font-weight-bold text-dark"> {% for i in response.data.domain_name %}
       <li class="text_12">{{ i }}</li>
   {% endfor %}</span>
                                                                         </div>
@@ -1118,10 +1118,10 @@
 
                                                                         <!--  -->
                                                                         <div class="col-md-4">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">Emails</span>
+                                                                            <span class="badge  custom_badge font-weight-bold">Emails</span>
                                                                         </div>
                                                                         <div class="col-md-8">
-  <span class=" font-weight-bold"> {% for i in response.data.emails %}
+  <span class=" font-weight-bold text-dark"> {% for i in response.data.emails %}
       <li class="text_12">{{ i }}</li>
   {% endfor %}</span>
                                                                         </div>
@@ -1129,10 +1129,10 @@
 
                                                                         <!--  -->
                                                                         <div class="col-md-4">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">Status</span>
+                                                                            <span class="badge  custom_badge font-weight-bold">Status</span>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <ul class=" font-weight-bold">
+                                                                            <ul class=" font-weight-bold text-dark">
                                                                                 {% for i in response.data.status %}
                                                                                     <li class="text_12">{{ i }}</li>
                                                                                 {% endfor %}</ul>
@@ -1142,10 +1142,10 @@
 
                                                                         <!--  -->
                                                                         <div class="col-md-4">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">Name Servers</span>
+                                                                            <span class="badge  custom_badge font-weight-bold">Name Servers</span>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <ul class=" font-weight-bold">
+                                                                            <ul class=" font-weight-bold text-dark">
                                                                                 {% for i in response.data.name_servers %}
                                                                                     <li class="text_12">{{ i }}</li>
                                                                                 {% endfor %}</ul>
@@ -1155,10 +1155,10 @@
 
                                                                         <!--  -->
                                                                         <div class="col-md-4">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">Whois Server  </span>
+                                                                            <span class="badge custom_badge font-weight-bold">Whois Server  </span>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <span class="badge text-white badge-primary font-weight-bold">{{ response.data.whois_server|default:"N/A" }}</span>
+                                                                            <span class="badge text-dark font-weight-bold">{{ response.data.whois_server|default:"N/A" }}</span>
                                                                         </div>
                                                                         <!--  -->
 
