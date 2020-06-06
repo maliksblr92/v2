@@ -106,10 +106,10 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             <div class="input-group-append">
                                 <button type="button" x-target-name="{{platform.name|lower}}"
                                 class="btn btn-secondary searchbutton smartsearch">SMART
-                                SEARCH</button>
+                                SEARCH <span> <i class="fas fa-spinner fa-spin"style="font-size:25px;" id="loading_icon"></i></span></button>
                             </div>
                         </div>
-                        <div><span> <i class="fas fa-spinner fa-spin"style="font-size:25px;" id="loading_icon"></i></span>
+                        <div>
                         <span id="smart_search_response"
                             class="alert alert-info font-weight-bold "
                         style="font-size:13px;"></span></div>
@@ -123,7 +123,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             <select
                                 style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
                                 class="custom-select newinput col-md-9 form-control newinputdesign"
-                                name="{{platform.name|lower}}_authortype" id="{{platform.name|lower}}_authortype">
+                                name="{{platform.name|lower}}_authortype" id="{{platform.name|lower}}_authortype" required="required">
                                 {% for choice in platform.target_type %}
                                     <option value="{{forloop.counter0}}">{{choice}}</option>
                                 {% endfor %}
@@ -140,7 +140,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your number"
                             id="{{platform.name|lower}}-authoruserid"
                             name="{{platform.name|lower}}_authoruserid"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
 
 
                         </div>
@@ -157,7 +157,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your text"
                             id="{{platform.name|lower}}-authorusername"
                             name="{{platform.name|lower}}_authorusername"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
                         </div>
                         <!--AUTHUR URL-->
                         <div class="row input-group mt-4 mb-3">
@@ -170,19 +170,24 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                             placeholder="Please Enter your number"
                             id="{{platform.name|lower}}-authoruserurl"
                             name="{{platform.name|lower}}_authoruserurl"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" required="required">
                         </div>
                         <!-- DATE AND TIME 2 column div -->
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- EXPIRED ON SECTION-->
+                                {% now "SHORT_DATE_FORMAT"  as date %}
+                              
                                 <div class="row input-group   mt-4 mb-3">
                                     <div class="col-md-3 p-0 input-group-prepend" >
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:5px 9px 0 10px;">Expire on
                                         </span>
                                     </div>
-                                    <input type="date" class="col-md-9 form-control  newinputdesign" id="{{platform.name|lower}}-expirydate" name="{{platform.name|lower}}_expirydate">
+                                    <input type="date" min='{{date|to_and}}' max='2020-31-12' value="{{date|to_and}}" class="col-md-9 form-control  newinputdesign"
+                                     id="{{platform.name|lower}}-expirydate"
+                                     required="required" name="{{platform.name|lower}}_expirydate"
+                                     >
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -196,7 +201,7 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
                                     <select
                                         class="custom-select newinput col-md-9 form-control  newinputdesign"
                                         id="{{platform.name|lower}}-interval"
-                                        name="{{platform.name|lower}}_interval">
+                                        name="{{platform.name|lower}}_interval" required="required">
                                         {% for interval in data.intervals %}
                                             <option value="{{ interval.0 }}">{{ interval.1 }}</option>
                                         {% endfor %}
@@ -271,85 +276,6 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
 </div>
 {% endblock %}
 {% block foot_script %}
-<<<<<<< HEAD
-
-    <script>
-        window.document.title = "Mark Target";
-        Date.prototype.toDateInputValue = (function () {
-            var local = new Date(this);
-            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-            return local.toJSON().slice(0, 10);
-        });
-
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            //show selected tab / active
-            console.log ("tab");
-             console.log ( $(e.target).attr('href') );
-             hideErrorAlerts();
-            });
-
-            $('a[data-toggle="tab"]').on('shown', function (e) {
-                $(e.target).index();
-                hideErrorAlerts();
-              })
-
-        function hideErrorAlerts(){
-            console.log("IN HIDE ALL ERRORS FUNCTION")
-            var p_name = $('#platform_name').val();
-            console.log(p_name)
-            console.log('#'+p_name+'-alert__autheruseraccount')
-            $('#'+p_name+'-alert__autheruseraccount').hide()
-            $('#'+p_name+'-smart_search_response').hide()
-            
-          
-            
-        }
-        function validate(){
-            var flag =0;
-             var p_name = $('#platform_name').val();
-            if( $('#'+p_name+'_autheruseraccount').val()==''){
-               $('#'+p_name+'-alert__autheruseraccount').show()
-               $('#'+p_name+'-alert__autheruseraccount').empty().append('<i class="fa fa-info-circle mr-2" aria-hidden="true"></i>  <strong>Author account is required </strong>')
-               $('#'+p_name+'-alert__autheruseraccount').fadeOut(8000);
-               flag=1;
-            }
-           
-           return flag;
-        }
-        hideErrorAlerts();
-        
-
-    </script>
-    <script>
-        
-        function cleanForm() {
-            var allInputs = $(":input");
-            $(allInputs).val('')
-            var img= $('.profile_image').attr("src","/static/images/testimonial.png");
-            console.log("formed cleaned")
-        }
-
-        var tabpane_name = $('#platform_name').val();
-        console.log("tab_name ==  " + tabpane_name)
-        $('#'+tabpane_name + "-loading_icon").hide()
-        $('#'+tabpane_name +'-smart_search_response').hide()
-        //start of document ready
-        document.addEventListener('DOMContentLoaded', function () {
-            let smartsearch = $('.smartsearch')
-// smart searchc
-            smartsearch.click((event) => {
-              
-                $('#'+tabpane_name + "-loading_icon").show()
-               var flag= validate();
-               if(flag==1){
-                   console.log(flag)
-                   console.log("Request denied -- author id is required for smart search")    
-                $('#'+tabpane_name + "-loading_icon").hide()
-               }
-               else{
-               
-=======
 <script>
 function cleanForm(){
 var allInputs = $( ":input" );
@@ -366,7 +292,6 @@ let smartsearch = $('.smartsearch')
 // smart search
 smartsearch.click((event) => {
 $(tabpane_name + " #loading_icon").show()
->>>>>>> c401d86b9be468bc8492cc09bbe8d21ae0bcc5f0
 // console.log(event.target)
 let website = event.target.getAttribute('x-target-name')
 let author_account = event.target.parentElement.parentElement.querySelector('input').value
@@ -436,17 +361,8 @@ clearformbtn.click(event => {
 // console.log('clear form clicked')
 let pf = event.target.getAttribute('x-parent-form')
 // console.log(pf)
-<<<<<<< HEAD
-                $(`#${pf}`).trigger('reset')
-            })
-        }) // document ready
-    </script>
-
-{% endblock %}
-=======
 $(`#${pf}`).trigger('reset')
 })
 }) // document ready
 </script>
 {% endblock %}
->>>>>>> c401d86b9be468bc8492cc09bbe8d21ae0bcc5f0
