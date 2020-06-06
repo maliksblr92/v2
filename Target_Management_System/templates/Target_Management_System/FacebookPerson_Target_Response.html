@@ -22,7 +22,9 @@
             margin: 0 !important;
             padding: 0 !important;
             overflow-x: hidden !important;
+            font-family: 'Raleway'!important; 
         }
+       
 
         html {
             --scrollbarBG: #CFD8DC;
@@ -167,18 +169,7 @@
             background-size: cover;
         }
 
-        /*            .profile-image-wrapper {
-        height: 150px;
-        width: 100%;
-        margin-top: -120px;
-        border:5px solid #FEC134;
-        border-radius: 10px;
-        background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        }*/
+        
         .profile-image-name {
             font-size: 25px;
             font-weight: bold;;
@@ -681,11 +672,10 @@
                                                     <img src="{{ c.media_directory }}"
                                                          style="height: 80px;width:80px;border-radius: 50%;;"
                                                          class="img-fluid">
-                                                    <button class="btn btn-link text-white" type="button"></button>
-                                                    {{ c.name }}
-                                                    </button>
-                                                    <span class="badge text-white"><i
-                                                            class="fas fa-star mr-2 text-warning"></i>Score : {{ c.score }}</span>
+                                                         <div class="d-inline">
+                                                            {{ c.name }} 
+                                                        </div>
+                                                        <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
                                                     {% if c.username %}
                                                         <div class="float-right d-flex flex-column justify-content-center align-items-center">
                                                             <div class="badge custom_badge">

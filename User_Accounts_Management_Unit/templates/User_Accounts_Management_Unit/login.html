@@ -293,9 +293,14 @@
         >
           <form action="/accounts/login/" method="POST">
             {% csrf_token %}
+            {% if message %}
+              <p class="alert alert-danger"><i class="fa fa-unlock-alt mr-2 fa-2x" aria-hidden="true"></i>{{ message }}</p>
+              {% endif %}
+
             <br />
             <br />
             <div class="row  mx-auto my-auto ">
+
               <div
                 class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5 "
               >

@@ -856,9 +856,13 @@ class Timeline_Manager(object):
                     for post in posts :
                         try:
 
-                            temp_dic = {'link':post.url,
+                            image = ''
+                            if(len(post['images'])>0):
+                                image = post['images'][0]
+
+                            temp_dic = {'link':'https://twitter.com'+post.url,
                                       'text':post.text,
-                                      'picture':'',
+                                      'picture':image,
                                       'vedio': '',
                                         'author':author,
                                       'a_url':'https://www.twitter.com/'+post.username_tweet+'/',

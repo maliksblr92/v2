@@ -47,6 +47,7 @@
       background-size: cover;
       margin: 0 !important;
       padding: 0 !important;
+      font-family: 'Raleway'!important; 
       }
       html {
       --scrollbarBG: #CFD8DC;
@@ -240,75 +241,58 @@
       text-align: center;
       text-decoration: none;
       }
+
+      .text_12{
+        font-weight:bold;
+        font-size:12px;
+      }
       </style>
     </head>
     <body class="background-gradient">
       <div class="container-fluid wrapper">
-        <div class="row pl-5 pr-5">
-          <!-- <div class="col-lg-12 pl-5 pr-5"> -->
-          <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg" id="header">
-              <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-              data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon ">
-                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-              </span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8 ">
-                  <div class="row m-0 p-0">
-                    <div class="col-lg-5 pt-2">
-                      <div class="row">
-                        <div class="col-lg-6  list list-inline custom_center "
-                          style="border-right:2px solid white;border-left:2px solid white;">
-                          <li class="nav-item">
-                            <a class="   btn  font-weight-bold nav_btn" href="#">DASHBOARD</a>
-                          </li>
-                        </div>
-                        <div class="col-lg-6  list list-inline custom_center "
-                          style="border-right:2px solid white;border-left:2px solid white;">
-                          <li class="nav-item">
-                            <a class="   btn  font-weight-bold nav_btn" href="#">MONITOR</a>
-                          </li>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-2 custom_center">
-                      <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}" class="m-0 p-0  " style="height: 60px;width: 200px;"alt="">
-                    </div>
-                    <div class="col-lg-5 pt-2">
-                      <div class="row">
-                        <div class="col-lg-6  list list-inline custom_center "
-                          style="border-right:2px solid white;border-left:2px solid white;">
-                          <li class="nav-item">
-                            <a class="btn font-weight-bold nav_btn" href="#">FETCH</a>
-                          </li>
-                        </div>
-                        <div class="col-lg-6 list list-inline custom_center "
-                          style="border-right:2px solid white;border-left:2px solid white;">
-                          <li class="nav-item">
-                            <a class="btn font-weight-bold nav_btn" href="#">RETRIEVE</a>
-                          </li>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-2 "></div>
-              </div>
-            </nav>
-          </div>
+      
         </div>
         <div class="row ml-1 mr-1 pl-5 pr-5">
-          <div class="col-md-12 bg-white d-flex flex-row justify-content-start align-items-center  mt-5 " style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
-            <div class="circle-dot1 ml-2"></div>
-            <div class="circle-dot2 ml-1"></div>
-            <div class="circle-dot3 ml-1"></div>
-            <a type="button" class="btn  btn-sm btn-success pull-right"  href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}" id="download_as_pdf">PDF Downlaod</a>
+          <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+              <div class="row">
+                  <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
+                          class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </span></div>
+  
+                  <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                      <li class="dropdown">
+                          <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
+                                  class="fa fa-cog mr-2"></i>Options</a>
+                          <div class="dropdown-content">
+                              <a type="button" target="_blank"
+                                 class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
+                                 href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}"
+                                 id="download_as_pdf"
+                                 id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                              <a type="button" target="_blank"
+                              href="{% url 'Target_Management_System:link_analysis' object_gtr_id=group.GTR %}"
+                                 class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;">Link
+                                  Analysis</a>
+                                  <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                               style="margin-top:2px;"
+                               href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=group.GTR %}"
+                               id="">Close Associates</a>
+  
+                          </div>
+                      </li>
+                  </div>
+                  <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                      <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white"
+                         style="margin-top:2px;"
+                        
+                         id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                      <a type="button" class="btn  btn-sm btn-success float-right text-white" style="margin-top:2px;">Link
+                          Analysis</a>
+                  </div>
+              </div>
+  
           </div>
-        </div>
+  
+      </div>
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <div class="col-md-12 fb-cover-img background-gradient-dark">
           </div>
@@ -316,6 +300,7 @@
         <div class="row ml-1 mr-1 pl-5 pr-5">
           <div class="col-md-2">
             <div class="profile-image-wrapper custom_border_color">
+              <img src="{{group.group_creator.media_directory}}" style="height:100%;width:100%;"class="img-fluid" alt="">
             </div>
           </div>
           <div class="col-md-8 ">
@@ -328,213 +313,7 @@
           <!-- Left Card Start -->
           <div class="col-md-3">
                <!-- WORK DETAILS START-->
-            <div class="row border custom_border_color background-gradient-dark mt-2 p-2"
-            style="border-radius:10px 0px 0px 0px;">
-           <div class="col-md-10 d-flex flex-row justify-content-start align-items-center">
-               <i class="fas fa-user-friends text-white fa-2x"></i>
-               <span class="ml-2 text-white" style="font-size:18px;">
-             <span class="font-weight-bold">Perosnal Details</span>
-             </span>
-           </div>
-           <div class="col-md-2 text-white mt-1"></div>
-       </div>
-       <div class="row p-1 border custom_border_color bg-white" id="work_details_div"
-            style="height:300px;overflow-y:auto;">
-           <!-- start -->
-           <div class="col-md-12  d-flex flex-row justify-content-around align-items-start">
-
-               <a class="badge custom_badge border-radius-none p-2" data-toggle="collapse" id="work_details_btn"
-                  href="#work_details" role="button" aria-expanded="false" aria-controls="work_details">
-                   <i class="fas fa-briefcase mr-2"></i>Work
-               </a>
-               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
-                  id="family_details_btn"
-                  href="#family_details" role="button" aria-expanded="false" aria-controls="family_details">
-                   <i class="fas fa-briefcase mr-2"></i>Family
-               </a>
-
-               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
-                  id="websites_details_btn"
-                  href="#websites_details" role="button" aria-expanded="false" aria-controls="websites_details">
-                   <i class="fas fa-globe mr-2"></i>Web Links
-               </a>
-
-               <a class="badge custom_badge badge-primary border-radius-none p-2" data-toggle="collapse"
-                  id="social_links_details_btn" href="#social_links_details" role="button" aria-expanded="false"
-                  aria-controls="social_links_details">
-                   <i class="fas fa-share-alt mr-2"></i>Social Links
-               </a>
-
-
-           </div>
-
-           <div class="col-md-12">
-               <div class="collapse show m-0 p-0" id="work_details">
-                   <div class="card-body p-0 m-0 ">
-                       {% for work in profile.work %}
-                           <div class="row  ">
-                               <div class="col-md-12"><span class="badge custom_badge"
-                                                            style="font-size:12px;font-weight:bold;">{{ forloop.counter }}#{{ work.organisation|default:"N/A" }}</span>
-                               </div>
-                               <div class="col-md-12 mt-1" style="font-size:12px;">
-                                   <p class="font-weight-bold text_paragraph">{{ work.details|default:"N/A" }}</p>
-                               </div>
-                           </div>
-                       {% empty %}
-                           <p>No Work Details </p>
-                       {% endfor %}
-                   </div>
-
-               </div>
-
-               <!-- end -->
-
-
-               <!-- start -->
-
-
-               <div class="collapse m-0 p-0" id="family_details">
-                   <div class="card-body p-0 m-0 ">
-                       {% for family in profile.family %}
-                           <div class="row   mt-2">
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      Enitity Type :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <span class="font-weight-bold text_paragraph">{{ family.entity_type|default:"N/A" }}</span>
-                               </div>
-
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      Username :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <span class="font-weight-bold text_paragraph">{{ family.username|default:"N/A" }}</span>
-                               </div>
-
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      ID :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <span class="font-weight-bold text_paragraph">{{ family.id|default:"N/A" }}</span>
-                               </div>
-
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      Name :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <span class="font-weight-bold text_paragraph">{{ family.name|default:"N/A" }}</span>
-                               </div>
-
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      URL :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <a target="_blank" class="badge custom_badge" href="{{ family.url }}"><i
-                                           class="fa fa-eye"></i></a>
-                               </div>
-
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                      Profile Picture :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <img src="{{ family.media_directory }}" class="img-fluid"
-                                        style="height:100px;;width:100px;;"/>
-                               </div>
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="font-size:12px;font-weight:bold; width: 100px;">
-                     Relation :</span></div>
-                               <div class="col-md-8" style="font-size:12px;">
-                                   <span class="font-weight-bold text_paragraph">{{ family.relation|default:"N/A" }}</span>
-                               </div>
-
-
-                           </div>
-                           <hr>
-                       {% empty %}
-                           <p>No Family Details </p>
-                       {% endfor %}
-                   </div>
-
-               </div>
-
-               <!-- end -->
-
-
-               <!-- start -->
-
-
-               <div class="collapse m-0 p-0" id="websites_details">
-
-
-                   {% for webistes in profile.web_links.websites %}
-                       <div class="row ">
-                           <div class="col-md-12">
-                               <span class="badge "> {{ forloop.counter }} # ) {{ webistes }}</span>
-                               <a href="{{ webistes }}" target="_blank" class="badge custom_badge float-right "><i
-                                       class="fa fa-eye"></i></a>
-                           </div>
-
-                       </div>
-                   {% empty %}
-                       <p>No Websites Details </p>
-                   {% endfor %}
-
-
-               </div>
-               <!-- end -->
-
-
-               <!-- start -->
-
-
-               <div class="collapse m-0 p-0" id="social_links_details">
-                   <div class="card card-body p-0 m-0 ">
-
-                       {% for social_links in profile.web_links.social_links %}
-                           <div class="row mt-2">
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="width: 70px;">Name</span></div>
-                               <div class="col-md-8">
-                                   <span class="font-weight-bold text_paragraph"
-                                         style="font-size:12px;">{{ social_links.link|default:"N/A" }}</span>
-                               </div>
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="width: 70px;">URL</span></div>
-                               <div class="col-md-8">
-                                   <a href="{{ social_links.url }}" target="_blank" class="badge custom_badge"><i
-                                           class="fa fa-eye"></i></a>
-                               </div>
-
-                               <div class="col-md-4"><span class="badge custom_badge text-left"
-                                                           style="width: 70px;">Details</span></div>
-                               <div class="col-md-8">
-
-                                   <span class="font-weight-bold text_paragraph"
-                                         style="font-size:12px;">{{ social_links.details|default:"N/A" }}</span>
-                               </div>
-
-                               <hr>
-
-                           </div>
-                       {% empty %}
-                           <p>No Social Link Details </p>
-                       {% endfor %}
-
-
-                   </div>
-               </div>
-               <!-- end -->
-
-
-           </div>
-       </div>
+           
        <!-- WORK DETAILS END -->
             <div class="row border custom_border_color bg-white mt-2" style="border-radius:10px 0px 0px 0px;">
               <div class="col-md-12 background-gradient-dark p-2" style="border-radius:10px 0px 0px 0px;">
@@ -673,7 +452,7 @@
               ///////////////////////////
               //////////////////////////// -->
               <div class="row border custom_border_color mt-2 ml-1" style="border-radius:0px 10px 10px 0px ;">
-                <div class="col-md-12 p-0 "style="height:766px;overflow-y:hidden;">
+                <div class="col-md-12 p-0 "style="height:830px;overflow-y:hidden;">
                   <ul class="nav border nav-tabs m-0 p-0 d-flex flex-row justify-content-around background-gradient-dark align-items-center"style="height:40px;border-radius:0px 10px 0px 0px;">
                     <li class="active">
                       <a data-toggle="tab" class="nav-link custom_active_text" href="#profile" >
@@ -690,8 +469,228 @@
                         </i>
                       </a>
                     </li>
+
+
+                    <li class="">
+                      <a data-toggle="tab" class="nav-link custom_active_text" href="#posts">
+                        
+                        <i class="material-icons text-dark font-weight-bold fa fa-user-friends text-warning fa-2x">
+                      Group Posts ({{group.posts | length}})
+                        </i>
+                      </a>
+                    </li>
                   </ul>
                   <div class="tab-content bg-white pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
+                                   <!-- start profile tab  -->
+                                   <div id="profile" class="tab-pane fade show in active ">
+                                    <div class="row">  
+                                      
+                                      <!-- general information start -->
+                                    <div class="col-md-8">
+                                     <div class="card">
+                                       <div class="card-header bg-dark text-center">
+                                        <span class="btn btn-primary ">  General Info  </span>
+                                       </div>
+                                       <div class="card-body"style="height:275px;">
+                                         <div class="row mt-2">
+                                           <!-- col-md-6 -->
+                                           <div class="col-md-6">
+                                             <!--  -->
+                                             <div class="row mt-2">
+                                               <div class="col-md-4 text_12">Username </div>
+                                               <div class="col-md-8  text-primary text_12">{{group.username|default:"N/A"}}</div>
+                                             </div>
+                                             <!--  -->
+                                              <!--  -->
+                                              <div class="row mt-2">
+                                                <div class="col-md-4 text_12">Name </div>
+                                                <div class="col-md-8  text-primary text_12">{{group.name|truncatechars:"30"|default:"N/A"}}</div>
+                                              </div>
+                                              <!--  -->
+                                                <!--  -->
+                                                <div class="row mt-2">
+                                                  <div class="col-md-4 text_12">Target Type </div>
+                                                  <div class="col-md-8  text-primary text_12">{{group.target_type|default:"N/A"}}</div>
+                                                </div>
+                                                <!--  -->
+                                    
+                                                 <!--  -->
+                                                 <div class="row mt-2">
+                                                  <div class="col-md-4 text_12">Group Description </div>
+                                                  <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
+                                                </div>
+                                                <!--  -->
+                                    
+                                    
+                                                   <!--  -->
+                                                   <div class="row mt-2">
+                                                    <div class="col-md-4 text_12"> Update Count </div>
+                                                    <div class="col-md-8  text-primary text_12"><p>{{group.target_update_count|default:"N/A"}}</p></div>
+                                                  </div>
+                                                  <!--  -->
+                                           </div>
+                                           <!-- col-md-6 -->
+                                    
+                                            <!-- col-md-6 -->
+                                            <div class="col-md-6">
+                                              <!--  -->
+                                              <div class="row mt-2">
+                                                <div class="col-md-4 text_12">Group Privacy </div>
+                                                <div class="col-md-8  text-primary text_12">{{group.group_privacy|default:"N/A"}}</div>
+                                              </div>
+                                              <!--  -->
+                                               <!--  -->
+                                               <div class="row mt-2">
+                                                 <div class="col-md-4 text_12">Group Visibility </div>
+                                                 <div class="col-md-8  text-primary text_12">{{group.group_visibility|default:"N/A"}}</div>
+                                               </div>
+                                               <!--  -->
+                                                 <!--  -->
+                                                 <div class="row mt-2">
+                                                   <div class="col-md-4 text_12">Group Category </div>
+                                                   <div class="col-md-8  text-primary text_12">{{group.General|default:"N/A"}}</div>
+                                                 </div>
+                                                 <!--  -->
+                                     
+                                                  <!--  -->
+                                                  <div class="row mt-2">
+                                                   <div class="col-md-4 text_12">Group Description </div>
+                                                   <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
+                                                 </div>
+                                                 <!--  -->
+                                     
+                                     
+                                                   
+                                            </div>
+                                            <!-- col-md-6 -->
+                                         </div>
+                                       </div>
+                                       <div class="card-footer bg-dark"></div>  
+                                     </div>
+                                    </div>
+                                    <!-- genreal inforamtion start  -->
+
+                                    <!-- posting timeline start  -->
+                                    <div class="col-md-4">
+                                      <div class="card ">
+                                    <div class="card-header  bg-dark  text-center">
+                                     <span class="btn btn-primary "> Posting Timeline</span>
+                                    </div>
+                                    <div class="card-body"style="height:250px;overflow-y:scroll;">
+                                      <div class="row">
+                                      
+                                    
+                                      <ul class="col-md-6"style="list-style:square;">
+                                        {% for i in group.posting_time_charts.1 %}
+                                        <li class="text_12">{{i}}</li>
+                                        {% endfor %}
+                                      </ul>
+                                      <ul class="col-md-6 "style="list-style:none;">
+                                        {% for i in group.posting_time_charts.0 %}
+                                        <li class="text_12">{{i}}</li>
+                                        {% endfor %}
+                                      </ul>
+                                    </div>
+                                    </div>
+                                    <div class="card-footer bg-dark">
+                                      <span class="badge badge-primary">Total posts : {{group.posting_time_charts.0|length}}</span>
+                                    </div>
+                                      </div>
+                                    </div>
+                                    <!-- posting timeline end  -->
+                                    
+                                    <!-- start group moderators  -->
+                                                              <div class="col-md-12 mt-3">
+                                                                <h3><i class="material-icon text_heading">Group Moderators  </i></h3>
+                                                                <div class="row">
+                                                                  
+                                                                    {% for i in group.group_moderators %}
+                                                                     <div class="col-md-4">
+                                                                       <div class="card ">
+                                                                         <div class="card-header text-center bg-dark"> 
+                                                                           <span class="btn btn-primary btn-sm ">Moderator # {{forloop.counter}}</span>
+                                                                         </div>
+                                                                         <div class="card-body">
+                                                                           <div class="row">
+                                                                             <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                                               <img src="{{i.media_directory}}" class="img-fluid" style="height:100px;width:100px;" />  
+                                                                             </div>
+                                                                             <div class="col-md-8">
+                                                                              <div class="row">
+                                                                                <div class="col-md-4"><span class="badge">Enitity Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">User Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.username|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">Enitity ID</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.id|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">Enitity URL</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
+
+                                                                                
+                                                                              </div>
+                                                                             </div>
+                                                                           </div>
+                                                                         </div>
+                                                                         <div class="card-footer bg-dark"></div>  
+                                                                       </div>
+                                                                     </div>
+                                                                      {% empty %}
+                                                                      <p>Group has no moderators  </p>
+                                                                    {% endfor %}
+                                                                 
+                                                                </div>
+                                                              </div>
+                                                              <!-- end group moderators -->
+                                    
+                                    
+                                                            <div class="col-md-6  m-0 p-0  text-center">
+                                                              <h3><i class="material-icon text_heading">Common Words </i></h3>
+                                                              <div class="row">
+                                                                {% if group.common_wrods is not Null %}
+                                                                  <div class="col-md-12 m-0 p-0 text_paragraph" id="common_words_chart" style="height: 400px;width: 100%;">
+                                                                  </div>
+                                                                {% else %}
+                                                                  <div class="col-md-12 text-center text_paragraph"><p>No common words to display </p></div>
+                                                                  {%endif%}
+                                                                </div>
+                                                              </div>
+                                                              <div class="col-md-6 m-0 p-0 text-center">
+                                                                <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
+                                                                <div class="row">
+                                                                  <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;"></div>
+                                                                  
+                                                                </div>
+                                                              </div>
+                                                            
+                                                              <div class="col-md-12">
+                                                                <h3><i class="material-icon text_heading">Group Rules  </i></h3>
+                                                                <div class="row">
+                                                                  <ul class="col-md-12 list-group list-unstyled">
+                                                                    {% for i in group.group_rules %}
+                                                                      <li class="list-group-item custom_border_color text_paragraph">{{forloop.counter}} # {{i.heading}}</li>
+                                                                      <div class="border custom_border_color p-3"><small class=" text_heading font-weight-bold"> {{i.body}} </small>
+                                                                      </div>
+                                                                      {% empty %}
+                                                                      <p>Group has defined no rules yet  </p>
+                                                                    {% endfor %}
+                                                                  </ul>
+                                                                </div>
+                                                              </div>
+                                                              <div class="col-md-12">
+                                                                <h3><i class="material-icon text_heading">Group Histroy </i></h3>
+                                                                <div class="row">
+                                                                  <ul class="col-md-12 list-group list-unstyled">
+                                                                    {% for i in group.group_history%}
+                                                                      <li class="list-group-item border custom_border_color text_paragraph">{{forloop.counter}} # {{i.event}}
+                                                                        <small class="float-right font-weight-bold">Timestamp :{{i.time_stamp}} </small>
+                                                                      </small>
+                                                                      {% endfor %}
+                                                                    </ul>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-md-12 pb-4">
+                                                                  <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
+                                                                  <p class="text_paragraph">{{group.behaviour}}</p>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <!-- end profile tab  -->
                     <!-- start close associates tab  -->
                     <div id="close_asscoiates"  class="tab-pane  text-white fade">
                       <!-- <p>Close Associates ({{group.close_associates | length}})</p> -->
@@ -704,8 +703,9 @@
                                   <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
                                   <img src="{{c.media_directory}}" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
                                   <div class="d-inline">
-                                    {{c.name}}
-                                  </div>
+                                    {{ c.name }} 
+                                </div>
+                                <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
                                 </div>
                                 <div id="_{{c.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                   <div class="card-body bg-white">
@@ -754,82 +754,331 @@
                       </div>
                     </div>
                     <!-- end close asscoiates  -->
-                    <!-- start profile tab  -->
-                    <div id="profile" class="tab-pane fade show in active ">
-                      <div class="row">
-                      <div class="col-md-4">
-                              <p>GENERAL INFORMATION :</p>
-                              <p> <span class="badge badge-primary mr-2 w-25">Name  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.name|default:"N/A"}}<span></p>
-                              <p><span class="badge badge-primary mr-2 w-25">Birthday  : </span>
-                               
-                               <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.birthday|default:"N/A"}}<span>
-                               </p>
-                              <p>
-                              <span class="badge badge-primary mr-2 w-25">Authro ID  : </span> 
-                
-                               <span class="font-weight-bold"style="font-size:12px;">{{profile.author_id|default:"N/A"}}<span>
-                              </p>
-                                <p><span class="badge badge-primary mr-2 w-25">Gender  : </span>
-                                
-                                 <span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.gender|default:"N/A"}}<span>
-                                </p>
-                                 
-                              </div>
 
-                               <div class="col-md-5">
-                              <p>GENERAL INFORMATION :</p>
-<p> <span class="badge badge-primary w-25 mr-2">languages  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.languages|default:"N/A"}}<span></p>
-                              <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span class="font-weight-bold"style="font-size:12px;">{{profile.general_information.religious_views|default:"N/A"}}<span></p>
-                              </div>
-                        <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
-                        </div>
-                        <div class="col-md-6  m-0 p-0  text-center">
-                          <h3><i class="material-icon text_heading">Common Words </i></h3>
-                          <div class="row">
-                            {% if group.common_wrods is not Null %}
-                              <div class="col-md-12 m-0 p-0 text_paragraph" id="common_words_chart" style="height: 400px;width: 100%;">
-                              </div>
-                            {% else %}
-                              <div class="col-md-12 text-center text_paragraph"><p>No common words to display </p></div>
-                              {%endif%}
+
+                    <!-- startof group posts  -->
+                    <div id="posts" class="tab-pane fade  ">
+                      <div class="row">
+                        {% for p in  group.posts %}
+                            <div class="border custom_border_color col-md-12 text-center text_paragraph"
+                                 style="border-radius: 10px 10px 0px 0px;">
+                                Post # {{ forloop.counter }}
                             </div>
-                          </div>
-                          <div class="col-md-6 m-0 p-0 text-center">
-                            <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
-                            <div class="row">
-                              <!-- <div class="col-md-12 m-0 p-0  "id="sentiment_chart"  style="height: 400px;width: 100%;"></div> -->
-                              
+                            <div class="col-md-12 post-wrapper">
+                            <div class="row border custom_border_color">
+                                <div class="col-md-2 m-0 p-0 custom-center-center">
+                                    <img src="{{ p.author_media_directory }}"
+                                         style="height: 60px;width:60px;border-radius: 50%;;"
+                                         class="img-fluid">
+                                </div>
+                                <div class="col-md-2 custom-column-start-start pt-2 text_heading">
+                                    <span> {{ page.name }}</span>
+                                    <span class="smaller-txt">{{ p.timestamp }}</span>
+                                </div>
+                                <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
+                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Post id:
+                                        <span class="text_paragraph">{{ p.post_id }}</span>
+                                    </div>
+                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
+                                        Name:
+                                        <span class="text_paragraph">{{ p.author_name }}</span>
+                                    </div>
+                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
+                                        Username:
+                                        <span class="text_paragraph">{{ p.author_username }}</span>
+                                    </div>
+                                    <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">
+                                        Sentiment:
+                                        <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
+                                    </div>
+                                </div>
+                                {#                                        <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">#}
+                                {#                                            {{ p.post_text }}#}
+                                {#                                        </div>#}
                             </div>
-                          </div>
-                          <div class="col-md-12">
-                            <h3><i class="material-icon text_heading">Group Rules  </i></h3>
+
                             <div class="row">
-                              <ul class="col-md-12 list-group list-unstyled">
-                                {% for i in group.group_rules%}
-                                  <li class="list-group-item custom_border_color text_paragraph">{{forloop.counter}} # {{i.heading}}</li>
-                                  <div class="border custom_border_color p-3"><small class=" text_heading font-weight-bold"> {{i.body}} </small>
-                                  </div>
+                                <div class="col-md-12">
+                                    <i class="material-icon text_heading" style="font-size:16px;">
+                                        Post Text</i>
+                                </div>
+                                {% if p.post_text %}
+                                    <div class="col-md-12 text-center text-dark ">
+                                        <p>{{ p.post_text }}</p>
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-12 text-center text-dark ">
+                                        <p class="alert alert-info">This post has No text attachment</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <i class="material-icon text_heading" style="font-size:16px;">Post
+                                        Pictures ({{ p.picture_directory | length }})</i>
+                                </div>
+                                {% for x in p.picture_directory %}
+                                    <div class="col-md-12 text-center" style="">
+                                        <img src="{{ x.url }}" class="img-fluid"/>
+                                    </div>
+                                {% empty %}
+                                    <div class="col-md-12 text-center text-dark ">
+                                        <p class="alert alert-info">This post has No picture attachment</p>
+                                    </div>
                                 {% endfor %}
-                              </ul>
                             </div>
-                          </div>
-                          <div class="col-md-12">
-                            <h3><i class="material-icon text_heading">Group Histroy </i></h3>
+
+
                             <div class="row">
-                              <ul class="col-md-12 list-group list-unstyled">
-                                {% for i in group.group_history%}
-                                  <li class="list-group-item border custom_border_color text_paragraph">{{forloop.counter}} # {{i.event}}<small class="float-right font-weight-bold">Timestamp :{{i.time_stamp}} </small></small>
-                                  {% endfor %}
-                                </ul>
-                              </div>
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">Liked By
+                                        ({{ p.reactions.like | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was liked by
+                                        following users </small>
+                                </div>
+                                {% for r in p.reactions.like %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:150px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <div class="col-md-12 pb-4">
-                              <h3><i class="material-icon text_heading">Overall Behaviour </i></h3>
-                              <p class="text_paragraph">{{group.behaviour}}</p>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                        Loved' By ({{ p.reactions.love | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted by
+                                        following users </small>
+                                </div>
+                                {% for r in p.reactions.love %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:150px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                          </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                        HAHA' By ({{ p.reactions.haha | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "HAHA"
+                                        by following users </small>
+                                </div>
+                                {% for r in p.reactions.haha %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                        WOW' By ({{ p.reactions.wow | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "WOW"
+                                        by following users </small>
+                                </div>
+                                {% for r in p.reactions.wow %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                        ANGRY' By ({{ p.reactions.angry | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "ANGRY"
+                                        by following users </small>
+                                </div>
+                                {% for r in p.reactions.angry %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Reacted
+                                        SAD' By ({{ p.reactions.sad | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "SAD"
+                                        by following users </small>
+                                </div>
+                                {% for r in p.reactions.sad %}
+                                    <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <img src="{{ r.media_directory }}"
+                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                               <span class="text_paragraph">{{ r.name }}</span>
+                               </span>
+                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                               <span class="text_paragraph">{{ r.username }}</span>
+                               </span>
+                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                               <span class="text_paragraph">{{ r.id }}</span>
+                               </span>
+                                            <a href="{{ r.url }}" target="_blank"
+                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                    class="fa fa-search">View</i></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-6">
+                                    <i class="material-icon text_heading" style="font-size:16px;">'Comments'
+                                        By ({{ p.comments | length }})</i>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class=" bg-success p-1 text-white ml-5"> Following users commented on
+                                        the post </small>
+                                </div>
+                                {% for r in p.comments %}
+                                    <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                         style="height:100px;">
+                                        <div>
+                                        </div>
+                                        <img src=" {{ r.commentor.media_directory }}"
+                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                             class="img-fluid">
+                                        <div class="p-2">
+                               <span
+                                       class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
+                                   {{ r.commentor.name }}</span>
+                                            <span
+                                                    class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
+                                                {{ r.commentor.username }}</span>
+                                            <span
+                                                    class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
+                                                {{ r.commentor.id }}</span>
+                                            <a href="{{ r.commentor.url }}"
+                                               class="badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 border custom_border_color custom-center-center">
+                                        {{ r.comment_text }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                        class="fas fa-comments text_heading mr-1"></i>{{ p.comments_statistics }}
+                                </div>
+                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                        class="fas fa-grin-hearts text_heading mr-1"></i>{{ p.reactions_statistics }}
+                                </div>
+                                <div class="col-md-2 text-center small-txt border custom_border_color"><i
+                                        class="fas fa-share-alt text_heading mr-1"></i>{{ p.shares_statistics }}
+                                </div>
+                            </div>
+                            </p>
+                        {% endfor %}
                         </div>
-                        <!-- end profile tab  -->
+                    </div>
+                      </div>
+
+                    <!-- end of group posts -->
+
+     
                       </div>
                       <!-- end tab content -->
                     </div>
@@ -841,19 +1090,7 @@
                 ///////////////////////////////// -->
               </div>
             </div>
-            <div class="row mt-2 ml-3 mr-3">
-              <div class="col-md-12 mt-2">
-                <div class="row ">
-                  <div class="col-lg-12 pl-5 pr-5">
-                    <nav class="navbar navbar-expand-lg " id="header">
-                      <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                        <img src="{% static '/images/logo.svg'%}" class="img-fluid" style="height: 80px;width:80px;" />
-                      </div>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
              <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
@@ -964,80 +1201,7 @@ $('#social_links_details_btn').addClass("badge-primary");
 })
 
 </script>
-            <script>
-            am4core.ready(function() {
-            // Themes begin
-            am4core.useTheme(am4themes_animated);
-            // Themes end
-            var iconPath = "M53.5,476c0,14,6.833,21,20.5,21s20.5-7,20.5-21V287h21v189c0,14,6.834,21,20.5,21 c13.667,0,20.5-7,20.5-21V154h10v116c0,7.334,2.5,12.667,7.5,16s10.167,3.333,15.5,0s8-8.667,8-16V145c0-13.334-4.5-23.667-13.5-31 s-21.5-11-37.5-11h-82c-15.333,0-27.833,3.333-37.5,10s-14.5,17-14.5,31v133c0,6,2.667,10.333,8,13s10.5,2.667,15.5,0s7.5-7,7.5-13 V154h10V476 M61.5,42.5c0,11.667,4.167,21.667,12.5,30S92.333,85,104,85s21.667-4.167,30-12.5S146.5,54,146.5,42 c0-11.335-4.167-21.168-12.5-29.5C125.667,4.167,115.667,0,104,0S82.333,4.167,74,12.5S61.5,30.833,61.5,42.5z"
-            var chart = am4core.create("profile_chart", am4charts.SlicedChart);
-            chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
-            chart.data = [{
-            "name": "Friends",
-            "value": 354
-            }, {
-            "name": "Close Associates",
-            "value": 245
-            }, {
-            "name": "Posts",
-            "value": 187
-            }, {
-            "name": "Popularity",
-            "value": 123
-            }, {
-            "name": "Popularity",
-            "value": 87
-            }, {
-            "name": "Positivity",
-            "value": 45
-            }];
-            var series = chart.series.push(new am4charts.PictorialStackedSeries());
-            series.dataFields.value = "value";
-            series.dataFields.category = "name";
-            series.alignLabels = true;
-            series.maskSprite.path = iconPath;
-            series.ticks.template.locationX = 1;
-            series.ticks.template.locationY = 0.5;
-            
-            // series.renderer.label.template.fill = am4core.color("#fff");
-            series.labelsContainer.width = 200;
-            chart.legend = new am4charts.Legend();
-            chart.legend.position = "left";
-            chart.legend.valign = "bottom";
-            }); // end am4core.ready()
-            </script>
-            <script>
-            am4core.ready(function() {
-            // Themes begin
-            am4core.useTheme(am4themes_animated);
-            // Themes end
-            var chart = am4core.create("common_words_chart", am4plugins_wordCloud.WordCloud);
-            var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-            chart.padding(0,0,0,0)
-            series.accuracy = 4;
-            series.step = 15;
-            series.rotationThreshold = 0.7;
-            series.maxCount = 200;
-            series.minWordLength = 2;
-            series.labels.template.margin(4,4,4,4);
-            series.maxFontSize = am4core.percent(30);
-            data=[]
-            {% for i in group.common_words%}
-              data+='{{i}}'+",",
-            {% endfor %}
-            console.log(data)
-            series.text =data;
-            //series.text = "Though yet of Hamlet our dear brother's death The memory be green, and that it us befitted To bear our hearts in grief and our whole kingdom To be contracted in one brow of woe, Yet so far hath discretion fought with nature That we with wisest sorrow think on him, Together with remembrance of ourselves. Therefore our sometime sister, now our queen, The imperial jointress to this warlike state, Have we, as 'twere with a defeated joy,-- With an auspicious and a dropping eye, With mirth in funeral and with dirge in marriage, In equal scale weighing delight and dole,-- Taken to wife: nor have we herein barr'd Your better wisdoms, which have freely gone With this affair along. For all, our thanks. Now follows, that you know, young Fortinbras, Holding a weak supposal of our worth, Or thinking by our late dear brother's death Our state to be disjoint and out of frame, Colleagued with the dream of his advantage, He hath not fail'd to pester us with message, Importing the surrender of those lands Lost by his father, with all bonds of law, To our most valiant brother. So much for him. Now for ourself and for this time of meeting: Thus much the business is: we have here writ To Norway, uncle of young Fortinbras,-- Who, impotent and bed-rid, scarcely hears Of this his nephew's purpose,--to suppress His further gait herein; in that the levies, The lists and full proportions, are all made Out of his subject: and we here dispatch You, good Cornelius, and you, Voltimand, For bearers of this greeting to old Norway; Giving to you no further personal power To business with the king, more than the scope Of these delated articles allow. Farewell, and let your haste commend your duty. Tis sweet and commendable in your nature, Hamlet,To give these mourning duties to your father: But, you must know, your father lost a father; That father lost, lost his, and the survivor bound In filial obligation for some term To do obsequious sorrow: but to persever In obstinate condolement is a course Of impious stubbornness; 'tis unmanly grief; It shows a will most incorrect to heaven, A heart unfortified, a mind impatient, An understanding simple and unschool'd: For what we know must be and is as common As any the most vulgar thing to sense, Why should we in our peevish opposition Take it to heart? Fie! 'tis a fault to heaven, A fault against the dead, a fault to nature, To reason most absurd: whose common theme Is death of fathers, and who still hath cried, From the first corse till he that died to-day, 'This must be so.' We pray you, throw to earth This unprevailing woe, and think of us As of a father: for let the world take note, You are the most immediate to our throne; And with no less nobility of love Than that which dearest father bears his son, Do I impart toward you. For your intent In going back to school in Wittenberg, It is most retrograde to our desire: And we beseech you, bend you to remain Here, in the cheer and comfort of our eye, Our chiefest courtier, cousin, and our son.";
-            series.colors = new am4core.ColorSet();
-            series.colors.passOptions = {}; // makes it loop
-            //series.labelsContainer.rotation = 45;
-            series.angles = [0,-90];
-            series.fontWeight = "900"
-            setInterval(function () {
-            series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-            }, 10000)
-            }); // end am4core.ready()
-            </script>
+         
             <script>
             am4core.ready(function() {
             // Themes begin
