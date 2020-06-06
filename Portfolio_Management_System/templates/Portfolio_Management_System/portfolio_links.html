@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xs-12">
                     <div class="row">
-                        <div class="mydiv col-md-12 glowing_border ">
+                        <div class="mydiv col-md-12 glowing_border " style="border-radius: 20px 20px 0px 0px;">
                             <div class="row">
                                 <div class="col-md-12 markTargetDiv ">
                                     <!-- FIrst Row of the Main COntent-->
@@ -45,145 +45,148 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <!-- This is The Form Section below top-section-->
-                                <div class="row ml-2 mt-4 mr-2"
+                                <div class="row ml-2 mt-4"
                                      style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
                                     <div class="col-md-12">
                                         <h5 class=" myH5">Linked Targets</h5>
-                                        <div class="row">
-
+                                        <div class="row mr-2">
                                             <!-- Just like card 1  start looping here -->
                                             {% if targets|length > 0 %}
                                                 {% for target in targets %}
                                                     <div class="col-md-6">
                                                         <!-- inside CaRD DIV-->
-                                                        <div class="row mr-2">
-                                                            <div class="col-md-2  glowing_border d-flex flex-column justify-content-around align-items-center"
+                                                        <div class="row h-100">
+                                                            <div class="col-md-2  glowing_border d-flex flex-column justify-content-center align-items-center"
                                                                  style="border-radius:15px 0px 0px 15px;">
 
-
                                                                 {% if target.1.GTR|lower == 'facebook' %}
-                                                                        {% if target.1.target_type|lower == 'profile' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-                                                                        {% elif target.1.target_type|lower == 'page' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-                                                                        {% elif target.1.target_type|lower == 'group' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-
-                                                                        {% endif %}
-                                                                    {% elif target.1.GTR|lower == 'twitter' %}
+                                                                    {% if target.1.target_type|lower == 'profile' %}
                                                                         <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i class="fa fa-eye"></i></a>
-
-                                                                    {% elif target.1.GTR|lower == 'instagram' %}
+                                                                           href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+                                                                    {% elif target.1.target_type|lower == 'page' %}
                                                                         <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                                                                           href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+                                                                    {% elif target.1.target_type|lower == 'group' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
 
-                                                                    {% elif target.1.GTR|lower == 'linkedin' %}
-
-
-                                                                        {% if target.1.target_type|lower == 'profile' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-                                                                        {% elif target.1.target_type|lower == 'company' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-
-                                                                        {% endif %}
-                                                                    {% elif target.1.GTR|lower == 'reddit' %}
-
-                                                                        {% if target.1.target_type|lower == 'profile' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:reddit_target_response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-                                                                        {% elif target.1.target_type|lower == 'subreddit' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:subreddit_target_resposne' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-
-                                                                        {% endif %}
-
-                                                                    {% elif target.1.GTR|lower == 'youtube' %}
-
-                                                                        {% if target.1.target_type|lower == 'channel' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:Youtube_Target_Response' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-
-                                                                        {% endif %}
-
-                                                                    {% elif target.1.GTR|lower == 'custom' %}
-
-                                                                        {% if target.1.target_type|lower == 'keybase_crawling' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-                                                                        {% elif target.1.target_type|lower == 'dynamic_crawling' %}
-                                                                            <a class="btn btn-primary custom_icons"
-                                                                               href="{% url 'Target_Management_System:dynamic_crawling_target' target.0.GTR %}"
-                                                                               role="button" target="_blank"><i
-                                                                                    class="fa fa-eye"></i></a>
-
-                                                                        {% endif %}
-                                                                    {% else %}
                                                                     {% endif %}
+                                                                {% elif target.1.GTR|lower == 'twitter' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+
+                                                                {% elif target.1.GTR|lower == 'instagram' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+
+                                                                {% elif target.1.GTR|lower == 'linkedin' %}
+
+
+                                                                    {% if target.1.target_type|lower == 'profile' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+                                                                    {% elif target.1.target_type|lower == 'company' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+
+                                                                    {% endif %}
+                                                                {% elif target.1.GTR|lower == 'reddit' %}
+
+                                                                    {% if target.1.target_type|lower == 'profile' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:reddit_target_response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+                                                                    {% elif target.1.target_type|lower == 'subreddit' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:subreddit_target_resposne' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+
+                                                                    {% endif %}
+
+                                                                {% elif target.1.GTR|lower == 'youtube' %}
+
+                                                                    {% if target.1.target_type|lower == 'channel' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:Youtube_Target_Response' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+
+                                                                    {% endif %}
+
+                                                                {% elif target.1.GTR|lower == 'custom' %}
+
+                                                                    {% if target.1.target_type|lower == 'keybase_crawling' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+                                                                    {% elif target.1.target_type|lower == 'dynamic_crawling' %}
+                                                                        <a class="btn btn-primary custom_icons"
+                                                                           href="{% url 'Target_Management_System:dynamic_crawling_target' target.0.GTR %}"
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
+
+                                                                    {% endif %}
+                                                                {% else %}
+                                                                {% endif %}
 
 
                                                             </div>
                                                             <!-- Div Right part-->
                                                             <div class="col-md-10 glowing_border"
-                                                                 style="height:200px; border-radius:0px 15px 15px 0px;">
+                                                                 style=" border-radius:0px 15px 15px 0px;">
                                                                 <div class="row">
                                                                     <div class="col-md-4 d-flex flex-column justify-content-center">
                                                                         <img class=""
-                                                                                 style="height:120px; width:120px; border-radius: 50%;"
-                                                                                    {% if target.0.profile_picture_url.profile_picture %}
-                                                                                 src="{{ target.0.profile_picture_url.profile_picture }}"
-                                                                                 alt="">
+                                                                             style="height:120px; width:120px; border-radius: 50%;"
+                                                                                {% if target.0.profile_picture_url.profile_picture %}
+                                                                             src="{{ target.0.profile_picture_url.profile_picture }}"
+                                                                             alt="">
 
-                                                                                    {% elif target.0.profile_picture_url %}
-                                                                                        src="
-                                                                                        {{ target.0.profile_picture_url }}
-                                                                                        "
-                                                                                        alt="">
+                                                                                {% elif target.0.profile_picture_url %}
+                                                                                    src="
+                                                                                    {{ target.0.profile_picture_url }}
+                                                                                    "
+                                                                                    alt="">
 
-                                                                                    {% elif target.0.overview.media_directory %}
-                                                                                        src="
-                                                                                        {{ target.0.overview.media_directory }}
-                                                                                        " alt="">
+                                                                                {% elif target.0.overview.media_directory %}
+                                                                                    src="
+                                                                                    {{ target.0.overview.media_directory }}
+                                                                                    " alt="">
 
-                                                                                    {% elif target.0.profile_url %}
-                                                                                        src="{{ target.0.profile_url }}"
-                                                                                        alt="">
+                                                                                {% elif target.0.profile_url %}
+                                                                                    src="{{ target.0.profile_url }}"
+                                                                                    alt="">
 
-                                                                                    {% elif target.0.icon_media_directory %}
-                                                                                        src="
-                                                                                        {{ target.0.icon_media_directory }}
-                                                                                        "
-                                                                                        alt="">
+                                                                                {% elif target.0.icon_media_directory %}
+                                                                                    src="
+                                                                                    {{ target.0.icon_media_directory }}
+                                                                                    "
+                                                                                    alt="">
 
-                                                                                    {% else %}
-                                                                                        src="{% static 'images/testimonial.png' %}" alt="">
-                                                                                    {% endif %}
+                                                                                {% else %}
+                                                                                    src="
+                                                                                    {% static 'images/testimonial.png' %}
+                                                                                    " alt="">
+                                                                                {% endif %}
 
                                                                         <!-- src="" alt=""> -->
 
@@ -200,12 +203,12 @@
                                                                             <li>Website :{{ target.1.GTR }} </li>
                                                                             <li>Target Type
                                                                                 :{{ target.1.target_type }}</li>
-                                                                            <li>Added On :{{ target.1.created_on }}</li>
+                                                                            <li>Added On
+                                                                                :{{ target.1.created_on }}</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-8" style="width:140px;">
-                                                                </div>
+
                                                             </div>
                                                         </div>
 
@@ -217,8 +220,6 @@
 
                                             {% endif %}
                                             <!--END OF CARD 1-->
-
-
                                         </div>
                                         <h5 class=" myH5">Linked Posts</h5>
                                         <div class="row">
@@ -271,5 +272,4 @@
                 </div>
             </div>
         </div>
-    </div>
 {% endblock %}

@@ -82,10 +82,10 @@
               
                           {% for y in x.news %}
                           {% for x in y.News %}
-                          <div class=" text_paragraph p-2 "style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
+                          <div class=" text_paragraph p-2 font-weight-bold"style="font-size:14px;" data-toggle="collapse" data-target="#{{forloop.counter}}" aria-expanded="true"
                           aria-controls="{{forloop.counter}}">
                           <span class="text_heading">  {{forloop.counter}} #</span>  {{x.HeadLine}}
-                          <a href="{{x.Link}}" class="float-right"> <i class="fa fa-eye text_paragraph"></i> </a>
+                          <a href="{{x.Link}}" class="float-right" target="_blank"> <i class="fa fa-eye text_paragraph"></i> </a>
                         </div>
                         <div>
                           <span class=" badge badge-success float-right">{{x.Time|default:"--" }}</span>
