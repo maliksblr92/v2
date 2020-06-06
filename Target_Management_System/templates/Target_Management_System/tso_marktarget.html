@@ -332,11 +332,26 @@
         });
 
 
-        
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            //show selected tab / active
+            console.log ("tab");
+             console.log ( $(e.target).attr('href') );
+             hideErrorAlerts();
+            });
+
+            $('a[data-toggle="tab"]').on('shown', function (e) {
+                $(e.target).index();
+                hideErrorAlerts();
+              })
 
         function hideErrorAlerts(){
+            console.log("IN HIDE ALL ERRORS FUNCTION")
             var p_name = $('#platform_name').val();
+            console.log(p_name)
+            console.log('#'+p_name+'-alert__autheruseraccount')
             $('#'+p_name+'-alert__autheruseraccount').hide()
+            $('#'+p_name+'-smart_search_response').hide()
+            
           
             
         }
