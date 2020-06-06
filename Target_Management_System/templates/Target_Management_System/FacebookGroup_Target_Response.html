@@ -801,10 +801,15 @@
                                             <div class="card-header background-gradient-dark" id="headingOne"
                                                  data-toggle="collapse" data-target="#_{{ c.id }}" aria-expanded="true"
                                                  aria-controls="_{{ c.id }}">
-                                                <!-- <img src="/static/images/VIaL8H.jpg" style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                                <img src="{{ c.media_directory }}"
-                                                     style="height: 80px;width:80px;border-radius: 50%;;"
-                                                     class="img-fluid">
+                                                {% if c.media_directory %}
+                                                    <img src="{{ c.media_directory }}"
+                                                         style="height: 80px;width:80px;border-radius: 50%;;"
+                                                         class="img-fluid">
+                                                {% else %}
+                                                    <img src="/static/images/profile-avatar-png-5.png"
+                                                         style="height: 80px;width:80px;border-radius: 50%;;"
+                                                         class="img-fluid">
+                                                {% endif %}
                                                 <div class="d-inline">
                                                     {{ c.name }}
                                                 </div>
@@ -821,6 +826,21 @@
                                                             </div>
                                                             <div class="badge custom_badge mt-2">
                                                                 <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    {% elif c.id %}
+                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="badge custom_badge">
+                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.id 'facebook' %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-link  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="badge custom_badge mt-2">
+                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.id %}"
                                                                    target="_blank">
                                                                     <i class="fa fa-envelope  fa-2x text-light"></i>
                                                                 </a>
