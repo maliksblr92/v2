@@ -134,10 +134,12 @@ class Data_Queries(object):
         try:
             gtr_id = object.GTR
             GTR = acq.get_gtr_by_id(gtr_id)
+            targ_obj = acq.get_dataobject_by_gtr(GTR)
 
-
-            if(GTR.website.name.lower() in supported_links):
+            if(GTR.website.name.lower() in supported_links and targ_obj.target_type == 'profile'):
                 return GTR.website.name.lower()
+
+            return None
         except Exception as e:
             print(e)
 
