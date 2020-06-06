@@ -41,7 +41,8 @@
             background-color: #06111a !important;
             color: #ffffff !important;
         }
-    .dropdown-content a:hover {
+
+        .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
 
@@ -89,196 +90,223 @@
 {% endblock %}
 {% block belly %}
     <div class="row  ">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
 
-    <div class="row">
-        <h4 class="col-md-6 topheading">
-            Keybase Responses
-        </h4>
-        <div class=" col-md-6 text-right" style="margin: auto;">
-{#            <a href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"#}
-{#               target="_blank" class="btn btn-outline-light font-weight-bold ">#}
-{#                <i class="fas fa-download  mr-2"></i> Download PDF Report#}
-{#            </a>#}
-        <div class="text-right d-flex flex-row justify-content-end align-items-center">
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
-                                class="fa fa-cog mr-2"></i>Options</a>
-                        <div class="dropdown-content">
-                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
-                               style="margin-top:2px;"
-                               href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"
-                               id="download_as_pdf">PDF Downlaod</a>
-                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
-                               style="margin-top:2px;"
-                               href="{% url 'Bi_Tools:dashboard_with_pivot' %}"
-                               id="">Bi Tool</a>
-                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
-                               style="margin-top:2px;"
-                               href="{% url 'Bi_Tools:visualization' content_type='keybase' %}"
-                               id="">Statistics</a>
-                        </div>
-                    </li>
+            <div class="row">
+                <h4 class="col-md-6 topheading">
+                    Keybase Responses
+                </h4>
+                <div class=" col-md-6 text-right" style="margin: auto;">
+                    {#            <a href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"#}
+                    {#               target="_blank" class="btn btn-outline-light font-weight-bold ">#}
+                    {#                <i class="fas fa-download  mr-2"></i> Download PDF Report#}
+                    {#            </a>#}
+                    <div class="text-right d-flex flex-row justify-content-end align-items-center">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
+                                    class="fa fa-cog mr-2"></i>Options</a>
+                            <div class="dropdown-content">
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR %}"
+                                   id="download_as_pdf">PDF Downlaod</a>
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Bi_Tools:dashboard_with_pivot' %}"
+                                   id="">Bi Tool</a>
+                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                                   style="margin-top:2px;"
+                                   href="{% url 'Bi_Tools:visualization' content_type='keybase' %}"
+                                   id="">Statistics</a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="card-body border border-dark " style="border-radius:0px 0px 15px 15px">
+                        {% if x.query|length > 0 %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">Query  :</span></div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
+                            </div>
+                        {% endif %}
+                        {% if x.serp_title|length > 0 %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Query Search title :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
+                            </div>
+                        {% endif %}
+                        {% if x.meta_title|length > 0 %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">Meta  title :</span></div>
+                                </div>
+                                <div class="col-md-10" style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if x.serp_url|length > 0 %}
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="col-md-12"><span class="badge badge-primary"
+                                                                 style="width:120px;">URL :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2" style="font-size:12px;"><a
+                                        href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+                                        target="_blank"> Block</a></div>
+                                <div class="col-md-2" style="font-size:12px;"><a
+                                        href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
+                                        target="_blank"> Add Target </a></div>
+                                <div class="col-md-2" style="font-size:12px;"><a href="{{ x.serp_url }}"
+                                                                                 class="badge badge-success"
+                                                                                 target="_blank"><i
+                                        class="fa fa-eye text-white fa-2x"></i> </a></div>
+
+                            </div>
+                        {% endif %}
+                        {% if x.serp_snippet|length > 0 %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Search Snippet :</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10"
+                                     style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            <div class="card-body border border-dark " style="border-radius:0px 0px 15px 15px">
-                {% if x.query|length > 0 %}
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="col-md-12"><span class="badge badge-primary"
-                                                         style="width:120px;">Query  :</span></div>
-                        </div>
-                        <div class="col-md-10" style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
-                    </div>
-                {% endif %}
-                {% if x.serp_title|length > 0 %}
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Query Search title :</span>
-                            </div>
-                        </div>
-                        <div class="col-md-10" style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
-                    </div>
-                {% endif %}
-                {% if x.meta_title|length > 0 %}
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="col-md-12"><span class="badge badge-primary"
-                                                         style="width:120px;">Meta  title :</span></div>
-                        </div>
-                        <div class="col-md-10" style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
-                    </div>
-                {% endif %}
+                <!-- end of top row -->
+                <!-- inside main container -->
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  "
+                     style="height:500px;overflow-y:auto;">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <div class="row formbg ml-5">
+                            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                                {% for x in resp.data %}
 
-                {% if x.serp_url|length > 0 %}
-                    <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border ">
+                                        <div class="row">
+                                            <h4 class="topheading col-md-8">      {{ target_object }} Response
+                                                {% if x.serp_domain == "www.youtube.com" %}
+                                                    <span class="float-right d-flex flex-row justify-content-center align-items-center bg-danger"
+                                                          style="border-radius:5px;height:40px;width:60px;"> <i
+                                                            class="fab fa-youtube   text-white  "
+                                                            style="font-size:25px;"></i></span>
 
-                        <div class="col-md-6">
-                            <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">URL :</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2" style="font-size:12px;"><a
-                                href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
-                                target="_blank"> Block</a></div>
-                        <div class="col-md-2" style="font-size:12px;"><a
-                                href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
-                                target="_blank"> Add Target </a></div>
-                        <div class="col-md-2" style="font-size:12px;"><a href="{{ x.serp_url }}"
-                                                                         class="badge badge-success" target="_blank"><i
-                                class="fa fa-eye text-white fa-2x"></i> </a></div>
-
-                    </div>
-                {% endif %}
-                {% if x.serp_snippet|length > 0 %}
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="col-md-12"><span class="badge badge-primary" style="width:120px;">Search Snippet :</span>
-                            </div>
-                        </div>
-                        <div class="col-md-10" style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
-                    </div>
-                {% endif %}
-            </div>
-
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  " style="height:500px;overflow-y:auto;">
-            <div class="">
-                <!-- RPW FOR SOCIAL MEDIA -->
-                <div class="row formbg ml-5">
-                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
-                        {% for x in resp.data %}
-
-                            <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar glowing_border ">
-                                <h4 class="topheading">      {{ target_object }} Response
-                                    {% if x.serp_domain == "www.youtube.com" %}
-                                        <span class="float-right d-flex flex-row justify-content-center align-items-center bg-danger"
-                                              style="border-radius:5px;height:40px;width:60px;"> <i
-                                                class="fab fa-youtube   text-white  "
-                                                style="font-size:25px;"></i></span>
-                                        </h4>
-                                        <p class="ml-3" style="font-size:12px;"><span class="badge badge-success"> Response Source :</span> {{ x.url|default:"N/A" }}
-                                        </p>
+                                                    <p class="ml-3" style="font-size:12px;">
+                                                        <span
+                                                                class="badge badge-success"> Response Source :</span> {{ x.url|default:"N/A" }}
+                                                    </p>
+                                                {% endif %}
+                                            </h4>
+                                            {% if x.status == '800' %}
+                                                <span class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                                            <div class="badge badge-danger p-2">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                Blocked
+                                            </div>
                                         </span>
-                                    {% endif %}
-                            </div>
-                            <div class="card-body border border-dark background glowing_border mb-2"
-                                 style="border-radius:0px 0px 15px 15px">
-                                {% if x.query|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">Query  :</span></div>
-                                        </div>
-                                        <div class="col-md-10 text-white p-0 m-0"
-                                             style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
-                                    </div>
-                                {% endif %}
-                                {% if x.serp_title|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">Query Search title :</span>
+                                            {% elif x.status == '200' %}
+                                                <span class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                                            <div class="badge badge-success p-2">
+                                                <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                Accessable
                                             </div>
+                                        </span>
+                                            {% endif %}
                                         </div>
-                                        <div class="col-md-10 text-white p-0 m-0"
-                                             style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
                                     </div>
-                                {% endif %}
-                                {% if x.meta_title|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">Meta  title :</span></div>
-                                        </div>
-                                        <div class="col-md-10 text-white p-0 m-0"
-                                             style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
-                                    </div>
-                                {% endif %}
-                                {% if x.serp_url|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">URL :</span></div>
-                                        </div>
-
-                                        <div class="col-md-6" style="font-size:12px;">
-                                            <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
-                                               class="text-white" target="_blank" style="font-size: 12px;">Block</a>
-                                            <a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
-                                               target="_blank"> Add Target </a>
-
-                                            <a href="{{ x.serp_url }}" class="badge custom_badge"><i
-                                                    class="fa fa-eye text-white fa-2x"></i> </a></div>
-                                    </div>
-                                {% endif %}
-                                {% if x.serp_snippet|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">Search Snippet :</span>
+                                    <div class="card-body border border-dark background glowing_border mb-2"
+                                         style="border-radius:0px 0px 15px 15px">
+                                        {% if x.query|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12">
+                                                        <span class="badge custom_badge text-left" style="width:120px;">Query  :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;"> {{ x.query|default:"N/A" }}</div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-10 text-white p-0 m-0"
-                                             style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
+                                        {% endif %}
+                                        {% if x.serp_title|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Query Search title :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;"> {{ x.serp_title|default:"N/A" }}</div>
+                                            </div>
+                                        {% endif %}
+                                        {% if x.meta_title|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Meta  title :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0"
+                                                     style="font-size:12px;"> {{ x.meta_title|default:"N/A" }}</div>
+                                            </div>
+                                        {% endif %}
+                                        {% if x.serp_url|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">URL :</span></div>
+                                                </div>
+
+                                                <div class="col-md-6 d-flex flex-row justify-content-between align-items-center"
+                                                     style="font-size:12px;">
+                                                    <a href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+                                                       class="text-white" target="_blank"
+                                                       style="font-size: 12px;">Block</a>
+                                                    <a href="{% url 'Target_Management_System:dynamic_crawling_prime' x.serp_url|encode_url %}"
+                                                       target="_blank"> Add Target </a>
+
+                                                    <a href="{{ x.serp_url }}" class="badge custom_badge w-25" target="_blank"><i
+                                                            class="fa fa-eye text-white fa-2x"></i> </a></div>
+                                            </div>
+                                        {% endif %}
+                                        {% if x.serp_snippet|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Search Snippet :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 text-white p-0 m-0 d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;">  {{ x.serp_snippet|default:"N/A" }}</div>
+                                            </div>
+                                        {% endif %}
+                                        {% if x.text_raw|length > 0 %}
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="col-md-12"><span class="badge custom_badge text-left"
+                                                                                 style="width:120px;">Raw Text :</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 glowing_border p-2 text-white d-flex flex-row justify-content-start align-items-center"
+                                                     style="font-size:12px;height:200px;overflow-y:auto;border-radius:3px;"> {{ x.text_raw|linebreaksbr|default:"N/A" }}</div>
+                                            </div>
+
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                                {% if x.text_raw|length > 0 %}
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="col-md-12"><span class="badge custom_badge text-left"
-                                                                         style="width:120px;">Raw Text :</span></div>
-                                        </div>
-                                        <div class="col-md-10 glowing_border p-2 text-white"
-                                             style="font-size:12px;height:200px;overflow-y:auto;border-radius:3px;"> {{ x.text_raw|linebreaksbr|default:"N/A" }}</div>
-                                    </div>
 
-                                {% endif %}
-
-
+                                {% endfor %}
                             </div>
-
-                        {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
