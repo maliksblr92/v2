@@ -47,6 +47,7 @@
       background-size: cover;
       margin: 0 !important;
       padding: 0 !important;
+      font-family: 'Raleway'!important; 
       }
       html {
       --scrollbarBG: #CFD8DC;
@@ -264,11 +265,17 @@
                           <div class="dropdown-content">
                               <a type="button" target="_blank"
                                  class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
-                                
+                                 href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}"
+                                 id="download_as_pdf"
                                  id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
                               <a type="button" target="_blank"
+                              href="{% url 'Target_Management_System:link_analysis' object_gtr_id=group.GTR %}"
                                  class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;">Link
                                   Analysis</a>
+                                  <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                               style="margin-top:2px;"
+                               href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=group.GTR %}"
+                               id="">Close Associates</a>
   
                           </div>
                       </li>
@@ -476,37 +483,39 @@
                   <div class="tab-content bg-white pl-4 pr-4 pt-2"style="height:100%;overflow-y:auto;">
                                    <!-- start profile tab  -->
                                    <div id="profile" class="tab-pane fade show in active ">
-                                    <div class="row">        
+                                    <div class="row">  
+                                      
+                                      <!-- general information start -->
                                     <div class="col-md-8">
                                      <div class="card">
                                        <div class="card-header bg-dark text-center">
-                                        <span class="btn btn-info ">  General Info  </span>
+                                        <span class="btn btn-primary ">  General Info  </span>
                                        </div>
-                                       <div class="card-body">
-                                         <div class="row">
+                                       <div class="card-body"style="height:275px;">
+                                         <div class="row mt-2">
                                            <!-- col-md-6 -->
                                            <div class="col-md-6">
                                              <!--  -->
-                                             <div class="row">
+                                             <div class="row mt-2">
                                                <div class="col-md-4 text_12">Username </div>
                                                <div class="col-md-8  text-primary text_12">{{group.username|default:"N/A"}}</div>
                                              </div>
                                              <!--  -->
                                               <!--  -->
-                                              <div class="row">
+                                              <div class="row mt-2">
                                                 <div class="col-md-4 text_12">Name </div>
                                                 <div class="col-md-8  text-primary text_12">{{group.name|truncatechars:"30"|default:"N/A"}}</div>
                                               </div>
                                               <!--  -->
                                                 <!--  -->
-                                                <div class="row">
+                                                <div class="row mt-2">
                                                   <div class="col-md-4 text_12">Target Type </div>
                                                   <div class="col-md-8  text-primary text_12">{{group.target_type|default:"N/A"}}</div>
                                                 </div>
                                                 <!--  -->
                                     
                                                  <!--  -->
-                                                 <div class="row">
+                                                 <div class="row mt-2">
                                                   <div class="col-md-4 text_12">Group Description </div>
                                                   <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
                                                 </div>
@@ -514,8 +523,8 @@
                                     
                                     
                                                    <!--  -->
-                                                   <div class="row">
-                                                    <div class="col-md-4 text_12">Target Update Count </div>
+                                                   <div class="row mt-2">
+                                                    <div class="col-md-4 text_12"> Update Count </div>
                                                     <div class="col-md-8  text-primary text_12"><p>{{group.target_update_count|default:"N/A"}}</p></div>
                                                   </div>
                                                   <!--  -->
@@ -525,26 +534,26 @@
                                             <!-- col-md-6 -->
                                             <div class="col-md-6">
                                               <!--  -->
-                                              <div class="row">
+                                              <div class="row mt-2">
                                                 <div class="col-md-4 text_12">Group Privacy </div>
                                                 <div class="col-md-8  text-primary text_12">{{group.group_privacy|default:"N/A"}}</div>
                                               </div>
                                               <!--  -->
                                                <!--  -->
-                                               <div class="row">
+                                               <div class="row mt-2">
                                                  <div class="col-md-4 text_12">Group Visibility </div>
                                                  <div class="col-md-8  text-primary text_12">{{group.group_visibility|default:"N/A"}}</div>
                                                </div>
                                                <!--  -->
                                                  <!--  -->
-                                                 <div class="row">
+                                                 <div class="row mt-2">
                                                    <div class="col-md-4 text_12">Group Category </div>
                                                    <div class="col-md-8  text-primary text_12">{{group.General|default:"N/A"}}</div>
                                                  </div>
                                                  <!--  -->
                                      
                                                   <!--  -->
-                                                  <div class="row">
+                                                  <div class="row mt-2">
                                                    <div class="col-md-4 text_12">Group Description </div>
                                                    <div class="col-md-8  text-primary text_12"><p>{{group.description|default:"N/A"}}</p></div>
                                                  </div>
@@ -559,10 +568,13 @@
                                        <div class="card-footer bg-dark"></div>  
                                      </div>
                                     </div>
+                                    <!-- genreal inforamtion start  -->
+
+                                    <!-- posting timeline start  -->
                                     <div class="col-md-4">
                                       <div class="card ">
                                     <div class="card-header  bg-dark  text-center">
-                                     <span class="btn btn-info "> Posting Timeline</span>
+                                     <span class="btn btn-primary "> Posting Timeline</span>
                                     </div>
                                     <div class="card-body"style="height:250px;overflow-y:scroll;">
                                       <div class="row">
@@ -581,12 +593,50 @@
                                     </div>
                                     </div>
                                     <div class="card-footer bg-dark">
-                                      <span class="badge badge-info">Total posts : {{group.posting_time_charts.0|length}}</span>
+                                      <span class="badge badge-primary">Total posts : {{group.posting_time_charts.0|length}}</span>
                                     </div>
                                       </div>
                                     </div>
+                                    <!-- posting timeline end  -->
                                     
-                                    
+                                    <!-- start group moderators  -->
+                                                              <div class="col-md-12 mt-3">
+                                                                <h3><i class="material-icon text_heading">Group Moderators  </i></h3>
+                                                                <div class="row">
+                                                                  
+                                                                    {% for i in group.group_moderators %}
+                                                                     <div class="col-md-4">
+                                                                       <div class="card ">
+                                                                         <div class="card-header text-center bg-dark"> 
+                                                                           <span class="btn btn-primary btn-sm ">Moderator # {{forloop.counter}}</span>
+                                                                         </div>
+                                                                         <div class="card-body">
+                                                                           <div class="row">
+                                                                             <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                                               <img src="{{i.media_directory}}" class="img-fluid" style="height:100px;width:100px;" />  
+                                                                             </div>
+                                                                             <div class="col-md-8">
+                                                                              <div class="row">
+                                                                                <div class="col-md-4"><span class="badge">Enitity Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">User Name</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.username|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">Enitity ID</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.id|default:"N/A"}}</span></div>
+                                                                                <div class="col-md-4"><span class="badge">Enitity URL</span> </div><div class="col-md-8"><span class="badge badge-primary">{{i.entity_type|default:"N/A"}}</span></div>
+
+                                                                                
+                                                                              </div>
+                                                                             </div>
+                                                                           </div>
+                                                                         </div>
+                                                                         <div class="card-footer bg-dark"></div>  
+                                                                       </div>
+                                                                     </div>
+                                                                      {% empty %}
+                                                                      <p>Group has no moderators  </p>
+                                                                    {% endfor %}
+                                                                 
+                                                                </div>
+                                                              </div>
+                                                              <!-- end group moderators -->
                                     
                                     
                                                             <div class="col-md-6  m-0 p-0  text-center">
@@ -607,11 +657,12 @@
                                                                   
                                                                 </div>
                                                               </div>
+                                                            
                                                               <div class="col-md-12">
                                                                 <h3><i class="material-icon text_heading">Group Rules  </i></h3>
                                                                 <div class="row">
                                                                   <ul class="col-md-12 list-group list-unstyled">
-                                                                    {% for i in group.group_rules%}
+                                                                    {% for i in group.group_rules %}
                                                                       <li class="list-group-item custom_border_color text_paragraph">{{forloop.counter}} # {{i.heading}}</li>
                                                                       <div class="border custom_border_color p-3"><small class=" text_heading font-weight-bold"> {{i.body}} </small>
                                                                       </div>
