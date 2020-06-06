@@ -1056,16 +1056,15 @@
                                                 </div>
                                             {% endif %}
                                         </div>
-                                        {% if  p.picture_directory %}
-                                            <div class="row" style="height:550px;">
+                                        {% if  p.picture_links %}
+                                            <div class="row">
                                                 <div class="col-md-12">
                                                     <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                        Pictures ({{ p.picture_directory | length }})</i>
+                                                        Pictures </i>
                                                 </div>
-                                                {% for x in p.picture_directory %}
+                                                {% for x in p.picture_links %}
                                                     <div class="col-md-12 text-center">
                                                         <img src="{{ x.url }}"
-                                                             style="height: 500px;width:100%;"
                                                              class="img-fluid">
                                                     </div>
                                                 {% endfor %}
