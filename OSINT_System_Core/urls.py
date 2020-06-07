@@ -59,6 +59,7 @@ urlpatterns = [
     path('share_resource/',views.Share_Resource.as_view(), name='share_resource'),
     path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('logged_ips/', views.Logged_Ips.as_view(), name='logged_ips'),
+    path('delete_ips/<str:obj_id>/', views.Delete_Ips.as_view(), name='delete_ips'),
 
 
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),

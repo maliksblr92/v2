@@ -820,6 +820,19 @@ class Logged_Ips(RequireLoginMixin,IsTSO,View):
         return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
 
 
+class Delete_Ips(RequireLoginMixin,IsTSO,View):
+
+    def get(self,request,*args,**kwargs):
+
+        obj_id = kwargs['obj_id']
+
+        ip_obj = Ip_Logger.objects(id=obj_id).first()
+        ip_obj.delete()
+
+        responses = Ip_Logger.get_all_loggers()
+
+        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+
 
 
 class Update_Footer_Graphs():

@@ -117,7 +117,7 @@
                         <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
 
 
-                        <td><a class="btn" href=""><i class="fa fa-trash text-white"></i></a></td>
+                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i class="fa fa-trash text-white"></i></a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
