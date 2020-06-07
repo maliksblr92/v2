@@ -265,6 +265,97 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
         <!-- end of the first reddit tab #1 -->
     </div>
 {% endfor %}
+<script>
+    function cleanForm(){
+    var allInputs = $( ":input" );
+    $(allInputs).val('')
+    console.log("formed cleaned")
+    }
+    var tabpane_name = "{{platform.name|lower}}";
+    console.log("tab_name ==  " + tabpane_name)
+    $(tabpane_name + " #loading_icon").hide()
+    $(tabpane_name + ' #smart_search_response').hide()
+    //start of document ready
+    document.addEventListener('DOMContentLoaded', function () {
+    let smartsearch = $('.smartsearch')
+    // smart search
+    smartsearch.click((event) => {
+console.log("")
+   
+    $(tabpane_name + " #loading_icon").show()
+    // console.log(event.target)
+    let website = event.target.getAttribute('x-target-name')
+    let author_account = event.target.parentElement.parentElement.querySelector('input').value
+    let target_type = "{{platform.name|lower}}"
+    //console.log(website)
+    var author_type = $(`#${website}_authortype option:selected`).val();
+    console.log(author_type)
+    let data = {
+    'author_account': author_account,
+    'search_site': website,
+    'target_type': author_type
+    }
+    $.ajax({
+    dataType: "json",
+    url: "/tms/smartsearch/",
+    data: data,
+    success: (response) => {
+    console.log("Smart Search == in success function ")
+    // console.log(response)
+    $(`#${website}-authoruserid`).val(response['author_userid'])
+    $(`#${website}-authorusername`).val(response['author_username'])
+    document.getElementById(`${website}-profile_image`).src = response[
+    'profile_url']
+    switch (website) {
+    case 'reddit':
+    $(`#${website}-authoruserurl`).val(
+    `http://www.reddit.com/${author_account}`)
+    break;
+    case 'linkedin':
+    $(`#${website}-authoruserurl`).val(
+    `http://www.linkedin.com/in/${author_account}`)
+    break;
+    case 'instagram':
+    $(`#${website}-authoruserurl`).val(
+    `http://www.instagram.com/${author_account}`)
+    break;
+    case 'facebook':
+    $(`#${website}-authoruserurl`).val(
+    `http://www.facebook.com/${author_account}`)
+    break;
+    case 'twitter':
+    $(`#${website}-authoruserurl`).val(
+    `http://www.twitter.com/${author_account}`)
+    break;
+    default:
+    break;
+    }
+    $(tabpane_name + " #loading_icon").hide()
+    $(tabpane_name + ' #smart_search_response').show()
+    $(tabpane_name + ' #smart_search_response').empty().append(
+    " Operation successfull   ")
+    $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+    },
+    error: function () {
+    console.log("Smart Search == in error function ")
+    $(tabpane_name + ' #smart_search_response').show()
+    $(tabpane_name + ' #smart_search_response').empty().append(
+    " Operation Unsuccessfull  ! Please Try Again ")
+    $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+    $(tabpane_name + " #loading_icon").hide()
+    }
+    })
+    })
+    // clear form btn functionality
+    let clearformbtn = $('.clearform-btn')
+    clearformbtn.click(event => {
+    // console.log('clear form clicked')
+    let pf = event.target.getAttribute('x-parent-form')
+    // console.log(pf)
+    $(`#${pf}`).trigger('reset')
+    })
+    }) // document ready
+    </script>
 </div>
 <!-- let me check -->
 <!-- end of content -->
@@ -276,93 +367,5 @@ style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
 </div>
 {% endblock %}
 {% block foot_script %}
-<script>
-function cleanForm(){
-var allInputs = $( ":input" );
-$(allInputs).val('')
-console.log("formed cleaned")
-}
-var tabpane_name = "{{platform.name|lower}}";
-console.log("tab_name ==  " + tabpane_name)
-$(tabpane_name + " #loading_icon").hide()
-$(tabpane_name + ' #smart_search_response').hide()
-//start of document ready
-document.addEventListener('DOMContentLoaded', function () {
-let smartsearch = $('.smartsearch')
-// smart search
-smartsearch.click((event) => {
-$(tabpane_name + " #loading_icon").show()
-// console.log(event.target)
-let website = event.target.getAttribute('x-target-name')
-let author_account = event.target.parentElement.parentElement.querySelector('input').value
-let target_type = "{{platform.name|lower}}"
-//console.log(website)
-var author_type = $(`#${website}_authortype option:selected`).val();
-console.log(author_type)
-let data = {
-'author_account': author_account,
-'search_site': website,
-'target_type': author_type
-}
-$.ajax({
-dataType: "json",
-url: "/tms/smartsearch/",
-data: data,
-success: (response) => {
-console.log("Smart Search == in success function ")
-// console.log(response)
-$(`#${website}-authoruserid`).val(response['author_userid'])
-$(`#${website}-authorusername`).val(response['author_username'])
-document.getElementById(`${website}-profile_image`).src = response[
-'profile_url']
-switch (website) {
-case 'reddit':
-$(`#${website}-authoruserurl`).val(
-`http://www.reddit.com/${author_account}`)
-break;
-case 'linkedin':
-$(`#${website}-authoruserurl`).val(
-`http://www.linkedin.com/in/${author_account}`)
-break;
-case 'instagram':
-$(`#${website}-authoruserurl`).val(
-`http://www.instagram.com/${author_account}`)
-break;
-case 'facebook':
-$(`#${website}-authoruserurl`).val(
-`http://www.facebook.com/${author_account}`)
-break;
-case 'twitter':
-$(`#${website}-authoruserurl`).val(
-`http://www.twitter.com/${author_account}`)
-break;
-default:
-break;
-}
-$(tabpane_name + " #loading_icon").hide()
-$(tabpane_name + ' #smart_search_response').show()
-$(tabpane_name + ' #smart_search_response').empty().append(
-" Operation successfull   ")
-$(tabpane_name + ' #smart_search_response').fadeOut(8000)
-},
-error: function () {
-console.log("Smart Search == in error function ")
-$(tabpane_name + ' #smart_search_response').show()
-$(tabpane_name + ' #smart_search_response').empty().append(
-" Operation Unsuccessfull  ! Please Try Again ")
-$(tabpane_name + ' #smart_search_response').fadeOut(8000)
-$(tabpane_name + " #loading_icon").hide()
-}
-})
-})
-// clear form btn functionality
-let clearformbtn = $('.clearform-btn')
-clearformbtn.click(event => {
-// console.log('clear form clicked')
-let pf = event.target.getAttribute('x-parent-form')
-// console.log(pf)
-$(`#${pf}`).trigger('reset')
-})
-}) // document ready
-</script>
+
 {% endblock %}

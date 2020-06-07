@@ -50,11 +50,13 @@
         html {
             --scrollbarBG: #CFD8DC;
             --thumbBG: #90A4AE;
-            
+
         }
-body{
-    font-family: 'Raleway'!important; 
-}
+
+        body {
+            font-family: 'Raleway' !important;
+        }
+
         ::-webkit-scrollbar {
             width: 7px;
             scrollbar-width: thin;
@@ -114,7 +116,10 @@ body{
         .fb-cover-img {
             /*background: url(
 
-        {{c.media_directory}}  ) no-repeat center center fixed;*/
+
+
+
+        {{c.media_directory}}     ) no-repeat center center fixed;*/
             background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -307,11 +312,11 @@ body{
                                class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
                                href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}"
                                id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
-                               <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                                style="margin-top:2px;"
                                href="{% url 'Target_Management_System:link_analysis' object_gtr_id=page.GTR %}"
                                id="">Link Analysis</a>
-                               <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                                style="margin-top:2px;"
                                href="{% url 'Target_Management_System:close_associates_tree_graph' object_gtr_id=page.GTR %}"
                                id="">Close Associates</a>
@@ -319,7 +324,7 @@ body{
                         </div>
                     </li>
                 </div>
-              
+
             </div>
 
         </div>
@@ -328,7 +333,7 @@ body{
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-12 fb-cover-img background-gradient-dark">
             <img src="{{ page.profile_picture_url.cover_picture }}" style="height: 100%;width:100%;"
-            class="img-fluid"/>
+                 class="img-fluid"/>
         </div>
     </div>
     <div class="row ml-1 mr-1 pl-5 pr-5">
@@ -339,7 +344,7 @@ body{
         </div>
         <div class="col-md-8 ">
             <div class="profile-image-name text-white ">
-                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }} 
+                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }}
                      <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success">
                         <i class="fa fa-eye mr-2"></i>view</a>
             </div>
@@ -668,10 +673,11 @@ body{
                                         <span class="text_paragraph font-weight-bold small-txt">
                                             {{ page.contact_information.0.value }}
                                         </span>
-                                        {% if page.contact_information.0.value in not Null %}
-                            <a href="{{ page.contact_information.0.value }}" target="_blank" class="badge custom_badge text-dark">{{ page.contact_information }}</a>
+                            {% if page.contact_information.0.value in not Null %}
+                                <a href="{{ page.contact_information.0.value }}" target="_blank"
+                                   class="badge custom_badge text-dark">{{ page.contact_information }}</a>
                             {% else %}
-                                    <span>N/A</span>
+                                <span>N/A</span>
                             {% endif %}
                         </div>
 
@@ -746,17 +752,44 @@ body{
                                                          style="height: 70px;width:70px;border-radius: 50%;;"
                                                          class="img-fluid">
                                                     <div class="d-inline">
-                                                        {{ c.name }} 
+                                                        {{ c.name }}
                                                     </div>
-                                                    <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
-                                                    {% if c.username %}
-                                                        <div class="badge custom_badge">
-                                                            <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
-                                                               target="_blank">
-                                                                <i class="fa fa-link text-white"></i>
-                                                            </a>
+                                                    <!-- Addedd by osama start-->
+                                                    <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                        <span class="badge badge-light float-right mb-2">Score : {{ c.score }}</span>
+                                                        {% if c.username %}
+                                                            <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                                <div class="badge custom_badge">
+                                                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-link  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="badge custom_badge mt-2">
+                                                                    <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        {% elif c.id %}
+                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                            <div class="badge custom_badge">
+                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.id 'facebook' %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-link  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="badge custom_badge mt-2">
+                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.id %}"
+                                                                   target="_blank">
+                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- Addedd by osama end-->
                                                 </div>
                                                 <div id="_{{ c.id }}" class="collapse " aria-labelledby="headingOne"
                                                      data-parent="#accordionExample">
@@ -851,22 +884,22 @@ body{
                                     <p>GENERAL INFORMATION :</p>
                                     <p><span class="badge badge-primary mr-2 w-25">Name  : </span><span
                                             class="font-weight-bold"
-                                            style="font-size:12px;">{{ profile.name|default:"N/A" }}<span></p>
+                                            style="font-size:12px;">{{ profile.name|default:"N/A" }}</span></p>
                                     <p><span class="badge badge-primary mr-2 w-25">Birthday  : </span>
 
                                         <span class="font-weight-bold"
-                                              style="font-size:12px;">{{ profile.general_information.birthday|default:"N/A" }}<span>
+                                              style="font-size:12px;">{{ profile.general_information.birthday|default:"N/A" }}</span>
                                     </p>
                                     <p>
                                         <span class="badge badge-primary mr-2 w-25">Authro ID  : </span>
 
                                         <span class="font-weight-bold"
-                                              style="font-size:12px;">{{ profile.author_id|default:"N/A" }}<span>
+                                              style="font-size:12px;">{{ profile.author_id|default:"N/A" }}</span>
                                     </p>
                                     <p><span class="badge badge-primary mr-2 w-25">Gender  : </span>
 
                                         <span class="font-weight-bold"
-                                              style="font-size:12px;">{{ profile.general_information.gender|default:"N/A" }}<span>
+                                              style="font-size:12px;">{{ profile.general_information.gender|default:"N/A" }}</span>
                                     </p>
 
                                 </div>
@@ -884,12 +917,12 @@ body{
 
                                             <p>
                                                 <span class="badge badge-primary w-25 mr-2">Relegion  : </span> <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a>    </p>
-            
+
 
                                             </p>
-                                          
-                                           
-                                       
+
+
+
                                 </div>
                                 <!-- <div class="col-md-12" id="profile_chart" style="height: 300px;width:100%;">
                                 </div> -->
@@ -1059,7 +1092,8 @@ body{
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">Post Text</i>
+                                                    <i class="material-icon text_heading" style="font-size:20px;">Post
+                                                        Text</i>
                                                 </div>
                                             </div>
                                             {% if p.post_text %}
@@ -1087,12 +1121,12 @@ body{
                                             </div>
                                         {% else %}
                                             <div class="col-md-12">
-                                                    <i class="material-icon text_heading" style="font-size:20px;">Post
-                                                        Pictures ({{ p.picture_directory | length }})</i>
-                                                </div>
+                                                <i class="material-icon text_heading" style="font-size:20px;">Post
+                                                    Pictures ({{ p.picture_directory | length }})</i>
+                                            </div>
                                             <div class="col-md-12 text-center text-dark ">
-                                                    <p class="alert alert-info">This post has no picture</p>
-                                                </div>
+                                                <p class="alert alert-info">This post has no picture</p>
+                                            </div>
                                         {% endif %}
                                         <div class="row">
                                             <div class="col-md-12">
