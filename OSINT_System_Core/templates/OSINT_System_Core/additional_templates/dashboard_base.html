@@ -630,8 +630,9 @@
 
     $(document).ready(function () {
 
-
+      $('#spinner_icon').hide();
       $('#country_selector').on('change', function () {
+        $('#spinner_icon').show();
         country_name = this.value;
         console.log(country_name);
         $.ajax({
@@ -667,11 +668,13 @@
             }
 
 console.log(" %3FP(%3FP%23کبھی_کبھی%5B0-9%5D+)%5C/$/")
+$('#spinner_icon').hide();
           },
           error: function (error) {
 
             console.log(error)
             console.log("No Trends for country = " + country_name)
+            $('#spinner_icon').hide();
           },
         })
       });
@@ -979,11 +982,17 @@ console.log(" %3FP(%3FP%23کبھی_کبھی%5B0-9%5D+)%5C/$/")
           rgba(6, 17, 26, 1) 100%);
     }
 
-    .
+    
+    .background-gradient-dark {
+            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
   </style>
+
+
+
+
 </head>
 
-<body>
+<body class="background-gradient-dark">
   {% block content %}
   {% endblock  %}
   {##}

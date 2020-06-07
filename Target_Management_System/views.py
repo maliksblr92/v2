@@ -779,6 +779,9 @@ def convert_facebook_indirect_links_to_graph(data):
             for y in data:
                 if(item['mutual_close_associate']==y['mutual_close_associate']):
                     linkwith.add(y['username'])
+                    linkwith.add(y['username'])
+                    linkwith.add(y['username'])
+                    linkwith.add(y['username'])
 
             node['linkWith'] = list(linkwith)
 
