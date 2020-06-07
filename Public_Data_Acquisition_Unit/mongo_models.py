@@ -1414,13 +1414,19 @@ class Rabbit_Messages(Document):
         return Rabbit_Messages.objects(Q(created_on__gte=start) & Q(created_on__lte=end))
 
     @staticmethod
-    def get_top_messages(top=10,message_type='message'):
+    def get_top_messages_with_pid(top=10,message_type='message'):
 
         if(message_type == 'alert'):
             return Rabbit_Messages.objects(Q(message_type=message_type)).order_by('-id')[:top]
 
         else:
             return Rabbit_Messages.objects(Q(message_type=message_type) & Q(process_id=os.getpid())).order_by('-id')[:top]
+
+    @staticmethod
+    def get_top_messages(top=10, message_type='message'):
+
+        return Rabbit_Messages.objects(Q(message_type=message_type)).order_by('-id')[:top]
+
 
 class Ip_Logger(Document):
 

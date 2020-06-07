@@ -727,7 +727,13 @@ class Acquistion_Manager(object):
                 if(resp):
                     if(len(resp['data']['data'])>0):
                         if(resp['data']['data'][0]):
-                            logger.logged_response = resp['data']['data'][0]
+
+                            dict_temp = {}
+                            dict_temp.update(resp['data']['data'][0])
+                            dict_temp.update(resp['data']['IP_data'])
+
+                            logger.logged_response = dict_temp
+
                             logger.updated_on = datetime.datetime.utcnow()
                             logger.is_ip_logged = True
                             logger.save()
