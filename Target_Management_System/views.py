@@ -739,15 +739,16 @@ def convert_facebook_indirect_links_to_graph(data):
 
     for i,item in enumerate(data):
 
-        print(item)
+        # print(item)
         if(not username_exists(item['username'],n_data)):
-            node = {'name': item['username'],
+            node = {'hero': item['username'],
+                    'name': item['username'],
                     'value': 1,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": acq.get_picture_by_facebook_username(item['username']),
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": acq.get_picture_by_facebook_username(item['username']),
                     }
             linkwith = set()
 
@@ -763,13 +764,14 @@ def convert_facebook_indirect_links_to_graph(data):
 
         #print(item)
         if(not username_exists(item['mutual_close_associate'],n_data)):
-            node = {'name': item['mutual_close_associate'],
+            node = {'hero': item['mutual_close_associate'],
+                    'name': item['mutual_close_associate'],
                     'value': 0.5,
                     'children': [],
                     "linkWith": [],
-                    'collapsed': 'true',
-                    'fixed': 'false',
-                    "image": acq.get_picture_by_facebook_username(item['mutual_close_associate']),
+                    # 'collapsed': 'true',
+                    # 'fixed': 'false',
+                    "img": acq.get_picture_by_facebook_username(item['mutual_close_associate']),
                     }
 
             linkwith = set()
@@ -782,9 +784,20 @@ def convert_facebook_indirect_links_to_graph(data):
 
             n_data.append(node)
 
-
+            
+            dic={
+                "name":node['name'],
+                "hero":node['name'],
+                "img":"/static/images/anonymous_logo.jpg",
+                "children":n_data,
+            }
+    print("****************************************************************************************************")
+    print("****************************************************************************************************")
+    print("****************************************************************************************************")
+    print("****************************************************************************************************")
+    print("****************************************************************************************************")
     print(n_data)
-    return json.dumps(n_data)
+    return json.dumps(dic)
 
 
 def username_exists(username,n_data):
