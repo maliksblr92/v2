@@ -24,7 +24,7 @@
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
                     SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
                 <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
                     CRAWLING</a>
             </div>
@@ -114,6 +114,7 @@
 
                                 </div>
                                 <!-- new result section-->
+                                {% if result.data %}
                                 <div class="container  d-flex justify-content-center">
                                     <div class="container glowing_border" style="border-radius: 10px 10px 0px 0px;">
                                         <div class="row custom_content_header_text mb-3">
@@ -143,6 +144,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </form>

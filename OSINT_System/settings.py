@@ -24,13 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wk@z!^we^q_-l_j6h+l4xq%vweos9tc^(_w1j!wwi35ud2$g8*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 
 ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.27'
+FILE_SERVER = '192.168.18.33'
 
 # mongoDb setting variables for public access
 # db='OSINT_System'
@@ -229,8 +230,17 @@ HUEY = RedisHuey('my-app')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+STATIC_SERVER_BASE_PATH = 'http://{0}/osint_system'.format(FILE_SERVER)
+if(DEBUG):
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+else:
+    STATIC_URL = STATIC_SERVER_BASE_PATH+'/static_files/'
+    STATICFILES_DIRS = (os.path.join(STATIC_SERVER_BASE_PATH, "static_files"),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
+
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'

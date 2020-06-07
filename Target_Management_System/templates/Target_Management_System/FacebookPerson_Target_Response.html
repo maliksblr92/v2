@@ -22,7 +22,9 @@
             margin: 0 !important;
             padding: 0 !important;
             overflow-x: hidden !important;
+            font-family: 'Raleway' !important;
         }
+
 
         html {
             --scrollbarBG: #CFD8DC;
@@ -167,18 +169,7 @@
             background-size: cover;
         }
 
-        /*            .profile-image-wrapper {
-        height: 150px;
-        width: 100%;
-        margin-top: -120px;
-        border:5px solid #FEC134;
-        border-radius: 10px;
-        background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        }*/
+
         .profile-image-name {
             font-size: 25px;
             font-weight: bold;;
@@ -681,26 +672,45 @@
                                                     <img src="{{ c.media_directory }}"
                                                          style="height: 80px;width:80px;border-radius: 50%;;"
                                                          class="img-fluid">
-                                                         <div class="d-inline">
-                                                            {{ c.name }} 
-                                                        </div>
-                                                        <span class="badge  badge-primary float-right">Score : {{c.score}}</span>
-                                                    {% if c.username %}
-                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
-                                                            <div class="badge custom_badge">
-                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-link  fa-2x text-light"></i>
-                                                                </a>
+                                                    <div class="d-inline">
+                                                        {{ c.name }}
+                                                    </div>
+                                                    <!-- Addedd by osama start-->
+                                                    <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                        <span class="badge badge-light float-right mb-2">Score : {{ c.score }}</span>
+                                                        {% if c.username %}
+                                                            <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                                <div class="badge custom_badge">
+                                                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.username 'facebook' %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-link  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="badge custom_badge mt-2">
+                                                                    <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                            <div class="badge custom_badge mt-2">
-                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.username %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
-                                                                </a>
+                                                        {% elif c.id %}
+                                                            <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                                <div class="badge custom_badge">
+                                                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.id 'facebook' %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-link  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="badge custom_badge mt-2">
+                                                                    <a href="{% url 'Avatar_Management_Unit:send_message' c.id %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <!-- Addedd by osama end-->
                                                 </div>
                                                 <div id="_{{ c.id }}" class="collapse " aria-labelledby="custom1"
                                                      data-parent="#accordionExample">
@@ -797,31 +807,108 @@
                                     <span class="badge custom_badge text-left w-25 mr-2">Relegion  : </span><span
                                         class="font-weight-bold text_paragraph"
                                         style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}</span></p>
+                                    </p>
+                                    <span class="badge custom_badge text-left w-25 mr-2">View Profile  : </span>
+                                    <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a>    
+                                </p>
+
+
+
                                 </div>
                                 <div class="col-md-12">
+                                    <h3><i class="material-icon text_heading">Profile Events </i></h3>
+                                    <div class="row d-flex flex-row justify-content-center align-items-center">
+                                        {% for y in profile.events %}
+                                        <div class="col-md-1 mt-3 h-100 ">
+                                            <span class="badge badge-primary">Year : {{y.year}}</span>
+                                        </div>
+
+                                        <div class="col-md-11 h-100 mt-3">
+                                            <div class="row">
+                                                {% for event in y.events  %}
+                                            <div class="col-md-12 ">   <span class="badge ">  {{event.event|default:"N/A"}}</span>  <a class="badge badge-success" target="_blank" href="{{event.url}}"><i class="fa fa-eye  mr-2"></i>view</a> </div>
+                                               
+                                            {% endfor %}
+                                            </div>
+                                        </div> 
+                                    
+                                        {% empty %}
+                                        <p class="ml-3 text_paragraph">N/A </p>
+                                        {% endfor %}
+                                    </div>
+                               
+                                   
+                                   
+                                   
+                                </div>
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Overview Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_overview_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Friends Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_friends_summary|default:"N/A" }}</p>
 
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Intrest Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_interest_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Close Associates Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.profile_close_associates_summary|default:"N/A" }}</p>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <h3><i class="material-icon text_heading">Profile Behaviour Summary </i></h3>
                                     <p class="text_paragraph text-justify">{{ profile.behaviour|default:"N/A" }}</p>
                                 </div>
                             </div>
                         </div>
                         <!-- end profile tab  -->
+                              <!-- start checkins -->
+                              <div id="checkins" class="tab-pane fade pb-5">
+                                <div class="row">
+                                    {% for c in profile.check_ins %}
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row">
+                                                        <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+                                                            <!-- <img src="{{c.media_directory}}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
+                                                            <button class="btn btn-link text_heading" type="button"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#_{{ c.id }}" aria-expanded="true"
+                                                                    aria-controls="_{{ c.id }}">
+                                                                {{ c.name }}
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
+                                                            <div class="row text_heading">
+                                                                <div class="col-md-4">Date:</div>
+                                                                <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
+                                                                <div class="col-md-4">Location:</div>
+                                                                <div class="col-md-8 text_paragraph">{{ c.name }}</div>
+                                                                <div class="col-md-4">View:</div>
+                                                                <div class="col-md-8">
+                                                                    <a class="badge badge-sm custom_badge fa fa-search"
+                                                                       href="{{ c.url }}">view</a>
+                                                                </div>
+                                                                <div class="col-md-4">Linking Post:</div>
+                                                                <div class="col-md-8">
+                                                                    <a class="badge badge-sm custom_badge fa fa-search"
+                                                                       href="{{ c.linking_post }}">view</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- end checkin -->
                         <!-- start related tab   -->
                         <div id="related" class="tab-pane fade pb-5">
                             <div class="row">
@@ -1420,50 +1507,7 @@
                             </div>
                         </div>
                         <!-- end posts tab  -->
-                        <!-- start checkins -->
-                        <div id="checkins" class="tab-pane fade pb-5">
-                            <div class="row">
-                                {% for c in profile.check_ins %}
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <div class="row">
-                                                    <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-                                                        <!-- <img src="{{c.media_directory}}"
-                                             style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid"> -->
-                                                        <button class="btn btn-link text_heading" type="button"
-                                                                data-toggle="collapse"
-                                                                data-target="#_{{ c.id }}" aria-expanded="true"
-                                                                aria-controls="_{{ c.id }}">
-                                                            {{ c.name }}
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center">
-                                                        <div class="row text_heading">
-                                                            <div class="col-md-4">Date:</div>
-                                                            <div class="col-md-8 text_paragraph">{{ c.details.date }}</div>
-                                                            <div class="col-md-4">Location:</div>
-                                                            <div class="col-md-8 text_paragraph">{{ c.name }}</div>
-                                                            <div class="col-md-4">View:</div>
-                                                            <div class="col-md-8">
-                                                                <a class="badge badge-sm custom_badge fa fa-search"
-                                                                   href="{{ c.url }}">view</a>
-                                                            </div>
-                                                            <div class="col-md-4">Linking Post:</div>
-                                                            <div class="col-md-8">
-                                                                <a class="badge badge-sm custom_badge fa fa-search"
-                                                                   href="{{ c.linking_post }}">view</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <!-- end checkin -->
+                  
                     </div>
                     <!-- end tab content -->
                 </div>

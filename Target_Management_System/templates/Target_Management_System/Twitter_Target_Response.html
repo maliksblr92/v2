@@ -373,8 +373,8 @@
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
             <div class="row">
-                <div class="col-md-6 text-left"><span class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
-                        class="fab fa-twitter mr-2 "></i>Twitter Target Profile </span></div>
+                <div class="col-md-6 text-left"><a class="btn btn-primary btn-sm" href='https://twitter.com/{{ profile.username }}' target="_blank" style="margin-top:2px;"> <i
+                        class="fab fa-twitter mr-2 "></i>Twitter Target Profile </a></div>
 
                 <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
                     <li class="dropdown">
@@ -459,7 +459,7 @@
 
                         </div>
                         {% if tweets.website %}
-                            <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                            <a  class="text-primary"
                                class="twitter-follow-button text-primary nav-link ml-5 " data-show-count="false"
                                data-size="large"
                                data-show-screen-name="false" class="" data-dnt="true">Webiste @{{ tweets.website }}</a>
@@ -469,42 +469,42 @@
                     <div class="twPc-divStats">
                         <ul class="twPc-Arrange">
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="9.840 Tweet">
                                     <span class="twPc-StatLabel twPc-block">Tweets</span>
                                     <span class="twPc-StatValue">{{ tweets.tweets_count }}</span>
                                 </a>
                             </li>
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="885 Following">
                                     <span class="twPc-StatLabel twPc-block">Following</span>
                                     <span class="twPc-StatValue">{{ tweets.following_count }}</span>
                                 </a>
                             </li>
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="1.810 Followers">
                                     <span class="twPc-StatLabel twPc-block">Followers</span>
-                                    <span class="twPc-StatValue">{{ tweets.following_count }}</span>
+                                    <span class="twPc-StatValue">{{ tweets.follower_count }}</span>
                                 </a>
                             </li>
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="1.810 Followers">
                                     <span class="twPc-StatLabel twPc-block">Likes</span>
                                     <span class="twPc-StatValue">{{ tweets.likes_count }}</span>
                                 </a>
                             </li>
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="1.810 Followers">
                                     <span class="twPc-StatLabel twPc-block">joined</span>
                                     <span class="twPc-StatValue">{{ tweets.joined_twitter }}</span>
                                 </a>
                             </li>
                             <li class="twPc-ArrangeSizeFit">
-                                <a href="https://pbs.twimg.com/profile_images/970360541624651776/-3H5TyTo_400x400.jpg"
+                                <a  class="text-primary"
                                    title="1.810 Followers">
                                     <span class="twPc-StatLabel twPc-block">Location</span>
                                     <span class="twPc-StatValue">{{ tweets.location }}</span>
@@ -574,7 +574,14 @@
                         </div>
                         <div id="frequent_hashtags" class="collapse " aria-labelledby="headingOne"
                              data-parent="#accordionExample">
-                            <p class=" card-body "> {{ tweets.frequent_hashtags }}</p>
+                            <p class=" card-body "> 
+
+                                  {% for i in  tweets.frequent_hashtags  %}
+                                <span class="badge badge-primary"style="font-size:15px;">{{i}}</span>
+                                {% empty %}
+                                <span class=" badge badge-info ">No frequent hashtags avaliable </span>
+                                {% endfor %}
+                            </p>
                         </div>
                     </div>
 
@@ -583,13 +590,20 @@
                             <h2 class="mb-0">
                                 <button class="btn btn-link font-weight-bold" type="button" data-toggle="collapse"
                                         data-target="#sentiments" aria-expanded="true" aria-controls="sentiments">
-                                    Sentiments
+                               
+                                    Common Words
                                 </button>
                             </h2>
                         </div>
                         <div id="sentiments" class="collapse " aria-labelledby="headingOne"
                              data-parent="#accordionExample">
-                            <p class=" card-body "> {{ tweets.sentiments }}</p>
+                            <p class=" card-body ">
+                                {% for i in  tweets.common_words  %}
+                                <span class="badge badge-primary"style="font-size:15px;">{{i}}</span>
+                                {% empty %}
+                                <span class=" badge badge-info ">No common words  avaliable </span>
+                                {% endfor %}
+                            </p>
                         </div>
                     </div>
 
@@ -598,7 +612,7 @@
                             <h2 class="mb-0">
                                 <button class="btn btn-link font-weight-bold" type="button" data-toggle="collapse"
                                         data-target="#common_words" aria-expanded="true" aria-controls="common_words">
-                                    Common Words
+                                        Sentiments
                                 </button>
                             </h2>
                         </div>
@@ -697,7 +711,9 @@
 
 
                                             </div>
-                                            <div class="card-footer"></div>
+                                            <div class="card-footer text-center">
+                                                <a href="#" target="_blank"  class="badge badge-info p-1"><i class="fa fa-link text-white fa-2x" aria-hidden="true"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 {% endfor %}
