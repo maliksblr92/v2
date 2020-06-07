@@ -407,7 +407,7 @@ def getListv(dict):
 
 
 def profiles_similar_location(modelname):
-    x = {}
+    check = {}
     if (modelname.objects):
         locations = []
         c_loc = []
@@ -433,7 +433,20 @@ def profiles_similar_location(modelname):
         d = Counter(c_loc)
         x = dict(d)
 
-    return x
+        uniq = unique(c_loc)
+        for eachu in uniq:
+            for eachl in locations:
+                loc = eachl['location']
+                namel = eachl['name']
+                if (eachu == loc):
+                    if loc not in check:
+                        check[loc] = [namel]
+                    else:
+                        locval = check[loc]
+                        if namel not in locval:
+                            locval.append(namel)
+
+    return check
 
 
 def keywords_no_barplot(modelname):
@@ -553,6 +566,33 @@ def trends_type_freq(modelname):
     return x
 
 
+def get_suspicious_profiles(modelname):
+    suspicious_list = []
+    if modelname.objects:
+        ccp = common_categorization_profiles(modelname)
+        print(ccp)
+        if ccp:
+            label = ccp['labels']
+            offense = ccp['incitement to an offense']
+            pornography = ccp['pornography']
+            indecent = ccp['indecent']
+            contemptofcourt = ccp['contempt of court']
+            antistate = ccp['anti state']
+            for each, o, p, i, c, a in zip(label, offense, pornography, indecent, contemptofcourt, antistate):
+                if (o > 0 or p > 0 or i > 10 or c > 5 or a > 10):
+                    for each_target in modelname.objects:
+                        if (modelname == Instagram_Response_TMS):
+                            name = each_target.fullname
+                        else:
+                            name = each_target.name
+                        if (name == each):
+                            behaviour = each_target['behaviour']
+                            if (behaviour == 'Negative'):
+                                suspicious_list.append(each)
+
+    return unique(suspicious_list)
+
+
 class Instagram_Response_TMS_visualization:
     def content_categorization_piechart():
         return content_categorization_piechart(Instagram_Response_TMS)
@@ -565,6 +605,9 @@ class Instagram_Response_TMS_visualization:
 
     def circle_pack_common_sentiments():
         return common_sentiments_profiles(Instagram_Response_TMS)
+
+    def suspicious_profiles():
+        return get_suspicious_profiles(Instagram_Response_TMS)
 
 
 class Twitter_Response_TMS_visualization:
@@ -580,10 +623,13 @@ class Twitter_Response_TMS_visualization:
     def circle_pack_common_sentiments():
         return common_sentiments_profiles(Twitter_Response_TMS)
 
+    def suspicious_profiles():
+        return get_suspicious_profiles(Twitter_Response_TMS)
+
 
 class Facebook_Profile_Response_TMS_visualization:
-    """def profiles_with_similar_location():
-        return profiles_similar_location(Facebook_Profile_Response_TMS)"""
+    def profiles_with_similar_location():
+        return profiles_similar_location(Facebook_Profile_Response_TMS)
 
     def content_categorization_piechart():
         return content_categorization_piechart(Facebook_Profile_Response_TMS)
@@ -596,6 +642,9 @@ class Facebook_Profile_Response_TMS_visualization:
 
     def circle_pack_common_sentiments():
         return common_sentiments_profiles(Facebook_Profile_Response_TMS)
+
+    def suspicious_profiles():
+        return get_suspicious_profiles(Facebook_Profile_Response_TMS)
 
 
 # print(Facebook_Profile_Response_TMS_visualization.most_active_users_chart())
@@ -612,6 +661,9 @@ class Facebook_Group_Response_TMS_visualization:
     def circle_pack_common_sentiments():
         return common_sentiments_profiles(Facebook_Group_Response_TMS)
 
+    def suspicious_profiles():
+        return get_suspicious_profiles(Facebook_Group_Response_TMS)
+
 
 class Facebook_Page_Response_TMS_visualization:
     def content_categorization_piechart():
@@ -625,6 +677,9 @@ class Facebook_Page_Response_TMS_visualization:
 
     def circle_pack_common_sentiments():
         return common_sentiments_profiles(Facebook_Page_Response_TMS)
+
+    def suspicious_profiles():
+        return get_suspicious_profiles(Facebook_Page_Response_TMS)
 
 
 class Keybase_Response_TMS_visualization:

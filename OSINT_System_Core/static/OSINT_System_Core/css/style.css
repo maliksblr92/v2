@@ -1,5 +1,5 @@
 /* normal css  */
-
+{%load static %}
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -123,7 +123,7 @@
 }
 
 body {
-    background: url("./../../../../static/images/background_gradient.svg") no-repeat center center fixed;
+    background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -1042,41 +1042,4 @@ option {
 }
 .custom_content_header_text{
     font-size: 26px !important;
-}
-
-
-/***
-*
-* Author: Ahmed kabeer Shaukat
-*
-***/
-
-
-.no_list_style{
-list-style:none!important;
-}
-.custom_start_center_row{
-    display: flex!important;
-    justify-content: start!important;
-    align-items:center!important;
-    flex-direction: row!important;
-}
-.custom_start_center_column{
-    display: flex!important;
-    justify-content: start!important;
-    align-items:center!important;
-    flex-direction: column!important;
-}
-
-.custom_center_center_row{
-    display: flex!important;
-    justify-content: center!important;
-    align-items:center!important;
-    flex-direction: row!important;
-}
-.custom_center_center_column{
-    display: flex!important;
-    justify-content: center!important;
-    align-items:center!important;
-    flex-direction: column!important;
 }

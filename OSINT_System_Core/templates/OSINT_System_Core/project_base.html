@@ -16,12 +16,13 @@
     {% block head_styles %}
     {% endblock %}
     <!-- loading css with link does not evaluate static tag -->
-    <link rel="stylesheet" href="{% static 'OSINT_System_Core/css/style.css' %}"/>
+
     <script src="{% static 'django_eventstream/json2.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
     <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-
+    {% include 'OSINT_System_Core/project_base_sub_template_for_css.html' %}
 
 </head>
 <style>
