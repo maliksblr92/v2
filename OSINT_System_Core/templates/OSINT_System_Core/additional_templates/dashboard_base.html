@@ -42,20 +42,7 @@
     <script src="{% static 'django_eventstream/json2.js' %}"></script>
     <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
     <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
-            background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            margin: 0 !important;
-            padding: 0 !important;
-            font-family: 'Raleway' !important;
-        }
-
-    </style>
+  
     <script>
         //var es = new ReconnectingEventSource('/events/');
         //es.addEventListener('reddit_trends', function (e) {
@@ -481,7 +468,7 @@
 
     <script>
 
-
+      $('#spinner_icon').hide();
         /*################################################################ AUTO REFRESH WORLD WIDE TRENDS################################################################*/
 
 
@@ -498,7 +485,7 @@
                 },
                 success: function (e) {
                     console.log(e)
-                    len = e.length
+                   var  len = e.length
                     $('#trends_by_world').empty();
                     for (var x = 0; x < len; x++) {
 
@@ -547,9 +534,11 @@
                 // },
                 success: function (data) {
                     var html = ''
-                    for (var x = 0; x < len; x++) {
+                
+                    for (var x = 0; x < data.top_Trends[0].length; x++) {
                         $('#trends_by_google').empty();
                         for (var x = 0; x < len; x++) {
+                          console.log(x);
                             console.log(data.top_Trends[0][x])
                             var html = '<div class="col-md-12 mt-1"><div class="row"><div class="col-md-3 d-flex flex-column justify-content-center align-items-center border" style="border-radius:5px;"><span class="text-white font-weight-bold d-flex flex-row justify-content-center align-items-center"style="font-size:11px;">N/A</span></div><div class="col-md-9 border border-white m-0  social_posts_post custom_center"style="overflow: hidden;"><a class="text-white font-weight-bold nav-link" style="font-size: 12px;" href="' + data.top_Trends[0][x].article_link + '">' + data.top_Trends[0][x].article_name + '</a></div></div></div>';
                             $("#trends_by_google").append(html);
@@ -580,8 +569,9 @@
 
         $(document).ready(function () {
 
-
+          
             $('#country_selector').on('change', function () {
+            $('#spinner_icon').show();
                 country_name = this.value;
                 console.log(country_name);
                 $.ajax({
@@ -616,12 +606,14 @@
                             console.log(html)
                         }
 
-                        console.log(" %3FP(%3FP%23کبھی_کبھی%5B0-9%5D+)%5C/$/")
+                        console.log(" %3FP(%3FP%23کبھی_کبھی%5B0-9%5D+)%5C/$/");
+                        $('#spinner_icon').hide();
                     },
                     error: function (error) {
 
                         console.log(error)
-                        console.log("No Trends for country = " + country_name)
+                        console.log("No Trends for country = " + country_name);
+                        $('#spinner_icon').hide();
                     },
                 })
             });
@@ -903,11 +895,13 @@
             rgba(6, 17, 26, 1) 100%);
         }
 
-        .
+        .background-gradient-dark {
+          background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+      }
     </style>
 </head>
 
-<body>
+<body class="background-gradient-dark">
 {% block content %}
 {% endblock %}
 {##}
