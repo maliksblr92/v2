@@ -60,6 +60,7 @@ urlpatterns = [
     path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('logged_ips/', views.Logged_Ips.as_view(), name='logged_ips'),
     path('delete_ips/<str:obj_id>/', views.Delete_Ips.as_view(), name='delete_ips'),
+    path('views_ip_logger_resp/<str:latlons>/', views.View_Logged_Ip_Response.as_view(), name='views_ip_logger_resp'),
 
 
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),

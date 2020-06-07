@@ -60,3 +60,8 @@ def img_count(value):
     length=len(value)
     print(length)
     return length
+
+@register.filter(name='split_latlons')
+def split_latlons(latlons):
+
+    return latlons.replace(',','_')
