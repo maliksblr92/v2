@@ -141,17 +141,29 @@
 
                                                                                 <div class="col-md-12  m-0 mt-4 p-0">
 
-                                                                                    <i class="fas fa-plus mr-2"></i>ADD
-                                                                                    </a>
+                                                                                  <a class="btn btn-sm btn-primary" href="{% url 'Target_Management_System:tms_marktarget' %}">Add Social Target</a>
+                                                                                    <input type="hidden" value="{{ portfolio_id }}"
+                                                                                id="form_name" name="portfolio_id"/>
+                                                                                <input type="hidden" value="address"
+                                                                                id="form_name"
+                                                                                name="extra_type"/>
                                                                                 </div>
 
                                                                             </div>
+
+                                                                        
+                                                                        <div class="row">
+                                                                            {% for i in social_targets %}
+                                                                            {{i}}
+                                                                            {% empty %}
+                                                                            <p>No address </p>
+                                                                            {% endfor %}
                                                                         </div>
-                                                                        <input type="hidden" value="address"
-                                                                               id="form_name"
-                                                                               name="extra_type"/>
-                                                                        <input type="hidden" value="{{ portfolio_id }}"
-                                                                               id="form_name" name="portfolio_id"/>
+                                                                        </div>
+                                                                        
+                                                                      
+
+
                                                                         <div class="row input_wrapper_row">
                                                                             <div class="col-md-6"></div>
                                                                             <div class="col-md-4"></div>
