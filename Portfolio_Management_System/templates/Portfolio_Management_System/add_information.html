@@ -1,693 +1,310 @@
-{% extends 'OSINT_System_Core/tso_base.html' %}
-{% load static %}
-{% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_link.css' %}"/>
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-{% endblock %}
-{% block smallnavbar %}
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 ">
-            <div class="row">
-                <div class="col-md-3 m-0 p-0  border-bottom-left"><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left"
-                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
-                <div class="col-md-3 m-0 p-0  "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
-                </div>
-                <div class="col-md-3 m-0 p-0 secondnavactive "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
-                <div class="col-md-3 m-0 p-0  border-bottom-right"><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right"
-                        href="/pms/archive">Archive</a></div>
-            </div>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
-{% endblock %}
-{% block belly %}
-    <style>
-        .custom_label {
-            border: 1px solid white;
-            border-radius: 0px;
-            background: transparent !important;
-            padding-left: 5px;
-            border-radius: 5px;
-        }
+{% extends 'OSINT_System_Core/tso_base.html' %} {% load static %} {% block head_dep %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_link.css' %}" />
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}"> {% endblock %} {% block smallnavbar %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8 ">
+		<div class="row">
+			<div class="col-md-3 m-0 p-0  border-bottom-left"><a class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left" href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+			<div class="col-md-3 m-0 p-0  "><a class="nav-link secondmidnavmenu w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:explore' %}">Explore</a></div>
+			<div class="col-md-3 m-0 p-0 secondnavactive "><a class="nav-link secondmidnavmenu w-100 h-100 text-white" href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
+			<div class="col-md-3 m-0 p-0  border-bottom-right"><a class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right" href="/pms/archive">Archive</a></div>
+		</div>
+	</div>
+	<div class="col-md-2"></div>
+</div> {% endblock %} {% block belly %}
+<style>
+.custom_label {
+	border: 1px solid white;
+	border-radius: 0px;
+	background: transparent !important;
+	padding-left: 5px;
+	border-radius: 5px;
+}
 
-        .input_text {
-            width: 200px;
-            font-size: 12px;
-            letter-spacing: 4px;
-            font-weight: bold;
-            color: white;
-        }
+.input_text {
+	width: 200px;
+	font-size: 12px;
+	letter-spacing: 4px;
+	font-weight: bold;
+	color: white;
+}
 
-        input {
-            background-color: transparent !important;
-            border-radius: 10px 5px 5px 10px !important;
-            color: white !important;
-        }
+input {
+	background-color: transparent !important;
+	border-radius: 10px 5px 5px 10px !important;
+	color: white !important;
+}
 
-        .radio_btns {
-            height: 60px;
-            width: 160px;
-            background: transparent;
-            border: 1px solid white;
-            color: white;
-            background: linear-gradient(to right, #283e51, #1cb5e0);
-        }
+.radio_btns {
+	height: 60px;
+	width: 160px;
+	background: transparent;
+	border: 1px solid white;
+	color: white;
+	background: linear-gradient(to right, #283e51, #1cb5e0);
+}
 
-        .custom_pills {
-            /*background: linear-gradient(to right, #283e51, #1cb5e0);*/
-            background: linear-gradient(
-                    90deg,
-                    rgba(0, 113, 188, 20%) 0%,
-                    rgba(65, 130, 173, 29%) 50%,
-                    rgba(0, 0, 0, 40%) 100%
-            );
-            text-align: center;
-        }
+.custom_pills {
+	/*background: linear-gradient(to right, #283e51, #1cb5e0);*/
+	background: linear-gradient(90deg, rgba(0, 113, 188, 20%) 0%, rgba(65, 130, 173, 29%) 50%, rgba(0, 0, 0, 40%) 100%);
+	text-align: center;
+}
 
-        .custom_pills a {
-            text-decoration: none;;
-            font-weight: bolder;
-        }
+.custom_pills a {
+	text-decoration: none;
+	;
+	font-weight: bolder;
+}
 
-        #submit {
-            background: rgb(24, 72, 116);
-            background: linear-gradient(
-                    93deg,
-                    rgba(24, 72, 116, 1) 0%,
-                    rgba(6, 17, 26, 1) 100%
-            );
-        }
-    </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12  ">
-                <div class="w-100 h-100" id="content_div">
-                    <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
-                        <p class="card_header_text">Add Information</p>
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 custom_main_background">
-                        <div class="">
-                            <!-- RPW FOR SOCIAL MEDIA -->
-                            <!-- Second row-->
-                            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-                                <div class="card-body custom_inner_background inner_form_margin_radius">
-                                    <div class="row">
-                                        <div class="col-md-12 m-0 p-0 ">
-
-
-                                            <div class="container-fluid">
-                                                <ul class="nav nav-pills row">
-
-                                                    <li class="custom_card_body_background btn active col-md-3 glowing_border">
-                                                        <a class="text-white " data-toggle="pill" href="#social">Add
-                                                            Social
-                                                            Targets </a>
-                                                    </li>
-                                                    <li class="custom_card_body_background btn col-md-3 glowing_border">
-                                                        <a class="text-white " data-toggle="pill" href="#adresses">Add
-                                                            Addresses </a>
-                                                    </li>
-                                                    <li class="custom_card_body_background btn col-md-3 glowing_border">
-                                                        <a class="text-white " data-toggle="pill" href="#description">Add
-                                                            Description</a>
-                                                    </li>
-                                                    <li class="custom_card_body_background btn col-md-3 glowing_border">
-                                                        <a class="text-white " data-toggle="pill" href="#phones">Add
-                                                            Phones</a>
-                                                    </li>
-
-                                                </ul>
-                                                <!-- START OF TAB CONTENT DIV  -->
-                                                <div class="tab-content">
-                                                    <!-- START SOCIAL TAB -->
-                                                    <div id="social" class="tab-pane fade in active show ">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-12 m-0 p-0">
-                                                                    <form name="portfolio_create_form"
-                                                                          id="portfolio_create_form"
-                                                                          action="{% url 'Portfolio_Management_System:add_information' %}"
-                                                                          method="POST">
-                                                                        {% csrf_token %}
-                                                                        <div class="card-body m-0 p-0 ">
-                                                                            <div class="row  ">
-
-                                                                                <div class="col-md-12  m-0 mt-4 p-0">
-
-                                                                                  <a class="btn btn-sm btn-primary" href="{% url 'Target_Management_System:tms_marktarget' %}">Add Social Target</a>
-                                                                                    <input type="hidden" value="{{ portfolio_id }}"
-                                                                                id="form_name" name="portfolio_id"/>
-                                                                                <input type="hidden" value="address"
-                                                                                id="form_name"
-                                                                                name="extra_type"/>
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        
-                                                                        <div class="row">
-                                                                            {% for i in social_targets %}
-                                                                            {{i}}
-                                                                            {% empty %}
-                                                                            <p>No address </p>
-                                                                            {% endfor %}
-                                                                        </div>
-                                                                        </div>
-                                                                        
-                                                                      
-
-
-                                                                        <div class="row input_wrapper_row">
-                                                                            <div class="col-md-6"></div>
-                                                                            <div class="col-md-4"></div>
-                                                                            <div class="col-md-2">
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="row p-2"
-                                                                     style="width: 100% !important; height:500px;overflow-y:auto;">
-                                                                    {% for target in social_targets %}
-                                                                        <div class="col-md-4">
-                                                                            <!-- inside CaRD DIV-->
-                                                                            <div class="row mr-2">
-                                                                                <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center"
-                                                                                     style="border-radius:15px 0px 0px 15px;">
-                                <span class="rotate custom_label glowing_border" role="button"
-                                      style="font-size:11px; margin-top: auto; margin-bottom: auto;">
-                                  <i class="fa fa-user text-white mr-2">{{ target.username }}</i>
-                                </span>
-                                                                                    <button type="button"
-                                                                                            class="btn btn-primary btn_link custom_icons"
-                                                                                            id="btn_link" data-id=""
-                                                                                            data-toggle=""
-                                                                                            data-target="#">
-                                                                                        <i class="fa fa-trash"></i>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <!-- Div Right part-->
-                                                                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center"
-                                                                                     style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-
-                                                                                    <ul>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.name }}</li>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.created_on }}</li>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.user_id }}</li>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.target_type }}</li>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.is_expired }}</li>
-                                                                                        <li style="font-size:12px;"
-                                                                                            class="text-white ">{{ target.GTR.website.name }}</li>
-                                                                                    </ul>
-
-
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    {% endfor %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
+#submit {
+	background: rgb(24, 72, 116);
+	background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+}
+.custom_btn_{
+    background: rgb(24, 72, 116);
+	background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+}
+</style>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12  ">
+			<div class="w-100 h-100" id="content_div">
+				<div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+					<p class="card_header_text">Add Information</p>
+				</div>
+				<div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 custom_main_background">
+					<div class="">
+						<div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+							<div class="card-body custom_inner_background inner_form_margin_radius">
+								<div class="row">
+									<div class="col-md-12 m-0 p-0 ">
+										<div class="container-fluid">
+											<ul class="nav nav-pills row">
+												<li class="custom_card_body_background btn active col-md-3 glowing_border"><a class="text-white " data-toggle="pill" href="#social">Add
+                                                        Social
+                                                        Targets </a></li>
+												<li class="custom_card_body_background btn col-md-3 glowing_border"><a class="text-white " data-toggle="pill" href="#adresses">Add
+                                                        Addresses </a></li>
+												<li class="custom_card_body_background btn col-md-3 glowing_border"><a class="text-white " data-toggle="pill" href="#description">Add
+                                                        Description</a></li>
+												<li class="custom_card_body_background btn col-md-3 glowing_border"><a class="text-white " data-toggle="pill" href="#phones">Add
+                                                        Phones</a></li>
+											</ul>
+											<div class="tab-content">
+												<div id="social" class="tab-pane fade in active show ">
+													<div class="container-fluid">
+														<div class="row">
+															<div class="col-md-12 m-0 p-0">
+																<form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST"> {% csrf_token %}
+																	<div class="card-body m-0 p-0 ">
+																		<div class="row  ">
+																			<div class="col-md-12  m-0 mt-4 p-0"><a  class="btn btn-sm  text-white  custom_btn_" href="{% url 'Target_Management_System:tms_marktarget_portfolio' portfolio_id=portfolio_id %}">Add
+                                                                                    Social Target</a>
+																				<input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+																				<input type="hidden" value="address" id="form_name" name="extra_type" />
+																			</div>
+																		</div>
+																</form>
+																</div>
+																<div class="row p-2" style="width: 100% !important; height:500px;overflow-y:auto;"> {% for target in social_targets %}
+																	<div class="col-md-4">
+																		<div class="row mr-2">
+																			<div class="col-md-2 custom_btn_ glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;"><span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;"><i
+                                                                                    class="fa fa-user text-white mr-2">{{ target.username }}</i></span>
+																				<button type="button" class="btn text-white btn_link custom_icons" id="btn_link" data-id="" data-toggle="" data-target="#"><i class="fa fa-trash"></i></button>
+																			</div>
+																			<div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center background" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+																				<ul>
+																					<li style="font-size:12px;" class="text-white "> {{ target.name }}</li>
+																					<li style="font-size:12px;" class="text-white "> {{ target.created_on }}</li>
+																					<li style="font-size:12px;" class="text-white "> {{ target.user_id }}</li>
+																					<li style="font-size:12px;" class="text-white "> {{ target.target_type }}</li>
+																					<li style="font-size:12px;" class="text-white "> {{ target.is_expired }}</li>
+																					<li style="font-size:12px;" class="text-white "> {{ target.GTR.website.name }}</li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div> {% endfor %} </div>
+															</div>
+														</div>
                                                     </div>
-                                                    <!-- END SOCIAL TAB -->
+                                                    </div>
+                                                    <!-- end of social address tab  -->
 
-
-                                                    <!-- START ADDRESES TAB -->
-                                                    <div id="adresses" class="tab-pane fade mt-2">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-12 m-0 p-0">
-
-                                                                    <div class="card-body m-0 p-0 main_card">
-                                                                        <div class="row">
-                                                                            <form name="portfolio_create_form"
-                                                                                  id="portfolio_create_form"
-                                                                                  class="w-100"
-                                                                                  action="{% url 'Portfolio_Management_System:add_information' %}"
-                                                                                  method="POST">
-                                                                                {% csrf_token %}
-                                                                                <div class="row">
-                                                                                    <div class="col-md-8">
-                                                                                        <div class="row input-group mt-4 mb-3">
-                                                                                            <div class="col-md-3 pr-0 input-group-prepend">
-                                                                                            <span class="custom_label_input_field"
-                                                                                                  style="font-size:13px;letter-spacing:0.1em;
+                                                    <!-- start of addresse tabs  -->
+													<div id="adresses" class="tab-pane fade mt-2">
+														<div class="container-fluid">
+															<div class="row">
+																<div class="col-md-12 m-0 p-0">
+																	<div class="card-body m-0 p-0 main_card">
+																		<div class="row">
+																			<form name="portfolio_create_form" id="portfolio_create_form" class="w-100" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST"> {% csrf_token %}
+																				<div class="row">
+																					<div class="col-md-8">
+																						<div class="row input-group mt-4 mb-3">
+																							<div class="col-md-3 pr-0 input-group-prepend"><span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                                                                                 opacity:0.9; padding:9px 9px 0 10px;">Adresses
-                                                                                            </span>
-                                                                                            </div>
-                                                                                            <input type="text"
-                                                                                                   class="col-md-9 form-control custom_input_field"
-                                                                                                   required="required"
-                                                                                                   id="author_id"
-                                                                                                   name="prime_value"/>
-                                                                                        </div>
-
-                                                                                        {#                                                                                        <div class="">#}
-                                                                                        {#                                                                                            <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center"#}
-                                                                                        {#                                                                                                   for="addresses">#}
-                                                                                        {#                                                                                                <span class="custom_label_input_field w-25 text-center glowing_border">Adresses</span>#}
-                                                                                        {#                                                                                                <input type="text"#}
-                                                                                        {#                                                                                                       class="col-md-9 form-control"#}
-                                                                                        {#                                                                                                       required="required"#}
-                                                                                        {#                                                                                                       id="author_id"#}
-                                                                                        {#                                                                                                       name="prime_value"/>#}
-                                                                                        {#                                                                                            </label>#}
-                                                                                        {#                                                                                        </div>#}
+                                                                                            </span></div>
+																							<input type="text" class="col-md-9 form-control custom_input_field" required="required" id="author_id" name="prime_value" />
+																						</div>
                                                                                     </div>
-                                                                                    <div class="col-md-2"></div>
-                                                                                    <div class="col-md-2"
-                                                                                         style="margin: auto;">
-                                                                                        <div class="">
-                                                                                            <input type="hidden"
-                                                                                                   value="address"
-                                                                                                   id="form_name"
-                                                                                                   name="extra_type"/>
-                                                                                            <input type="hidden"
-                                                                                                   value="{{ portfolio_id }}"
-                                                                                                   id="form_name"
-                                                                                                   name="portfolio_id"/>
-                                                                                            <div class="row input_wrapper_row">
-                                                                                                <div class="col-md-12">
-                                                                                                    <input type="submit"
-                                                                                                           class="btn glowing_border font-weight-bold btn-sm w-100 text-white"
-                                                                                                           value="Add"
-                                                                                                           name="submit"
-                                                                                                           id="submit">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row p-2">
-                                                                        {% for address in addresses %}
-                                                                            <div class="col-md-4">
-                                                                                <!-- inside CaRD DIV-->
-                                                                                <div class="row mr-2">
-                                                                                    <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center"
-                                                                                         style="border-radius:15px 0px 0px 15px;">
-                                  <span class="rotate custom_label glowing_border" role="button"
-                                        style="font-size:11px; margin-top: auto; margin-bottom: auto;">
-                                    <i class="fa fa-user text-white mr-2">Target Address</i>
-                                  </span>
-                                                                                        <button type="button"
-                                                                                                class="btn btn-primary btn_link custom_icons"
-                                                                                                id="btn_link"
-                                                                                                data-id="5eb8742a31cbda0214058eff"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#linkto_portfolio">
-                                                                                            <i class="fa fa-trash"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                    <!-- Div Right part-->
-                                                                                    <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center"
-                                                                                         style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-                                                                            <span style="font-size:12px;"
-                                                                                  class="text-white ">  {{ address }}</span>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                        {% endfor %}
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                                 </div>
+																				<div class="col-md-2"></div>
+																				<div class="col-md-2" style="margin: auto;">
+																					<div class="">
+																						<input type="hidden" value="address" id="form_name" name="extra_type" />
+																						<input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+																						<div class="row input_wrapper_row">
+																							<div class="col-md-12">
+																								<input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100 text-white" value="Add" name="submit" id="submit">
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																		</div>
+																		</form>
+																	</div>
+																</div>
+																<div class="row p-2"> {% for address in addresses %}
+																	<div class="col-md-4">
+																		<div class="row mr-2">
+																			<div class="col-md-2 custom_btn_ glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;"><span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;"><i
+                                                                                        class="fa fa-user text-white mr-2">Target
+                                                                                        Address</i></span>
+																				<button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="5eb8742a31cbda0214058eff" data-toggle="modal" data-target="#linkto_portfolio"><i class="fa fa-trash"></i></button>
+																			</div>
+																			<div class="col-md-10 glowing_border background d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;"><span style="font-size:12px;" class="text-white ">
+                                                                                    {{ address }}</span></div>
+																		</div>
+																	</div> {% endfor %} </div>
+															</div>
+														</div>
                                                     </div>
-                                                    <!-- END ADDRESSES TAB -->
-
-                                                    <!-- START DESCRIPTION TABS  -->
-                                                    <div id="description" class="tab-pane fade">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <form name="portfolio_create_form"
-                                                                          name="add_description_form"
-                                                                          id="add_description_form"
-                                                                          action="{% url 'Portfolio_Management_System:add_information' %}"
-                                                                          method="POST">
-                                                                        {% csrf_token %}
-                                                                        <input type="hidden"
-                                                                               value="add_description_form"
-                                                                               name="form_name" id="form_name"
-                                                                               value="form_name"/>
-
-                                                                        <div class="row">
-                                                                            <div class="col-md-8">
-                                                                                <div class="row input-group mt-4 mb-3">
-                                                                                    <div class="col-md-3 pr-0 input-group-prepend">
-                                                                                            <span class="custom_label_input_field"
-                                                                                                  style="font-size:13px;letter-spacing:0.1em;
+                                                    <!-- end ob addresses tabs  -->
+                                                
+                                                    
+                                                    <!-- start of description tab  -->
+												<div id="description" class="tab-pane fade">
+													<div class="container-fluid">
+														<div class="row">
+															<div class="col-md-12">
+																<form name="portfolio_create_form" name="add_description_form" id="add_description_form" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST"> {% csrf_token %}
+																	<input type="hidden" value="add_description_form" name="form_name" id="form_name" value="form_name" />
+																	<div class="row">
+																		<div class="col-md-8">
+																			<div class="row input-group mt-4 mb-3">
+																				<div class="col-md-3 pr-0 input-group-prepend"><span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                                                                                 opacity:0.9; padding:9px 9px 0 10px;">Title
-                                                                                            </span>
-                                                                                    </div>
-                                                                                    <input type="text"
-                                                                                           class="col-md-9 form-control custom_input_field"
-                                                                                           required="required"
-                                                                                           id="author_id"
-                                                                                           name="title"/>
-                                                                                </div>
-
-
-                                                                                {#                                                                                <div class="">#}
-                                                                                {#                                                                                    <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center"#}
-                                                                                {#                                                                                           for="addresses">#}
-                                                                                {#                                                                                        <span class="newlabeldesign glowing_border">Title</span>#}
-                                                                                {#                                                                                        <input type="text"#}
-                                                                                {#                                                                                               class="col-md-9 form-control custom_input_field"#}
-                                                                                {#                                                                                               required="required"#}
-                                                                                {#                                                                                               id="author_id"#}
-                                                                                {#                                                                                               name="title"/>#}
-                                                                                {#                                                                                    </label>#}
-                                                                                {#                                                                                </div>#}
-
-                                                                                <div class="row input-group mt-4 mb-3">
-                                                                                    <div class="col-md-3 pr-0 input-group-prepend">
-                                                                                            <span class="custom_label_input_field"
-                                                                                                  style="font-size:13px;letter-spacing:0.1em;
+                                                                                    </span></div>
+																				<input type="text" class="col-md-9 form-control custom_input_field" required="required" id="author_id" name="title" />
+																			</div>
+                                                                        </div>
+                                                                        
+																		<div class="row input-group mt-4 mb-3">
+																			<div class="col-md-3 pr-0 input-group-prepend"><span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                                                                                 opacity:0.9; padding:9px 9px 0 10px;">Description
-                                                                                            </span>
-                                                                                    </div>
-                                                                                    <textarea type="text"
-                                                                                              class="col-md-9 form-control custom_input_field"
-                                                                                              id="description_value"
-                                                                                              name="prime_value"
-                                                                                              rows="2"
-                                                                                              required="required"></textarea>
-                                                                                </div>
-                                                                                {#                                                                                <div class="mb-2">#}
-                                                                                {#                                                                                    <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center"#}
-                                                                                {#                                                                                           for="addresses">#}
-                                                                                {#                                                                                        <span class="newlabeldesign glowing_border">Description</span>#}
-                                                                                {#                                                                                        <textarea type="text"#}
-                                                                                {#                                                                                                  class="col-md-9 form-control custom_input_field"#}
-                                                                                {#                                                                                                  id="description_value"#}
-                                                                                {#                                                                                                  name="prime_value"#}
-                                                                                {#                                                                                                  rows="2"#}
-                                                                                {#                                                                                                  required="required"></textarea>#}
-                                                                                {#                                                                                    </label>#}
-                                                                                {#                                                                                </div>#}
-                                                                            </div>
-                                                                            <div class="col-md-2"></div>
-                                                                            <div class="col-md-2" style="margin: auto;">
-                                                                                <div class="">
-                                                                                    <input type="hidden"
-                                                                                           value="description"
-                                                                                           id="form_name"
-                                                                                           name="extra_type"/>
-                                                                                    <input type="hidden"
-                                                                                           value="{{ portfolio_id }}"
-                                                                                           id="form_name"
-                                                                                           name="portfolio_id"/>
-                                                                                    <div class="row input_wrapper_row">
-                                                                                        <div class="col-md-12">
-                                                                                            <input type="submit"
-                                                                                                   class="btn glowing_border font-weight-bold btn-sm w-100  text-white"
-                                                                                                   value="Add"
-                                                                                                   name="submit"
-                                                                                                   id="submit">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                    <div class="row p-2">
-                                                                        {% for description in descriptions %}
-                                                                            <div class="col-md-4">
-                                                                                <!-- inside CaRD DIV-->
-                                                                                <div class="row mr-2">
-                                                                                    <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center"
-                                                                                         style="border-radius:15px 0px 0px 15px;">
-                                  <span class="rotate custom_label glowing_border" role="button"
-                                        style="font-size:14px; margin-top: auto; margin-bottom: auto;">
-                                    <i class="fa fa-user text-white mr-2">Description</i>
-                                  </span>
-                                                                                        <button type="button"
-                                                                                                class="btn btn-primary btn_link custom_icons"
-                                                                                                id="btn_link"
-                                                                                                data-id="5eb8742a31cbda0214058eff"
-                                                                                                data-toggle="modal"
-                                                                                                data-target="#linkto_portfolio">
-                                                                                            <i class="fa fa-trash"></i>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                    <!-- Div Right part-->
-                                                                                    <div class="col-md-10 glowing_border d-flex flex-column justify-content-center align-items-start"
-                                                                                         style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-                                                                                        <div style="font-size:12px;"
-                                                                                             class="text-white ">
-                                                                                            Title: {{ description.title }}</div>
-                                                                                        <div style="font-size:12px;"
-                                                                                             class="text-white ">
-                                                                                            Description
-                                                                                            : {{ description.description }}</div>
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                        {% endfor %}
+                                                                                    </span></div>
+																			<textarea type="text" class="col-md-9 form-control custom_input_field" id="description_value" name="prime_value" rows="2" required="required"></textarea>
+																		</div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END DESCRIPTION TABS  -->
-
-                                                    <!-- START PHONES TAB -->
-                                                    <div id="phones" class="tab-pane fade">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-md-12 m-0 p-0">
-                                                                    <div class="card-body m-0 p-0 main_card">
-                                                                        <div class="row">
-                                                                            <form name="portfolio_create_form"
-                                                                                  id="portfolio_create_form"
-                                                                                  class="w-100"
-                                                                                  action="{% url 'Portfolio_Management_System:add_information' %}"
-                                                                                  method="POST">
-                                                                                {% csrf_token %}
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-8">
-                                                                                        <div class="row input-group mt-4 mb-3">
-                                                                                            <div class="col-md-3 pr-0 input-group-prepend">
-                                                                                            <span class="custom_label_input_field"
-                                                                                                  style="font-size:13px;letter-spacing:0.1em;
-                                                                                                opacity:0.9; padding:9px 9px 0 10px;">Phone
-                                                                                            </span>
-                                                                                            </div>
-                                                                                            <input type="text"
-                                                                                                   class="col-md-9 form-control custom_input_field"
-                                                                                                   id="author_id"
-                                                                                                   name="prime_value"
-                                                                                                   required=""/>
-                                                                                        </div>
-                                                                                        {#                                                                                        <div class="">#}
-                                                                                        {#                                                                                            <label class="d-flex p-0 m-0 flex-row justify-content-start align-items-center"#}
-                                                                                        {#                                                                                                   for="phone">#}
-                                                                                        {#                                                                                                <span class="newlabeldesign glowing_border">  Phone</span>#}
-                                                                                        {#                                                                                                <input type="text"#}
-                                                                                        {#                                                                                                       class="col-md-9 form-control custom_input_field"#}
-                                                                                        {#                                                                                                       id="author_id"#}
-                                                                                        {#                                                                                                       name="prime_value"#}
-                                                                                        {#                                                                                                       required=""/>#}
-                                                                                        {#                                                                                            </label>#}
-                                                                                        {#                                                                                        </div>#}
-                                                                                    </div>
-                                                                                    <div class="col-md-2"></div>
-                                                                                    <div class="col-md-2"
-                                                                                         style="margin: auto;">
-                                                                                        <div class="">
-                                                                                            <input type="hidden"
-                                                                                                   value="phones"
-                                                                                                   id="form_name"
-                                                                                                   name="extra_type"/>
-                                                                                            <input type="hidden"
-                                                                                                   value="{{ portfolio_id }}"
-                                                                                                   id="form_name"
-                                                                                                   name="portfolio_id"/>
-                                                                                            <div class="row input_wrapper_row">
-                                                                                                <div class="col-md-12">
-                                                                                                    <input type="submit"
-                                                                                                           class="btn glowing_border font-weight-bold btn-sm w-100  text-white glowing_border"
-                                                                                                           value="Add"
-                                                                                                           name="submit"
-                                                                                                           id="submit">
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </form>
-                                                                            <div class="col-md-12 "
-                                                                                 style="height:500px;overflow-y:auto;">
-                                                                                <div class="row">
-                                                                                    {% for phones in phones %}
-                                                                                        <div class="col-md-4">
-                                                                                            <!-- inside CaRD DIV-->
-                                                                                            <div class="row mr-1 ml-1">
-                                                                                                <div class="col-md-2  glowing_border d-flex flex-column justify-content-between align-items-center"
-                                                                                                     style="border-radius:15px 0px 0px 15px;">
-                                        <span class="rotate custom_label glowing_border" role="button"
-                                              style="font-size:11px; margin-top: auto; margin-bottom: auto;">
-                                          <i class="fa fa-user text-white mr-2">Phone</i>
-                                        </span>
-                                                                                                    <button type="button"
-                                                                                                            class="btn btn-primary btn_link custom_icons"
-                                                                                                            id="btn_link"
-                                                                                                            data-id=""
-                                                                                                            data-toggle=""
-                                                                                                            data-target="#">
-                                                                                                        <i class="fa fa-trash"></i>
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                                <!-- Div Right part-->
-                                                                                                <div class="col-md-10 glowing_border d-flex flex-row justify-content-start align-items-center"
-                                                                                                     style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
-                                                                                        <span style="font-size:12px;"
-                                                                                              class="text-white ">  {{ phones }}</span>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                    {% endfor %}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- END PHONES TAB  -->
-
-
-                                                    <!-- START VISUAL TAB -->
-
-                                                    {% comment %}
-                <div id="visuals" class="tab-pane fade">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <form name="portfolio_create_form" id="portfolio_create_form" action="{% url 'Portfolio_Management_System:add_information' %}" enctype="multipart/form-data" method="POST">
-                          {% csrf_token %}
-                          <div class="card-body m-4 main_card">
-                            
-                            <div class="row input_wrapper_row">
-                              <div class="col-md-2"></div>
-                              <div class="col-md-9">
-                                <div class="row">
-                                  <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                    class="input_text">Title</span>
-                                    <input type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="author_id"
-                                    name="title" required="" />
-                                  </label>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                    class="input_text">Description</span>
-                                    <textarea type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="description_value"
-                                    name="description" rows="10" required="required"></textarea>
-                                  </label>
-                                </div>
-                                <div class="row">
-                                  <div class="col-sm-9">
-                                    <span class="btn btn-default btn-file">
-                                      <input id="input-1" name="photos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                                    </span>
-                                  </div>
-                                  
-                                </div>
-                                
-                                <div class="row">
-                                  <div class="col-sm-9">
-                                    <span class="btn btn-default btn-file">
-                                      <input id="input-2" name="videos_file_field[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                                    </span>
-                                  </div>
-                                  
-                                </div>
-                              </div>
-                              
-                              
-                            </div>
-                            <div class="col-md-1 ">
-                            </div>
-                          </div>
-                          <input type="hidden" value="visuals" id="form_name" name="extra_type" />
-                          <input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
-                          <div class="row input_wrapper_row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-2">
-                              <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="Add"
-                              name="submit" id="submit">
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                      
-                      <div class="row">
-                        {% for visual in visuals %}
-                          
-                          <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">{{ visual.title }}</h5>
-                              <p class="card-text">{{ visual.description }}</p>
-                              {% for image in visual.images %}
-                                <img src="{% static 'Portfolio_Management_System/mongo_temp_files/' %}" alt="">
-                              {% endfor %}
-                              <a href="#" class="btn btn-primary">Delete</a>
-                            </div>
-                          </div>
-                        {% endfor %}
-                        
-                        
-                      </div>
-                      
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-          {% endcomment %}
-                                                    <!-- END VISUAL TAB -->
+                                                                 </div>
+															<div class="col-md-2"></div>
+															<div class="col-md-2" style="margin: auto;">
+																<div class="">
+																	<input type="hidden" value="description" id="form_name" name="extra_type" />
+																	<input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+																	<div class="row input_wrapper_row">
+																		<div class="col-md-12">
+																			<input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white" value="Add" name="submit" id="submit">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														</form>
+														<div class="row p-2"> {% for description in descriptions %}
+															<div class="col-md-4">
+																<div class="row mr-2">
+																	<div class="col-md-2 custom_btn_ glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;"><span class="rotate custom_label glowing_border" role="button" style="font-size:14px; margin-top: auto; margin-bottom: auto;"><i
+                                                                                        class="fa fa-user text-white mr-2">Description</i></span>
+																		<button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="5eb8742a31cbda0214058eff" data-toggle="modal" data-target="#linkto_portfolio"><i class="fa fa-trash"></i></button>
+																	</div>
+																	<div class="col-md-10 background glowing_border d-flex flex-column justify-content-center align-items-start" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+																		<div style="font-size:12px;" class="text-white "> Title: {{ description.title }}</div>
+																		<div style="font-size:12px;" class="text-white "> Description : {{ description.description }} </div>
+																	</div>
+																</div>
+															</div> {% endfor %} </div>
+													</div>
                                                 </div>
-                                            </div>
-
-
+                                                <!-- end of desription tab  -->
+											
+                                        <!-- start of phones tab  -->
+                                                <div id="phones" class="tab-pane fade">
+											<div class="container-fluid">
+												<div class="row">
+													<div class="col-md-12 m-0 p-0">
+														<div class="card-body m-0 p-0 main_card">
+															<div class="row">
+																<form name="portfolio_create_form" id="portfolio_create_form" class="w-100" action="{% url 'Portfolio_Management_System:add_information' %}" method="POST"> {% csrf_token %}
+																	<div class="row">
+																		<div class="col-md-8">
+																			<div class="row input-group mt-4 mb-3">
+																				<div class="col-md-3 pr-0 input-group-prepend"><span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                                                opacity:0.9; padding:9px 9px 0 10px;">Phone
+                                                                                            </span></div>
+																				<input type="text" class="col-md-9 form-control custom_input_field" id="author_id" name="prime_value" required="" />
+																			</div>
+                                                                        </div>
+                                                                     </div>
+																	<div class="col-md-2"></div>
+																	<div class="col-md-2" style="margin: auto;">
+																		<div class="">
+																			<input type="hidden" value="phones" id="form_name" name="extra_type" />
+																			<input type="hidden" value="{{ portfolio_id }}" id="form_name" name="portfolio_id" />
+																			<div class="row input_wrapper_row">
+																				<div class="col-md-12">
+																					<input type="submit" class="btn glowing_border font-weight-bold btn-sm w-100  text-white glowing_border" value="Add" name="submit" id="submit">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+															</div>
+															</form>
+															<div class="col-md-12 " style="height:500px;overflow-y:auto;">
+																<div class="row"> {% for phones in phones %}
+																	<div class="col-md-4">
+																		<div class="row mr-1 ml-1">
+																			<div class="col-md-2 custom_btn_ glowing_border d-flex flex-column justify-content-between align-items-center" style="border-radius:15px 0px 0px 15px;"><span class="rotate custom_label glowing_border" role="button" style="font-size:11px; margin-top: auto; margin-bottom: auto;"><i
+                                                                                                class="fa fa-user text-white mr-2">Phone</i></span>
+																				<button type="button" class="btn btn-primary btn_link custom_icons" id="btn_link" data-id="" data-toggle="" data-target="#"><i class="fa fa-trash"></i></button>
+																			</div>
+																			<div class="col-md-10 background glowing_border d-flex flex-row justify-content-start align-items-center" style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;"><span style="font-size:12px;" class="text-white ">
+                                                                                            {{ phones }}</span></div>
+																		</div>
+																	</div> {% endfor %} </div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        <!-- end of phones tabs  -->
+                                  
+                                   
+                                   
+							</div> <!-- end of tabcontent  -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div> 
+
 {% endblock %}

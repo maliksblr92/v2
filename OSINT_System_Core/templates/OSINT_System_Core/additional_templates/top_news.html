@@ -15,6 +15,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
           integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
     <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+            background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Raleway' !important;
+        }
+
         .background-gradient {
             background: linear-gradient(
                     0deg,
@@ -99,8 +111,9 @@
                                              aria-expanded="true"
                                              aria-controls="{{ forloop.counter }}">
                                             <span class="text_heading">  {{ forloop.counter }} #</span> {{ x.HeadLine }}
-                                            <a  taeget="_blank" href="{{ x.Link }}" class="float-right" target="_blank"> <i
-                                                    class="fa fa-eye text_paragraph"></i> </a>
+                                            <a taeget="_blank" href="{{ x.Link }}" class="float-right" target="_blank">
+                                                <i
+                                                        class="fa fa-eye text_paragraph"></i> </a>
                                         </div>
                                         <div>
                                             <span class=" badge badge-success float-right">{{ x.Time|default:"--" }}</span>

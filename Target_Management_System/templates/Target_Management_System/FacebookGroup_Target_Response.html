@@ -47,7 +47,7 @@
     </style>
     <style>
         body {
-            background: url(/static/Additional_assets/main/images/background_gradient.svg) no-repeat center center fixed;
+            background: url({% static 'images/background_gradient.svg' %}) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -169,7 +169,7 @@
             margin-top: -120px;;
             border: 5px solid #FEC134;
             border-radius: 10px;
-            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
+            background: url({% static 'images/VIaL8H.jpg' %}) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -300,14 +300,15 @@
         }
     </style>
 </head>
-<body class="background-gradient">
+<body>
 <div class="container-fluid wrapper">
 
 </div>
 <div class="row ml-1 mr-1 pl-5 pr-5">
     <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
         <div class="row">
-            <div class="col-md-6 text-left"><a href="https://www.facebook.com/{{group.username}}" target="_blank" class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
+            <div class="col-md-6 text-left"><a href="https://www.facebook.com/{{ group.username }}" target="_blank"
+                                               class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
                     class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile </a></div>
 
             <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
@@ -673,6 +674,124 @@
                             </div>
                             <!-- posting timeline end  -->
 
+  <!-- start group admins  -->
+  <div class="col-md-12 mt-3">
+    <h3><i class="material-icon text_heading">Group Creator information  </i></h3>
+    <div class="row">
+
+       {% if group.group_creator %}
+            <div class="col-md-4">
+                <div class="card ">
+                    <div class="card-header text-center background-gradient-dark">
+                        <span class="text-white text-20">Group Creator  </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                {% if group.group_creator.media_directory %}
+                                <img src="{{ group.group_creator.media_directory }}" class="img-fluid"
+                                     style="height:100px;width:100px;"/>
+                                     {% else %}
+
+                                     <img src="data:image/png;base64,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" class="img-fluid"
+                                     style="height:100px;width:100px;"/>
+                                     {% endif %}
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-4"><span
+                                            class="badge">Enitity Name</span></div>
+                                    <div class="col-md-8"><span
+                                            class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
+                                    </div>
+                                    <div class="col-md-4"><span
+                                            class="badge">User Name</span></div>
+                                    <div class="col-md-8"><span
+                                            class="badge custom_badge">{{ group.group_creator.username|default:"N/A" }}</span>
+                                    </div>
+                                    <div class="col-md-4"><span
+                                            class="badge">Enitity ID</span></div>
+                                    <div class="col-md-8"><span
+                                            class="badge custom_badge">{{ group.group_creator.id|default:"N/A" }}</span>
+                                    </div>
+                                    <div class="col-md-4"><span
+                                            class="badge">Enitity URL</span></div>
+                                    <div class="col-md-8"><span
+                                            class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer background-gradient-dark"></div>
+                </div>
+            </div>
+      {% else  %}
+            <p>Group has no moderators </p>
+        {% endif %}
+
+    </div>
+</div>
+<!-- end group admins -->
+
+                                 <!-- start group admins  -->
+                                 <div class="col-md-12 mt-3">
+                                    <h3><i class="material-icon text_heading">Group Moderators </i></h3>
+                                    <div class="row">
+    
+                                        {% for i in group.group_admins %}
+                                            <div class="col-md-4">
+                                                <div class="card ">
+                                                    <div class="card-header text-center background-gradient-dark">
+                                                        <span class="text-white text-20">Admin # {{ forloop.counter }}</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                                <img src="{{ i.media_directory }}" class="img-fluid"
+                                                                     style="height:100px;width:100px;"/>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-4"><span
+                                                                            class="badge">Enitity Name</span></div>
+                                                                    <div class="col-md-8"><span
+                                                                            class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                    </div>
+                                                                    <div class="col-md-4"><span
+                                                                            class="badge">User Name</span></div>
+                                                                    <div class="col-md-8"><span
+                                                                            class="badge custom_badge">{{ i.username|default:"N/A" }}</span>
+                                                                    </div>
+                                                                    <div class="col-md-4"><span
+                                                                            class="badge">Enitity ID</span></div>
+                                                                    <div class="col-md-8"><span
+                                                                            class="badge custom_badge">{{ i.id|default:"N/A" }}</span>
+                                                                    </div>
+                                                                    <div class="col-md-4"><span
+                                                                            class="badge">Enitity URL</span></div>
+                                                                    <div class="col-md-8"><span
+                                                                            class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                    </div>
+    
+    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer background-gradient-dark"></div>
+                                                </div>
+                                            </div>
+                                        {% empty %}
+                                            <p>Group has no moderators </p>
+                                        {% endfor %}
+    
+                                    </div>
+                                </div>
+                                <!-- end group admins -->
+
                             <!-- start group moderators  -->
                             <div class="col-md-12 mt-3">
                                 <h3><i class="material-icon text_heading">Group Moderators </i></h3>
@@ -746,8 +865,16 @@
                             <div class="col-md-6 m-0 p-0 text-center">
                                 <h3><i class="material-icon text_heading"> Page Sentiment Analysis </i></h3>
                                 <div class="row">
-                                    <div class="col-md-12 m-0 p-0  " id="sentiment_chart"
-                                         style="height: 400px;width: 100%;"></div>
+                                    <!-- <div class="col-md-12 m-0 p-0  " id="sentiment_chart"
+                                         style="height: 400px;width: 100%;"></div> -->
+
+
+                                         <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50"><i
+                                         class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span
+                                         class="badge "> {{ group.sentiments.0 }}</span></div>
+                                 <div class="d-flex flex-row justify-content-start align-items-center mt-2"><i
+                                         class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> : <span
+                                         class="badge ">{{ group.sentiments.1 }}</span></div>
 
                                 </div>
                             </div>
@@ -1343,116 +1470,6 @@
 
 </script>
 
-<script>
-    am4core.ready(function () {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        // create chart
-        var chart = am4core.create("sentiment_chart", am4charts.GaugeChart);
-        chart.hiddenState.properties.opacity = 0;
-        var axis = chart.xAxes.push(new am4charts.ValueAxis());
-        axis.min = 0;
-        axis.max = 160;
-        axis.strictMinMax = true;
-        axis.renderer.inside = true;
-        //axis.renderer.ticks.template.inside = true;
-        //axis.stroke = chart.colors.getIndex(3);
-        axis.renderer.radius = am4core.percent(97);
-        //axis.renderer.radius = 80;
-        axis.renderer.line.strokeOpacity = 1;
-        axis.renderer.line.strokeWidth = 5;
-        axis.renderer.line.stroke = chart.colors.getIndex(0);
-        axis.renderer.ticks.template.disabled = false
-        axis.renderer.ticks.template.stroke = chart.colors.getIndex(0);
-        axis.renderer.labels.template.radius = 35;
-        axis.renderer.labels.template.fontColor = "#FFF";
-        axis.renderer.ticks.template.strokeOpacity = 1;
-        axis.renderer.grid.template.disabled = true;
-        axis.renderer.ticks.template.length = 10;
-        axis.hiddenState.properties.opacity = 1;
-        axis.hiddenState.properties.visible = true;
-        axis.setStateOnChildren = true;
-        axis.renderer.hiddenState.properties.endAngle = 180;
-        var axis2 = chart.xAxes.push(new am4charts.ValueAxis());
-        axis2.min = 0;
-        axis2.max = 240;
-        axis2.strictMinMax = true;
-        axis2.renderer.line.strokeOpacity = 1;
-        axis2.renderer.line.strokeWidth = 5;
-        axis2.renderer.line.stroke = chart.colors.getIndex(3);
-        axis2.renderer.ticks.template.stroke = chart.colors.getIndex(3);
-        axis2.renderer.ticks.template.disabled = false
-        axis2.renderer.ticks.template.strokeOpacity = 1;
-        axis2.renderer.grid.template.disabled = true;
-        axis2.renderer.ticks.template.length = 10;
-        axis2.hiddenState.properties.opacity = 1;
-        axis2.hiddenState.properties.visible = true;
-        axis2.setStateOnChildren = true;
-        axis2.renderer.hiddenState.properties.endAngle = 180;
-        var hand = chart.hands.push(new am4charts.ClockHand());
-        hand.fill = axis.renderer.line.stroke;
-        hand.stroke = axis.renderer.line.stroke;
-        hand.axis = axis;
-        hand.pin.radius = 14;
-        hand.startWidth = 10;
-        var hand2 = chart.hands.push(new am4charts.ClockHand());
-        hand2.fill = axis2.renderer.line.stroke;
-        hand2.stroke = axis2.renderer.line.stroke;
-        hand2.axis = axis2;
-        hand2.pin.radius = 10;
-        hand2.startWidth = 10;
-        setInterval(function () {
-            hand.showValue({{group.sentiments.positive}}, 1000, am4core.ease.cubicOut);
-            label.text = Math.round(hand.value).toString();
-            hand2.showValue({{group.sentiments.negitive}}, 1000, am4core.ease.cubicOut);
-            label2.text = Math.round(hand2.value).toString();
-        }, 9000);
-        var legend = new am4charts.Legend();
-        legend.isMeasured = false;
-        legend.y = am4core.percent(100);
-        legend.verticalCenter = "bottom";
-        legend.parent = chart.chartContainer;
-        legend.data = [{
-            "name": "Positive",
-            "fill": chart.colors.getIndex(0)
-        }, {
-            "name": "Negitive",
-            "fill": chart.colors.getIndex(3)
-        }];
-        legend.itemContainers.template.events.on("hit", function (ev) {
-            var index = ev.target.dataItem.index;
-            if (!ev.target.isActive) {
-                chart.hands.getIndex(index).hide();
-                chart.xAxes.getIndex(index).hide();
-                labelList.getIndex(index).hide();
-            } else {
-                chart.hands.getIndex(index).show();
-                chart.xAxes.getIndex(index).show();
-                labelList.getIndex(index).show();
-            }
-        });
-        var labelList = new am4core.ListTemplate(new am4core.Label());
-        labelList.template.isMeasured = false;
-        labelList.template.background.strokeWidth = 2;
-        labelList.template.fontSize = 25;
-        labelList.template.padding(10, 20, 10, 20);
-        labelList.template.y = am4core.percent(50);
-        labelList.template.horizontalCenter = "middle";
-        var label = labelList.create();
-        label.parent = chart.chartContainer;
-        label.x = am4core.percent(40);
-        label.background.stroke = chart.colors.getIndex(0);
-        label.fill = chart.colors.getIndex(0);
-        label.text = "0";
-        var label2 = labelList.create();
-        label2.parent = chart.chartContainer;
-        label2.x = am4core.percent(60);
-        label2.background.stroke = chart.colors.getIndex(3);
-        label2.fill = chart.colors.getIndex(3);
-        label2.text = "0";
-    }); // end am4core.ready()
-</script>
 
 </body>
 </html>
