@@ -455,14 +455,14 @@
 
                                                     <div class="row">
                                                         <div class="col-md-6 d-flex flex-row justify-content-center align-item-center">
-                                                            {% if post.media is not None %}
-                                                                <img src="{{ post.media|default:'https://via.placeholder.com/150' }}"
+                                                            {% if post.media %}
+                                                                <img src="{{ post.media }}"
                                                                      class="border_radius_5px img-fluid"
                                                                      style="height:200px;width:200px">
                                                             {% else %}
-                                                                <img src="https://via.placeholder.com/150"
-                                                                     class="border_radius_5px img-fluid"
-                                                                     style="height:200px;width:200px">
+                                                                <img src="{% static 'images/reddit-logo.png' %}"
+                                                                     class="glowing_border border_radius_5px img-fluid"
+                                                                     style="height:200px;width:200px; padding: 25px;">
                                                             {% endif %}
                                                         </div>
                                                         <div class="col-md-6 d-flex flex-row justify-content-start align-item-center p-3">
@@ -542,14 +542,14 @@
 
                                                     <div class="row">
                                                         <div class="col-md-6 d-flex flex-row justify-content-center align-item-center">
-                                                            {% if post.media is not None %}
-                                                                <img src="{{ post.media|default:'https://via.placeholder.com/150' }}"
+                                                            {% if post.media %}
+                                                                <img src="{{ post.media }}"
                                                                      class="border_radius_5px img-fluid"
                                                                      style="height:200px;width:200px">
                                                             {% else %}
-                                                                <img src="https://via.placeholder.com/150"
-                                                                     class="border_radius_5px img-fluid"
-                                                                     style="height:200px;width:200px">
+                                                                <img src="{% static 'images/reddit-logo.png' %}"
+                                                                     class="glowing_border border_radius_5px img-fluid"
+                                                                     style="height:200px;width:200px; padding: 25px;">
                                                             {% endif %}
                                                         </div>
                                                         <div class="col-md-6 d-flex flex-row justify-content-start align-item-center p-3">
