@@ -175,12 +175,14 @@
                                                                     {% elif target.1.GTR|lower == 'twitter' %}
                                                                         <a class="btn btn-primary custom_icons"
                                                                            href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
 
                                                                     {% elif target.1.GTR|lower == 'instagram' %}
                                                                         <a class="btn btn-primary custom_icons"
                                                                            href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                                                                           role="button" target="_blank"><i
+                                                                                class="fa fa-eye"></i></a>
 
                                                                     {% elif target.1.GTR|lower == 'linkedin' %}
 
@@ -271,37 +273,62 @@
                                                                                         "
                                                                                         alt="">
 
+                                                                                    {% elif target.0.image_url %}
+                                                                                        src="
+                                                                                        {{ target.0.image_url }}
+                                                                                        "
+                                                                                        alt="">
+
                                                                                     {% else %}
-                                                                                        src="{% static 'images/testimonial.png' %}" alt="">
+                                                                                        src="
+                                                                                        {% static 'images/testimonial.png' %}
+                                                                                        " alt="">
                                                                                     {% endif %}
                                                                         </div>
                                                                         <div class="col-md-8  ">
-                                                                                <div class="row mt-3">
-                                                                                    <div class="col-md-12 ">
-                                                                                        <div class="text-white"><span class="text-primary">Name :</span>{{ target.0.name|truncatechars:"20" }}</div>
+                                                                            <div class="row mt-3">
+                                                                                <div class="col-md-12 ">
+
+
+                                                                                    <div class="text-white"><span
+                                                                                            class="text-primary">Name :</span>{{ target.1.name|truncatechars:"20" }}
                                                                                     </div>
 
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="text-white"><span class="text-primary">Username :</span>{% if target.0.username %}
-                                                                                            {{ target.0.username }} {% else %}
+                                                                                </div>
 
-                                                                                            {{ target.1.title }}{% endif %} </div>
-                                                                                    </div>
+                                                                                <div class="col-md-12">
 
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="text-white"><span class="text-primary">Website :</span>{{ target.1.GTR }} </div>
-                                                                                    </div>
+                                                                                    <div class="text-white"><span
+                                                                                            class="text-primary">Username :</span>
+                                                                                        {% if target.1.username %}
+                                                                                            {{ target.1.username }} {% else %}
 
-
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="text-white"><span class="text-primary">Type :</span>{{ target.1.target_type }}</div>
+                                                                                            {{ target.1.title }}{% endif %}
                                                                                     </div>
 
 
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="text-white"><span class="text-primary">Created at :</span>{{ target.1.created_on }}</div>
+                                                                                </div>
+
+                                                                                <div class="col-md-12">
+                                                                                    <div class="text-white"><span
+                                                                                            class="text-primary">Website :</span>{{ target.1.GTR }}
                                                                                     </div>
                                                                                 </div>
+
+
+                                                                                <div class="col-md-12">
+                                                                                    <div class="text-white"><span
+                                                                                            class="text-primary">Type :</span>{{ target.1.target_type }}
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-12">
+                                                                                    <div class="text-white"><span
+                                                                                            class="text-primary">Created at :</span>{{ target.1.created_on }}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
                                                                         </div>
                                                                     </div>
