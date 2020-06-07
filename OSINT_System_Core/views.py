@@ -807,12 +807,20 @@ class Rabbit_Message(View):
     def get(self, request):
         #print(request.GET)
         objects = Rabbit_Messages.get_top_messages_with_pid(20, request.GET.get('window_type', 'message'))
-        print(objects)
+
 
         return render(request, 'OSINT_System_Core/message_loger.html', {'messages': objects})
 
 
 class Logged_Ips(RequireLoginMixin,IsTSO,View):
+
+    def get(self,request,*args,**kwargs):
+        responses = Ip_Logger.get_all_loggers()
+
+        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+
+
+class View_Logged_Ips_Responses(RequireLoginMixin,IsTSO,View):
 
     def get(self,request,*args,**kwargs):
         responses = Ip_Logger.get_all_loggers()
@@ -827,11 +835,21 @@ class Delete_Ips(RequireLoginMixin,IsTSO,View):
         obj_id = kwargs['obj_id']
 
         ip_obj = Ip_Logger.objects(id=obj_id).first()
+
+
+
+        return HttpResponseRedirect(reverse('OSINT_System_Core:logged_ips'))
+
+    def get(self,request,*args,**kwargs):
+
+        obj_id = kwargs['obj_id']
+
+        ip_obj = Ip_Logger.objects(id=obj_id).first()
         ip_obj.delete()
 
         responses = Ip_Logger.get_all_loggers()
 
-        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+        return HttpResponseRedirect(reverse('OSINT_System_Core:logged_ips'))
 
 
 
