@@ -12,23 +12,35 @@
     <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'Additional_assets/news_monitoring/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
     <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+            background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Raleway' !important;
+        }
+
         .background-gradient {
             background: linear-gradient(0deg,
-                    rgba(242, 242, 242, 1) 0%,
-                    rgba(240, 240, 240, 1) 52%,
-                    rgba(221, 221, 221, 1) 77%,
-                    rgba(204, 204, 204, 1) 100%);
+            rgba(242, 242, 242, 1) 0%,
+            rgba(240, 240, 240, 1) 52%,
+            rgba(221, 221, 221, 1) 77%,
+            rgba(204, 204, 204, 1) 100%);
         }
 
         .background-gradient-dark {
             background: linear-gradient(90deg,
-                    rgba(0, 113, 188, 20%) 0%,
-                    rgba(65, 130, 173, 29%) 50%,
-                    rgba(0, 0, 0, 40%) 100%);
+            rgba(0, 113, 188, 20%) 0%,
+            rgba(65, 130, 173, 29%) 50%,
+            rgba(0, 0, 0, 40%) 100%);
         }
 
         .text_heading {
@@ -47,83 +59,83 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row pl-5 pr-5">
-            <div class="col-lg-12">
-                <nav class="navbar
+<div class="container-fluid">
+    <div class="row pl-5 pr-5">
+        <div class="col-lg-12">
+            <nav class="navbar
               navbar-expand-lg" id="header">
-                    <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
+                <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
                         data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon ">
                             <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
                         </span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <div class="col-lg-2">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <div class="col-lg-2">
 
-                        </div>
-                        <div class="col-lg-8 ">
-                            <div class="row m-0 p-0">
-                                <div class="col-lg-5 pt-2">
-                                    <div class="row">
-                                        <div class="col-lg-6 list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;">
-                                            <li class="nav-item">
-                                                <a class=" btn font-weight-bold nav_btn" href="#"
-                                                    style="color: #fff !important;">DASHBOARD</a>
-                                            </li>
-                                        </div>
-                                        <div class="col-lg-6  list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;">
-                                            <li class="nav-item">
-                                                <a class="btn font-weight-bold nav_btn" href="#"
-                                                    style="color: #fff !important;">MONITOR</a>
-                                            </li>
-                                        </div>
+                    </div>
+                    <div class="col-lg-8 ">
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-5 pt-2">
+                                <div class="row">
+                                    <div class="col-lg-6 list list-inline custom_center "
+                                         style="border-right:2px solid white;border-left:2px solid white;">
+                                        <li class="nav-item">
+                                            <a class=" btn font-weight-bold nav_btn" href="#"
+                                               style="color: #fff !important;">DASHBOARD</a>
+                                        </li>
+                                    </div>
+                                    <div class="col-lg-6  list list-inline custom_center "
+                                         style="border-right:2px solid white;border-left:2px solid white;">
+                                        <li class="nav-item">
+                                            <a class="btn font-weight-bold nav_btn" href="#"
+                                               style="color: #fff !important;">MONITOR</a>
+                                        </li>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 custom_center">
-                                    <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}"
-                                        class="m-0 p-0  " style="height: 60px;width: 200px;" alt="">
-                                </div>
-                                <div class="col-lg-5 pt-2">
-                                    <div class="row">
-                                        <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
+                            </div>
+                            <div class="col-lg-2 custom_center">
+                                <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}"
+                                     class="m-0 p-0  " style="height: 60px;width: 200px;" alt="">
+                            </div>
+                            <div class="col-lg-5 pt-2">
+                                <div class="row">
+                                    <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
                         white;">
-                                            <li class="nav-item">
-                                                <a class="btn font-weight-bold nav_btn" href="#"
-                                                    style="color: #fff !important;">FETCH</a>
-                                            </li>
-                                        </div>
-                                        <div class="col-lg-6 list list-inline custom_center "
-                                            style="border-right:2px solid white;border-left:2px solid white;">
-                                            <li class="nav-item">
-                                                <a class="btn font-weight-bold nav_btn" href="#"
-                                                    style="color: #fff !important;">RETRIEVE</a>
-                                            </li>
-                                        </div>
+                                        <li class="nav-item">
+                                            <a class="btn font-weight-bold nav_btn" href="#"
+                                               style="color: #fff !important;">FETCH</a>
+                                        </li>
+                                    </div>
+                                    <div class="col-lg-6 list list-inline custom_center "
+                                         style="border-right:2px solid white;border-left:2px solid white;">
+                                        <li class="nav-item">
+                                            <a class="btn font-weight-bold nav_btn" href="#"
+                                               style="color: #fff !important;">RETRIEVE</a>
+                                        </li>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 ">
-
-                        </div>
                     </div>
-                </nav>
-            </div>
+                    <div class="col-lg-2 ">
+
+                    </div>
+                </div>
+            </nav>
         </div>
-        {% for x in news_json %}
+    </div>
+    {% for x in news_json %}
 
         <div class="row mt-2 p-3   ml-2 mr-2">
             <div class="col-md-1"></div>
             <div class="col-md-10 border border-white text-center m-0 p-0" style="border-radius: 10px 10px 0px 0px;">
                 <div class="col-md-12 card-header  text-center font-weight-bold text-white"
-                    style="border-radius: 10px 10px 0px 0px;">
+                     style="border-radius: 10px 10px 0px 0px;">
                     {{ x.channel }}
                     <img class="img-fluid float-right" style="width: 45px; height: 35px;"
-                        src="{% static 'OSINT_System_Core/dawn.png' %}" alt="">
+                         src="{% static 'OSINT_System_Core/dawn.png' %}" alt="">
                 </div>
                 <div class="row">
                     <div class="col-md-6 text-center font-weight-bold text-white ">
@@ -135,108 +147,109 @@
 
                                         <div class="col-md-12 text-center">
                                             <div class="text-white text-center card-header font-weight-bold pt-2 pb-2"
-                                                style="font-size: 14px; border-radius: 10px 10px 0px 0px;">
+                                                 style="font-size: 14px; border-radius: 10px 10px 0px 0px;">
                                                 Most Emerging News
                                             </div>
                                             <div class="" style="height:400px;overflow-y:auto">
 
                                                 {% for i in x.most_emerging_news %}
-                                                <div class="accordion " id="accordionExample">
-                                                    <div class="card">
-                                                        <div class="card-header background-gradient" id="headingOne">
-                                                            <a class="d-flex flex-row justify-content-around  align-items-center"
-                                                                type="button" data-toggle="collapse"
-                                                                data-target="#id{{ forloop.counter }}"
-                                                                aria-expanded="true"
-                                                                aria-controls="id{{ forloop.counter }}">
-                                                                <div align="left" class="text-white w-75"
-                                                                    style="font-size:12px;">
+                                                    <div class="accordion " id="accordionExample">
+                                                        <div class="card">
+                                                            <div class="card-header background-gradient"
+                                                                 id="headingOne">
+                                                                <a class="d-flex flex-row justify-content-around  align-items-center"
+                                                                   type="button" data-toggle="collapse"
+                                                                   data-target="#id{{ forloop.counter }}"
+                                                                   aria-expanded="true"
+                                                                   aria-controls="id{{ forloop.counter }}">
+                                                                    <div align="left" class="text-white w-75"
+                                                                         style="font-size:12px;">
                                                                     <span class="text_heading">{{ forloop.counter }} #
                                                                     </span>
-                                                                    <span class="text_paragraph">{{ i.HeadLine }}</span>
-                                                                </div>
-                                                                <div class="w-25 badge custom_badge p-2"
-                                                                    style="font-size:10px;">
-                                                                    {{ i.Time | default_if_none:"No content availble " }}
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div id="id{{ forloop.counter }}"
-                                                            class="collapse background-gradient"
-                                                            aria-labelledby="headingOne"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body  text_paragraph">
-                                                                <div class="w-100" style="font-size:12px;">
-                                                                    {{ i.Description }}
-                                                                </div>
+                                                                        <span class="text_paragraph">{{ i.HeadLine }}</span>
+                                                                    </div>
+                                                                    <div class="w-25 badge custom_badge p-2"
+                                                                         style="font-size:10px;">
+                                                                        {{ i.Time | default_if_none:"No content availble " }}
+                                                                    </div>
+                                                                </a>
                                                             </div>
-                                                            <a class="d-flex flex-row justify-content-around align-items-center"
-                                                                type="button" data-toggle="collapse"
-                                                                data-target="#id{{ forloop.counter }}"
-                                                                aria-expanded="true"
-                                                                aria-controls="id{{ forloop.counter }}">
+                                                            <div id="id{{ forloop.counter }}"
+                                                                 class="collapse background-gradient"
+                                                                 aria-labelledby="headingOne"
+                                                                 data-parent="#accordionExample">
+                                                                <div class="card-body  text_paragraph">
+                                                                    <div class="w-100" style="font-size:12px;">
+                                                                        {{ i.Description }}
+                                                                    </div>
+                                                                </div>
+                                                                <a class="d-flex flex-row justify-content-around align-items-center"
+                                                                   type="button" data-toggle="collapse"
+                                                                   data-target="#id{{ forloop.counter }}"
+                                                                   aria-expanded="true"
+                                                                   aria-controls="id{{ forloop.counter }}">
                                                                 <span> <i
                                                                         class="fas fa-chevron-circle-up text_paragraph fa-2x"></i></span><a
-                                                                    class="badge custom_badge"
-                                                                     target="_blank"href="{{ i.Link }}">View</a>
-                                                            </a>
+                                                                        class="badge custom_badge"
+                                                                        target="_blank" href="{{ i.Link }}">View</a>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 {% endfor %}
                                             </div>
                                             <div class="text-white text-center card-header font-weight-bold pt-2 pb-2 mt-4"
-                                                style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> Top News
+                                                 style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> Top News
                                             </div>
                                             <div class="" style="height:400px;overflow-y:auto">
 
                                                 {% for i in x.news %}
-                                                {% for x in i.News %}
-                                                <div class="accordion " id="accordionExample">
-                                                    <div class="card background-gradient">
-                                                        <div class="card-header" id="headingOne">
-                                                            <a class="d-flex flex-row justify-content-around  align-items-center"
-                                                                type="button" data-toggle="collapse"
-                                                                data-target="#ida{{ forloop.counter }}"
-                                                                aria-expanded="true"
-                                                                aria-controls="id{{ forloop.counter }}">
-                                                                <div align="left" class="text-white w-75"
-                                                                    style="font-size:12px;"><span
-                                                                        class="text-white">{{ forloop.counter }} #
+                                                    {% for x in i.News %}
+                                                        <div class="accordion " id="accordionExample">
+                                                            <div class="card background-gradient">
+                                                                <div class="card-header" id="headingOne">
+                                                                    <a class="d-flex flex-row justify-content-around  align-items-center"
+                                                                       type="button" data-toggle="collapse"
+                                                                       data-target="#ida{{ forloop.counter }}"
+                                                                       aria-expanded="true"
+                                                                       aria-controls="id{{ forloop.counter }}">
+                                                                        <div align="left" class="text-white w-75"
+                                                                             style="font-size:12px;"><span
+                                                                                class="text-white">{{ forloop.counter }} #
                                                                     </span>{{ x.HeadLine }}
+                                                                        </div>
+                                                                        <div class="w-25 badge badge-light p-2"
+                                                                             style="font-size:10px;">
+                                                                            {{ x.Time | default_if_none:"No content availble " }}
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
-                                                                <div class="w-25 badge badge-light p-2"
-                                                                    style="font-size:10px;">
-                                                                    {{ x.Time | default_if_none:"No content availble " }}
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div id="ida{{ forloop.counter }}"
-                                                            class="collapse card-header background-gradient-dark"
-                                                            aria-labelledby="headingOne"
-                                                            data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <div class="w-100 text_paragraph "
-                                                                    style="font-size:12px;">
-                                                                    {{ x.Description }}
-                                                                </div>
-                                                            </div>
-                                                            <a class="d-flex flex-row justify-content-around  align-items-center"
-                                                                type="button" data-toggle="collapse"
-                                                                data-target="#ida{{ forloop.counter }}"
-                                                                aria-expanded="true"
-                                                                aria-controls="ida{{ forloop.counter }}">
+                                                                <div id="ida{{ forloop.counter }}"
+                                                                     class="collapse card-header background-gradient-dark"
+                                                                     aria-labelledby="headingOne"
+                                                                     data-parent="#accordionExample">
+                                                                    <div class="card-body">
+                                                                        <div class="w-100 text_paragraph "
+                                                                             style="font-size:12px;">
+                                                                            {{ x.Description }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <a class="d-flex flex-row justify-content-around  align-items-center"
+                                                                       type="button" data-toggle="collapse"
+                                                                       data-target="#ida{{ forloop.counter }}"
+                                                                       aria-expanded="true"
+                                                                       aria-controls="ida{{ forloop.counter }}">
                                                                 <span> <i
                                                                         class="fas fa-chevron-circle-up text_paragraph fa-2x"></i></span><a
-                                                                    class="badge custom_badge"
-                                                                     target="_blank"href="{{ x.Link }}">View</a>
-                                                            </a>
+                                                                            class="badge custom_badge"
+                                                                            target="_blank" href="{{ x.Link }}">View</a>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
 
 
-                                                {% endfor %}
+                                                    {% endfor %}
 
                                                 {% endfor %}
                                             </div>
@@ -252,27 +265,27 @@
                             <div class="row">
                                 <div class="col-md-12 text-center  pt-4">
                                     <div class="text-white text-center card-header font-weight-bold pt-2 pb-2"
-                                        style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> Most Common Words
+                                         style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> Most Common Words
                                     </div>
                                     {% for i in x.common_words %}
-                                    <span class="badge badge-light">{{ i }}</span>
+                                        <span class="badge badge-light">{{ i }}</span>
                                     {% endfor %}
                                 </div>
                                 <div class="col-md-12 text-center pt-5">
                                     <div class="text-white text-center card-header font-weight-bold pt-2 pb-2"
-                                        style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> World Cloud
+                                         style="font-size: 14px; border-radius: 10px 10px 0px 0px;"> World Cloud
                                     </div>
                                     <span class="text_paragraph text-justify" style="font-size: 12px;;">
                                         {{ x.wordcloud |cut:'#' }}</span>
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <div class="text-white text-center card-header font-weight-bold pt-2 pb-2"
-                                        style="font-size: 14px; border-radius: 10px 10px 0px 0px;">
+                                         style="font-size: 14px; border-radius: 10px 10px 0px 0px;">
                                         Most Used Hastag
                                     </div>
                                     <div class="">
                                         {% for i in x.most_used_hashtags %}
-                                        <span class="badge custom_badge">{{ i }}</span>
+                                            <span class="badge custom_badge">{{ i }}</span>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -283,29 +296,29 @@
             </div>
             <div class="col-md-1"></div>
         </div>
-        {% endfor %}
+    {% endfor %}
 
-        <!--           <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-10 background-gradient text-center footer  m-0 p-0">
-        <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
-      </div>
-      <div class="col-md-1"></div>
-    </div> -->
-        <div class="row pl-5 pr-5 mt-3">
-            <div class="col-lg-12 ">
-                <nav class="navbar navbar-expand-lg " id="header">
-                    <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
-                        <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
-                    </div>
-                </nav>
-            </div>
+    <!--           <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10 background-gradient text-center footer  m-0 p-0">
+    <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
+  </div>
+  <div class="col-md-1"></div>
+</div> -->
+    <div class="row pl-5 pr-5 mt-3">
+        <div class="col-lg-12 ">
+            <nav class="navbar navbar-expand-lg " id="header">
+                <div class="col-md-12 d-flex flex-row justify-content-center align-items-center m-0 p-0">
+                    <p class="font-weight-bold text-white mt-2">NEWS TEXT</p>
+                </div>
+            </nav>
         </div>
-
     </div>
-    <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
+
+</div>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
 </body>
 <!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:46 GMT -->
 

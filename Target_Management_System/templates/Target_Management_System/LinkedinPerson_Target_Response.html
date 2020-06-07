@@ -18,6 +18,10 @@
             font-family: 'Raleway' !important;
         }
 
+        .background-gradient-dark {
+            background: linear-gradient(0deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%) !important;
+        }
+
         li {
             font-size: 13px !important;;
         }
@@ -34,7 +38,7 @@
         }
 
         body {
-            background: url(/static/images/background_gradient.svg) no-repeat center center fixed;
+            background: url({% static 'images/background_gradient.svg' %}) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -268,7 +272,7 @@
                     <span class="float-left"><strong>Profile Summary ({{ profile.name }}) </strong></span>
                 </li>
 
-                <li class="list-group-item text-left">{{ profile.profile_summary }}</li>
+                <li class="list-group-item text-left" style="overflow-x: hidden; overflow-y: auto; height: 340px;">{{ profile.profile_summary }}</li>
             </ul>
 
 
