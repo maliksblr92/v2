@@ -327,6 +327,15 @@ class Explore(View):
         return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
 
 
+class Explore_By_GTR(View):
+    def get(self,request,*args,**kwargs):
+        portfolio_id = kwargs['porfolio_id']
+        if portfolio_id is not None:
+            resp=Portfolio_PMS.objects.get(id=portfolio_id)
+
+        return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
+
+
 class Portfolio_Links(RequireLoginMixin, IsTSO, View):
 
     SUPPORTED_LINK_TYPES = ()

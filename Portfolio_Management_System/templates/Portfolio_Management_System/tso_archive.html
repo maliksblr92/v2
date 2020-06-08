@@ -1,137 +1,119 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_archive.css' %}"/>
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_archive.css' %}"/>
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 ">
-            <div class="row">
-                <div class="col-md-3 m-0 p-0  border-bottom-left"><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left"
-                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
-                <div class="col-md-3 m-0 p-0  "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
-                </div>
-                <div class="col-md-3 m-0 p-0  "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
-                <div class="col-md-3 m-0 p-0 secondnavactive border-bottom-right"><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right"
-                        href="/pms/archive">Archive</a></div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 ">
+        <div class="row">
+            <div class="col-md-3 m-0 p-0  border-bottom-left"><a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left"
+                    href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+            <div class="col-md-3 m-0 p-0  "><a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                    href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
             </div>
+            <div class="col-md-3 m-0 p-0  "><a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                    href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
+            <div class="col-md-3 m-0 p-0 secondnavactive border-bottom-right"><a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right"
+                    href="/pms/archive">Archive</a></div>
         </div>
-        <div class="col-md-2"></div>
     </div>
+    <div class="col-md-2"></div>
+</div>
 {% endblock %}
 {% block belly %}
-    <div class="row">
-        <div class="col-md-12  m-0 p-0">
-            <div class="w-100 h-100 glowing_border" style="border-radius: 20px 20px 0px 0px;">
-                <div class="card-header custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
-                    <p class="card_header_text">Portfolio Archive </p>
-                </div>
-                <div class="card-body main_card custom_main_background">
-                    <!-- row 1 small cards starts -->
-                    <div class="row  m-1">
-                        {% for portfolio in portfolios %}
-                            <!-- small card col-md-3  -->
-                            <div class="col-md-4  ">
-                                <div class=" m-1 row small_card_warpper border">
-                                    <div class=" row small_card_warpper custom_card_body_background glowing_border ">
+<div class="row">
+    <div class="col-md-12  m-0 p-0">
+        <div class="w-100 h-100 glowing_border" style="border-radius: 20px 20px 0px 0px;">
+            <div class="card-header custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+                <p class="card_header_text">Portfolio Archive </p>
+            </div>
+            <div class="card-body main_card custom_main_background">
+                <!-- row 1 small cards starts -->
+                <div class="row  m-1">
+                    {% for portfolio in portfolios %}
+                    <!-- small card col-md-3  -->
+                    <div class="col-md-4  ">
+                        <div class=" m-1 row small_card_warpper border">
+                            <div class=" row small_card_warpper custom_card_body_background glowing_border ">
+
+                                <div class="col-md-12 d-flex flex-row justify-content-around align-content-center glowing_border">
 
 
-                                        <div class="col-md-1 glowing_border custom_card_body_background small_card_scroll"
-                                             style="height: 300px !important;">
+                                    <a href="{% url 'Portfolio_Management_System:add_information' portfolio.id %}"
+                                       target="_blank" class=" mt-1   custom_icons badge badge-success "
+                                       role="button" aria-pressed="true" style="font-size:11px;"> ADD INFO </a>
+                                    <a href="{% url 'Portfolio_Management_System:portfolio_links' portfolio.id %}"
+                                       target="_blank" class="  mt-1 custom_icons badge badge-success "
+                                       role="button" aria-pressed="true" style="font-size:11px;"> LINK
+                                        INFO </a>
+                                    <a href="{% url 'Portfolio_Management_System:portfolio_links_analysis' portfolio.id %}"
+                                       target="_blank" class="  mt-1 custom_icons badge badge-success "
+                                       role="button" aria-pressed="true" style="font-size:11px;"> Link
+                                        Analysis </a>
+                                </div>
+                                <div class="col-md-3  m-0 p-0  small_card_left_wrapper">
+                                    <img src="{% static 'images/profile-avatar-png-5.png' %}"
+                                         class="profile_card_avatar">
 
+                                </div>
+                                <div class="col-md-7 small_card_right_wrapper"
+                                     style="height: 260px;">
 
-                                            <a href="{% url 'Portfolio_Management_System:add_information' portfolio.id %}"
-                                               target="_blank" class=" mt-1 rotate  custom_icons badge badge-success "
-                                               role="button" aria-pressed="true" style="font-size:11px;"> ADD INFO </a>
-                                            <a href="{% url 'Portfolio_Management_System:portfolio_links' portfolio.id %}"
-                                               target="_blank" class=" rotate mt-1 custom_icons badge badge-success "
-                                               role="button" aria-pressed="true" style="font-size:11px;"> LINK
-                                                INFO </a>
-                                            <a href="{% url 'Portfolio_Management_System:portfolio_links_analysis' portfolio.id %}"
-                                               target="_blank" class=" rotate mt-1 custom_icons badge badge-success "
-                                               role="button" aria-pressed="true" style="font-size:11px;"> Link
-                                                Analysis </a>
-
-
-                                        </div>
-                                        <div class="col-md-3  m-0 p-0  small_card_left_wrapper">
-                                            <img src="{% static 'images/profile-avatar-png-5.png' %}"
-                                                 class="profile_card_avatar">
-
-                                        </div>
-                                        <div class="col-md-12   h-100  small_card_right_wrapper"
-                                             style="height: 300px;">
-
-                                            <div class="row h-100">
-                                                <div class="my-auto">
-                                                    <div class="col-md-12 text-center text-white badge btn_background text-left">Portfolio Name </div>
-                                                 <div class="col-md-12 text-center text-white badge">{{portfolio.name}}</div>
-
-                                                 <div class="col-md-12 text-center text-white badge btn_background text-left">Portfolio Type </div>
-                                                 <div class="col-md-12 text-center text-white badge">{{portfolio.portfolio_type}}</div>
-
-
-                                                 <div class="col-md-12 text-center text-white badge btn_background text-left">Created at </div>
-                                                 <div class="col-md-12 text-center text-white badge">{{portfolio.created_on}}</div>
-
-
-                                                 <div class="col-md-12 text-center text-white badge btn_background text-left">Updated at </div>
-                                                 <div class="col-md-12 text-center text-white badge">{{portfolio.updated_on}}</div>
-                                                </div>
+                                    <div class="row h-100">
+                                        <div class="my-auto">
+                                            <div class="col-md-12  text-white badge custom_bagde text-left ">Portfolio
+                                                Name
                                             </div>
-<!--                                            <ul class="mt-2">-->
-<!--                                                <li class="d-flex flex-column"><span-->
-<!--                                                        class=" font-weight-bold badge badge-light"-->
-<!--                                                        style="width:100px;"> Title :</span>-->
-<!--                                                    <span class="text-white font-weight-bold "-->
-<!--                                                          style="font-size:12px;">{{ portfolio.name }}</span></li>-->
-<!--                                                <li class="d-flex flex-column"><span-->
-<!--                                                        class=" font-weight-bold badge badge-light"-->
-<!--                                                        style="width:100px;">Portfolio type :</span>-->
-<!--                                                    <span class="text-white font-weight-bold "-->
-<!--                                                          style="font-size:12px;">{{ portfolio.portfolio_type }}</span>-->
-<!--                                                </li>-->
-<!--                                                <li class="d-flex flex-column"><span-->
-<!--                                                        class=" font-weight-bold badge badge-light"-->
-<!--                                                        style="width:100px;">Created on :</span>-->
-<!--                                                    <span class="text-white font-weight-bold "-->
-<!--                                                          style="font-size:12px;"> {{ portfolio.created_on }}</span>-->
-<!--                                                </li>-->
-<!--                                                <li class="d-flex flex-column"><span-->
-<!--                                                        class=" font-weight-bold badge badge-light"-->
-<!--                                                        style="width:100px;">Updated on :</span>-->
-<!--                                                    <span class="text-white font-weight-bold "-->
-<!--                                                          style="font-size:12px;">{{ portfolio.updated_on }}</span></li>-->
-<!--                                                -->
-<!--                                                          <li class="d-flex flex-column"><span-->
-<!--                                                        class=" font-weight-bold badge badge-light"-->
-<!--                                                        style="width:100px;">Explore :</span>-->
-<!--                                                        <a href="{% url 'Portfolio_Management_System:portfolio_links_analysis' portfolio.id %}"-->
-<!--                                                        target="_blank" class="badge text-white  btn_background "-->
-<!--                                                        role="button" aria-pressed="true" style="font-size:11px;"> Explore-->
-<!--                                                          </a></li>-->
-<!--                                                          -->
-<!--                                                        -->
+                                            <div class="col-md-12  text-white badge text-left ">{{portfolio.name}}</div>
 
-<!--                                            </ul>-->
+                                            <div class="col-md-12  text-white badge custom_bagde text-left">Portfolio
+                                                Type
+                                            </div>
+                                            <div class="col-md-12  text-white badge text-left ">
+                                                {{portfolio.portfolio_type}}
+                                            </div>
+
+
+                                            <div class="col-md-12  text-white badge custom_bagde text-left">Created
+                                                at
+                                            </div>
+                                            <div class="col-md-12  text-white badge text-left ">
+                                                {{portfolio.created_on}}
+                                            </div>
+
+
+                                            <div class="col-md-12  text-white badge custom_bagde text-left">Updated
+                                                at
+                                            </div>
+                                            <div class="col-md-12  text-white badge text-left ">
+                                                {{portfolio.updated_on}}
+                                            </div>
+
+                                            <div class="col-md-12  text-white badge custom_bagde text-left">Explore
+                                            </div>
+                                            <a href="{% url 'Portfolio_Management_System:Explore_By_GTR' porfolio_id=portfolio.id %}"
+                                               target="_blank" class="  mt-1 custom_icons badge badge-success "
+                                               role="button" aria-pressed="true" style="font-size:11px;"> Click Here </a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
-                            <!-- end small card col-md-3 -->
-                        {% endfor %}
+                        </div>
                     </div>
-
+                    <!-- end small card col-md-3 -->
+                    {% endfor %}
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
