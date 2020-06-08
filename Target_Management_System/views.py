@@ -13,7 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from System_Log_Management_Unit.system_log_manager import Data_Queries
-
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 dq = Data_Queries()
 acq = Acquistion_Manager()
 km = Keybase_Manager()
@@ -190,6 +190,15 @@ class Target_Fetched(RequireLoginMixin, IsTSO, View):
 
         resp = acq.get_fetched_targets(website=target_site)
         #print(resp)
+
+        paginator = Paginator(resp, 6)
+        page = request.GET.get('page')
+        try:
+            resp = paginator.page(page)
+        except PageNotAnInteger:
+            resp = paginator.page(1)
+        except EmptyPage:
+            resp = paginator.page(paginator.num_pages)
         return render(request,'Target_Management_System/tso_targetfetchview.html',{'targets':resp,'supported_sites':acq.get_all_supported_sites()})
 
     def post(self, request, *args, **kwargs):
