@@ -131,11 +131,16 @@
                         <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
 
 
-                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i
-                                class="fa fa-trash text-white"></i></a></td>
-                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i class="fa fa-trash text-white"></i></a>
+{#                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i#}
+{#                                class="fa fa-trash text-white"></i></a></td>#}
+                        <td>
+                            <a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}">
+                                <i class="fa fa-trash text-white"></i>
+                            </a>
                             {% if logger.logged_response.coordinates_of_city %}
-                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" style="color: white">View</a>
+                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" target="_blank" style="color: white">
+                                <i class="fa fa-eye text-white"></i>
+                            </a>
 
                         {% endif %}
                         </td>
