@@ -887,14 +887,14 @@ class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
         'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
         'total_periodic_targets':                   ss.total_periodic_targets(),
         'total_targets_added':                      ss.total_targets_added(),
-        'top_twitter_profiles_with_highest_counts': ss.top_twitter_profiles_with_highest_counts(),
+        'top_twitter_profiles_with_highest_counts': '',
         'top_profiles_with_negative_behavior':      ss.top_profiles_with_negative_behavior(),
         # 'targets_added_by_date':                    ss.targets_added_by_date(),
         'total_dynamic_crawling_targets_added':     ss.total_dynamic_crawling_targets_added(),
         'total_dynamic_crawling_targets_fetched':   ss.total_dynamic_crawling_targets_fetched(),
         # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
         }
-        dic=ss.top_twitter_profiles_with_highest_counts()
+        dic=ss.targets_added_by_date()
         print(dic)
         return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
 

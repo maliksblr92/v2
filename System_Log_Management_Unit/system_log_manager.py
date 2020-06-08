@@ -2,7 +2,7 @@ from django.http import JsonResponse
 import random
 import time
 import json
-from datetime import datetime,timezone
+from datetime import datetime,timedelta
 import re
 
 from Public_Data_Acquisition_Unit.mongo_models import *
@@ -27,8 +27,13 @@ class System_Stats(object):
     def total_targets_fetched(self):
         return len(acq.get_fetched_targets())
 
-    def targets_added_by_date(self,start_date,end_date):
-        return len(Global_Target_Reference.targets_added_count_by_date_range(start_date,end_date))
+    def targets_added_by_date(self,days=10):
+        data_list = []
+        for ss in Supported_Website.objects():
+            res = Global_Target_Reference.targets_added_count_by_date_range_and_website_name(datetime.datetime.utcnow()-timedelta(days=days),datetime.datetime.utcnow(),ss.name)
+            data_list.append({'name': ss.name, 'count': len(res)})
+
+        return data_list
 
     def targets_fetched_by_date(self,start_date,end_date):
         pass

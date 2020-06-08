@@ -342,6 +342,79 @@ class Acquistion_Manager(object):
         else:
             publish('website type not defined',message_type='alert',module_name=__name__)
 
+
+
+
+
+    def get_appropriate_method_object_by_website_name(self,gtr):
+        """
+        this is a high-order method whcic takes gtr as an argument and return the function object
+        depending on the website and website-type and target-type
+        it returns a tuple of two objects one is a mongo model class's and other is a ess method's object
+        :param gtr:
+        :return function_object:
+        """
+
+        #gtr = Global_Target_Reference.objects(id=gtr)
+        if(gtr.website.name == 'Facebook'):
+            if(gtr.target_type == 'profile'):
+                return (Facebook_Profile,ess.add_target,Facebook_Profile_Response_TMS)
+            elif (gtr.target_type == 'page'):
+                return (Facebook_Page,ess.add_target,Facebook_Page_Response_TMS)
+            elif (gtr.target_type == 'group'):
+                return (Facebook_Group,ess.add_target,Facebook_Group_Response_TMS)
+            elif (gtr.target_type == 'search'):
+                pass
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+
+        elif (gtr.website.name == 'Twitter'):
+            if (gtr.target_type == 'profile'):
+                return (Twitter_Profile,ess.add_target,Twitter_Response_TMS)
+            elif (gtr.target_type == 'search'):
+                pass
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+
+        elif (gtr.website.name == 'Instagram'):
+            if (gtr.target_type == 'profile'):
+                return (Instagram_Profile,ess.add_target,Instagram_Response_TMS)
+            elif (gtr.target_type == 'search'):
+                pass
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+
+        elif (gtr.website.name == 'Linkedin'):
+            if (gtr.target_type == 'profile'):
+                return (Linkedin_Profile, ess.add_target,Linkedin_Profile_Response_TMS)
+            elif (gtr.target_type == 'company'):
+                return (Linkedin_Company, ess.add_target,Linkedin_Company_Response_TMS)
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'custom'):
+            if (gtr.target_type == 'dynamic_crawling'):
+                return (Dynamic_Crawling, ess.dynamic_crawling,Dynamic_Crawling_Response_TMS)
+            elif (gtr.target_type == 'keybase_crawling'):
+                return (Keybase_Crawling,ess.add_keybase_target ,Keybase_Response_TMS)
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'Reddit'):
+            if (gtr.target_type == 'profile'):
+                return (Reddit_Profile,ess.add_target,Reddit_Profile_Response_TMS)
+            elif (gtr.target_type == 'subreddit'):
+                return (Reddit_Subreddit, ess.add_target ,Reddit_Subreddit_Response_TMS)
+            else:
+                publish('target type not defined',message_type='alert',module_name=__name__)
+        elif (gtr.website.name == 'Youtube'):
+            if (gtr.target_type == 'channel'):
+                return (Youtube_Channel, ess.add_target, Youtube_Response_TMS)
+            else:
+                publish('target type not defined', message_type='alert', module_name=__name__)
+
+
+        else:
+            publish('website type not defined',message_type='alert',module_name=__name__)
+
     def get_data_response_object_by_gtr_id(self,gtr_id):
 
         gtr = self.get_gtr_by_id(gtr_id)
@@ -538,6 +611,10 @@ class Acquistion_Manager(object):
         """
 
     def get_fetched_targets(self,website=None,top=50):
+
+        import time
+        start_time = time.time()
+
         responses = []
 
         ml = Mongo_Lookup()
@@ -564,10 +641,61 @@ class Acquistion_Manager(object):
                 #resp = Facebook_Profile.objects(GTR=gtr.id)
                 #targ = Facebook_Profile.objects(GTR=gtr.id)
 
+        end_time = time.time()
+
+        print('time to execute {0}'.format(end_time - start_time))
+
+        return responses
+
+    def get_fetched_targets_fast(self,website=None,top=50):
+        import time
+        start_time = time.time()
+        responses = []
+
+        class gtr:
+            target_type=''
+            class website:
+                name=''
+
+
+
+        #GTRs = Global_Target_Reference.objects.all().order_by('-id')
+        supported_sites = Supported_Website.objects()
+
+        for site in supported_sites:
+
+            gtr.website.name = site.name
+            for t in site.target_type:
+                gtr.target_type = t
+
+                if(gtr.website.name.lower() == website or website == None):
+                    appropriate_model_targ,_ ,appropriate_model_resp = self.get_appropriate_method(gtr)
+                    #obj_amt = appropriate_model_targ()
+                    #obj_amr = appropriate_model_resp()
+
+                    if(appropriate_model_resp is not None):
+
+                        #print(appropriate_model_targ,appropriate_model_resp,gtr.id)
+
+                        resp_list = appropriate_model_resp.objects()
+                        for resp in resp_list:
+                            try:
+                                targ = '' #appropriate_model_targ.objects(GTR=resp.GTR).first()
+
+                                responses.append([resp, targ])
+                            except:
+                                pass
+
+
+                    #resp = Facebook_Profile.objects(GTR=gtr.id)
+                    #targ = Facebook_Profile.objects(GTR=gtr.id)
 
 
 
 
+        end_time = time.time()
+
+        print('time to execute {0}'.format(end_time-start_time))
 
         return responses
 
