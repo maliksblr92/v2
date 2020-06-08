@@ -1,5 +1,7 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
+
+{% load osint_custom_tags %}
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
@@ -150,6 +152,8 @@
                         <td style="font-size:12px;">{{ logger.logged_response.isp }}</td>
 
 
+
+
                         <td style="font-size:12px;">{{ logger.logged_response.timestamp }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.user_agent|truncatechars:50 }}</td>
                         <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
@@ -157,6 +161,12 @@
 
                         <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i
                                 class="fa fa-trash text-white"></i></a></td>
+                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i class="fa fa-trash text-white"></i></a>
+                            {% if logger.logged_response.coordinates_of_city %}
+                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" style="color: white">View</a>
+
+                        {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

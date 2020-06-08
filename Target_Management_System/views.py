@@ -185,7 +185,7 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
 class Target_Fetched(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
 
-        target_site=None
+        target_site='facebook'
         if 'target_site' in kwargs:target_site = kwargs['target_site']
 
         resp = acq.get_fetched_targets(website=target_site)

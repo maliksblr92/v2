@@ -209,6 +209,16 @@ class Global_Target_Reference(Document):
         return Global_Target_Reference.objects(Q(created_on__gte=start_datetime) & Q(created_on__lte=end_date))
 
     @staticmethod
+    def targets_added_count_by_date_range_and_website_name(start_datetime, end_date,website_name):
+        resp_list = []
+        targets = Global_Target_Reference.objects(Q(created_on__gte=start_datetime) & Q(created_on__lte=end_date))
+        for target in targets:
+            if(target.website.name==website_name):
+                resp_list.append(target)
+
+        return resp_list
+
+    @staticmethod
     def target_added_count_by_website_type(website_type='social'):
         GTRS = Global_Target_Reference.objects
         objects = []

@@ -820,12 +820,16 @@ class Logged_Ips(RequireLoginMixin,IsTSO,View):
         return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
 
 
-class View_Logged_Ips_Responses(RequireLoginMixin,IsTSO,View):
-
+class View_Logged_Ip_Response(RequireLoginMixin,IsTSO,View):
     def get(self,request,*args,**kwargs):
-        responses = Ip_Logger.get_all_loggers()
 
-        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+        latlons = kwargs['latlons']
+
+        lat = float(latlons.split('_')[0])
+        lon = float(latlons.split('_')[1])
+
+        print(latlons)
+        return render(request,'OSINT_System_Core/view_ip_logger_response.html',{'lat':lat,'lon':lon})
 
 
 class Delete_Ips(RequireLoginMixin,IsTSO,View):
@@ -835,21 +839,12 @@ class Delete_Ips(RequireLoginMixin,IsTSO,View):
         obj_id = kwargs['obj_id']
 
         ip_obj = Ip_Logger.objects(id=obj_id).first()
-
-
-
-        return HttpResponseRedirect(reverse('OSINT_System_Core:logged_ips'))
-
-    def get(self,request,*args,**kwargs):
-
-        obj_id = kwargs['obj_id']
-
-        ip_obj = Ip_Logger.objects(id=obj_id).first()
         ip_obj.delete()
 
-        responses = Ip_Logger.get_all_loggers()
 
         return HttpResponseRedirect(reverse('OSINT_System_Core:logged_ips'))
+
+
 
 
 
@@ -892,14 +887,14 @@ class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
         'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
         'total_periodic_targets':                   ss.total_periodic_targets(),
         'total_targets_added':                      ss.total_targets_added(),
-        'top_twitter_profiles_with_highest_counts': ss.top_twitter_profiles_with_highest_counts(),
+        'top_twitter_profiles_with_highest_counts': '',
         'top_profiles_with_negative_behavior':      ss.top_profiles_with_negative_behavior(),
         # 'targets_added_by_date':                    ss.targets_added_by_date(),
         'total_dynamic_crawling_targets_added':     ss.total_dynamic_crawling_targets_added(),
         'total_dynamic_crawling_targets_fetched':   ss.total_dynamic_crawling_targets_fetched(),
         # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
         }
-        dic=ss.top_twitter_profiles_with_highest_counts()
+        dic=ss.targets_added_by_date()
         print(dic)
         return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
 
