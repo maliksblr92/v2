@@ -18,7 +18,8 @@
     <!-- loading css with link does not evaluate static tag -->
 
     <script src="{% static 'django_eventstream/json2.js' %}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+          integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous"/>
     <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
     <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
@@ -27,19 +28,18 @@
 </head>
 <style>
     body {
-    background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow-x: hidden !important;
+        background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
         -webkit-transition: background-color 1s;
         transition: background-color 1s;
-        font-family: 'Raleway'!important;
-}
-
+        font-family: 'Raleway' !important;
+    }
 
 
 </style>
@@ -890,9 +890,9 @@
         series.angles = [0, -90];
         series.fontWeight = "700"
 
-       // setInterval(function () {
-     //       series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-       // }, 10000)
+        // setInterval(function () {
+        //       series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+        // }, 10000)
 
     }); // end am4core.ready()
 
@@ -926,3 +926,7 @@
 </script>
 </body>
 </html>
+<div>ahmed</div>
+{% block base_js %}
+
+{% endblock %}

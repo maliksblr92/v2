@@ -4,9 +4,7 @@
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script defer type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
 
 {% endblock %}
 
@@ -40,31 +38,6 @@
 {% endblock %}
 {% block belly %}
     <style>
-        .dataTables_length > label,
-        .dataTables_filter > label,
-        .dataTables_info {
-            color: #fff !important;
-        }
-
-        .paginate_button {
-            background-color: #fff !important;
-        }
-
-        .paginate_button.current {
-            border: 1px solid #1cb5e0;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-            -webkit-box-shadow: 0px 0px 4px #1cb5e0;
-            -moz-box-shadow: 0px 0px 4px #1cb5e0;
-            box-shadow: 0px 0px 4px #1cb5e0;
-            background: linear-gradient(to bottom, white 0%, #525252 100%) !important;
-        }
-
-        .ellipsis {
-            color: #fff !important;
-        }
-
         tr {
             width: 100%;
             display: inline-table;
@@ -156,9 +129,9 @@
 
                 </tr>
                 </thead>
-                <tbody class="bg-transparent">
+                <tbody>
                 {% for target in targets %}
-                    <tr class="bg-transparent">
+                    <tr>
 
                         <th scope="row">{{ target.GTR }}</th>
                         <td>{{ target.target_type }}</td>
@@ -181,9 +154,14 @@
             </table>
         </div>
     </div>
+{% endblock %}>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
             $('#created_targets').DataTable();
         });
     </script>
-{% endblock %}>
+{% endblock %}
