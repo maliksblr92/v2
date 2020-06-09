@@ -282,11 +282,11 @@
 <script src="{% static 'popper/js/popper.min.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <!-- index 1 js Resources -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/core.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/charts.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/plugins/wordCloud.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/dark.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/animated.js' %}"></script>
 <script src="{% static 'Additional_assets/main/js/chart.js' %}"></script>
 <script src="{% static 'Additional_assets/main/js/footer_charts.js' %}"></script>
 <script>
@@ -862,39 +862,44 @@
     }); // end am4core.ready()
 
 
-    //$('#asd').hide();
-    am4core.ready(function () {
 
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
+// Themes begin
+am4core.useTheme(am4themes_animated);
 
 
-        var chart = am4core.create("chart_4", am4plugins_wordCloud.WordCloud);
-        var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-
-        series.accuracy = 4;
-        series.step = 15;
-        series.rotationThreshold = 0.7;
-        series.maxCount = 200;
-        series.minWordLength = 2;
-        series.labels.template.margin(4, 4, 4, 4);
-        series.maxFontSize = am4core.percent(80);
-        var z = "{{ context.top_profiles_with_negative_behavior }}"
+var chart = am4core.create("chart_4", am4plugins_wordCloud.WordCloud);
+chart.padding(0,0,0,0);
+chart.margin(0,0,0,0);
+var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+series.randomness = 0.1;
+series.rotationThreshold = 0.5;
+series.fontFamily = "Raleway";
+series.fontSize = 100;
+series.maxFontSize = am4core.percent(50);
+var z = "{{ context.top_profiles_with_negative_behavior }}"
         series.text = z
 
-        series.colors = new am4core.ColorSet();
-        series.colors.passOptions = {}; // makes it loop
 
-        //series.labelsContainer.rotation = 45;
-        series.angles = [0, -90];
-        series.fontWeight = "700"
+series.colors = new am4core.ColorSet();
+series.colors.passOptions = {}; // makes it loop
 
-        // setInterval(function () {
-        //       series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
-        // }, 10000)
+series.angles = [0,-90];
+series.fontWeight = "700"
 
-    }); // end am4core.ready()
+setInterval(function () {
+  series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+ }, 10000)
+
+// series.labels.template.url = "https://stackoverflow.com/questions/tagged/{word}";
+// series.labels.template.urlTarget = "_blank";
+
+// var subtitle = chart.titles.create();
+//subtitle.text = "(click to open)";
+//
+// var title = chart.titles.create();
+// title.text = "Most Popular Tags @ StackOverflow";
+// title.fontSize = 40;
+// title.fontWeight = "800";
 
 </script>
 

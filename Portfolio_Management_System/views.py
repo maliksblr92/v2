@@ -1,4 +1,4 @@
-from django.shortcuts import render , reverse
+from django.shortcuts import render , reverse,redirect
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 # Create your views here.
 from django.shortcuts import render
@@ -18,7 +18,7 @@ from Portfolio_Management_System.models import *
 from System_Log_Management_Unit.system_log_manager import Data_Queries
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.conf import settings as djangoSettings
-
+from django.contrib import messages
 acq = Acquistion_Manager()
 dq = Data_Queries()
 
@@ -196,9 +196,15 @@ class Portfolio_Link_Analysis(View):
         if(object_id is not None):
 
             resp = dq.portfolio_link_analysis(object_id)
-
-            print(resp)
-            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+            resp=json.loads(resp)
+            name=resp['name']
+            #make sure that we have two nodes to display else it will redirect back to archive page with message 
+            if (len(resp['children']) and len(resp['children'][0]['children'])) <= 1 :
+                messages.success(request, 'No link analysis found for '+name)
+                return redirect('/pms/archive')
+            else:
+                resp=json.dumps(resp)
+                return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
         else:
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
