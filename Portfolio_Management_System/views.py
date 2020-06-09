@@ -16,7 +16,7 @@ from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
 from System_Log_Management_Unit.system_log_manager import Data_Queries
-
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.conf import settings as djangoSettings
 
 acq = Acquistion_Manager()
@@ -324,6 +324,15 @@ class Explore(View):
     def get(self,request,*args,**kwargs):
         resp=Portfolio_PMS.objects().first()
         print("printitng portfolio pms object")
+        return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
+
+
+class Explore_By_GTR(View):
+    def get(self,request,*args,**kwargs):
+        portfolio_id = kwargs['porfolio_id']
+        if portfolio_id is not None:
+            resp=Portfolio_PMS.objects.get(id=portfolio_id)
+
         return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
 
 

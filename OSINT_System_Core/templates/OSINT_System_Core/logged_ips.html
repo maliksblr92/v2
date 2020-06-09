@@ -5,6 +5,8 @@
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
 {% endblock %}
 
 {% block smallnavbar %}
@@ -89,7 +91,7 @@
         <!-- end of top row -->
         <!-- inside main container -->
         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-            <table class="table table-responsive" style="color: white">
+            <table class="table table-responsive text-white" id="logged_ips" class="display" style="width:100%">
                 <thead>
                 <tr>
 
@@ -101,7 +103,7 @@
                     <th scope="col">Isp</th>
 
 
-                     <th scope="col">Tracked On</th>
+                    <th scope="col">Tracked On</th>
                     <th scope="col">Useragent</th>
 
                     <th scope="col">Created On</th>
@@ -129,9 +131,16 @@
                         <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
 
 
-                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i class="fa fa-trash text-white"></i></a>
+{#                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i#}
+{#                                class="fa fa-trash text-white"></i></a></td>#}
+                        <td>
+                            <a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}">
+                                <i class="fa fa-trash text-white"></i>
+                            </a>
                             {% if logger.logged_response.coordinates_of_city %}
-                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" style="color: white">View</a>
+                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" target="_blank" style="color: white">
+                                <i class="fa fa-eye text-white"></i>
+                            </a>
 
                         {% endif %}
                         </td>
@@ -139,8 +148,16 @@
                 {% endfor %}
                 </tbody>
             </table>
-            </table>
         </div>
     </div>
 {% endblock %}>
-l>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#logged_ips').DataTable();
+        });
+    </script>
+{% endblock %}
