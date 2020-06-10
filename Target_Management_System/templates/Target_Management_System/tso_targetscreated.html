@@ -10,11 +10,11 @@
 
 {% block smallnavbar %}
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
         <div class="col-md-8 d-flex" style="">
             <div class="col-md-1">
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu"> <!-- secondnavactive -->
                 <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
@@ -28,12 +28,16 @@
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
                     SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
                 <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
                     CRAWLING</a>
             </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
+                    KEYBASE</a>
+            </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
     </div>
 {% endblock %}
 {% block belly %}
@@ -163,5 +167,8 @@
         $(document).ready(function () {
             $('#created_targets').DataTable();
         });
+    </script>
+    <script>
+        window.document.title = "Target";
     </script>
 {% endblock %}

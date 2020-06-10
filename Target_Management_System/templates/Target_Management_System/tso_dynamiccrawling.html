@@ -22,7 +22,7 @@
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu glowing_border"><!-- secondnavactive -->
                 <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
@@ -111,4 +111,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
+    </script>
 {% endblock %}

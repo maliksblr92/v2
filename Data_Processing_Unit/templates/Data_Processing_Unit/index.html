@@ -40,7 +40,7 @@
         <div class="col-md-8 d-flex" style="">
             <div class="col-md-1">
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu glowing_border">
                 <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold "> IDIENTITY GENEARTOR</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
@@ -119,12 +119,11 @@
 
                                                 </select>
                                                 <small class=" col-md-9 font-weight-bold text_paragraph "
-                                                style="padding-left:180px;"><i
-                                                 class="fas fa-info mr-2"></i>Please select country 
-                                         </small>
+                                                       style="padding-left:180px;"><i
+                                                        class="fas fa-info mr-2"></i>Please select country
+                                                </small>
                                             </div>
 
-                                            
 
                                             <!-- inputfield 3 -->
                                             <div class="row input-group mt-4 mb-3">
@@ -144,11 +143,10 @@
                                                 </select>
                                                 <small class=" col-md-9 font-weight-bold text_paragraph "
                                                        style="padding-left:180px;"><i
-                                                        class="fas fa-info mr-2"></i>Please select gender 
+                                                        class="fas fa-info mr-2"></i>Please select gender
                                                 </small>
                                             </div>
 
-                                          
 
                                             <!-- inputfield 2 -->
                                             <div class="row input-group mt-4 mb-3">
@@ -163,7 +161,7 @@
                                                        min="18"
                                                        max="100"
                                                        name="age" required="required">
-                                                       <small class=" col-md-9 font-weight-bold text_paragraph "
+                                                <small class=" col-md-9 font-weight-bold text_paragraph "
                                                        style="padding-left:180px;"><i
                                                         class="fas fa-info mr-2"></i>Age must be between 18-100
                                                 </small>
@@ -605,3 +603,8 @@
     {% endif %}
 
 {% endblock %}  
+   {% block base_js %}
+        <script>
+            window.document.title = "Fake ID Generator";
+        </script>
+    {% endblock %}

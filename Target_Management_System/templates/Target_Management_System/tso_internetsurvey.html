@@ -20,7 +20,7 @@
                 <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
                     IDENTIFY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border"> <!-- secondnavactive -->
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
                     SURVEY</a>
             </div>
@@ -115,35 +115,35 @@
                                 </div>
                                 <!-- new result section-->
                                 {% if results.data %}
-                                <div class="container  d-flex justify-content-center">
-                                    <div class="container glowing_border" style="border-radius: 10px 10px 0px 0px;">
-                                        <div class="row custom_content_header_text mb-3">
-                                            <div class="col-md-12 custom_header text-white pt-2 pb-2"
-                                                 style="border-radius: 10px 10px 0px 0px;">
-                                                Results
-                                            </div>
-                                        </div>
-                                        <div class="row" style="overflow-y: auto; height: 500px;">
-                                            <div class="col-md-12">
-                                                {% for result in results.data %}
-                                                <div class="row mb-2">
-                                                    <div class="card w-100 glowing_border">
-                                                        <div class="card-header custom_header text-white">
-                                                            {{ result.meta_title }}
-                                                        </div>
-                                                        <div class="card-body custom_background text-white">
-                                                            <h5 class="card-title">{{ result.serp_title }}</h5>
-                                                            <p class="card-text">{{ result.serp_snippet }}</p>
-                                                            <a href="{{ result.serp_url }}"
-                                                               class="btn custom_button text-white">visit</a>
-                                                        </div>
-                                                    </div>
+                                    <div class="container  d-flex justify-content-center">
+                                        <div class="container glowing_border" style="border-radius: 10px 10px 0px 0px;">
+                                            <div class="row custom_content_header_text mb-3">
+                                                <div class="col-md-12 custom_header text-white pt-2 pb-2"
+                                                     style="border-radius: 10px 10px 0px 0px;">
+                                                    Results
                                                 </div>
-                                            {% endfor %}
+                                            </div>
+                                            <div class="row" style="overflow-y: auto; height: 500px;">
+                                                <div class="col-md-12">
+                                                    {% for result in results.data %}
+                                                        <div class="row mb-2">
+                                                            <div class="card w-100 glowing_border">
+                                                                <div class="card-header custom_header text-white">
+                                                                    {{ result.meta_title }}
+                                                                </div>
+                                                                <div class="card-body custom_background text-white">
+                                                                    <h5 class="card-title">{{ result.serp_title }}</h5>
+                                                                    <p class="card-text">{{ result.serp_snippet }}</p>
+                                                                    <a href="{{ result.serp_url }}"
+                                                                       class="btn custom_button text-white">visit</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -163,5 +163,10 @@
         function myFunction() {
             $('#loading_icon').show();
         }
+    </script>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
     </script>
 {% endblock %}
