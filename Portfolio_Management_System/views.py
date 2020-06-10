@@ -19,6 +19,7 @@ from System_Log_Management_Unit.system_log_manager import Data_Queries
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.conf import settings as djangoSettings
 from django.contrib import messages
+from django.templatetags.static import static
 acq = Acquistion_Manager()
 dq = Data_Queries()
 
@@ -198,6 +199,8 @@ class Portfolio_Link_Analysis(View):
             resp = dq.portfolio_link_analysis(object_id)
             resp=json.loads(resp)
             name=resp['name']
+            path=static('/images/anonymous_logo.jpg')
+            resp['img']=path+""
             #make sure that we have two nodes to display else it will redirect back to archive page with message 
             if (len(resp['children']) and len(resp['children'][0]['children'])) <= 1 :
                 messages.success(request, 'No link analysis found for '+name)
