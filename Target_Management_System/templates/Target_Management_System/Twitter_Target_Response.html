@@ -885,17 +885,17 @@
 <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
 <!-- Latest compiled and minified plotly.js JavaScript -->
-<script src="https://cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>
+<script src="{% static 'Target_Management_System/js/plotly-latest.min.js' %}" charset="utf-8"></script>
 <!-- OR use a specific plotly.js release (e.g. version 1.52.3) -->
-<script src="https://cdn.plot.ly/plotly-1.52.3.min.js" charset="utf-8"></script>
+<script src="{% static 'Target_Management_System/js/plotly-1.52.3.min.js' %}" charset="utf-8"></script>
 <!-- OR an un-minified version is also available -->
-<script src="https://cdn.plot.ly/plotly-latest.js" charset="utf-8"></script>
+<script src="{% static 'Target_Management_System/js/plotly-latest.js' %}" charset="utf-8"></script>
 
 
 <script>
 
     var list2 =
-        console.log(list2)
+      //  console.log({{ tweets.posting_time_charts.0|safe }})
     var trace1 = {
         y: {{ tweets.posting_time_charts.0|safe }},
         x: {{ tweets.posting_time_charts.1|safe }},
