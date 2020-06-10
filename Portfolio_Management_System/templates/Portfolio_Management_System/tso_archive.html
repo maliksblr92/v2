@@ -6,35 +6,44 @@
 {% endblock %}
 {% block smallnavbar %}
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 ">
-        <div class="row">
-            <div class="col-md-3 m-0 p-0  border-bottom-left"><a
-                    class="nav-link secondmidnavmenu w-100 h-100 text-white border-bottom-left"
-                    href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                    href="{% url 'Portfolio_Management_System:explore' %}">Explore</a>
+    <div class="col-md-3"></div>
+                <div class="col-md-3 m-0 p-0  "><a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+
+<div class="col-md-3 m-0 p-0  ">
+                    <a
+                        class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                        href="/pms/archive">Archive</a></div>
             </div>
-            <div class="col-md-3 m-0 p-0  "><a
-                    class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                    href="{% url 'Portfolio_Management_System:add_information' %}">Link </a></div>
-            <div class="col-md-3 m-0 p-0 secondnavactive border-bottom-right"><a
-                    class="nav-link secondmidnavmenu w-100 h-100 text-white active border-bottom-right"
-                    href="/pms/archive">Archive</a></div>
+<div class="col-md-3"></div>
         </div>
-    </div>
-    <div class="col-md-2"></div>
-</div>
-{% endblock %}
+
+    </div>{% endblock %}
 {% block belly %}
 <div class="row">
+ 
     <div class="col-md-12  m-0 p-0">
         <div class="w-100 h-100 glowing_border" style="border-radius: 20px 20px 0px 0px;">
             <div class="card-header custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
                 <p class="card_header_text">Portfolio Archive </p>
             </div>
             <div class="card-body main_card custom_main_background">
+                <div class="row">
+                   <div class="col-md-3"></div>
+                        <div class="col-md-6 text-center">
+                            {% if messages %}
+                          
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="alert alert-danger font-weight-bold"  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </div>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                        </div>
+                        <div class="col-md-3"></div>
+                    
+                </div>
                 <!-- row 1 small cards starts -->
                 <div class="row  m-1">
                     {% for portfolio in portfolios %}

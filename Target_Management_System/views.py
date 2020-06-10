@@ -189,7 +189,7 @@ class Target_Fetched(RequireLoginMixin, IsTSO, View):
         if 'target_site' in kwargs:target_site = kwargs['target_site']
 
         resp = acq.get_fetched_targets(website=target_site)
-        #print(resp)
+
 
         paginator = Paginator(resp, 6)
         page = request.GET.get('page')
