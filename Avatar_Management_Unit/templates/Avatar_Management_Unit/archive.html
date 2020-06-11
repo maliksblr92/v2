@@ -1,0 +1,94 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+           
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems "> CREATE</a>
+            </div>
+
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:archive' %}" class="btn secondnavitems "> ARCHIVE</a>
+            </div>
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:send_message' %}" class="btn secondnavitems "> SEND MESSAGE</a>
+            </div>
+            
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+{% block belly %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for avatar in resp %}
+            <div class="col-md-6 card">
+<div class="card-header">
+  <div class="row">
+      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='work_details' avatar_id=avatar.first_name  %}" class="badge badge-primary text-white">Add work </a></div>
+      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='intrest' avatar_id=avatar.first_name %}" class="badge badge-primary text-white">Add intrest </a></div>
+      <div class="col-md-4"><a target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.first_name %}" class="badge badge-primary text-white">Add events </a></div>
+     
+  </div>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Fisrt Name </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.first_name|truncatechars:"20"}}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Last Name </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.last_name|truncatechars:"20"}}</span></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Email  </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.email|truncatechars:"20"}}</span></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Gender  </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.gender|truncatechars:"20"}}</span></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">DOB  </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.birthday|truncatechars:"20"}}</span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">martial Status  </span></div>
+        <div class="col-md-9"><span class="badge badge-info">{{avatar.marital_status|truncatechars:"20"}}</span></div>
+    </div>
+  
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Nationality    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.nationality|truncatechars:"20"}}</p></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Relegious views   </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.religious_views}}</p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Address    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.address}}</p></div>
+    </div>
+</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
+    </script>
+{% endblock %}

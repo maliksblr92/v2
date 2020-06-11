@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 # Create your views here.
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse,render
+from django.contrib import messages
 from bson import ObjectId
 from Avatar_Management_Unit.models import *
 from Avatar_Management_Unit.avatar_action_manager import Avatar_Action
@@ -28,75 +29,51 @@ class Create_Avatar(View):
             request, 'Avatar_Management_Unit/avatar.html', ctx)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+        print("in post request")
+        fname = request.POST.get('pinfo-fname')
+        lname = request.POST.get('pinfo-lname')
         email = request.POST.get('pinfo-email')
-        if not request.POST.get('pinfo-fname') == '':
-            fname = request.POST.get('pinfo-fname')
-        else:
-            fname = None
-        if not request.POST.get('pinfo-lname') == '':
-            lname = request.POST.get('pinfo-lname')
-        else:
-            lname = None
-        if not request.POST.get('pinfo-phone') == '':
-            phone = request.POST.get('pinfo-phone')
-        else:
-            phone = None
-        if not request.POST.get('pinfo-nationality') == '':
-            nationality = request.POST.get('pinfo-nationality')
-        else:
-            nationality = None
-        if not request.POST.get('pinfo-address') == '':
-            address = request.POST.get('pinfo-address')
-        else:
-            address = None
-        if not request.POST.get('pinfo-religious') == '':
-            religious = request.POST.get('pinfo-religious')
-        else:
-            religious = None
-        if not request.POST.get('pinfo-marital-status') == '':
-            marital_status = request.POST.get('pinfo-marital-status')
-        else:
-            marital_status = None
-        if not request.POST.get('pinfo-dob') == '':
-            dob = datetime.datetime.strptime(request.POST.get('pinfo-dob'), '%m/%d/%Y')
-        else:
-            dob = None
-        gender = request.POST.get('pinfo-gender')
-
-        print(
-            email,
-            fname,
-            lname,
-            phone,
-            nationality,
-            address,
-            religious,
-            marital_status,
-            dob,
-            gender)
+        phone = request.POST.get('pinfo-phone')
+        nationality = request.POST.get('pinfo-nationality')
+        address = request.POST.get('pinfo-address')
+        religious = request.POST.get('pinfo-religious')
+        marital_status=request.POST.get('pinfo-marital-status')
+        dob=request.POST.get('pinfo-dob')
+        gender=request.POST.get('pinfo-gender')
+       
+    
+        # saving to model
         a = Avatar_AMS()
         a.create(
-            email,
+          
             first_name=fname,
             last_name=lname,
+            email=email,
             phone=phone,
             nationality=nationality,
             address=address,
             religious_views=religious,
             gender=gender,
             marital_status=marital_status,
-            birthday=dob
+            birthday=dob,
         )
-
-        return JsonResponse({'success': 200})
+        if(a):
+           
+            messages.success(request, 'Avatar created successfully')
+            return redirect('/amu/avatar')
+        else:
+            messages.error(request, 'Failed to cerate avatar .... please  try again')
+            return redirect('/amu/avatar')
 
 
 class Add_Work(View):
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse('on Create avatar')
-
+        details_type=kwargs.get('details_type')
+        avatar_id=kwargs.get('avatar_id')
+        print('#######')
+        print(avatar_id)
+        return render(request,'Avatar_Management_Unit/add_work.html',{'details_type':details_type});
     def post(self, request, *args, **kwargs):
 
         avatar_id = request.POST.get('wd-avatar')
@@ -434,3 +411,11 @@ class Action_Send_Message(View):
 
 
         return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
+
+class Archive(View):
+    def get (self,request,*args,**kwargs):
+        resp = Avatar_AMS.get_all_avatars()
+        resp=resp.to_json()
+        resp=json.loads(resp)
+        return render(request,'Avatar_Management_Unit/archive.html',{'resp':resp})
+    
