@@ -119,7 +119,21 @@
 
 
 
-        {{c.media_directory}}     ) no-repeat center center fixed;*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{c.media_directory}}                   ) no-repeat center center fixed;*/
             background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -300,7 +314,8 @@
     <div class="row ml-1 mr-1 pl-5 pr-5">
         <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
             <div class="row">
-                <div class="col-md-6 text-left"><a href="https://www.facebook.com/{{page.username}}" target="_blank" class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
+                <div class="col-md-6 text-left"><a href="https://www.facebook.com/{{ page.username }}" target="_blank"
+                                                   class="btn btn-primary btn-sm  " style="margin-top:2px;"> <i
                         class="fab fa-facebook-f mr-2 "></i>Facebook Target Profile</a></div>
 
                 <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
@@ -311,7 +326,7 @@
                             <a type="button" target="_blank"
                                class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
                                href="{% url 'Target_Management_System:FacebookPageReport' object_gtr_id=page.GTR %}"
-                               id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                               id="download_as_pdf" id="download_as_pdf">PDF Download</a>
                             <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                                style="margin-top:2px;"
                                href="{% url 'Target_Management_System:link_analysis' object_gtr_id=page.GTR %}"
@@ -344,8 +359,10 @@
         </div>
         <div class="col-md-8 ">
             <div class="profile-image-name text-white ">
-                <span class="" style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }}
-                     <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success">
+                <span class=""
+                      style="border-radius:2px;padding:10px;letter-spacing:4px;">{{ page.name|truncatechars:"25" }}
+                     <a href="https://www.facebook.com/{{ profile.username }}" target="_blank"
+                        class="badge badge-success">
                         <i class="fa fa-eye mr-2"></i>view</a>
             </div>
         </div>
@@ -773,20 +790,20 @@
                                                                 </div>
                                                             </div>
                                                         {% elif c.id %}
-                                                        <div class="float-right d-flex flex-column justify-content-center align-items-center">
-                                                            <div class="badge custom_badge">
-                                                                <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.id 'facebook' %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-link  fa-2x text-light"></i>
-                                                                </a>
+                                                            <div class="float-right d-flex flex-column justify-content-center align-items-center">
+                                                                <div class="badge custom_badge">
+                                                                    <a href="{% url 'Target_Management_System:tms_marktarget_prime' c.id 'facebook' %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-link  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="badge custom_badge mt-2">
+                                                                    <a href="{% url 'Avatar_Management_Unit:send_message' c.id %}"
+                                                                       target="_blank">
+                                                                        <i class="fa fa-envelope  fa-2x text-light"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                            <div class="badge custom_badge mt-2">
-                                                                <a href="{% url 'Avatar_Management_Unit:send_message' c.id %}"
-                                                                   target="_blank">
-                                                                    <i class="fa fa-envelope  fa-2x text-light"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
                                                         {% endif %}
                                                     </div>
                                                     <!-- Addedd by osama end-->
@@ -911,16 +928,18 @@
                                             style="font-size:12px;">{{ profile.general_information.languages|default:"N/A" }}<span>
                                     </p>
                                     <p>
-                                    <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span
-                                        class="font-weight-bold"
-                                        style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}<span></p>
+                                        <span class="badge badge-primary w-25 mr-2">Relegion  : </span><span
+                                            class="font-weight-bold"
+                                            style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}<span>
+                                    </p>
 
-                                            <p>
-                                                <span class="badge badge-primary w-25 mr-2">Relegion  : </span> <a href="https://www.facebook.com/{{profile.username}}" target="_blank" class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a>    </p>
+                                    <p>
+                                        <span class="badge badge-primary w-25 mr-2">Relegion  : </span> <a
+                                            href="https://www.facebook.com/{{ profile.username }}" target="_blank"
+                                            class="badge badge-success"><i class="fa fa-eye mr-2">view</i></a></p>
 
 
-                                            </p>
-
+                                    </p>
 
 
                                 </div>
@@ -1030,6 +1049,53 @@
                         <div id="page_posts" class="tab-pane fade ">
                             <div class="row">
                                 {% for p in  page.page_posts %}
+                                    <!-- NEW DESIGN FOR POSTS START -->
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row p-1 glowing_border">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <!-- Post header start - image, page info, author info start-->
+                                                <div class="row">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3 text-center">
+                                                        {% if p.media_directory %}
+                                                            <img src="{{ p.media_directory }}"
+                                                                 style="height: 70px;width:70px;border-radius: 50%;;"
+                                                                 class="img-fluid">
+                                                        {% else %}
+                                                            <img src="{% static '/images/logo.svg' %}"
+                                                                 style="height: 70px;width:70px;border-radius: 50%;;"
+                                                                 class="img-fluid">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-3 text-center custom-column-start-start pt-2 text_heading">
+                                                        <span> {{ page.name|truncatechars:"25" }}</span>
+                                                        <span class="smaller-txt">{{ p.timestamp }}</span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-column justify-content-around align-items-center text_heading">
+                                                        <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                            Post id:
+                                                            <span class="text_paragraph">{{ p.post_id }}</span>
+                                                        </div>
+                                                        <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                            Author
+                                                            Name:
+                                                            <span class="text_paragraph">{{ p.author_name }}</span>
+                                                        </div>
+                                                        <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                            Author
+                                                            Username:
+                                                            <span class="text_paragraph">{{ p.author_username }}</span>
+                                                        </div>
+                                                        <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                            Sentiment:
+                                                            <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Post header start - image, page info, author info end-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- NEW DESIGN FOR POSTS END -->
                                     <div class="border custom_border_color col-md-12 text-center text_paragraph"
                                          style="border-radius: 10px 10px 0px 0px;">
                                         <div class="row">

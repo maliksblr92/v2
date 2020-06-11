@@ -60,72 +60,7 @@
 
 <body>
 <div class="container-fluid">
-    <div class="row pl-5 pr-5">
-        <div class="col-lg-12">
-            <nav class="navbar
-              navbar-expand-lg" id="header">
-                <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
-                        data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon ">
-                            <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-                        </span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <div class="col-lg-2">
 
-                    </div>
-                    <div class="col-lg-8 ">
-                        <div class="row m-0 p-0">
-                            <div class="col-lg-5 pt-2">
-                                <div class="row">
-                                    <div class="col-lg-6 list list-inline custom_center "
-                                         style="border-right:2px solid white;border-left:2px solid white;">
-                                        <li class="nav-item">
-                                            <a class=" btn font-weight-bold nav_btn" href="#"
-                                               style="color: #fff !important;">DASHBOARD</a>
-                                        </li>
-                                    </div>
-                                    <div class="col-lg-6  list list-inline custom_center "
-                                         style="border-right:2px solid white;border-left:2px solid white;">
-                                        <li class="nav-item">
-                                            <a class="btn font-weight-bold nav_btn" href="#"
-                                               style="color: #fff !important;">MONITOR</a>
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 custom_center">
-                                <img src="{% static 'Additional_assets/news_monitoring/images/Asset 722.svg' %}"
-                                     class="m-0 p-0  " style="height: 60px;width: 200px;" alt="">
-                            </div>
-                            <div class="col-lg-5 pt-2">
-                                <div class="row">
-                                    <div class="col-lg-6  list list-inline custom_center " style="border-right:2px solid white;border-left:2px solid
-                        white;">
-                                        <li class="nav-item">
-                                            <a class="btn font-weight-bold nav_btn" href="#"
-                                               style="color: #fff !important;">FETCH</a>
-                                        </li>
-                                    </div>
-                                    <div class="col-lg-6 list list-inline custom_center "
-                                         style="border-right:2px solid white;border-left:2px solid white;">
-                                        <li class="nav-item">
-                                            <a class="btn font-weight-bold nav_btn" href="#"
-                                               style="color: #fff !important;">RETRIEVE</a>
-                                        </li>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 ">
-
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
     {% for x in news_json %}
 
         <div class="row mt-2 p-3   ml-2 mr-2">
@@ -281,7 +216,7 @@
                                 <div class="col-md-12 text-center">
                                     <div class="text-white text-center card-header font-weight-bold pt-2 pb-2"
                                          style="font-size: 14px; border-radius: 10px 10px 0px 0px;">
-                                        Most Used Hastag
+                                        Most Used Hashtag
                                     </div>
                                     <div class="">
                                         {% for i in x.most_used_hashtags %}
