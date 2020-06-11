@@ -123,8 +123,8 @@ class Avatar_AMS(Document):
     phone_number = StringField(max_length=20)
     profile_image = ImageField()
     cover_image = ImageField()
-    address = StringField(min_length=1)
-    nationality = StringField(min_length=1)
+    address = StringField(min_length=10)
+    nationality = StringField(min_length=5)
 
     works= ListField(default=[])
     educations = ListField(default=[])
@@ -139,7 +139,7 @@ class Avatar_AMS(Document):
 
 
     def __str__(self):
-        return self.__all__;
+        return self.email
 
     def __repr__(self):
         return self.email
