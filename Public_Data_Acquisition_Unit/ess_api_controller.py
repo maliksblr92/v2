@@ -1,5 +1,6 @@
 import requests
 import logging
+import time
 from django.conf import settings
 
 #ESS_IP = settings.ESS_IP
@@ -17,6 +18,13 @@ class Ess_Api_Controller(object):
 
     def __init__(self):
         self.ess = None
+        self.reconnect_delay = 1
+        self.max_reconnect_tries = 10
+        self.reconnect_tries = 0
+
+
+
+
         try :
             if(self.ess_connect()):
                 pass
@@ -24,6 +32,7 @@ class Ess_Api_Controller(object):
                 #self.ess_add_instagram_search_target('islamabad')
         except Exception as e:
             logger.error('.......................................failed to connect to ESS..........................')
+            self.reconnect_ess()
 
     def ess_connect(self):
         login_url = 'login/'
@@ -48,7 +57,38 @@ class Ess_Api_Controller(object):
         pass
 
     def ess_is_conneted(self):
-        pass
+        try:
+
+            add_target_url = 'connection'
+            payload = {}
+            response = requests.get(ESS_SERVER_BASE_URL + add_target_url)
+            print(response.status_code)
+            return response.status_code == 200 or False
+        except Exception as e:
+            print(e)
+            return False
+
+    def reconnect_ess(self):
+
+        if(not self.reconnect_tries >= self.max_reconnect_tries):
+            self.get_reconnect_delay()
+            print('reconnecting to ess')
+            if(self.ess_connect()):
+                pass
+            else:
+                self.reconnect_ess()
+        else:
+            print('failed to connect to ess , maximum reconnect tries exceeded ')
+
+
+
+    def get_reconnect_delay(self):
+
+        time.sleep(self.reconnect_delay)
+
+        self.reconnect_tries += 1
+        self.reconnect_delay = self.reconnect_delay * self.reconnect_tries
+
 
     def ess_add_news_target(self,top = 10,news_site='bbc'):
         try:
