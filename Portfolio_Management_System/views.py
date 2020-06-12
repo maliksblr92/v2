@@ -183,6 +183,7 @@ class Archive(View):
 
         portfolios = Portfolio_PMS.get_all_portfolios()
         print(portfolios)
+        print("+++++++++++++++++++++++")
         return render(request,'Portfolio_Management_System/tso_archive.html',{'portfolios':portfolios})
 
 

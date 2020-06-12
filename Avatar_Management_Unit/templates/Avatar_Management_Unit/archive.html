@@ -1,6 +1,7 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
+
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
 {% endblock %}
@@ -31,9 +32,10 @@
             <div class="col-md-6 card">
 <div class="card-header">
   <div class="row">
-      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='work_details' avatar_id=avatar.first_name  %}" class="badge badge-primary text-white">Add work </a></div>
-      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='intrest' avatar_id=avatar.first_name %}" class="badge badge-primary text-white">Add intrest </a></div>
-      <div class="col-md-4"><a target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.first_name %}" class="badge badge-primary text-white">Add events </a></div>
+    
+      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='work_details' avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add work </a></div>
+      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='intrest' avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add intrest </a></div>
+      <div class="col-md-4"><a target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add events </a></div>
      
   </div>
 </div>
@@ -81,6 +83,33 @@
         <div class="col-md-3"><span class="badge badge-primary">Address    </span></div>
         <div class="col-md-9"><p class="badge ">{{avatar.address}}</p></div>
     </div>
+
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Education Details    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.educations|length}}</p></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Marriage Details    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.marriages|length}}</p></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Intrest Details    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.interests|length}}</p></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3"><span class="badge badge-primary">Work Details    </span></div>
+        <div class="col-md-9"><p class="badge ">{{avatar.works|length}}</p></div>
+    </div>
+
+
+    
 </div>
             </div>
             {% endfor %}
@@ -89,6 +118,6 @@
 {% endblock %}
 {% block base_js %}
     <script>
-        window.document.title = "Target";
+        window.document.title = "AMU ARCHIVE";
     </script>
 {% endblock %}
