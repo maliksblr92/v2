@@ -1824,34 +1824,46 @@
                                                         <!-- Reaction Angry End -->
 
                                                         <!-- Reaction Comments Start -->
-                                                        <div class="row collapse" id="comments_{{ forloop.counter }}">
+                                                    <div class="row collapse" id="comments_{{ forloop.counter }}">
                                                         <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
                                                             Comments ({{ p.comments | length }})
                                                         </span>
-                                                            {% for r in p.comments %}
-                                                                <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                                                     style="height:100px;">
-                                                                    <img src="{{ r.media_directory }}"
-                                                                         style="height: 80px;width:80px;border-radius: 50%;;"
-                                                                         class="img-fluid">
-                                                                    <div class="p-2">
-                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                                                                    <span class="text_paragraph">{{ r.name }}</span>
-                                                                </span>
-                                                                        <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                                                                    <span class="text_paragraph">{{ r.username }}</span>
-                                                                </span>
-                                                                        <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                                                                    <span class="text_paragraph">{{ r.id }}</span>
-                                                                </span>
-                                                                        <a href="{{ r.url }}" target="_blank"
-                                                                           class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                                                class="fa fa-search">View</i></a>
+                                                        {% for r in p.comments %}
+                                                            <div class="col-sm-12 col-md-12 col-lg-12 border custom_border_color border-radius-5-all m-0 p-1">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-row justify-content-start align-items-center">
+                                                                        <img src="{{ r.commentor.media_directory }}"
+                                                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                             class="img-fluid">
+                                                                        <div class="p-2">
+                                                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                                <span class="text_paragraph">{{ r.commentor.name }}</span>
+                                                                            </span>
+                                                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                                <span class="text_paragraph">{{ r.commentor.username }}</span>
+                                                                            </span>
+                                                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                                <span class="text_paragraph">{{ r.commentor.id }}</span>
+                                                                            </span>
+                                                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Timestamp:
+                                                                                <span class="text_paragraph">{{ r.timestamp| default:"N/A" }}</span>
+                                                                            </span>
+                                                                            <a href="{{ r.commentor.url }}"
+                                                                               target="_blank"
+                                                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                                    class="fa fa-search">View</i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-column justify-content-start align-items-start">
+                                                                        <span class="badge w-100 m-0 text_heading">Comment Text:</span>
+                                                                        <span class="text_paragraph" style="height: 100px; overflow-x: hidden; overflow-y: auto;">{{ r.comment_text }}</span>
                                                                     </div>
                                                                 </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                        <!-- Reaction Comments End -->
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Comments End -->
                                                     </div>
                                                 </div>
                                                 <!-- Post Reacts Tabs end -->
