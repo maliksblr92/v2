@@ -8,24 +8,16 @@
 
 {% block smallnavbar %}
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4" style="">
-            <div class="row border second_nav_row">
-                <div class="col-md-6 m-0 p-0  ">
-                    <a class="btn border-right  nav-link  second_nav_btn  h-100 text-white"
-                       href="/pms/create">Create</a>
-                </div>
-                <!--            <div class="col-md-3 border-top m-0 p-0  "><a
-                                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/overview">Overview</a>
-                            </div>
-                            <div class="col-md-3  border-top m-0 p-0  "><a
-                                    class="btn  border-right border-top nav-link  second_nav_btn w-100 h-100 text-white" href="/pms/link">Link </a></div> -->
-                <div class="col-md-6 m-0 p-0  ">
-                    <a class="btn   nav-link  second_nav_btn  h-100 text-white active" href="/pms/archive">Archive</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                    href="/pms/archive">Archive</a></div>
+        <div class="col-md-3"></div>
     </div>
 {% endblock %}
 {% block belly %}
@@ -46,230 +38,235 @@
                                     </div>
                                 </div>
                             </div>
-                                <!-- This is The Form Section below top-section-->
-                                <div class="row ml-2 mt-4"
-                                     style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
-                                    <div class="col-md-12">
-                                        <h5 class=" myH5">Linked Targets</h5>
-                                        <div class="row mr-2">
-                                            <!-- Just like card 1  start looping here -->
-                                            {% if targets|length > 0 %}
-                                                {% for target in targets %}
-                                                    <div class="col-md-6">
-                                                        <!-- inside CaRD DIV-->
-                                                        <div class="row h-100">
-                                                            <div class="col-md-2  glowing_border d-flex flex-column justify-content-center align-items-center"
-                                                                 style="border-radius:15px 0px 0px 15px;">
+                            <!-- This is The Form Section below top-section-->
+                            <div class="row ml-2 mt-4"
+                                 style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
+                                <div class="col-md-12">
+                                    <h5 class=" myH5">Linked Targets</h5>
+                                    <div class="row mr-2">
+                                        <!-- Just like card 1  start looping here -->
+                                        {% if targets|length > 0 %}
+                                            {% for target in targets %}
+                                                <div class="col-md-6">
+                                                    <!-- inside CaRD DIV-->
+                                                    <div class="row h-100">
+                                                        <div class="col-md-2  glowing_border d-flex flex-column justify-content-center align-items-center"
+                                                             style="border-radius:15px 0px 0px 15px;">
 
-                                                                {% if target.1.GTR|lower == 'facebook' %}
-                                                                    {% if target.1.target_type|lower == 'profile' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-                                                                    {% elif target.1.target_type|lower == 'page' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-                                                                    {% elif target.1.target_type|lower == 'group' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-
-                                                                    {% endif %}
-                                                                {% elif target.1.GTR|lower == 'twitter' %}
+                                                            {% if target.1.GTR|lower == 'facebook' %}
+                                                                {% if target.1.target_type|lower == 'profile' %}
                                                                     <a class="btn btn-primary custom_icons"
-                                                                       href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}"
+                                                                       href="{% url 'Target_Management_System:FacebookPerson_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                                {% elif target.1.target_type|lower == 'page' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:FacebookPage_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                                {% elif target.1.target_type|lower == 'group' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:FacebookGroup_Target_Response' target.0.GTR %}"
                                                                        role="button" target="_blank"><i
                                                                             class="fa fa-eye"></i></a>
 
-                                                                {% elif target.1.GTR|lower == 'instagram' %}
+                                                                {% endif %}
+                                                            {% elif target.1.GTR|lower == 'twitter' %}
+                                                                <a class="btn btn-primary custom_icons"
+                                                                   href="{% url 'Target_Management_System:Twitter_Target_Response' target.0.GTR %}"
+                                                                   role="button" target="_blank"><i
+                                                                        class="fa fa-eye"></i></a>
+
+                                                            {% elif target.1.GTR|lower == 'instagram' %}
+                                                                <a class="btn btn-primary custom_icons"
+                                                                   href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}"
+                                                                   role="button" target="_blank"><i
+                                                                        class="fa fa-eye"></i></a>
+
+                                                            {% elif target.1.GTR|lower == 'linkedin' %}
+
+
+                                                                {% if target.1.target_type|lower == 'profile' %}
                                                                     <a class="btn btn-primary custom_icons"
-                                                                       href="{% url 'Target_Management_System:Instagram_Target_Response' target.0.GTR %}"
+                                                                       href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                                {% elif target.1.target_type|lower == 'company' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}"
                                                                        role="button" target="_blank"><i
                                                                             class="fa fa-eye"></i></a>
 
-                                                                {% elif target.1.GTR|lower == 'linkedin' %}
+                                                                {% endif %}
+                                                            {% elif target.1.GTR|lower == 'reddit' %}
 
+                                                                {% if target.1.target_type|lower == 'profile' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:reddit_target_response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                                {% elif target.1.target_type|lower == 'subreddit' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:subreddit_target_resposne' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
 
-                                                                    {% if target.1.target_type|lower == 'profile' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-                                                                    {% elif target.1.target_type|lower == 'company' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-
-                                                                    {% endif %}
-                                                                {% elif target.1.GTR|lower == 'reddit' %}
-
-                                                                    {% if target.1.target_type|lower == 'profile' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:reddit_target_response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-                                                                    {% elif target.1.target_type|lower == 'subreddit' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:subreddit_target_resposne' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-
-                                                                    {% endif %}
-
-                                                                {% elif target.1.GTR|lower == 'youtube' %}
-
-                                                                    {% if target.1.target_type|lower == 'channel' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:Youtube_Target_Response' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-
-                                                                    {% endif %}
-
-                                                                {% elif target.1.GTR|lower == 'custom' %}
-
-                                                                    {% if target.1.target_type|lower == 'keybase_crawling' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-                                                                    {% elif target.1.target_type|lower == 'dynamic_crawling' %}
-                                                                        <a class="btn btn-primary custom_icons"
-                                                                           href="{% url 'Target_Management_System:dynamic_crawling_target' target.0.GTR %}"
-                                                                           role="button" target="_blank"><i
-                                                                                class="fa fa-eye"></i></a>
-
-                                                                    {% endif %}
-                                                                {% else %}
                                                                 {% endif %}
 
+                                                            {% elif target.1.GTR|lower == 'youtube' %}
 
-                                                            </div>
-                                                            <!-- Div Right part-->
-                                                            <div class="col-md-10 glowing_border"
-                                                                 style=" border-radius:0px 15px 15px 0px;">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 d-flex flex-column justify-content-center">
-                                                                        <img class=""
-                                                                             style="height:120px; width:120px; border-radius: 50%;"
-                                                                                {% if target.0.profile_picture_url.profile_picture %}
-                                                                             src="{{ target.0.profile_picture_url.profile_picture }}"
-                                                                             alt="">
+                                                                {% if target.1.target_type|lower == 'channel' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:Youtube_Target_Response' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
 
-                                                                                {% elif target.0.profile_picture_url %}
-                                                                                    src="
-                                                                                    {{ target.0.profile_picture_url }}
-                                                                                    "
-                                                                                    alt="">
+                                                                {% endif %}
 
-                                                                                {% elif target.0.overview.media_directory %}
-                                                                                    src="
-                                                                                    {{ target.0.overview.media_directory }}
-                                                                                    " alt="">
+                                                            {% elif target.1.GTR|lower == 'custom' %}
 
-                                                                                {% elif target.0.profile_url %}
-                                                                                    src="{{ target.0.profile_url }}"
-                                                                                    alt="">
+                                                                {% if target.1.target_type|lower == 'keybase_crawling' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                                {% elif target.1.target_type|lower == 'dynamic_crawling' %}
+                                                                    <a class="btn btn-primary custom_icons"
+                                                                       href="{% url 'Target_Management_System:dynamic_crawling_target' target.0.GTR %}"
+                                                                       role="button" target="_blank"><i
+                                                                            class="fa fa-eye"></i></a>
 
-                                                                                {% elif target.0.icon_media_directory %}
-                                                                                    src="
-                                                                                    {{ target.0.icon_media_directory }}
-                                                                                    "
-                                                                                    alt="">
-
-                                                                                {% else %}
-                                                                                    src="
-                                                                                    {% static 'images/testimonial.png' %}
-                                                                                    " alt="">
-                                                                                {% endif %}
-
-                                                                        <!-- src="" alt=""> -->
+                                                                {% endif %}
+                                                            {% else %}
+                                                            {% endif %}
 
 
-                                                                    </div>
-                                                                    <div class="col-md-8">
-
-                                                                        <ul class=""
-                                                                            style="margin-top:5%;  color:white">
-                                                                            <li>Name :{{ target.0.name }}</li>
-                                                                            <li>Username :{% if target.0.username %}
-                                                                                {{ target.0.username }} {% else %}
-                                                                                {{ target.1.title }}{% endif %} </li>
-                                                                            <li>Website :{{ target.1.GTR }} </li>
-                                                                            <li>Target Type
-                                                                                :{{ target.1.target_type }}</li>
-                                                                            <li>Added On
-                                                                                :{{ target.1.created_on }}</li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
                                                         </div>
-
-
-                                                    </div>
-                                                {% endfor %}
-                                            {% else %}
-                                                <h4 style="color: white">no data found</h4>
-
-                                            {% endif %}
-                                            <!--END OF CARD 1-->
-                                        </div>
-                                        <h5 class=" myH5">Linked Posts</h5>
-                                        <div class="row">
-
-                                            {% for post in posts %}
-                                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
-                                                    <div class="card text-center glowing_border transparent">
-                                                        <div class="card-header text-white text-left topcontentbar">
-                                                            Username: {{ post.username }}
-                                                            <h5 class="card-title"><a class="text-white"
-                                                                                      href="{{ post.a_url }}"
-                                                                                      target="_blank">Author: {{ post.author }}</a>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="card-body ">
-                                                            <p class="card-text text-black">{{ post.text }}</p>
+                                                        <!-- Div Right part-->
+                                                        <div class="col-md-10 glowing_border"
+                                                             style=" border-radius:0px 15px 15px 0px;">
                                                             <div class="row">
-                                                                <div class="col-md-12">
-                                                                    {% if post.picture|length > 0 %}
-                                                                        <img class="img-fluid border"
-                                                                             src="{{ post.picture }}">
-                                                                    {% else %}
-                                                                        <img class="img-fluid border"
-                                                                             src="{{ post.link }}">
+                                                                <div class="col-md-4 d-flex flex-column justify-content-center">
+                                                                    <img class=""
+                                                                         style="height:120px; width:120px; border-radius: 50%;"
+                                                                            {% if target.0.profile_picture_url.profile_picture %}
+                                                                         src="{{ target.0.profile_picture_url.profile_picture }}"
+                                                                         alt="">
+
+                                                                            {% elif target.0.profile_picture_url %}
+                                                                                src="
+                                                                                {{ target.0.profile_picture_url }}
+                                                                                "
+                                                                                alt="">
+
+                                                                            {% elif target.0.overview.media_directory %}
+                                                                                src="
+                                                                                {{ target.0.overview.media_directory }}
+                                                                                " alt="">
+
+                                                                            {% elif target.0.profile_url %}
+                                                                                src="{{ target.0.profile_url }}"
+                                                                                alt="">
+
+                                                                            {% elif target.0.icon_media_directory %}
+                                                                                src="
+                                                                                {{ target.0.icon_media_directory }}
+                                                                                "
+                                                                                alt="">
+
+                                                                            {% else %}
+                                                                                src="
+                                                                                {% static 'images/testimonial.png' %}
+                                                                                " alt="">
+                                                                            {% endif %}
+
+                                                                    <!-- src="" alt=""> -->
 
 
-                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="col-md-8">
+
+                                                                    <ul class=""
+                                                                        style="margin-top:5%;  color:white">
+                                                                        <li>Name :{{ target.0.name }}</li>
+                                                                        <li>Username :{% if target.0.username %}
+                                                                            {{ target.0.username }} {% else %}
+                                                                            {{ target.1.title }}{% endif %} </li>
+                                                                        <li>Website :{{ target.1.GTR }} </li>
+                                                                        <li>Target Type
+                                                                            :{{ target.1.target_type }}</li>
+                                                                        <li>Added On
+                                                                            :{{ target.1.created_on }}</li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <a href="{{ post.link }}" target="_blank"
-                                                               class="btn btn-outline-light  ">Post</a>
 
                                                         </div>
-                                                        <div class="card-footer text-muted">
-                                                            <span class="badge badge-light float-left">Site : {{ post.t_site }}</span>
-                                                            <span class="badge badge-light float-right">Type : {{ post.t_type }}</span>
-                                                        </div>
                                                     </div>
+
+
                                                 </div>
                                             {% endfor %}
+                                        {% else %}
+                                            <h4 style="color: white">no data found</h4>
 
-                                        </div>
+                                        {% endif %}
+                                        <!--END OF CARD 1-->
+                                    </div>
+                                    <h5 class=" myH5">Linked Posts</h5>
+                                    <div class="row">
+
+                                        {% for post in posts %}
+                                            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
+                                                <div class="card text-center glowing_border transparent" style="border-radius: 20px 20px 0px 0px;">
+                                                    <div class="card-header text-white text-left topcontentbar">
+                                                        Username: {{ post.username }}
+                                                        <h5 class="card-title"><a class="text-white"
+                                                                                  href="{{ post.a_url }}"
+                                                                                  target="_blank">Author: {{ post.author }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="card-body ">
+                                                        <p class="card-text text-black">{{ post.text }}</p>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                {% if post.picture|length > 0 %}
+                                                                    <img class="img-fluid border"
+                                                                         src="{{ post.picture }}">
+                                                                {% else %}
+                                                                    <img class="img-fluid border"
+                                                                         src="{{ post.link }}">
+
+
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <a href="{{ post.link }}" target="_blank"
+                                                           class="btn btn-outline-light  ">Post</a>
+
+                                                    </div>
+                                                    <div class="card-footer text-muted">
+                                                        <span class="badge badge-light float-left">Site : {{ post.t_site }}</span>
+                                                        <span class="badge badge-light float-right">Type : {{ post.t_type }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
 
                                     </div>
+
                                 </div>
-                                <!--my code above-->
                             </div>
+                            <!--my code above-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Links - Portfolio";
+    </script>
 {% endblock %}

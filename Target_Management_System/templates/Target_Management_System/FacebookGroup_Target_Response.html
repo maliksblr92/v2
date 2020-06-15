@@ -320,7 +320,7 @@
                            class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;"
                            href="{% url 'Target_Management_System:FacebookGroupReport' object_gtr_id=group.GTR %}"
                            id="download_as_pdf"
-                           id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                           id="download_as_pdf" id="download_as_pdf">PDF Download</a>
                         <a type="button" target="_blank"
                            href="{% url 'Target_Management_System:link_analysis' object_gtr_id=group.GTR %}"
                            class="btn  btn-sm btn-success float-left mr-2 ml-2 text-white" style="margin-top:2px;">Link
@@ -337,7 +337,7 @@
                 <a type="button" class="btn  btn-sm btn-success float-right mr-2 ml-2 text-white"
                    style="margin-top:2px;"
 
-                   id="download_as_pdf" id="download_as_pdf">PDF Downlaod</a>
+                   id="download_as_pdf" id="download_as_pdf">PDF Download</a>
                 <a type="button" class="btn  btn-sm btn-success float-right text-white" style="margin-top:2px;">Link
                     Analysis</a>
             </div>
@@ -674,123 +674,125 @@
                             </div>
                             <!-- posting timeline end  -->
 
-  <!-- start group admins  -->
-  <div class="col-md-12 mt-3">
-    <h3><i class="material-icon text_heading">Group Creator information  </i></h3>
-    <div class="row">
-
-       {% if group.group_creator %}
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header text-center background-gradient-dark">
-                        <span class="text-white text-20">Group Creator  </span>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
-                                {% if group.group_creator.media_directory %}
-                                <img src="{{ group.group_creator.media_directory }}" class="img-fluid"
-                                     style="height:100px;width:100px;"/>
-                                     {% else %}
-
-                                     <img src="data:image/png;base64,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" class="img-fluid"
-                                     style="height:100px;width:100px;"/>
-                                     {% endif %}
-                            </div>
-                            <div class="col-md-8">
+                            <!-- start group admins  -->
+                            <div class="col-md-12 mt-3">
+                                <h3><i class="material-icon text_heading">Group Creator information </i></h3>
                                 <div class="row">
-                                    <div class="col-md-4"><span
-                                            class="badge">Enitity Name</span></div>
-                                    <div class="col-md-8"><span
-                                            class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
-                                    </div>
-                                    <div class="col-md-4"><span
-                                            class="badge">User Name</span></div>
-                                    <div class="col-md-8"><span
-                                            class="badge custom_badge">{{ group.group_creator.username|default:"N/A" }}</span>
-                                    </div>
-                                    <div class="col-md-4"><span
-                                            class="badge">Enitity ID</span></div>
-                                    <div class="col-md-8"><span
-                                            class="badge custom_badge">{{ group.group_creator.id|default:"N/A" }}</span>
-                                    </div>
-                                    <div class="col-md-4"><span
-                                            class="badge">Enitity URL</span></div>
-                                    <div class="col-md-8"><span
-                                            class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
-                                    </div>
 
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer background-gradient-dark"></div>
-                </div>
-            </div>
-      {% else  %}
-            <p>Group has no moderators </p>
-        {% endif %}
-
-    </div>
-</div>
-<!-- end group admins -->
-
-                                 <!-- start group admins  -->
-                                 <div class="col-md-12 mt-3">
-                                    <h3><i class="material-icon text_heading">Group Moderators </i></h3>
-                                    <div class="row">
-    
-                                        {% for i in group.group_admins %}
-                                            <div class="col-md-4">
-                                                <div class="card ">
-                                                    <div class="card-header text-center background-gradient-dark">
-                                                        <span class="text-white text-20">Admin # {{ forloop.counter }}</span>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
-                                                                <img src="{{ i.media_directory }}" class="img-fluid"
+                                    {% if group.group_creator %}
+                                        <div class="col-md-4">
+                                            <div class="card ">
+                                                <div class="card-header text-center background-gradient-dark">
+                                                    <span class="text-white text-20">Group Creator  </span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                            {% if group.group_creator.media_directory %}
+                                                                <img src="{{ group.group_creator.media_directory }}"
+                                                                     class="img-fluid"
                                                                      style="height:100px;width:100px;"/>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="row">
-                                                                    <div class="col-md-4"><span
-                                                                            class="badge">Enitity Name</span></div>
-                                                                    <div class="col-md-8"><span
-                                                                            class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
-                                                                    </div>
-                                                                    <div class="col-md-4"><span
-                                                                            class="badge">User Name</span></div>
-                                                                    <div class="col-md-8"><span
-                                                                            class="badge custom_badge">{{ i.username|default:"N/A" }}</span>
-                                                                    </div>
-                                                                    <div class="col-md-4"><span
-                                                                            class="badge">Enitity ID</span></div>
-                                                                    <div class="col-md-8"><span
-                                                                            class="badge custom_badge">{{ i.id|default:"N/A" }}</span>
-                                                                    </div>
-                                                                    <div class="col-md-4"><span
-                                                                            class="badge">Enitity URL</span></div>
-                                                                    <div class="col-md-8"><span
-                                                                            class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
-                                                                    </div>
-    
-    
+                                                            {% else %}
+
+                                                                <img src="data:image/png;base64,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"
+                                                                     class="img-fluid"
+                                                                     style="height:100px;width:100px;"/>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="row">
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
                                                                 </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">User Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ group.group_creator.username|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity ID</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ group.group_creator.id|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity URL</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ group.group_creator.entity_type|default:"N/A" }}</span>
+                                                                </div>
+
+
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer background-gradient-dark"></div>
                                                 </div>
+                                                <div class="card-footer background-gradient-dark"></div>
                                             </div>
-                                        {% empty %}
-                                            <p>Group has no moderators </p>
-                                        {% endfor %}
-    
-                                    </div>
+                                        </div>
+                                    {% else %}
+                                        <p>Group has no moderators </p>
+                                    {% endif %}
+
                                 </div>
-                                <!-- end group admins -->
+                            </div>
+                            <!-- end group admins -->
+
+                            <!-- start group admins  -->
+                            <div class="col-md-12 mt-3">
+                                <h3><i class="material-icon text_heading">Group Admins </i></h3>
+                                <div class="row">
+
+                                    {% for i in group.group_admins %}
+                                        <div class="col-md-4">
+                                            <div class="card ">
+                                                <div class="card-header text-center background-gradient-dark">
+                                                    <span class="text-white text-20">Admin # {{ forloop.counter }}</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4 d-flex flex-row justify-content-center align-items-center">
+                                                            <img src="{{ i.media_directory }}" class="img-fluid"
+                                                                 style="height:100px;width:100px;"/>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="row">
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">User Name</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.username|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity ID</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.id|default:"N/A" }}</span>
+                                                                </div>
+                                                                <div class="col-md-4"><span
+                                                                        class="badge">Enitity URL</span></div>
+                                                                <div class="col-md-8"><span
+                                                                        class="badge custom_badge">{{ i.entity_type|default:"N/A" }}</span>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer background-gradient-dark"></div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <p>Group has no moderators </p>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- end group admins -->
 
                             <!-- start group moderators  -->
                             <div class="col-md-12 mt-3">
@@ -869,12 +871,12 @@
                                          style="height: 400px;width: 100%;"></div> -->
 
 
-                                         <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50"><i
-                                         class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span
-                                         class="badge "> {{ group.sentiments.0 }}</span></div>
-                                 <div class="d-flex flex-row justify-content-start align-items-center mt-2"><i
-                                         class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> : <span
-                                         class="badge ">{{ group.sentiments.1 }}</span></div>
+                                    <div class="d-flex flex-row justify-content-start align-items-center mt-2 w-50"><i
+                                            class="fas fa-thumbs-up fa-2x text-primary ml-5"></i> : <span
+                                            class="badge "> {{ group.sentiments.0 }}</span></div>
+                                    <div class="d-flex flex-row justify-content-start align-items-center mt-2"><i
+                                            class="fas fa-thumbs-down fa-2x text-warning ml-5"></i> : <span
+                                            class="badge ">{{ group.sentiments.1 }}</span></div>
 
                                 </div>
                             </div>
@@ -1032,336 +1034,579 @@
                     <div id="posts" class="tab-pane fade  ">
                         <div class="row">
                             {% for p in  group.posts %}
-                                <div class="border custom_border_color col-md-12 text-center text_paragraph"
-                                     style="border-radius: 10px 10px 0px 0px;">
-                                    Post # {{ forloop.counter }}
-                                </div>
-                                <div class="col-md-12 post-wrapper">
-                                <div class="row border custom_border_color">
-                                    <div class="col-md-2 m-0 p-0 custom-center-center">
-                                        <img src="{{ p.author_media_directory }}"
-                                             style="height: 60px;width:60px;border-radius: 50%;;"
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="col-md-2 custom-column-start-start pt-2 text_heading">
-                                        <span> {{ page.name }}</span>
-                                        <span class="smaller-txt">{{ p.timestamp }}</span>
-                                    </div>
-                                    <div class="col-md-3  m-0 p-0 d-flex flex-column justify-content-around align-items-center text_heading">
-                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Post id:
-                                            <span class="text_paragraph">{{ p.post_id }}</span>
-                                        </div>
-                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
-                                            Name:
-                                            <span class="text_paragraph">{{ p.author_name }}</span>
-                                        </div>
-                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Author
-                                            Username:
-                                            <span class="text_paragraph">{{ p.author_username }}</span>
-                                        </div>
-                                        <div class="badge badge-sm w-100 h-100 text-left m-0 text_heading">
-                                            Sentiment:
-                                            <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
-                                        </div>
-                                    </div>
-                                    {#                                        <div class="col-md-5 small-txt text_paragraph ellipsis text-justify">#}
-                                    {#                                            {{ p.post_text }}#}
-                                    {#                                        </div>#}
-                                </div>
+                                <!-- NEW DESIGN FOR POSTS START -->
+                                <div class="col-sm-12 col-md-6 col-lg-6 mt-1 mb-2">
+                                    <div class="row p-1 glowing_border">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <!-- Post Title Bar start - Post #, Categorization -->
+                                            <div class="row background-gradient-dark text-white p-2">
+                                                <div class="col-md-6 text-center">
+                                                    Post # {{ forloop.counter }}
+                                                </div>
+                                                <div class="col-md-6 text-center">
+                                                    {% if p.categorization %}
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <i class="material-icon text_heading" style="font-size:16px;">
-                                            Post Text</i>
-                                    </div>
-                                    {% if p.post_text %}
-                                        <div class="col-md-12 text-center text-dark ">
-                                            <p>{{ p.post_text }}</p>
-                                        </div>
-                                    {% else %}
-                                        <div class="col-md-12 text-center text-dark ">
-                                            <p class="alert alert-info">This post has No text attachment</p>
-                                        </div>
-                                    {% endif %}
-                                </div>
+                                                        {% for category in p.categorization %}
+                                                            <span class="stamp  is-draft"></span>
+                                                            {{ category|default:"N/A" }}
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <i class="material-icon text_heading" style="font-size:16px;">Post
-                                            Pictures ({{ p.picture_directory | length }})</i>
-                                    </div>
-                                    {% for x in p.picture_directory %}
-                                        <div class="col-md-12 text-center" style="">
-                                            <img src="{{ x.url }}" class="img-fluid"/>
-                                        </div>
-                                    {% empty %}
-                                        <div class="col-md-12 text-center text-dark ">
-                                            <p class="alert alert-info">This post has No picture attachment</p>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <span class="badge badge-warning">No Categorization Avaliable </span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <!-- Post Title Bar end - Post #, Categorization -->
 
+                                            <!-- Post Header start - author image, page info, author info start-->
+                                            <div class="row mt-1">
+                                                <div class="col-sm-3 col-md-3 col-lg-3 text-center custom-column-start-start pt-2 text_heading">
+                                                    {% if p.author.media_directory %}
+                                                        <img src="{{ p.author.media_directory }}"
+                                                             style="height: 70px;width:70px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                    {% else %}
+                                                        <img src="{% static '/images/logo.svg' %}"
+                                                             style="height: 70px;width:70px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                    {% endif %}
+                                                    <span> {{ page.name|truncatechars:"25" }}</span>
+                                                    <span class="smaller-txt">{{ p.timestamp }}</span>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5 text-center custom-column-start-start pt-2 text_heading">
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Post id:
+                                                        <span class="text_paragraph">{{ p.post_id }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Author
+                                                        Name:
+                                                        <span class="text_paragraph">{{ p.author.name }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Author
+                                                        Username:
+                                                        <span class="text_paragraph">{{ p.author.username }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Author Id:
+                                                        <span class="text_paragraph">{{ p.author.id | default:"N/A" }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Author Profile:
+                                                        <span class="text_paragraph">
+                                                            <a href="{{ p.author.url }}"
+                                                               target="_blank"
+                                                               class="badge badge-success">
+                                                                <i class=" text-white fa fa-eye mr-2"></i>View
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Comments Count:
+                                                        <span class="text_paragraph">{{ p.impressions.comments | default:"N/A" }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Share Stats:
+                                                        <span class="text_paragraph">{{ p.impressions.shares | default:"N/A" }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4 d-flex flex-column justify-content-around align-items-end text_heading">
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Post Pictures:
+                                                        <span class="text_paragraph">{{ p.picture_links|length| default:"N/A" }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Post Videos:
+                                                        <span class="text_paragraph">{{ p.video_links|length| default:"N/A" }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Post Link:
+                                                        <span class="text_paragraph">
+                                                            <a href="{{ p.post_link }}"
+                                                               target="_blank"
+                                                               class="badge badge-success">
+                                                                <i class=" text-white fa fa-eye mr-2"></i>View
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Reaction Stats:
+                                                        <span class="text_paragraph">{{ p.impressions.reactions | default:"N/A" }}</span>
+                                                    </div>
+                                                    <div class="badge badge-sm text_heading w-100 text-left h-100">
+                                                        Sentiment:
+                                                        <span class="text_paragraph">{{ p.sentiment | default:"N/A" }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Post Header start - author image, page info, author info end-->
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">Liked By
-                                            ({{ p.reactions.like | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was liked by
-                                            following users </small>
-                                    </div>
-                                    {% for r in p.reactions.like %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:150px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
+                                            <!-- Post Content start - Post Text, Post Image -->
+                                            <div class="row mt-3">
+                                                <!-- Post text start-->
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="heading text-center font-weight-bold">
+                                                        <span>Post Text</span>
+                                                    </div>
+                                                    <div class="glowing_border"
+                                                         style="height: 300px; overflow-y: auto; overflow-x: hidden;">
+                                                        {% if p.post_text %}
+                                                            <div class="col-md-12 text-center text-dark ">
+                                                                <p>{{ p.post_text }}</p>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="col-md-12 text-center text-dark ">
+                                                                <p class="alert alert-info">This post has no
+                                                                    text</p>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <!-- Post text end-->
+                                                <!-- Image text start-->
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="heading text-center font-weight-bold">
+                                                            <span>Post Image</span>
+                                                        </div>
+                                                        <div class="glowing_border" style="height: 300px;">
+                                                            {% if p.picture_links %}
+                                                                {% if p.picture_links|length == 1 %}
+                                                                    {% for x in p.picture_links %}
+                                                                        <div class="item active">
+                                                                            <img src="{{ x.url }}"
+                                                                                 class="img-fluid p-1"
+                                                                                 style="width: 100%; height: 300px;">
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                {% else %}
+                                                                    <!-- Post Pictures Carousel Start -->
+                                                                    <div id="carouselExampleIndicators"
+                                                                         class="carousel slide"
+                                                                         data-ride="carousel">
+                                                                        <ol class="carousel-indicators">
+                                                                            {% for x in p.picture_links %}
+                                                                                {% if forloop.first %}
+                                                                                    <li data-target="#carouselExampleIndicators"
+                                                                                        data-slide-to="{{ forloop.counter }}"
+                                                                                        class="active bg-dark"></li>
+                                                                                {% else %}
+                                                                                    <li data-target="#carouselExampleIndicators"
+                                                                                        data-slide-to="{{ forloop.counter }}"
+                                                                                        class="bg-dark"></li>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        </ol>
+                                                                        <div class="carousel-inner">
+                                                                            {% for x in p.picture_links %}
+                                                                                {% if forloop.first %}
+                                                                                    <div class="carousel-item active ">
+                                                                                        <img class="d-block w-100"
+                                                                                             src="{{ x.url }}"
+                                                                                             style="width: 100%; height: 300px"
+                                                                                             class="img-thumbnail img-fluid"
+                                                                                             alt="First slide">
+                                                                                    </div>
+                                                                                {% else %}
+                                                                                    <div class="carousel-item">
+                                                                                        <img class="d-block w-100"
+                                                                                             src="{{ x.url }}"
+                                                                                             style="width: 100%; height: 300px"
+                                                                                             class="img-thumbnail img-fluid"
+                                                                                             alt="First slide">
+                                                                                    </div>
+                                                                                {% endif %}
+
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                        <a class="carousel-control-prev"
+                                                                           href="#carouselExampleIndicators"
+                                                                           role="button" data-slide="prev">
+                                                                    <span class="carousel-control-prev-icon bg-dark"
+                                                                          aria-hidden="true"></span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                        <a class="carousel-control-next"
+                                                                           href="#carouselExampleIndicators"
+                                                                           role="button" data-slide="next">
+                                                                    <span class="carousel-control-next-icon bg-dark"
+                                                                          aria-hidden="true"></span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <!-- Post Pictures Carousel End -->
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <div class="col-md-12 text-center text-dark ">
+                                                                    <p class="alert alert-info">This post has no
+                                                                        picture</p>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                <!-- Image text end -->
                                             </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                            Loved' By ({{ p.reactions.love | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted by
-                                            following users </small>
-                                    </div>
-                                    {% for r in p.reactions.love %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:150px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
+                                            <!-- Post Content start - Post Text, Post Image -->
+
+                                            <!-- Post Reacts start -->
+                                            <div class="row mt-2">
+                                                <div class="col-sm-12 col-md-12 col-lg-12 d-flex flex-row justify-content-around">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="like_reacts_{{ forloop.counter }}"
+                                                         href="#like_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="like_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/like_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Like</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.like | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="love_reacts_{{ forloop.counter }}"
+                                                         href="#love_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="love_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/heart_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Love</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.love | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="haha_reacts_{{ forloop.counter }}"
+                                                         href="#haha_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="haha_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/hahha_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Haha</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.haha | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="wow_reacts_{{ forloop.counter }}"
+                                                         href="#wow_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="wow_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/shock_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Wow</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.wow | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="sad_reacts_{{ forloop.counter }}"
+                                                         href="#sad_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="sad_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/crying_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Sad</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.sad | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse"
+                                                         id="angry_reacts_{{ forloop.counter }}"
+                                                         href="#angry_reacts_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="angry_reacts_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/angry_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Angry</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.reactions.angry | length }})
+                                                        </span>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center align-items-center"
+                                                         data-toggle="collapse" id="comments_{{ forloop.counter }}"
+                                                         href="#comments_{{ forloop.counter }}" role="button"
+                                                         aria-expanded="false"
+                                                         aria-controls="comments_{{ forloop.counter }}">
+                                                        <img src="{% static '/images/comment_react.svg' %}"
+                                                             style="height: 50px;width:50px;border-radius: 50%;;"
+                                                             class="img-fluid">
+                                                        <span style="font-size: 11px;">Comments</span>
+                                                        <span class="font-weight-bold" style="font-size: 13px;">
+                                                            ({{ p.comments | length }})
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                            HAHA' By ({{ p.reactions.haha | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "HAHA"
-                                            by following users </small>
-                                    </div>
-                                    {% for r in p.reactions.haha %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:80px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
+                                            <!-- Post Reacts end -->
+
+                                            <!-- Post Reacts Tabs start -->
+                                            <div class="row mt-2">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <!-- Reaction Like Start -->
+                                                    <div class="row collapse"
+                                                         id="like_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Like Reacts ({{ p.reactions.like | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.like %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Like End -->
+
+                                                    <!-- Reaction Love Start -->
+                                                    <div class="row collapse"
+                                                         id="love_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Love Reacts ({{ p.reactions.love | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.love %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Love End -->
+
+                                                    <!-- Reaction Haha Start -->
+                                                    <div class="row collapse"
+                                                         id="haha_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Haha Reacts ({{ p.reactions.haha | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.haha %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Haha End -->
+
+                                                    <!-- Reaction Wow Start -->
+                                                    <div class="row collapse" id="wow_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Wow Reacts ({{ p.reactions.wow | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.wow %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <!-- <img src="{{r.media_directory}}" height="40" width="40" class="img-fluid"/> -->
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Wow End -->
+
+                                                    <!-- Reaction Sad Start -->
+                                                    <div class="row collapse" id="sad_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Sad Reacts ({{ p.reactions.sad | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.sad %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Sad End -->
+
+                                                    <!-- Reaction Angry Start -->
+                                                    <div class="row collapse" id="angry_reacts_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Angry Reacts ({{ p.reactions.angry | length }})
+                                                        </span>
+                                                        {% for r in p.reactions.angry %}
+                                                            <div class="col-sm-6 col-md-6 col-lg-4 border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
+                                                                 style="height:100px;">
+                                                                <img src="{{ r.media_directory }}"
+                                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                     class="img-fluid">
+                                                                <div class="p-2">
+                                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                    <span class="text_paragraph">{{ r.name }}</span>
+                                                                </span>
+                                                                    <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                    <span class="text_paragraph">{{ r.username }}</span>
+                                                                </span>
+                                                                    <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                    <span class="text_paragraph">{{ r.id }}</span>
+                                                                </span>
+                                                                    <a href="{{ r.url }}" target="_blank"
+                                                                       class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                            class="fa fa-search">View</i></a>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Angry End -->
+
+                                                    <!-- Reaction Comments Start -->
+                                                    <div class="row collapse" id="comments_{{ forloop.counter }}">
+                                                        <span class="background-gradient-dark w-100 mt-1 mb-1 p-2 text-white text-center">
+                                                            Comments ({{ p.comments | length }})
+                                                        </span>
+                                                        {% for r in p.comments %}
+                                                            <div class="col-sm-12 col-md-12 col-lg-12 border custom_border_color border-radius-5-all m-0 p-1">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-row justify-content-start align-items-center">
+                                                                        <img src="{{ r.commentor.media_directory }}"
+                                                                             style="height: 80px;width:80px;border-radius: 50%;;"
+                                                                             class="img-fluid">
+                                                                        <div class="p-2">
+                                                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
+                                                                                <span class="text_paragraph">{{ r.commentor.name }}</span>
+                                                                            </span>
+                                                                            <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
+                                                                                <span class="text_paragraph">{{ r.commentor.username }}</span>
+                                                                            </span>
+                                                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
+                                                                                <span class="text_paragraph">{{ r.commentor.id }}</span>
+                                                                            </span>
+                                                                            <span class="badge w-100 h-100 text-left m-0 text_heading">Timestamp:
+                                                                                <span class="text_paragraph">{{ r.timestamp| default:"N/A" }}</span>
+                                                                            </span>
+                                                                            <a href="{{ r.commentor.url }}"
+                                                                               target="_blank"
+                                                                               class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
+                                                                                    class="fa fa-search">View</i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-md-6 col-lg-6 d-flex flex-column justify-content-start align-items-start">
+                                                                        <span class="badge w-100 m-0 text_heading">Comment Text:</span>
+                                                                        <span class="text_paragraph" style="height: 100px; overflow-x: hidden; overflow-y: auto;">{{ r.comment_text }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- Reaction Comments End -->
+                                                </div>
                                             </div>
+                                            <!-- Post Reacts Tabs end -->
                                         </div>
-                                    {% endfor %}
+                                    </div>
+                                    <!-- NEW DESIGN FOR POSTS END -->
                                 </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                            WOW' By ({{ p.reactions.wow | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "WOW"
-                                            by following users </small>
-                                    </div>
-                                    {% for r in p.reactions.wow %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:80px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                            ANGRY' By ({{ p.reactions.angry | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "ANGRY"
-                                            by following users </small>
-                                    </div>
-                                    {% for r in p.reactions.angry %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:80px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Reacted
-                                            SAD' By ({{ p.reactions.sad | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5">This Post was Reacted "SAD"
-                                            by following users </small>
-                                    </div>
-                                    {% for r in p.reactions.sad %}
-                                        <div class="col-md-3  border custom_border_color border-radius-5-all m-0 p-1 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <img src="{{ r.media_directory }}"
-                                                 style="height: 80px;width:80px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">Name:
-                               <span class="text_paragraph">{{ r.name }}</span>
-                               </span>
-                                                <span class="badge badge-sm w-100 h-100 text-left m-0 text_heading">username:
-                               <span class="text_paragraph">{{ r.username }}</span>
-                               </span>
-                                                <span class="badge w-100 h-100 text-left m-0 text_heading">Id:
-                               <span class="text_paragraph">{{ r.id }}</span>
-                               </span>
-                                                <a href="{{ r.url }}" target="_blank"
-                                                   class="badge custom_badge w-50 h-100 text-left m-0 text-center"><i
-                                                        class="fa fa-search">View</i></a>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-md-6">
-                                        <i class="material-icon text_heading" style="font-size:16px;">'Comments'
-                                            By ({{ p.comments | length }})</i>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small class=" bg-success p-1 text-white ml-5"> Following users commented on
-                                            the post </small>
-                                    </div>
-                                    {% for r in p.comments %}
-                                        <div class="col-md-4  border custom_border_color m-0 p-0 d-flex flex-row justify-content-start align-items-center "
-                                             style="height:100px;">
-                                            <div>
-                                            </div>
-                                            <img src=" {{ r.commentor.media_directory }}"
-                                                 style="height: 80px;width:80px;border-radius: 50%;;"
-                                                 class="img-fluid">
-                                            <div class="p-2">
-                               <span
-                                       class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Name:
-                                   {{ r.commentor.name }}</span>
-                                                <span
-                                                        class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">username:
-                                                    {{ r.commentor.username }}</span>
-                                                <span
-                                                        class="badge badge-sm w-100 h-100 text-left m-0 text_paragraph">Id:
-                                                    {{ r.commentor.id }}</span>
-                                                <a href="{{ r.commentor.url }}"
-                                                   class="badge badge-sm badge-light w-50 h-100 text-left m-0 text-center">View</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 border custom_border_color custom-center-center">
-                                            {{ r.comment_text }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                            class="fas fa-comments text_heading mr-1"></i>{{ p.comments_statistics }}
-                                    </div>
-                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                            class="fas fa-grin-hearts text_heading mr-1"></i>{{ p.reactions_statistics }}
-                                    </div>
-                                    <div class="col-md-2 text-center small-txt border custom_border_color"><i
-                                            class="fas fa-share-alt text_heading mr-1"></i>{{ p.shares_statistics }}
-                                    </div>
-                                </div>
-                                </p>
                             {% endfor %}
-                            </div>
                         </div>
                     </div>
-
-                    <!-- end of group posts -->
-
-
                 </div>
-                <!-- end tab content -->
+
+                <!-- end of group posts -->
+
+
             </div>
+            <!-- end tab content -->
         </div>
     </div>
-    <!-- ////////////////////////////////
-    /////////////////////////////////////
-    ////////////////////////////////////
-    ///////////////////////////////// -->
 </div>
-</div>
+<!-- ////////////////////////////////
+/////////////////////////////////////
+////////////////////////////////////
+///////////////////////////////// -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

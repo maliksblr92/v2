@@ -5,20 +5,33 @@
 <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/archive.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex" style="">
-        <div class="col-md-4 col-lg-4 col-xl-4"></div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
-            <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>
-        </div>
-        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">
-            <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>
-        </div>
+        <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                href="{% url 'Keybase_Management_System:kms_create' %}">Create</a></div>
 
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white glowing_border"
+                    href="{% url 'Keybase_Management_System:kms_archive' %}">Archive</a></div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-4 col-lg-4 col-xl-4"></div>
-</div>
+
+{#<div class="row">#}
+    {#    <div class="col-md-2"></div>#}
+    {#    <div class="col-md-8 d-flex" style="">#}
+    {#        <div class="col-md-4 col-lg-4 col-xl-4"></div>#}
+    {#        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">#}
+    {#            <a href="{% url 'Keybase_Management_System:kms_create' %}" class="btn secondnavitems ">CREATE</a>#}
+    {#        </div>#}
+    {#        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu secondnavactive">#}
+    {#            <a href="{% url 'Keybase_Management_System:kms_archive' %}" class="btn secondnavitems ">ARCHIVE</a>#}
+    {#        </div>#}
+    {##}
+    {#    </div>#}
+    {#    <div class="col-md-4 col-lg-4 col-xl-4"></div>#}
+    {#</div>#}
 {% endblock %}
 {% block belly %}
 <style>
@@ -266,5 +279,11 @@
 </div>
 {% endblock %}
 {% block foot_dep %}
-<script defer src="{% static 'Keybase_Management_System/js/archive.js' %}"></script>
+
+{% endblock %}
+{% block base_js %}
+    <script defer src="{% static 'Keybase_Management_System/js/archive.js' %}"></script>
+    <script>
+        window.document.title = "Keybase";
+    </script>
 {% endblock %}

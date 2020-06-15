@@ -192,7 +192,7 @@ class Data_Queries(object):
             dic={
                 "name":portfolio_obj.name,
                 "hero":portfolio_obj.name,
-                "img":"/static/images/anonymous_logo.jpg",
+                "img":"",
                 "children":n_data_full,
             }
        

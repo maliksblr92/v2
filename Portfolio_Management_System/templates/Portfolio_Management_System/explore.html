@@ -5,21 +5,20 @@
 
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">{% endblock %}
 {% block smallnavbar %}
-<div class="row">
-    <div class="col-md-3"></div>
-                <div class="col-md-3 m-0 p-0  "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white"
+                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
 
-<div class="col-md-3 m-0 p-0  ">
-                    <a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white active"
-                        href="/pms/archive">Archive</a></div>
-            </div>
-<div class="col-md-3"></div>
-        </div>
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                    href="/pms/archive">Archive</a></div>
+        <div class="col-md-3"></div>
+    </div>
 
-    </div>{% endblock %}
+{% endblock %}
 {% block belly %}
     <div class="row">
         <div class="col-md-12">
@@ -35,7 +34,7 @@
                 </div>
 
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
-                 
+
                     <div class="">
                         <!-- RPW FOR SOCIAL MEDIA -->
                         <!-- Second row-->
@@ -58,18 +57,21 @@
 
                                             </div>
                                             <div class="col-md-8    ">
-                                              <div class="row h-100">
-                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                    <li class="text-white w-100 "> Title : {{ resp.name }}</li>
-                                                    <li class="text-white w-100 "> Portfolio Type
-                                                        : {{ resp.portfolio_type }}</li>
-                                                    <li class="text-white w-100 "> Relegion : {{ resp.relegion }}</li>
-                                                    <li class="text-white w-100 "> Sect : {{ resp.sect }}</li>
-                                                    <li class="text-white w-100 "> DOB : {{ resp.dob }}</li>
-                                                    <li class="text-white w-100 "> Created On : {{ resp.created_on }}</li>
-                                                    <li class="text-white w-100 "> Updated On : {{ resp.updated_on }}</li>
+                                                <div class="row h-100">
+                                                    <div class="col-md-12 my-auto no_list_style   ">
+                                                        <li class="text-white w-100 "> Title : {{ resp.name }}</li>
+                                                        <li class="text-white w-100 "> Portfolio Type
+                                                            : {{ resp.portfolio_type }}</li>
+                                                        <li class="text-white w-100 "> Relegion
+                                                            : {{ resp.relegion }}</li>
+                                                        <li class="text-white w-100 "> Sect : {{ resp.sect }}</li>
+                                                        <li class="text-white w-100 "> DOB : {{ resp.dob }}</li>
+                                                        <li class="text-white w-100 "> Created On
+                                                            : {{ resp.created_on }}</li>
+                                                        <li class="text-white w-100 "> Updated On
+                                                            : {{ resp.updated_on }}</li>
+                                                    </div>
                                                 </div>
-                                              </div>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +82,8 @@
 
                                     <!-- all targets start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header custom_header glowing_border text-white">All Targets</div>
+                                        <div class="card-header custom_header glowing_border text-white">All Targets
+                                        </div>
                                         <div class="card-body  custom_background">
 
                                             {% if resp.addresses %}
@@ -98,7 +101,8 @@
                                     <!-- all targets end  -->
                                     <!-- all phones start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header glowing_border custom_header text-white ">All Phones</div>
+                                        <div class="card-header glowing_border custom_header text-white ">All Phones
+                                        </div>
                                         <div class="card-body custom_background">
 
                                             {% if resp.phones %}
@@ -116,9 +120,11 @@
                                     <!-- all phones end  -->
                                     <!-- all description start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header card-header glowing_border custom_header text-white">All Description
+                                        <div class="card-header card-header glowing_border custom_header text-white">All
+                                            Description
                                         </div>
-                                        <div class="card-body custom_background w-100 text-white" style="font-size:12px;">
+                                        <div class="card-body custom_background w-100 text-white"
+                                             style="font-size:12px;">
 
 
                                             <ul style="list-style: none;">
@@ -145,7 +151,8 @@
 
                                     <!-- all portfolios start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header card-header glowing_border custom_header text-white">All Portfolios
+                                        <div class="card-header card-header glowing_border custom_header text-white">All
+                                            Portfolios
                                         </div>
                                         <div class="card-body custom_background w-100 text-white">
 
@@ -169,7 +176,8 @@
 
                                     <!-- all social_targets start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header card-header glowing_border custom_header text-white">All Social
+                                        <div class="card-header card-header glowing_border custom_header text-white">All
+                                            Social
                                             Targets
                                         </div>
                                         <div class="card-body custom_background w-100 text-white">
@@ -203,4 +211,9 @@
 
     </div>
 
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "{{ resp.name }} - Portfolio";
+    </script>
 {% endblock %}

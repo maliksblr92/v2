@@ -17,16 +17,20 @@
                 <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
+                    IDENTIFY</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
+                    SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
+                    CRAWLING</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive ">
-                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu glowing_border "><!-- secondnavactive -->
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
+                    KEYBASE</a>
             </div>
         </div>
         <div class="col-md-1"></div>
@@ -34,26 +38,27 @@
 {% endblock %}
 {% block belly %}
     <style>
-    .newlabeldesign {
-    background: rgb(24, 72, 116);
-    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
-    letter-spacing: 5px;
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #fff;
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
-    /* padding: 8px 3rem 0 1rem; */
-    padding: 7px 0rem 6px 0px;
-    }
-    .searchbutton {
-    border-radius: 12px;
-    background: rgb(24, 72, 116);
-    background: linear-gradient( 93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100% );
-    padding: 4px 3rem;
-    letter-spacing: 0.1rem;
-    font-size: 16px;
-    }
+        .newlabeldesign {
+            background: rgb(24, 72, 116);
+            background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+            letter-spacing: 5px;
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #fff;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            /* padding: 8px 3rem 0 1rem; */
+            padding: 7px 0rem 6px 0px;
+        }
+
+        .searchbutton {
+            border-radius: 12px;
+            background: rgb(24, 72, 116);
+            background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+            padding: 4px 3rem;
+            letter-spacing: 0.1rem;
+            font-size: 16px;
+        }
     </style>
     <div class="row middlecontentdiv">
         <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
@@ -75,7 +80,7 @@
                                         </span>
                                     </div>
                                     <input type="text" id="title" class="col-md-9 form-control newinputdesign"
-                                    placeholder="Please enter title here" name="title">
+                                           placeholder="Please Enter Title Here" name="title">
                                 </div>
                                 <div class="row input-group mt-4 mb-3">
                                     <div class="col-md-3 p-0 input-group-prepend">
@@ -83,7 +88,8 @@
                                             opacity:0.9; padding:7px 9px 0 10px;">Choose a Keybase
                                         </span>
                                     </div>
-                                    <select id="keybase" name="keybase" required="required" class="col-md-9 form-control newinputdesign text-white">
+                                    <select id="keybase" name="keybase" required="required"
+                                            class="col-md-9 form-control newinputdesign text-white">
                                         <option value="">Select keybase</option>
                                         {% for keybase in keybases %}
                                             <option value="{{ keybase.id }}">{{ keybase }}</option>
@@ -96,7 +102,8 @@
                                             opacity:0.9; padding:7px 9px 0 10px;">Select interval
                                         </span>
                                     </div>
-                                    <select id="interval" name="interval" class="col-md-9 form-control newinputdesign text-white">
+                                    <select id="interval" name="interval"
+                                            class="col-md-9 form-control newinputdesign text-white">
                                         <option value="">Select interval</option>
                                         {% for interval in intervals %}
                                             <option value="{{ interval.0 }}">{{ interval.1 }}</option>
@@ -109,18 +116,25 @@
                                             opacity:0.9; padding:7px 9px 0 10px;">Expire On
                                         </span>
                                     </div>
-                                    <input type="date" id="expire_on" class="col-md-9 form-control newinputdesign text-white" name="expire_on">
+                                    <input type="date" id="expire_on"
+                                           class="col-md-9 form-control newinputdesign text-white" name="expire_on">
                                 </div>
-                                
-                                
-                                <input type="submit" style="float:right" class="mr-3 btn btn-secondary searchbutton" id="submit" name="submit" />
-                                
+
+
+                                <input type="submit" style="float:right" class="mr-3 btn btn-secondary searchbutton"
+                                       id="submit" name="submit"/>
+
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
+    </script>
 {% endblock %}

@@ -5,19 +5,19 @@
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<div class="row">
-    <div class="col-md-3"></div>
-                <div class="col-md-3 m-0 p-0  "><a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                        href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white glowing_border"
+                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
 
-<div class="col-md-3 m-0 p-0  ">
-                    <a
-                        class="nav-link secondmidnavmenu w-100 h-100 text-white active"
-                        href="/pms/archive">Archive</a></div>
-            </div>
-<div class="col-md-3"></div>
-        </div>
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                    href="/pms/archive">Archive</a></div>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
 
     </div>{% endblock %}
 
@@ -27,7 +27,7 @@
             <!-- start of card  -->
             <div class="w-100 h-100" id="content_div">
                 <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
-                    <p class="card_header_text">CREATE PORTFOLIO  </p>
+                    <p class="card_header_text">CREATE PORTFOLIO </p>
                 </div>
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
                     <div class="">
@@ -69,9 +69,9 @@
                                             </div>
                                         </div>
                                         <small class=" col-md-9 font-weight-bold text_paragraph "
-                                        style="padding-left:180px;"><i
-                                         class="fas fa-info mr-2"></i>Please select one option from above 
-                                 </small>
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Please Select One Option From Above
+                                        </small>
                                         <!-- end of button grp  -->
                                     </div>
                                     <!-- Radio Buttons End -->
@@ -84,9 +84,9 @@
                                         </div>
                                         <input type="text" class="col-md-9 form-control custom_input_field"
                                                id="portfolio_name" name="portfolio_name" required="required">
-                                               <small class=" col-md-9 font-weight-bold text_paragraph "
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Specify a portflio name  
+                                                class="fas fa-info mr-2"></i>Specify a Portfolio Name
                                         </small>
                                     </div>
 
@@ -99,9 +99,9 @@
                                         </div>
                                         <input type="date" class="col-md-9 form-control custom_input_field" id="dob"
                                                name="dob" required="required"/>
-                                               <small class=" col-md-9 font-weight-bold text_paragraph "
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Specify date of birth  
+                                                class="fas fa-info mr-2"></i>Specify Date of Birth
                                         </small>
                                     </div>
 
@@ -121,7 +121,7 @@
                                         </select>
                                         <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Select a  gender  
+                                                class="fas fa-info mr-2"></i>Select a Gender
                                         </small>
                                     </div>
 
@@ -134,7 +134,7 @@
                                         </div>
                                         <select type="text" class="col-md-9 form-control custom_input_field"
                                                 id="relegion" name="relegion" required="required">
-                                            <option value="">Select Relegion</option>
+                                            <option value="">Select Religion</option>
                                             <option value="Islam">Islam</option>
                                             <option value="Hinduism">Hinduism</option>
                                             <option value="Christianity">Christianity</option>
@@ -147,7 +147,7 @@
                                         </select>
                                         <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Seelct a  relegion 
+                                                class="fas fa-info mr-2"></i>Seelct a Religion
                                         </small>
                                     </div>
 
@@ -159,10 +159,11 @@
                                         </span>
                                         </div>
                                         <input type="text" class="col-md-9 form-control custom_input_field" id="sect"
-                                               name="sect" required="required" />
-                                               <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               name="sect" required="required"/>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Please specfiy a relegious sect if applicable  
+                                                class="fas fa-info mr-2"></i>Please Specify a Religious Sect If
+                                            Applicable
                                         </small>
                                     </div>
 
@@ -173,7 +174,7 @@
                                         <div class="col-md-2">
                                             <input type="submit"
                                                    class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                   value="submit"
+                                                   value="SUBMIT"
                                                    name="submit" id="submit">
                                         </div>
                                     </div>
@@ -184,9 +185,14 @@
                     </div>
                 </div>
                 <!-- end of card  -->
-               
+
             </div>
 
         </div>
     </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Portfolio";
+    </script>
 {% endblock %}

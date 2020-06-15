@@ -3,10 +3,10 @@
 {% block head_dep %}
 <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 <link rel="stylesheet" href="{% static 'Avatar_Management_Unit/css/avatar.css' %}">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block smallnavbar %}
-<!-- navbar by shareef  -->
-<!-- <div class="row">
+<div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 d-flex">
         <div class="col-md-3 col-lg-3 col-xl-3"></div>
@@ -21,40 +21,39 @@
         </div>
     </div>
     <div class="col-md-3 col-lg-3 col-xl-3"></div>
-</div> -->
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
-       
-        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
-            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems "> CREATE</a>
-        </div>
-
-        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
-            <a href="{% url 'Avatar_Management_Unit:archive' %}" class="btn secondnavitems "> ARCHIVE</a>
-        </div>
-        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-            <a href="{% url 'Avatar_Management_Unit:send_message' %}" class="btn secondnavitems "> SEND MESSAGE</a>
-        </div>
-        
-    </div>
-    <div class="col-md-2"></div>
 </div>
-
 {% endblock %}
 {% block belly %}
 <div class="row middlecontentdiv">
     <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
         <!-- Sub Menu Bar for app specific menu -->
         <nav>
+            
             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo">Personal
-                    Information</a>
-                <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work">Work
+                {% if details_type == "perosnal_details" %}
+                <a class="nav-item nav-link active" id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo">Personal Information</a>
+                    {% else %}
+                    <a class="nav-item nav-link " id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo">Personal Information</a>
+                    {% endif %}
+                {% if details_type == "work_details" %}
+                <a class="nav-item nav-link active" id="nav-work-tab" data-toggle="tab" href="#nav-work">Work
                     Details</a>
+                    {% else %}
+                    <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work">Work
+                        Details</a>
+                    {% endif %}
+                    {% if details_type == "intrest" %}
+                <a class="nav-item nav-link active" id="nav-interest-tab" data-toggle="tab" href="#nav-interest">Interest</a>
+                {% else %}
                 <a class="nav-item nav-link" id="nav-interest-tab" data-toggle="tab" href="#nav-interest">Interest</a>
-                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events">Life
+                {% endif %}
+                {% if details_type  == 'events' %}
+                <a class="nav-item nav-link active" id="nav-events-tab" data-toggle="tab" href="#nav-events">Life
                     Events</a>
+                    {% else %}
+                    <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events">Life
+                        Events</a>
+                    {%endif %}
             </div>
         </nav>
         <!-- end of sub menu -->
@@ -77,7 +76,11 @@
                     <!-- nav tab content section -->
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         <!-- personal info tab -->
+                        {% if details_type == "perosnal_details" %}
                         <div class="tab-pane fade active show" id="nav-pinfo" role="tabpanel">
+                            {% else %}
+                            <div class="tab-pane fade " id="nav-pinfo" role="tabpanel">
+                            {% endif%}
                             <!-- a nav for personal information tab -->
                             <div class="row mt-2">
                                 <!-- left side redundant navigation -->
@@ -258,8 +261,14 @@
                         </div>
                         <!-- end of personal info tab -->
                         <!-- work details tab -->
-                        <div class="tab-pane fade" id="nav-work" role="tabpanel">
+                        {% if details_type == "work_details" %}
+                        <div class="tab-pane fade active show" id="nav-work" role="tabpanel">
+                            {% else %}
+                            <div class="tab-pane fade " id="nav-pinfo" role="tabpanel">
+                            {% endif%}
+                      
                             <!-- a nav for work details tab -->
+                          
                             <div class="row mt-2">
                                 <!-- left side redundant navigation -->
                                 <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
@@ -290,22 +299,28 @@
                                 <!-- end of left side redundant navigation -->
                                 <!-- Work Details form-->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form style="padding-bottom:10px;" id="work-details-form">
+                                    <form style="padding-bottom:10px;" id="work-details-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                         {% csrf_token %}
+                                        <!-- avatar id  -->
+                                            <input type="hidden" value="{{avatar.id}}" id="avatar_id" name="avatar_id" />
+
+                                        <!-- end avatar id  -->
                                         <div class="form-group ">
                                             <!-- avatar -->
                                             <div class="input-group mt-4 mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="newlabeldesign">Avatar</span>
                                                 </div>
-                                                <select name="wd-avatar" class="newinput custom-select amu-work-select">
-                                                    {% for avatar in avatars %}
-                                                    <option value="{{avatar.0}}"
+                                                
+                                                    <!-- <option value="{{avatar.0}}"
                                                         {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
-                                                    </option>
-                                                    {% endfor %}
-                                                </select>
+                                                    </option> -->
+                                                  
+                                                    
+                                                  
+                                              <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
                                             </div>
+                                            <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
                                             <!-- job title -->
                                             <div class="input-group mt-1 mb-3">
                                                 <div class="input-group-prepend">
@@ -313,7 +328,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Job Title ..." name="wd-job-title" required>
+                                                    placeholder="Job Title ..." name="wd-job-title" required="required" minlength="1" maxlength="50" />
                                             </div>
                                             <!-- company -->
                                             <div class="input-group   mt-1 mb-3">
@@ -322,7 +337,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" name="wd-company" class="form-control newinputdesign"
-                                                    placeholder="Company Name ..." required>
+                                                    placeholder="Company Name ..." required="required" minlength="1" maxlength="50"/>
                                             </div>
                                             <!--for Description-->
                                             <div class="input-group mt-1 mb-3">
@@ -331,7 +346,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control newinputdesign"
-                                                    placeholder="Description Please ..." name="wd-desc">
+                                                    placeholder="Description Please ..." name="wd-desc" required="required" minlength="1" maxlength="200"/>
                                             </div>
                                             <!--Address-->
                                             <div class="input-group mt-1 mb-3">
@@ -340,7 +355,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control  newinputdesign"
-                                                    placeholder="Address Please ..." name="wd-address">
+                                                    placeholder="Address Please ..." name="wd-address" required="required" minlength="1" maxlength="200"/>
                                             </div>
                                             <!-- DATE AND TIME 2 column div -->
                                             <div class="row mt-1 mb-3">
@@ -352,7 +367,7 @@
                                                             </span>
                                                         </div>
                                                         <input class="form-control newinputdesign" name="wd-start-date"
-                                                            placeholder="MM/DD/YYYY" type="text">
+                                                            placeholder="MM/DD/YYYY" type="date" required="required" />
                                                     </div>
                                                 </div>
                                                 <!--job end date SECTION-->
@@ -363,7 +378,7 @@
                                                             </span>
                                                         </div>
                                                         <input class="form-control newinputdesign" name="wd-end-date"
-                                                            placeholder="MM/DD/YYYY" type="text">
+                                                            placeholder="MM/DD/YYYY" type="date" required="required" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -373,8 +388,8 @@
                                                     <span class="newlabeldesign amu-work-input-font">Current
                                                     </span>
                                                 </div>
-                                                <input type="checkbox" class="form-control newinputdesign"
-                                                    name="wd-current-job">
+                                                <input type="checkbox" value="true" class="form-control newinputdesign"
+                                                    name="wd-current-job" required="required" />
                                             </div>
                                         </div>
                                         <!-- TWO BUTTON BOTTOM-->
@@ -398,7 +413,20 @@
                         </div>
                         <!-- end of work details tab -->
                         <!-- interests tab -->
-                        <div class="tab-pane fade" id="nav-interest" role="tabpanel">
+                        {% if details_type == "intrest" %}
+                        <div class="tab-pane fade active show" id="nav-interest" role="tabpanel">
+                            <style>
+                                .newlabeldesign{
+                                    width:150px;
+                                   
+                                }
+                                .bootstrap-tagsinput input{
+                                    width: 600px!important;
+                                }
+                            </style>
+                            {% else %}
+                            <div class="tab-pane fade " id="nav-interest" role="tabpanel">
+                            {% endif %}
                             <!-- a nav for interests tab -->
                             <div class="row mt-2">
                                 <!-- left side redundant navigation -->
@@ -428,71 +456,84 @@
                                 </div>
                                 <!-- end of left side redundant navigation -->
                                 <!-- interests form -->
-                                <div class="col-md-9 col-lg-9 col-xl-9" id="interests-form">
+                               
+                                <div class="col-md-9 col-lg-9 col-xl-9"id="interests-form" >
+                                    <form style="padding-bottom:10px;"  method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                     <!-- csrf_token -->
                                     {% csrf_token %}
                                     <!-- avatar -->
-                                    <div class="input-group mt-4 mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign">Avatar</span>
-                                        </div>
-                                        <select name="i-avatar" class="newinput custom-select amu-interest-select">
-                                            {% for avatar in avatars %}
-                                            <option value="{{avatar.0}}"
-                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
-                                            </option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <!-- hobbies -->
-                                    <div class="input-group mt-2 mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign">Hobbies
-                                            </span>
-                                        </div>
-                                        <input id="i-hobbies" type="text" class="form-control newinputdesign"
-                                            placeholder="Hobbies Please ...">
-                                    </div>
-                                    <div class="tegscontainer" id="i-hobbies-container">
-                                        <!-- <span class="eachtag">
-                                            tag
-                                            <i style="color:white; opacity:0.8;"
-                                                class="meraicon fas fa-times fa-1x"></i>
-                                        </span> -->
-                                    </div>
-                                    <!-- movies -->
-                                    <div class="input-group mt-2 mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign">Movies
-                                            </span>
-                                        </div>
-                                        <input id="i-movies" type="text" class="form-control newinputdesign"
-                                            placeholder="Movies Please ...">
-                                    </div>
-                                    <div class="tegscontainer" id="i-movies-container">
-                                    </div>
-                                    <!-- songs -->
-                                    <div class="input-group mt-2 mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="newlabeldesign">Songs
-                                            </span>
-                                        </div>
-                                        <input id="i-songs" type="text" class="form-control newinputdesign"
-                                            placeholder="Songs Please ...">
-                                    </div>
-                                    <div class="tegscontainer" id="i-songs-container">
-                                    </div>
 
+
+                                    <div class="input-group mt-4 mb-3">
+                                       
+                                        <!-- avatar -->
+                                        <div class="input-group mt-4 mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Avatar</span>
+                                            </div>
+                                            
+                                                <!-- <option value="{{avatar.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                                </option> -->
+                                              <input type="hidden" value="{{avavat.id}}" name="avatar_id" id="avatar_id" />
+                                                
+                                              
+                                          <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+                                        </div>
+                                        <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+                                        </div>
+
+
+
+
+                                        <div class="row d-flex flex-row justify-content-center align-items-center">
+                                            <div class="col-md-3"><span class="newlabeldesign">Hobbies</span></div>
+                                            <div class="col-md-9">
+                                                <input type="text" data-role="tagsinput" value="" id="ihobbies" name="ihobbies" type="text" 
+                                            style="width:400px!important;" required="required"/>
+                                            </div>
+                                            </div>
+
+
+
+                                        <div class="row d-flex flex-row justify-content-center align-items-center">
+                                            <div class="col-md-3"><span class="newlabeldesign">Movies</span></div>
+                                            <div class="col-md-9">
+                                                <input type="text" data-role="tagsinput" value="" id="imovies" name="imovies" type="text" 
+                                                style="width:400px!important;" required="required"/>
+                                            </div>
+                                            </div>
+
+
+                                            <div class="row d-flex flex-row justify-content-center align-items-center">
+                                                <div class="col-md-3"><span class="newlabeldesign">Songs</span></div>
+                                                <div class="col-md-9">
+                                                    <input type="text" data-role="tagsinput" value="" id="isongs" name="isongs" type="text" 
+                                                    style="width:400px!important;" required="required"/>
+                                                </div>
+                                                </div>
+    
+
+                                        
+
+    
+    
+
+
+                                   
+                                 
+                                  
                                     <!-- Clear and Submit Buttons-->
                                     <div class="row d-flex flex-row mt-3">
                                         <div class="col-md-12 ml-5 ">
                                             <button type="button" class="btn btn-secondary searchbutton"
                                                 id="i-clear-btn">Clear </button>
-                                            <button type="button" style="float:right;"
+                                            <button type="submit" style="float:right;"
                                                 class="btn btn-secondary searchbutton mr-5"
                                                 id="i-submit-btn">Submit</button>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                                 <!-- end of interests form -->
                             </div>
@@ -502,7 +543,11 @@
                         </div>
                         <!-- end of interests tab -->
                         <!-- life events tab -->
-                        <div class="tab-pane fade" id="nav-events" role="tabpanel">
+                        {% if details_type == "events" %}
+                        <div class="tab-pane fade active show" id="nav-events" role="tabpanel">
+                            {% else %}
+                            <div class="tab-pane fade" id="nav-events" role="tabpanel">
+                            {% endif %}
                             <!-- a nav for life events tab -->
                             <div class="row mt-2">
                                 <!-- left side redundant navigation -->
@@ -539,17 +584,26 @@
                                             <div class="input-group-prepend">
                                                 <span class="newlabeldesign">Avatar</span>
                                             </div>
-                                            <select name="le-avatar" class="newinput custom-select amu-work-select">
-                                                {% for avatar in avatars %}
-                                                <option value="{{avatar.0}}"
-                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
-                                                </option>
-                                                {% endfor %}
-                                            </select>
+                                            <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
                                         </div>
+                                        <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+                                        </div>
+
+
+                                       
+
+                                       
+
+
                                         <!-- 1st education section -->
-                                        <form id="education-form">
+                                        <form id="education-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                             {% csrf_token %}
+                                             <!-- avatar_id -->
+                                        <input type="hidden" value="{{avatar.id}}" name="avatar_id" id="avatar_id" required="required" />
+                                        <!-- avatar_id -->
+                                              <!-- form_name -->
+                                         <input type="hidden" value="education_form" name="form_name" id="form_name"  />
+                                         <!-- form_name -->
                                             <div class="col-md-12 col-lg-12 col-xl-12">
                                                 <!-- banner for education form -->
                                                 <div class="bg-info clearfix avatorleft mb-3">
@@ -565,7 +619,7 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" class="form-control newinputdesign"
-                                                        placeholder="Degree Name ..." name="le-ef-degree" required>
+                                                        placeholder="Degree Name ..." name="le-ef-degree" id="le-ef-degree" required="required" maxlength="50" />
                                                 </div>
                                                 <!-- institute -->
                                                 <div class="input-group mt-1 mb-3">
@@ -576,7 +630,7 @@
                                                     </div>
                                                     <input type="text" name="le-ef-institute"
                                                         class="form-control newinputdesign"
-                                                        placeholder="Institue Please ..." required>
+                                                        placeholder="Institue Please ..." id="le-ef-institute" required="required" />
                                                 </div>
                                                 <!-- grades and Field of Study -->
                                                 <div class="row mt-1 mb-3">
@@ -584,7 +638,7 @@
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span
                                                                     class="newlabeldesign">Grade</span></div>
-                                                            <input type="text" name="le-ef-grade"
+                                                            <input type="text" name="le-ef-grade" id="le-ef-grade"
                                                                 class="form-control newinputdesign"
                                                                 placeholder="Grades ...">
                                                         </div>
@@ -593,9 +647,9 @@
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span
                                                                     class="newlabeldesign">Field of Study</span></div>
-                                                            <input type="text" name="le-ef-fieldofstudy"
+                                                            <input type="text" name="le-ef-fieldofstudy" id="le-ef-fieldofstudy"
                                                                 class="form-control newinputdesign"
-                                                                placeholder="Field Of Study ...">
+                                                                placeholder="Field Of Study ..." required="required"  />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -611,7 +665,7 @@
                                                             </div>
                                                             <input class="form-control newinputdesign" id="date"
                                                                 name="le-ef-start-date" placeholder="MM/DD/YYYY"
-                                                                type="text" required>
+                                                                type="date" required="required" />
                                                         </div>
                                                     </div>
                                                     <!-- degree 1 end date SECTION-->
@@ -622,9 +676,9 @@
                                 opacity:0.9; padding:5px 9px 0 10px;">Ended
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="le-ef-end-date"
+                                                            <input  type="date"  name="le-ef-end-date"
                                                                 class="form-control newinputdesign"
-                                                                placeholder="MM/DD/YYYY">
+                                                                placeholder="MM/DD/YYYY" required="required" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -640,8 +694,9 @@
                                         </form>
                                         <!-- end of 1st education section -->
                                         <!-- marriage section -->
-                                        <form id="marriage-form">
+                                        <form id="marriage-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                             {% csrf_token %}
+                                            <input type="hidden" value="marriage_form" name="form_name" id="form_name"  />
                                             <div class="col-md-12 col-lg-12 col-xl-12 mt-3">
                                                 <!-- banner for form -->
                                                 <div class="bg-info clearfix avatorleft mb-3">
@@ -657,7 +712,7 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" class="form-control newinputdesign"
-                                                        placeholder="Spouse Name ..." name="le-m-spouse" required>
+                                                        placeholder="Spouse Name ..." name="le-m-spouse" required="required"  />
                                                 </div>
                                                 <!-- location -->
                                                 <div class="input-group mt-1 mb-3">
@@ -668,7 +723,7 @@
                                                     </div>
                                                     <input type="text" name="le-m-location"
                                                         class="form-control newinputdesign"
-                                                        placeholder="wedding destination ...">
+                                                        placeholder="wedding destination ..." required="required"  />
                                                 </div>
                                                 <!-- dates -->
                                                 <div class="row">
@@ -682,7 +737,7 @@
                                                             </div>
                                                             <input class="form-control newinputdesign"
                                                                 name="le-m-wedding-date" placeholder="MM/DD/YYY"
-                                                                type="text" required>
+                                                                type="date" required="required"  />
                                                         </div>
                                                     </div>
                                                     <!-- Divorce Date SECTION-->
@@ -693,9 +748,9 @@
                                 opacity:0.9; padding:5px 9px 0 10px;">Divorce Date
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="le-m-divorce-date"
+                                                            <input type="date" name="le-m-divorce-date"
                                                                 class="form-control newinputdesign"
-                                                                placeholder="MM/DD/YYYY">
+                                                                placeholder="MM/DD/YYYY" required="required"  />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1123,22 +1178,24 @@
 <!-- <script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script> -->
 {% endblock %}
 {% block base_js %}
-    <script>
-        window.document.title = "Create Avatar";
+    <script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
 
-        $(document).ready(function(){
-            function CLEAN_PERSONAL_INFORMATION_FORM(){
-            console.log("CLEARING PERSONAL INFORMATION FORM ");
-            $('#pinfo-fname').val("");
-            $('#pinfo-lname').val("");
-            $('#pinfo-email').val("");
-            $('#pinfo-nationality').val("");
-            $('#pinfo-address').val("");
-            $('#pinfo-relegious').val("");
-            $('#pinfo-married').val("");
-            $('#pinfo-dob').val("");
-            $('#pinfo-gender').val("");
-            }
-        })
+  
+  
+{% if details_type == 'work_details'%}
+    <script>
+        window.document.title = "Work Details";
     </script>
+    {% endif %}
+    {% if details_type == 'intrest' %}
+    <script>
+        window.document.title = "Intrest Details";
+    </script>
+    {% endif %}
+
+    {% if details_type == 'events' %}
+    <script>
+        window.document.title = "Events Details";
+    </script>
+    {% endif %}
 {% endblock %}

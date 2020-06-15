@@ -22,7 +22,7 @@
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu secondnavactive">
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu glowing_border"><!-- secondnavactive -->
                 <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
@@ -58,7 +58,7 @@
                                             </span>
                                         </div>
                                         <input type="text" class="col-md-9 form-control newinputdesign"
-                                        placeholder="Please enter URL here" name="page_url" value="{% if url %} {{ url }} {% endif %}" aria-label="Recipient's username"
+                                        placeholder="Please Enter URL Here" name="page_url" value="{% if url %} {{ url }} {% endif %}" aria-label="Recipient's username"
                                         aria-describedby="basic-addon2">
                                     </div>
                                     <!--Tetfield 2 -->
@@ -66,7 +66,7 @@
                                     <div class="row input-group mt-4 mb-3">
                                         <div class="col-md-12 p-0 input-group-prepend">
                                             <span class="newlabeldesign"
-                                            style="padding:0.2em 15.5em;border-radius:8px;">Select the following </span>
+                                            style="padding:0.2em 15.5em;border-radius:8px;">Select The Following </span>
                                         </div>
                                     </div>
                                     <div class="row mt-4" style="margin-left:-2%;">
@@ -111,4 +111,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
+    </script>
 {% endblock %}

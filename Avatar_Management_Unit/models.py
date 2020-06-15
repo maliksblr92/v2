@@ -123,8 +123,10 @@ class Avatar_AMS(Document):
     phone_number = StringField(max_length=20)
     profile_image = ImageField()
     cover_image = ImageField()
-    address = StringField(min_length=10)
-    nationality = StringField(min_length=5)
+    # address = StringField(min_length=10)
+    address = StringField()
+    # nationality = StringField(min_length=5)
+    nationality = StringField()
 
     works= ListField(default=[])
     educations = ListField(default=[])
@@ -161,7 +163,6 @@ class Avatar_AMS(Document):
         if (len(self.locations) > 0): self.health += 8
         if (len(self.life_events) > 0): self.health += 5
         if (len(self.social_media_accounts) > 0): self.health += 2
-
         self.save()
 
     def create(self,email,**kwargs):
@@ -196,6 +197,7 @@ class Avatar_AMS(Document):
         self.works.append(work)
         self.correct_current_job(work)
         self.evaluate_health()
+        return 'true'
 
     def add_education(self, institute, degree, grades,
                       field_of_study, start_date, end_date):
@@ -209,6 +211,7 @@ class Avatar_AMS(Document):
             end_date)
         self.educations.append(education)
         self.evaluate_health()
+        return 'true'
 
 
     def add_skills(self,name,level):
@@ -230,9 +233,10 @@ class Avatar_AMS(Document):
                 'movies': movies,
                 'songs': songs
             }
-
+        
         #self.save()
         self.evaluate_health()
+        return 'true'
 
     def add_life_events(self,year,event):
         event = LifeEvent(year,event)
@@ -270,7 +274,8 @@ class Avatar_AMS(Document):
             self.marriages = []
             self.marriages.append(marriage)
         self.evaluate_health()
-
+        return 'true'
+    
     def get_avatar_health(self):
         return self.health
 

@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 # Create your views here.
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse,render
+from django.contrib import messages
 from bson import ObjectId
 from Avatar_Management_Unit.models import *
 from Avatar_Management_Unit.avatar_action_manager import Avatar_Action
@@ -28,115 +29,156 @@ class Create_Avatar(View):
             request, 'Avatar_Management_Unit/avatar.html', ctx)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+        print("in post request")
+        fname = request.POST.get('pinfo-fname')
+        lname = request.POST.get('pinfo-lname')
         email = request.POST.get('pinfo-email')
-        if not request.POST.get('pinfo-fname') == '':
-            fname = request.POST.get('pinfo-fname')
-        else:
-            fname = None
-        if not request.POST.get('pinfo-lname') == '':
-            lname = request.POST.get('pinfo-lname')
-        else:
-            lname = None
-        if not request.POST.get('pinfo-phone') == '':
-            phone = request.POST.get('pinfo-phone')
-        else:
-            phone = None
-        if not request.POST.get('pinfo-nationality') == '':
-            nationality = request.POST.get('pinfo-nationality')
-        else:
-            nationality = None
-        if not request.POST.get('pinfo-address') == '':
-            address = request.POST.get('pinfo-address')
-        else:
-            address = None
-        if not request.POST.get('pinfo-religious') == '':
-            religious = request.POST.get('pinfo-religious')
-        else:
-            religious = None
-        if not request.POST.get('pinfo-marital-status') == '':
-            marital_status = request.POST.get('pinfo-marital-status')
-        else:
-            marital_status = None
-        if not request.POST.get('pinfo-dob') == '':
-            dob = datetime.datetime.strptime(request.POST.get('pinfo-dob'), '%m/%d/%Y')
-        else:
-            dob = None
-        gender = request.POST.get('pinfo-gender')
-
-        print(
-            email,
-            fname,
-            lname,
-            phone,
-            nationality,
-            address,
-            religious,
-            marital_status,
-            dob,
-            gender)
+        phone = request.POST.get('pinfo-phone')
+        nationality = request.POST.get('pinfo-nationality')
+        address = request.POST.get('pinfo-address')
+        religious = request.POST.get('pinfo-religious')
+        marital_status=request.POST.get('pinfo-marital-status')
+        dob=request.POST.get('pinfo-dob')
+        gender=request.POST.get('pinfo-gender')
+       
+    
+        # saving to model
         a = Avatar_AMS()
         a.create(
-            email,
+          
             first_name=fname,
             last_name=lname,
+            email=email,
             phone=phone,
             nationality=nationality,
             address=address,
             religious_views=religious,
             gender=gender,
             marital_status=marital_status,
-            birthday=dob
+            birthday=dob,
         )
-
-        return JsonResponse({'success': 200})
+        if(a):
+           
+            messages.success(request, 'Avatar created successfully')
+            return redirect('/amu/avatar')
+        else:
+            messages.error(request, 'Failed to cerate avatar .... please  try again')
+            return redirect('/amu/avatar')
 
 
 class Add_Work(View):
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse('on Create avatar')
-
+        details_type=kwargs.get('details_type')
+        avatar_id=kwargs.get('avatar_id')
+        avatar=Avatar_AMS.get_object_by_id(avatar_id)
+        return render(request,'Avatar_Management_Unit/add_work.html',{'details_type':details_type,'avatar':avatar});
     def post(self, request, *args, **kwargs):
-
-        avatar_id = request.POST.get('wd-avatar')
-        job_title = request.POST.get('wd-job-title')
-        company = request.POST.get('wd-company')
-        if request.POST.get('wd-desc') != '':
+        # essential for redirects
+        details_type=kwargs['details_type'] 
+        avatar_id =kwargs['avatar_id'] 
+        # form == work details form
+        if(details_type == 'work_details'): 
+            job_title = request.POST.get('wd-job-title')
+            company = request.POST.get('wd-company')
             description = request.POST.get('wd-desc')
-        else:
-            description = None
-        if request.POST.get('wd-address') != '':
             address = request.POST.get('wd-address')
-        else:
-            address = None
-        if request.POST.get('wd-start-date') != '':
-            start_date = datetime.datetime.strptime(request.POST.get('wd-start-date'), '%m/%d/%Y')
-        else:
-            start_date = None
-        if request.POST.get('wd-end-date') != '':
-            end_date = datetime.datetime.strptime(request.POST.get('wd-end-date'), '%m/%d/%Y')
-        else:
-            end_date = None
-        if request.POST.get('wd-current-job') == 'true':
-            current_job = True
-        else:
-            current_job = False
-        try:
+            start_date = request.POST.get('wd-start-date')
+            end_date = request.POST.get('wd-end-date')
+            current_job=request.POST.get('wd-current-job')
+            if(current_job == 'true'):
+                current_job=True
+            else:
+                current_job=False
             amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
-            amu_obj.add_work(
-                job_title,
-                company,
-                address,
-                description,
-                start_date,
-                end_date,
-                current_job)
-            return JsonResponse({'success': 200})
-        except Exception as e:
-            print(e)
-            return JsonResponse({'error': e})
-
+            db_status=amu_obj.add_work(
+                title=job_title,
+                company=company,
+                location=address,
+                description=description,
+                start_date=start_date,
+                end_date=end_date,
+                is_current=current_job)
+                    # details added == succesfull
+            if(db_status):
+                return redirect('/amu/archive')
+                    # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        # if form  == intrest form
+        if(details_type == 'intrest'):
+            hobbies=request.POST.getlist('ihobbies')
+            movies=request.POST.getlist('imovies')
+            songs=request.POST.getlist('isongs')
+            print(request.POST.getlist('ihobbies'))
+            print(movies)
+            print(songs)
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_interests(
+                hobbies=hobbies,
+                movies=movies,
+                songs=songs,
+              )
+            # details added == succesfull
+            if(db_status):
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        
+        
+        # if form  == events form
+        if(details_type == 'events'):
+            # for education form--
+            form_name=request.POST.get('form_name')
+          
+            if(form_name == "education_form" ):
+                print('+++++++++++++++++++++++++++++++++++++')
+                print("IN EDUCATION FORM ")
+                print('+++++++++++++++++++++++++++++++++++++')
+                institute=request.POST.get('le-ef-institute')
+                degree=request.POST.get('le-ef-degree')
+                grades=request.POST.get('le-ef-grade')
+                field_of_study=request.POST.get('le-ef-fieldofstudy')
+                start_date=request.POST.get('le-ef-start-date')
+                end_date=request.POST.get('le-ef-end-date')
+            #    add data to model object
+                amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+                db_status=amu_obj.add_education(
+                        institute=institute,
+                        degree=degree,
+                        grades=grades,
+                        field_of_study=field_of_study,
+                        start_date=start_date,
+                        end_date=end_date)
+               
+                # details added == succesfull
+                if(db_status):
+                    return redirect('/amu/archive')
+                # details insertion == fail 
+                else:
+                    return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+            if(form_name == "marriage_form"):
+                # get form fields
+                spouse=request.POST.get('le-m-spouse')
+                location=request.POST.get('le-m-location')
+                wedding_date=request.POST.get('le-m-wedding-date')
+                divorce_date=request.POST.get('le-m-divorce-date')
+                # 
+                amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+                db_status=amu_obj.add_marriage(
+                spouse=spouse,
+                location=location,
+                wedding_date=wedding_date,
+                divorce_date=divorce_date)
+                if(db_status):
+                    return redirect('/amu/archive')
+                # details insertion == fail 
+                else:
+                    return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
 
 class Add_Education(View):
 
@@ -434,3 +476,9 @@ class Action_Send_Message(View):
 
 
         return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
+
+class Archive(View):
+    def get (self,request,*args,**kwargs):
+        resp = Avatar_AMS.get_all_avatars()
+        return render(request,'Avatar_Management_Unit/archive.html',{'resp':resp})
+    
