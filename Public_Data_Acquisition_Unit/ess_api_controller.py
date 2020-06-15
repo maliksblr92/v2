@@ -5,12 +5,15 @@ import time
 
 from django.conf import settings
 
-#ESS_IP = settings.ESS_IP
-ESS_SERVER_BASE_URL = 'http://192.168.18.19:8000/' #ip of the serve or its url
+ESS_IP = settings.ESS_IP
+
+
 ESS_API_TOKEN = ''  #api token here
 ESS_SERVER_PORT = '8000'
 ESS_SERVER_USER = 'rapidev'
 ESS_SERVER_PASSWORD = 'rapidev'
+ESS_SERVER_BASE_URL = 'http://{0}:{1}/'.format(ESS_IP,ESS_SERVER_PORT) #ip of the serve or its url
+
 
 Header = ''
 

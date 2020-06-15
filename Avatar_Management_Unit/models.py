@@ -6,7 +6,7 @@ import datetime
 # -------------------------------------------------------- connection ------------------------------------------------------
 disconnect('default')
 #CONNECT TO MONGO DB
-connect(db='OSINT_System',host='192.168.18.20', port=27017)
+#connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
 
 SOCIAL_MEDIA_TYPE = (

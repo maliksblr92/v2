@@ -16,7 +16,7 @@ PORT = ''
 # disconnect('default')
 # CONNECT TO MONGO DB
 # connect(db='OSINT_Core',host='192.168.18.20', port=27017, username='ocs', password='rapidev')
-connect(db='OSINT_System', host='192.168.18.20', port=27017)
+#connect(db='OSINT_System', host='192.168.18.20', port=27017)
 
 
 # connect('OSINT_Core')
