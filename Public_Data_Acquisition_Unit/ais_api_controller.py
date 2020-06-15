@@ -2,13 +2,14 @@ import requests
 import logging
 from django.conf import settings
 
-#ESS_IP = settings.ESS_IP
-AIS_SERVER_BASE_URL = 'http://192.168.18.13:5000/' #ip of the serve or its url
+AIS_IP = settings.AIS_IP
+
 AIS_API_TOKEN = ''  #api token here
 AIS_SERVER_PORT = '5000'
 AIS_SERVER_USER = 'rapics'
 AIS_SERVER_PASSWORD = 'rapics'
-
+#AIS_SERVER_BASE_URL = 'http://192.168.18.13:5000/' #ip of the serve or its url
+AIS_SERVER_BASE_URL = 'http://{0}:{1}/'.format(AIS_IP,AIS_SERVER_PORT) #ip of the serve or its url
 Header = ''
 
 logger = logging.getLogger(__name__)

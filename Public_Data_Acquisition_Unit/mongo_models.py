@@ -2,6 +2,8 @@ from mongoengine import *
 import datetime
 from OSINT_System_Core.publisher import publish
 import random
+from django.conf import settings
+
 
 DATABASE = ''
 USERNAME = ''
@@ -9,10 +11,13 @@ PASSWORD = ''
 HOST_IP = ''
 PORT = ''
 
+MONGO_DB_IP = settings.MONGO_DB
+
+
 import os
 disconnect('default')
 #CONNECT TO MONGO DB
-connect(db='OSINT_System',host='192.168.18.20', port=27017)
+connect(db='OSINT_System',host=MONGO_DB_IP, port=27017)
 
 #connect('OSINT_System')
 
