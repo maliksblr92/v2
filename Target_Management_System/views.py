@@ -13,7 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django_eventstream import send_event
 from Keybase_Management_System.keybase_manager import Keybase_Manager
 from System_Log_Management_Unit.system_log_manager import Data_Queries
-
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 dq = Data_Queries()
 acq = Acquistion_Manager()
 km = Keybase_Manager()
@@ -128,10 +128,8 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             url = request.POST[plateform+'_authoruserurl']
             expire_on = request.POST[plateform+'_expirydate']
             interval = int(request.POST[plateform+'_interval'])
-            screen_shot = False
-
-
-
+            screen_shot = bool(int(request.POST[plateform+'_screenshot']))
+            print(screen_shot)
 
             print(portfolio_id)
 
@@ -187,11 +185,20 @@ class Smart_Search(RequireLoginMixin, IsTSO, View):
 class Target_Fetched(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
 
-        target_site=None
+        target_site='facebook'
         if 'target_site' in kwargs:target_site = kwargs['target_site']
 
         resp = acq.get_fetched_targets(website=target_site)
-        #print(resp)
+
+
+        paginator = Paginator(resp, 6)
+        page = request.GET.get('page')
+        try:
+            resp = paginator.page(page)
+        except PageNotAnInteger:
+            resp = paginator.page(1)
+        except EmptyPage:
+            resp = paginator.page(paginator.num_pages)
         return render(request,'Target_Management_System/tso_targetfetchview.html',{'targets':resp,'supported_sites':acq.get_all_supported_sites()})
 
     def post(self, request, *args, **kwargs):
@@ -433,6 +440,7 @@ def convert_expired_on_to_datetime(expired_on):
 
 
 # ahmed code
+# INSTAGRAM
 class Instagram_Target_Response(TemplateView):
        template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
        def get(self, request, *args, **kwargs):
@@ -441,11 +449,18 @@ class Instagram_Target_Response(TemplateView):
             print(profile.to_mongo())
             return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'profile': profile})
 
+class Instagram_Target_Report(TemplateView):
+       template_name = "Target_Management_System/InstagramPerson_Target_Report.html"
+       def get(self, request, *args, **kwargs):
+            object_gtr_id = kwargs['object_gtr_id']
+            profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+            print(profile.to_mongo())
+            return render(request, 'Target_Management_System/InstagramPerson_Target_Report.html', {'profile': profile})
 
 
 
 
-
+# LINKEDIN
 class LinkedinCompany_Target_Response(TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
@@ -458,14 +473,39 @@ class LinkedinCompany_Target_Response(TemplateView):
         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': data_object})
 
 
-
-
-
-class FacebookPerson_Target_Response(TemplateView):
+class LinkedinCompany_Target_Report(TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(data_object.to_mongo())
+        with open('static/Target_Json/linkedin_companyr_data.json', 'r') as f:
+            company = json.load(f)
+        return render(request, 'Target_Management_System/LinkedinCompany_Target_Report.html', {'company': data_object})
+    
+class LinkedinPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
+
+class LinkedinPerson_Target_Report(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+        return render(request, 'Target_Management_System/LinkedinPerson_Target_Report.html', {'profile': data_object})
+
+# FACEBOOK
+class FacebookPerson_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.work)
 
 
         with open('static/Target_Json/facebook_person_data.json', 'r') as f:
@@ -488,51 +528,9 @@ class FacebookGroup_Target_Response(TemplateView):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(data_object.to_mongo())
-
         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             group = json.load(f)
         return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': data_object})
-
-
-
-
-
-
-# this json wasnot according to format to formatted here
-class Twitter_Target_Response(TemplateView):
-    def get(self, request, *args, **kwargs):
-
-        object_gtr_id = kwargs['object_gtr_id']
-        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(data_object.to_mongo())
-
-
-
-
-        #print(tweets)
-        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
-
-
-
-
-# this json wasnot according to format to formatted here
-class LinkedinPerson_Target_Response(TemplateView):
-    def get(self, request, *args, **kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(data_object.to_mongo())
-
-
-        return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
-
-
-class Index(TemplateView):
-    def get(self, request, *args, **kwargs):
-          with open('static/Target_Json/facebook_person_data.json', 'r') as f:
-            profile = json.load(f)
-            return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile':profile})
-
-
 
 class FacebookPersonReport(TemplateView):
     def get(self,request,*args,**kwargs):
@@ -569,6 +567,41 @@ class FacebookGroupReport(TemplateView):
          return render(request,'Target_Management_System/FacebookGroup_Target_Report.html',{'group':data_object})
 
 
+
+# TWITTER
+
+# this json wasnot according to format to formatted here
+class Twitter_Target_Response(TemplateView):
+    def get(self, request, *args, **kwargs):
+
+        object_gtr_id = kwargs['object_gtr_id']
+        data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(data_object.to_mongo())
+
+
+
+
+        #print(tweets)
+        return render(request, 'Target_Management_System/Twitter_Target_Response.html', {'tweets': data_object})
+
+
+
+
+class Twitter_Target_Report(TemplateView):
+    def get(self,request,*args,**kwargs):
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         return render(request,'Target_Management_System/Twitter_Target_Report.html',{'tweets':data_object})
+
+    
+
+
+# this json wasnot according to format to formatted here
+
+
+
 #view for link analysis graph
 
 class Link_Analysis(View):
@@ -581,10 +614,17 @@ class Link_Analysis(View):
         if(len(data_object['linked_to'][1]) > 0):
 
             resp = convert_facebook_indirect_links_to_graph(data_object['linked_to'][1])
-            print(resp)
-            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+            resp=json.loads(resp)    
+            for i in resp:
+                if i['image']==None:
+                    i['image']='data:image/png;base64,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'
+                
+            resp=json.dumps(resp)
+                
+            
+            return render(request,'Target_Management_System/link_analysis_amcharts.html',{'data':resp})
         else:
-            return render(request, 'Target_Management_System/link_analysis.html', {})
+            return render(request, 'Target_Management_System/link_analysis_amcharts.html', {})
 
 
 class Close_Associates_Tree_Graph(View):
@@ -639,6 +679,75 @@ class Twitter_Follower_Tree_Graph(View):
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
 
+# REDDIT 
+class Reddit_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(profile.to_mongo())
+        return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
+    
+    
+class Reddit_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(profile.to_mongo())
+        return render(request,'Target_Management_System/Reddit_Target_Report.html',{'profile':profile})
+    
+   # YOUTUBE  
+class Youtube_Target_Response(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(channel.to_mongo())
+
+        return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
+ 
+class Youtube_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(channel.to_mongo())
+
+        return render(request,'Target_Management_System/Youtube_Target_Report.html',{'channel':channel})
+  
+  # DYNAMIC CRAWLING   
+class Dynamic_Crawling_Target(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(target.to_mongo())
+        return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
+    
+class Dynamic_Crawling_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(target.to_mongo())
+        return render(request,'Target_Management_System/Dynamic_Crawling_Report.html',{'target':target})
+    
+# SUBREDDIT 
+
+class Subreddit_Target_Resposne(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(subreddit_profile.to_mongo())
+        return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})
+
+
+
+
+class Subreddit_Target_Report(View):
+    def get(self,request,*args,**kwargs):
+        object_gtr_id = kwargs['object_gtr_id']
+        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+        print(subreddit_profile.to_mongo())
+        return render(request,'Target_Management_System/Subreddit_Target_Report.html',{'subreddit_profile':subreddit_profile})
+
+
+
 
 def convert_facebook_indirect_links_to_graph(data):
 
@@ -684,6 +793,9 @@ def convert_facebook_indirect_links_to_graph(data):
             for y in data:
                 if(item['mutual_close_associate']==y['mutual_close_associate']):
                     linkwith.add(y['username'])
+                    linkwith.add(y['username'])
+                    linkwith.add(y['username'])
+                    linkwith.add(y['username'])
 
             node['linkWith'] = list(linkwith)
 
@@ -703,34 +815,3 @@ def username_exists(username,n_data):
 
 
 
-class Reddit_Target_Response(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(profile.to_mongo())
-        return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
-    
-    
-class Youtube_Target_Response(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(channel.to_mongo())
-
-        return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
-    
-class Dynamic_Crawling_Target(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(target.to_mongo())
-        return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
-    
-    
-
-class Subreddit_Target_Resposne(View):
-    def get(self,request,*args,**kwargs):
-        object_gtr_id = kwargs['object_gtr_id']
-        subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-        print(subreddit_profile.to_mongo())
-        return render(request,'Target_Management_System/Subreddit_Target_Resposne.html',{'subreddit_profile':subreddit_profile})

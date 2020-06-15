@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.27'
+FILE_SERVER = '192.168.18.33'
 
 # mongoDb setting variables for public access
 # db='OSINT_System'
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'Case_Management_System.apps.CaseManagementSystemConfig',
     'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
     'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
+    'Bi_Tools.apps.BiToolsConfig',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +97,7 @@ TEMPLATES = [
                 'Data_Processing_Unit.context_processors.ess_ip',
                 'Data_Processing_Unit.context_processors.uis_ip',
             ],
+           
         },
     },
 ]
@@ -227,8 +230,17 @@ HUEY = RedisHuey('my-app')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+STATIC_SERVER_BASE_PATH = 'http://{0}/osint_system'.format(FILE_SERVER)
+if(DEBUG):
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+else:
+    STATIC_URL = STATIC_SERVER_BASE_PATH+'/static_files/'
+    STATICFILES_DIRS = (os.path.join(STATIC_SERVER_BASE_PATH, "static_files"),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
+
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'

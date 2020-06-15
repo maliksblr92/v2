@@ -1,121 +1,163 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
+{% block page_title %}IP Logger Details{% endblock %}
+{% load osint_custom_tags %}
 {% block head_dep %}
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
 {% endblock %}
 
 {% block smallnavbar %}
 
 {% endblock %}
 {% block belly %}
-<style>
- tr {
-    width: 100%;
-    display: inline-table;
-    table-layout: fixed;
-  }
+    <style>
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
 
-  table {
-    height: 500px!important;
-    display: -moz-groupbox;
-  }
+        table {
+            height: 500px !important;
+            display: -moz-groupbox;
+        }
 
-  tbody {
-    overflow-y: scroll!important;
-    height: 400px!important;
-    width: 100%;
+        tbody {
+            overflow-y: scroll !important;
+            height: 400px !important;
+            width: 100%;
 
-  }
-@media screen and (max-width: 767px) {
-  .table-responsive {
-    width: 100%;
-    margin-bottom: 15px;
-    overflow-y: hidden;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    border: 1px solid #ddd;
-  }
-  .table-responsive > .table {
-    margin-bottom: 0;
-  }
-  .table-responsive > .table > thead > tr > th,
-  .table-responsive > .table > tbody > tr > th,
-  .table-responsive > .table > tfoot > tr > th,
-  .table-responsive > .table > thead > tr > td,
-  .table-responsive > .table > tbody > tr > td,
-  .table-responsive > .table > tfoot > tr > td {
-    white-space: nowrap;
-  }
-  .table-responsive > .table-bordered {
-    border: 0;
-  }
-  .table-responsive > .table-bordered > thead > tr > th:first-child,
-  .table-responsive > .table-bordered > tbody > tr > th:first-child,
-  .table-responsive > .table-bordered > tfoot > tr > th:first-child,
-  .table-responsive > .table-bordered > thead > tr > td:first-child,
-  .table-responsive > .table-bordered > tbody > tr > td:first-child,
-  .table-responsive > .table-bordered > tfoot > tr > td:first-child {
-    border-left: 0;
-  }
-  .table-responsive > .table-bordered > thead > tr > th:last-child,
-  .table-responsive > .table-bordered > tbody > tr > th:last-child,
-  .table-responsive > .table-bordered > tfoot > tr > th:last-child,
-  .table-responsive > .table-bordered > thead > tr > td:last-child,
-  .table-responsive > .table-bordered > tbody > tr > td:last-child,
-  .table-responsive > .table-bordered > tfoot > tr > td:last-child {
-    border-right: 0;
-  }
-  .table-responsive > .table-bordered > tbody > tr:last-child > th,
-  .table-responsive > .table-bordered > tfoot > tr:last-child > th,
-  .table-responsive > .table-bordered > tbody > tr:last-child > td,
-  .table-responsive > .table-bordered > tfoot > tr:last-child > td {
-    border-bottom: 0;
-  }
-}
-</style>
-<div class="row middlecontentdiv">
-  <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-    <h4 class="topheading">IP Logger Details</h4>
-  </div>
-  <!-- end of top row -->
-  <!-- inside main container -->
-  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-    <table class="table table-responsive" style="color: white">
-      <thead>
-        <tr>
+        }
 
-          <th scope="col">Title</th>
-          <th scope="col">IP</th>
-          <th scope="col">Referrer</th>
-          <th scope="col">Time Stamp</th>
-            <th scope="col">UserAgent</th>
-          <th scope="col">Created_on</th>
+        @media screen and (max-width: 767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-y: hidden;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
 
+            .table-responsive > .table {
+                margin-bottom: 0;
+            }
 
-            <th scope="col">Action</th>
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > th,
+            .table-responsive > .table > tfoot > tr > th,
+            .table-responsive > .table > thead > tr > td,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space: nowrap;
+            }
 
-        </tr>
-      </thead>
-      <tbody>
-        {% for logger in responses %}
+            .table-responsive > .table-bordered {
+                border: 0;
+            }
 
-        <tr>
+            .table-responsive > .table-bordered > thead > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+            .table-responsive > .table-bordered > thead > tr > td:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left: 0;
+            }
 
-          <th  style="font-size:12px;" scope="row">{{logger.title}}</th>
-          <td  style="font-size:12px;">{{logger.logged_response.ip_addr}}</td>
-            <td  style="font-size:12px;"><a href="{{logger.logged_response.referrer|truncatechars:100}}" target="_blank">click to see</a></td>
-            <td  style="font-size:12px;">{{logger.logged_response.timestamp}}</td>
-            <td  style="font-size:12px;">{{logger.logged_response.user_agent|truncatechars:50}}</td>
-          <td style="font-size:10px;" ><span class="text-truncate">{{logger.created_on}}</span></td>
+            .table-responsive > .table-bordered > thead > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+            .table-responsive > .table-bordered > thead > tr > td:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right: 0;
+            }
+
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom: 0;
+            }
+        }
+    </style>
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">IP Logger Details</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+            <table class="table table-responsive text-white" id="logged_ips" class="display" style="width:100%">
+                <thead>
+                <tr>
+
+                    <th scope="col">Title</th>
+                    <th scope="col">IP</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Isp</th>
 
 
-          <td><a class="btn" href=""><i class="fa fa-trash text-white" ></i></a></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    </table>
-  </div>
-</div>
+                    <th scope="col">Tracked On</th>
+                    <th scope="col">Useragent</th>
+
+                    <th scope="col">Created On</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for logger in responses reversed %}
+
+                    <tr>
+
+                        <th style="font-size:12px;" scope="row">{{ logger.title }}</th>
+                        <td style="font-size:12px;">{{ logger.logged_response.ip_addr }}</td>
+                        <td style="font-size:12px;">{{ logger.logged_response.country }}</td>
+                        <td style="font-size:12px;">{{ logger.logged_response.region }}</td>
+                        <td style="font-size:12px;">{{ logger.logged_response.city }}</td>
+                        <td style="font-size:12px;">{{ logger.logged_response.isp }}</td>
+
+
+
+
+                        <td style="font-size:12px;">{{ logger.logged_response.timestamp }}</td>
+                        <td style="font-size:12px;">{{ logger.logged_response.user_agent|truncatechars:50 }}</td>
+                        <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
+
+
+{#                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i#}
+{#                                class="fa fa-trash text-white"></i></a></td>#}
+                        <td>
+                            <a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}">
+                                <i class="fa fa-trash text-white"></i>
+                            </a>
+                            {% if logger.logged_response.coordinates_of_city %}
+                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" target="_blank" style="color: white">
+                                <i class="fa fa-eye text-white"></i>
+                            </a>
+
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}>
-l>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#logged_ips').DataTable();
+        });
+    </script>
+{% endblock %}

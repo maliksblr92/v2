@@ -21,7 +21,7 @@ from Avatar_Management_Unit.models import Avatar_AMS
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
 from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
-from django.shortcuts import reverse, render,redirect
+from django.shortcuts import reverse, render, redirect
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -31,7 +31,7 @@ from Data_Processing_Unit import tasks
 import datetime
 from django.utils import timezone
 from django_eventstream import send_event
-from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages,Ip_Logger
+from Public_Data_Acquisition_Unit.mongo_models import Rabbit_Messages, Ip_Logger
 
 from bs4 import BeautifulSoup
 import requests
@@ -42,9 +42,9 @@ import os
 from Data_Processing_Unit.models import News
 from Data_Processing_Unit.models import Trends
 from django.core import serializers
-from django.shortcuts import get_object_or_404,reverse
+from django.shortcuts import get_object_or_404, reverse
 from mongoengine.queryset.visitor import Q
-from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference,Periodic_Targets
+from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference, Periodic_Targets
 
 from Public_Data_Acquisition_Unit.mongo_models import Global_Target_Reference
 from System_Log_Management_Unit.system_log_manager import System_Stats
@@ -64,8 +64,9 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-from System_Log_Management_Unit.system_log_manager import  System_Stats
-ss=System_Stats()
+from System_Log_Management_Unit.system_log_manager import System_Stats
+
+ss = System_Stats()
 # Create your views here.
 
 # processing_manager = Processing_Manager()
@@ -76,6 +77,7 @@ pl = Portfolio_Link()
 pi = Portfolio_Include()
 km = Keybase_Match()
 ss = System_Stats()
+
 
 # FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
 
@@ -733,7 +735,7 @@ class Link_Object(View):
         beta_path_list = []
         try:
 
-            beta_path_list.append(ObjectId(request.GET.getlist('beta_path_list[]')[0]),)
+            beta_path_list.append(ObjectId(request.GET.getlist('beta_path_list[]')[0]), )
         except:
             pass
 
@@ -748,7 +750,6 @@ class Link_Object(View):
             beta_path_list.append(int(request.GET.getlist('beta_path_list[]')[2]))
         except:
             pass
-
 
         type = request.GET['type']
         if (type == 'portfolio'):
@@ -805,21 +806,40 @@ class Share_Resource(View):
 class Rabbit_Message(View):
 
     def get(self, request):
-        #print(request.GET)
-        objects = Rabbit_Messages.get_top_messages(10, request.GET.get('window_type', 'message'))
-        print(objects)
+        # print(request.GET)
+        objects = Rabbit_Messages.get_top_messages_with_pid(20, request.GET.get('window_type', 'message'))
 
         return render(request, 'OSINT_System_Core/message_loger.html', {'messages': objects})
 
 
-class Logged_Ips(RequireLoginMixin,IsTSO,View):
+class Logged_Ips(RequireLoginMixin, IsTSO, View):
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         responses = Ip_Logger.get_all_loggers()
 
-        return render(request,'OSINT_System_Core/logged_ips.html',{'responses':responses})
+        return render(request, 'OSINT_System_Core/logged_ips.html', {'responses': responses})
 
 
+class View_Logged_Ip_Response(RequireLoginMixin, IsTSO, View):
+    def get(self, request, *args, **kwargs):
+        latlons = kwargs['latlons']
+
+        lat = float(latlons.split('_')[0])
+        lon = float(latlons.split('_')[1])
+
+        print(latlons)
+        return render(request, 'OSINT_System_Core/view_ip_logger_response.html', {'lat': lat, 'lon': lon})
+
+
+class Delete_Ips(RequireLoginMixin, IsTSO, View):
+
+    def get(self, request, *args, **kwargs):
+        obj_id = kwargs['obj_id']
+
+        ip_obj = Ip_Logger.objects(id=obj_id).first()
+        ip_obj.delete()
+
+        return HttpResponseRedirect(reverse('OSINT_System_Core:logged_ips'))
 
 
 class Update_Footer_Graphs():
@@ -847,30 +867,27 @@ def test_view(request):
 
 def test_view1(request):
     if request.method == 'GET':
-        
-        
-            
         return render(request, 'OSINT_System_Core/tso_dashboard.html')
 
 
 class TSO_Dashboard(RequireLoginMixin, IsTSO, View):
     def get(self, request, *args, **kwargs):
-        context={
-        'total_keybase_crawling_targets_added':     ss.total_keybase_crawling_targets_added(),
-        'total_expired_targets':                    ss.total_expired_targets(),
-        'total_keybase_crawling_targets_fetched':   ss.total_keybase_crawling_targets_fetched(),
-        'total_periodic_targets':                   ss.total_periodic_targets(),
-        'total_targets_added':                      ss.total_targets_added(),
-        'top_twitter_profiles_with_highest_counts': ss.top_twitter_profiles_with_highest_counts(),
-        'top_profiles_with_negative_behavior':      ss.top_profiles_with_negative_behavior(),
-        # 'targets_added_by_date':                    ss.targets_added_by_date(),
-        'total_dynamic_crawling_targets_added':     ss.total_dynamic_crawling_targets_added(),
-        'total_dynamic_crawling_targets_fetched':   ss.total_dynamic_crawling_targets_fetched(),
-        # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
+        context = {
+            'total_keybase_crawling_targets_added': ss.total_keybase_crawling_targets_added(),
+            'total_expired_targets': ss.total_expired_targets(),
+            'total_keybase_crawling_targets_fetched': ss.total_keybase_crawling_targets_fetched(),
+            'total_periodic_targets': ss.total_periodic_targets(),
+            'total_targets_added': ss.total_targets_added(),
+            'top_twitter_profiles_with_highest_counts': '',
+            'top_profiles_with_negative_behavior': ss.top_profiles_with_negative_behavior(),
+            # 'targets_added_by_date':                    ss.targets_added_by_date(),
+            'total_dynamic_crawling_targets_added': ss.total_dynamic_crawling_targets_added(),
+            'total_dynamic_crawling_targets_fetched': ss.total_dynamic_crawling_targets_fetched(),
+            # 'targets_fetched_by_date':                  ss.targets_fetched_by_date(),
         }
-        dic=ss.top_twitter_profiles_with_highest_counts()
+        dic = ss.targets_added_by_date()
         print(dic)
-        return render(request, 'OSINT_System_Core/tso_dashboard.html',{"context":context,'dic':dic})
+        return render(request, 'OSINT_System_Core/tso_dashboard.html', {"context": context, 'dic': dic})
 
 
 class TMO_Dashboard(RequireLoginMixin, IsTMO, View):
@@ -900,28 +917,28 @@ class Dashboard(APIView):
         youtube_trends = Trends.objects.filter(trend_type='youtube_trends').order_by('-id').first()
         google_trends = Trends.objects.filter(trend_type='google_trends').order_by('-id').first()
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
-       
+
         # get top hashtags for first load
         try:
-            twitter_country_hashtags  = get_country_hashtags("pakistan")
-            worldwide_hashtags=get_worldwide_hashtags()
+            twitter_country_hashtags = get_country_hashtags("pakistan")
+            worldwide_hashtags = get_worldwide_hashtags()
         # hashtag chart update
         except Trends.DoesNotExist:
             twitter_country_hashtags = None
-            worldwide_hashtags=None
+            worldwide_hashtags = None
         # first time load data end
         countries_list = [
             'pakistan',
-             'pakistan/faisalabad',
-             'pakistan/karachi',
-             'pakistan/lahore'
-             'pakistan/multan',
-             'pakistan/rawalpindi',
+            'pakistan/faisalabad',
+            'pakistan/karachi',
+            'pakistan/lahore'
+            'pakistan/multan',
+            'pakistan/rawalpindi',
             'india',
             'india/ahmedabad'
-            'india/amritsar',    
-            'india/bangalore',  
-            'india/bhopal',    
+            'india/amritsar',
+            'india/bangalore',
+            'india/bhopal',
             'india/chennai',
             'india/delhi',
             'india/hyderabad',
@@ -939,17 +956,19 @@ class Dashboard(APIView):
             'india/srinagar',
             'india/surat',
             'india/thane',
-            
+
             'israel',
             'israel/haifa',
             'israel/jerusalem',
             'israel/tel-aviv',
-            
+
         ]
 
         return render(request, 'OSINT_System_Core/additional_templates/dashboard.html',
-                      {'reddit_trends': reddit_trends,'youtube_trends': youtube_trends, 'twitter_country_hashtags': twitter_country_hashtags,
-                       'countries_list': countries_list, 'Target_Count_Chart': Target_Count_Chart,'worldwide_hashtags':worldwide_hashtags,'google_trends':google_trends})
+                      {'reddit_trends': reddit_trends, 'youtube_trends': youtube_trends,
+                       'twitter_country_hashtags': twitter_country_hashtags,
+                       'countries_list': countries_list, 'Target_Count_Chart': Target_Count_Chart,
+                       'worldwide_hashtags': worldwide_hashtags, 'google_trends': google_trends})
 
 
 def main(request):
@@ -1025,12 +1044,10 @@ def get_worldwide_hashtags():
     return (dic)
 
 
-
-
 def get_country_hashtags(country):
     # text_data_json = json.loads(text_data)
     # message = text_data_json['message']
-    url = 'https://trends24.in/'+country+'';
+    url = 'https://trends24.in/' + country + '';
     page = requests.get(url);
     status_code = page.status_code;
     dic = {};
@@ -1062,18 +1079,16 @@ def get_country_hashtags(country):
 def getTrendsByCountry(request):
     if request.method == 'GET':
         country_name = request.GET['country_name']
-        if country_name!="world":
-                print("country name"+country_name)
-                data=get_country_hashtags(country_name)
-                json_data=json.dumps(data)
-                return HttpResponse(json_data)
+        if country_name != "world":
+            print("country name" + country_name)
+            data = get_country_hashtags(country_name)
+            json_data = json.dumps(data)
+            return HttpResponse(json_data)
         else:
-                print("==world"+country_name)
-                data=get_worldwide_hashtags()
-                json_data=json.dumps(data)
-                return HttpResponse(json_data)
-               
-       
+            print("==world" + country_name)
+            data = get_worldwide_hashtags()
+            json_data = json.dumps(data)
+            return HttpResponse(json_data)
 
 
 def getYoutubeTrends(request):
@@ -1105,11 +1120,12 @@ def update_dashboard_donutchart(request):
     if request.method == 'GET':
         Target_Count_Chart = Global_Target_Reference.target_count_for_all_sites()
         json_data = json.dumps(Target_Count_Chart)
-       
+
         return HttpResponse(json_data)
 
+
 def getGoogleTrends(request):
-    if request.method=='GET':
+    if request.method == 'GET':
         try:
             data = Trends.objects.filter(trend_type='google_trends').order_by('-id').first()
             json_data = data.to_json()
@@ -1118,20 +1134,28 @@ def getGoogleTrends(request):
             data = None
             return HttpResponse(data)
 
-def Periodic_Target_DB(request):
-    if request.method=='GET':
-        obj=Periodic_Targets()
-        Periodic_Targets_List=obj.get_all_periodic_task()
-        return render(request,'OSINT_System_Core/Periodic_Targets.html',{'Periodic_Targets_List':Periodic_Targets_List})
-    
 
-    
+def Periodic_Target_DB(request):
+    if request.method == 'GET':
+        obj = Periodic_Targets()
+        Periodic_Targets_List = obj.get_all_periodic_task()
+        return render(request, 'OSINT_System_Core/Periodic_Targets.html',
+                      {'Periodic_Targets_List': Periodic_Targets_List})
+
+
 class Delete_Periodic_Target_DB(View):
-    def get(self,request,*args,**kwargs):
-        id=kwargs['periodic_task_id']
+    def get(self, request, *args, **kwargs):
+        id = kwargs['periodic_task_id']
         print(id)
-        fetch_object_for_deletion=Periodic_Targets.objects(id=id).first()
+        fetch_object_for_deletion = Periodic_Targets.objects(id=id).first()
         if fetch_object_for_deletion:
             fetch_object_for_deletion.delete_periodic_task()
         return redirect('/core/periodic_target')
-    
+
+
+def design_test(request):
+    return render(request, 'OSINT_System_Core/design_test.html')
+
+
+def resp_test(request):
+    return render(request, 'OSINT_System_Core/resp_test.html')

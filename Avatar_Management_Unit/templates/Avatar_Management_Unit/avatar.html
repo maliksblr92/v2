@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="{% static 'Avatar_Management_Unit/css/avatar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<div class="row">
+<!-- navbar by shareef  -->
+<!-- <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 d-flex">
         <div class="col-md-3 col-lg-3 col-xl-3"></div>
@@ -20,7 +21,26 @@
         </div>
     </div>
     <div class="col-md-3 col-lg-3 col-xl-3"></div>
+</div> -->
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+       
+        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems "> CREATE</a>
+        </div>
+
+        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:archive' %}" class="btn secondnavitems "> ARCHIVE</a>
+        </div>
+        <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:send_message' %}" class="btn secondnavitems "> SEND MESSAGE</a>
+        </div>
+        
+    </div>
+    <div class="col-md-2"></div>
 </div>
+
 {% endblock %}
 {% block belly %}
 <div class="row middlecontentdiv">
@@ -42,6 +62,15 @@
     <!-- end of top row -->
     <!-- inside main container -->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+      <div class="row">
+          <div class="col-md-12 text-center">
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+          </div>
+      </div>
         <div class="">
             <div class="row formbg ml-3">
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
@@ -79,7 +108,7 @@
                                 <!-- end of left side redundant navigation -->
                                 <!-- Personal information form-->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form id="personal-info-form" style="padding-bottom:10px;">
+                                    <form id="personal-info-form" style="padding-bottom:10px;" method="POST" action="/amu/avatar/">
                                         {% csrf_token %}
                                         <div class="form-group ">
                                             <div class="row">
@@ -92,6 +121,7 @@
                                                         </div>
                                                         <input type="text" name="pinfo-fname" id="pinfo-fname"
                                                             class="form-control newinputdesign"
+                                                            required="required" minlength="1" maxlength="50"
                                                             placeholder="First Name">
                                                     </div>
                                                 </div>
@@ -101,7 +131,7 @@
                                                             <span class="newlabeldesign">Last Name</span>
                                                         </div>
                                                         <input type="text" name="pinfo-lname" id="pinfo-lname"
-                                                            class="form-control newinputdesign" placeholder="Last Name">
+                                                            class="form-control newinputdesign" required="required" minlength="1" maxlength="50" placeholder="Last Name">
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +143,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="email" name="pinfo-email" id="pinfo-email"
-                                                    class="form-control newinputdesign" placeholder="Email Please"
+                                                    class="form-control newinputdesign"required="required" placeholder="Email Please"
                                                     required>
                                             </div>
                                             <!-- end of email -->
@@ -124,8 +154,8 @@
                            opacity:0.9; padding:7px 9px 0 10px;">Phone Number
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control newinputdesign"
-                                                    name="pinfo-phone" id="pinfo-phone" placeholder="Phone Number">
+                                                <input type="number" class="form-control newinputdesign"
+                                                    name="pinfo-phone" required="required" minlength="1" maxlength="15" id="pinfo-phone" placeholder="Phone Number">
                                             </div>
                                             <!-- end of phone number -->
                                             <!--for Nationality-->
@@ -136,7 +166,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control newinputdesign"
-                                                    name="pinfo-nationality" placeholder="Nationality">
+                                                    name="pinfo-nationality" required="required" minlength="1" maxlength="20"  id="pinfo-nationality" placeholder="Nationality">
                                             </div>
                                             <!--Address-->
                                             <div class="input-group mt-1 mb-3">
@@ -146,7 +176,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control newinputdesign"
-                                                    name="pinfo-address" placeholder="Permanent Address">
+                                                    name="pinfo-address"required="required" minlength="1" maxlength="200" id="pinfo-address" placeholder="Permanent Address">
                                             </div>
                                             <!-- religious views -->
                                             <div class="input-group mt-1 mb-3">
@@ -156,7 +186,7 @@
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control newinputdesign"
-                                                    placeholder="Religious Views" name="pinfo-religious">
+                                                    placeholder="Religious Views" required="required" id="pinfo-religious" name="pinfo-religious">
                                             </div>
                                             <!-- end of religious views -->
                                             <!-- marital status -->
@@ -168,7 +198,7 @@
                                                 </div>
                                                 <input type="text" name="pinfo-marital-status" id="pinfo-married"
                                                     class="form-control newinputdesign"
-                                                    placeholder="single - married - in a relationship">
+                                                    placeholder="single - married - in a relationship" required="required">
                                             </div>
                                             <!-- end of marital status -->
                                             <!-- dob and gender 2 column div -->
@@ -178,11 +208,11 @@
                                                     <div class="input-group mt-1 mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                 opacity:0.9; padding:5px 9px 0 10px;">DOB
+                                                        opacity:0.9; padding:5px 9px 0 10px;">DOB
                                                             </span>
                                                         </div>
                                                         <input class="form-control newinputdesign" name="pinfo-dob"
-                                                            placeholder="MM/DD/YYY" type="text">
+                                                            placeholder="MM/DD/YYY" id="pinfo-dob" required="required"  type="date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -190,13 +220,14 @@
                                                     <div class="input-group mt-1 mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                 opacity:0.9; padding:5px 9px 0 10px;">Gender
+                                                     opacity:0.9; padding:5px 9px 0 10px;">Gender
                                                             </span>
                                                         </div>
                                                         <select name="pinfo-gender"
                                                             style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                            class="custom-select newinput" id="inputGroupSelect01">
-                                                            <option selected value="male">Male</option>
+                                                            class="custom-select newinput" id="pinfo-gender" required="required">
+                                                            <option selected value="">Select Gender</option>
+                                                            <option  value="male">Male</option>
                                                             <option value="female">Female</option>
                                                             <option value="other">Other</option>
                                                         </select>
@@ -1068,7 +1099,7 @@
                                     </div>
                                     <div class="row d-flex flex-row mt-3">
                                         <div class="col-md-12 ml-5 ">
-                                            <button type="reset" class="btn btn-secondary searchbutton">Clear </button>
+                                            <button type="reset"  class="btn btn-secondary searchbutton">Clear </button>
                                             <button type="submit" style="float:right; "
                                                 class="btn btn-secondary searchbutton mr-5">Submit</button>
                                         </div>
@@ -1089,5 +1120,25 @@
 </div>
 {% endblock %}
 {% block foot_dep %}
-<script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script>
+<!-- <script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script> -->
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Create Avatar";
+
+        $(document).ready(function(){
+            function CLEAN_PERSONAL_INFORMATION_FORM(){
+            console.log("CLEARING PERSONAL INFORMATION FORM ");
+            $('#pinfo-fname').val("");
+            $('#pinfo-lname').val("");
+            $('#pinfo-email').val("");
+            $('#pinfo-nationality').val("");
+            $('#pinfo-address').val("");
+            $('#pinfo-relegious').val("");
+            $('#pinfo-married').val("");
+            $('#pinfo-dob').val("");
+            $('#pinfo-gender').val("");
+            }
+        })
+    </script>
 {% endblock %}

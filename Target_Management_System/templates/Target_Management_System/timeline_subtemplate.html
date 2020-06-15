@@ -1,37 +1,66 @@
-{% for post in posts %}
-            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 mt-5  ">
-                <div class="card text-center glowing_border transparent">
-                    <div class="card-header text-white text-left topcontentbar">
-                        Username: {{ post.post.username }}
-                        <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}" target="_blank">Author: {{ post.post.author }}</a></h5>
-                    </div>
-                    <div class="card-body ">
+{% load osint_custom_tags %}
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6  " style="height:auto!important">
+        <div class="card text-center glowing_border transparent" style="border-radius: 20px 20px 0px 0px;">
+            <div class="card-header text-white text-left topcontentbar">
+                Username: {{ post.post.username }}
+                <h5 class="card-title"><a class="text-white" href="{{ post.post.a_url }}"
+                                          target="_blank">Author: {{ post.post.author }}</a></h5>
+            </div>
+            <div class="card-body " style="height:auto!important">
+
+                <div class="row">
+                    {#                        Changes by ahmed#}
+                    <div class="col-md-12">
                         <p class="card-text text-white">{{ post.post.text }}</p>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {% if post.post.picture|length > 0 %}
-                                <img class="img-fluid border" src="{{ post.post.picture }}">
-                                {% else %}
-                                    <img class="img-fluid border" src="{{ post.post.link }}">
-
-
-                                {% endif %}
-                            </div>
-                        </div>
-                        <a href="{{ post.post.link }}" target="_blank" class="btn btn-outline-light  ">Post</a>
-                        <div class="d-flex flex-row">
-                            <button type="button" class="btn btn-primary btn_link custom_icons" onclick="open_model('{{ post.object_id }}','link','posts',{{ post.post_index }})" >
-                            <i class="fa fa-link"></i>
-                        </button>
-                        <button type="button" class="btn btn-primary btn_share custom_icons" onclick="open_model('{{ post.object_id }}','share')">
-                            <i class="fa fa-share"></i>
-                        </button>
-                        </div>
                     </div>
-                    <div class="card-footer text-muted">
-                        <span class="badge badge-light float-left">Site : {{ post.post.t_site }}</span>
-                        <span class="badge badge-light float-right">Type : {{ post.post.t_type }}</span>
+                    <div class="col-md-12">
+
+                        {% if post.post.t_site == 'youtube' %}
+
+                            {% if post.post.link|length > 0 %}
+                                <iframe src="https://www.youtube.com/embed/{{ post.post.link|get_vedio_id }}"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        style="width: 100%; height: 300px;"></iframe>
+                            {% else %}
+                                <img class="img-fluid border" src="{{ post.post.picture }}">
+
+
+                            {% endif %}
+
+                        {% else %}
+
+                            {% if post.post.picture|length > 0 %}
+                                <img class="img-fluid border" src="{{ post.post.picture }}">
+                            {% else %}
+                                <img class="img-fluid border" src="{{ post.post.link }}">
+
+
+                            {% endif %}
+
+                        {% endif %}
                     </div>
                 </div>
+                <a href="{{ post.post.link }}" target="_blank" class="btn btn-outline-light  ">Post</a>
+                <div class="d-flex flex-row">
+                    <button type="button" class="btn btn-primary btn_link custom_icons"
+                            onclick="open_model('{{ post.object_id }}','link','posts',{{ post.post_index }})">
+                        <i class="fa fa-link"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn_share custom_icons"
+                            onclick="open_model('{{ post.object_id }}','share')">
+                        <i class="fa fa-share"></i>
+                    </button>
+                </div>
             </div>
-        {% endfor %}
+            <div class="card-footer text-muted">
+                <span class="badge badge-light float-left">Site : {{ post.post.t_site }}</span>
+                <span class="badge badge-light float-right">Type : {{ post.post.t_type }}</span>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>

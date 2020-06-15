@@ -1,0 +1,154 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title %}Send Message {% endblock %}
+{% block head_dep %}
+    <!-- Stylesheet -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+
+    <!--  -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Keybase_Management_System/css/creation.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+           
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems "> CREATE</a>
+            </div>
+
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:archive' %}" class="btn secondnavitems "> ARCHIVE</a>
+            </div>
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:send_message' %}" class="btn secondnavitems "> SEND MESSAGE</a>
+            </div>
+            
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+
+{% block belly %}
+    <div class="row  ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Avatar Send Message</h4>
+        </div>
+        <!-- end of top row -->
+
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+            <div class="">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <div class="row formbg ml-5">
+                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                        <form name="portfolio_create_form" id="portfolio_create_form"
+                              action="{% url 'Avatar_Management_Unit:send_message' %}" method="POST">
+                            {% csrf_token %}
+
+                            <div class="row input_wrapper_row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-9">
+
+
+                                    <div class="row">
+                                        <!-- title -->
+                                        <div class="input-group w-100 d-flex flex-row justify-content-between align-items-center ">
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign w-100" style="font-size:13px;letter-spacing:0.1em;
+                                                        opacity:0.9; padding:7px 9px 0 10px;">Target Username
+                                                    </span>
+                                                </div>
+                                                {% if target_username %}
+                                                    <input type="text" id="username"
+                                                           class="col-md-9 form-control newinputdesign"
+                                                           name="username" value="{{ target_username }}"
+                                                           placeholder="username"
+                                                           required="required">
+                                                {% else %}
+                                                    <input type="text" id="username"
+                                                           class="col-md-9 form-control newinputdesign"
+                                                           name="username" value="" required="required"
+                                                           placeholder="username">
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-group  mb-3">
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="newlabeldesign w-100 d-flex flex-column justify-content-center align-items-start"
+                                                  style="font-size:13px;letter-spacing:0.1em;
+                                                opacity:0.9; padding:7px 9px 0 10px;">Message
+                                            </span>
+                                                </div>
+                                                <div class="col-md-9 p-0">
+                                            <textarea name="message" class="form-control newinputdesign w-100"
+                                                      cols="20" placeholder="Type Message Here" rows="10" required="required">
+                                            </textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-1 ">
+                                </div>
+                            </div>
+
+                            <div class="row input_wrapper_row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <input type="submit" class="btn-sm w-100 mainbutton text-white" value="send"
+                                           name="submit" id="submit">
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+            <!-- Second row-->
+            <!-- END OF second row-->
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!--  -->
+
+
+
+
+
+
+    </div>
+    </div>
+    <!-- inside main container -->
+
+{% endblock %}
+{% block foot_dep %}
+
+
+{% endblock %}

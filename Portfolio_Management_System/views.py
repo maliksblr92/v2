@@ -1,4 +1,4 @@
-from django.shortcuts import render , reverse
+from django.shortcuts import render , reverse,redirect
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 # Create your views here.
 from django.shortcuts import render
@@ -16,9 +16,10 @@ from Public_Data_Acquisition_Unit.acquistion_manager import Acquistion_Manager
 from Public_Data_Acquisition_Unit.mongo_models import Timeline_Posts as Timeline_Posts_Model
 from Portfolio_Management_System.models import *
 from System_Log_Management_Unit.system_log_manager import Data_Queries
-
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.conf import settings as djangoSettings
-
+from django.contrib import messages
+from django.templatetags.static import static
 acq = Acquistion_Manager()
 dq = Data_Queries()
 
@@ -182,6 +183,7 @@ class Archive(View):
 
         portfolios = Portfolio_PMS.get_all_portfolios()
         print(portfolios)
+        print("+++++++++++++++++++++++")
         return render(request,'Portfolio_Management_System/tso_archive.html',{'portfolios':portfolios})
 
 
@@ -196,9 +198,17 @@ class Portfolio_Link_Analysis(View):
         if(object_id is not None):
 
             resp = dq.portfolio_link_analysis(object_id)
-
-            print(resp)
-            return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
+            resp=json.loads(resp)
+            name=resp['name']
+            path=static('/images/anonymous_logo.jpg')
+            resp['img']=path+""
+            #make sure that we have two nodes to display else it will redirect back to archive page with message 
+            if (len(resp['children']) and len(resp['children'][0]['children'])) <= 1 :
+                messages.success(request, 'No link analysis found for '+name)
+                return redirect('/pms/archive')
+            else:
+                resp=json.dumps(resp)
+                return render(request,'Target_Management_System/link_analysis.html',{'data':resp})
         else:
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
@@ -327,6 +337,15 @@ class Explore(View):
         return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
 
 
+class Explore_By_GTR(View):
+    def get(self,request,*args,**kwargs):
+        portfolio_id = kwargs['porfolio_id']
+        if portfolio_id is not None:
+            resp=Portfolio_PMS.objects.get(id=portfolio_id)
+
+        return render(request,'Portfolio_Management_System/explore.html',{'resp':resp})
+
+
 class Portfolio_Links(RequireLoginMixin, IsTSO, View):
 
     SUPPORTED_LINK_TYPES = ()
@@ -347,13 +366,16 @@ class Portfolio_Links(RequireLoginMixin, IsTSO, View):
                 linked_objs = Portfolio_Linked_PMS.objects(alpha_reference=portfolio)
                 if(linked_objs):
                     for obj in linked_objs:
-                        if(not isinstance(obj.beta_reference,Timeline_Posts_Model)):
-                            gtr_list.append(obj.beta_reference.GTR)
-                        else:
-                            resource = Portfolio_Link.resolve_intell_refference(beta_ref=obj.beta_reference, beta_path=obj.beta_path)
-                            if(resource):
-                                posts.append(resource)
+                        try:
+                            if(not isinstance(obj.beta_reference,Timeline_Posts_Model)):
+                                gtr_list.append(obj.beta_reference.GTR)
+                            else:
+                                resource = Portfolio_Link.resolve_intell_refference(beta_ref=obj.beta_reference, beta_path=obj.beta_path)
+                                if(resource):
+                                    posts.append(resource)
 
+                        except :
+                            pass
 
                     resp = acq.get_linked_targets(link_type='portfolio',gtr_list=gtr_list)
                     print(posts)

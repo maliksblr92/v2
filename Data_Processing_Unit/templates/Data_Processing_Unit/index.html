@@ -6,451 +6,605 @@
 {% endblock %}
 {% block smallnavbar %}
     <style>
-    .radio_btns {
-    height: 60px;
-    width: 160px;
-    background: transparent;
-    border: 1px solid white;
-    color:white;
-    background: linear-gradient(to right, #283e51, #1cb5e0);
-    }
-    select{
-    color:white!important;
-    }
-    #submit{
-    background: linear-gradient(to right, #283e51, #1cb5e0);
-    }
+
+        select {
+            color: white !important;
+        }
+
+        #submit {
+            background: rgb(24, 72, 116);
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            color: #fff;
+        }
+
+        .text_12 {
+            font-size: 12px !important;
+        }
+
+        .text_10 {
+            font-size: 10px !important;
+        }
+
+        .text_14 {
+            font-size: 14px !important;
+        }
     </style>
 
+    <!--  -->
     <div class="row">
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
         <div class="col-md-8 d-flex" style="">
             <div class="col-md-1">
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu  secondnavactive">
-                <a  href="/dpu/index" class="btn secondnavitems "style="font-size:10px!important">   FAKE IDIENTITY GENEARTOR</a>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu glowing_border">
+                <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold "> IDENTITY GENERATOR</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="/dpu/index_darkweb" class="btn secondnavitems "style="font-size:12px!important;">    DARK WEB</a>
+                <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="/dpu/index_scrapper" class="btn secondnavitems "style="font-size:12px!important;">  DATA SCRAPPERS</a>
+                <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="/dpu/index_textprocessing" class="btn secondnavitems "style="font-size:12px!important;"> TEXT PROCESSING</a>
+                <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
+                    PROCESSING</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="/dpu/twitter" class="btn secondnavitems "style="font-size:12px!important;">  TWITTER</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="/dpu/iptools" class="btn secondnavitems "style="font-size:12px!important;"> LOOKUP TOOLS</a>
+                <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
             </div>
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
     </div>
-  {% endblock %}
+{% endblock %}
 
 {% block belly %}
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <div class="row">
         <div class="col-md-12  ">
             <div class="w-100 h-100 " id="content_div">
                 <div class="card-header  main_card_header m-0 p-0 ">
-                    <p class="card_header_text">FAKE IDIENTITY GENERATOR</p>
+                    <p class="card_header_text">FAKE IDENTITY GENERATOR</p>
                 </div>
-                <form name="fake_idientity_geneartor_from" id="fake_idientity_geneartor_from" action="/dpu/index/" method="POST">
-                    {% csrf_token %}
-                    <div class="card-body m-4 main_card glowing_border">
-                        
-                        <div class="row input_wrapper_row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                        class="input_text">Nationailty </span>
-                                        <select type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="gender"
-                                        name="nationality" required="required">
-                                        <option value="">Select Country</option>
-                                        <option value="american">american</option>
-                                        <option value="arabic">arabic</option>
-                                            <option value="australian">australian</option>
-                                        <option value="brazil">brazil</option>
-                                            <option value="chinese">chinese</option>
-                                        <option value="german">german</option>
-                                            <option value="japanese">japanese</option>
-                                        <option value="canada">canada</option>
-                                            <option value="denmark">denmark</option>
-                                        <option value="italy">italy</option>
-                                            <option value="norway">norway</option>
-                                        <option value="spain">spain</option>
-                                            <option value="united_kingdom">united_kingdom</option>
-                                        <option value="iceland">iceland</option>
-                                            <option value="netherlands">netherlands</option>
-                                        <option value="switzerland">switzerland</option>
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
 
-                                    </select>
-                                    </label>
+                            <form name="fake_idientity_geneartor_from" id="fake_idientity_geneartor_from"
+                                  class="inner_form_margin_radius custom_inner_background"
+                                  action="/dpu/index/"
+                                  method="POST">
+                                {% csrf_token %}
+                                <div class="card-body m-4 main_card">
+
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-9">
+                                            <!-- inputfield 3 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                    opacity:0.9; padding:7px 9px 0 10px;">Nationailty
+                                                </span>
+                                                </div>
+                                                <select type="text"
+                                                        class="col-md-9 form-control custom_input_field"
+                                                        id="gender"
+                                                        name="nationality" required="required">
+                                                    <option value="">Select Country</option>
+                                                    <option value="american">american</option>
+                                                    <option value="arabic">arabic</option>
+                                                    <option value="australian">australian</option>
+                                                    <option value="brazil">brazil</option>
+                                                    <option value="chinese">chinese</option>
+                                                    <option value="german">german</option>
+                                                    <option value="japanese">japanese</option>
+                                                    <option value="canada">canada</option>
+                                                    <option value="denmark">denmark</option>
+                                                    <option value="italy">italy</option>
+                                                    <option value="norway">norway</option>
+                                                    <option value="spain">spain</option>
+                                                    <option value="united_kingdom">united_kingdom</option>
+                                                    <option value="iceland">iceland</option>
+                                                    <option value="netherlands">netherlands</option>
+                                                    <option value="switzerland">switzerland</option>
+
+                                                </select>
+                                                <small class=" col-md-9 font-weight-bold text_paragraph "
+                                                       style="padding-left:180px;"><i
+                                                        class="fas fa-info mr-2"></i>Please Select Country
+                                                </small>
+                                            </div>
+
+
+                                            <!-- inputfield 3 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                    opacity:0.9; padding:7px 9px 0 10px;">Gender
+                                                </span>
+                                                </div>
+                                                <select type="text"
+                                                        class="col-md-9 form-control custom_input_field"
+                                                        id="gender"
+                                                        name="gender" required="required">
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+
+                                                </select>
+                                                <small class=" col-md-9 font-weight-bold text_paragraph "
+                                                       style="padding-left:180px;"><i
+                                                        class="fas fa-info mr-2"></i>Please Select Gender
+                                                </small>
+                                            </div>
+
+
+                                            <!-- inputfield 2 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                    opacity:0.9; padding:7px 9px 0 10px;">Age
+                                                </span>
+                                                </div>
+                                                <input type="number"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       id="age"
+                                                       min="18"
+                                                       max="100"
+                                                       name="age" required="required">
+                                                <small class=" col-md-9 font-weight-bold text_paragraph "
+                                                       style="padding-left:180px;"><i
+                                                        class="fas fa-info mr-2"></i>Age Must Be Between 18-100
+                                                </small>
+                                            </div>
+
+                                            <!--    <div class="row">
+                                                    <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                        <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                                class="input_text">Age</span>
+                                                            <input type="number"
+                                                                   class="col-md-9 form-control custom_input_field"
+                                                                   id="age"
+                                                                   name="age" required="required">
+                                                        </label>
+                                                    </div>
+                                                </div> -->
+                                        </div>
+                                        <div class="col-md-1 ">
+                                        </div>
+                                    </div>
+
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-9"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                   value="submit"
+                                                   name="submit" id="submit"/>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                    class="input_text">Gender</span>
-                                    <select type="text" class=" ml-2 form-control form-control-sm form_input w-100" id="gender"
-                                        name="gender" required="required">
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                class="input_text">Age</span>
-                                <input type="number" class=" ml-2 form-control form-control-sm form_input w-100" id="age"
-                                name="age" required="required">
-                            </label>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1 ">
-                </div>
             </div>
-            
-            <div class="row input_wrapper_row">
-                <div class="col-md-6"></div>
-                <div class="col-md-4"></div>
-                <div class="col-md-2">
-                    <input type="submit" class="btn border font-weight-bold btn-sm w-100  text-white" value="submit"
-                    name="submit" id="submit" />
-                </div>
-            </div>
+
+
         </div>
-    </form>
-</div>
-
-
-</div>
-</div>
-{% if resp %}
-       
-   <div class="row  ">
-  <div class="col-md-12 p-5">
-    <div class="row  "style="height:450px;overflow-y:scroll;">
-        <div class="col-md-6  " >
-            <!-- card -->
-            <div class="card">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-info-circle mr-2 fa-2x"></i>  <span class="font-weight-bold text-info">Personal Info</span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>    Full Name</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.full_name}}</span></div>
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"> <i class="fas fa-user-clock mr-2"></i>Age</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.age}}</span></div>
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-birthday-cake mr-2"></i>DOB</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.birthday}}</span></div>
-                        
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-venus-double mr-2"></i>Gender</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.gender}}</span></div>
-                        
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-signature mr-2"></i>mother_maiden_name</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.mother_maiden_name}}</span></div>
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-address-card mr-2"></i>Address</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.address|truncatechars:'30'}}</span></div>
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-map-marker-alt mr-2"></i> Geo Co-ordinate</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.personal_info.geo_coordinates}}</span></div>
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-        <div class="col-md-6">
-            <!-- card -->
-            <div class="card"style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-info-circle mr-2 fa-2x mr-2"></i>  <span class="font-weight-bold text-info">Online Info</span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>  Username</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light"id="foo">{{resp.data.online_info.username}}</span>
-                            <button class="btn" data-clipboard-target="#foo">
-                                <i class="fas fa-clipboard"></i>
-                            </button></div>
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"> <i class="fas fa-user-clock mr-2"></i>Password</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.online_info.password}}</span></div>
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-birthday-cake mr-2"></i>Email Address</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.online_info.birthday}}</span></div>
-                        
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-venus-double mr-2"></i>Website</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.online_info.website}}</span></div>
-                        
-                        
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-signature mr-2"></i>mail_receiving_url</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.online_info.mail_receiving_url|truncatechars:'30'}}</span></div>
-                        
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-address-card mr-2"></i>browser_user_agent</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.online_info.browser_user_agent|truncatechars:'30'}}</span></div>
-                        
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-info-circle mr-2 fa-2x mr-2"></i>  <span class="font-weight-bold text-info">Physical Characteristics </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>  Blood Type</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.physical_characteristics.blood_type}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   height</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.physical_characteristics.height}}</span></div>
-                       
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-address-card mr-2"></i>Width</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.physical_characteristics.weight}}</span></div>
-                        
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-hand-holding-usd fa-2x mr-2"></i>  <span class="font-weight-bold text-info">Financial Info </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>  Card Company</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.financial_info.card_company}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   Card Expiration Date</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.financial_info.card_expiration_date}}</span></div>
-                       
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-address-card mr-2"></i>Card Number</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.financial_info.card_number}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fas fa-address-card mr-2"></i>Card Verification Value</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.financial_info.card_verification_value}}</span></div>
-                        
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-briefcase fa-2x mr-2"></i>  <span class="font-weight-bold text-info">Employement Info </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   Company</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.employment.company}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i> Occupation</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.employment.occupation}}</span></div>
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="far fa-plus-square fa-2x mr-2"></i>  <span class="font-weight-bold text-info">Additional Info </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   Favorate color</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.additional_info.favorite_color}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i> Vehicle</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.additional_info.vehicle}}</span></div>
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-phone fa-2x mr-2"></i> <span class="font-weight-bold text-info">Phone Info </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   Country Code</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.phone.country_code}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i> C</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.phone.phone_number}}</span></div>
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-
-
-        <div class="col-md-6 mt-2">
-            <!-- card -->
-            <div class="card" style="height:300px;">
-                <div class="card-header d-flex flex-row justify-content-center align-items-center">
-                    <i class="fas fa-sort-amount-down fa-2x mr-2"></i> <span class="font-weight-bold text-info">Tracking Numbers  </span>
-                </div>
-                <div class="card-body">
-                    <!-- card body start -->
-                    <div class="row">
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i>   Money gram mtcn</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.tracking_numbers.money_gram_mtcn}}</span></div>
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i> UPS Tracking Number</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.tracking_numbers.ups_tracking_number}}</span></div>
-
-
-                        <div class="col-md-5"><span class="badge badge-primary"><i class="fa fa-user mr-2"></i> Western Union Mtcn</span></div>          
-                        <div class="col-md-7"><span class="badge badge-light">{{resp.data.tracking_numbers.western_union_mtcn}}</span></div>
-                        
-                        
-                                        
-                  </div>
-                </div>
-                <!-- card-boy end  -->
-                <div class="card-footer"></div>
-            </div>
-            <!-- card end -->
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
-  </div>
-   </div>
-        
-    
+    {% if resp %}
 
-        {% endif %}
+        <div class="row  ">
+            <div class="col-md-12 p-5">
+                <div class="row  " style="height:450px;overflow-y:scroll;">
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-info-circle mr-2 fa-2x"></i> <span class="font-weight-bold">Personal Info</span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"><i
+                                                class="fa fa-user mr-2"></i>Full Name:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.full_name }}</span>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"> <i
+                                                class="fas fa-user-clock mr-2"></i>Age:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.age }}</span>
+                                    </div>
+
+
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"><i
+                                                class="fas fa-birthday-cake mr-2"></i>DOB:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.birthday }}</span>
+                                    </div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-venus-double mr-2"></i>Gender:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.personal_info.gender }}</span></div>
+
+
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"><i
+                                                class="fas fa-signature mr-2"></i>Mother Maiden Name:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.mother_maiden_name }}</span>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"><i
+                                                class="fas fa-address-card mr-2"></i>Address:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.address|truncatechars:'30' }}</span>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <span class="badge badge-light text-left" style="width: 85% !important;"><i
+                                                class="fas fa-map-marker-alt mr-2"></i> Geo Co-ordinate:</span>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span class="badge text-white">{{ resp.data.personal_info.geo_coordinates }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-info-circle mr-2 fa-2x mr-2"></i> <span
+                                    class="font-weight-bold">Online Info</span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>  Username:</span></div>
+                                    <div class="col-md-7"><span class="badge text-white"
+                                                                id="foo">{{ resp.data.online_info.username }}</span>
+                                        <button class="btn p-0 m-0" data-clipboard-target="#foo">
+                                            <i class="fas fa-clipboard text-white p-0 m-0"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"> <i
+                                            class="fas fa-user-clock mr-2"></i>Password:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.online_info.password }}</span></div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-birthday-cake mr-2"></i>Email Address:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.online_info.birthday }}</span></div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-venus-double mr-2"></i>Website:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.online_info.website }}</span></div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-signature mr-2"></i>Mail Receiving URL:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.online_info.mail_receiving_url|truncatechars:'30' }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-address-card mr-2"></i>Browser User Agent:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.online_info.browser_user_agent|truncatechars:'30' }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-info-circle mr-2 fa-2x mr-2"></i> <span
+                                    class="font-weight-bold">Physical Characteristics </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>  Blood Type:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.physical_characteristics.blood_type }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Height:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.physical_characteristics.height }}</span>
+                                    </div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-address-card mr-2"></i>Width:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.physical_characteristics.weight }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-hand-holding-usd fa-2x mr-2"></i> <span
+                                    class="font-weight-bold">Financial Info </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>  Card Company:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.financial_info.card_company }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Card Expiration Date:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.financial_info.card_expiration_date }}</span>
+                                    </div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-address-card mr-2"></i>Card Number:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.financial_info.card_number }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fas fa-address-card mr-2"></i>Card Verification Value:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.financial_info.card_verification_value }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-briefcase fa-2x mr-2"></i> <span class="font-weight-bold">Employement Info </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Company:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.employment.company }}</span></div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i> Occupation:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.employment.occupation }}</span></div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="far fa-plus-square fa-2x mr-2"></i> <span class="font-weight-bold">Additional Info </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Favorate color:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.additional_info.favorite_color }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i> Vehicle:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.additional_info.vehicle }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-phone fa-2x mr-2"></i> <span
+                                    class="font-weight-bold">Phone Info </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Country Code:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.phone.country_code }}</span></div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i> Phone Number:</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.phone.phone_number }}</span></div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                    <div class="col-md-6 mt-2" style="height: auto !important;">
+                        <!-- card -->
+                        <div class="card bg-transparent glowing_border h-100"
+                             style="border-radius: 10px 10px 0px 0px !important;">
+                            <div class="card-header custom_header d-flex flex-row justify-content-center align-items-center text-white"
+                                 style="border-radius: 10px 10px 0px 0px !important;">
+                                <i class="fas fa-sort-amount-down fa-2x mr-2"></i> <span
+                                    class="font-weight-bold">Tracking Numbers  </span>
+                            </div>
+                            <div class="card-body">
+                                <!-- card body start -->
+                                <div class="row">
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i>   Money gram mtcn</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.tracking_numbers.money_gram_mtcn }}</span>
+                                    </div>
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i> UPS Tracking Number</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.tracking_numbers.ups_tracking_number }}</span>
+                                    </div>
+
+
+                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                                                style="width: 85% !important;"><i
+                                            class="fa fa-user mr-2"></i> Western Union Mtcn</span></div>
+                                    <div class="col-md-7"><span
+                                            class="badge text-white">{{ resp.data.tracking_numbers.western_union_mtcn }}</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- card-boy end  -->
+                            <div class="card-footer"></div>
+                        </div>
+                        <!-- card end -->
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    {% endif %}
 
 {% endblock %}  
+   {% block base_js %}
+        <script>
+            window.document.title = "Fake ID Generator";
+        </script>
+    {% endblock %}

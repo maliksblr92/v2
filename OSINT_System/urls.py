@@ -41,4 +41,5 @@ urlpatterns = [
     path('pms/', include('Portfolio_Management_System.urls')),
     path('kms/', include('Keybase_Management_System.urls')),
     path('cms/', include('Case_Management_System.urls')),
+    path('bi_tools/', include('Bi_Tools.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,130 @@
+"""
+tuple of world-wide languages, genders and spoken language
+fluency levels to be imported into CMS models.py
+"""
+
+GENDERS = (
+    ('m', 'Male'),
+    ('f', 'Female'),
+    ('t', 'Transgender'),
+    ('o', 'Other')
+)
+
+SPOKEN_LANGUAGE_FLUENCY = (
+    ('b', 'Beginner'),
+    ('e', 'Elementary'),
+    ('i', 'Intermediate'),
+    ('ui', 'Upper Intermediate'),
+    ('a', 'Advanced'),
+    ('p', 'Proficient')
+)
+
+LANGUAGES = (
+    ('mandarin chinese', 'Mandarin Chinese'),
+    ('spanish', 'Spanish'),
+    ('english', 'English'),
+    ('hindi', 'Hindi'),
+    ('bengali', 'Bengali'),
+    ('portuguese', 'Portuguese'),
+    ('russian', 'Russian'),
+    ('japanese', 'Japanese'),
+    ('western punjabi', 'Western Punjabi'),
+    ('marathi', 'Marathi'),
+    ('telugu', 'Telugu'),
+    ('wu chinese', 'Wu Chinese'),
+    ('turkish', 'Turkish'),
+    ('korean', 'Korean'),
+    ('german', 'German'),
+    ('vietnamese', 'Vietnamese'),
+    ('tamil', 'Tamil'),
+    ('yue chinese', 'Yue Chinese'),
+    ('urdu', 'Urdu'),
+    ('javanese', 'Javanese'),
+    ('italian', 'Italian'),
+    ('egyptian arabic', 'Egyptian Arabic'),
+    ('gujarati', 'Gujarati'),
+    ('iranian persian', 'Iranian Persian'),
+    ('bhojpuri', 'Bhojpuri'),
+    ('min nan chinese', 'Min Nan Chinese'),
+    ('hakka chinese', 'Hakka Chinese'),
+    ('jin chinese', 'Jin Chinese'),
+    ('hausa', 'Hausa'),
+    ('kannada', 'Kannada'),
+    ('indonesian (malay)', 'Indonesian (Malay)'),
+    ('polish', 'Polish'),
+    ('yoruba', 'Yoruba'),
+    ('xiang chinese', 'Xiang Chinese'),
+    ('malayalam', 'Malayalam'),
+    ('odia', 'Odia'),
+    ('maithili', 'Maithili'),
+    ('burmese', 'Burmese'),
+    ('eastern punjabi', 'Eastern Punjabi'),
+    ('sunda', 'Sunda'),
+    ('sudanese arabic', 'Sudanese Arabic'),
+    ('algerian arabic', 'Algerian Arabic'),
+    ('moroccan arabic', 'Moroccan Arabic'),
+    ('ukrainian', 'Ukrainian'),
+    ('igbo', 'Igbo'),
+    ('northern uzbek', 'Northern Uzbek'),
+    ('sindhi', 'Sindhi'),
+    ('north levantine arabic', 'North Levantine Arabic'),
+    ('romanian', 'Romanian'),
+    ('tagalog', 'Tagalog'),
+    ('dutch', 'Dutch'),
+    ("sa'idi arabic", "Sa'idi Arabic"),
+    ('gan chinese', 'Gan Chinese'),
+    ('amharic', 'Amharic'),
+    ('northern pashto', 'Northern Pashto'),
+    ('magahi', 'Magahi'),
+    ('thai', 'Thai'),
+    ('saraiki', 'Saraiki'),
+    ('khmer', 'Khmer'),
+    ('chhattisgarhi', 'Chhattisgarhi'),
+    ('somali', 'Somali'),
+    ('malay (malaysian malay)', 'Malay (Malaysian Malay)'),
+    ('cebuano', 'Cebuano'),
+    ('nepali', 'Nepali'),
+    ('mesopotamian arabic', 'Mesopotamian Arabic'),
+    ('assamese', 'Assamese'),
+    ('sinhalese', 'Sinhalese'),
+    ('northern kurdish', 'Northern Kurdish'),
+    ('hejazi arabic', 'Hejazi Arabic'),
+    ('nigerian fulfulde', 'Nigerian Fulfulde'),
+    ('bavarian', 'Bavarian'),
+    ('south azerbaijani', 'South Azerbaijani'),
+    ('greek', 'Greek'),
+    ('chittagonian', 'Chittagonian'),
+    ('kazakh', 'Kazakh'),
+    ('deccan', 'Deccan'),
+    ('hungarian', 'Hungarian'),
+    ('kinyarwanda', 'Kinyarwanda'),
+    ('zulu', 'Zulu'),
+    ('south levantine arabic', 'South Levantine Arabic'),
+    ('tunisian arabic', 'Tunisian Arabic'),
+    ('sanaani spoken arabic', 'Sanaani Spoken Arabic'),
+    ('min bei chinese', 'Min Bei Chinese'),
+    ('southern pashto', 'Southern Pashto'),
+    ('rundi', 'Rundi'),
+    ('czech', 'Czech'),
+    ("ta'izzi-adeni arabic", "Ta'izzi-Adeni Arabic"),
+    ('uyghur', 'Uyghur'),
+    ('min dong chinese', 'Min Dong Chinese'),
+    ('sylheti', 'Sylheti')
+)
+
+CASE_STATES = (
+    ('p', 'Pending'),
+    ('ui', 'Under Investigation'),
+    ('cr', 'Closed Resolved'),
+    ('cu', 'Closed Unresolved')
+)
+
+POI_CATEGORY = (
+    ('r', 'Case Reporter'), # person who reported the case to police
+    ('w', 'Witness'),
+    ('s', 'Suspect'),
+    ('a', 'Accused'),
+    ('d', 'Dependent'),
+    ('g', 'Guilty'),
+    ('i', 'Innocent')
+)

@@ -19,6 +19,7 @@ urlpatterns = [
     path('news_monitoring/', views.News_Monitoring.as_view(), name='news_monitoring'),
     path('reports_management/', views.Report_Management_View.as_view(), name='reports_management'),
     path('convert_html_to_pdf/', views.Convert_Html_To_Pdf.as_view(), name='convert_html_to_pdf'),
+    path('response_changes_view/', views.Response_Changes_View.as_view(), name='response_changes_view'),
 
     # ahmed paths
     path('index/', views.Index.as_view(), name='index'),

@@ -59,6 +59,8 @@ urlpatterns = [
     path('share_resource/',views.Share_Resource.as_view(), name='share_resource'),
     path('rabbit_message/',views.Rabbit_Message.as_view(), name='rabbit_message'),
     path('logged_ips/', views.Logged_Ips.as_view(), name='logged_ips'),
+    path('delete_ips/<str:obj_id>/', views.Delete_Ips.as_view(), name='delete_ips'),
+    path('views_ip_logger_resp/<str:latlons>/', views.View_Logged_Ip_Response.as_view(), name='views_ip_logger_resp'),
 
 
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
@@ -85,7 +87,8 @@ urlpatterns = [
     path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
-    # ahmed end
+    path('design_test',views.design_test,name='design_test'),
+    path('resp_test', views.resp_test, name='resp_test'), # ahmed end
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

@@ -216,6 +216,28 @@
                 rgba(24, 72, 116, 1) 0%,
                 rgba(6, 17, 26, 1) 100%);
                 }
+                .dropdown-content a:hover {background-color: #f1f1f1;}
+                .dropdown:hover .dropdown-content {
+                display: block;
+                }
+                .dropdown-content {
+                display: none;
+                position: absolute;
+                min-width: 150px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                }
+                .dropdown-content > a {
+                min-width: 140px;
+                }
+                li.dropdown {
+                display: inline-block;
+                }
+                li a, .dropbtn {
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+                }
                 </style>
                 <!-- categorization styling  -->
                 <style>
@@ -251,25 +273,33 @@
                     <div class="row ">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
-                            <div class="row p-2">
-                                <div class="col-md-4 text-left">
-                                    <a href="#" target="_blank" class="btn btn-info font-weight-bold">
-                                        <i class="fab fa-instagram mr-2"></i> Instagram
-                                    </a>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <a type="button" class="btn  btn-sm btn-success float-right" style="margin-top:2px;"
-                                        href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}"
-                                    id="download_as_pdf">Followers Graph</a>
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <a href="#" target="_blank" class="btn btn-success font-weight-bold">
-                                        <i class="fas fa-download  mr-2"></i> Download PDF Report
-                                    </a>
+                            
+                            <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+                                <div class="row">
+                                    <div class="col-md-6 text-left">
+                                        <a class="btn btn-primary btn-sm"
+                                           href="https://www.instagram.com/{{profile.username}}"
+                                           target="_blank"
+                                           style="margin-top:2px;">
+                                            <i class="fab fa-instagram mr-2 "></i>Instagram Target Profile
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i class="fa fa-cog mr-2"></i>Options</a>
+                                            <div class="dropdown-content">
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;" href="{% url 'Target_Management_System:Instagram_Target_Report' object_gtr_id=profile.GTR %}"id="download_as_pdf">PDF Download</a>
+                                                <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2"target="_blank" style="margin-top:2px;"  href="{% url 'Target_Management_System:instagram_follower_tree_graph' object_gtr_id=profile.GTR %}" id="download_as_pdf">Followers Graph</a>
+                    
+                                            </div>
+                                        </li>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="row background-gradient-dark border_radius_5px ">
-                                <div class="col-md-2  custom-column-center-center">
+                                <div class="col-md-2  custom-column-start-center mt-5">
                                     <div class="profile-img-wrapper ">
                                         <img src="{{profile.profile_picture_url}}" class="border_radius_5px img-fluid full_space">
                                     </div>
@@ -511,7 +541,7 @@
                                                                     {% if i.picture_image_url %}
                                                                         <img src="{{i.picture_image_url}}" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
                                                                     {% else %}
-                                                                        <img src="/static/images/heliports_image_placeholder.jpg" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
+                                                                        <img src="{% static 'images/heliports_image_placeholder.jpg' %}" style="height:60px;width:60px;border-radius:50%;" class="img-fluid" />
                                                                     {% endif %}
                                                                 </div>
                                                                 <div class="card-body">
@@ -520,7 +550,7 @@
                                                                         <div class="col-md-12 m-0 p-0 ">
                                                                             <div><span class="badge custom_bagde w-25 text-left">Full Name:</span> <span class="badge badge-light">{{i.full_name}}</span></div>
                                                                             <div><span class="badge custom_bagde w-25 text-left">User-Name:</span> <span class="badge badge-light">{{i.username}}</span></div>
-                                                                            <div><span class="badge custom_bagde w-25 text-left">URL:</span> <a  href="{{i.url}}" class="badge badge-success"><i class="fa fa-eye "></i></a></div>
+                                                                            <div><span class="badge custom_bagde w-25 text-left">URL:</span> <a  href="{{i.url}}" class="badge badge-success" target="_blank"><i class="fa fa-eye "></i></a></div>
                                                                             
                                                                             
                                                                         </div>
@@ -549,19 +579,15 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <script src="https://www.amcharts.com/lib/4/core.js"></script>
-        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-        <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
-        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+        <script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js'%}"></script>
+        
+
+        <script src="{% static 'OSINT_System_Core/amcharts/core.js' %}"></script>
+        <script src="{% static 'OSINT_System_Core/amcharts/charts.js' %}"></script>
+        <script src="{% static 'OSINT_System_Core/amcharts/themes/dark.js' %}"></script>
+        <script src="{% static 'OSINT_System_Core/amcharts/themes/animated.js' %}"></script>
         <script>
         am4core.ready(function () {
         // Themes begin
