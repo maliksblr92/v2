@@ -29,41 +29,46 @@ class Create_Avatar(View):
             request, 'Avatar_Management_Unit/avatar.html', ctx)
 
     def post(self, request, *args, **kwargs):
-        print("in post request")
-        fname = request.POST.get('pinfo-fname')
-        lname = request.POST.get('pinfo-lname')
-        email = request.POST.get('pinfo-email')
-        phone = request.POST.get('pinfo-phone')
-        nationality = request.POST.get('pinfo-nationality')
-        address = request.POST.get('pinfo-address')
-        religious = request.POST.get('pinfo-religious')
-        marital_status=request.POST.get('pinfo-marital-status')
-        dob=request.POST.get('pinfo-dob')
-        gender=request.POST.get('pinfo-gender')
+        print('+++++++++++++++++++++++++++++++++++++')
+        print("CREATING AVATAR ")
+        print('+++++++++++++++++++++++++++++++++++++')
+        form_name=request.POST['form_name']
+        if form_name == "personal_details_form":
+            fname = request.POST.get('pinfo-fname')
+            lname = request.POST.get('pinfo-lname')
+            email = request.POST.get('pinfo-email')
+            phone = request.POST.get('pinfo-phone')
+            nationality = request.POST.get('pinfo-nationality')
+            address = request.POST.get('pinfo-address')
+            religious = request.POST.get('pinfo-religious')
+            marital_status=request.POST.get('pinfo-marital-status')
+            dob=request.POST.get('pinfo-dob')
+            gender=request.POST.get('pinfo-gender')
        
     
-        # saving to model
-        a = Avatar_AMS()
-        a.create(
+            # saving to model
+            newly_created_avatar = Avatar_AMS()
+            newly_created_avatar.create(
           
-            first_name=fname,
-            last_name=lname,
-            email=email,
-            phone=phone,
-            nationality=nationality,
-            address=address,
-            religious_views=religious,
-            gender=gender,
-            marital_status=marital_status,
-            birthday=dob,
-        )
-        if(a):
+                first_name=fname,
+                last_name=lname,
+                email=email,
+                phone=phone,
+                nationality=nationality,
+                address=address,
+                religious_views=religious,
+                gender=gender,
+                marital_status=marital_status,
+                birthday=dob,
+                )
+            if(newly_created_avatar):
            
-            messages.success(request, 'Avatar created successfully')
-            return redirect('/amu/avatar')
-        else:
-            messages.error(request, 'Failed to cerate avatar .... please  try again')
-            return redirect('/amu/avatar')
+                messages.success(request, 'Avatar created successfully')
+                return redirect('/amu/avatar')
+            else:
+                messages.error(request, 'Failed to cerate avatar .... please  try again')
+                return redirect('/amu/avatar')
+        id form_name == ""
 
 
 class Add_Work(View):

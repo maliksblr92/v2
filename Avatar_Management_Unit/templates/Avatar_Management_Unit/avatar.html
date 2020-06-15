@@ -110,6 +110,7 @@
                                 <div class="col-md-9 col-lg-9 col-xl-9">
                                     <form id="personal-info-form" style="padding-bottom:10px;" method="POST" action="/amu/avatar/">
                                         {% csrf_token %}
+                                        <input type="hidden" name="form_name" id="form_name" value="personal_details_form" />
                                         <div class="form-group ">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -750,8 +751,11 @@
                                 </div>
                                 <!-- end of left side redundant navigation -->
                                 <div class="col-md-9 col-lg-9 col-xl-9">
-                                    <form id="biography-form">
+                                    <form id="biography-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                         {% csrf_token %}
+                                        <!-- hidden input to iditify form type on submit  -->
+                                        <input type="hidden" name="form_name" id="form_name" value="biography_details" />
+                                        <!-- hidden input end -->
                                         <!-- avatar -->
                                         <div class="input-group mt-4 mb-3">
                                             <div class="input-group-prepend">
@@ -817,8 +821,11 @@
                                 </div>
                                 <!-- end of redundant navigation -->
                                 <!-- form container -->
-                                <form class="col-md-9 col-lg-9 col-xl-9" id="socialaccount-form">
+                                <form class="col-md-9 col-lg-9 col-xl-9" id="socialaccount-form"method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
                                     {% csrf_token %}
+                                    <!-- hidden input to iditify form type on submit  -->
+                                    <input type="hidden" name="form_name" id="form_name" value="social_account_details" />
+                                    <!-- hidden input end -->
                                     <!-- sma platform -->
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12 col-xl-12 ">
