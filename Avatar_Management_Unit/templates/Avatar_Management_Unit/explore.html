@@ -1,403 +1,346 @@
+
+
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/explore.css' %}">
-
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">{% endblock %}
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/explore.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+{% endblock %}
 {% block smallnavbar %}
-    <!-- <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-3 m-0 p-0  "><a
-                class="nav-link secondmidnavmenu w-100 h-100 text-white"
-                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
-
-        <div class="col-md-3 m-0 p-0  ">
-            <a
-                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
-                    href="/pms/archive">Archive</a></div>
-        <div class="col-md-3"></div>
-    </div> -->
-
+<!-- <div class="row">
+   <div class="col-md-3"></div>
+   <div class="col-md-3 m-0 p-0  "><a
+           class="nav-link secondmidnavmenu w-100 h-100 text-white"
+           href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+   
+   <div class="col-md-3 m-0 p-0  ">
+       <a
+               class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+               href="/pms/archive">Archive</a></div>
+   <div class="col-md-3"></div>
+   </div> -->
 {% endblock %}
 {% block belly %}
-    <div class="row">
-        <div class="col-md-12">
-
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12  ">
-            <div class="w-100 h-100" id="content_div">
-                <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
-                    <p class="card_header_text">EXPLORE AVATAR </p>
-                </div>
-
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
-
-                    <div class="">
-                        <!-- RPW FOR SOCIAL MEDIA -->
-                        <!-- Second row-->
-                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-
-                            <div class="justify-content-center custom_inner_background inner_form_margin_radius  pt-3 pb-5">
-                                <div class="row">
-                                    <div class="col-md-1">
-
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class=" row h-100 custom_card_body_background mt-2 glowing_border ">
-                                            <div class="col-md-1 glowing_border dark_side_column">
-
-
-                                            </div>
-                                            <div class="col-md-3  m-0 p-0  small_card_left_wrapper d-flex flex-column justify-content-center align-items-center">
-                                                <img src="{% static 'images/profile-avatar-png-5.png' %}"
-                                                     class="profile_card_avatar">
-
-                                            </div>
-                                            <div class="col-md-8    ">
-                                                <div class="row h-100">
-                                                    <div class="col-md-12 my-auto no_list_style   ">
-                                                        <li class="text-white w-100 "> FirstName : {{ resp.first_name|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> LastName : {{ resp.last_name|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> Gender : {{ resp.first_name|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> DOB : {{ resp.birthday|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> Address : {{ resp.address|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> Email : {{ resp.email|truncatechars:"20" }}</li>
-                                                        <li class="text-white w-100 "> Nationality : {{ resp.nationality }}</li>
-                                                        <li class="text-white w-100 "> Martial Status : {{ resp.nationality }}</li>
-                                                        <li class="text-white w-100 ">  Health: {{ resp.health|default:"N/A" }}</li>
-                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                </div>
-
-                                <div class="p-3">
-
-                                    <!-- all relegious views  start -->
-                                    <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header custom_header glowing_border text-white">Relegious Views
-                                        </div>
-                                        <div class="card-body  custom_background">
-
-                                           {% if resp.religious_views %}
-                                                    <span class="badge badge-light p-2 mr-3 font-weight-bold">  {{ resp.religious_views|default:"N/A" }}</span>
-                                               
-                                            {% else %}
-                                                <p class="text-white">No Relegious Views</p>
-                                            {% endif %}
-
-
-                                        </div>
-
-                                    </div>
-                                    <!-- all work  start -->
-                                    <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header glowing_border custom_header text-white ">All Works
-                                        </div>
-                                        <div class="card-body custom_background">
-
-                                            
-                                                
-                                                
-                                             
-                                            {% if resp.works %}
-                                                {% for work in resp.works %}
-                                                <div class="accordion" id="accordionExample">
-                                                    <div class="card">
-                                                      <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
-                                                    
-                                                          <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#work_{{forloop.counter}}" aria-expanded="true" aria-controls="work_{{forloop.counter}}">
-                                                             Work ({{forloop.counter}})
-                                                          </button>
-                                                      
-                                                      </div>
-                                                  
-                                                      <div id="work_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                        <div class="card-body">
-                                                            <div class="col-md-4 my-auto no_list_style   ">
-                                                                <li class="text-white w-100 "> Job Title : {{ work.title|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Start Date : {{ work.start_date|truncatechars:"20"|default:"N/A" }}</li>
-                                                               
-                                                                {% if work.current == True      %}
-                                                           
-                                                                <li class="text-white w-100 "> End Date : Currently Wroking </li>
-                                                            {% else %}
-                                                            <li class="text-white w-100 "> End Date : {{ work.end_date|truncatechars:"20"|default:"N/A" }}</li>
-                                                            {% endif %}
-                                                                <li class="text-white w-100 "> Location : {{ work.location|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Description : {{ work.description|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Company Name : {{ work.company|truncatechars:"20"|default:"N/A" }}</li>
-                                                              
-                                                                
-                                                               
-                                                            </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                               
-                                            {% empty %}
-                                                <p class="text-white">No Educations</p>
-                                                {% endfor %}
-                                            {% endif %}
-
-                                        </div>
-                                        </div>
-
-                                 
-                                    <!-- all education end  --><!-- all relegious views  end  -->
-
-
-
-
-                                    <!-- all educations  start -->
-                                    <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header glowing_border custom_header text-white ">All Educations
-                                        </div>
-                                        <div class="card-body custom_background">
-
-                                            
-                                                
-                                                
-                                             
-                                            {% if resp.educations %}
-                                                {% for education in resp.educations %}
-                                                <div class="accordion" id="accordionExample">
-                                                    <div class="card">
-                                                      <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
-                                                    
-                                                          <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#education_{{forloop.counter}}" aria-expanded="true" aria-controls="education_{{forloop.counter}}">
-                                                             Education ({{forloop.counter}})
-                                                          </button>
-                                                      
-                                                      </div>
-                                                  
-                                                      <div id="education_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                        <div class="card-body">
-                                                            <div class="col-md-4 my-auto no_list_style   ">
-                                                                <li class="text-white w-100 "> Institution : {{ education.institution|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Degree : {{ education.degree|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Grade : {{ education.grade|truncatechars:"20"|default:"N/A" }}</li>
-                                                                <li class="text-white w-100 "> Field : {{ education.field_of_study|truncatechars:"20"|default:"N/A" }}</li>
-                                                              
-                                                                
-                                                               
-                                                            </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                               
-                                            {% empty %}
-                                                <p class="text-white">No Educations</p>
-                                                {% endfor %}
-                                            {% endif %}
-
-                                        </div>
-                                        </div>
-
-                                 
-                                    <!-- all education end  -->
-                                   
-                                           <!-- all marriages  start -->
-                                           <div class="card transparent glowing_border mt-3">
-                                            <div class="card-header glowing_border custom_header text-white ">All Marriages
-                                            </div>
-                                            <div class="card-body custom_background">
-    
-                                                
-                                                    
-                                                    
-                                                 
-                                                {% if resp.marriages %}
-                                                    {% for marriage in resp.marriages %}
-                                                    <div class="accordion" id="accordionExample">
-                                                        <div class="card">
-                                                          <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
-                                                        
-                                                              <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#marriage_{{forloop.counter}}" aria-expanded="true" aria-controls="marriage_{{forloop.counter}}">
-                                                                Marriage ({{forloop.counter}})
-                                                              </button>
-                                                          
-                                                          </div>
-                                                      
-                                                          <div id="marriage_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                                    <li class="text-white w-100 "> Spouse Name : {{ marriage.spouse|truncatechars:"20"|default:"N/A" }}</li>
-                                                                    <li class="text-white w-100 "> Location : {{ marriage.degree|truncatechars:"20"|default:"N/A" }}</li>
-                                                                    <li class="text-white w-100 "> Wedding Date : {{ marriage.wedding_date|truncatechars:"20"|default:"N/A" }}</li>
-                                                                    <li class="text-white w-100 "> Divorce Date : {{ marriage.divorce_date|truncatechars:"20"|default:"N/A" }}</li>
-                                                                  
-                                                                    
-                                                                   
-                                                                </div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                   
-                                                {% empty %}
-                                                    <p class="text-white">No Marriages</p>
-                                                    {% endfor %}
-                                                {% endif %}
-    
-                                            </div>
-                                            </div>
-    
-                                       
-                                        <!-- all marriages end  -->
-
-
-
-
-
-
-                                         <!-- all biography  start -->
-                                         <div class="card transparent glowing_border mt-3">
-                                            <div class="card-header glowing_border custom_header text-white ">All Biography
-                                            </div>
-                                            <div class="card-body custom_background">
-    
-                                                
-                                                    
-                                                    
-                                                 
-                                                {% if resp.biography %}
-                                                    {% for bio in resp.biography %}
-                                                    <div class="accordion" id="accordionExample">
-                                                        <div class="card">
-                                                          <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
-                                                        
-                                                              <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#bio_{{forloop.counter}}" aria-expanded="true" aria-controls="bio_{{forloop.counter}}">
-                                                                Biography ({{forloop.counter}})
-                                                              </button>
-                                                          
-                                                          </div>
-                                                      
-                                                          <div id="bio_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                                    <p class="text-white w-100 font-weight-bold"style="font-size:12px">  {{ bio }}</p>
-                                                                    
-                                                                    
-                                                                   
-                                                                </div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                   
-                                                {% empty %}
-                                                    <p class="text-white">No Biographies</p>
-                                                    {% endfor %}
-                                                {% endif %}
-    
-                                            </div>
-                                            </div>
-    
-                                       
-                                        <!-- all biography end  -->
-
-
-
-                                         <!-- all intrests  start -->
-                                         <div class="card transparent glowing_border mt-3">
-                                            <div class="card-header glowing_border custom_header text-white ">All Intrests
-                                            </div>
-                                            <div class="card-body custom_background">
-    
-                                                
-                                                    
-                                                    
-                                                 
-                                                {% if resp.interests %}
-                                                
-                                                    <div class="accordion" id="accordionExample">
-                                                        <div class="card">
-                                                          <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
-                                                        
-                                                              <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#intrests_{{forloop.counter}}"
-                                                               aria-expanded="true" aria-controls="intrests_{{forloop.counter}}">
-                                                             All Intrests ({{resp.intrest|length}})
-                                                              </button>
-                                                          
-                                                          </div>
-                                                      
-                                                          <div id="intrests_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                            <div class="card-body">
-                                                                <div class="col-md-12 text-white">Hobbies ({{resp.hobbies|length}})</div>
-                                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                                  {% for i in intrest.hobbies %}
-                                                                   <span class="badge badge-primary">{{i}}</span>
-                                                                  {% empty %}
-                                                                    <span class="badge badge-primary text-white">No Hobbies </span>
-                                                                   {% endfor %}
-                                                                </div>
-
-
-                                                                <div class="col-md-12 text-white">Movies ({{resp.movies|length}})</div>
-                                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                                  {% for i in intrest.movies %}
-                                                                   <span class="badge badge-primary">{{i}}</span>
-                                                                  {% empty %}
-                                                                    <span class="badge badge-primary text-white">No Movies </span>
-                                                                   {% endfor %}
-                                                                </div>
-
-                                                                <div class="col-md-12 text-white">Songs ({{resp.songs|length}})</div>
-                                                                <div class="col-md-12 my-auto no_list_style   ">
-                                                                  {% for i in intrest.songs %}
-                                                                   <span class="badge badge-primary">{{i}}</span>
-                                                                  {% empty %}
-                                                                    <span class="badge badge-primary text-white">No Songs </span>
-                                                                   {% endfor %}
-                                                                </div>
-
-
-
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                   {% endif %}
-                                                
-    
-                                            </div>
-                                            </div>
-    
-
-
-
-                                        </div>
-
-
-
-                                        </div>
-                                        <!-- all intrests end  -->
-
-
-
-                                    </div>
-
-
-
-                                   
-                                </div>
-                            </div>
-
+<style>
+   li{
+   list-style: none!important;
+   }
+</style>
+<div class="row">
+   <div class="col-md-12">
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-12  ">
+      <div class="w-100 h-100" id="content_div">
+         <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+            <p class="card_header_text">EXPLORE AVATAR </p>
+         </div>
+         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+            <div class="">
+               <!-- RPW FOR SOCIAL MEDIA -->
+               <!-- Second row-->
+               <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                  <div class="justify-content-center custom_inner_background inner_form_margin_radius  pt-3 pb-5">
+                     <div class="row">
+                        <div class="col-md-1">
                         </div>
-                    </div>
-                </div>
+                        <div class="col-md-10">
+                           <div class=" row h-100 custom_card_body_background mt-2 glowing_border ">
+                              <div class="col-md-1 glowing_border dark_side_column">
+                              </div>
+                              <div class="col-md-3  m-0 p-0  small_card_left_wrapper d-flex flex-column justify-content-center align-items-center">
+                                 <img src="{% static 'images/profile-avatar-png-5.png' %}"
+                                    class="profile_card_avatar">
+                              </div>
+                              <div class="col-md-8    ">
+                                 <div class="row h-100">
+                                    <div class="col-md-12 my-auto no_list_style   ">
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">FirstName : </span><span class="badge"> {{resp.first_name|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">LastName : </span><span class="badge"> {{resp.last_name|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Gender : </span><span class="badge"> {{resp.first_name|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">DOB : </span><span class="badge"> {{resp.birthday|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Address : </span><span class="badge"> {{resp.address|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Email : </span><span class="badge"> {{resp.email|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Nationality : </span><span class="badge"> {{resp.nationality }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Martial Status : </span><span class="badge"> {{resp.nationality }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;"> Health: </span><span class="badge"> {{resp.health|default:"N/A" }}</span></li>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                     </div>
+                     <div class="p-3">
+                        <!-- all relegious views  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header custom_header glowing_border text-white">Relegious Views
+                           </div>
+                           <div class="card-body  custom_background">
+                              {% if resp.religious_views %}
+                              <span class="badge badge-light p-2 mr-3 font-weight-bold">  {{ resp.religious_views|default:"N/A" }}</span>
+                              {% else %}
+                              <p class="text-white">No Relegious Views</p>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all work  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Works
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.works %}
+                              {% for work in resp.works %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#work_{{forloop.counter}}" aria-expanded="true" aria-controls="work_{{forloop.counter}}">
+                                    Work ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="work_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-4 my-auto no_list_style   ">
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Job Title :</span><span class="badge">{{ work.title|truncatechars:"40"|default:"N/A" }} <span> </div>
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Start Date :</span> <span class="badge">{{ work.start_date|truncatechars:"40"|default:"N/A" }}</span></div>
+                                          {% if work.current == True      %}
+                                          <div class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;">End Date : </span> <span class="badge"> Currently Wroking</span> </div>
+                                          {% else %}
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">End Date : </span><span class="badge">{{ work.end_date|truncatechars:"40"|default:"N/A" }}</span></div>
+                                          {% endif %}
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Location : </span> <span class="badge">{{ work.location|truncatechars:"40"|default:"N/A" }}</span></div>
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Description : </span> <span class="badge">{{ work.description|truncatechars:"40"|default:"N/A" }}</span></div>
+                                          <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Company Name : </span><span class="badge"> {{ work.company|truncatechars:"40"|default:"N/A" }}</span></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% empty %}
+                              <p class="text-white">No Educations</p>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all education end  --><!-- all relegious views  end  -->
+                        <!-- all educations  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Educations
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.educations %}
+                              {% for education in resp.educations %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#education_{{forloop.counter}}" aria-expanded="true" aria-controls="education_{{forloop.counter}}">
+                                    Education ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="education_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-4 my-auto no_list_style   ">
+                                          <li class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;"> Institution :</span> <span class="badge"> {{education.institution|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Degree :</span> <span class="badge"> {{ education.degree|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class="badge      badge-light text-left"style="width:100px;"> Grade :</span> <span class="badge"> {{ education.grades|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "> <span class="badge      badge-light text-left"style="width:100px;"> Field :</span> <span class="badge"> {{education.field_of_study|truncatechars:"20"|default:"N/A" }}</span></li>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% empty %}
+                              <p class="text-white">No Educations</p>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all education end  -->
+                        <!-- all marriages  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Marriages
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.marriages %}
+                              {% for marriage in resp.marriages %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#marriage_{{forloop.counter}}" aria-expanded="true" aria-controls="marriage_{{forloop.counter}}">
+                                    Marriage ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="marriage_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Spouse Name : </span><span class="badge" >{{marriage.spouse|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Location : </span><span class="badge" >{{marriage.location|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Wedding Date : </span><span class="badge" >{{marriage.wedding_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Divorce Date : </span><span class="badge" >{{marriage.divorce_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% empty %}
+                              <p class="text-white">No Marriages</p>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all marriages end  -->
+                        <!-- all biography  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Biography
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.biography %}
+                              {% for bio in resp.biography %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#bio_{{forloop.counter}}" aria-expanded="true" aria-controls="bio_{{forloop.counter}}">
+                                    Biography ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="bio_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          <p class="text-white w-100 font-weight-bold"style="font-size:12px">  {{ bio }}</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% empty %}
+                              <p class="text-white">No Biographies</p>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all biography end  -->
+                        <!-- all intrests  start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Intrests
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.interests %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#intrests_{{forloop.counter}}"
+                                       aria-expanded="true" aria-controls="intrests_{{forloop.counter}}">
+                                    All Intrests ({{resp.interests|length}})
+                                    </button>
+                                 </div>
+                                 <div id="intrests_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-12 text-white">Hobbies ({{resp.interests.hobbies|length}})</div>
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          {% for i in resp.interests.hobbies %}
+                                          <span class="badge badge-primary">{{i}}</span>
+                                          {% empty %}
+                                          <span class="badge badge-primary text-white">No Hobbies </span>
+                                          {% endfor %}
+                                       </div>
+                                       <div class="col-md-12 text-white">Movies ({{resp.interests.movies|length}})</div>
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          {% for i in resp.interests.movies %}
+                                          <span class="badge badge-primary">{{i}}</span>
+                                          {% empty %}
+                                          <span class="badge badge-primary text-white">No Movies </span>
+                                          {% endfor %}
+                                       </div>
+                                       <div class="col-md-12 text-white">Songs ({{resp.interests.songs|length}})</div>
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          {% for i in resp.interests.songs %}
+                                          <span class="badge badge-primary">{{i}}</span>
+                                          {% empty %}
+                                          <span class="badge badge-primary text-white">No Songs </span>
+                                          {% endfor %}
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all intreats  end  -->
+                        <!-- all posts   start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Social  Posts
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.social_media_posts %}
+                              {% for post in resp.social_media_posts %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#posts_{{forloop.counter}}"
+                                       aria-expanded="true" aria-controls="posts_{{forloop.counter}}">
+                                    Posts ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="posts_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ post.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Text : </span><span class="badge">{{ post.post_text|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Date: </span><span class="badge">{{ post.post_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all posts  end  -->
+                        <!-- all social media    start -->
+                        <div class="card transparent glowing_border mt-3">
+                           <div class="card-header glowing_border custom_header text-white ">All Social Accounts
+                           </div>
+                           <div class="card-body custom_background">
+                              {% if resp.social_media_accounts %}
+                              {% for account in resp.social_media_accounts %}
+                              <div class="accordion" id="accordionExample">
+                                 <div class="card">
+                                    <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                                    <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#account_{{forloop.counter}}"
+                                       aria-expanded="true" aria-controls="account_{{forloop.counter}}">
+                                    {{account.social_media_type}} Account  ({{forloop.counter}})
+                                    </button>
+                                 </div>
+                                 <div id="account_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                       <div class="col-md-12 my-auto no_list_style   ">
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ account.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">First Name  : </span><span class="badge">{{ account.first_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Last Name : </span><span class="badge">{{ account.last_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Email: </span><span class="badge">{{ account.email|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Phone #  : </span><span class="badge">{{ account.phone_number|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Username : </span><span class="badge">{{ account.user_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">DOB: </span><span class="badge">{{ account.dob|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Gender: </span><span class="badge">{{ account.gender|truncatechars:"20"|default:"N/A" }}</span></li>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% endfor %}
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- all social media   end  -->
+                     </div>
+                     <!-- p-3 end  -->
+                  </div>
+               </div>
             </div>
-        </div>
-
-    </div>
-
+         </div>
+      </div>
+   </div>
+</div>
 {% endblock %}
 {% block base_js %}
-    <script>
-        window.document.title = "{{ resp.name }} - Portfolio";
-    </script>
+<script>
+   window.document.title = "{{ resp.first_name }} -  EXPLORE";
+</script>
 {% endblock %}
+

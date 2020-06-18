@@ -59,7 +59,7 @@ class Create_Avatar(View):
         if(a):
            
             messages.success(request, 'Avatar created successfully')
-            return redirect('/amu/avatar')
+            return redirect('/amu/archive')
         else:
             messages.error(request, 'Failed to cerate avatar .... please  try again')
             return redirect('/amu/avatar')
@@ -100,10 +100,11 @@ class Add_Work(View):
                 is_current=current_job)
                     # details added == succesfull
             if(db_status):
-                messages.success(request, 'Avatar created successfully')
+                messages.success(request, 'Work Details added successfully ')
                 return redirect('/amu/archive')
                     # details insertion == fail 
             else:
+                messages.success(request, 'Work Details insertion failed ')
                 return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         # if form  == intrest form
