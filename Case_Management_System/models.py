@@ -16,7 +16,7 @@ from Case_Management_System.constants import CASE_STATES, POI_CATEGORY
 from Portfolio_Management_System.models import Portfolio_PMS
 # Create your models here.
 
-client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
+#client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
 class LocationOfInterest(Document):
     """
