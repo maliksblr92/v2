@@ -26,95 +26,185 @@
     </div>
 {% endblock %}
 {% block belly %}
+    
     <div class="container-fluid">
         <div class="row">
-            {% for avatar in resp %}
-            <div class="col-md-6 card">
-<div class="card-header">
-  <div class="row">
-    
-      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='work_details' avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add work </a></div>
-      <div class="col-md-4"><a target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='intrest' avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add intrest </a></div>
-      <div class="col-md-4"><a target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.id  %}" class="badge badge-primary text-white">Add events </a></div>
-     
-  </div>
-</div>
-<div class="card-body">
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Fisrt Name </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.first_name|truncatechars:"20"}}</span></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Last Name </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.last_name|truncatechars:"20"}}</span></div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Email  </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.email|truncatechars:"20"}}</span></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Gender  </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.gender|truncatechars:"20"}}</span></div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">DOB  </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.birthday|truncatechars:"20"}}</span></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">martial Status  </span></div>
-        <div class="col-md-9"><span class="badge badge-info">{{avatar.marital_status|truncatechars:"20"}}</span></div>
-    </div>
-  
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Nationality    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.nationality|truncatechars:"20"}}</p></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Relegious views   </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.religious_views}}</p></div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Address    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.address}}</p></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Education Details    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.educations|length}}</p></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Marriage Details    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.marriages|length}}</p></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Intrest Details    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.interests|length}}</p></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3"><span class="badge badge-primary">Work Details    </span></div>
-        <div class="col-md-9"><p class="badge ">{{avatar.works|length}}</p></div>
-    </div>
-
-
-    
-</div>
+            <div class="col-md-12 text-center">
+               {% if messages %}
+               {% for message in messages %}
+               <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+               {% endfor %}
+               {% endif %}
             </div>
-            {% endfor %}
+         </div>
+        <div class="row">
+            <div class="col-md-12 bg-white"style="height:600px;overflow-y:scroll">
+                <div class="row  m-1">
+                    {% for avatar in resp %}
+                        <!-- small card col-md-3  -->
+                        <div class="col-md-6 mt-2"                                                                                                                                 <div class=" m-1 row small_card_warpper border">
+                                <div class=" row small_card_warpper custom_card_body_background glowing_border ">
+
+                                    <div class="col-md-4 d-flex flex-row justify-content-around align-content-center glowing_border">
+
+
+                                        <div class="dropdown show">
+                                            <a class="btn btn-sm  text-white font-weight-bold  dropdown-toggle custom_social_icons"
+                                               href="#" role="button" id="dropdownMenuLink"
+                                               data-toggle="dropdown" aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <i class="fas fa-chart-bar text-white mr-2"></i> Add Operations
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item"
+                                                target="_blank"
+                                                href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='work_details' avatar_id=avatar.id  %}"
+                                                   style="font-size:12px;"> <i
+                                                        class="fab fa-facebook-square text-primary mr-2"></i>
+                                                    Add Work </a>
+                                                <a class="dropdown-item"
+                                                target="_blank" href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='intrest' avatar_id=avatar.id  %}"
+                                                   style="font-size:12px;"><i
+                                                        class="fab fa-twitter-square text-primary mr-2"></i>Add Intrests
+                                                    </a>
+                                                <a class="dropdown-item"
+                                                target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.id  %}"
+                                                   style="font-size:12px;"><i
+                                                        class="fab fa-instagram-square text-primary mr-2"></i> Add Marriage
+                                                    </a>
+
+
+                                                    <a class="dropdown-item"
+                                                    target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='biography'  avatar_id=avatar.id  %}"
+                                                       style="font-size:12px;"><i
+                                                            class="fab fa-instagram-square text-primary mr-2"></i> Add Bio-Graphy
+                                                        </a>
+
+
+                                                        <a class="dropdown-item"
+                                                        target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='post'  avatar_id=avatar.id  %}"
+                                                           style="font-size:12px;"><i
+                                                                class="fab fa-instagram-square text-primary mr-2"></i> Add Post
+                                                            </a>
+
+                                                            <a class="dropdown-item"
+                                                        target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='social_account'  avatar_id=avatar.id  %}"
+                                                           style="font-size:12px;"><i
+                                                                class="fab fa-instagram-square text-primary mr-2"></i> Add Social Accounts
+                                                            </a>
+    
+
+
+                                                    <a class="dropdown-item"
+                                                    target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.id  %}"
+                                                       style="font-size:12px;"><i
+                                                            class="fab fa-instagram-square text-primary mr-2"></i>Send Message
+                                                        </a>
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex flex-row justify-content-around align-content-center glowing_border">
+                                        <div class="dropdown show">
+
+                                            <a href="{% url 'Avatar_Management_Unit:explore' avatar_id=avatar.id%}" target="_blank" class="btn btn-sm text-white custom_social_icons "><i class="fa fa-eye text-white"></i> Explore</a>
+
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex flex-row justify-content-around align-content-center glowing_border"></div>
+                               
+                                    <div class="col-md-12 small_card_right_wrapper"
+                                        >
+<!--  -->
+<div class="row">
+<div class="col-md-3"><span class="text-white badge custom_bagde text-left">First Name</span></div>
+<div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.first_name|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Last Name</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.last_name|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Email</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.email|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Gender</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.gender|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">DOB</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.birthday|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Martial Status</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.marital_status|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Address</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.address|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Relegious Views</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.religious_views|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+
+<!--  -->
+<div class="row">
+    <div class="col-md-3"><span class="text-white badge custom_bagde text-left">Nationality</span></div>
+    <div class="col-md-9"><span class="text-white badge custom_bagde text-left">{{avatar.nationality|truncatechars:"40"}}</span></div>
+</div>
+<!--  -->
+
+
+
+
+                                     
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <!-- end small card col-md-3 -->
+                    {% endfor %}
+                
+            </div>
         </div>
-    </div>
+            </div>
+    
+  
 {% endblock %}
 {% block base_js %}
     <script>

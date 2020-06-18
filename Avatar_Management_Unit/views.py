@@ -29,46 +29,40 @@ class Create_Avatar(View):
             request, 'Avatar_Management_Unit/avatar.html', ctx)
 
     def post(self, request, *args, **kwargs):
-        print('+++++++++++++++++++++++++++++++++++++')
-        print("CREATING AVATAR ")
-        print('+++++++++++++++++++++++++++++++++++++')
-        form_name=request.POST['form_name']
-        if form_name == "personal_details_form":
-            fname = request.POST.get('pinfo-fname')
-            lname = request.POST.get('pinfo-lname')
-            email = request.POST.get('pinfo-email')
-            phone = request.POST.get('pinfo-phone')
-            nationality = request.POST.get('pinfo-nationality')
-            address = request.POST.get('pinfo-address')
-            religious = request.POST.get('pinfo-religious')
-            marital_status=request.POST.get('pinfo-marital-status')
-            dob=request.POST.get('pinfo-dob')
-            gender=request.POST.get('pinfo-gender')
+        fname = request.POST.get('pinfo-fname')
+        lname = request.POST.get('pinfo-lname')
+        email = request.POST.get('pinfo-email')
+        phone = request.POST.get('pinfo-phone')
+        nationality = request.POST.get('pinfo-nationality')
+        address = request.POST.get('pinfo-address')
+        religious = request.POST.get('pinfo-religious')
+        marital_status=request.POST.get('pinfo-marital-status')
+        dob=request.POST.get('pinfo-dob')
+        gender=request.POST.get('pinfo-gender')
        
     
-            # saving to model
-            newly_created_avatar = Avatar_AMS()
-            newly_created_avatar.create(
+        # saving to model
+        a = Avatar_AMS()
+        a.create(
           
-                first_name=fname,
-                last_name=lname,
-                email=email,
-                phone=phone,
-                nationality=nationality,
-                address=address,
-                religious_views=religious,
-                gender=gender,
-                marital_status=marital_status,
-                birthday=dob,
-                )
-            if(newly_created_avatar):
+            first_name=fname,
+            last_name=lname,
+            email=email,
+            phone=phone,
+            nationality=nationality,
+            address=address,
+            religious_views=religious,
+            gender=gender,
+            marital_status=marital_status,
+            birthday=dob,
+        )
+        if(a):
            
-                messages.success(request, 'Avatar created successfully')
-                return redirect('/amu/avatar')
-            else:
-                messages.error(request, 'Failed to cerate avatar .... please  try again')
-                return redirect('/amu/avatar')
-        id form_name == ""
+            messages.success(request, 'Avatar created successfully')
+            return redirect('/amu/avatar')
+        else:
+            messages.error(request, 'Failed to cerate avatar .... please  try again')
+            return redirect('/amu/avatar')
 
 
 class Add_Work(View):
@@ -106,6 +100,7 @@ class Add_Work(View):
                 is_current=current_job)
                     # details added == succesfull
             if(db_status):
+                messages.success(request, 'Avatar created successfully')
                 return redirect('/amu/archive')
                     # details insertion == fail 
             else:
@@ -127,12 +122,74 @@ class Add_Work(View):
               )
             # details added == succesfull
             if(db_status):
+                messages.success(request, 'Avatar Intrests added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        if(details_type == 'biography'):
+            print("+++++++++++++BIOGRAPHY FORM ++++++++++++++++++++")
+            biography_text=request.POST.get('b-biography')
+            print(biography_text)
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_biography(
+                biography=biography_text,
+              )
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Biography  added successfully')
                 return redirect('/amu/archive')
             # details insertion == fail 
             else:
                 return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         
+        if(details_type == 'social_account'):
+            print("+++++++++++++SOCIAL ACCOUNT FORM ++++++++++++++++++++")
+            platform_name=request.POST.get('sma-platform')
+            first_name=request.POST.get('sma-first-name')
+            last_name=request.POST.get('sma-last-name')
+            email=request.POST.get('sma-email')
+            phone=request.POST.get('sma-phone')
+            username=request.POST.get('sma-username')
+            dob=request.POST.get('sma-dob')
+            gender=request.POST.get('sma-gender')
+            
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_social_accounts(
+            social_media_type=platform_name, 
+            first_name=first_name,
+            last_name=last_name,
+            email=email, 
+            phone_number=phone,
+            user_name=username,
+            dob=dob,
+            gender=gender)
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Social Account  added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        if(details_type == 'post'):
+            print("+++++++++++++SOCIAL POST FORM ++++++++++++++++++++")
+            platform_name=request.POST.get('smp-platform')
+            post_text=request.POST.get('smp-text')
+            post_date=request.POST.get('smp-date')
+
+            
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_social_post(social_media_type=platform_name, post=post_text, post_date=post_date)
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Social Post  added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         # if form  == events form
         if(details_type == 'events'):
@@ -161,6 +218,7 @@ class Add_Work(View):
                
                 # details added == succesfull
                 if(db_status):
+                    messages.success(request, 'Avatar Education Details  added successfully')
                     return redirect('/amu/archive')
                 # details insertion == fail 
                 else:
@@ -179,12 +237,20 @@ class Add_Work(View):
                 wedding_date=wedding_date,
                 divorce_date=divorce_date)
                 if(db_status):
+                    messages.success(request, 'Avatar Marriage Details  added successfully')
                     return redirect('/amu/archive')
                 # details insertion == fail 
                 else:
                     return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
 
+
+class Explore (View):
+    def get(self,request,*args,**kwargs):
+        avatar_id=kwargs.get('avatar_id')
+        a = Avatar_AMS()
+        avatar=a.get_object_by_id(avatar_id)
+        return render(request,'Avatar_Management_Unit/explore.html',{'resp':avatar})
 class Add_Education(View):
 
     def post(self, request, *args, **kwargs):
