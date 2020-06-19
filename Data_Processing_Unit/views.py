@@ -305,11 +305,11 @@ class Twitter(View):
             dic=LocationSearchTweets(phrase,limit,lat,lon,rad)
             print(dic)
             if(len(dic) > 0 ):
-                messages.success(
-                    request, 'Query Executed Successfully --Location Search With Phrase and  Radius ')
+                # messages.success(
+                #     request, 'Query Executed Successfully --Location Search With Phrase and  Radius ')
                 return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
             else:
-                messages.error(request, 'Query execution failed')
+                # messages.error(request, 'Query execution failed')
                
                 return redirect('/dpu/twitter')
             return redirect('/dpu/twitter')
@@ -449,11 +449,11 @@ class Twitter(View):
                 })
             print(dic)
             if(len(dic) > 0 ):
-                messages.success(
-                    request, 'Query Executed Successfully --Location Search With Radius ')
+                # messages.success(
+                #     request, 'Query Executed Successfully --Location Search With Radius ')
                 return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
             else:
-                messages.error(request, 'Query execution failed')
+                # messages.error(request, 'Query execution failed')
                
                 return redirect('/dpu/twitter')
             
@@ -474,13 +474,13 @@ class Twitter(View):
             if(sentiment == 'positive'):
                 tweets_json = ess.tweets_positive(phrase)
                 if(len(tweets_json) > 0):
-                    messages.success(
-                        request, 'Query executed successfully   --Positive Tweets ')
+                    # messages.success(
+                    #     request, 'Query executed successfully   --Positive Tweets ')
                     print(
                         "=======================ESS REPLY=========================\n", tweets_json)
                     return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json': tweets_json})
                 else:
-                    messages.error(request, 'Query execution failed')
+                    # messages.error(request, 'Query execution failed')
                     print(
                         "=======================ESS REPLY=========================\n", tweets_json)
                     return redirect('/dpu/twitter')
@@ -489,12 +489,12 @@ class Twitter(View):
                 print("printing negitive tweets ");
                 length=len(tweets_json)
                 if(len(tweets_json) > 0):
-                    messages.success(request, 'Query executed successfully --Negitive Tweets')
+                    # messages.success(request, 'Query executed successfully --Negitive Tweets')
                     print("=======================ESS REPLY=========================\n", tweets_json)
                     return render(request, 'Data_Processing_Unit/sentiment_tweets.html', {'tweets_json': tweets_json})
 
                 else:
-                    messages.error(request, 'Query execution failed')
+                    # messages.error(request, 'Query execution failed')
                     print(
                         "=======================ESS REPLY=========================\n", tweets_json)
                     return redirect('/dpu/twitter')
@@ -638,13 +638,13 @@ class Twitter(View):
                 })
             print(dic)
             if(len(dic) > 0 ):
-                messages.success(
-                      request, 'Query Executed Successfully --Phrase Search ')
+                # messages.success(
+                #       request, 'Query Executed Successfully --Phrase Search ')
                 print(
                     "=======================ESS REPLY=========================\n", tweets_json)
                 return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
             else:
-                messages.error(request, 'Query execution failed')
+                # messages.error(request, 'Query execution failed')
                 print(
                     "=======================ESS REPLY=========================\n", tweets_json)
                 return redirect('/dpu/twitter')
@@ -839,7 +839,7 @@ class Ip_Tools(View):
             resp = ess.get_domains_ip_info(domain)
             print(resp)
             if(resp['code'] == 0 ):
-                messages.success(request, 'No Response for the given domain ip ')
+                # messages.success(request, 'No Response for the given domain ip ')
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
             else:
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
@@ -851,10 +851,10 @@ class Ip_Tools(View):
             print("#####################################################################################")
             print(resp)
             if(resp['code'] == 0 ):
-                messages.warning(request, 'No Response for the given domain ip ')
+                # messages.warning(request, 'No Response for the given domain ip ')
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
             else:
-                messages.success(request, 'Query Successfull ! Showing response for  '+domain)
+                # messages.success(request, 'Query Successfull ! Showing response for  '+domain)
                 return render(request,'Data_Processing_Unit/ip_tools.html',{'query_type':query_type,'response':resp})
 
 

@@ -88,7 +88,7 @@
                            class="fab fa-instagram-square text-primary mr-2"></i> Add Social Accounts
                         </a>
                         <a class="dropdown-item"
-                           target="_blank"href="{% url 'Avatar_Management_Unit:amu_add_work' details_type='events'  avatar_id=avatar.id  %}"
+                           target="_blank"href="{% url 'Avatar_Management_Unit:amu_send_message'  avatar_id=avatar.id  %}"
                            style="font-size:12px;"><i
                            class="fab fa-instagram-square text-primary mr-2"></i>Send Message
                         </a>
@@ -100,7 +100,28 @@
                      <a href="{% url 'Avatar_Management_Unit:explore' avatar_id=avatar.id%}" target="_blank" class="btn btn-sm text-white custom_social_icons "><i class="fa fa-eye text-white"></i> Explore</a>
                   </div>
                </div>
-               <div class="col-md-4 d-flex flex-row justify-content-around align-content-center glowing_border"></div>
+               <div class="col-md-4 d-flex flex-row justify-content-around align-content-center glowing_border">
+                <div class="dropdown show">
+                    <a class="btn btn-sm  text-white font-weight-bold  dropdown-toggle custom_social_icons"
+                       href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                    <i class="fas fa-chart-bar text-white mr-2"></i> Schedule Tasks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                       <a class="dropdown-item"
+                          target="_blank"
+                          href="{% url 'Avatar_Management_Unit:schedule_action' action_type='post' avatar_id=avatar.id  %}"
+                          style="font-size:12px;"> <i
+                          class="fab fa-facebook-square text-primary mr-2"></i>
+                     Schedule Post </a>
+
+
+                      
+                    
+                    </div>
+                 </div>
+               </div>
                <div class="col-md-12 small_card_right_wrapper"
                   >
                   <!--  -->
@@ -164,6 +185,7 @@
          {% endfor %}
       </div>
    </div>
+</div>
 </div>
 {% endblock %}
 {% block base_js %}
