@@ -242,10 +242,12 @@ class Avatar_AMS(Document):
         event = LifeEvent(year,event)
         self.life_events.append(event)
         self.evaluate_health()
+        return 'true'
 
     def add_biography(self, biography):
         self.biography.append(biography)
         self.save()
+        return 'true'
 
     def add_social_accounts(self, social_media_type, first_name,
                             last_name, email, phone_number, user_name, dob, gender):
@@ -254,11 +256,13 @@ class Avatar_AMS(Document):
             last_name, email, phone_number, user_name, dob, gender)
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
+        return 'true'
 
     def add_social_post(self, social_media_type, post, post_date):
         social_post = SocialMediaPost(social_media_type, post, post_date)
         self.social_media_posts.append(social_post)
         self.save()
+        return 'true'
 
     def add_marriage(self, spouse, location, wedding_date, divorce_date):
         # print(spouse, location, wedding_date, divorce_date)

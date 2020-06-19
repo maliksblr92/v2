@@ -6,6 +6,7 @@ urlpatterns = [
     # 1st submenu
     path('avatar/', views.Create_Avatar.as_view(), name='amu_avatar'),
     path('adddetails/<str:details_type>/<str:avatar_id>/', views.Add_Work.as_view(), name='amu_add_work'),
+    path('explore/<str:avatar_id>/', views.Explore.as_view(), name='explore'),
     path('addinterest/', views.Add_Interest.as_view(), name='amu_add_interest'),
     path('addeducation/', views.Add_Education.as_view(), name='amu_add_education'),
     path('addmarriage/', views.Add_Marriage.as_view(), name='amu_add_marriage'),
