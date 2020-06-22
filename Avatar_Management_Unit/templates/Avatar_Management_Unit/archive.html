@@ -106,7 +106,7 @@
                        href="#" role="button" id="dropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                    <i class="fas fa-chart-bar text-white mr-2"></i> Schedule Tasks
+                    <i class="fas fa-chart-bar text-white mr-2"></i> Schedule Actions
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                        <a class="dropdown-item"
@@ -115,6 +115,32 @@
                           style="font-size:12px;"> <i
                           class="fab fa-facebook-square text-primary mr-2"></i>
                      Schedule Post </a>
+                     <a class="dropdown-item"
+                     target="_blank"
+                     href="{% url 'Avatar_Management_Unit:schedule_action' action_type='comment' avatar_id=avatar.id  %}"
+                     style="font-size:12px;"> <i
+                     class="fab fa-facebook-square text-primary mr-2"></i>
+                Schedule Comment </a>
+                <a class="dropdown-item"
+                target="_blank"
+                href="{% url 'Avatar_Management_Unit:schedule_action' action_type='reaction' avatar_id=avatar.id  %}"
+                style="font-size:12px;"> <i
+                class="fab fa-facebook-square text-primary mr-2"></i>
+           Schedule React </a>
+           <a class="dropdown-item"
+           target="_blank"
+           href="{% url 'Avatar_Management_Unit:schedule_action' action_type='share' avatar_id=avatar.id  %}"
+           style="font-size:12px;"> <i
+           class="fab fa-facebook-square text-primary mr-2"></i>
+      Schedule Share </a>
+
+      <a class="dropdown-item"
+           target="_blank"
+           href="{% url 'Avatar_Management_Unit:schedule_action' action_type='message' avatar_id=avatar.id  %}"
+           style="font-size:12px;"> <i
+           class="fab fa-facebook-square text-primary mr-2"></i>
+      Schedule Message </a>
+      
 
 
                       
