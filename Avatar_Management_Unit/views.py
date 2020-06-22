@@ -480,38 +480,43 @@ class Schedule_Action(View):
 
     def get(self, request, *args, **kwargs):
 
-        action_type = ACTION_TYPE
-        account_types_supported = None
+        # action_type = ACTION_TYPE
+        # account_types_supported = None
+        action_type=kwargs['action_type']
+        avatar_id=kwargs['avatar_id']
+        avatar=Avatar_AMS.get_object_by_id(avatar_id)
+        return render(request,'Avatar_Management_Unit/scheduled_action.html',{'action_type':action_type,'avatar':avatar})
 
-        return HttpResponse('on Schedule An Action View')
-
-    def post(self, request):
-
-        avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
+    def post(self, request,*args,**kwargs):
+        # now avatar will come from archive page via parameters so no need static avatar
+        # avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
         try:
+            avatar_id=kwargs['avatar_id']
+            action_type=kwargs['action_type']
             a = Avatar_AMS.get_object_by_id(avatar_id)
 
-            account_type = 'facebook'
-            title = 'happy eid'
-            description = 'on special day of eid'
+            account_type = request.POST.get('account-platform-type')
+            title = request.POST.get('title')
+            description = request.POST.get('action-description')
             account_credentials = Avatar_AMS.get_social_account(a, account_type)
-            type = 'post'
+            type = action_type  
 
 
 
-            text = 'post text'
-            reaction = 'love'
-            post_url = ''
+            text = request.POST.get('post-text')
+            reaction =request.POST.get('reaction-type')
+            post_url =request.POST.get('target-post-url')
             social_media = account_credentials.social_media_type
-            username = account_credentials.username
-            password = account_credentials.password
-
+            username = account_credentials.user_name
+            # social media account has no field or attribute passord even coaaacial media account form has no password field 
+            # password = account_credentials.password
+            password='dummy'
             data = {'text':text,'reaction':reaction,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
 
             act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type)
             act_s.save()
-
-            return HttpResponse('account added')
+            print("+++++++success +++++++++++")
+            return redirect('/amu/archive')
         except Exception as e:
             print(e)
             return HttpResponse(e)
@@ -535,7 +540,7 @@ class Action_Send_Message(View):
 
         if('target_username' in kwargs):
             target_username = kwargs['target_username']
-
+       
         print(target_username)
         return render(request,'Avatar_Management_Unit/send_message.html',{'target_username':target_username})
 
@@ -548,7 +553,29 @@ class Action_Send_Message(View):
 
 
         return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
+# by ahmed 
+class Amu_Send_Message(View):
+    
+    def get(self,request,*args,**kwargs):
 
+        avatar_id = None
+
+        if('avatar_id' in kwargs):
+            avatar_id = kwargs['avatar_id']
+        avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+        print(avatar_id)
+        return render(request,'Avatar_Management_Unit/send_message.html',{'avatar':avatar_obj})
+
+    def post(self,request):
+        print(request.POST)
+        # this request.POST.get('user') will return email has AMU object has no username 
+        # however if amu_object has social media accounts they have user names 
+        target_username = request.POST.get('username',None)
+        message = request.POST.get('message')
+        aa.message(target_username,message)
+        messages.success(request, 'Message Sent successfully  ')
+        return redirect('/amu/archive')
+        # return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
 class Archive(View):
     def get (self,request,*args,**kwargs):
         resp = Avatar_AMS.get_all_avatars()

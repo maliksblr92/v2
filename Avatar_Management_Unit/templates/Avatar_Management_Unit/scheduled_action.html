@@ -1,0 +1,212 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+    <!-- <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white glowing_border"
+                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                    href="/pms/archive">Archive</a></div>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+
+    </div>{% endblock %} -->
+
+{% block belly %}
+    <div class="row">
+        <div class="col-md-12  ">
+            <!-- start of card  -->
+            <div class="w-100 h-100" id="content_div">
+                <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+                    <p class="card_header_text">SCHEDULE ACTIONS (<span class="text-uppercase">{{action_type}})</span> </p>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                            {% if action_type ==  'post' %}
+                            <form name="portfolio_create_form"
+                                  class="justify-content-center  pt-3 pb-5 custom_inner_background inner_form_margin_radius"
+                                  id="portfolio_create_form"
+                                  action="{% url 'Avatar_Management_Unit:schedule_action' action_type=action_type avatar_id=avatar.id %}" method="POST">
+                                {% csrf_token %}
+                                <div style="width:80%;" class="container input1">
+                                    <!-- Radio Buttons Start -->
+                                    <div class="row">
+                                        <!-- start of button grp -->
+                                        <div class="col-md-12  ">
+                                            
+                                        </div>
+                                      
+                                        <!-- end of button grp  -->
+                                    </div>
+                                    <!-- Radio Buttons End -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Action Type :
+                                        </span>
+                                        </div>
+                                       
+                                               <select name="action-type" id="action-type" class="form-control custom_input_field" required="required">
+                                                   <option value="">Select Action Type</option>
+                                                   <option selected value="post">Post</option>
+                                               </select>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Specify a Action Type                                        </small>
+                                    </div>
+
+
+                                    <!-- reaction type -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Reaction Type
+                                        </span>
+                                        </div>
+                                        <!-- <input type="date" class="col-md-9 form-control custom_input_field" id="dob"
+                                               name="dob" required="required"/> -->
+                                               <select name="reaction-type" id="reaction-type" class="form-control custom_input_field" required="required">
+                                                <option value="">Select Reaction Type</option>
+                                                <option value="love">Love</option>
+                                                <option value="hate">Hate</option>
+                                            </select>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Specify Reaction Type
+                                        </small>
+                                    </div>
+
+
+                                    {% if avatar.social_media_accounts|length > 0 %}
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Action Type :
+                                        </span>
+                                        </div>
+                                        <select name="account-platform-type" id="account-platform-type" class="form-control custom_input_field" required="required">
+                                            <option value="">Select Social Account</option>
+                                           {% for acc in avatar.social_media_accounts%}
+                                            <option value="{{acc.social_media_type}}">{{acc.social_media_type}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                        style="padding-left:180px;"><i
+                                         class="fas fa-info mr-2"></i>Avatar all avalible media accounts
+                                 </small>
+                                        
+                                    </div>
+                                    
+                                    {% endif %}
+                                    
+                                    
+                                    
+                                   
+
+                                  
+
+
+                                    
+
+
+
+                                     <!-- reaction type -->
+                                     <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Post Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="post-text" id="post-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide post / comment text 
+                                        </small>
+                                    </div>
+
+                                    <!-- inputfield 3 -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Target Post Url :
+                                        </span>
+                                        </div>
+                                        <input type="url" class="col-md-9 form-control custom_input_field"
+                                        id="target-post-url" name="target-post-url" required="required">
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Paste target post Url 
+                                        </small>
+                                    </div>
+
+
+
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Title :
+                                        </span>
+                                        </div>
+                                        <input type="text" class="col-md-9 form-control custom_input_field"
+                                        id="title" name="title" required="required">
+                                     
+                                    </div>
+
+                                    <!-- inputfield 4 -->
+                                    <div class="row input-group mt-3 ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Description
+                                        </span>
+                                        </div>
+                                       <textarea name="action-description" id="action-description" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide action description
+                                        </small>
+                                    </div>
+
+                                   
+
+                                    <!-- Button -->
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border custom_input_field font-weight-bold btn-sm w-100  text-white"
+                                                   value="SUBMIT"
+                                                  id="submit">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- end of card  -->
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "AMU Schedule Actions";
+    </script>
+{% endblock %}

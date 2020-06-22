@@ -23,6 +23,9 @@ urlpatterns = [
     # 3rd submenu
     path('report/', views.Create_Avatar.as_view(), name='amu_report'),
     path('send_message/', views.Action_Send_Message.as_view(), name='send_message'),
+    path('amu_send_message/', views.Amu_Send_Message.as_view(), name='amu_send_message'),
+    path('amu_send_message/<str:avatar_id>', views.Amu_Send_Message.as_view(), name='amu_send_message'),
     path('send_message/<str:target_username>', views.Action_Send_Message.as_view(), name='send_message'),
     path('archive/', views.Archive.as_view(), name='archive'),
+    path('scheduled_action/<str:action_type>/<str:avatar_id>/', views.Schedule_Action.as_view(), name='schedule_action'),
 ]
