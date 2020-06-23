@@ -21,7 +21,7 @@ class Mongo_Lookup(object):
     client = None
 
     def __init__(self):
-        cli = connect(db='OSINT_System', host='192.168.18.20', port=27017)
+        cli = connect(db='OSINT_System', host='127.0.0.1', port=27017)
         self.client = cli['OSINT_System']
     def __repr__(self):
         return self.client.name
