@@ -34,7 +34,7 @@
                         <!-- RPW FOR SOCIAL MEDIA -->
                         <!-- Second row-->
                         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-                            {% if action_type ==  'post' %}
+                           
                             <form name="portfolio_create_form"
                                   class="justify-content-center  pt-3 pb-5 custom_inner_background inner_form_margin_radius"
                                   id="portfolio_create_form"
@@ -60,7 +60,22 @@
                                        
                                                <select name="action-type" id="action-type" class="form-control custom_input_field" required="required">
                                                    <option value="">Select Action Type</option>
+                                                   {% if action_type      == 'post' %}
                                                    <option selected value="post">Post</option>
+                                                   
+                                                   {% endif %}
+                                                   {% if action_type      == 'comment' %}
+                                                   <option selected value="comment">Comment</option>
+                                                   {% endif %}
+                                                   {% if action_type      == 'reaction' %}
+                                                   <option selected value="reaction">Reaction</option>
+                                                   {% endif %}
+                                                   {% if action_type      == 'share' %}
+                                                   <option selected value="share">Share</option>
+                                                   {% endif %} {% if action_type      == 'message' %}
+                                                   <option selected value="message">Message</option>
+                                                   {% endif %}
+                                                  
                                                </select>
                                         <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
@@ -68,6 +83,7 @@
                                     </div>
 
 
+{% if    action_type == 'reaction'  %}
                                     <!-- reaction type -->
                                     <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
@@ -87,13 +103,13 @@
                                                 class="fas fa-info mr-2"></i>Specify Reaction Type
                                         </small>
                                     </div>
-
+{% endif %}
 
                                     {% if avatar.social_media_accounts|length > 0 %}
                                     <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Action Type :
+                                            opacity:0.9; padding:7px 9px 0 10px;">Select Social Account :
                                         </span>
                                         </div>
                                         <select name="account-platform-type" id="account-platform-type" class="form-control custom_input_field" required="required">
@@ -120,9 +136,9 @@
 
                                     
 
-
-
-                                     <!-- reaction type -->
+<!-- reaction type -->
+{% if action_type == 'post' or action_type == 'share' %}
+                                     
                                      <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
@@ -132,11 +148,58 @@
                                         <textarea name="post-text" id="post-text" class="form-control" cols="30" rows="3" required="required"></textarea>
                                         <small class=" col-md-9 font-weight-bold text_paragraph "
                                                style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Provide post / comment text 
+                                                class="fas fa-info mr-2"></i>Provide post text 
+                                        </small>
+                                    </div>
+{% endif %}
+{% if action_type == 'comment' %}
+                                     
+                                     <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Comment Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="comment-text" id="comment-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide  comment text 
+                                        </small>
+                                    </div>
+{% endif %}
+{% if action_type == 'message' %}
+                                     
+                                     <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Message Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="message-text" id="message-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide  message text 
                                         </small>
                                     </div>
 
-                                    <!-- inputfield 3 -->
+
+                                    <!-- taget_username -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Target Username 
+                                        </span>
+                                        </div>
+                                        <input type="text" class="col-md-9 form-control custom_input_field"
+                                        id="target-username" name="target-username" required="required">
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide target username
+                                        </small>
+                                    </div>
+{% endif %}
+    <!-- end reaction type --> 
+    {% if  action_type == 'share' or action_type == 'comment' or  action_type == 'reaction'  %}                               <!-- inputfield 3 -->
                                     <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
@@ -150,9 +213,10 @@
                                                 class="fas fa-info mr-2"></i>Paste target post Url 
                                         </small>
                                     </div>
+{% endif %}
 
 
-
+{% if action_type == 'post' or action_type == 'comment' or action_type == 'reaction'  or action_type == 'share' or action_type == 'message' %}                                 
                                     <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
@@ -177,7 +241,7 @@
                                                 class="fas fa-info mr-2"></i>Provide action description
                                         </small>
                                     </div>
-
+{% endif %}
                                    
 
                                     <!-- Button -->
@@ -187,14 +251,25 @@
                                         <div class="col-md-2">
                                             <input type="submit"
                                                    class="btn border custom_input_field font-weight-bold btn-sm w-100  text-white"
-                                                   value="SUBMIT"
+                                                   {% if action_type == 'post' %}
+                                                   value=" POST"
+                                                   {% endif %}
+                                                   {% if action_type == 'comment' %}
+                                                   value=" COMMENT"
+                                                   {% endif %}
+                                                   {% if action_type == 'reaction' %}
+                                                   value=" REACT"
+                                                   {% endif %}
+                                                   {% if action_type == 'share' %}
+                                                   value=" SHARE"
+                                                   {% endif %}
                                                   id="submit">
                                         </div>
                                     </div>
 
                                 </div>
                             </form>
-                            {% endif %}
+                          
                         </div>
                     </div>
                 </div>
