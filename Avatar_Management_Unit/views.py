@@ -501,16 +501,16 @@ class Schedule_Action(View):
                 a = Avatar_AMS.get_object_by_id(avatar_id)
                 account_type = request.POST.get('account-platform-type')
                 title = request.POST.get('title')
-                description = request.POST.get('action-description')
+                # description = request.POST.get('action-description')
                 account_credentials = Avatar_AMS.get_social_account(a, account_type)
                 type = action_type  
                 text = request.POST.get('post-text')
                 social_media = account_credentials.social_media_type
-                username = account_credentials.user_name               
+                username = account_credentials.username               
                 password=account_credentials.password
                 perform_on=request.POST.get('perform-on')
                 data = {'text':text,'social_media':social_media,'username':username,'password':password}
-                act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s = Action_Schedule_AMS(title=title,description=''  ,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
                 act_s.save()
                 # imitiate object locally 
                 # takes three params (usernam,password,social_meida)
@@ -530,7 +530,7 @@ class Schedule_Action(View):
                 text = request.POST.get('comment-text')
                 post_url =request.POST.get('target-post-url')
                 social_media = account_credentials.social_media_type
-                username = account_credentials.user_name               
+                username = account_credentials.username               
                 password=account_credentials.password
               
                 perform_on=request.POST.get('perform-on')
@@ -557,7 +557,7 @@ class Schedule_Action(View):
                 text = request.POST.get('message-text')
                 target_username=request.POST.get('target-username')
                 social_media = account_credentials.social_media_type
-                username = account_credentials.user_name               
+                username = account_credentials.username               
                 password=account_credentials.password
                 perform_on=request.POST.get('perform-on')
                 data = {'social_media':social_media,'target_username':target_username,'messgae':text,'username':username,'password':password}
@@ -581,7 +581,7 @@ class Schedule_Action(View):
                 reaction =request.POST.get('reaction-type')
                 post_url =request.POST.get('target-post-url')
                 social_media = account_credentials.social_media_type
-                username = account_credentials.user_name               
+                username = account_credentials.username               
                 password=account_credentials.password
                 perform_on=request.POST.get('perform-on')
                 data = {'reaction':reaction,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
@@ -607,7 +607,7 @@ class Schedule_Action(View):
                 text = request.POST.get('post-text')
                 post_url =request.POST.get('target-post-url')
                 social_media = account_credentials.social_media_type
-                username = account_credentials.user_name               
+                username = account_credentials.username               
                 password=account_credentials.password
                 perform_on=request.POST.get('perform-on')
                 data = {'text':text,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
