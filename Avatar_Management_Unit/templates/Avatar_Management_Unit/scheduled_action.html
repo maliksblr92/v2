@@ -51,37 +51,9 @@
                                         <!-- end of button grp  -->
                                     </div>
                                     <!-- Radio Buttons End -->
-                                    <div class="row input-group ">
-                                        <div class="col-md-3 p-0 input-group-prepend">
-                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Action Type :
-                                        </span>
-                                        </div>
-                                       
-                                               <select name="action-type" id="action-type" class="form-control custom_input_field" required="required">
-                                                   <option value="">Select Action Type</option>
-                                                   {% if action_type      == 'post' %}
-                                                   <option selected value="post">Post</option>
-                                                   
-                                                   {% endif %}
-                                                   {% if action_type      == 'comment' %}
-                                                   <option selected value="comment">Comment</option>
-                                                   {% endif %}
-                                                   {% if action_type      == 'reaction' %}
-                                                   <option selected value="reaction">Reaction</option>
-                                                   {% endif %}
-                                                   {% if action_type      == 'share' %}
-                                                   <option selected value="share">Share</option>
-                                                   {% endif %} {% if action_type      == 'message' %}
-                                                   <option selected value="message">Message</option>
-                                                   {% endif %}
-                                                  
-                                               </select>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Specify a Action Type                                        </small>
-                                    </div>
-
+                                    
+                                   
+<input type="hidden" id="action-type" name="action-type" value="{{action_type}}" />
 
 {% if    action_type == 'reaction'  %}
                                     <!-- reaction type -->
@@ -216,7 +188,7 @@
 {% endif %}
 
 
-{% if action_type == 'post' or action_type == 'comment' or action_type == 'reaction'  or action_type == 'share' or action_type == 'message' %}                                 
+{% if action_type == 'post'   or action_type == 'message' %}                                 
                                     <div class="row input-group ">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
@@ -242,7 +214,19 @@
                                         </small>
                                     </div>
 {% endif %}
-                                   
+<div class="row input-group ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Perform On :
+    </span>
+    </div>
+    <input type="datetime-local" class="col-md-9 form-control custom_input_field"
+    id="perform-on" name="perform-on" required="required">
+    <small class=" col-md-9 font-weight-bold text_paragraph "
+    style="padding-left:180px;"><i
+     class="fas fa-info mr-2"></i>Example 06/05/2020,07:45 PM
+</small>
+</div>                    
 
                                     <!-- Button -->
                                     <div class="row input_wrapper_row">
