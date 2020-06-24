@@ -52,13 +52,13 @@ def split(obj):
 def to_and(value):
     arr=value.split('/')
     new_value=arr[2]+"-"+arr[0]+"-"+arr[1]
-    print(new_value)
+  
     return new_value
 
 @register.filter(name='img_count')
 def img_count(value):
     length=len(value)
-    print(length)
+   
     return length
 
 @register.filter(name='split_latlons')
