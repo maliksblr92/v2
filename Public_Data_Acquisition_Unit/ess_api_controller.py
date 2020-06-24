@@ -1,4 +1,5 @@
 from OSINT_System_Core.publisher import publish
+import threading
 import requests
 import logging
 import time
@@ -14,6 +15,7 @@ ESS_SERVER_USER = 'rapidev'
 ESS_SERVER_PASSWORD = 'rapidev'
 ESS_SERVER_BASE_URL = 'http://{0}:{1}/'.format(ESS_IP,ESS_SERVER_PORT) #ip of the serve or its url
 
+CONNECTION_THREAD_ACTIVE = None
 
 Header = ''
 
@@ -93,16 +95,32 @@ class Ess_Api_Controller(object):
             return self.reconnect_ess()
 
     def reconnect_ess(self,**kwargs):
+        global CONNECTION_THREAD_ACTIVE
 
-        if(not self.reconnect_tries >= self.max_reconnect_tries):
+        if(CONNECTION_THREAD_ACTIVE is not None):
+            if(not CONNECTION_THREAD_ACTIVE.isAlive()):
+
+                CONNECTION_THREAD_ACTIVE = threading.Thread(target=self.reconnect_ess_thread_fx,name='connection_thread').start()
+                print('connection thread instantiated')
+        else:
+            CONNECTION_THREAD_ACTIVE = threading.Thread(target=self.reconnect_ess_thread_fx,name='connection_thread').start()
+            print('connection thread instantiated')
+
+
+    def reconnect_ess_thread_fx(self):
+        if (not self.reconnect_tries >= self.max_reconnect_tries):
             self.get_reconnect_delay()
             print('...................reconnecting to ess....................')
-            if(self.ess_connect()):
+            if (self.ess_connect()):
                 return True
             else:
-                print('...................failed reconnecting to ess, will try after {0} seconds....................'.format(self.reconnect_delay))
-                publish('...................failed reconnecting to ess, will try after {0} seconds....................'.format(self.reconnect_delay),
-                        message_type='info', module_name=__name__)
+                print(
+                    '...................failed reconnecting to ess, will try after {0} seconds....................'.format(
+                        self.reconnect_delay))
+                publish(
+                    '...................failed reconnecting to ess, will try after {0} seconds....................'.format(
+                        self.reconnect_delay),
+                    message_type='info', module_name=__name__)
                 return self.reconnect_ess()
         else:
             print('failed to connect to ess , maximum reconnect tries exceeded ')
@@ -358,12 +376,13 @@ class Ess_Api_Controller(object):
 
     def ess_add_smart_serach_target(self,username='arooma.shah',search_site='facebook',entity_type='profile'):
         try:
-            add_target_url = 'smart_search/'
-            payload = {'username': username,'category':search_site,'entity_type':entity_type}
-            print(payload)
-            response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
-            print(response.json())
-            return response.json()
+            if(self.ess_is_conneted()):
+                add_target_url = 'smart_search/'
+                payload = {'username': username,'category':search_site,'entity_type':entity_type}
+                print(payload)
+                response = requests.post(ESS_SERVER_BASE_URL + add_target_url, headers=Header, data=payload)
+                print(response.json())
+                return response.json()
         except Exception as e:
             print(e)
             return {'response': 'ess replied null'}
