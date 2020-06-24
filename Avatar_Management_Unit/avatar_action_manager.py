@@ -21,26 +21,50 @@ class Avatar_Action(object):
         self.social_media = social_media
 
 
-
     def post(self,text,image=''):
         resp = ess.action_post(text,self.social_media,self.username,self.password)
+        if (resp is not None):
+            publish('message sent successfully', message_type='notification')
+            return True
+        else:
+            publish('message send failed', message_type='notification')
+            return False
 
     def comment(self,text,target_post_url):
-        ess.action_comment(text,target_post_url,self.social_media,self.username,self.password)
+        resp = ess.action_comment(text,target_post_url,self.social_media,self.username,self.password)
+        if (resp is not None):
+            publish('message sent successfully', message_type='notification')
+            return True
+        else:
+            publish('message send failed', message_type='notification')
+            return False
 
     def react(self,reaction,target_post_url):
-        ess.action_reaction(reaction,target_post_url,self.social_media,self.username,self.password)
+        resp = ess.action_reaction(reaction,target_post_url,self.social_media,self.username,self.password)
+        if (resp is not None):
+            publish('message sent successfully', message_type='notification')
+            return True
+        else:
+            publish('message send failed', message_type='notification')
+            return False
 
     def share(self,text,target_post_url):
-        ess.action_share(text,target_post_url,self.social_media,self.username,self.password)
+        resp = ess.action_share(text,target_post_url,self.social_media,self.username,self.password)
+        if (resp is not None):
+            publish('message sent successfully', message_type='notification')
+            return True
+        else:
+            publish('message send failed', message_type='notification')
+            return False
 
     def message(self,target_username,message):
         resp = ess.action_send_message(self.social_media,target_username,message,self.username,self.password)
         if(resp is not None):
             publish('message sent successfully',message_type='notification')
+            return True
         else:
             publish('message send failed', message_type='notification')
-
+            return False
 
 
 #beta class for perforing or processing the actions instaed of into the task
@@ -64,15 +88,20 @@ class Perform_Action(object):
 
                                                )
                 if (action.type == 'post'):
-                    self.av_action.post(action.data['text'])
+                    if(self.av_action.post(action.data['text'])):
+                        action.expire_me()
                 elif (action.type == 'comment'):
-                    self.av_action.comment(action.data['text'],action.data['target_post'])
+                    if(self.av_action.comment(action.data['text'],action.data['target_post'])):
+                        action.expire_me()
                 elif (action.type == 'reaction'):
-                    self.av_action.react(action.data['reaction'],action.data['target_post'])
+                    if(self.av_action.react(action.data['reaction'],action.data['target_post'])):
+                        action.expire_me()
                 elif (action.type == 'share'):
-                    self.av_action.share(action.data['text'],action.data['target_post'])
+                    if(self.av_action.share(action.data['text'],action.data['target_post'])):
+                        action.expire_me()
                 else:
                     print('un defined action')
+                publish('scheduled action {0} submitted to successfully ', message_type='notification')
             else:
                 print('not the time ')
 

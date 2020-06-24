@@ -12,6 +12,8 @@ disconnect('default')
 #connect('OSINT_System')
 #client = connect(db='OSINT_System',host='192.168.18.20', port=27017)
 
+
+
 class Mongo_Lookup(object):
 
     """
@@ -21,7 +23,7 @@ class Mongo_Lookup(object):
     client = None
 
     def __init__(self):
-        cli = connect(db='OSINT_System', host='192.168.18.20', port=27017)
+        cli = connect(db='OSINT_System', host=MONGO_DB_IP, port=27017)
         self.client = cli['OSINT_System']
     def __repr__(self):
         return self.client.name
