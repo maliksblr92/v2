@@ -524,12 +524,7 @@ class Schedule_Action(View):
             elif(action_type == 'comment'):
                 print("## ACTION TYPE COMMENT ##")
                 a = Avatar_AMS.get_object_by_id(avatar_id)
-                account_type = request.POST.get('account-platform-type')
-                #title and description  remove by awais 
-                # title = request.POST.get('title')
-                title = ''
-                # description = request.POST.get('action-description')
-                description = ''
+              
                 account_credentials = Avatar_AMS.get_social_account(a, account_type)
                 type = action_type  
                 text = request.POST.get('comment-text')
@@ -540,7 +535,7 @@ class Schedule_Action(View):
               
                 perform_on=request.POST.get('perform-on')
                 data = {'text':text,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
-                act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
                 act_s.save()
                  # imitiate object locally 
                 # takes three params (usernam,password,social_meida)
@@ -580,11 +575,7 @@ class Schedule_Action(View):
                 print("## ACTION TYPE REACT ##")
                 a = Avatar_AMS.get_object_by_id(avatar_id)
                 account_type = request.POST.get('account-platform-type')
-                #title and description  remove by awais 
-                # title = request.POST.get('title')
-                title = ''
-                # description = request.POST.get('action-description')
-                description = ''
+                
                 account_credentials = Avatar_AMS.get_social_account(a, account_type)
                 type = action_type  
                 reaction =request.POST.get('reaction-type')
@@ -594,7 +585,7 @@ class Schedule_Action(View):
                 password=account_credentials.password
                 perform_on=request.POST.get('perform-on')
                 data = {'reaction':reaction,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
-                act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
                 act_s.save()
                  # imitiate object locally 
                 # takes three params (usernam,password,social_meida)
@@ -609,11 +600,7 @@ class Schedule_Action(View):
             elif(action_type == 'share'):
                 print("## ACTION TYPE SHARE ##")
                 a = Avatar_AMS.get_object_by_id(avatar_id)
-                account_type = request.POST.get('account-platform-type')
-                #title and description  remove by awais 
-                # title = request.POST.get('title')
-                title = ''
-                # description = request.POST.get('action-description')
+               
                 description = ''
                 account_credentials = Avatar_AMS.get_social_account(a, account_type)
                 type = action_type  
@@ -625,7 +612,7 @@ class Schedule_Action(View):
                 perform_on=request.POST.get('perform-on')
                 data = {'text':text,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
 
-                act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
                 act_s.save()
                  # imitiate object locally 
                 # takes three params (usernam,password,social_meida)
