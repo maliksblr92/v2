@@ -24,24 +24,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wk@z!^we^q_-l_j6h+l4xq%vweos9tc^(_w1j!wwi35ud2$g8*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 
-ESS_IP = '58.65.160.148'
+#ESS_IP = '58.65.160.148'
 #UIS_IP = '192.168.18.27'
-FILE_SERVER = '58.65.160.148'
-AIS_IP = '58.65.160.148'
-MONGO_DB = '192.168.18.20'
-
-
-
-#ESS_IP = '192.168.18.19'
-UIS_IP = '192.168.18.77'
-#FILE_SERVER = '192.168.18.33'
-#AIS_IP = '192.168.18.13'
+#FILE_SERVER = '58.65.160.148'
+#AIS_IP = '58.65.160.148'
 #MONGO_DB = '192.168.18.20'
+
+
+
+ESS_IP = '192.168.18.19'
+UIS_IP = '192.168.18.77'
+FILE_SERVER = '192.168.18.33'
+AIS_IP = '192.168.18.13'
+MONGO_DB = '192.168.18.20'
 
 
 # mongoDb setting variables for public access

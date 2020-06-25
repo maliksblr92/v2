@@ -92,8 +92,9 @@ class SocialMediaAccount(EmbeddedDocument):
     first_name = StringField()
     last_name = StringField()
     email = EmailField()
+    password = StringField()
     phone_number = StringField()
-    user_name = StringField()
+    username = StringField()
     dob = DateField()
     gender = StringField()
 
@@ -242,23 +243,27 @@ class Avatar_AMS(Document):
         event = LifeEvent(year,event)
         self.life_events.append(event)
         self.evaluate_health()
+        return 'true'
 
     def add_biography(self, biography):
         self.biography.append(biography)
         self.save()
-
+        return 'true'
+#added password in the dictionary
     def add_social_accounts(self, social_media_type, first_name,
-                            last_name, email, phone_number, user_name, dob, gender):
+                            last_name, email, password,phone_number, username, dob, gender):
         social_account = SocialMediaAccount(
             social_media_type, first_name,
-            last_name, email, phone_number, user_name, dob, gender)
+            last_name, email,password, phone_number, user_name, dob, gender)
         self.social_media_accounts.append(social_account)
         self.evaluate_health()
+        return 'true'
 
     def add_social_post(self, social_media_type, post, post_date):
         social_post = SocialMediaPost(social_media_type, post, post_date)
         self.social_media_posts.append(social_post)
         self.save()
+        return 'true'
 
     def add_marriage(self, spouse, location, wedding_date, divorce_date):
         # print(spouse, location, wedding_date, divorce_date)

@@ -29,7 +29,6 @@ class Create_Avatar(View):
             request, 'Avatar_Management_Unit/avatar.html', ctx)
 
     def post(self, request, *args, **kwargs):
-        print("in post request")
         fname = request.POST.get('pinfo-fname')
         lname = request.POST.get('pinfo-lname')
         email = request.POST.get('pinfo-email')
@@ -60,7 +59,7 @@ class Create_Avatar(View):
         if(a):
            
             messages.success(request, 'Avatar created successfully')
-            return redirect('/amu/avatar')
+            return redirect('/amu/archive')
         else:
             messages.error(request, 'Failed to cerate avatar .... please  try again')
             return redirect('/amu/avatar')
@@ -101,9 +100,12 @@ class Add_Work(View):
                 is_current=current_job)
                     # details added == succesfull
             if(db_status):
+                
+                messages.success(request, 'Work Details added successfully ')
                 return redirect('/amu/archive')
                     # details insertion == fail 
             else:
+                messages.success(request, 'Work Details insertion failed ')
                 return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         # if form  == intrest form
@@ -122,12 +124,76 @@ class Add_Work(View):
               )
             # details added == succesfull
             if(db_status):
+                messages.success(request, 'Avatar Intrests added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        if(details_type == 'biography'):
+            print("+++++++++++++BIOGRAPHY FORM ++++++++++++++++++++")
+            biography_text=request.POST.get('b-biography')
+            print(biography_text)
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_biography(
+                biography=biography_text,
+              )
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Biography  added successfully')
                 return redirect('/amu/archive')
             # details insertion == fail 
             else:
                 return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         
+        if(details_type == 'social_account'):
+            print("+++++++++++++SOCIAL ACCOUNT FORM ++++++++++++++++++++")
+            platform_name=request.POST.get('sma-platform')
+            first_name=request.POST.get('sma-first-name')
+            last_name=request.POST.get('sma-last-name')
+            email=request.POST.get('sma-email')
+            password=request.POST.get('sma-password')
+            phone=request.POST.get('sma-phone')
+            username=request.POST.get('sma-username')
+            dob=request.POST.get('sma-dob')
+            gender=request.POST.get('sma-gender')
+            
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_social_accounts(
+            social_media_type=platform_name, 
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password, 
+            phone_number=phone,
+            user_name=username,
+            dob=dob,
+            gender=gender)
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Social Account  added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
+        
+        if(details_type == 'post'):
+            print("+++++++++++++SOCIAL POST FORM ++++++++++++++++++++")
+            platform_name=request.POST.get('smp-platform')
+            post_text=request.POST.get('smp-text')
+            post_date=request.POST.get('smp-date')
+
+            
+            amu_obj = Avatar_AMS.get_object_by_id(avatar_id)
+            db_status=amu_obj.add_social_post(social_media_type=platform_name, post=post_text, post_date=post_date)
+            # details added == succesfull
+            if(db_status):
+                messages.success(request, 'Avatar Social Post  added successfully')
+                return redirect('/amu/archive')
+            # details insertion == fail 
+            else:
+                return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         
         # if form  == events form
         if(details_type == 'events'):
@@ -156,6 +222,7 @@ class Add_Work(View):
                
                 # details added == succesfull
                 if(db_status):
+                    messages.success(request, 'Avatar Education Details  added successfully')
                     return redirect('/amu/archive')
                 # details insertion == fail 
                 else:
@@ -174,12 +241,20 @@ class Add_Work(View):
                 wedding_date=wedding_date,
                 divorce_date=divorce_date)
                 if(db_status):
+                    messages.success(request, 'Avatar Marriage Details  added successfully')
                     return redirect('/amu/archive')
                 # details insertion == fail 
                 else:
                     return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
         return redirect('/amu/archive',{'details_type':details_type,'avatar_id':avatar_id})
 
+
+class Explore (View):
+    def get(self,request,*args,**kwargs):
+        avatar_id=kwargs.get('avatar_id')
+        a = Avatar_AMS()
+        avatar=a.get_object_by_id(avatar_id)
+        return render(request,'Avatar_Management_Unit/explore.html',{'resp':avatar})
 class Add_Education(View):
 
     def post(self, request, *args, **kwargs):
@@ -408,42 +483,151 @@ class Schedule_Action(View):
 
     def get(self, request, *args, **kwargs):
 
-        action_type = ACTION_TYPE
-        account_types_supported = None
+        # action_type = ACTION_TYPE
+        # account_types_supported = None
+        action_type=kwargs['action_type']
+        avatar_id=kwargs['avatar_id']
+        avatar=Avatar_AMS.get_object_by_id(avatar_id)
+        return render(request,'Avatar_Management_Unit/scheduled_action.html',{'action_type':action_type,'avatar':avatar})
 
-        return HttpResponse('on Schedule An Action View')
-
-    def post(self, request):
-
-        avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
+    def post(self, request,*args,**kwargs):
+        # now avatar will come from archive page via parameters so no need static avatar
+        # avatar_id = ObjectId("5e7b350f9eda802eb3e6b7fd")
         try:
-            a = Avatar_AMS.get_object_by_id(avatar_id)
+            avatar_id=kwargs['avatar_id']
+            action_type=kwargs['action_type']
+            if(action_type =='post'):
+                print("## ACTION TYPE POST ##")
+                a = Avatar_AMS.get_object_by_id(avatar_id)
+                account_type = request.POST.get('account-platform-type')
+                title = request.POST.get('title')
+                # description = request.POST.get('action-description')
+                account_credentials = Avatar_AMS.get_social_account(a, account_type)
+                type = action_type  
+                text = request.POST.get('post-text')
+                social_media = account_credentials.social_media_type
+                username = account_credentials.username               
+                password=account_credentials.password
+                perform_on=request.POST.get('perform-on')
+                data = {'text':text,'social_media':social_media,'username':username,'password':password}
+                act_s = Action_Schedule_AMS(title=title,description=''  ,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s.save()
+                # imitiate object locally 
+                # takes three params (usernam,password,social_meida)
+                aa = Avatar_Action(username,password,social_media)
+                # now send appropiate message
+                aa.post(text,image='');
 
-            account_type = 'facebook'
-            title = 'happy eid'
-            description = 'on special day of eid'
-            account_credentials = Avatar_AMS.get_social_account(a, account_type)
-            type = 'post'
+                print("+++++++success +++++++++++")
+                return redirect('/amu/archive')
+           
+            elif(action_type == 'comment'):
+                print("## ACTION TYPE COMMENT ##")
+                a = Avatar_AMS.get_object_by_id(avatar_id)
+              
+                account_credentials = Avatar_AMS.get_social_account(a, account_type)
+                type = action_type  
+                text = request.POST.get('comment-text')
+                post_url =request.POST.get('target-post-url')
+                social_media = account_credentials.social_media_type
+                username = account_credentials.username               
+                password=account_credentials.password
+              
+                perform_on=request.POST.get('perform-on')
+                data = {'text':text,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s.save()
+                 # imitiate object locally 
+                # takes three params (usernam,password,social_meida)
+                aa = Avatar_Action(username,password,social_media)
+                # now send appropiate message
+                aa.comment(text,post_url)
+                return redirect('/amu/archive')
+            
+            
+            
+            elif(action_type == 'message'):
+                print("## ACTION TYPE MESSAGE ##")
+                a = Avatar_AMS.get_object_by_id(avatar_id)
+                account_type = request.POST.get('account-platform-type')
+                title = request.POST.get('title')
+                description = request.POST.get('action-description')
+                account_credentials = Avatar_AMS.get_social_account(a, account_type)
+                type = action_type  
+                text = request.POST.get('message-text')
+                target_username=request.POST.get('target-username')
+                social_media = account_credentials.social_media_type
+                username = account_credentials.username               
+                password=account_credentials.password
+                perform_on=request.POST.get('perform-on')
+                data = {'social_media':social_media,'target_username':target_username,'messgae':text,'username':username,'password':password}
+                act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s.save()
+                 # imitiate object locally 
+                # takes three params (usernam,password,social_meida)
+                aa = Avatar_Action(username,password,social_media)
+                # now send appropiate message
+                aa.message(target_username,text)
+                return redirect('/amu/archive')
+            
+            
+            elif(action_type == 'reaction'):
+                print("## ACTION TYPE REACT ##")
+                a = Avatar_AMS.get_object_by_id(avatar_id)
+                account_type = request.POST.get('account-platform-type')
+                
+                account_credentials = Avatar_AMS.get_social_account(a, account_type)
+                type = action_type  
+                reaction =request.POST.get('reaction-type')
+                post_url =request.POST.get('target-post-url')
+                social_media = account_credentials.social_media_type
+                username = account_credentials.username               
+                password=account_credentials.password
+                perform_on=request.POST.get('perform-on')
+                data = {'reaction':reaction,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s.save()
+                 # imitiate object locally 
+                # takes three params (usernam,password,social_meida)
+                aa = Avatar_Action(username,password,social_media)
+                # now send appropiate message
+                aa.react(reaction,post_url)
+                return redirect('/amu/archive')
+            
+            
+            
+            
+            elif(action_type == 'share'):
+                print("## ACTION TYPE SHARE ##")
+                a = Avatar_AMS.get_object_by_id(avatar_id)
+               
+                description = ''
+                account_credentials = Avatar_AMS.get_social_account(a, account_type)
+                type = action_type  
+                text = request.POST.get('post-text')
+                post_url =request.POST.get('target-post-url')
+                social_media = account_credentials.social_media_type
+                username = account_credentials.username               
+                password=account_credentials.password
+                perform_on=request.POST.get('perform-on')
+                data = {'text':text,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
 
-
-
-            text = 'post text'
-            reaction = 'love'
-            post_url = ''
-            social_media = account_credentials.social_media_type
-            username = account_credentials.username
-            password = account_credentials.password
-
-            data = {'text':text,'reaction':reaction,'target_post':post_url,'social_media':social_media,'username':username,'password':password}
-
-            act_s = Action_Schedule_AMS(title=title,description=description,account_credentials=account_credentials,data=data,type=type)
-            act_s.save()
-
-            return HttpResponse('account added')
+                act_s = Action_Schedule_AMS(account_credentials=account_credentials,data=data,type=type,perform_on=perform_on)
+                act_s.save()
+                 # imitiate object locally 
+                # takes three params (usernam,password,social_meida)
+                aa = Avatar_Action(username,password,social_media)
+                # now send appropiate message
+                aa.share(text,post_url)
+                print("+++++++success +++++++++++")
+                return redirect('/amu/archive')
+            
+            
+            
+                
         except Exception as e:
             print(e)
             return HttpResponse(e)
-
 class Actions_Archive(View):
 
     def get(self,request):
@@ -463,7 +647,7 @@ class Action_Send_Message(View):
 
         if('target_username' in kwargs):
             target_username = kwargs['target_username']
-
+       
         print(target_username)
         return render(request,'Avatar_Management_Unit/send_message.html',{'target_username':target_username})
 
@@ -476,7 +660,29 @@ class Action_Send_Message(View):
 
 
         return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
+# by ahmed 
+class Amu_Send_Message(View):
+    
+    def get(self,request,*args,**kwargs):
 
+        avatar_id = None
+
+        if('avatar_id' in kwargs):
+            avatar_id = kwargs['avatar_id']
+        avatar_obj = Avatar_AMS.get_object_by_id(avatar_id)
+        print(avatar_id)
+        return render(request,'Avatar_Management_Unit/send_message.html',{'avatar':avatar_obj})
+
+    def post(self,request):
+        print(request.POST)
+        # this request.POST.get('user') will return email has AMU object has no username 
+        # however if amu_object has social media accounts they have user names 
+        target_username = request.POST.get('username',None)
+        message = request.POST.get('message')
+        aa.message(target_username,message)
+        messages.success(request, 'Message Sent successfully  ')
+        return redirect('/amu/archive')
+        # return HttpResponseRedirect(reverse('Avatar_Management_Unit:send_message'))
 class Archive(View):
     def get (self,request,*args,**kwargs):
         resp = Avatar_AMS.get_all_avatars()
