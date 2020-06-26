@@ -16,7 +16,7 @@ PORT = ''
 # disconnect('default')
 # CONNECT TO MONGO DB
 # connect(db='OSINT_Core',host='192.168.18.20', port=27017, username='ocs', password='rapidev')
-#connect(db='OSINT_System', host='192.168.18.20', port=27017)
+connect(db='OSINT_System', host='192.168.18.20', port=27017)
 
 
 # connect('OSINT_Core')
@@ -197,6 +197,7 @@ class Linkedin_Company_Response_TMS(Document):
     number_of_employees = IntField()
     jobs = DictField()
     linked_to = DictField()
+    posts = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
@@ -422,6 +423,7 @@ class Facebook_Page_Response_TMS(Document):
     linked_to = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    profile_picture_url = DictField()
 
     def __str__(self):
         return self.username
@@ -472,6 +474,7 @@ class Facebook_Group_Response_TMS(Document):
     linked_to = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    profile_picture_url = DictField()
 
     def __str__(self):
         return self.username
@@ -593,6 +596,44 @@ class Reddit_Subreddit_Response_TMS(Document):
     num_moderators = IntField()
     top_moderators = ListField()
     posts = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+
+
+class Social_Entity_Attributes(Document):
+    GTR = StringField()
+    CTR = IntField()
+    target_website = StringField()
+    target_type = StringField()
+    name = StringField()
+    username = StringField()
+    profile_picture = StringField()
+    cover_picture = StringField()
+    friends = IntField()
+    followers = IntField()
+    date_of_birth = StringField()
+    birth_place = StringField()
+    occupation = StringField()
+    religion = StringField()
+    major = StringField()
+    address = StringField()
+    posts_count = IntField()
+    field = ListField()
+    affiliation = ListField()
+    award = ListField()
+    school = ListField()
+    degree = ListField()
+    mentor = ListField()
+    family = ListField()
+    phone = ListField()
+    email = ListField()
+    website = ListField()
+    city = ListField()
+    favorite_movies = ListField()
+    favorite_songs = ListField()
+    hobbies = ListField()
+    companies = ListField()
+    religions_involved = ListField()
     created_on = DateTimeField(default=datetime.datetime.utcnow())
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
 
