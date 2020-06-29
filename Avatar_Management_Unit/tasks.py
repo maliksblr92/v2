@@ -11,5 +11,5 @@ pa = Perform_Action()
 @periodic_task(run_every=(crontab()),name='avatar_scheduled_action_task')
 def avatar_scheduled_action_task():
 
-    pa.action_polling()
+    #pa.action_polling()
     print('.........................Avatar Action Polling.......................')
