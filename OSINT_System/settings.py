@@ -41,7 +41,7 @@ ESS_IP = '192.168.18.19'
 UIS_IP = '192.168.18.77'
 FILE_SERVER = '192.168.18.33'
 AIS_IP = '192.168.18.13'
-MONGO_DB = '192.168.18.20'
+MONGO_DB = '192.168.18.27'
 
 
 # mongoDb setting variables for public access
