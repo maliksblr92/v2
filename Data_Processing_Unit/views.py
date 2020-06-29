@@ -473,12 +473,22 @@ class Twitter(View):
             print(sentiment, phrase)
             if(sentiment == 'positive'):
                 tweets_json = ess.tweets_positive(phrase)
+                print(tweets_json)
+                
+                new_data=[]
+                
+                for i in range(len(tweets_json["data"])):
+                    tt= tweets_json["data"][str(i)]
+                    new_data.append(tt)
+                    
+                print(new_data)
+                
                 if(len(tweets_json) > 0):
                     # messages.success(
                     #     request, 'Query executed successfully   --Positive Tweets ')
                     print(
                         "=======================ESS REPLY=========================\n", tweets_json)
-                    return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json': tweets_json})
+                    return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json':new_data})
                 else:
                     # messages.error(request, 'Query execution failed')
                     print(
@@ -486,12 +496,22 @@ class Twitter(View):
                     return redirect('/dpu/twitter')
             else:
                 tweets_json = ess.tweets_negative(phrase)
-                print("printing negitive tweets ");
-                length=len(tweets_json)
+                print(tweets_json)
+                
+                new_data=[]
+                
+                for i in range(len(tweets_json["data"])):
+                    tt= tweets_json["data"][str(i)]
+                    new_data.append(tt)
+                    
+                print(new_data)
+                
                 if(len(tweets_json) > 0):
-                    # messages.success(request, 'Query executed successfully --Negitive Tweets')
-                    print("=======================ESS REPLY=========================\n", tweets_json)
-                    return render(request, 'Data_Processing_Unit/sentiment_tweets.html', {'tweets_json': tweets_json})
+                    # messages.success(
+                    #     request, 'Query executed successfully   --Positive Tweets ')
+                    print(
+                        "=======================ESS REPLY=========================\n", tweets_json)
+                    return render(request, 'Data_Processing_Unit/tweets.html', {'tweets_json':new_data})
 
                 else:
                     # messages.error(request, 'Query execution failed')

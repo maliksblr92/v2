@@ -82,7 +82,7 @@
 
                                     <!-- all targets start -->
                                     <div class="card transparent glowing_border mt-3">
-                                        <div class="card-header custom_header glowing_border text-white">All Targets
+                                        <div class="card-header custom_header glowing_border text-white">All Adresses
                                         </div>
                                         <div class="card-body  custom_background">
 
@@ -127,18 +127,35 @@
                                              style="font-size:12px;">
 
 
-                                            <ul style="list-style: none;">
+                                            <div class="row">
                                                 {% if resp.description %}
+                                          
                                                     {% for description in resp.description %}
-                                                        <li class="d-flex flex-row"><i
-                                                                class="fas fa-info-circle text-white mr-2 d-inline pt-1"></i>{{ description|linebreaks|default:"N/A" }}
-                                                        </li>
+                                                    <div class="col-md-2  d-flex flex-row justify-content-start align-items-center font-weight-bold text-capitalize">
+                                                   
+                                                      <span class="badge badge-primary text-white mr-2">{{forloop.counter}}</span>   Title 
+                                                       
+                                                    </div>
+                                                    <div class="col-md-10  d-flex justify-content-start align-items-center font-weight-bold">
+                                                        {{ description.title|default:"N/A" }}
+                                                  
+                                                    </div>
+                                                    <div class="col-md-2  d-flex flex-row justify-content-start align-items-center font-weight-bold text-capitalize">
+                                                   
+                                                        <span class="badge badge-primary text-white mr-2">{{forloop.counter}}</span>     Description 
+                                                      
+                                                   </div>
+                                                   <div class="col-md-10  d-flex justify-content-start align-items-center font-weight-bold">
+                                                       {{ description.description|default:"N/A" }}
+                                                 
+                                                   </div>
+                                               
                                                     {% endfor %}
                                                 {% else %}
                                                     <p class="text-white">No Description Exists</p>
                                                 {% endif %}
 
-                                            </ul>
+                                            </div>
 
 
                                         </div>
@@ -184,6 +201,7 @@
 
 
                                             <ul>
+                                                {{resp.social_targets}}
                                                 {% if resp.social_targets %}
                                                     {% for x in resp.social_targets %}
                                                         <li class="badge badge-primary">{{ x|default:"N/A" }}</li>

@@ -96,12 +96,13 @@ class Add_Target(RequireLoginMixin, IsTSO, View):
             'prime_argument':prime_argument,
             'target_site':target_site,
         }
-        print(prime_argument)
+        print(data)
         #publish('target created successfully', message_type='notification')
         return render(request,
                       'Target_Management_System/tso_marktarget.html',
                       {'app': 'target',
                        'data': data})
+        
         # return JsonResponse(data,
         #                     content_type='application/json',
         #                     charset='utf8')
