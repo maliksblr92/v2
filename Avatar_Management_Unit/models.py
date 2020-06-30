@@ -94,7 +94,7 @@ class SocialMediaAccount(EmbeddedDocument):
     email = EmailField()
     password = StringField()
     phone_number = StringField()
-    user_name = StringField()
+    username = StringField()
     dob = DateField()
     gender = StringField()
 
@@ -251,7 +251,7 @@ class Avatar_AMS(Document):
         return 'true'
 #added password in the dictionary
     def add_social_accounts(self, social_media_type, first_name,
-                            last_name, email, password,phone_number, user_name, dob, gender):
+                            last_name, email, password,phone_number, username, dob, gender):
         social_account = SocialMediaAccount(
             social_media_type, first_name,
             last_name, email,password, phone_number, user_name, dob, gender)

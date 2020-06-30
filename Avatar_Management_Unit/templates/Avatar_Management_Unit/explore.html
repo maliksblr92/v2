@@ -56,14 +56,14 @@
                               <div class="col-md-8    ">
                                  <div class="row h-100">
                                     <div class="col-md-12 my-auto no_list_style   ">
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">FirstName : </span><span class="badge"> {{resp.first_name|truncatechars:"20" }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">LastName : </span><span class="badge"> {{resp.last_name|truncatechars:"20" }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Gender : </span><span class="badge"> {{resp.first_name|truncatechars:"20" }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">DOB : </span><span class="badge"> {{resp.birthday|truncatechars:"20" }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Address : </span><span class="badge"> {{resp.address|truncatechars:"20" }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Email : </span><span class="badge"> {{resp.email|truncatechars:"20" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">FirstName : </span><span class="badge"> {{resp.first_name|truncatechars:"50" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">LastName : </span><span class="badge"> {{resp.last_name|truncatechars:"50" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Gender : </span><span class="badge"> {{resp.first_name|truncatechars:"50" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">DOB : </span><span class="badge"> {{resp.gender|truncatechars:"50" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Address : </span><span class="badge"> {{resp.address|truncatechars:"50" }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Email : </span><span class="badge"> {{resp.email|truncatechars:"40" }}</span></li>
                                        <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Nationality : </span><span class="badge"> {{resp.nationality }}</span></li>
-                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Martial Status : </span><span class="badge"> {{resp.nationality }}</span></li>
+                                       <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;">Martial Status : </span><span class="badge"> {{resp.marital_status }}</span></li>
                                        <li class="text-white w-100 "> <span class="badge badge-light text-left "style="width:100px;"> Health: </span><span class="badge"> {{resp.health|default:"N/A" }}</span></li>
                                     </div>
                                  </div>
@@ -140,10 +140,10 @@
                                  <div id="education_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                        <div class="col-md-4 my-auto no_list_style   ">
-                                          <li class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;"> Institution :</span> <span class="badge"> {{education.institution|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Degree :</span> <span class="badge"> {{ education.degree|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class="badge      badge-light text-left"style="width:100px;"> Grade :</span> <span class="badge"> {{ education.grades|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "> <span class="badge      badge-light text-left"style="width:100px;"> Field :</span> <span class="badge"> {{education.field_of_study|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;"> Institution :</span> <span class="badge"> {{education.institution|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Degree :</span> <span class="badge"> {{ education.degree|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class="badge      badge-light text-left"style="width:100px;"> Grade :</span> <span class="badge"> {{ education.grades|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "> <span class="badge      badge-light text-left"style="width:100px;"> Field :</span> <span class="badge"> {{education.field_of_study|truncatechars:"100"|default:"N/A" }}</span></li>
                                        </div>
                                     </div>
                                  </div>
@@ -172,10 +172,10 @@
                                  <div id="marriage_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                        <div class="col-md-12 my-auto no_list_style   ">
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Spouse Name : </span><span class="badge" >{{marriage.spouse|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Location : </span><span class="badge" >{{marriage.location|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Wedding Date : </span><span class="badge" >{{marriage.wedding_date|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Divorce Date : </span><span class="badge" >{{marriage.divorce_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Spouse Name : </span><span class="badge" >{{marriage.spouse|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Location : </span><span class="badge" >{{marriage.location|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Wedding Date : </span><span class="badge" >{{marriage.wedding_date|truncatechars:"100"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Divorce Date : </span><span class="badge" >{{marriage.divorce_date|truncatechars:"100"|default:"N/A" }}</span></li>
                                        </div>
                                     </div>
                                  </div>
@@ -227,7 +227,7 @@
                                     <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
                                     <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#intrests_{{forloop.counter}}"
                                        aria-expanded="true" aria-controls="intrests_{{forloop.counter}}">
-                                    All Intrests ({{resp.interests|length}})
+                                    All Interests ({{resp.interests|length}})
                                     </button>
                                  </div>
                                  <div id="intrests_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -281,9 +281,9 @@
                                  <div id="posts_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                        <div class="col-md-12 my-auto no_list_style   ">
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ post.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Text : </span><span class="badge">{{ post.post_text|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Date: </span><span class="badge">{{ post.post_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ post.social_media_type|truncatechars:"200"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Text : </span><span class="badge">{{ post.post_text|truncatechars:"200"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Date: </span><span class="badge">{{ post.post_date|truncatechars:"200"|default:"N/A" }}</span></li>
                                        </div>
                                     </div>
                                  </div>
@@ -311,15 +311,15 @@
                                  <div id="account_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                        <div class="col-md-12 my-auto no_list_style   ">
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ account.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">First Name  : </span><span class="badge">{{ account.first_name|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Last Name : </span><span class="badge">{{ account.last_name|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Email: </span><span class="badge">{{ account.email|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Password: </span><span class="badge">{{ account.password|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Phone #  : </span><span class="badge">{{ account.phone_number|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Username : </span><span class="badge">{{ account.user_name|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">DOB: </span><span class="badge">{{ account.dob|truncatechars:"20"|default:"N/A" }}</span></li>
-                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Gender: </span><span class="badge">{{ account.gender|truncatechars:"20"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ account.social_media_type|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">First Name  : </span><span class="badge">{{ account.first_name|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Last Name : </span><span class="badge">{{ account.last_name|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Email: </span><span class="badge">{{ account.email|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Password: </span><span class="badge">{{ account.password|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Phone #  : </span><span class="badge">{{ account.phone_number|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Username : </span><span class="badge">{{ account.user_name|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">DOB: </span><span class="badge">{{ account.dob|truncatechars:"50"|default:"N/A" }}</span></li>
+                                          <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Gender: </span><span class="badge">{{ account.gender|truncatechars:"50"|default:"N/A" }}</span></li>
                                        </div>
                                     </div>
                                  </div>

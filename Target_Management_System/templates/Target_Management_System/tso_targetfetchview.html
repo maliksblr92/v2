@@ -131,18 +131,19 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 <!-- This is The Form Section below top-section-->
-                                <div class="row ml-4 mt-4 mr-4"
-                                     style="height:550px;border-radius:15px 15px 15px 15px; overflow-y: auto;">
+                                <div class="row ml-4 mt-4 mr-4 "
+                                     style="border-radius:15px 15px 15px 15px; overflow-y: auto;">
                                     <div class="col-md-12">
-                                        <div class="container">
-                                            <div class="row">
+                                   
+                                            <div class="row "style="height:550px;">
 
 
                                                 <!-- Just like card 1  start looping here -->
                                                 {% if targets|length > 0 %}
                                                     {% for target in targets %}
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-6 ">
                                                             <!-- inside CaRD DIV-->
                                                             <div class="row mr-2">
                                                                 <div class="col-md-2  glowing_border d-flex flex-column justify-content-around align-items-center"
@@ -308,7 +309,7 @@
                                                                                     <div class="text-white"><span
                                                                                             class="text-primary">Username: </span>
                                                                                         {% if target.1.username %}
-                                                                                            {{ target.1.username }} {% else %}
+                                                                                            {{ target.1.username|truncatechars:"50" }} {% else %}
 
                                                                                             {{ target.1.title }}{% endif %}
                                                                                     </div>
@@ -344,53 +345,56 @@
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-                                                    <div class="col-md-12">
-                                                        <nav aria-label="Page navigation example  " class="pagination1">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <nav aria-label="Page navigation example  " class="pagination1">
 
-                                                            <ul class="pagination justify-content-end mt-3 ">
-                                                                {% if targets.has_previous %}
+                                                        <ul class="pagination justify-content-end mt-3 ">
+                                                            {% if targets.has_previous %}
+                                                                <li class="page-item "><a class="page-link"
+                                                                                          href="?page={{ targets.previous_page_number }}">Previous</a>
+                                                                </li>
+                                                            {% endif %}
+
+                                                            {% for pages in targets.paginator.page_range %}
+                                                                {% if targets.number == pages %}
+
+                                                                    <li class="page-item active "><a
+                                                                            class="page-link text-priamry font-weight-bold"
+                                                                            href="?page={{ pages }}">{{ pages }}</a>
+                                                                    </li>
+
+                                                                {% else %}
                                                                     <li class="page-item "><a class="page-link"
-                                                                                              href="?page={{ targets.previous_page_number }}">Previous</a>
+                                                                                              href="?page={{ pages }}">{{ pages }}</a>
                                                                     </li>
                                                                 {% endif %}
 
-                                                                {% for pages in targets.paginator.page_range %}
-                                                                    {% if targets.number == pages %}
+                                                            {% endfor %}
+                                                            {% if targets.has_next %}
+                                                                <li class="page-item "><a class="page-link "
+                                                                                          href="?page={{ targets.next_page_number }}">Next</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
 
-                                                                        <li class="page-item active "><a
-                                                                                class="page-link text-priamry font-weight-bold"
-                                                                                href="?page={{ pages }}">{{ pages }}</a>
-                                                                        </li>
-
-                                                                    {% else %}
-                                                                        <li class="page-item "><a class="page-link"
-                                                                                                  href="?page={{ pages }}">{{ pages }}</a>
-                                                                        </li>
-                                                                    {% endif %}
-
-                                                                {% endfor %}
-                                                                {% if targets.has_next %}
-                                                                    <li class="page-item "><a class="page-link "
-                                                                                              href="?page={{ targets.next_page_number }}">Next</a>
-                                                                    </li>
-                                                                {% endif %}
-                                                            </ul>
-
-                                                        </nav>
-                                                    </div>
+                                                    </nav>
+                                                </div>
+                                            </div>
                                                 {% else %}
 
                                                 {% endif %}
                                                 <!--END OF CARD 1-->
 
 
-                                            </div>
-                                        </div>
+                                           
+                                      
 
                                     </div>
                                 </div>
                                 <!--my code above-->
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

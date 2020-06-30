@@ -176,11 +176,11 @@
                                 </span>
                                                         </div>
                                                         <input type="text" class="col-md-9 form-control  newinputdesign"
-                                                               placeholder="Please Enter Your Text"
+                                                               
                                                                id="{{ platform.name|lower }}-authorusername"
                                                                name="{{ platform.name|lower }}_authorusername"
                                                                aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2" required="required">
+                                                               aria-describedby="basic-addon2" {% if platform.name == 'Reddit' %} disabled placeholder="Reddit Target has no author name " {% else %} required="required" {% endif %}>
                                                     </div>
                                                     <!--AUTHUR URL-->
                                                     <div class="row input-group mt-4 mb-3">
@@ -190,11 +190,12 @@
                                 </span>
                                                         </div>
                                                         <input type="text" class="col-md-9 form-control  newinputdesign"
-                                                               placeholder="Please Enter Target URL"
+                                                            
                                                                id="{{ platform.name|lower }}-authoruserurl"
                                                                name="{{ platform.name|lower }}_authoruserurl"
                                                                aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2" required="required">
+                                                               aria-describedby="basic-addon2"  {% if platform.name == 'Youtube' %} disabled placeholder="Youtube Target has no author url  " {% else %} required="required" {% endif %} >
+                                                              
                                                     </div>
                                                     <!-- DATE AND TIME 2 column div -->
                                                     <div class="row">

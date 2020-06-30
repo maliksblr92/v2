@@ -95,7 +95,8 @@ select{
 
                
 <div class="row">
-    {% for i in tweets_json.data %}
+    {% for i in tweets_json%}
+  
     <div class="col-md-4 p-3">
         <div class="card">
             <div class="card-header bg-dark"style="height:60px;">
@@ -105,8 +106,8 @@ select{
                    
                </div> 
                <div class="row">
-                <div class="col-md-4 text-white text-truncate text-center"style="font-size:13px;"> {{i.id}}</div>
-                <div class="col-md-8 text-white text-truncate text-center"style="font-size:13px;">  {{i.name}}</div>
+                <div class="col-md-4 text-white text-truncate text-center"style="font-size:13px;"> {{i.ID}}</div>
+                <div class="col-md-8 text-white text-truncate text-center"style="font-size:13px;">  {{i.datetime}}</div>
               
             </div> 
                
@@ -114,7 +115,7 @@ select{
             
             </div>
             <div class="card-body m-0 p-0 text-center">
-                <img src="{{i.media_directory}}" style="height:200px;width:100%;"  class="img-thumbnail img-fluid">
+                <img src="{{i.images.0}}" style="height:200px;width:100%;"  class="img-thumbnail img-fluid">
             </div>
             <div class="card-footer"></div>
         </div>

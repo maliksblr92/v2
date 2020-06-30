@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
+
     <!-- <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-3 m-0 p-0  "><a
@@ -22,6 +23,18 @@
     </div>{% endblock %} -->
 
 {% block belly %}
+<style>
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+        color: rgba(0, 0, 0, 0);
+        opacity: 1;
+        display: block;
+        background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+        width: 20px;
+        height: 20px;
+        border-width: thin;
+    }
+
+</style>
     <div class="row">
         <div class="col-md-12  ">
             <!-- start of card  -->
@@ -103,7 +116,38 @@
                                     
                                    
 
-                                  
+                          
+{% if action_type == 'post'   or action_type == 'message' %}                                 
+<div class="row input-group ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Title :
+    </span>
+    </div>
+    <input type="text" class="col-md-9 form-control custom_input_field"
+    id="title" name="title" required="required">
+ 
+</div>
+
+
+{% endif %}  
+
+
+{% if  action_type == 'message' %}
+<!-- inputfield 4 -->
+<div class="row input-group mt-3 ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Description
+    </span>
+    </div>
+   <textarea name="action-description" id="action-description" class="form-control" cols="30" rows="3" required="required"></textarea>
+    <small class=" col-md-9 font-weight-bold text_paragraph "
+           style="padding-left:180px;"><i
+            class="fas fa-info mr-2"></i>Provide action description
+    </small>
+</div>   
+{% endif %}
 
 
                                     
@@ -111,7 +155,7 @@
 <!-- reaction type -->
 {% if action_type == 'post' or action_type == 'share' %}
                                      
-                                     <div class="row input-group ">
+                                     <div class="row input-group mt-4">
                                         <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Post Text 
@@ -188,32 +232,6 @@
 {% endif %}
 
 
-{% if action_type == 'post'   or action_type == 'message' %}                                 
-                                    <div class="row input-group ">
-                                        <div class="col-md-3 p-0 input-group-prepend">
-                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Title :
-                                        </span>
-                                        </div>
-                                        <input type="text" class="col-md-9 form-control custom_input_field"
-                                        id="title" name="title" required="required">
-                                     
-                                    </div>
-
-                                    <!-- inputfield 4 -->
-                                    <div class="row input-group mt-3 ">
-                                        <div class="col-md-3 p-0 input-group-prepend">
-                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Description
-                                        </span>
-                                        </div>
-                                       <textarea name="action-description" id="action-description" class="form-control" cols="30" rows="3" required="required"></textarea>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Provide action description
-                                        </small>
-                                    </div>
-{% endif %}
 <div class="row input-group ">
     <div class="col-md-3 p-0 input-group-prepend">
     <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
