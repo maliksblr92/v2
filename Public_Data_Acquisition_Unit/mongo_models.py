@@ -1214,7 +1214,7 @@ class Keybase_Crawling(Document):
     updated_on = DateTimeField(default=datetime.datetime.utcnow())
     periodic_interval = IntField(default=0, choices=PERIODIC_INTERVALS)
     target_type = StringField(default='keybase_crawling')
-
+    social_sites = DictField(default={})
     title = StringField()
     keybase_ref = DynamicField()
 
@@ -1237,6 +1237,7 @@ class Keybase_Crawling(Document):
 
                 if 'title' in kwargs: self.title = kwargs['title']
                 if 'keybase_ref' in kwargs: self.keybase_ref = kwargs['keybase_ref']
+                if 'social_sites' in kwargs: self.social_sites = kwargs['social_sites']
 
 
                 self.GTR = GTR
