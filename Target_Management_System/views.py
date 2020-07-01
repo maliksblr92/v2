@@ -303,7 +303,55 @@ class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
 
     def post(self,request):
         try:
-            print(request.POST)
+           
+           
+            fb=False;
+            instagram=False;
+            linkedin=False;
+            twitter=False;
+            reddit=False;
+            reddit=False;
+            youtube=False;
+            if 'fb' in request.POST:
+                fb=True;
+            else:
+                fb=False;
+                
+            if 'instagram' in request.POST:
+                instagram=True;
+            else:
+                instagram=False;
+                
+            if 'linkedin' in request.POST:
+                linkedin=True;
+            else:
+                linkedin=False;
+                
+            if 'twitter' in request.POST:
+                twitter=True;
+            else:
+                twitter=False;  
+                 
+            if 'reddit' in request.POST:
+                reddit=True;
+            else:
+                reddit=False;
+                
+            if 'youtube' in request.POST:
+                youtube=True;
+            else:
+                youtube=False;
+            social_sites={ 
+                            "fb":fb,
+                            "instagram":instagram,
+                            "linkedin":linkedin, 
+                            "twitter":twitter, 
+                            "reddit":reddit,
+                            "youtube":youtube, }
+            
+            
+
+           
             title = request.POST.get('title',None)
             website_id = acq.get_custom_webiste_id()
             target_type = 0
@@ -318,8 +366,9 @@ class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
                 expire_on = convert_expired_on_to_datetime(expire_date)
 
 
-            acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval)
-
+            acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval,social_sites=social_sites)
+            print("###################################")
+            print(social_sites)
             return HttpResponseRedirect(reverse('Target_Management_System:tms_targetscreated'))
         except Exception as e:
             print(e)

@@ -62,8 +62,8 @@
                                                         <li class="text-white w-100 "> Title : {{ resp.name }}</li>
                                                         <li class="text-white w-100 "> Portfolio Type
                                                             : {{ resp.portfolio_type }}</li>
-                                                        <li class="text-white w-100 "> Relegion
-                                                            : {{ resp.relegion }}</li>
+                                                        <li class="text-white w-100 "> Religion
+                                                            : {{ resp.religion|default:"N/A" }}</li>
                                                         <li class="text-white w-100 "> Sect : {{ resp.sect }}</li>
                                                         <li class="text-white w-100 "> DOB : {{ resp.dob }}</li>
                                                         <li class="text-white w-100 "> Created On
@@ -124,7 +124,7 @@
                                             Description
                                         </div>
                                         <div class="card-body custom_background w-100 text-white"
-                                             style="font-size:12px;">
+                                            >
 
 
                                             <div class="row">
@@ -174,7 +174,7 @@
                                         <div class="card-body custom_background w-100 text-white">
 
 
-                                            <ul>
+                                            <div class="row">
                                                 {% if resp.portfolios %}
                                                     {% for x in resp.portfolios %}
                                                         <li class="badge badge-primary">{{ x|default:"N/A" }}</li>
@@ -182,7 +182,7 @@
                                                 {% else %}
                                                     <p class="text-white">No Portfolio Exists</p>
                                                 {% endif %}
-                                            </ul>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -200,18 +200,19 @@
                                         <div class="card-body custom_background w-100 text-white">
 
 
-                                            <ul>
-                                                {{resp.social_targets}}
+                                        <div class="row">
+                                               
                                                 {% if resp.social_targets %}
                                                     {% for x in resp.social_targets %}
-                                                        <li class="badge badge-primary">{{ x|default:"N/A" }}</li>
+                                                    <div class="col-md-6 d-flex flex-row justify-content-between align-items-center" > <span class="badge badge-light text-left ">Target Type : </span> <span class="badge w-75"> {{ x.GTR.website.name|default:"N/A" }}</span> </div>
+                                                    <div class="col-md-6 d-flex flex-row justify-content-between align-items-center" > <span class="badge badge-light  text-left ">Target Username : </span> <span class="badge w-75"><a class="text-white" href="{% url 'Target_Management_System:tms_marktarget_prime' x  x.GTR.website.name|lower %}" ><i class="fa fa-share"></i>{{ x.username|default:"N/A" }}</a></span></div>
                                                     {% endfor %}
                                                 {% else %}
                                                     <p class="text-white">No Social Target Exists</p>
                                                 {% endif %}
 
 
-                                            </ul>
+                                            </div>
                                         </div>
 
                                     </div>
