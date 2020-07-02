@@ -32,10 +32,10 @@ class Keybase_KMS(Document):
     title = StringField(default='')
     topic = StringField(default='')
 
-    keywords = ListField()
-    mentions = ListField()
-    phrases = ListField()
-    hashtags = ListField()
+    keywords = ListField(default=[])
+    mentions = ListField(default=[])
+    phrases = ListField(default=[])
+    hashtags = ListField(default=[])
 
     #matched_references = DynamicField()
     #linked_references = DynamicField()

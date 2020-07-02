@@ -34,10 +34,10 @@ class Create_Keybase(RequireLoginMixin, View):
             login_user_id=str(request.user.id),
             title=request.POST.get('title'),
             topic=request.POST.get('topic'),
-            keywords=request.POST.getlist('keywords[]'),
-            mentions=request.POST.getlist('mentions[]'),
-            hashtags=request.POST.getlist('tags[]'),
-            phrases=request.POST.getlist('phrases[]')
+            keywords=list(filter(lambda x:len(x)>0,request.POST.getlist('keywords[]'))),
+            mentions=list(filter(lambda x:len(x)>0,request.POST.getlist('mentions[]'))),
+            hashtags=list(filter(lambda x:len(x)>0,request.POST.getlist('tags[]'))),
+            phrases=list(filter(lambda x:len(x)>0,request.POST.getlist('phrases[]')))
             )
         print(resp) 
         print(type(resp))
