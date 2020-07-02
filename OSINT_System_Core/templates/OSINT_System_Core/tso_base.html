@@ -3,27 +3,189 @@
 {% block page_title %}TSO Dashboard{% endblock %}
 <!-- left sidebar -->
 {% block leftsidebar %}
-    <div class="col-lg-2 col-sm-12 col-xs-12 ">
+    <style>
+        .custom_left_nav {
+            width: 100%;
+            height: 100%;
+        }
+
+        .custom_notification_box {
+            font-size: 12px;
+            overflow-y: auto;
+            height: 90%;
+            width: 100%;
+            padding: 5px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .custom_left_buttons {
+            background-image: url({% static "/images/left_side_button_bg_1_1.svg" %});
+            background-repeat: no-repeat;
+            height: 27% !important;
+            width: 100% !important;
+        }
+
+        .custom_left_buttons_wrapper {
+            height: 65%;
+            padding: 5% 1% 5% 3%;
+        }
+
+        .custom_left_buttons_icons {
+            height: 90%;
+            width: 90%;
+        }
+
+
+        @media only screen and (min-width: 992px) {
+            .custom_charts_header {
+                writing-mode: vertical-rl;
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .custom_charts_parent_div {
+                height: 325px;
+                border-radius: 15px 0px 0px 15px;
+            }
+        }
+
+        @media only screen and (max-width: 992px) {
+            .custom_charts_header {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .custom_charts_parent_div {
+            {#height: 325px;#} display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+                border-radius: 15px 0px 0px 15px;
+            }
+        }
+
+
+    </style>
+
+    <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 mb-5">
         <div class="row">
-            <div class="col-lg-12 ">
+            <div class="col-lg-12">
                 <!-- start of bars -->
 
-                <div class="left_nav text-white">
-                    <div class="" id="notification-box">
+                <!-- SVG START-->
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                     viewBox="0 0 295 344.5" class="custom_left_nav">
+                    <defs>
+                        <linearGradient id="linear-gradient" x1="0.5" y1="17.25" x2="124.23" y2="17.25"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#0071bc" stop-opacity="0.35"/>
+                            <stop offset="0.1" stop-color="#4590c1" stop-opacity="0.33"/>
+                            <stop offset="0.23" stop-color="#81abc6" stop-opacity="0.32"/>
+                            <stop offset="0.38" stop-color="#acbeca" stop-opacity="0.31"/>
+                            <stop offset="0.57" stop-color="#c5c9cb" stop-opacity="0.3"/>
+                            <stop offset="1" stop-color="#ccc" stop-opacity="0.3"/>
+                        </linearGradient>
+                        <linearGradient id="linear-gradient-2" y1="17.25" x2="124.23" y2="17.25"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#b3b3b3" stop-opacity="0.4"/>
+                            <stop offset="0.88" stop-color="#f2f2f2" stop-opacity="0.3"/>
+                        </linearGradient>
+                        <linearGradient id="linear-gradien" y1="17.25" x2="124.23" y2="17.25"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+                            <stop offset="0.88" stop-color="#000" stop-opacity="0.3"/>
+                        </linearGradient>
+                        <linearGradient id="linear-gradient-3" x1="244.55" y1="189" x2="294.5" y2="189"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#0071bc" stop-opacity="0.2"/>
+                            <stop offset="0.46" stop-color="#4182ad" stop-opacity="0.29"/>
+                            <stop offset="1" stop-color="#999" stop-opacity="0.4"/>
+                        </linearGradient>
+                        <linearGradient id="linear-gradient-4" x1="244.55" y1="189" x2="295" y2="189"
+                                        gradientUnits="userSpaceOnUse">
+                            <stop offset="0.12" stop-color="#e6e6e6" stop-opacity="0.3"/>
+                            <stop offset="0.52" stop-color="#939393" stop-opacity="0.4"/>
+                            <stop offset="1" stop-color="#f2f2f2" stop-opacity="0.5"/>
+                        </linearGradient>
+                        <linearGradient id="linear-gradient-5" x1="12" y1="189.5" x2="26" y2="189.5"
+                                        xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-6" x1="11.5" y1="189.5" x2="26.5" y2="189.5"
+                                        xlink:href="#linear-gradient-4"/>
+                        <linearGradient id="linear-gradient-7" x1="26" y1="190" x2="40" y2="190"
+                                        xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-8" x1="25.5" y1="190" x2="40.5" y2="190"
+                                        xlink:href="#linear-gradient-4"/>
+                        <linearGradient id="linear-gradient-9" x1="0.5" x2="266.5" xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-10" x1="0" x2="267" xlink:href="#linear-gradient-4"/>
+                        <linearGradient id="linear-gradient-11" x1="230.55" x2="280.5" xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-12" x1="230.55" x2="281" xlink:href="#linear-gradient-4"/>
+                        <linearGradient id="linear-gradient-13" x1="99.27" y1="17.25" x2="152.23" y2="17.25"
+                                        xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-14" x1="99.27" y1="17.25" x2="152.23" y2="17.25"
+                                        xlink:href="#linear-gradient-4"/>
+                        <linearGradient id="linear-gradient-15" x1="85.27" y1="17.25" x2="138.23" y2="17.25"
+                                        xlink:href="#linear-gradient-3"/>
+                        <linearGradient id="linear-gradient-16" x1="85.27" y1="17.25" x2="138.23" y2="17.25"
+                                        xlink:href="#linear-gradient-4"/>
+                    </defs>
+                    <title>
+                        left notification panel
+                    </title>
 
-                    </div>
-                </div>
+
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="SideBar">
+                            <path d="M124.23,34H.5V7.09A6.59,6.59,0,0,1,7.09.5H85.27a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,124.23,34Z"
+                                  style="opacity:.75;fill:url(#linear-gradient);stroke:url(#linear-gradient-2);stroke-miterlimit:10"/>
+                            <path d="M294.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L263.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,294.5,47Z"
+                                  style="fill:url(#linear-gradient-3);stroke:url(#linear-gradient-4);opacity:.4;stroke-miterlimit:10"/>
+                            <rect x="12" y="65" width="14" height="249"
+                                  style="fill:url(#linear-gradient-5);stroke:url(#linear-gradient-6);opacity:.6;stroke-miterlimit:10"/>
+                            <rect x="26" y="65.5" width="14" height="249"
+                                  style="fill:url(#linear-gradient-7);stroke:url(#linear-gradient-8);opacity:.4;stroke-miterlimit:10"/>
+                            <path d="M253.52,34H.5V337.41A6.59,6.59,0,0,0,7.09,344H230.55a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47A13,13,0,0,0,253.52,34Zm-21,240.27a6.58,6.58,0,0,1-1.93,4.66l-33.14,33.14a6.58,6.58,0,0,1-4.66,1.93H12V65H225.91a6.59,6.59,0,0,1,6.59,6.59Z"
+                                  style="opacity:.8;fill:url(#linear-gradient-9);stroke:url(#linear-gradient-10);stroke-miterlimit:10"/>
+                            <path d="M280.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L249.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,280.5,47Z"
+                                  style="fill:url(#linear-gradient-11);stroke:url(#linear-gradient-12);opacity:.6;stroke-miterlimit:10"/>
+                            <path d="M152.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L103.93,2.43A6.58,6.58,0,0,0,99.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,152.23,34Z"
+                                  style="fill:url(#linear-gradient-13);stroke:url(#linear-gradient-14);opacity:.4;stroke-miterlimit:10"/>
+                            <path d="M138.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L89.93,2.43A6.58,6.58,0,0,0,85.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,138.23,34Z"
+                                  style="fill:url(#linear-gradient-15);stroke:url(#linear-gradient-16);opacity:.6;stroke-miterlimit:10;"/>
+                        </g>
+
+
+                    </g>
+                    <g>
+                        <rect id="" style="fill:url(#fff)" x="41" y="65" width="192" height="215"/>
+                        <foreignobject x="45" y="70" width="190" height="250">
+
+                            <div id="notification_box" class="custom_notification_box text-white">
+
+                            </div>
+
+
+                        </foreignobject>
+                    </g>
+                </svg>
+                <!-- SVG END-->
+
+                <!-- <div class="custom_left_nav text-white">
+                     <div class="custom_notification_box">
+
+                     </div>
+                 </div>-->
                 <!-- end of bars -->
             </div>
         </div>
 
-        <div class="row mt-4  ">
+        <div class="row mr-1">
             <div class="col-lg-12 pt-3 pb-3">
                 <!-- first button left  -->
-                <div class="left_buttons m-2">
-                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="custom_left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  custom_left_buttons_wrapper">
                         <div class="  w-25 custom_center   h-100 ">
-                            <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>
+                            <img src="{% static 'images/fetch_icon.svg' %}" class="custom_left_buttons_icons"/>
                         </div>
 
                         <div class="  w-25 custom_center  h-100 ">
@@ -35,10 +197,10 @@
                 <!-- end first button left  -->
 
                 <!-- first button left  -->
-                <div class="left_buttons m-2">
-                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="custom_left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  custom_left_buttons_wrapper">
                         <div class="  w-25 custom_center  h-100 ">
-                            <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>
+                            <img src="{% static 'images/analyze_icon.svg' %}" class="custom_left_buttons_icons"/>
                         </div>
 
                         <div class="  w-25 custom_center  h-100 ">
@@ -50,10 +212,10 @@
                 <!-- end first button left  -->
 
                 <!-- first button left  -->
-                <div class="left_buttons m-2">
-                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="custom_left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  custom_left_buttons_wrapper">
                         <div class="  w-25 custom_center   h-100 ">
-                            <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>
+                            <img src="{% static 'images/search_icon.svg' %}" class="custom_left_buttons_icons"/>
                         </div>
 
                         <div class="  w-25 custom_center   h-100 ">
@@ -64,10 +226,10 @@
                 <!-- end first button left  -->
 
                 <!-- first button left  -->
-                <div class="left_buttons m-2">
-                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="custom_left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  custom_left_buttons_wrapper">
                         <div class="  w-25 custom_center  h-100 ">
-                            <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>
+                            <img src="{% static 'images/generate_icon.svg' %}" class="custom_left_buttons_icons"/>
                         </div>
 
                         <div class="  w-25 custom_center  h-100 ">
@@ -83,157 +245,396 @@
 
     <!-- end of left sidebar script -->
 {% endblock %}
+{#{% block leftsidebar %}#}
+{#    <div class="col-lg-2 col-sm-12 col-xs-12 ">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12 ">#}
+{#                <!-- start of bars -->#}
+{##}
+{#                <div class="left_nav text-white">#}
+{#                    <div class="" id="notification-box">#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- end of bars -->#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mt-4  ">#}
+{#            <div class="col-lg-12 pt-3 pb-3">#}
+{#                <!-- first button left  -->#}
+{#                <div class="left_buttons m-2">#}
+{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
+{#                        <div class="  w-25 custom_center   h-100 ">#}
+{#                            <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>#}
+{#                        </div>#}
+{##}
+{#                        <div class="  w-25 custom_center  h-100 ">#}
+{#                            <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "#}
+{#                               style="font-size:1vw;">Targets</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- end first button left  -->#}
+{##}
+{#                <!-- first button left  -->#}
+{#                <div class="left_buttons m-2">#}
+{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
+{#                        <div class="  w-25 custom_center  h-100 ">#}
+{#                            <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>#}
+{#                        </div>#}
+{##}
+{#                        <div class="  w-25 custom_center  h-100 ">#}
+{#                            <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "#}
+{#                               style="font-size:1vw;">Timeline</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- end first button left  -->#}
+{##}
+{#                <!-- first button left  -->#}
+{#                <div class="left_buttons m-2">#}
+{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
+{#                        <div class="  w-25 custom_center   h-100 ">#}
+{#                            <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>#}
+{#                        </div>#}
+{##}
+{#                        <div class="  w-25 custom_center   h-100 ">#}
+{#                            <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- end first button left  -->#}
+{##}
+{#                <!-- first button left  -->#}
+{#                <div class="left_buttons m-2">#}
+{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
+{#                        <div class="  w-25 custom_center  h-100 ">#}
+{#                            <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>#}
+{#                        </div>#}
+{##}
+{#                        <div class="  w-25 custom_center  h-100 ">#}
+{#                            <a href="{% url 'OSINT_System_Core:topNews' %}" class=" secondnavitems ">Top News</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- end first button left  -->#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- left sidebar script -->#}
+{##}
+{#    <!-- end of left sidebar script -->#}
+{#{% endblock %}#}
 <!-- end left sidebar -->
 {% block belly %} {% endblock %}
 <!-- right sidebar -->
+{#{% block rightsidebar %}#}
+{#    <div class="col-lg-2 custom_div_3 ">#}
+{#        <!-- row 1 start -->#}
+{#        <div class="row ">#}
+{#            <div class="col-lg-12 w-100">#}
+{#                <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">#}
+{#                    <input class="form-control input_rightside" placeholder="Enter Name Here"/>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- row 1 end -->#}
+{##}
+{#        <!-- start row 2 -->#}
+{#        <div class="row ">#}
+{#            <div class="col-lg-12 w-100 ">#}
+{#                <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">#}
+{#                    <div class="text-white  target_mark_text">#}
+{#                        <div class="h-100 w-100 text-white w-100 h-100 p-1  text-center "#}
+{#                             style="font-size:10px;overflow:hidden">#}
+{#                            <p clas class="font-weight-bold m-0 p-0 ">Logged-User</p>#}
+{#                            <a class="badge mt-1 text-white" href="/core/tsodash" target="_blank"#}
+{#                               style="font-size:12px"><i class="fas fa-user text-white mr-1"#}
+{#                                                         style="color: #1F79B4 !important;"></i>{{ request.user.username }}#}
+{#                            </a>#}
+{#                            <a href="/accounts/logout/" class="badge mt-1 text-white" style="font-size:12px"><i#}
+{#                                    class="fas fa-sign-out-alt text-white mr-1" style="color: #1F79B4 !important;"></i>Logout</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="  ml-2  target_mark_icon">#}
+{#                        <img src="{% static 'images/target_mark.svg' %}" height="60" width="60"/>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- start row 3 -->#}
+{#        <div class="row mt-2">#}
+{#            <div class="col-lg-12 ">#}
+{#                <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">#}
+{#                    <div class="text-white   right_globe_icon ">#}
+{#                        <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">#}
+{#                            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40"/>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class=" text-white  globe_icon_text_wrapper">#}
+{#                        <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">#}
+{#                            No object selected#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- end row 3 -->#}
+{##}
+{#        <!-- start row 4 -->#}
+{#        <div class="row mt-2">#}
+{#            <div class="col-lg-12 ">#}
+{#                <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">#}
+{#                    <!-- <div class="progress ">#}
+{#                      <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"#}
+{#                        aria-valuemin="0" aria-valuemax="100">#}
+{#                        60% Complete (warning)#}
+{#                      </div>#}
+{#                    </div> -->#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- start of row 5 -->#}
+{#        <div class="row  m-0 p-0  mt-1">#}
+{#            <div class="col-lg-12  m-0 p-0 custom_center alert_1">#}
+{#                <div class="alert_1_wrapper m-0 p-0 ">#}
+{#                    <div class="text-danger font-weight-bold    alert_1_text_header ">#}
+{#                        Alerts:#}
+{#                        <div class="text-white  alert_1_text_wrapper  " id="alert-box" style="overflow-y:auto;">#}
+{#                            new_alert#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- end row 5 -->#}
+{##}
+{#        <!-- start of row 5 -->#}
+{#        <div class="row " style="margin-top:-5px;">#}
+{#            <div class="col-lg-12  m-0 p-0 alert_2">#}
+{#                <div class=" alert_2_wrapper h-100  ml-auto mr-auto">#}
+{#                    <div class="text-danger font-weight-bold  alert_2_text_header  ">#}
+{#                        <span class="alert-2_text"> Tools:</span>#}
+{#                        <div class="text-white  alert_2_text_wrapper  p-1" id="prev-alert">#}
+{#                            <div class="">#}
+{#                                <p class="mt-0"><a href="{% url 'Keybase_Management_System:block_url' %}"#}
+{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>Blocked URLs</a></p>#}
+{#                                <p class="mt-0"><a href="/core/periodic_target" target="_blank"#}
+{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>Periodic_Target</a></p>#}
+{#                                <p class="mt-0"><a href="/core/newsmonitoring" target="_blank"#}
+{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>News</a></p>#}
+{#                                <p class="mt-0"><a href="{% url 'OSINT_System_Core:logged_ips' %}" target="_blank"#}
+{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>Ip Logger</a></p>#}
+{#                                <p class="mt-0"><a href="{% url 'Target_Management_System:bulk_targets' %}"#}
+{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>Bulk Targets</a></p>#}
+{##}
+{#                                <p class="mt-0"><a href="{% url 'Data_Processing_Unit:response_changes_view' %}"#}
+{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
+{#                                        class="fas fa-hand-pointer text-white mr-1"#}
+{#                                        style="color: #1F79B4 !important;"></i>Detected Changed</a></p>#}
+{##}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <!-- end row 5 -->#}
+{##}
+{#    <!-- start of rigt sidebar script -->#}
+{##}
+{#    <script>#}
+{#        /*#}
+{#        // jquery ready function#}
+{#        document.addEventListener("DOMContentLoaded", function () {#}
+{#          let rightRES = new ReconnectingEventSource("/events/");#}
+{#          rightRES.addEventListener("alert", event => {#}
+{#            const alert_data = JSON.parse(event.data);#}
+{#            console.log(alert_data);#}
+{#            const alert1 = $('#new-alert')#}
+{#            const alert2 = $('#prev-alert')#}
+{#            alert1.text(alert_data['new'])#}
+{#            alert2.text(alert_data['prev1'])#}
+{#          });#}
+{#        }); // end of jquery ready#}
+{#         */#}
+{##}
+{#    </script>#}
+{##}
+{#    <!-- end of right sidebar script -->#}
+{#{% endblock %}#}
 {% block rightsidebar %}
-    <div class="col-lg-2 custom_div_3 ">
-        <!-- row 1 start -->
-        <div class="row ">
-            <div class="col-lg-12 w-100">
-                <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">
-                    <input class="form-control input_rightside" placeholder="Enter Name Here"/>
+    <style>
+        .custom_custom_div_3 {
+            background-image: url("{% static "/images/right_side_bar.svg" %}") !important;
+            background-repeat: no-repeat;
+            width: 100% !important;
+        }
+
+        .custom_input_wrapper {
+            height: 15px;
+            padding: 14% 1% 14% 1%;
+        }
+
+        .custom_input_rightside {
+            width: 89%;
+            margin: 0px 17px 0px 0px;
+            background-color: transparent !important;
+            border: 0px !important;
+            border-radius: 10px 10px 10px 10px !important;
+            color: white !important;
+        }
+
+        .custom_target_mark_parent {
+        {#height: 150px;#} padding: 20% 20% 20% 0%;
+        }
+
+
+        .custom_target_mark_text {
+        {#height: 49px;#}{#width: 70px;#}{#margin-left: 24px;#}{#border-radius: 1px;#}{#border: 1px solid white;#}
+        }
+
+        .custom_target_mark_icon {
+        {#height: 60px;#}{#width: 60px;#}
+        }
+
+        .right_bar_svg_background {
+            background-image: url({% static "/images/sidebars/Asset1box.svg" %});
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding-bottom: 20px;
+            width: 100% !important;
+            border-radius: 20px !important;
+        }
+
+        .enter_name_background {
+            background-image: url({% static "/images/sidebars/Asset11enternamebox.svg" %});
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100% !important;
+            font-size: 13.86px !important;
+        }
+
+        .most_recent_background {
+            background-image: url({% static "images/sidebars/Asset 12most recent box.svg" %});
+            background-repeat: no-repeat;
+            width: 80px !important;
+            background-size: cover;
+            height: 80px !important;
+        }
+
+        .update_box_background {
+            background-image: url({% static "images/sidebars/Asset 13update box.svg" %});
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .alert_1_text_wrapper {
+            height: 150px;
+        }
+    </style>
+    <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 mt-3">
+        <div class="right_bar_svg_background ml-1">
+            <div class="d-flex flex-row justify-content-lg-start align-items-center">
+                <input class="form-control border-0 m-3 bg-transparent enter_name_background"
+                       placeholder="enter name here"/>
+            </div>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <div style="width: 80px; height: 80px;">
+                    <div class=" most_recent_background text-white w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+                         style="font-size:10px;overflow:hidden">
+                        <p clas class="font-weight-bold m-0 p-0 ">Logged-User</p>
+                        <a class="badge text-white" href="/core/tsodash" target="_blank"
+                           style="font-size:12px"><i class="fas fa-user text-white mr-1"
+                                                     style="color: #1F79B4 !important;"></i>{{ request.user.username }}
+                        </a>
+                        <a href="/accounts/logout/" class="badge text-white" style="font-size:12px"><i
+                                class="fas fa-sign-out-alt text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Logout</a>
+                    </div>
+                </div>
+                <div>
+                    <img src="{% static 'images/sidebars/Asset 9aim icon.svg' %}" height="80" width="80"/>
+                </div>
+
+            </div>
+            <div class="d-flex flex-row justify-content-start align-items-center update_box_background mr-3 mt-3">
+                <div>
+                    <img src="{% static 'images/sidebars/Asset 9world icon.svg' %}" class="ml-4" height="50"
+                         width="50"/>
+                </div>
+                <div style="height: 80px;">
+                    <div class="h-100 w-100 ml-1 text-white w-100 h-100  p-2 globe_icon_text">
+                        No object selected
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- row 1 end -->
 
-        <!-- start row 2 -->
-        <div class="row ">
-            <div class="col-lg-12 w-100 ">
-                <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">
-                    <div class="text-white  target_mark_text">
-                        <div class="h-100 w-100 text-white w-100 h-100 p-1  text-center "
-                             style="font-size:10px;overflow:hidden">
-                            <p clas class="font-weight-bold m-0 p-0 ">Logged-User</p>
-                            <a class="badge mt-1 text-white" href="/core/tsodash" target="_blank"
-                               style="font-size:12px"><i class="fas fa-user text-white mr-1"
-                                                         style="color: #1F79B4 !important;"></i>{{ request.user.username }}
-                            </a>
-                            <a href="/accounts/logout/" class="badge mt-1 text-white" style="font-size:12px"><i
-                                    class="fas fa-sign-out-alt text-white mr-1" style="color: #1F79B4 !important;"></i>Logout</a>
-                        </div>
-                    </div>
-                    <div class="  ml-2  target_mark_icon">
-                        <img src="{% static 'images/target_mark.svg' %}" height="60" width="60"/>
-                    </div>
+        <div class="right_bar_svg_background ml-1 mt-2 ">
+            <div class="d-flex flex-column justify-content-start align-items-start p-2">
+                <div class="d-flex flex-row justify-content-center align-items-center mt-1">
+                    <img src="{% static 'images/sidebars/Asset 10alert icon.svg' %}" class="ml-4" height="25"
+                         width="25"/>
+                    <span class="text-white ml-2">ALERT!</span>
+                </div>
+                <div class="text-white  alert_1_text_wrapper  mt-3" id="alert-box" style="overflow-y:auto;">
+                    new_alert
                 </div>
             </div>
-        </div>
-
-        <!-- start row 3 -->
-        <div class="row mt-2">
-            <div class="col-lg-12 ">
-                <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">
-                    <div class="text-white   right_globe_icon ">
-                        <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">
-                            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40"/>
-                        </div>
-                    </div>
-                    <div class=" text-white  globe_icon_text_wrapper">
-                        <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">
-                            No object selected
-                        </div>
-                    </div>
+            <div class="d-flex flex-column justify-content-start align-items-start p-2">
+                <div class="d-flex flex-row justify-content-center align-items-center mt-1">
+                    <span class="text-white ml-4">TOOLS!</span>
                 </div>
-            </div>
-        </div>
-        <!-- end row 3 -->
+                <div class="text-white  alert_2_text_wrapper  p-1" id="prev-alert">
+                    <div class="">
+                        <p class="mt-0"><a href="{% url 'Keybase_Management_System:block_url' %}"
+                                           target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Blocked URLs</a></p>
+                        <p class="mt-0"><a href="/core/periodic_target" target="_blank"
+                                           class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Periodic_Target</a></p>
+                        <p class="mt-0"><a href="/core/newsmonitoring" target="_blank"
+                                           class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>News</a></p>
+                        <p class="mt-0"><a href="{% url 'OSINT_System_Core:logged_ips' %}" target="_blank"
+                                           class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Ip Logger</a></p>
+                        <p class="mt-0"><a href="{% url 'Target_Management_System:bulk_targets' %}"
+                                           target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Bulk Targets</a></p>
 
-        <!-- start row 4 -->
-        <div class="row mt-2">
-            <div class="col-lg-12 ">
-                <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">
-                    <!-- <div class="progress ">
-                      <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"
-                        aria-valuemin="0" aria-valuemax="100">
-                        60% Complete (warning)
-                      </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-        <!-- start of row 5 -->
-        <div class="row  m-0 p-0  mt-1">
-            <div class="col-lg-12  m-0 p-0 custom_center alert_1">
-                <div class="alert_1_wrapper m-0 p-0 ">
-                    <div class="text-danger font-weight-bold    alert_1_text_header ">
-                        Alerts:
-                        <div class="text-white  alert_1_text_wrapper  " id="alert-box" style="overflow-y:auto;">
-                            new_alert
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- end row 5 -->
-
-        <!-- start of row 5 -->
-        <div class="row " style="margin-top:-5px;">
-            <div class="col-lg-12  m-0 p-0 alert_2">
-                <div class=" alert_2_wrapper h-100  ml-auto mr-auto">
-                    <div class="text-danger font-weight-bold  alert_2_text_header  ">
-                        <span class="alert-2_text"> Tools:</span>
-                        <div class="text-white  alert_2_text_wrapper  p-1" id="prev-alert">
-                            <div class="">
-                                <p class="mt-0"><a href="{% url 'Keybase_Management_System:block_url' %}"
-                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>Blocked URLs</a></p>
-                                <p class="mt-0"><a href="/core/periodic_target" target="_blank"
-                                                   class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>Periodic_Target</a></p>
-                                <p class="mt-0"><a href="/core/newsmonitoring" target="_blank"
-                                                   class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>News</a></p>
-                                <p class="mt-0"><a href="{% url 'OSINT_System_Core:logged_ips' %}" target="_blank"
-                                                   class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>Ip Logger</a></p>
-                                <p class="mt-0"><a href="{% url 'Target_Management_System:bulk_targets' %}"
-                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>Bulk Targets</a></p>
-
-                                <p class="mt-0"><a href="{% url 'Data_Processing_Unit:response_changes_view' %}"
-                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
-                                        class="fas fa-hand-pointer text-white mr-1"
-                                        style="color: #1F79B4 !important;"></i>Detected Changed</a></p>
+                        <p class="mt-0"><a href="{% url 'Data_Processing_Unit:response_changes_view' %}"
+                                           target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                class="fas fa-hand-pointer text-white mr-1"
+                                style="color: #1F79B4 !important;"></i>Detected Changed</a></p>
 
 
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- end row 5 -->
-
-    <!-- start of rigt sidebar script -->
-
-    <script>
-        /*
-        // jquery ready function
-        document.addEventListener("DOMContentLoaded", function () {
-          let rightRES = new ReconnectingEventSource("/events/");
-          rightRES.addEventListener("alert", event => {
-            const alert_data = JSON.parse(event.data);
-            console.log(alert_data);
-            const alert1 = $('#new-alert')
-            const alert2 = $('#prev-alert')
-            alert1.text(alert_data['new'])
-            alert2.text(alert_data['prev1'])
-          });
-        }); // end of jquery ready
-         */
-
-    </script>
-
-    <!-- end of right sidebar script -->
 {% endblock %}
 <!-- end right sidebar -->
