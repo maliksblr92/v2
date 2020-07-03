@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/tso_base.html' %}
+{% extends 'OSINT_System_Core/resp_test.html' %}
 {% load static %}
 {% block page_title %}Periodic Targets{% endblock %}
 {% block head_dep %}
@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 {% endblock %}
-
 {% block smallnavbar %}
     <div class="row">
         <div class="col-md-2"></div>
@@ -34,6 +33,9 @@
         </div>
         <div class="col-md-2"></div>
     </div>
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">PERIOD TARGETS</p>
 {% endblock %}
 {% block belly %}
     <style>
@@ -107,14 +109,9 @@
             }
         }
     </style>
-    <div class="row middlecontentdiv">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-            <h4 class="topheading">Periodic Targets</h4>
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-            <table class="table table-responsive text-white" id="periodic_targets" class="display" style="width:100%">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table table-responsive" id="periodic_targets" class="display" style="width:100%">
                 <thead>
                 <tr>
 
