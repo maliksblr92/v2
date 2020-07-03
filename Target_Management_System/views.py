@@ -369,7 +369,7 @@ class Keybase_Crawling(RequireLoginMixin, IsTSO, View):
             acq.add_target(website_id,target_type,None,title=title,keybase_ref=keybase_ref,expired_on=expire_on,periodic_interval=interval,social_sites=social_sites)
             print("###################################")
             print(social_sites)
-            return HttpResponseRedirect(reverse('Target_Management_System:tms_targetscreated'))
+            return HttpResponseRedirect(reverse('Target_Management_System:tms_keybase_crawling'))
         except Exception as e:
             print(e)
             publish(str(e),module_name=__name__,message_type='error')

@@ -559,21 +559,21 @@ class Ess_Api_Controller(object):
             print(e)
         return {'response': 'ess replied null'}
 
-    def add_keybase_target(self,keywords,GTR,CTR):
+    def add_keybase_target(self,keywords,social_sites,GTR,CTR):
 
         try:
 
             if (self.ess_is_conneted()):
                 add_target_url = 'keybase/'
 
-                payload = {'keywords':keywords,'GTR':str(GTR),'CTR':str(CTR)}
+                payload = {'keywords':keywords,'GTR':str(GTR),'CTR':str(CTR),'social_sites':social_sites}
                 print(type(keywords),keywords)
                 print(payload)
                 Header = {'Content-Type': 'application/json',
                           'Authorization': 'Token {0}'.format(ESS_API_TOKEN)}
                 import json
                 payload_json = json.dumps(payload)
-                response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload)
+                response = requests.post(ESS_SERVER_BASE_URL+add_target_url,headers=Header,json=payload_json)
                 print(response.json())
                 return response.json()
 

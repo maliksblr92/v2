@@ -134,10 +134,10 @@ class Acquistion_Manager(object):
             if(gtr.target_type == 'keybase_crawling'):
                 keybase = appropriate_class.objects(GTR=gtr.id)[0]
                 keywords = keybase.keybase_ref.keywords + keybase.keybase_ref.mentions+keybase.keybase_ref.phrases+keybase.keybase_ref.hashtags
-
+                social_sites = keybase.social_sites
                 print('..............................adding keybase target ................................')
-                print(keywords)
-                response = appropriate_ess_method(keywords,gtr.id,ctr)
+                print(social_sites)
+                response = appropriate_ess_method(keywords,social_sites,gtr.id,ctr)
                 if(response is not None):
                     print(response)
                     publish(' '+keybase.keybase_ref.title+' target added successfully', message_type='notification', module_name=__name__)
