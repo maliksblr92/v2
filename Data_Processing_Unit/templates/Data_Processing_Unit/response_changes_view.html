@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/tso_base.html' %}
+{% extends 'OSINT_System_Core/resp_test.html' %}
 {% load static %}
 {% block page_title %}Detected Changes{% endblock %}
 {% block head_dep %}
@@ -11,6 +11,9 @@
 
     <div class="col-md-2"></div>
     </div>
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">DETECTED CHANGES</p>
 {% endblock %}
 {% block belly %}
     <style>
@@ -84,14 +87,9 @@
             }
         }
     </style>
-    <div class="row middlecontentdiv">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-            <h4 class="topheading">Detected Changes</h4>
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-            <table class="table table-responsive text-white" id="response_changes_view" class="display"
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table table-responsive" id="response_changes_view" class="display"
                    style="width:100%">
                 <thead>
                 <tr>
