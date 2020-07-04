@@ -212,7 +212,16 @@ class Keybase_Fetched_Responses(View):
         GTR_id=kwargs['GTR_id']
         resp=acq.get_data_response_object_by_gtr_id(GTR_id)
         target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
-        print(resp,target_object)
+        search_engines={
+            'query':resp.data[0]['query'],
+            'site':resp.data[0]['site'],
+            'data':resp.data[0]['data'],
+        }
+
+        print("++++++++++++++++++++++++++++++")
+        print(search_engines)
+        print("++++++++++++++++++++++++++++++")
+     
         # return HttpResponse('<div>asdas</div>')
         return render(request,'Keybase_Management_System/Keybase_Fetched_Responses.html',{'resp':resp,'target_object':target_object})
     
