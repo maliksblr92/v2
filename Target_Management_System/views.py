@@ -865,3 +865,14 @@ def username_exists(username,n_data):
 
 
 
+class Graph(View):
+    def get(self,request,*args,**kwargs):
+        
+         object_gtr_id = kwargs['object_gtr_id']
+         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
+         print(data_object.to_mongo())
+
+         with open('static/Target_Json/facebook_group_data.json', 'r') as f:
+            profile = json.load(f)
+         return render(request,'Target_Management_System/graph2.html',{'profile':data_object})
+       
