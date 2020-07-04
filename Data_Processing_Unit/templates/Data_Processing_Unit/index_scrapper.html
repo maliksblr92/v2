@@ -1,354 +1,335 @@
 {% extends 'OSINT_System_Core/resp_test.html' %}
 {% load static %}
 {% block head_dep %}
-<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
-<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-<style>
-   select {
-   color: white !important;
-   }
-   #submit {
-   background: rgb(24, 72, 116);
-   background: linear-gradient(
-   93deg,
-   rgba(24, 72, 116, 1) 0%,
-   rgba(6, 17, 26, 1) 100%
-   );
-   color: #fff;
-   }
-   .text_12 {
-   font-size: 12px !important;
-   }
-   .text_10 {
-   font-size: 10px !important;
-   }
-   .text_14 {
-   font-size: 14px !important;
-   }
-</style>
-<!--  -->
-<div class="row">
-   <div class="col-md-2"></div>
-   <div class="col-md-8 d-flex" style="">
-      <div class="col-md-1">
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
-         <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">IDENTITY GENERATOR</a>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-         <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border">
-         <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-         <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
-         PROCESSING</a>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-         <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-         <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
-      </div>
-   </div>
-   <div class="col-md-2"></div>
-</div>
+    <style>
+        select {
+            color: white !important;
+        }
+
+        #submit {
+            background: rgb(24, 72, 116);
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            color: #fff;
+        }
+
+        .text_12 {
+            font-size: 12px !important;
+        }
+
+        .text_10 {
+            font-size: 10px !important;
+        }
+
+        .text_14 {
+            font-size: 14px !important;
+        }
+    </style>
+    <!--  -->
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+                <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">IDENTITY GENERATOR</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border">
+                <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
+                    PROCESSING</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 {% endblock %}
 {% block belly_header %}
-<p class="text-uppercase custom_card_title ">DATA SCRAPPERS</p>
+    <p class="text-uppercase custom_card_title ">DATA SCRAPPERS</p>
 {% endblock %}
 {% block belly %}
-<style>
-   select {
-   color: white !important;
-   }
-   #submit {
-   background: linear-gradient(
-   93deg,
-   rgba(24, 72, 116, 1) 0%,
-   rgba(6, 17, 26, 1) 100%
-   );
-   }
-   .custom_pills {
-   background: linear-gradient(
-   93deg,
-   rgba(24, 72, 116, 1) 0%,
-   rgba(6, 17, 26, 1) 100%
-   );
-   text-align: center;
-   }
-   .custom_pills a {
-   text-decoration: none;;
-   font-weight: bolder;
-   font-size: 12px;;
-   }
-   .rotate {
-   transform: rotate(-90deg);
-   }
-   .custom_heading {
-   width: 150px !important;
-   border-radius: 5px;
-   height: 30px;
-   margin: 10px;
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-   background: #012847 !important;
-   font-weight: bold;
-   }
-   .custom_para {
-   align-items: center;
-   justify-content: start;
-   display: flex;
-   }
-</style>
-<div class="row">
-   <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
-      <ul class="nav nav-pills row flex-row align-items-center justify-content-center">
-         <!-- <li class="custom_pills  col-md-3 m-0 p-0">
-            <a class="btn w-100 text-white "data-toggle="tab" href="#emarket_form">
-              E-MARKET SCRAPPER
-            </a>
-            </li>
-            <li class="custom_pills col-md-3 m-0 p-0">
-              <a class="btn w-100 text-white "data-toggle="tab" href="#daraz_form">
-                DARAZ DATA SCRAPPER
-              </a>
-              </li> -->
-         <li class="custom_pills active col-md-6 m-0 p-0">
-            <a class="btn w-100 text-white " data-toggle="tab" href="#scholor_form">
-            GOOGLE SCHOLAR 
-            </a>
-         </li>
-         <li class="custom_pills col-md-6 m-0 p-0">
-            <a class="btn w-100 text-white " data-toggle="tab" href="#patent_form">
-            GOOGLE PATENT
-            </a>
-         </li>
-      </ul>
-      <div class="row">
-         <div class="col-md-12">
-            <div class="tab-content" >
-               <div id="scholor_form" class="tab-pane fade in active show  ">
-                  <div class="card-body m-4 main_card border-0">
-                     <form name="google_scholar" id="google_scholar"
-                        action="/dpu/index_scrapper/" method="POST">
-                        {% csrf_token %}
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-2"></div>
-                           <div class="col-md-9">
-                              <!-- inputfield 2 -->
-                              <div class="row input-group mt-4 mb-3">
-                                 <div class="col-md-3 p-0 input-group-prepend">
+    <style>
+        select {
+            color: white !important;
+        }
+
+        #submit {
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+        }
+
+        .custom_pills {
+            background: linear-gradient(
+                    93deg,
+                    rgba(24, 72, 116, 1) 0%,
+                    rgba(6, 17, 26, 1) 100%
+            );
+            text-align: center;
+        }
+
+        .custom_pills a {
+            text-decoration: none;;
+            font-weight: bolder;
+            font-size: 12px;;
+        }
+
+        .rotate {
+            transform: rotate(-90deg);
+        }
+
+        .custom_heading {
+            width: 150px !important;
+            border-radius: 5px;
+            height: 30px;
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: #012847 !important;
+            font-weight: bold;
+        }
+
+        .custom_para {
+            align-items: center;
+            justify-content: start;
+            display: flex;
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
+            <ul class="nav nav-pills row flex-row align-items-center justify-content-center">
+                <!-- <li class="custom_pills  col-md-3 m-0 p-0">
+                   <a class="btn w-100 text-white "data-toggle="tab" href="#emarket_form">
+                     E-MARKET SCRAPPER
+                   </a>
+                   </li>
+                   <li class="custom_pills col-md-3 m-0 p-0">
+                     <a class="btn w-100 text-white "data-toggle="tab" href="#daraz_form">
+                       DARAZ DATA SCRAPPER
+                     </a>
+                     </li> -->
+                <li class="custom_pills active col-md-6 m-0 p-0">
+                    <a class="btn w-100 text-white " data-toggle="tab" href="#scholor_form">
+                        GOOGLE SCHOLAR
+                    </a>
+                </li>
+                <li class="custom_pills col-md-6 m-0 p-0">
+                    <a class="btn w-100 text-white " data-toggle="tab" href="#patent_form">
+                        GOOGLE PATENT
+                    </a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab-content">
+                        <div id="scholor_form" class="tab-pane fade in active show  ">
+                            <div class="card-body m-4 main_card border-0">
+                                <form name="google_scholar" id="google_scholar"
+                                      action="/dpu/index_scrapper/" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-9">
+                                            <!-- inputfield 2 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
                                     <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                        opacity:0.9; padding:7px 9px 0 10px;">Query
                                     </span>
-                                 </div>
-                                 <input type="text"
-                                    class="col-md-9 form-control custom_input_field"
-                                    id="query"
-                                    name="query" required="required">
-                              </div>
-                              <!--   <div class="row">
-                                 <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                     <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                             class="input_text">Query </span>
-                                         <input type="text"
-                                                class="col-md-9 form-control custom_input_field"
-                                                id="query"
-                                                name="query" required="required">
-                                     </label>
-                                 </div>
-                                 </div> -->
-                              <input type="hidden" name="form_name"
-                                 value="google_scholar"
-                                 id="form_name"/>
-                           </div>
-                           <div class="col-md-1 ">
-                           </div>
+                                                </div>
+                                                <input type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       id="query"
+                                                       name="query" required="required">
+                                            </div>
+                                            <input type="hidden" name="form_name"
+                                                   value="google_scholar"
+                                                   id="form_name"/>
+                                        </div>
+                                        <div class="col-md-1 ">
+                                        </div>
+                                    </div>
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                   value="submit"
+                                                   name="submit" id="submit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-6"></div>
-                           <div class="col-md-4"></div>
-                           <div class="col-md-2">
-                              <input type="submit"
-                                 class="btn border font-weight-bold btn-sm w-100  text-white"
-                                 value="submit"
-                                 name="submit" id="submit">
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-               <div id="emarket_form" class="tab-pane ">
-                  <div class="card-body m-4 main_card border-0">
-                     <form name="e_market_scrapper_form" id="e_market_scrapper_form"
-                        action="/dpu/index_scrapper/" method="POST">
-                        {% csrf_token %}
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-2"></div>
-                           <div class="col-md-9">
-                              <!-- inputfield 2 -->
-                              <div class="row input-group mt-4 mb-3">
-                                 <div class="col-md-3 p-0 input-group-prepend">
+                        <div id="emarket_form" class="tab-pane ">
+                            <div class="card-body m-4 main_card border-0">
+                                <form name="e_market_scrapper_form" id="e_market_scrapper_form"
+                                      action="/dpu/index_scrapper/" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-9">
+                                            <!-- inputfield 2 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
                                     <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                        opacity:0.9; padding:7px 9px 0 10px;">Query
                                     </span>
-                                 </div>
-                                 <input type="text"
-                                    class="col-md-9 form-control custom_input_field"
-                                    id="query"
-                                    name="query" required="required">
-                              </div>
-                              <!--   <div class="row">
-                                 <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                     <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                             class="input_text">Query </span>
-                                         <input type="text"
-                                                class="col-md-9 form-control custom_input_field"
-                                                id="query"
-                                                name="query" required="required">
-                                     </label>
-                                 </div>
-                                 </div> -->
-                              <input type="hidden" name="form_name"
-                                 value="e_market_scrapper_form"
-                                 id="form_name"/>
-                           </div>
-                           <div class="col-md-1 ">
-                           </div>
+                                                </div>
+                                                <input type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       id="query"
+                                                       name="query" required="required">
+                                            </div>
+                                            <input type="hidden" name="form_name"
+                                                   value="e_market_scrapper_form"
+                                                   id="form_name"/>
+                                        </div>
+                                        <div class="col-md-1 ">
+                                        </div>
+                                    </div>
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                   value="submit"
+                                                   name="submit" id="submit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-6"></div>
-                           <div class="col-md-4"></div>
-                           <div class="col-md-2">
-                              <input type="submit"
-                                 class="btn border font-weight-bold btn-sm w-100  text-white"
-                                 value="submit"
-                                 name="submit" id="submit">
-                           </div>
+                        <div id="daraz_form" class="tab-pane ">
+                            <div class="card-body m-4 main_card border-0">
+                                <form name="daraz_data_scrapper_form"
+                                      id="daraz_data_scrapper_form"
+                                      action="/dpu/index_scrapper/" method="POST">
+                                    {% csrf_token %}
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-12  form-group form-inline w-100 h-100 b">
+                                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
+                                                            class="input_text">Query </span>
+                                                        <input type="text"
+                                                               class=" ml-2 form-control form-control-sm form_input w-100"
+                                                               id="query"
+                                                               name="query" required="required">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="form_name"
+                                                   value="daraz_data_scrapper_form"
+                                                   id="form_name"/>
+                                        </div>
+                                        <div class="col-md-1 ">
+                                        </div>
+                                    </div>
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                   value="submit"
+                                                   name="submit" id="submit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                  </div>
-                  </form>
-               </div>
-               <div id="daraz_form" class="tab-pane ">
-                  <div class="card-body m-4 main_card border-0">
-                     <form name="daraz_data_scrapper_form"
-                        id="daraz_data_scrapper_form"
-                        action="/dpu/index_scrapper/" method="POST">
-                        {% csrf_token %}
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-2"></div>
-                           <div class="col-md-9">
-                              <div class="row">
-                                 <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                    <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                       class="input_text">Query </span>
-                                    <input type="text"
-                                       class=" ml-2 form-control form-control-sm form_input w-100"
-                                       id="query"
-                                       name="query" required="required">
-                                    </label>
-                                 </div>
-                              </div>
-                              <input type="hidden" name="form_name"
-                                 value="daraz_data_scrapper_form"
-                                 id="form_name"/>
-                           </div>
-                           <div class="col-md-1 ">
-                           </div>
-                        </div>
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-6"></div>
-                           <div class="col-md-4"></div>
-                           <div class="col-md-2">
-                              <input type="submit"
-                                 class="btn border font-weight-bold btn-sm w-100  text-white"
-                                 value="submit"
-                                 name="submit" id="submit">
-                           </div>
-                        </div>
-                  </div>
-                  </form>
-               </div>
-               <div id="patent_form" class="tab-pane  ">
-                  <div class="card-body m-4 main_card border-0">
-                     <form name="google_patent" id="google_patent"
-                        action="/dpu/index_scrapper/"
-                        method="POST">
-                        {% csrf_token %}
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-2"></div>
-                           <div class="col-md-9">
-                              <!-- inputfield 2 -->
-                              <div class="row input-group mt-4 mb-3">
-                                 <div class="col-md-3 p-0 input-group-prepend">
+                        <div id="patent_form" class="tab-pane  ">
+                            <div class="card-body m-4 main_card border-0">
+                                <form name="google_patent" id="google_patent"
+                                      action="/dpu/index_scrapper/"
+                                      method="POST">
+                                    {% csrf_token %}
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-9">
+                                            <!-- inputfield 2 -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
                                     <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                        opacity:0.9; padding:7px 9px 0 10px;">Query
                                     </span>
-                                 </div>
-                                 <input type="text"
-                                    class="col-md-9 form-control custom_input_field"
-                                    id="query"
-                                    name="query" required="required">
-                              </div>
-                              <!--    <div class="row">
-                                 <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                     <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                             class="input_text">Query </span>
-                                         <input type="text"
-                                                class="col-md-9 form-control custom_input_field"
-                                                id="query"
-                                                name="query" required="required">
-                                     </label>
-                                 </div>
-                                 </div> -->
-                              <input type="hidden" name="form_name"
-                                 value="google_patent"
-                                 id="form_name"/>
-                           </div>
-                           <div class="col-md-1 ">
-                           </div>
+                                                </div>
+                                                <input type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       id="query"
+                                                       name="query" required="required">
+                                            </div>
+                                            <input type="hidden" name="form_name"
+                                                   value="google_patent"
+                                                   id="form_name"/>
+                                        </div>
+                                        <div class="col-md-1 ">
+                                        </div>
+                                    </div>
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                                   value="submit"
+                                                   name="submit" id="submit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="row input_wrapper_row">
-                           <div class="col-md-6"></div>
-                           <div class="col-md-4"></div>
-                           <div class="col-md-2">
-                              <input type="submit"
-                                 class="btn border font-weight-bold btn-sm w-100  text-white"
-                                 value="submit"
-                                 name="submit" id="submit">
-                           </div>
-                        </div>
-                  </div>
-                  </form>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
-</div>
-{% if google_scholar_resposne %}
-<div class="row">
-   <div class="col-md-12  ">
-      {% for i in google_scholar_resposne.data %}
-      <div class="col-md-12">
-         <!-- inside CaRD DIV-->
-         <div class="row mt-2 mr-2 ml-2">
-            <div class="col-md-1  glowing_border d-flex flex-column justify-content-center align-items-center"
-               style="border-radius:15px 0px 0px 15px;">
+        </div>
+    </div>
+    {% if google_scholar_resposne %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 custom_background text-center">
+                <p class="text-uppercase custom_card_title">GOOGLE SCHOLAR RESPONSE</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                {% for i in google_scholar_resposne.data %}
+                    <!-- inside CaRD DIV-->
+                    <div class="row mt-2 mr-2 ml-2">
+                        <div class="col-md-1 custom_background glowing_border d-flex flex-column justify-content-center align-items-center"
+                             style="border-radius:15px 0px 0px 15px;">
                <span class="rotate  text-white font-weight-bold text-center"
-                  style="font-size:12px; margin-top: auto; margin-bottom: auto; width: 140%;">
+                     style="font-size:14px; margin-top: auto; margin-bottom: auto; width: 140%;">
                Response # {{ forloop.counter }}
                </span>
-            </div>
-            <!-- Div Right part-->
-            <div class="col-md-11 glowing_border d-flex flex-row justify-content-start align-items-center"
-               style="overflow-y: auto; height: 180px; border-radius:0px 15px 15px 0px;">
+                        </div>
+                        <!-- Div Right part-->
+                        <div class="col-md-11 custom_background glowing_border d-flex flex-row justify-content-start align-items-center"
+                             style="border-radius:0px 15px 15px 0px;">
                <span style="font-size:12px;" class="text-white ">
                   <div class="row">
                      <div class="col-md-3 text-center">
@@ -422,33 +403,34 @@
                      </div>
                   </div>
                </span>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-         </div>
-      </div>
-      {% endfor %}
-   </div>
-</div>
-{% endif %}
-{% if google_patent_resposne %}
-<div class="row">
-   <div class="col-md-12  ">
-     
-     
-     
-            {% for i in google_patent_resposne.data %}
-            <div class="col-md-12">
-               <!-- inside CaRD DIV-->
-               <div class="row mt-2 mr-2 ml-2">
-                  <div class="col-md-1  glowing_border d-flex flex-column justify-content-center align-items-center"
-                     style="border-radius:15px 0px 0px 15px;">
+        </div>
+    {% endif %}
+    {% if google_patent_resposne %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 custom_background text-center">
+                <p class="text-uppercase custom_card_title">GOOGLE PATENT RESPONSE</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                {% for i in google_patent_resposne.data %}
+                    <div class="col-md-12">
+                        <!-- inside CaRD DIV-->
+                        <div class="row mt-2 mr-2 ml-2">
+                            <div class="col-md-1 custom_background glowing_border d-flex flex-column justify-content-center align-items-center"
+                                 style="border-radius:15px 0px 0px 15px;">
                      <span class="rotate  text-white font-weight-bold text-center"
-                        style="font-size:12px; margin-top: auto; margin-bottom: auto; width: 140%;">
+                           style="font-size:14px; margin-top: auto; margin-bottom: auto; width: 140%;">
                      Response # {{ forloop.counter }}
                      </span>
-                  </div>
-                  <!-- Div Right part-->
-                  <div class="col-md-11 glowing_border d-flex flex-row justify-content-start align-items-center"
-                     style="overflow-y: auto; height: 280px; border-radius:0px 15px 15px 0px;">
+                            </div>
+                            <!-- Div Right part-->
+                            <div class="col-md-11 custom_background glowing_border d-flex flex-row justify-content-start align-items-center"
+                                 style="border-radius:0px 15px 15px 0px;">
                      <span style="font-size:12px;" class="text-white ">
                         <div class="row">
                            <div class="col-md-3 text-center">
@@ -581,18 +563,18 @@
                            </div>
                         </div>
                      </span>
-                  </div>
-               </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
             </div>
-            {% endfor %}
-       
-      
-   </div>
-</div>
-{% endif %}
+        </div>
+    {% endif %}
 {% endblock %}
 {% block base_js %}
-<script>
-   window.document.title = "Data Scrapper";
-</script>
+    <script>
+        window.document.title = "Data Scrapper";
+    </script>
 {% endblock %}
