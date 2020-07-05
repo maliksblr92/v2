@@ -8,6 +8,11 @@ from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from Public_Data_Acquisition_Unit.mongo_models import Blocked_Urls
 from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 
+from django.http import HttpResponse
+from docx import Document
+from docx.shared import Inches
+
+
 # Create your views here.
 
 km = Keybase_Manager()
@@ -227,3 +232,23 @@ class Keybase_Fetched_Report(View):
         return render(request,'Keybase_Management_System/Keybase_Fetched_Report.html',{'resp':resp,'target_object':target_object})
     def post(self,request,*args,**kwargs):
         pass
+
+class Keybase_Processed_Report(View):
+
+    def get(self,request,*argv,**kwargs):
+
+
+
+
+        return km.get_keybase_processed_report()
+
+
+
+
+
+
+
+
+
+
+
