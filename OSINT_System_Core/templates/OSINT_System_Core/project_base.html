@@ -1,0 +1,938 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/all.min.css' %}"/>
+    {% comment %}
+      <!-- including style.css so that it should be evaluated by django -->
+      <!-- <style>
+      {% include 'OSINT_System_Core/css/style.css' %}
+      </style> -->
+    {% endcomment %}
+    {% block head_dep %} {% endblock %}
+    {% block head_styles %}
+    {% endblock %}
+    <!-- loading css with link does not evaluate static tag -->
+
+    <script src="{% static 'django_eventstream/json2.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+          integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous"/>
+    <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
+    <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    {% include 'OSINT_System_Core/project_base_sub_template_for_css.html' %}
+
+</head>
+<style>
+    body {
+        background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+        -webkit-transition: background-color 1s;
+        transition: background-color 1s;
+        font-family: 'Raleway' !important;
+    }
+
+
+</style>
+<body class="loading">
+<script type="text/javascript">
+    window.addEventListener("load", function () {
+        const loader = document.querySelector(".loader");
+        loader.className += " hidden";
+    });
+</script>
+<style>
+    #control-msg-box {
+        height: 150px;;
+        overflow-y: auto;
+        padding-left: 10px !important;;
+        padding-top: 5px !important;;
+        padding-bottom: 5px !important;;
+    }
+
+    .chart_label {
+        background-color: #1cb5e0;
+        width: 150px;
+
+    }
+
+    .loader {
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loader > img {
+        width: 100px;
+    }
+
+    .loader.hidden {
+        animation: fadeOut 1s;
+        animation-fill-mode: forwards;;
+    }
+
+    @keyframes fadeOut {
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .custom_badge {
+        border: 1px solid #000;
+        border-radius: 5px;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+                93deg,
+                rgba(24, 72, 116, 1) 0%,
+                rgba(6, 17, 26, 1) 100%);
+    }
+
+    .topcontentbar {
+        border-radius: 20px 20px 0 0 !important;
+        background: linear-gradient(
+                90deg,
+                rgba(0, 32, 44, 90%) 0%,
+                rgba(0, 46, 69, 90%) 28%,
+                rgba(0, 83, 135, 82%) 72%,
+                rgba(0, 113, 188, 80%) 100%
+        );
+        border-bottom: 1px solid #707070;
+    }
+
+    .background {
+        background: #012847 !important;
+    }
+
+    .notification_border_white {
+        border-color: #D5D5D5 !important;
+    }
+
+    .notification_border_blue {
+        border-color: #2A77B2 !important;
+    }
+
+</style>
+<!-- container fluid div -->
+<div class="container-fluid">
+    <div class="loader">
+        <img src="{% static 'images/loader.gif' %}" height="120" width="250" class=" m-0 p-0"/>
+    </div>
+    <!-- header -->
+    {% block header %}
+        <div class="row ">
+            <div class="col-lg-12 pl-5 pr-5">
+                <nav class="navbar navbar-expand-lg " id="header">
+                    <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
+                            data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                            aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon ">
+                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+              </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8 ">
+                            <div class="row">
+                                <div class="col-lg-4 p-3">
+                                    <div class="row">
+                                        <div class="col-lg-6  list list-inline custom_center "
+                                             style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
+                                            <li class="nav-item">
+                                                <a class="btn  nav_btn  "
+                                                   href="{% url 'Target_Management_System:tms_marktarget' %}"
+                                                   style=" letter-spacing: normal;" id="nav_target_btn">TARGET</a>
+                                            </li>
+                                        </div>
+                                        <div class="col-lg-6  list list-inline custom_center "
+                                             style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
+                                            <li class="nav-item">
+                                                <a class="   btn   nav_btn"
+                                                   href="{% url 'Portfolio_Management_System:archive' %}"
+                                                   id="nav_porfolio_btn">PORTFOLIO</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 custom_center">
+                                    <a href="/core/dashboard"><img src="{% static 'images/logo.svg' %}" height="120"
+                                                                   width="250" class=" m-0 p-0"></a>
+                                </div>
+                                <div class="col-lg-4 p-3">
+                                    <div class="row">
+                                        <div class="col-lg-6  list list-inline custom_center "
+                                             style="border-right:1px solid white;border-left:1px solid white;padding-top:35px;padding-bottom:20px;">
+                                            <li class="nav-item">
+                                                <a class="   btn   nav_btn" href="#" id="nav_case_btn">CASE</a>
+                                            </li>
+                                        </div>
+                                        <div class="col-lg-6  list list-inline custom_center "
+                                             style="border-right:1px solid white;padding-top:35px;padding-bottom:20px;">
+                                            <li class="nav-item">
+                                                <a class="   btn   nav_btn"
+                                                   href="{% url 'Keybase_Management_System:kms_create' %}"
+                                                   id="nav_keybase_btn">KEYBASE</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 ">
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- end header -->
+    <!-- small navbar below header -->
+    {% block smallnavbar %}
+    {% endblock %}
+    <!-- end of navbar below header -->
+    <!-- start body -->
+    <div class="row mt-5">
+        <!-- left sidebar -->
+        {% block leftsidebar %} {% endblock %}
+        <!-- end of left sidebar -->
+        <!-- main belly of the beast -->
+        <div class="col-lg-8">
+            {% block belly %} {% endblock %}
+            <!-- start footer -->
+            {% block footer %}
+            
+                <div class="row footer_wrapper ">
+                    <div class="col-lg-12 glowing_border" style="border-radius:5px;">
+                        <div class="row">
+                            <div class="col-lg-6 m-0 p-3 d-flex flex-column">
+                                <div class="footer_div_1">
+                                    <div class=" m-0 p-0 font-weight-bold " style="font-size: 10px;color:white"
+                                         id="control-msg-box">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <span class=" badge chart_label ">Subsystem Notifications</span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6  m-0 p-3">
+                                <div class="row">
+                                    <div class="col-lg-4 d-flex flex-column">
+                                        <div id="chart_66" class="m-0 p-0 "></div>
+                                        <div class="text-center">
+                                            <span class=" badge chart_label  ">Upload Speed</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 d-flex flex-column">
+                                        <div id="chart_77" class="m-0 p-0 "></div>
+                                        <div class="text-center">
+                                            <span class=" badge  chart_label ">Download Speed</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 m-0 p-0 d-flex flex-column">
+                                        <div id="chart_88" class="m-0 p-0 "></div>
+                                        <div class="text-center">
+                                            <span class=" badge  chart_label">Tasks</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- start footer script -->
+                <script>
+                </script>
+                <!-- end of footer script -->
+            {% endblock %}
+            <!-- end footer -->
+        </div>
+        <!-- end of belly -->
+        <!-- right sidebar -->
+        {% block rightsidebar %} {% endblock %}
+        <!-- end of right sidebar -->
+        <!-- end body -->
+    </div>
+</div>
+<!-- end of container fluid -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'popper/js/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- index 1 js Resources -->
+<script src="{% static 'OSINT_System_Core/amcharts/core.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/charts.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/plugins/wordCloud.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/dark.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/animated.js' %}"></script>
+<script src="{% static 'Additional_assets/main/js/chart.js' %}"></script>
+<script src="{% static 'Additional_assets/main/js/footer_charts.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        console.log('ok running ')
+        // jquery ready function
+        const alert = 0;
+        let footerRES = new ReconnectingEventSource('/events/')
+        footerRES.addEventListener('message', (event) => {
+            console.log(event)
+            rabbit_message("message")
+        })
+        //Alert by Ahmed
+        footerRES.addEventListener('alert', (event) => {
+            console.log(event)
+            rabbit_message("alerts")
+        })
+        // jquery event function for notification f
+        //document.addEventListener('DOMContentLoaded', function () {
+        // let footerRES = new ReconnectingEventSource('/events/')
+        // console.log(footerRES)
+        footerRES.addEventListener('notification', (event) => {
+            const control_msg = JSON.parse(event.data)
+            console.log(control_msg)
+            rabbit_message("notification")
+            // })
+        }) // end of jquery ready function
+        function rabbit_message(window_type) {
+            console.log("get top 10 messages from db for " + window_type);
+            var control_msg_box = null;
+            var data = {
+                window_type: window_type
+            };
+            console.log("in rabbit mq function ")
+            $.get({
+                url: '{% url 'OSINT_System_Core:rabbit_message' %}',
+                data: data,
+                'success': (resp) => {
+                    console.log(resp)
+                    //const control_msg = JSON.parse(resp)
+                    if (window_type == 'notification') {
+                        control_msg_box = $('#notification-box')
+
+                        function notify() {
+                            control_msg_box.addClass(" border notification_border_white")
+                            setTimeout(function () {
+
+                                control_msg_box.removeClass("border notification_border_blue")
+                                control_msg_box.addClass(" border notification_border_white")
+                                setTimeout(function () {
+
+                                    control_msg_box.removeClass("border notification_border_white")
+                                    control_msg_box.addClass(" border notification_border_blue")
+                                    setTimeout(function () {
+
+                                        control_msg_box.removeClass("border notification_border_blue")
+                                        control_msg_box.addClass("border notification_border_white")
+                                        setTimeout(function () {
+
+                                            control_msg_box.removeClass("border notification_border_white")
+                                            control_msg_box.addClass(" border notification_border_blue")
+                                            setTimeout(function () {
+
+                                                control_msg_box.removeClass("border notification_border_blue")
+                                                control_msg_box.addClass("border notification_border_white")
+                                                setTimeout(function () {
+
+                                                    control_msg_box.removeClass("border notification_border_white")
+                                                    control_msg_box.addClass("border notification_border_blue")
+
+                                                    setTimeout(function () {
+                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                        control_msg_box.addClass("border notification_border_white")
+                                                        setTimeout(function () {
+                                                            control_msg_box.removeClass("border notification_border_white")
+                                                            control_msg_box.addClass("border notification_border_blue")
+                                                            setTimeout(function () {
+                                                                control_msg_box.removeClass("border notification_border_blue")
+                                                                control_msg_box.addClass("border notification_border_white")
+                                                                setTimeout(function () {
+                                                                    control_msg_box.removeClass("border notification_border_white")
+                                                                    control_msg_box.addClass("border notification_border_blue")
+                                                                    setTimeout(function () {
+                                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                                        control_msg_box.addClass("border notification_border_white")
+                                                                        control_msg_box.removeClass("border notification_border_blue")
+                                                                    }, 1000)
+                                                                }, 1000)
+                                                            }, 1000)
+                                                        }, 1000)
+                                                    }, 1000)
+                                                }, 1000)
+                                            }, 1000)
+                                        }, 1000);
+                                    }, 1000);
+                                }, 1000);
+                            }, 1000);
+                        }
+
+
+                        notify()
+
+
+                    } else if (window_type == 'message') {
+                        control_msg_box = $('#control-msg-box')
+                    } else if (window_type == 'alert') {
+                        control_msg_box = $('#alert-box')
+                    }
+
+                    //control_msg_box.append('<p class ="m-0 p-0">'+"*-> Server :"+control_msg['server_name']+" Module "+control_msg['module_name']+"Message"+control_msg['messege']+'</p>')
+                    control_msg_box.empty().append(resp)
+
+                },
+            });
+        }
+
+        rabbit_message("message")
+        rabbit_message("notification")
+        rabbit_message("alert")
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
+<script defer src="{% static 'amchart/js/core.js' %}"></script>
+<script defer src="{% static 'amchart/js/charts.js' %}"></script>
+<script defer src="{% static 'amchart/js/themes/dark.js' %}"></script>
+<script defer src="{% static 'amchart/js/themes/animated.js' %}"></script>
+<script defer src="{% static 'OSINT_System_Core/js/oss_core_chart.js' %}"></script>
+{% block foot_dep %} {% endblock %}
+{% block foot_script %} {% endblock %}
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="linkto_portfolio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Link To</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <label>Search Object</label>
+                        <input type="text" name="search" id="txtSearch" onkeyup="searchOpen()"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cars">Choose Type:</label>
+                        <select id="type">
+                            <option value="portfolio">Portfolio</option>
+                            <option value="keybase">Keybase</option>
+                            <option value="case">Case</option>
+                            <option value="target">Target</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="search_result">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-light" id="response" role="alert">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End-->
+<!-- Modal -->
+<div class="modal fade" id="share_resource" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Share Resource</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label for="comment">Message</label>
+                            <textarea class="form-control" rows="5" id="share_message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="cars">Share With:</label>
+                        <select id="group_type">
+                            <option value="tso">Target Selection Officer</option>
+                            <option value="tmo">Target Monitoring Officer</option>
+                            <option value="pao">Processing & Analysis Officer</option>
+                            <option value="rdo">Reporting and Documentation Officer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="search_result">
+                </div>
+                <div class="row">
+                    <div class="alert alert-light" id="share_response" role="alert">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="submit_share()" class="text-white custom_badge">Share</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script>
+
+    var beta_id_g = "";
+
+    function open_model(beta_id, modal_type, constant = '', list_index = -1) {
+        var beta_path = []
+
+
+        beta_path.push(beta_id);
+
+        if (constant !== '') {
+            beta_path.push(constant);
+        }
+
+        if (list_index !== -1) {
+            beta_path.push(list_index);
+        }
+
+
+        beta_id_g = beta_path
+        console.log(beta_path)
+
+
+        if (modal_type == 'link') {
+            $('#linkto_portfolio').modal('show')
+        } else {
+            $('#share_resource').modal('show')
+        }
+
+    }
+
+
+    function searchOpen() {
+
+
+        var type = $('#type').val()
+        var search = $('#txtSearch').empty().val()
+        var data = {
+            query: search, type: type
+        };
+        $.ajax({
+            url: '{% url 'OSINT_System_Core:find_object' %}',
+            data: data,
+            'success': (resp) => {
+                $('#search_result').empty().append(resp)
+                console.log(resp)
+            },
+        });
+    }
+
+    function submit_share() {
+
+        console.log("in submit share")
+        var user_group = $('#group_type').val()
+        var resource_id = beta_id_g;
+        var message = $('#share_message').val()
+        //var beta_id = $('.btn_link').attr('data-id')
+        console.log(resource_id)
+        var data = {
+            resource_id: resource_id, message: message, user_group: user_group
+        };
+        $.ajax({
+            url: '{% url 'OSINT_System_Core:share_resource' %}',
+            data: data,
+            'success': (resp) => {
+
+                $('#share_response').text(resp)
+                console.log(resp)
+                beta_id_g = ""
+            },
+
+        });
+    }
+
+    function submit_link(alpha_id) {
+
+        console.log("i m clicked")
+
+        var beta_id = beta_id_g;//$('#btn_link').attr("data-id")
+        //var beta_id = $('.btn_link').attr('data-id')
+        console.log(beta_id)
+        var type = $('#type').val()
+        var data = {
+            alpha_id: alpha_id, beta_path_list: beta_id, type: type
+        };
+        $.ajax({
+            url: '{% url 'OSINT_System_Core:link_object' %}',
+            data: data,
+            'success': (resp) => {
+
+                $('#response').text(resp)
+                console.log(resp)
+                beta_id_g = ""
+            },
+
+        });
+    }
+</script>
+<script>
+
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_dark);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+
+        // Create chart instance
+        var chart = am4core.create("chart_3", am4charts.RadarChart);
+
+        // Add data
+        chart.data = [{
+            "category": "Keybase Targets",
+            "value": {{ context.total_keybase_crawling_targets_added }},
+            "full": 100
+
+        }, {
+            "category": "Expired Targets",
+            "value": {{ context.total_expired_targets }},
+            "full": 100
+        }, {
+            "category": "Crawling Targets Fetched",
+            "value": {{ context.total_keybase_crawling_targets_fetched }},
+            "full": 100
+        }, {
+            "category": "Periodic Targets",
+            "value": {{ context.total_periodic_targets }},
+            "full": 100
+        },
+
+            {
+                "category": "Dynamic Crawling Targets",
+                "value": {{ context.total_dynamic_crawling_targets_added }},
+                "full": 100
+            },
+
+
+            {
+                "category": "Dynamic Crawling Fetched",
+                "value": {{ context.total_dynamic_crawling_targets_fetched }},
+                "full": 100
+            },
+
+            {
+                "category": "Targets Added",
+                "value": {{ context.total_targets_added }},
+                "full": 100
+            },
+
+
+        ];
+
+        // Make chart not full circle
+        chart.startAngle = -90;
+        chart.endAngle = 180;
+        chart.innerRadius = am4core.percent(30);
+
+        // Set number format
+        chart.numberFormatter.numberFormat = "#.#'%'";
+
+        // Create axes
+        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "category";
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.grid.template.strokeOpacity = 0;
+        categoryAxis.renderer.labels.template.horizontalCenter = "right";
+        categoryAxis.renderer.labels.template.fontWeight = 500;
+        categoryAxis.renderer.labels.template.fontSize = 12;
+
+        categoryAxis.renderer.labels.template.adapter.add("fill", function (fill, target) {
+            return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
+        });
+        categoryAxis.renderer.minGridDistance = 10;
+
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.grid.template.strokeOpacity = 0;
+        valueAxis.min = 0;
+        valueAxis.max = 100;
+        valueAxis.strictMinMax = true;
+
+        // Create series
+        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
+        series1.dataFields.valueX = "full";
+        series1.dataFields.categoryY = "category";
+        series1.clustered = false;
+        series1.columns.template.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
+        series1.columns.template.fillOpacity = 0.08;
+        series1.columns.template.cornerRadiusTopLeft = 20;
+        series1.columns.template.strokeWidth = 0;
+        series1.columns.template.radarColumn.cornerRadius = 20;
+
+        var series2 = chart.series.push(new am4charts.RadarColumnSeries());
+        series2.dataFields.valueX = "value";
+        series2.dataFields.categoryY = "category";
+        series2.clustered = false;
+        series2.columns.template.strokeWidth = 0;
+        series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
+        series2.columns.template.radarColumn.cornerRadius = 20;
+
+        series2.columns.template.adapter.add("fill", function (fill, target) {
+            return chart.colors.getIndex(target.dataItem.index);
+        });
+
+        // Add cursor
+        chart.cursor = new am4charts.RadarCursor();
+
+    }); // end am4core.ready()
+
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("chart_1", am4charts.XYChart3D);
+        chart.paddingBottom = 30;
+        chart.angle = 35;
+
+        chart.data = [{
+            "country": "Keybase Targets",
+            "visits": {{ context.total_keybase_crawling_targets_added }}
+
+        }, {
+            "country": "Expired Targets",
+            "visits": {{ context.total_expired_targets }}
+        }, {
+            "country": "Crawling Targets Fetched",
+            "visits": {{ context.total_keybase_crawling_targets_fetched }}
+        }, {
+            "country": "Periodic Targets",
+            "visits": {{ context.total_periodic_targets }}
+        },
+
+            {
+                "country": "Dynamic Crawling Targets",
+                "visits": {{ context.total_dynamic_crawling_targets_added }}
+            },
+
+
+            {
+                "country": "Dynamic Crawling Fetched",
+                "visits": {{ context.total_dynamic_crawling_targets_fetched }}
+            },
+
+            {
+                "country": "Targets Added",
+                "visits": {{ context.total_targets_added }}
+            },
+
+
+        ];
+
+        // Create axes
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "country";
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.inside = true;
+        categoryAxis.renderer.grid.template.disabled = true;
+
+        let labelTemplate = categoryAxis.renderer.labels.template;
+        labelTemplate.rotation = -90;
+        labelTemplate.horizontalCenter = "left";
+        labelTemplate.verticalCenter = "middle";
+        labelTemplate.dy = 10; // moves it a bit down;
+        labelTemplate.inside = false; // this is done to avoid settings which are not suitable when label is rotated
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.grid.template.disabled = true;
+
+        // Create series
+        var series = chart.series.push(new am4charts.ConeSeries());
+        series.dataFields.valueY = "visits";
+        series.dataFields.categoryX = "country";
+
+        var columnTemplate = series.columns.template;
+        columnTemplate.adapter.add("fill", function (fill, target) {
+            return chart.colors.getIndex(target.dataItem.index);
+        })
+
+        columnTemplate.adapter.add("stroke", function (stroke, target) {
+            return chart.colors.getIndex(target.dataItem.index);
+        })
+
+    }); // end am4core.ready()
+
+
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chart_2", am4charts.XYChart);
+
+        chart.data =
+        {{ dic|safe}}
+
+        for (var i = 0; i < name.length; i++) {
+            value += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 5);
+            data.push({category: name[i], value: value});
+        }
+
+
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.dataFields.category = "name";
+        categoryAxis.renderer.minGridDistance = 15;
+        categoryAxis.renderer.grid.template.location = 0.5;
+        categoryAxis.renderer.grid.template.strokeDasharray = "1,3";
+        categoryAxis.renderer.labels.template.rotation = -90;
+        categoryAxis.renderer.labels.template.horizontalCenter = "left";
+        categoryAxis.renderer.labels.template.location = 0.5;
+        categoryAxis.renderer.labels.template.fontSize = 12;
+        categoryAxis.renderer.labels.template.truncate = true;
+        categoryAxis.renderer.labels.template.maxWidth = 80
+
+        categoryAxis.renderer.labels.template.adapter.add("dx", function (dx, target) {
+            return -target.maxRight / 2;
+        })
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.tooltip.disabled = true;
+        valueAxis.renderer.ticks.template.disabled = true;
+        valueAxis.renderer.axisFills.template.disabled = true;
+
+        var series = chart.series.push(new am4charts.ColumnSeries());
+        series.dataFields.categoryX = "name";
+        series.dataFields.valueY = "count";
+        series.tooltipText = "{count}";
+        series.sequencedInterpolation = true;
+        series.fillOpacity = 0;
+        series.strokeOpacity = 1;
+        series.strokeDashArray = "1,3";
+        series.columns.template.width = 0.01;
+        series.tooltip.pointerOrientation = "horizontal";
+
+        var bullet = series.bullets.create(am4charts.CircleBullet);
+
+        chart.cursor = new am4charts.XYCursor();
+
+        chart.scrollbarX = new am4core.Scrollbar();
+        chart.scrollbarY = new am4core.Scrollbar();
+
+
+    }); // end am4core.ready()
+
+
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+
+
+var chart = am4core.create("chart_4", am4plugins_wordCloud.WordCloud);
+chart.padding(0,0,0,0);
+chart.margin(0,0,0,0);
+var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+series.randomness = 0.1;
+series.rotationThreshold = 0.5;
+series.fontFamily = "Raleway";
+series.fontSize = 100;
+series.maxFontSize = am4core.percent(50);
+var z = "{{ context.top_profiles_with_negative_behavior }}"
+        series.text = z
+
+
+series.colors = new am4core.ColorSet();
+series.colors.passOptions = {}; // makes it loop
+
+series.angles = [0,-90];
+series.fontWeight = "700"
+
+setInterval(function () {
+  series.dataItems.getIndex(Math.round(Math.random() * (series.dataItems.length - 1))).setValue("value", Math.round(Math.random() * 10));
+ }, 10000)
+
+// series.labels.template.url = "https://stackoverflow.com/questions/tagged/{word}";
+// series.labels.template.urlTarget = "_blank";
+
+// var subtitle = chart.titles.create();
+//subtitle.text = "(click to open)";
+//
+// var title = chart.titles.create();
+// title.text = "Most Popular Tags @ StackOverflow";
+// title.fontSize = 40;
+// title.fontWeight = "800";
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        var url = window.location.href;
+        console.log(url)
+        var sub_string = 'core';
+        if (url.includes(sub_string)) {
+
+
+        }
+        if (url.includes('tms')) {
+
+            $('#nav_target_btn').addClass("active btn-outline-light  ")
+        }
+        if (url.includes("case")) {
+
+            $('#nav_case_btn').addClass("active btn-outline-light")
+        }
+        if (url.includes('pms')) {
+
+            $('#nav_porfolio_btn').addClass("active btn-outline-light ")
+        }
+        if (url.includes("kms")) {
+            $('#nav_keybase_btn').addClass("active btn-outline-light ")
+        }
+    })
+</script>
+</body>
+</html>
+
+{% block base_js %}
+
+{% endblock %}

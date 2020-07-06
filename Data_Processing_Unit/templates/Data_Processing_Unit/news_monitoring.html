@@ -1,0 +1,202 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+
+
+
+        {% block system_header_block %}
+
+
+<style>
+		.nav-link{
+		text-decoration: none!important;
+		font-weight: bold!important;
+		color: white!important;
+		}
+		a{
+		text-decoration: none!important;
+		font-weight: bold!important;
+		color: white!important;
+		}
+
+/* dashbaord componnets css start  */
+/* Start welcome */
+
+.welcome {
+  color: #CCC;
+}
+.welcome .content {
+  background-color: #313348;
+  padding: 15px;
+  margin-top: 25px;
+}
+.welcome h2 {
+  font-family: Calibri;
+  font-weight: 100;
+  margin-top: 0
+}
+.welcome p {
+  color: #999;
+}
+
+/* Start charts */
+.charts {
+  margin-top: 25px;
+  color: #BBB
+}
+.charts .chart-container {
+  background-color: #313348;
+  padding: 15px;
+}
+.charts .chart-container h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+/* Start statistics */
+.statistics {
+  margin-top: 25px;
+  color: #CCC;
+}
+.statistics .box {
+  background-color: #313348;
+  padding: 15px;
+  overflow: hidden;
+}
+.statistics .box > i {
+  float: left;
+  color: #FFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 22px;
+}
+.statistics .box .info {
+  float: left;
+  width: auto;
+  margin-left: 10px;
+}
+.statistics .box .info h3 {
+  margin: 5px 0 5px;
+  display: inline-block;
+}
+.statistics .box .info p {color:#BBB}
+
+/* End statistics */
+		</style>
+
+
+
+
+
+    {% endblock %}
+
+
+
+	<body>
+
+		<!-- code bwtween  -->
+{% block system_content_block %}
+
+<div class="container-fluid m-0 p-0 " style="background-color: #212529">
+<div class="row">
+<div class="col-md-12">
+		<div class="welcome">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="content">
+                <h2 class="text-white font-weight-bold" style="text-align:center">News Monitor </h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+
+
+
+<div class="container-fluid pt-2" style="background-color: #212529">
+
+	<div class="row">
+        {% for news_ch in news_response %}
+
+<div class="col-md-3 p-1">
+	<!--  -->
+	<div class="card  m-0 ">
+		<div class="card-header m-0  text-center p-0 " style="background-color: #003b6d;">
+			<span class=" text-white font-weight-bold  btn"style="font-size: 20px;">{{ news_ch.0.news_site }}</span>
+		</div>
+		<div class="card-body p-0 m-0 ">
+
+
+			<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true"style="height: 400px;overflow: scroll;">
+
+                {% for news in news_ch %}
+                <div class="card m-0 " style="background-color: #212529;">
+					<div class="card-header m-0 " role="tab" id="heading1" >
+						<a data-toggle="collapse" data-parent="#accordion" href="#a{{ news.id }}" aria-expanded="true" aria-controls="collapse1">
+							<h5 class="mb-0 text-white " style="font-size:13px">{{news.title}}<i class="fa fa-angle-down rotate-icon"></i>
+
+						</a>
+					</div>
+					<div id="a{{ news.id }}" class="collapse " role="tabpanel" aria-labelledby="heading1">
+						<div class="card-block p-2" style="font-size:11px;color:white">
+							{{ news.description }}<br>
+                            <span class="pull-left float-left text-primary font-weight-bold" style="font-size:8px; ">{{ news.time }}</span></h5>
+							<a href="{{ news.url }}" class="btn btn-sm btn-success pull-right float-right " style="height: 30px;width: 100px;font-size:8px;">read more </a>
+						</div>
+					</div>
+				</div>
+                {% endfor %}
+
+
+
+
+
+
+			</div>
+			<!--/.Accordion wrapper-->
+        	<div class="card-footer d-flex flex-row  " style="background-color:#212529;">
+
+				</div>
+		</div>
+	</div>
+</div>
+
+
+{% endfor %}
+
+
+
+		</div><!-- row 1 end  -->
+
+
+
+
+
+
+
+
+	</div>
+</div>
+
+
+
+
+
+			<!-- code between  -->
+			<div class="row fixed-bottom">
+				<div class="col-md-12 text-center bg-dark" style="background-color: black;">
+					<p class="text-dark font-weight-bold ">Osint.com.pk</p>
+				</div>
+			</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+ {% endblock system_content_block %}

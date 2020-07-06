@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+    <title>TMS | Linkedin</title>
+    <style>
+        li {
+            font-size: 13px !important;;
+        }
+
+        #headingOne {
+            height: 40px;
+            font-size: 16px;;
+        }
+
+        .card-header {
+            height: 40px !important;
+            border-radius: 5px !important;;
+        }
+
+        html {
+            --scrollbarBG: #CFD8DC;
+            --thumbBG: #90A4AE;
+        }
+
+        body {
+            background: url({% static 'images/background_gradient.svg' %}) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbarBG);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--thumbBG);
+            border-radius: 6px;
+            border: 3px solid var(--scrollbarBG);
+        }
+
+        .company_header {
+            height: 200px;
+            width: 100%;
+            background: url(/static/images/hudYSw.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .prodile_pic_wrapper {
+            height: 150px;;
+            width: 150px;;
+            border: 1px solid white;
+            margin-top: -132px;
+        }
+
+        .prodile_data_wrapper {
+            height: 60px;
+            border: 1px solid white;
+            margin-top: -60px;
+        }
+
+        .main_card_header {
+            display: flex;
+            flex-direction: row;
+            justify-content: around;
+            align-items:center;;
+            background: linear-gradient(90deg, rgba(65, 101, 135, 1) 0%, rgba(10, 32, 51, 1) 100%) !important;
+        }
+
+        .custom_nav.active {
+            color: #000 !important;
+        }
+
+        .background_heading {
+            background: #012847;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content > a {
+            min-width: 120px;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        li a, .dropbtn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<!--  -->
+<div class="container-fluid">
+    <div class="row pl-2 pr-2">
+        <div class="col-md-12 bg-white" style="background-color:black; border-radius :5px 5px 0px 0px;height: 35px;;">
+            <div class="row">
+                <div class="col-md-6 text-left"><a class="btn btn-primary btn-sm" href='https://linkedin.com/in/{{ company.username }}' target="_blank" style="margin-top:2px;"> <i
+                        class="fab fa-linkedin-in mr-2 "></i>Linked in Target company </a></div>
+
+                <div class="col-md-6 d-flex flex-row justify-content-end align-items-center">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn btn btn-sm btn-primary  mr-2 ml-2"><i
+                                class="fa fa-cog mr-2"></i>Options</a>
+                        <div class="dropdown-content">
+                            <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                               style="margin-top:2px;"
+                               href="{% url 'Target_Management_System:LinkedinCompany_Target_Report' object_gtr_id=company.GTR %}"
+                               id="download_as_pdf">PDF Download</a>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--         <div class="row p-2">
+              <div class="col-md-4 text-left">
+                <a href="#" target="_blank" class="btn btn-info font-weight-bold">
+                  <i class="fab fa-linkedin-in mr-2"></i> Linked in
+                </a>
+              </div>
+              <div class="col-md-4 text-center">
+                <a href="#" target="_blank" class="btn btn-primary font-weight-bold">
+                  <i class="fas fa-users mr-2"></i> Linked in Target
+                </a>
+              </div>
+              <div class="col-md-4 text-right">
+                <a href="#" target="_blank" class="btn btn-success font-weight-bold">
+                  <i class="fas fa-download  mr-2"></i> Download PDF Report
+                </a>
+              </div>
+            </div> -->
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 company_header border">
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="prodile_pic_wrapper">
+                {% if company.image_url %}
+                    <img src="{{ company.image_url }}" style="width: 100%;height: 100%;" class="img-fluid"/>
+                {% else %}
+                    <img src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"
+                         style="width: 100%;height: 100%;" class="img-fluid"/>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="col-md-8 prodile_data_wrapper main_card_header">
+            <div class=" d-flex flex-row justify-content-start align-items-center">
+                <p class="font-weight-bold text-white mt-2" style="font-size:12px;">{{ company.headline }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<div class="container-fluid mt-3 ">
+    <div class="col-md-12">
+    </div>
+    <div class="row mr-1" style="border-radius:5px;">
+        <div class="col-sm-4"><!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item font-weight-bold main_card_header text-white">
+                    {{ company.name }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Target Type</strong></span>{{ company.target_type|default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Target Name </strong></span>{{ company.name|default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Website</strong></span>{{ company.websites}}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Update Count</strong></span>{{ company.target_update_count | default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong class="float-left">Description</strong><p>
+                        {{company.description| default:"N/A"}}
+                    </p></span>
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Employee</strong></span>{{ company.company_size| default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Industry</strong></span>{{ company.industry | default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Company Type</strong></span>{{ company.company_type | default:"N/A" }}
+                </li>
+
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Founded</strong></span>{{ company.founded | default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Specialities</strong></span>{{ company.specialties | default:"N/A" }}
+                </li>
+                <li class="list-group-item text-right">
+                    <span class="float-left text-muted"><strong>Number of employees</strong></span>{{ company.number_of_employees | default:"N/A" }}
+                </li>
+            </ul>
+           
+        </div><!--/col-3-->
+        <div class="col-sm-8 border bg-white p-0" style="border-radius:5px;">
+            <ul class="nav nav-tabs main_card_header" id="myTab">
+                <li class="btn btn-outline-light col-md-4" class="active">
+                    <a class="nav-link text-white font-weight-bold custom_nav" href="#jobs"
+                       data-toggle="tab">jobs</a>
+                </li>
+
+                <li class="btn btn-outline-light col-md-4" class="active">
+                    <a class="nav-link text-white font-weight-bold custom_nav" href="#linked_to"
+                       data-toggle="tab">linked_to</a>
+                </li>
+               
+               
+            </ul>
+            <div class="tab-content bg-white " style="height:400px!important;overflow-y:auto;">
+                <div class="tab-pane active " id="jobs" style="">
+                  
+                  jobs
+                </div><!--/tab-pane-->
+               <!-- tabname  -->
+               <div class="tab-pane  " id="linked_to" style="">
+              
+              <div class=""></div>
+            </div><!--/tab-pane-->
+           
+
+               <!-- tabname -->
+               
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
+</body>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
+</html>

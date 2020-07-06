@@ -1,0 +1,250 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+<DOCTYPE html>
+    {% load static %}
+  <html>
+
+
+    {% block system_header_block %}
+<style>
+    #chartdiv {
+    width: 1920px;
+    height:1000px;
+    background-color:#f8f8f8;
+    }
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/forceDirected.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+ <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+
+
+    {% endblock %}
+
+
+
+
+
+<body>
+{% block system_content_block %}
+    </div>
+    <div class="row">
+      <div class="col-md-12 bg-dark" >
+        <div id="chartdiv"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+   <div class="row fixed-bottom">
+    <div class="col-md-12 text-center bg-dark" style="background-color: black;">
+    <p class="text-white font-weight-bold ">Osint.com.pk</p>
+    </div>
+    </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+    <!-- Chart code -->
+<script>
+am4core.useTheme(am4themes_animated);
+
+// Create chart
+var chart = am4core.create("chartdiv", am4plugins_forceDirected.ForceDirectedTree);
+
+// Create series
+var series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
+
+
+
+
+
+// Set data
+series.data = [{
+  "name":"Archibald",
+  "image":"{% static 'Data_Processing_Unit/a.svg'%}",
+  "color": "#0000",
+  "children": [{
+    "name": "Facebook",
+    "image": "{% static 'Data_Processing_Unit/svg/fb.svg'%}",
+     "color":"#3b5998",
+    "children": [{
+                "name": "Bradley",
+                "image": "{% static 'Data_Processing_Unit/1.svg'%}",
+                "children": [{
+                          "name": "Clayton",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/3.svg'%}"
+                        }
+                        , {
+                          "name": "Mehk",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/main.jpg'%}"
+
+                        },{
+                          "name": "Carroll",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/2.svg'%}"
+                        }]
+              }
+              , {
+                "name": "George",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/d.svg'%}"
+
+              },
+               {
+                "name": "Adele",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/b.svg'%}"
+
+              }
+              , {
+                "name": "Jacob",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/c.svg'%}"
+
+              },
+              {
+                "name": "Alden",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/6.svg'%}"
+              }]},
+
+    {
+    "name": "linkedin",
+    "color": "#0e76a8",
+    "image": "{% static 'Data_Processing_Unit/svg/linkedin.svg'%}",
+    "children": [{
+                "name": "Adele",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/b.svg'%}"
+              }
+              , {
+                "name": "Crispin",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/4.svg'%}"
+
+              },{
+                "name": "Bradley",
+
+                "image": "{% static 'Data_Processing_Unit/1.svg'%}",
+                "children": [{
+                          "name": "Clayton",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/3.svg'%}"
+                        },
+                        {
+                          "name": "Alden",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/6.svg'%}"
+                        }]
+              }
+              ]},
+              {
+    "name": "Twitter",
+    "image": "{% static 'Data_Processing_Unit/svg/twitter.svg'%}",
+    "color":"#00acee",
+    "children": [{
+                "name": "Alden",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/6.svg'%}"
+              }
+              , {
+                "name": "Bradley",
+
+                "image": "{% static 'Data_Processing_Unit/1.svg'%}",
+                "children": [{
+                          "name": "Clayton",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/3.svg'%}"
+                        },
+                        {
+                          "name": "Bruce",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/5.svg'%}"
+                        }]
+
+              },{
+                "name": "Crispin",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/4.svg'%}"
+              }]},
+
+              {
+    "name": "Instagram",
+    "image": "{% static 'Data_Processing_Unit/svg/insta.svg'%}",
+    "color":"#DD2A7B",
+    "children": [
+               {
+                "name": "Carroll",
+                "value": 1,
+                "image": "{% static 'Data_Processing_Unit/2.svg'%}"
+
+              },{
+                "name": "Bradley",
+                "image": "{% static 'Data_Processing_Unit/1.svg'%}",
+                "children": [{
+                          "name": "Clayton",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/3.svg'%}"
+                        },
+                        {
+                          "name": "Crispin",
+                          "value": 1,
+                          "image": "{% static 'Data_Processing_Unit/4.svg'%}"
+                        }]
+
+              }]},
+  ]
+}];
+
+// Set up data fields
+series.dataFields.value = "value";
+series.dataFields.name = "name";
+series.dataFields.color = "color";
+series.dataFields.id = "id";
+series.dataFields.children = "children";
+series.dataFields.linkWith = "link";
+
+// Add labels
+series.nodes.template.label.text = "[bold]{name}";
+series.nodes.template.label.valign = "middle";
+series.nodes.template.label.textAlign = "middle";
+series.nodes.template.label.fill = am4core.color("#000");
+series.nodes.template.label.dy = 10;
+series.nodes.template.tooltipText = "{name}: [bold]{value}[/]";
+series.fontSize = 10;
+series.minRadius =60;
+series.maxRadius = 60;
+
+// Configure circles
+series.nodes.template.circle.disabled = true;
+
+// Configure icons
+var icon = series.nodes.template.createChild(am4core.Image);
+icon.propertyFields.href = "image";
+icon.horizontalCenter = "middle";
+icon.verticalCenter = "middle";
+icon.width = 60;
+icon.height = 60;
+
+
+series.centerStrength = 0.5;
+  </script>
+
+{% endblock system_content_block %}
+</body>
+
+
+  </html>

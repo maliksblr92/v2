@@ -1,0 +1,224 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block page_title %}Detected Changes{% endblock %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block smallnavbar %}
+
+    <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+{% block belly %}
+    <style>
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
+
+        table {
+            height: 500px !important;
+            display: -moz-groupbox;
+        }
+
+        tbody {
+            overflow-y: scroll !important;
+            height: 400px !important;
+            width: 100%;
+
+        }
+
+        @media screen and (max-width: 767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-y: hidden;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
+
+            .table-responsive > .table {
+                margin-bottom: 0;
+            }
+
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > th,
+            .table-responsive > .table > tfoot > tr > th,
+            .table-responsive > .table > thead > tr > td,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space: nowrap;
+            }
+
+            .table-responsive > .table-bordered {
+                border: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+            .table-responsive > .table-bordered > thead > tr > td:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+            .table-responsive > .table-bordered > thead > tr > td:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right: 0;
+            }
+
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom: 0;
+            }
+        }
+    </style>
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Detected Changes</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+            <table class="table table-responsive text-white" id="response_changes_view" class="display"
+                   style="width:100%">
+                <thead>
+                <tr>
+
+                    <th scope="col">Username/title</th>
+
+                    <th scope="col">Website</th>
+                    <th scope="col">Target Type</th>
+                    <th scope="col">CTR</th>
+                    <th scope="col">Detected On</th>
+
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody class="bg-transparent">
+                {% for change in resp_changes %}
+
+                    <tr class="bg-transparent">
+
+                        <td style="font-size:12px;"> {% if change.resp_obj.username %}
+                            {{ change.resp_obj.username }}
+                        {% elif change.resp_obj.title %}
+                            {{ change.resp_obj.title }}
+                        {% else %}
+                            untitled
+                        {% endif %}
+                        </td>
+
+                        <td style="font-size:12px;">{{ change.resp_obj.GTR.website.name }}</td>
+                        <td style="font-size:12px;">{{ change.resp_obj.target_type }}</td>
+                        <td style="font-size:12px;">{{ change.ctr }}</td>
+                        <td style="font-size:12px;">{{ change.detected_on }}</td>
+
+
+                        <td> {% if change.resp_obj.GTR|lower == 'facebook' %}
+                            {% if change.resp_obj.target_type|lower == 'profile' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:FacebookPerson_Target_Response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                            {% elif change.resp_obj.target_type|lower == 'page' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:FacebookPage_Target_Response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                            {% elif change.resp_obj.target_type|lower == 'group' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:FacebookGroup_Target_Response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                            {% endif %}
+                        {% elif change.resp_obj.GTR|lower == 'twitter' %}
+                            <a class="btn btn-primary custom_icons"
+                               href="{% url 'Target_Management_System:Twitter_Target_Response' change.resp_obj.GTR.id %}"
+                               role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                        {% elif change.resp_obj.GTR|lower == 'instagram' %}
+                            <a class="btn btn-primary custom_icons"
+                               href="{% url 'Target_Management_System:Instagram_Target_Response' change.resp_obj.GTR.id %}"
+                               role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                        {% elif change.resp_obj.GTR|lower == 'linkedin' %}
+
+
+                            {% if change.resp_obj.target_type|lower == 'profile' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                            {% elif change.resp_obj.target_type|lower == 'company' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                            {% endif %}
+                        {% elif change.resp_obj.GTR|lower == 'reddit' %}
+
+                            {% if change.resp_obj.target_type|lower == 'profile' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:reddit_target_response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                            {% elif change.resp_obj.target_type|lower == 'subreddit' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:subreddit_target_resposne' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                            {% endif %}
+
+                        {% elif change.resp_obj.GTR|lower == 'youtube' %}
+
+                            {% if change.resp_obj.target_type|lower == 'channel' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:youtube_target_response' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                            {% endif %}
+
+                        {% elif change.resp_obj.GTR|lower == 'custom' %}
+
+                            {% if change.resp_obj.target_type|lower == 'keybase_crawling' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+                            {% elif change.resp_obj.target_type|lower == 'dynamic_crawling' %}
+                                <a class="btn btn-primary custom_icons"
+                                   href="{% url 'Target_Management_System:dynamic_crawling_target' change.resp_obj.GTR.id %}"
+                                   role="button" target="_blank"><i class="fa fa-eye"></i></a>
+
+                            {% endif %}
+
+
+                        {% else %}
+
+
+                        {% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#response_changes_view').DataTable();
+        });
+    </script>
+{% endblock %}

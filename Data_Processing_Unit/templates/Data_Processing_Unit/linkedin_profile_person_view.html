@@ -1,0 +1,256 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+<DOCTYPE html>
+    {% load static %}
+<html>
+
+	<body>
+		{% block system_content_block %}
+		<!-- code bwtween  -->
+		<div class="container-fluid bg-white">
+			<div class="row pt-5 pb-5  border border-white">
+				<div class="col-md-3">
+					<!-- prodile picture  -->
+					<div class="profile_picture ">
+						<p class="text-dark font-weight-bold">Profile picture </p>
+						<img class="card-img-top" src="{{ person.image_url }}" alt="profile image is private">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Name</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Linked in  account</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Linked in  followers</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Headline</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Company</span></li>
+                        <li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Current Company</span></li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.name }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.author_account }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.followers }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.headline }}</strong></li>
+						<li class="list-inline-item p-2">	<strong class="text-dark">{{ person.company }}</strong></li>
+                            <li class="list-inline-item p-2">	<strong class="text-dark">{{ person.current_company_link }}</strong></li>
+					</ul>
+					</div>
+					</div>
+
+
+
+
+					<div class="col-md-1">
+
+					</div>
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="col-md-4">
+					<div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Company </span>		</li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">School</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Location</span>		</li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Email</span>		</li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Phone</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Connected</span>		</li>
+                            <li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Website</span>		</li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+
+						<li class="list-inline-item p-2">	<strong class="text-dark">50%</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.school }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.location }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.email }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.phone }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.connected }}</strong></li>
+					    <li class="list-inline-item p-2"><strong class="text-dark">{{ person.websites }}</strong></li>
+
+                        </ul>
+					</div>
+					</div>
+
+
+
+
+					<div class="col-md-1">
+
+					</div>
+
+				</div>
+
+			</div>
+			<!-- second row  -->
+			<div class="row mt-5">
+				<div class="profile_summary border border-success col-md-10 ml-auto mr-auto mt-2 ml-2" style="border-radius:0px 20px 0px 20px!important;border:4px solid !important ">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<p class="text-success font-weight-bold " style="font-size:25px;">Profile Overview </p>
+						</div>
+					</div>
+					<div class="p-2">
+						<p class="text-dark font-weight-bold text-center">{{ person.profile_summary }}</p>
+					</div>
+				</div>
+			</div>
+			<!--end second row   -->
+			<!-- third row  -->
+			<div class="row mt-5">
+				<!-- start of cards  -->
+
+                {% for exp in person.experience.jobs %}
+				<div class="col-md-4">
+					<div class="card text-center border border-dark" style="border-radius:25px 0px 25px 0px">
+						<div class="card-header text-center">
+							<span class="text-success font-weight-bold">Experience</span>
+						</div>
+						<div class="card-body">
+
+							<div class="row">
+							<div class="col-md-12">
+									<ul class="list-group  list-unstyled float-left pull-left" style="">
+								<li class="">Job :{{exp.title}}</li>
+								<li class="">Duration :{{exp.date_range}}</li>
+								<li class="">Location :{{exp.location}}</li>
+                                    <li class="">Description :{{exp.description}}</li>
+
+								<li class="">Company :{{exp.company}}</li>
+								<li class=""> <a href="{{exp.li_company_url}}" style="color:black">Company Profile</a></li>
+							</ul>
+							</div>
+
+							</div>
+							<a href="#" class="btn btn-primary btn-sm float-right pull-right">read more ...</a>
+						</div>
+						<div class="card-footer text-muted">
+							2 days ago
+						</div>
+					</div>
+				</div>
+                {% endfor %}
+
+
+			</div>
+			<!-- end third row  -->
+
+
+			</div>
+
+<div class="row pb-5">
+<div class="col-md-12">
+
+	</div>
+</div>
+
+</div>
+
+
+			<!-- code between  -->
+			<div class="row fixed-bottom">
+				<div class="col-md-12 text-center bg-dark" style="background-color: black;">
+					<p class="text-dark font-weight-bold ">Osint.com.pk</p>
+				</div>
+			</div>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<!-- Bootstrap tooltips -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+			<!-- Bootstrap core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<!-- MDB core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/series-label.js"></script>
+			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+			<script src="https://code.highcharts.com/modules/export-data.js"></script>
+			<script>
+				Highcharts.chart('container', {
+			chart: {
+			type: 'spline'
+			},
+			title: {
+			text: 'Monthly Average Tweets'
+			},
+			subtitle: {
+			text: 'Source: Osint.com'
+			},
+			xAxis: {
+			categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+			'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			},
+			yAxis: {
+			title: {
+			text: 'Tweets'
+			},
+			labels: {
+			formatter: function () {
+			return this.value + '°';
+			}
+			}
+			},
+			tooltip: {
+			crosshairs: true,
+			shared: true
+			},
+			plotOptions: {
+			spline: {
+			marker: {
+			radius: 4,
+			lineColor: '#666666',
+			lineWidth: 1
+			}
+			}
+			},
+			series: [{
+			name: 'Year : 2019',
+			marker: {
+			symbol: 'square'
+			},
+			data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
+			y: 26.5,
+			marker: {
+			symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
+			}
+			}, 23.3, 18.3, 13.9, 9.6]
+			}, {
+			name: 'Year : 2020',
+			marker: {
+			symbol: 'diamond'
+			},
+			data: [{
+			y: 3.9,
+			marker: {
+			symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
+			}
+			}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+			}]
+			});
+			</script>
+
+    {% endblock %}
+
+		</body>
+	</html>

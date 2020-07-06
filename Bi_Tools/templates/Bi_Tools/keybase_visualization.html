@@ -1,0 +1,146 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<meta charset="UTF-8">
+    <title>charts</title>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+       <script type="text/javascript" src="{% static 'Bi_Tools/colorschemes.js' %}"></script>
+{% endblock %}
+
+
+{% block belly %}
+ <div class="row middlecontentdiv glowing_border" style="border-radius: 20px 20px 0px 0px !important;">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading text-white pt-2 pb-1">{{ content_type|capfirst }} Visualization</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-3">
+
+
+
+
+        <div class="row" >
+            <div class="col-md-6">
+
+               <canvas id="a_chart" ></canvas>
+            </div>
+            <div class="col-md-6">
+
+                <canvas id="b_chart" ></canvas>
+            </div>
+
+        </div>
+        <div class="row" >
+            <div class="col-md-6">
+
+                <canvas id="c_chart" ></canvas>
+            </div>
+            <div class="col-md-6">
+
+                <canvas id="d_chart" ></canvas>
+            </div>
+
+        </div>
+
+
+
+
+            <div class="row" >
+            <div class="col-md-12">
+
+                <canvas id="fa_chart" ></canvas>
+            </div>
+
+
+        </div>
+
+
+
+            <div class="row" >
+            <div class="col-md-12">
+
+                <canvas id="fb_chart" ></canvas>
+            </div>
+
+
+        </div>
+
+
+            <div class="row" >
+            <div class="col-md-12">
+
+                <canvas id="fc_chart" ></canvas>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+    <script>
+
+        {% for dataset in dataset_list %}
+
+var ctx = document.getElementById('{{ dataset.div }}').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: "{{ dataset.type }}",
+    data: {
+        labels: {{ dataset.data.labels|safe }},
+        datasets: [
+            {% for d in dataset.data.datasets %}
+        {
+            label: '{{ d.label }}',
+            data: {{ d.data }},
+            fontColor:'#ffffff',
+            borderWidth: 1
+        },
+
+            {% endfor %}
+]
+
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        },
+        responsive: true,
+        plugins: {
+
+      colorschemes: {
+
+        scheme: 'brewer.Paired12'
+
+      }
+
+    },
+        title: {
+            display: true,
+            text: '{{ dataset.title|capfirst }}',
+            fontSize:20,
+            fontColor:'#ffffff'
+        },
+        legend: {
+            display: true,
+            labels: {
+                fontColor: 'rgb(255, 255, 132)'
+            }
+        }
+
+    }
+});
+
+        {% endfor %}
+
+</script>
+
+
+{% endblock %}>

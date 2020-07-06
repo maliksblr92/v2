@@ -1,0 +1,1225 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Avatar_Management_Unit/css/avatar.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+    
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems "> CREATE</a>
+            </div>
+
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:archive' %}" class="btn secondnavitems "> ARCHIVE</a>
+            </div>
+            <div class="col-md-4 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu">
+                <a href="{% url 'Avatar_Management_Unit:send_message' %}" class="btn secondnavitems "> SEND MESSAGE</a>
+            </div>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+{% endblock %}
+{% block belly %}
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
+            <!-- Sub Menu Bar for app specific menu -->
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <div class="nav-item nav-link text-left" style="font-size: 20px;">Personal
+                        Information</div>
+{#                    <a class="nav-item nav-link text-left" id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo">Personal#}
+{#                        Information</a>#}
+{#                    <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work">Work#}
+{#                        Details</a>#}
+{#                    <a class="nav-item nav-link" id="nav-interest-tab" data-toggle="tab"#}
+{#                       href="#nav-interest">Interest</a>#}
+{#                    <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events">Life#}
+{#                        Events</a>#}
+                </div>
+            </nav>
+            <!-- end of sub menu -->
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                                 role="alert">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="">
+                <div class="row formbg ml-3">
+                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                        <!-- nav tab content section -->
+                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <!-- personal info tab -->
+                            <div class="tab-pane fade active show" id="nav-pinfo" role="tabpanel">
+                                <!-- a nav for personal information tab -->
+                                <div class="row mt-2">
+                                    <!-- left side redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link active" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                        <p style="text-align: center; margin-top:10%;"><a class="CreateBtn" href="#">
+                                            Edit</a></p>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of left side redundant navigation -->
+                                    <!-- Personal information form-->
+                                    <div class="col-md-9 col-lg-9 col-xl-9">
+                                        <form id="personal-info-form" style="padding-bottom:10px;" method="POST"
+                                              action="/amu/avatar/">
+                                            {% csrf_token %}
+                                            <div class="form-group ml-4">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- First name start -->
+                                                        <div class="row input-group mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">
+                                                                First Name
+                                                            </span>
+                                                            </div>
+                                                            <input type="text" name="pinfo-fname" id="pinfo-fname"
+                                                                   class="col-md-9 form-control custom_input_field"
+                                                                   required="required" minlength="1" maxlength="50"
+                                                                   placeholder="First Name">
+                                                        </div>
+
+                                                                  
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row input-group mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Last Name</span>
+                                                            </div>
+                                                            <input type="text" name="pinfo-lname" id="pinfo-lname"
+                                                                   class="col-md-9 form-control custom_input_field"
+                                                                   required="required" minlength="1" maxlength="50"
+                                                                   placeholder="Last Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- email -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Email
+                                                    </span>
+                                                    </div>
+                                                    <input type="email" name="pinfo-email" id="pinfo-email"
+                                                           class="col-md-9 form-control custom_input_field"
+                                                           required="required"
+                                                           placeholder="Email Please"
+                                                           required>
+                                                </div>
+                                                <!-- end of email -->
+                                                <!-- phone number -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Phone Number
+                                                    </span>
+                                                    </div>
+                                                    <input type="number"
+                                                           class="col-md-9 form-control custom_input_field"
+                                                           name="pinfo-phone" required="required" minlength="1"
+                                                           maxlength="15" id="pinfo-phone" placeholder="Phone Number">
+                                                </div>
+                                                <!-- end of phone number -->
+                                                <!--for Nationality-->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;"> Nationality
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           name="pinfo-nationality" required="required" minlength="1"
+                                                           maxlength="20" id="pinfo-nationality"
+                                                           placeholder="Nationality">
+                                                </div>
+                                                <!--Address-->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Address
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           name="pinfo-address" required="required" minlength="1"
+                                                           maxlength="200" id="pinfo-address"
+                                                           placeholder="Permanent Address">
+                                                </div>
+                                                <!-- religious views -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Religious Views
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           placeholder="Religious Views" required="required"
+                                                           id="pinfo-religious" name="pinfo-religious">
+                                                </div>
+                                                <!-- end of religious views -->
+                                                <!-- marital status -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">
+                                                        Marital Status
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" name="pinfo-marital-status" id="pinfo-married"
+                                                           class="col-md-9 form-control custom_input_field"
+                                                           placeholder="single - married - in a relationship"
+                                                           required="required">
+                                                </div>
+                                                <!-- end of marital status -->
+                                                <!-- dob and gender 2 column div -->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- DOB ON SECTION-->
+                                                        <div class="row input-group mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">DOB
+                                                            </span>
+                                                            </div>
+                                                            <input class="col-md-9 form-control custom_input_field"
+                                                                   name="pinfo-dob"
+                                                                   placeholder="MM/DD/YYY" id="pinfo-dob"
+                                                                   required="required" type="date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <!--Gender SECTION-->
+                                                        <div class="row input-group mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Gender
+                                                            </span>
+                                                            </div>
+                                                            <select name="pinfo-gender"
+                                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                                    class="custom-select newinput" id="pinfo-gender"
+                                                                    required="required">
+                                                                <option selected value="">Select Gender</option>
+                                                                <option value="male">Male</option>
+                                                                <option value="female">Female</option>
+                                                                <option value="other">Other</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end of 2 column div for dob and gender-->
+                                            </div>
+                                            <!-- TWO BUTTON BOTTOM-->
+                                            <div class="row d-flex flex-row">
+                                                <div class="col-md-12 ml-5">
+                                                    <!--LEFT BUTTON-->
+                                                    <button type="reset" class="btn btn-secondary searchbutton"
+                                                            id="pinfo-clear-btn">Clear
+                                                    </button>
+                                                    <button type="submit" style="float:right;"
+                                                            class="btn btn-secondary searchbutton mr-5"
+                                                            id="pinfo-submit-btn">Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- END of Personal information form-->
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info progress-bar-striped" style="width:30%"></div>
+                                </div>
+                            </div>
+                            <!-- end of personal info tab -->
+                            <!-- work details tab -->
+                            <div class="tab-pane fade" id="nav-work" role="tabpanel">
+                                <!-- a nav for work details tab -->
+                                <div class="row mt-2">
+                                    <!-- left side redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                            <p style="text-align: center; margin-top:10%;">
+                                                <a class="CreateBtn" href="#">Edit</a>
+                                            </p>
+                                        </div>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of left side redundant navigation -->
+                                    <!-- Work Details form-->
+                                    <div class="col-md-9 col-lg-9 col-xl-9">
+                                        <form style="padding-bottom:10px;" id="work-details-form">
+                                            {% csrf_token %}
+                                            <div class="form-group ml-4">
+                                                <!-- avatar -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">
+                                                            Avatar
+                                                        </span>
+                                                    </div>
+                                                    <select name="wd-avatar"
+                                                            class="col-md-9 form-control custom_input_field custom-select amu-work-select">
+                                                        {% for avatar in avatars %}
+                                                            <option value="{{ avatar.0 }}"
+                                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                            </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <!-- job title -->
+                                                <div class="row input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Job title
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           placeholder="Job Title ..." name="wd-job-title" required>
+                                                </div>
+                                                <!-- company -->
+                                                <div class="row input-group   mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Company
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" name="wd-company"
+                                                           class="col-md-9 form-control custom_input_field"
+                                                           placeholder="Company Name ..." required>
+                                                </div>
+                                                <!--for Description-->
+                                                <div class="row input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;"> Description
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           placeholder="Description Please ..." name="wd-desc">
+                                                </div>
+                                                <!--Address-->
+                                                <div class="row input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Address
+                                                    </span>
+                                                    </div>
+                                                    <input type="text" class="col-md-9 form-control custom_input_field"
+                                                           placeholder="Address Please ..." name="wd-address">
+                                                </div>
+                                                <!-- DATE AND TIME 2 column div -->
+                                                <div class="row mt-1 mb-3">
+                                                    <!-- job start date SECTION-->
+                                                    <div class="col-md-6">
+                                                        <div class="row input-group">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Started
+                                                            </span>
+                                                            </div>
+                                                            <input class="col-md-9 form-control custom_input_field"
+                                                                   name="wd-start-date"
+                                                                   placeholder="MM/DD/YYYY" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <!--job end date SECTION-->
+                                                    <div class="col-md-6">
+                                                        <div class="row input-group">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Ended
+                                                            </span>
+                                                            </div>
+                                                            <input class="col-md-9 form-control custom_input_field"
+                                                                   name="wd-end-date"
+                                                                   placeholder="MM/DD/YYYY" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end of 2 column div for date and time-->
+                                                <div class="row input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Current
+                                                    </span>
+                                                    </div>
+                                                    <input type="checkbox"
+                                                           class="col-md-9 form-control custom_input_field"
+                                                           name="wd-current-job">
+                                                </div>
+                                            </div>
+                                            <!-- TWO BUTTON BOTTOM-->
+                                            <div class="row d-flex flex-row">
+                                                <div class="col-md-12 ml-5 ">
+                                                    <!--LEFT BUTTON-->
+                                                    <button type="reset" class="btn btn-secondary searchbutton"
+                                                            id="wd-clear-btn">Clear
+                                                    </button>
+                                                    <button type="submit" style="float:right; "
+                                                            class="btn btn-secondary searchbutton mr-5">Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- END of Work Details form-->
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info progress-bar-striped" style="width:50%"></div>
+                                </div>
+                            </div>
+                            <!-- end of work details tab -->
+                            <!-- interests tab -->
+                            <div class="tab-pane fade" id="nav-interest" role="tabpanel">
+                                <!-- a nav for interests tab -->
+                                <div class="row mt-2">
+                                    <!-- left side redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                            <p style="text-align: center; margin-top:10%;"><a class="CreateBtn"
+                                                                                              href="#">
+                                                Edit</a></p>
+                                        </div>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of left side redundant navigation -->
+                                    <!-- interests form -->
+                                    <div class="col-md-9 col-lg-9 col-xl-9" id="interests-form">
+                                        <!-- csrf_token -->
+                                        {% csrf_token %}
+                                        <div class="ml-4">
+                                            <!-- avatar -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Avatar</span>
+                                                </div>
+                                                <select name="i-avatar"
+                                                        class="col-md-9 form-control custom_input_field custom-select amu-interest-select">
+                                                    {% for avatar in avatars %}
+                                                        <option value="{{ avatar.0 }}"
+                                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <!-- hobbies -->
+                                            <div class="row input-group mt-2 mb-2">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Hobbies
+                                            </span>
+                                                </div>
+                                                <input id="i-hobbies" type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       placeholder="Hobbies Please ...">
+                                            </div>
+                                            <div class="tegscontainer" id="i-hobbies-container">
+                                                <!-- <span class="eachtag">
+                                                    tag
+                                                    <i style="color:white; opacity:0.8;"
+                                                        class="meraicon fas fa-times fa-1x"></i>
+                                                </span> -->
+                                            </div>
+                                            <!-- movies -->
+                                            <div class="row input-group mt-2 mb-2">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Movies
+                                            </span>
+                                                </div>
+                                                <input id="i-movies" type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       placeholder="Movies Please ...">
+                                            </div>
+                                            <div class="tegscontainer" id="i-movies-container">
+                                            </div>
+                                            <!-- songs -->
+                                            <div class="row input-group mt-2 mb-2">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Songs
+                                            </span>
+                                                </div>
+                                                <input id="i-songs" type="text"
+                                                       class="col-md-9 form-control custom_input_field"
+                                                       placeholder="Songs Please ...">
+                                            </div>
+                                            <div class="tegscontainer" id="i-songs-container">
+                                            </div>
+
+                                            <!-- Clear and Submit Buttons-->
+                                            <div class="row d-flex flex-row mt-3">
+                                                <div class="col-md-12 ml-5 ">
+                                                    <button type="button" class="btn btn-secondary searchbutton"
+                                                            id="i-clear-btn">Clear
+                                                    </button>
+                                                    <button type="button" style="float:right;"
+                                                            class="btn btn-secondary searchbutton mr-5"
+                                                            id="i-submit-btn">Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of interests form -->
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info progress-bar-striped" style="width:70%"></div>
+                                </div>
+                            </div>
+                            <!-- end of interests tab -->
+                            <!-- life events tab -->
+                            <div class="tab-pane fade" id="nav-events" role="tabpanel">
+                                <!-- a nav for life events tab -->
+                                <div class="row mt-2">
+                                    <!-- left side redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}">
+                                            <div class="btn-group-vertical" role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                        <p style="text-align: center; margin-top:10%;"><a class="CreateBtn" href="#">
+                                            Edit</a></p>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of left side redundant navigation -->
+                                    <!-- life events, education, skills form -->
+                                    <div class="col-md-9 col-lg-9 col-xl-9">
+                                        <div class="row mt-2 ml-4">
+                                            <!-- avatar -->
+                                            <div class="row input-group mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Avatar</span>
+                                                </div>
+                                                <select name="le-avatar"
+                                                        class="col-md-9 form-control custom_input_field custom-select amu-work-select">
+                                                    {% for avatar in avatars %}
+                                                        <option value="{{ avatar.0 }}"
+                                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <!-- 1st education section -->
+                                            <form id="education-form">
+                                                {% csrf_token %}
+                                                <div class="col-md-12 col-lg-12 col-xl-12 m-0 p-0">
+                                                    <!-- banner for education form -->
+                                                    <div class="bg-info clearfix avatorleft mb-3 mr-4">
+                                                        <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
+                                                           class="fas fa-university fa-1x mt-2 ml-4">
+                                                            Education</i>
+                                                    </div>
+                                                    <!-- degree -->
+                                                    <div class="row input-group mt-2 mb-3">
+                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Degree
+                                                        </span>
+                                                        </div>
+                                                        <input type="text" class="col-md-9 form-control custom_input_field"
+                                                               placeholder="Degree Name ..." name="le-ef-degree"
+                                                               required>
+                                                    </div>
+                                                    <!-- institute -->
+                                                    <div class="row input-group mt-1 mb-3">
+                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Institute
+                                                        </span>
+                                                        </div>
+                                                        <input type="text" name="le-ef-institute"
+                                                               class="form-control newinputdesign"
+                                                               placeholder="Institue Please ..." required>
+                                                    </div>
+                                                    <!-- grades and Field of Study -->
+                                                    <div class="row mt-1 mb-3">
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">
+                                                                        Grade
+                                                                    </span>
+                                                                </div>
+                                                                <input type="text" name="le-ef-grade"
+                                                                       class="col-md-9 form-control custom_input_field"
+                                                                       placeholder="Grades ...">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                    <span class="custom_label_input_field" style="font-size:13px;
+                                                                opacity:0.9; padding:7px 4px 0 6px;">
+                                                                        Field of Study
+                                                                    </span>
+                                                                </div>
+                                                                <input type="text" name="le-ef-fieldofstudy"
+                                                                       class="col-md-9 form-control custom_input_field"
+                                                                       placeholder="Field Of Study ...">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- dates -->
+                                                    <div class="row">
+                                                        <!-- degree 1 start date SECTION-->
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group mt-1 mb-3">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Started
+                                                                </span>
+                                                                </div>
+                                                                <input class="col-md-9 form-control custom_input_field"
+                                                                       id="date"
+                                                                       name="le-ef-start-date" placeholder="MM/DD/YYYY"
+                                                                       type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <!-- degree 1 end date SECTION-->
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group   mt-1 mb-3">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Ended
+                                                                </span>
+                                                                </div>
+                                                                <input type="text" name="le-ef-end-date"
+                                                                       class="col-md-9 form-control custom_input_field"
+                                                                       placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- clear and submit button -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center">
+                                                            <button type="reset"
+                                                                    class="btn btn-secondary searchbutton">Clear
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-6 text-center">
+                                                            <button type="submit"
+                                                                    id="le-ef-submit"
+                                                                    class="btn btn-secondary searchbutton">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!-- end of 1st education section -->
+                                            <!-- marriage section -->
+                                            <form id="marriage-form">
+                                                {% csrf_token %}
+                                                <div class="col-md-12 col-lg-12 col-xl-12 mt-3">
+                                                    <!-- banner for form -->
+                                                    <div class="bg-info clearfix avatorleft mb-3">
+                                                        <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
+                                                           class="fas fa-ring fa-1x mt-2 ml-4">
+                                                            Marriage</i>
+                                                    </div>
+                                                    <!-- married to -->
+                                                    <div class="row input-group mt-2 mb-3">
+                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Married to
+                                                        </span>
+                                                        </div>
+                                                        <input type="text"
+                                                               class="col-md-9 form-control custom_input_field"
+                                                               placeholder="Spouse Name ..." name="le-m-spouse"
+                                                               required>
+                                                    </div>
+                                                    <!-- location -->
+                                                    <div class="row input-group mt-1 mb-3">
+                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Location
+                                                        </span>
+                                                        </div>
+                                                        <input type="text" name="le-m-location"
+                                                               class="col-md-9 form-control custom_input_field"
+                                                               placeholder="wedding destination ...">
+                                                    </div>
+                                                    <!-- dates -->
+                                                    <div class="row">
+                                                        <!-- Wedding Date SECTION-->
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group mt-1 mb-3">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Wedding Date
+                                                                </span>
+                                                                </div>
+                                                                <input class="col-md-9 form-control custom_input_field"
+                                                                       name="le-m-wedding-date" placeholder="MM/DD/YYY"
+                                                                       type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Divorce Date SECTION-->
+                                                        <div class="col-md-6">
+                                                            <div class="row input-group mt-1 mb-3">
+                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                                <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                                                opacity:0.9; padding:7px 9px 0 10px;">Divorce Date
+                                                                </span>
+                                                                </div>
+                                                                <input type="text" name="le-m-divorce-date"
+                                                                       class="col-md-9 form-control custom_input_field"
+                                                                       placeholder="MM/DD/YYYY">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- clear and submit button -->
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center">
+                                                            <button type="reset"
+                                                                    class="btn btn-secondary searchbutton">Clear
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-6 text-center">
+                                                            <button type="submit"
+                                                                    id="le-m-submit"
+                                                                    class="btn btn-secondary searchbutton">Submit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end of marriage section -->
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of life events, education, skills form-->
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info progress-bar-striped" style="width:80%"></div>
+                                </div>
+                            </div>
+                            <!-- end of life events tab -->
+                            <!-- biography tab -->
+                            <div class="tab-pane fade" id="nav-bio" role="tabpanel">
+                                <!--  -->
+                                <div class="row mt-2">
+                                    <!-- left side redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link active" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                            <p style="text-align: center; margin-top:10%;"><a class="CreateBtn" href="#">
+                                                Edit</a></p>
+                                        </div>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of left side redundant navigation -->
+                                    <div class="col-md-9 col-lg-9 col-xl-9">
+                                        <form id="biography-form">
+                                            {% csrf_token %}
+                                            <!-- avatar -->
+                                            <div class="row input-group mt-4 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign">Avatar</span>
+                                                </div>
+                                                <select name="b-avatar" class="newinput custom-select amu-work-select">
+                                                    {% for avatar in avatars %}
+                                                        <option value="{{ avatar.0 }}"
+                                                                {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="input-group mt-2 mb-3">
+                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="newlabeldesign pt-auto" style="font-size:13px;letter-spacing:0.1em;
+                      opacity:0.9;">Enter Biography text
+                                                </span>
+                                                </div>
+                                                <textarea class="form-control" rows="5" name="b-biography"></textarea>
+                                                <div class="row d-flex flex-row mt-3">
+                                                    <div class="col-md-12 ml-5 ">
+                                                        <!--LEFT BUTTON-->
+                                                        <button type="reset" class="btn btn-secondary searchbutton">
+                                                            Clear
+                                                        </button>
+                                                        <button type="submit" style="float:right; "
+                                                                class="btn btn-secondary searchbutton mr-5">Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- END of Personal information form-->
+                                </div>
+                            </div>
+                            <!-- end of biography tab -->
+                            <!-- social media tab -->
+                            <div class="tab-pane fade" id="nav-social" role="tabpanel">
+                                <div class="row mt-2">
+                                    <!-- redundant navigation -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link active" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                            <p style="text-align: center; margin-top:10%;"><a class="CreateBtn"
+                                                                                              href="#">
+                                                Edit</a></p>
+                                        </div>
+                                    </div>
+                                    <!-- end of redundant navigation -->
+                                    <!-- form container -->
+                                    <form class="col-md-9 col-lg-9 col-xl-9" id="socialaccount-form">
+                                        {% csrf_token %}
+                                        <!-- sma platform -->
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xl-12 ">
+                                                <div class="row mt-5 ml-auto text-center">
+                                                    <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-reddit fa-2x"></i>
+                                                            <input type="radio" name="sma-platform" value="reddit">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-linkedin fa-2x"></i>
+                                                            <input type="radio" name="sma-platform" value="linkedin">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-instagram fa-2x"></i>
+                                                            <input type="radio" name="sma-platform" value="instagram">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-facebook fa-2x"></i>
+                                                            <input type="radio" name="sma-platform" value="facebook">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-twitter-square fa-2x"></i>
+                                                            <input type="radio" name="sma-platform" value="twitter">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- avatar -->
+                                        <div class="row input-group mt-4 mb-3">
+                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="newlabeldesign">Avatar</span>
+                                            </div>
+                                            <select name="sma-avatar" class="newinput custom-select amu-work-select">
+                                                {% for avatar in avatars %}
+                                                    <option value="{{ avatar.0 }}"
+                                                            {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- first name last name -->
+                                        <div class="row mt-2 mb-3">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <div class="input-group">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:7px 9px 0 10px;">First name
+                                                    </span>
+                                                    </div>
+                                                    <input name="sma-first-name" type="text"
+                                                           class="form-control newinputdesign"
+                                                           placeholder="First Name...">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <div class="input-group">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:7px 9px 0 10px;">Last name
+                                                    </span>
+                                                    </div>
+                                                    <input name="sma-last-name" type="text"
+                                                           class="form-control newinputdesign"
+                                                           placeholder="Last Name...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- email -->
+                                        <div class="input-group mt-2 mb-3">
+                                            <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                        opacity:0.9; padding:7px 9px 0 10px;">Email
+                                            </span>
+                                            </div>
+                                            <input name="sma-email" type="email" class="form-control  newinputdesign"
+                                                   placeholder="Email Please ...">
+                                        </div>
+                                        <!-- phone -->
+                                        <div class="input-group mt-2 mb-3">
+                                            <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                        opacity:0.9; padding:7px 9px 0 10px;">Phone Number
+                                            </span>
+                                            </div>
+                                            <input name="sma-phone" type="text" class="form-control  newinputdesign"
+                                                   placeholder="Phone Number ...">
+                                        </div>
+                                        <!-- username -->
+                                        <div class="input-group   mt-2 mb-3">
+                                            <div class="col-md-3 p-0 input-group-prepend">
+                                            <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                          opacity:0.9; padding:7px 9px 0 10px;">Username
+                                            </span>
+                                            </div>
+                                            <input name="sma-username" type="text" class="form-control  newinputdesign"
+                                                   placeholder="Please Enter text...">
+                                        </div>
+                                        <!-- date of birth and gender -->
+                                        <div class="row">
+                                            <!-- dob -->
+                                            <div class="col-md-6">
+                                                <div class="input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:5px 9px 0 10px;">DOB
+                                                    </span>
+                                                    </div>
+                                                    <input class="form-control newinputdesign" name="sma-dob"
+                                                           placeholder="MM/DD/YYY" type="text">
+                                                </div>
+                                            </div>
+                                            <!-- gender -->
+                                            <div class="col-md-6">
+                                                <div class="input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:5px 9px 0 10px;">Gender
+                                                    </span>
+                                                    </div>
+                                                    <select
+                                                            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                            class="custom-select newinput" name="sma-gender">
+                                                        <option value="male" selected>Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- clear and submit button -->
+                                        <div class="row d-flex flex-row mt-3">
+                                            <div class="col-md-12 ml-5 ">
+                                                <button type="reset" class="btn btn-secondary searchbutton">Clear
+                                                </button>
+                                                <button type="submit" style="float:right; "
+                                                        class="btn btn-secondary searchbutton mr-5">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- end of form form container -->
+                                </div>
+                            </div>
+                            <!-- end of social media tab -->
+                            <!-- Posts tab -->
+                            <div class="tab-pane fade" id="nav-posts" role="tabpanel">
+                                <!-- Each content tab #1 for keywords-->
+                                <div class="row mt-2">
+                                    <!-- redundant nav -->
+                                    <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                                        <!-- Left Image side-->
+                                        <p style="text-align: center; margin-top:30%;"><a class="CreateBtn" href="#">
+                                            Create</a></p>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
+                                            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-bio">Biography</a>
+                                                        <a class="nav-item nav-link active" data-toggle="tab"
+                                                           href="#nav-social">Social Media</a>
+                                                        <a class="nav-item nav-link" data-toggle="tab"
+                                                           href="#nav-posts">Posts</a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                            <p style="text-align: center; margin-top:10%;"><a class="CreateBtn"
+                                                                                              href="#">
+                                                Edit</a></p>
+                                        </div>
+                                        <!-- end of left img section -->
+                                    </div>
+                                    <!-- end of redundant nav -->
+                                    <form class="col-md-9 col-lg-9 col-xl-9" id="socialpost-form">
+
+                                        <p class="paratext mt-2"> Select the social media below</p>
+                                        <!-- csrf token -->
+                                        {% csrf_token %}
+                                        <!-- platform type radio buttons -->
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-xl-12 ">
+                                                <div class="row mt-2 ml-auto text-center">
+                                                    <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-reddit fa-2x"></i>
+                                                            <input type="radio" name="smp-platform" value="reddit">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-linkedin fa-2x"></i>
+                                                            <input type="radio" name="smp-platform" value="linkedin">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-instagram fa-2x"></i>
+                                                            <input type="radio" name="smp-platform" value="instagram">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-facebook fa-2x"></i>
+                                                            <input type="radio" name="smp-platform" value="facebook">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                                        <div class="iconbg">
+                                                            <i style="color:white; opacity:0.8;"
+                                                               class="fab fa-twitter-square fa-2x"></i>
+                                                            <input type="radio" name="smp-platform" value="twitter">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- avatar id section -->
+                                        <!-- avatar -->
+                                        <div class="row input-group mt-4 mb-3">
+                                            <div class="col-md-3 p-0 input-group-prepend">
+                                                <span class="newlabeldesign">Avatar</span>
+                                            </div>
+                                            <select name="smp-avatar" class="newinput custom-select amu-work-select">
+                                                {% for avatar in avatars %}
+                                                    <option value="{{ avatar.0 }}"
+                                                            {% if forloop.counter0 == 0 %}selected{% endif %}>{{ avatar.1 }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                        <!-- post text section -->
+                                        <div class="row">
+                                            <div class="col-md-12 col-xl-12 col-lg-12">
+                                                <div class="input-group   mt-2 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign pt-auto" style="font-size:13px;letter-spacing:0.1em;
+                            opacity:0.9;">Enter Posts Texts
+                                                    </span>
+                                                    </div>
+                                                    <textarea class="form-control" rows="5" name="smp-text"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- post date section -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
+                                                <div class="input-group mt-1 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                opacity:0.9; padding:5px 9px 0 10px;">Post Date
+                                                    </span>
+                                                    </div>
+                                                    <input class="form-control newinputdesign" type="text"
+                                                           name="smp-date"
+                                                           placeholder="MM/DD/YYYY">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex flex-row mt-3">
+                                            <div class="col-md-12 ml-5 ">
+                                                <button type="reset" class="btn btn-secondary searchbutton">Clear
+                                                </button>
+                                                <button type="submit" style="float:right; "
+                                                        class="btn btn-secondary searchbutton mr-5">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- end of posts tab -->
+                        </div>
+                        <!-- end of nav tab content -->
+                    </div>
+                </div>
+                <!-- END OF second row-->
+            </div>
+        </div>
+        <!-- end of main container -->
+
+    </div>
+{% endblock %}
+{% block foot_dep %}
+    <!-- <script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script> -->
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Create Avatar";
+
+        $(document).ready(function () {
+            function CLEAN_PERSONAL_INFORMATION_FORM() {
+                console.log("CLEARING PERSONAL INFORMATION FORM ");
+                $('#pinfo-fname').val("");
+                $('#pinfo-lname').val("");
+                $('#pinfo-email').val("");
+                $('#pinfo-nationality').val("");
+                $('#pinfo-address').val("");
+                $('#pinfo-relegious').val("");
+                $('#pinfo-married').val("");
+                $('#pinfo-dob').val("");
+                $('#pinfo-gender').val("");
+            }
+        })
+    </script>
+{% endblock %}

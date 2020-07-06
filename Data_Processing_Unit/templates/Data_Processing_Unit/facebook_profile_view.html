@@ -1,0 +1,432 @@
+{% extends 'OSINT_System_Core/system_base.html' %}
+<DOCTYPE html>
+
+<html>
+
+	<body>
+		{% block system_content_block %}
+		<!-- code bwtween  -->
+		<div class="container-fluid bg-white">
+			<div class="row pt-5 pb-5  border border-white">
+				<div class="col-md-4 text-center ">
+					<!-- prodile picture  -->
+					<div class="profile_picture ">
+						<p class="text-dark font-weight-bold"></p>
+						<img class="card-img-top border border-warning" src="{{ person.profile_picture_url.web }}" style="height: 300px; width: 300px;" alt="Card image cap">
+					</div>
+				</div>
+
+
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-4"><div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Name</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Person account</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Peron ID</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">facebook following</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Suspicious</span>		</li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.name }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.author_account }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.author_id }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark"></strong></li>
+						<li class="list-inline-item p-2">	<strong class="text-dark">50%</strong></li>
+					</ul>
+					</div>
+					</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="col-md-4">
+                            <div class="row">
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">DOB:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Gender:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Interested In:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Language:</span></li>
+						<li class="list-inline-item p-2"><span class="text-dark font-weight-bold ">Religion:</span>		</li>
+					</ul>
+					</div>
+
+					<div class="col-md-6">
+						<ul class="list-group list-group-flush">
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.general_information.birthday }}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.general_information.gender}}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">{{ person.general_information.interested_in}}</strong></li>
+						<li class="list-inline-item p-2"><strong class="text-dark">3124</strong></li>
+						<li class="list-inline-item p-2">	<strong class="text-dark">50%</strong></li>
+					</ul>
+					</div>
+                            </div>
+					</div>
+                   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+            </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8"><div class="profile_summary border border-success col-md-12 ml-auto mr-auto p-2 mt-2 ml-2" style="border-radius:10px 10px 10px 10px!important;border:4px solid !important ">
+					<div class="p-2">
+						<p class="text-dark font-weight-bold text-center">{{ person.profile_summary }}</p>
+					</div>
+				</div></div>
+        </div>
+
+			<!-- second row  -->
+			<div class="row mt-5">
+
+			</div>
+			<!--end second row   -->
+			<!-- third row  -->
+			<div class="row mt-5">
+				<!-- start of cards  -->
+				<div class="col-md-4">
+					<div class="card text-center border border-dark" style="border-radius:25px 25px 25px 25px">
+						<div class="card-header text-center">
+							<span class="text-success font-weight-bold">Close Associates  </span>
+						</div>
+
+						<div class="card-body"  style="height:400px!important;overflow: scroll;!important">
+
+                                                                            <table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Name</th>
+                                                        <th>Action</th>
+
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                     {% for associate in person.close_associates.close_associates %}
+                                                      <tr>
+                                                        <td>{{ associate.name }}</td>
+                                                        <td><a href="{{ associate.url }}" class="btn btn-primary btn-sm">view profile</a></td>
+                                                      </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                  </table>
+						</div>
+
+
+						<div class="card-footer text-muted">
+							2 days ago
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card text-center border border-dark" style="border-radius:25px 25px 25px 25px">
+						<div class="card-header text-center">
+							<span class="text-success font-weight-bold"> Check In </span>
+						</div>
+						<div class="card-body" style="height:400px!important;overflow: scroll;!important">
+
+							<table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Place</th>
+                                                        <th>Date</th>
+                                                          <th>Action</th>
+
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                     {% for checkin in person.check_ins.check_ins %}
+                                                      <tr>
+                                                        <td>{{ checkin.location }}</td>
+                                                          <td>{{ checkin.date }}</td>
+                                                        <td><a href="{{ checkin.url }}" class="btn btn-primary btn-sm">view page</a></td>
+                                                      </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                  </table>
+						</div>
+						<div class="card-footer text-muted">
+							2 days ago
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card text-center border border-dark" style="border-radius:25px 25px 25px 25px">
+						<div class="card-header text-center">
+							<span class="text-success font-weight-bold">Intrests</span>
+						</div>
+						<div class="card-body" style="height:400px!important;overflow: scroll;!important">
+
+							<table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Interest</th>
+
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                     {% for interest in person.interests.interests %}
+                                                      <tr>
+                                                        <td>{{ interest }}</td>
+
+                                                      </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                  </table>
+						</div>
+						<div class="card-footer text-muted">
+							2 days ago
+						</div>
+					</div>
+				</div>
+				<!-- end of cards  -->
+			</div>
+			<!-- end third row  -->
+			<!-- start of fourth row and graphs -->
+			<div class="row mt-5">
+				<div class="col-md-12 text-center text-white mb-5" >
+					<p class="btn" style="font-size: 25px!important; background-color: #0E2355;color:white" >Facebook Post Frequency Graph </p>
+				</div>
+				<div class="col-md-2 bg-dark">
+
+				</div>
+				<div class="col-md-8 bg-white p-2" style="border:10px solid green;">
+					<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto;"></div>
+				</div>
+				<div class="col-md-2 bg-dark">
+
+				</div>
+			</div>
+			<!-- end of fourth row and graophs  -->
+
+
+			<!-- fifth row  -->
+			<div class="recent_tweets row mt-5 mb-5 pb-5">
+				<div class="col-md-12 text-center pb-5 ">
+						<p class="btn" style="font-size: 25px!important; background-color: #0E2355;color:white" >Most Interacted Posts   </p>
+				</div>
+
+                {% for post in person.posts.posts %}
+                    <div class="col-md-2 mt-1 mb-1 ">
+                        <div class="card border border-primary" style="border-radius:25px 25px 25px 25px">
+
+                            <div class="card-body">
+                                <div class="  float-right" style="border-radius: 50%;height: 60;width: 60;justify-content: center;align-items: center;display: flex;">
+                                    <i class="fab fa-facebook float-right pull-right  text-dark  mt-0 pt-0"></i>
+
+                                </div>
+                <div style="height: 50px;overflow: scroll;">
+                                <p class="card-text  text-black " style="font-size:11px;font-weight: bold;">{{post.post_text}}</p>
+</div>
+                                    <img src="{{ post.picture_directory }}" style="height:150px!important; width:100%!important">
+
+                                <a href="{{ post.post_link }}" class="btn btn-primary btn-sm">view on facebook</a>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor  %}
+
+
+
+
+
+				<!--  -->
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!--  -->
+
+			</div>
+
+
+
+
+
+
+
+
+
+<div class="row pb-5">
+<div class="col-md-12">
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<!-- code between  -->
+			<div class="row fixed-bottom">
+				<div class="col-md-12 text-center bg-dark" style="background-color: black;">
+					<p class="text-dark font-weight-bold ">Osint.com.pk</p>
+				</div>
+			</div>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<!-- Bootstrap tooltips -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+			<!-- Bootstrap core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<!-- MDB core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/modules/series-label.js"></script>
+			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+			<script src="https://code.highcharts.com/modules/export-data.js"></script>
+			<script>
+				Highcharts.chart('container', {
+			chart: {
+			type: 'spline'
+			},
+			title: {
+			text: 'Monthly Average Facebook Posts'
+			},
+			subtitle: {
+			text: 'Source: Osint.com'
+			},
+			xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			},
+			yAxis: {
+                title: {
+                text: 'Posts'
+                },
+                labels: {
+                formatter: function () {
+                return this.value + '°';
+                }
+                }
+			},
+			tooltip: {
+			crosshairs: true,
+			shared: true
+			},
+			plotOptions: {
+			spline: {
+			marker: {
+			radius: 4,
+			lineColor: '#666666',
+			lineWidth: 1
+			}
+			}
+			},
+			series: [{
+			name: 'Post',
+			marker: {
+			symbol: 'square'
+			},
+			data: [{% for point in person.post_frequency_graph.1 %} {{ point }},  {% endfor %}]
+			}]
+			});
+			</script>
+
+    {% endblock system_content_block %}
+		</body>
+	</html>
