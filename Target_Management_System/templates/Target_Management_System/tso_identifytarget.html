@@ -1,8 +1,8 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}"/>
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_identifytarget.css' %}"/>
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}" />
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_identifytarget.css' %}" />
 {% endblock %}
 {% block smallnavbar %}
     <div class="row">
@@ -17,271 +17,249 @@
                 <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border"> <!-- secondnavactive -->
-                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
-                    IDENTIFY</a>
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
-                    SURVEY</a>
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
-                    CRAWLING</a>
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
-                    KEYBASE</a>
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
 {% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">IDENTIFY TARGET</p>
-{% endblock %}
 {% block belly %}
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <!-- Query Form start-->
-            <div class="row">
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Identify Target</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  mymainbg  ">
+            <div class="">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <!-- Second row-->
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
                     <!-- FORM start -->
-
-                    {% csrf_token %}
-                    <div class="form-group justify-content-center text-center ">
-                        <div style="" class="container input1">
-                            <!--Tetfield 3 -->
-                            <div class="row input-group mt-4 mb-3">
-                                <div class="col-md-3 p-0 input-group-prepend">
+                   
+                        {% csrf_token %}
+                        <div class="form-group justify-content-center text-center ">
+                            <div style="" class="container input1">
+                                <!--Tetfield 3 -->
+                                <div class="row input-group mt-4 mb-3">
+                                    <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Query
                                         </span>
+                                    </div>
+                                    <input type="text" class="col-md-9  form-control  newinputdesign" id="hid_query" name="query"
+                                    placeholder="Please Enter Target Description" aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2">
+                                    <input type="hidden" id="hid_website" name="website" value="ss">
                                 </div>
-                                <input type="text" class="col-md-9  form-control  newinputdesign" id="hid_query"
-                                       name="query"
-                                       placeholder="Please Enter Target Description" aria-label="Recipient's username"
-                                       aria-describedby="basic-addon2">
-                                <input type="hidden" id="hid_website" name="website" value="ss">
                             </div>
+                            <!-- end of 2 divided textfield-->
                         </div>
-                        <!-- end of 2 divided textfield-->
                     </div>
-                </div>
+                
+                <!--FORM END-->
             </div>
-            <!-- Query Form end -->
-            <!-- Response Fields start-->
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
-                    <!-- social box for facebook -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-facebook fa-1x mt-2  ml-4  ">
-                                Facebook
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('facebook')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_facebook"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
+            <!-- below form  -->
+            <div class="col-md-12  ">
+                <!-- social box for facebook -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-facebook fa-1x mt-2  ml-4  ">
+                        Facebook
+                        </i>
                     </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="facebook_response"
-                         style="border:none;">
-                    </div>
-                    <!-- for Instagram -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-instagram fa-1x mt-2  ml-4  ">
-                                Instagram
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('instagram')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_instagram"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
-                    </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="instagram_response"
-                         style="border:none;">
-                    </div>
-                    <!-- For twitter -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-twitter-square fa-1x mt-2  ml-4  ">
-                                Twitter
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('twitter')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_twitter"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
-                    </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="twitter_response"
-                         style="border:none;">
-                    </div>
-                    <!-- for LinkedIn -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-linkedin fa-1x mt-2  ml-4  ">
-                                LinkedIn
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('linkedin')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_linkedin"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
-                    </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="linkedin_response"
-                         style="border:none;">
-                    </div>
-                    <!-- for Reddit -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
-                                Reddit
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('reddit')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_reddit"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
-                    </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="reddit_response"
-                         style="border:none;">
-                    </div>
-                    <!-- for Youtube -->
-                    <div class="row custom_row mb-3">
-                        <div class="iconlabel col-md-8">
-                            <i style="color:white; opacity:0.8;font-size:14px; "
-                               class="fab fa-youtube-square fa-1x mt-2  ml-4  ">
-                                Youtube
-                            </i>
-                        </div>
-                        <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
-                                onclick="myFunction('youtube')">
-                            Search
-                        </button>
-                        <div class=" col-md-1 p-0 m-0">
-                            <i class="fas fa-circle-notch fa-spin" id="loading_icon_youtube"
-                               style="margin: 7px 0px 0px 20px"></i>
-                        </div>
-                    </div>
-                    <div class="container othercontainer d-flex justify-content-center" id="youtube_response"
-                         style="border:none;">
-                    </div>
-                    <!-- END OF second row-->
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('facebook')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_facebook" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
                 </div>
+                <div class="container othercontainer d-flex justify-content-center" id="facebook_response" style="border:none;">
+                </div>
+                <!-- for Instagram -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-instagram fa-1x mt-2  ml-4  ">
+                        Instagram
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('instagram')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_instagram" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="instagram_response" style="border:none;">
+                </div>
+                <!-- For twitter -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-twitter-square fa-1x mt-2  ml-4  ">
+                        Twitter
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('twitter')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_twitter" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="twitter_response" style="border:none;">
+                </div>
+                <!-- for LinkedIn -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-linkedin fa-1x mt-2  ml-4  ">
+                        LinkedIn
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('linkedin')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin" id="loading_icon_linkedin" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="linkedin_response" style="border:none;">
+                </div>
+                <!-- for Reddit -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-reddit-square fa-1x mt-2  ml-4  ">
+                        Reddit
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('reddit')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_reddit" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="reddit_response" style="border:none;">
+                </div>
+                 <!-- for Youtube -->
+                <div class="row custom_row mb-3">
+                    <div class="iconlabel col-md-8">
+                        <i style="color:white; opacity:0.8;font-size:14px; " class="fab fa-youtube-square fa-1x mt-2  ml-4  ">
+                        Youtube
+                        </i>
+                    </div>
+                    <button type="button" class="col-md-3 btn btn-secondary searchbtn float-right"
+                    onclick="myFunction('youtube')">
+                    Search
+                    </button>
+                      <div class=" col-md-1 p-0 m-0">
+                          <i class="fas fa-circle-notch fa-spin"id="loading_icon_youtube" style="margin: 7px 0px 0px 20px"></i>
+                      </div>
+                </div>
+                <div class="container othercontainer d-flex justify-content-center" id="youtube_response" style="border:none;">
+                </div>
+                <!-- END OF second row-->
             </div>
-            <!-- Response fields end-->
         </div>
     </div>
     <script>
-        window.document.title = "Target";
+    window.document.title = "Target";
+          function hideLoadingIcons(){
+    console.log("hide all icons")
 
-        function hideLoadingIcons() {
-            console.log("hide all icons")
+}
+document.getElementById("loading_icon_facebook").style.display = "none";
+document.getElementById("loading_icon_twitter").style.display = "none";
+document.getElementById("loading_icon_instagram").style.display = "none";
+document.getElementById("loading_icon_linkedin").style.display = "none";
+document.getElementById("loading_icon_reddit").style.display = "none";
+document.getElementById("loading_icon_youtube").style.display = "none";
 
+    function myFunction(website) {
+        if(website == 'instagram'){
+            $('#loading_icon_instagram').show()
         }
 
-        document.getElementById("loading_icon_facebook").style.display = "none";
-        document.getElementById("loading_icon_twitter").style.display = "none";
-        document.getElementById("loading_icon_instagram").style.display = "none";
-        document.getElementById("loading_icon_linkedin").style.display = "none";
-        document.getElementById("loading_icon_reddit").style.display = "none";
-        document.getElementById("loading_icon_youtube").style.display = "none";
-
-        function myFunction(website) {
-            if (website == 'instagram') {
-                $('#loading_icon_instagram').show()
-            }
-
-            if (website == 'facebook') {
-                $('#loading_icon_facebook').show()
-            }
-
-            if (website == 'reddit') {
-                $('#loading_icon_reddit').show()
-            }
-            if (website == 'linkedin') {
-                $('#loading_icon_linkedin').show()
-            }
-
-            if (website == 'twitter') {
-                $('#loading_icon_twitter').show()
-            }
-
-            if (website == 'youtube') {
-                $('#loading_icon_youtube').show()
-            }
-
-            var query = document.getElementById("hid_query").value
-            $.ajax({
-                url: "/tms/identifytarget_request/",
-                data: {
-                    'query': query,
-                    'website': website
-                },
-                'success': (response) => {
-                    //console.log('i am called    ss  s')
-
-                    if (website == 'instagram') {
-
-                        $('#instagram_response').empty().append(response)
-                        $('#loading_icon_instagram').hide()
-                    }
-                    if (website == 'twitter') {
-                        $('#twitter_response').empty().append(response)
-                        $('#loading_icon_twitter').hide()
-                    }
-                    if (website == 'reddit') {
-                        $('#reddit_response').empty().append(response)
-                        $('#loading_icon_reddit').hide()
-                    }
-                    if (website == 'linkedin') {
-                        $('#linkedin_response').empty().append(response)
-                        $('#loading_icon_linkedin').hide()
-                    }
-                    if (website == 'facebook') {
-                        $('#facebook_response').empty().append(response)
-                        $('#loading_icon_facebook').hide()
-
-
-                    }
-                    if (website == 'youtube') {
-                        $('#youtube_response').empty().append(response)
-                        $('#loading_icon_youtube').hide()
-
-
-                    }
-                    //console.log(response)
-                }
-            });
-
+        if(website == 'facebook'){
+            $('#loading_icon_facebook').show()
         }
 
+        if(website == 'reddit'){
+            $('#loading_icon_reddit').show()
+        }
+        if(website == 'linkedin'){
+            $('#loading_icon_linkedin').show()
+        }
 
+        if(website == 'twitter'){
+            $('#loading_icon_twitter').show()
+        }
+
+        if(website == 'youtube'){
+            $('#loading_icon_youtube').show()
+        }
+
+    var query = document.getElementById("hid_query").value
+    $.ajax({
+    url: "/tms/identifytarget_request/",
+    data: {
+    'query': query,
+    'website': website
+    },
+    'success': (response) => {
+    //console.log('i am called    ss  s')
+
+    if(website == 'instagram'){
+
+        $('#instagram_response').empty().append(response)
+        $('#loading_icon_instagram').hide()
+    }
+    if(website == 'twitter'){
+    $('#twitter_response').empty().append(response)
+    $('#loading_icon_twitter').hide()
+    }
+    if(website == 'reddit'){
+    $('#reddit_response').empty().append(response)
+    $('#loading_icon_reddit').hide()
+    }
+    if(website == 'linkedin'){
+    $('#linkedin_response').empty().append(response)
+    $('#loading_icon_linkedin').hide()
+    }
+    if(website == 'facebook'){
+    $('#facebook_response').empty().append(response)
+    $('#loading_icon_facebook').hide()
+
+
+    }
+    if(website == 'youtube'){
+    $('#youtube_response').empty().append(response)
+    $('#loading_icon_youtube').hide()
+
+
+    }
+    //console.log(response)
+    }
+    });
+
+    }
+
+       
+       
+   
     </script>
 {% endblock %}

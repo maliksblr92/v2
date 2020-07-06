@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block page_title %}IP Logger Details{% endblock %}
 {% load osint_custom_tags %}
@@ -8,11 +8,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
 {% endblock %}
+
 {% block smallnavbar %}
 
-{% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">IP LOGGER DETAILS</p>
 {% endblock %}
 {% block belly %}
     <style>
@@ -86,46 +84,65 @@
             }
         }
     </style>
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <table class="table table-responsive" id="logged_ips" class="display" style="width:100%">
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">IP Logger Details</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
+            <table class="table table-responsive text-white" id="logged_ips" class="display" style="width:100%">
                 <thead>
                 <tr>
+
                     <th scope="col">Title</th>
                     <th scope="col">IP</th>
                     <th scope="col">Country</th>
                     <th scope="col">Region</th>
                     <th scope="col">City</th>
                     <th scope="col">Isp</th>
+
+
                     <th scope="col">Tracked On</th>
                     <th scope="col">Useragent</th>
+
                     <th scope="col">Created On</th>
                     <th scope="col">Action</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 {% for logger in responses reversed %}
+
                     <tr>
+
                         <th style="font-size:12px;" scope="row">{{ logger.title }}</th>
                         <td style="font-size:12px;">{{ logger.logged_response.ip_addr }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.country }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.region }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.city }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.isp }}</td>
+
+
+
+
                         <td style="font-size:12px;">{{ logger.logged_response.timestamp }}</td>
                         <td style="font-size:12px;">{{ logger.logged_response.user_agent|truncatechars:50 }}</td>
                         <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
+
+
+{#                        <td><a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}"><i#}
+{#                                class="fa fa-trash text-white"></i></a></td>#}
                         <td>
                             <a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}">
                                 <i class="fa fa-trash text-white"></i>
                             </a>
                             {% if logger.logged_response.coordinates_of_city %}
-                                <a class="btn"
-                                   href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}"
-                                   target="_blank" style="color: white">
-                                    <i class="fa fa-eye text-white"></i>
-                                </a>
-                            {% endif %}
+                            <a class="btn" href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}" target="_blank" style="color: white">
+                                <i class="fa fa-eye text-white"></i>
+                            </a>
+
+                        {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

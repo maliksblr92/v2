@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-      <title>Facebook Person Graph Analysis</title>
+      <title>  Graph Analysis</title>
       <style>
          body { 
          font: 14px helvetica neue, helvetica, arial, sans-serif;
@@ -291,10 +291,10 @@
                "image":"{% static 'Keybase_Management_System/images/instagram_user.png' %}",
                 "children":[//start of instagram users 
                 {% for i in resp.data %}
-                {% for x in i.data.videos %}
+              
                 {% if i.site == 'instagram' %}
-                {% for user in  i.data.videos.users %}
-                {% if forloop.counter < 3 %}
+                {% for user in  i.data.videos.users|slice:":10" %}
+               
                     {
     
                     
@@ -307,10 +307,10 @@
                     {% endif %}
                     
                     },
-                {% endif %}
+              
                 {% endfor %}
                 {% endif %}
-                {% endfor %}
+            
                 {% endfor %}
     
     

@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
@@ -36,12 +36,18 @@
         <div class="col-md-1"></div>
     </div>
 {% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">INTERNET SURVEY</p>
-{% endblock %}
 {% block belly %}
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+    <div class="row middlecontentdiv">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Internet Survey</h4>
+        </div>
+        <!-- end of top row -->
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  mymainbg  ">
+            <div class="">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <!-- Second row-->
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
                     <!-- FORM start -->
                     <form class="justify-content-center targetform formbg  pt-3 pb-5" method="GET"
                           action="/tms/survey/">
@@ -144,6 +150,10 @@
                     </form>
                     <!--FORM END-->
                 </div>
+                <!-- below form  -->
+                <!-- END OF second row-->
+            </div>
+        </div>
     </div>
 
     <script>

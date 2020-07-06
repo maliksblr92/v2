@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block page_title %}Keybase Create{% endblock %}
 {% block head_dep %}
@@ -36,183 +36,196 @@
         <div class="col-md-3"></div>
     </div>
 
+    
+{% endblock %}
 
-{% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">KEYBASE CREATION</p>
-{% endblock %}
 {% block belly %}
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <!-- FORM start -->
-            <form class="justify-content-center mt-5" id="kms-create-form">
-                {% csrf_token %}
-                <div class="form-group justify-content-center text-center ">
-                    <div style="width:100%;" class="container input1">
-                        <!-- textfield 1 -->
-                        <!-- title -->
-                        <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Title</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    {% if ctx.title %}
-                                        <input type="text" id="title"
-                                               class="form-control newinputdesign w-100"
-                                               name="title" value="{{ ctx.title }}">
-                                    {% else %}
-                                        <input type="text" name="title" id="title"
-                                               class="form-control newinputdesign w-100"
-                                               placeholder="Enter Title Here">
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
+    <div class="row  ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
+            <h4 class="topheading">Keybase Creation</h4>
+        </div>
+        <!-- end of top row -->
 
-                        <!--Tetfield 2 -->
-                        <!-- Topic -->
-                        <div class="input-group pb-4 mb-2 d-flex flex-row justify-content-between align-items-center">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Topic</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    {% if ctx.topic %}
-                                        <input type="text" id="title"
-                                               class="form-control newinputdesign w-100 "
-                                               name="title" value="{{ ctx.title }}">
-                                    {% else %}
-                                        <input type="text" name="topic" id="topic"
-                                               class="form-control newinputdesign w-100 "
-                                               placeholder="Enter Topic Here">
-                                    {% endif %}
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <!--KEYWORDS TEGS SECTION-->
-
-
-                        <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center mt-2">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">keywords</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <input type="text" data-role="tagsinput" value="" class="newinputdesign"
-                                           id="keywords" name="keywords"/>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <!--Mentions SECTION-->
-
-                        <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Mentions</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <input type="text" data-role="tagsinput" value="" class="newinputdesign"
-                                           id="mentions" name="mentions"/>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                        <!--HASHTAGS TEGS SECTION-->
-                        <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Tags</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <input type="text" data-role="tagsinput" value="" class="newinputdesign"
-                                           id="tags" name="tags"/>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <!--PHRASES SECTION-->
-                        <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Phrase</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <input type="text" data-role="tagsinput" value="" class="newinputdesign"
-                                           id="phrases" name="phrases"/>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <!--DATE SECTION-->
-
-                        <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
-                            <div class="row w-100">
-                                <div class="col-md-3 p-0">
-                                    <div class="input-group-prepend">
-                                        <span class="newlabeldesign w-100">Expire on</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <div class="datepicker date input-group p-0 m-0">
-                                        <input class="form-control   newinputdesign" type="text"
-                                               placeholder="Choose a Reservation Date" id="reservationDate"
-                                               name="date">
-                                        <div class="input-group-append">
-                                                        <span class="input-group-text "><i class="fas fa-calendar"
-                                                                                           style=""></i></span>
+        <!-- inside main container -->
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  othercontainer  ">
+            <div class="">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <div class="row formbg ml-5">
+                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-2 ">
+                        <!-- FORM start -->
+                        <form class="justify-content-center" id="kms-create-form">
+                            {% csrf_token %}
+                            <div class="form-group justify-content-center text-center ">
+                                <div style="width:100%;" class="container input1">
+                                    <!-- textfield 1 -->
+                                    <!-- title -->
+                                    <div class="input-group mb-4 w-100 d-flex flex-row justify-content-between align-items-center ">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Title</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                {% if ctx.title %}
+                                                    <input type="text" id="title"
+                                                           class="form-control newinputdesign w-100"
+                                                           name="title" value="{{ ctx.title }}">
+                                                {% else %}
+                                                    <input type="text" name="title" id="title"
+                                                           class="form-control newinputdesign w-100"
+                                                           placeholder="Enter Title Here">
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <!--Tetfield 2 -->
+                                    <!-- Topic -->
+                                    <div class="input-group pb-4 mb-2 d-flex flex-row justify-content-between align-items-center">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Topic</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                {% if ctx.topic %}
+                                                    <input type="text" id="title"
+                                                           class="form-control newinputdesign w-100 "
+                                                           name="title" value="{{ ctx.title }}">
+                                                {% else %}
+                                                    <input type="text" name="topic" id="topic"
+                                                           class="form-control newinputdesign w-100 "
+                                                           placeholder="Enter Topic Here">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <!--KEYWORDS TEGS SECTION-->
+
+
+                                    <div class=" w-100 form-group  d-flex flex-row justify-content-between align-items-center mt-2">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">keywords</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <input type="text" data-role="tagsinput" value="" class="newinputdesign"
+                                                       id="keywords" name="keywords"/>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <!--Mentions SECTION-->
+
+                                    <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Mentions</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <input type="text" data-role="tagsinput" value="" class="newinputdesign"
+                                                       id="mentions" name="mentions"/>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <!--HASHTAGS TEGS SECTION-->
+                                    <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Tags</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <input type="text" data-role="tagsinput" value="" class="newinputdesign"
+                                                       id="tags" name="tags"/>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <!--PHRASES SECTION-->
+                                    <div class=" w-100 form-group d-flex flex-row justify-content-between align-items-center">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Phrase</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <input type="text" data-role="tagsinput" value="" class="newinputdesign"
+                                                       id="phrases" name="phrases"/>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <!--DATE SECTION-->
+
+                                    <div class="input-group   mt-2 mb-2 d-flex flex-row justify-content-between align-items-center">
+                                        <div class="row w-100">
+                                            <div class="col-md-3 p-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign w-100">Expire on</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <div class="datepicker date input-group p-0 m-0">
+                                                    <input class="form-control   newinputdesign" type="text"
+                                                           placeholder="Choose a Reservation Date" id="reservationDate"
+                                                           name="date">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text "><i class="fas fa-calendar"
+                                                                                           style=""></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <!--SUBMIT BUTTON  -->
+                                    <button type="button" style="float:right;" id="kms-form-submit"
+                                            class="btn btn-secondary searchbutton mr-1 mb-3">
+                                        SUBMIT
+                                    </button>
+
+                                    <!-- TWO Section divided into 2--Tetfields  -->
                                 </div>
                             </div>
-
-
-                        </div>
-
-                        <!--SUBMIT BUTTON  -->
-                        <button type="button" style="float:right;" id="kms-form-submit"
-                                class="btn btn-secondary searchbutton mr-1 mb-3">
-                            SUBMIT
-                        </button>
-
-                        <!-- TWO Section divided into 2--Tetfields  -->
+                        </form>
+                        <!--FORM END-->
                     </div>
                 </div>
-            </form>
-            <!--FORM END-->
+                <!-- Second row-->
+                <!-- END OF second row-->
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -36,6 +36,7 @@ class Create_Portfolio(View):
         form_name = request.POST.get('form_name',None)
         print(request.POST)
 
+
         name = request.POST.get('portfolio_name',None)
         dob = formate_date(request.POST.get('dob','2020-05-06'))
         gender = request.POST.get('gender',None)
