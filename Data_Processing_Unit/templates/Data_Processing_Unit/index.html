@@ -319,22 +319,23 @@
                                                                 style="width: 85% !important;"><i
                                             class="fas fa-birthday-cake mr-2"></i>Email Address:</span></div>
                                     <div class="col-md-7"><span
-                                            class="badge text-white">{{ resp.data.online_info.birthday }}</span></div>
+                                            class="badge text-white">{{ resp.data.online_info.email_address }}</span></div>
 
 
                                     <div class="col-md-5"><span class="badge badge-light text-left"
                                                                 style="width: 85% !important;"><i
                                             class="fas fa-venus-double mr-2"></i>Website:</span></div>
                                     <div class="col-md-7"><span
-                                            class="badge text-white">{{ resp.data.online_info.website }}</span></div>
+                                            class="badge text-white">{{ resp.data.online_info.website|default:"N/A" }}</span></div>
 
 
-                                    <div class="col-md-5"><span class="badge badge-light text-left"
+                                    <!-- <div class="col-md-5">
+                                        <span class="badge badge-light text-left"
                                                                 style="width: 85% !important;"><i
                                             class="fas fa-signature mr-2"></i>Mail Receiving URL:</span></div>
                                     <div class="col-md-7"><span
                                             class="badge text-white">{{ resp.data.online_info.mail_receiving_url|truncatechars:'30' }}</span>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-5"><span class="badge badge-light text-left"
                                                                 style="width: 85% !important;"><i
