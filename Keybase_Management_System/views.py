@@ -237,10 +237,8 @@ class Keybase_Processed_Report(View):
 
     def get(self,request,*argv,**kwargs):
 
-
-
-
-        return km.get_keybase_processed_report()
+        keybase_gtr_id = kwargs['GTR_id']
+        return km.get_keybase_processed_report(keybase_gtr_id)
 
 
 
