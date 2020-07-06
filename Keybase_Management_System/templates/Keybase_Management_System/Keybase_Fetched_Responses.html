@@ -175,7 +175,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:#243F52;">
             <ul class="nav nav-pills d-flex flex-row justify-content-around align-items-center">
                 <li class=""><a class="nav-link btn btn-primary custom_social_icons active" data-toggle="pill"
-                                      href="#searchEngines">Search
+                                href="#searchEngines">Search
                     Engines</a></li>
                 <li class=""><a class="nav-link btn btn-primary custom_social_icons" data-toggle="pill"
                                 href="#facebook">Facebook</a></li>
@@ -191,102 +191,114 @@
                 <!-- search engine tab starts -->
                 <div id="searchEngines" class="tab-pane fade in active show">
                     <!-- row start  -->
-                    <div class="row  ">
-                        {% for i in resp.data %}
-                            <div class="col-md-12 mt-2">
-                                <!-- loop2 -->
-                                {% for x in i.data %}
-                                    {% if i.site == 'search_engines' %}
-                                        <!-- card start -->
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <div class="row">
-                                                    <div class="col-md-4"> Query # ({{ forloop.counter }})
-                                                    </div>
-                                                    {% with foo_num=forloop.counter0 %}
-                                                        <div class="col-md-4"> Query Keyword ({{ i.query }})
+                    <div class="container">
+                        <div class="row  ">
+                            {% for i in resp.data %}
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
+                                    <!-- loop2 -->
+                                    {% for x in i.data %}
+                                        {% if i.site == 'search_engines' %}
+                                            <!-- card start -->
+                                            <div class="card custom_background mt-3">
+                                                <div class="card-header border  text-white">
+                                                    <div class="row">
+                                                        <div class="col-md-4"> Query # ({{ forloop.counter }})
                                                         </div>
-                                                    {% endwith %}
+                                                        {% with foo_num=forloop.counter0 %}
+                                                            <div class="col-md-4"> Query Keyword ({{ i.query }})
+                                                            </div>
+                                                        {% endwith %}
+                                                    </div>
+                                                    <div class="col-md-4"></div>
                                                 </div>
-                                                <div class="col-md-4"></div>
+                                                <!-- card-body starts -->
+                                                <div class="card-body border text-white">
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white"> Url </span>
+                                                        </div>
+                                                        <div class="col-md-8"><a target="_blank" href="{{ x.serp_url }}"
+                                                                                 class="badge badge-light"
+                                                                                 style="text-decoration: none;;"><i
+                                                                class="fa fa-eye text-dark"></i> view</a></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Serp Title </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.serp_title|default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Serp Domain </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.serp_domain|default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Serp Visible Link </span>
+                                                        </div>
+                                                        <div class="col-md-8"><a target="_blank"
+                                                                                 href="{{ x.serp_visible_link }}"
+                                                                                 class="badge badge-light   "
+                                                                                 style="text-decoration: none;;"><i
+                                                                class="fa fa-eye"></i> view</a></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Screenshot </span>
+                                                        </div>
+                                                        <div class="col-md-8"><img src="{{ x.screenshot }}"
+                                                                                   class="img-fluid img-thumbnail"
+                                                                                   alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Meta Title </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.meta_title|default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Status </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.status }}</span></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">IP Address </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.ip|default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"><span
+                                                                class="badge text-white">Categorization </span>
+                                                        </div>
+                                                        <div class="col-md-8"><span
+                                                                class="badge">{{ x.categorization.0|default:"N/A" }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- loop-2-end  -->
+                                                </div>
+                                                <!-- card body end   -->
                                             </div>
-                                            <!-- card-body starts -->
-                                            <div class="card-body border">
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white"> Url </span>
-                                                    </div>
-                                                    <div class="col-md-8"><a target="_blank" href="{{ x.serp_url }}"
-                                                                             class="badge badge-success text-white"
-                                                                             style="text-decoration: none;;"><i
-                                                            class="fa fa-eye text-white"></i> view</a></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Serp Title </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.serp_title|default:"N/A" }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Serp Domain </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.serp_domain|default:"N/A" }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Serp Visible Link </span>
-                                                    </div>
-                                                    <div class="col-md-8"><a target="_blank"
-                                                                             href="{{ x.serp_visible_link }}"
-                                                                             class="badge badge-success text-white"
-                                                                             style="text-decoration: none;;"><i
-                                                            class="fa fa-eye text-white"></i> view</a></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Screenshot </span>
-                                                    </div>
-                                                    <div class="col-md-8"><img src="{{ x.screenshot }}"
-                                                                               class="img-fluid img-thumbnail" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Meta Title </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.meta_title|default:"N/A" }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Status </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.status }}</span></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">IP Address </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.ip|default:"N/A" }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-4"><span class="badge badge-primary text-white">Categorization </span>
-                                                    </div>
-                                                    <div class="col-md-8"><span
-                                                            class="badge text-dark">{{ x.categorization.0|default:"N/A" }}</span>
-                                                    </div>
-                                                </div>
-                                                <!-- loop-2-end  -->
-                                            </div>
-                                            <!-- card body end   -->
-                                        </div>
-                                        <!-- card-end  -->
-                                    {% else %}
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
+                                            <!-- card-end  -->
+                                        {% else %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     <!-- row end  -->
                 </div>
@@ -297,33 +309,31 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:#243F52;">
                             <ul class="nav nav-pills d-flex flex-row justify-content-around align-items-center mt-2">
-                                <li class="active"><a data-toggle="pill"
-                                                      class="nav-link btn btn-primary custom_social_icons"
-                                                      href="#facebookUsers">Facebook
-                                    Users</a></li>
+                                <li class=""><a data-toggle="pill"
+                                                      class="nav-link btn btn-primary custom_social_icons active"
+                                                      href="#facebookUsers">Users</a></li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookPages">Facebook Pages </a>
+                                       href="#facebookPages">Pages </a>
                                 </li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookGroups">Facebook Groups</a>
+                                       href="#facebookGroups">Groups</a>
                                 </li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookPost">Facebook Posts</a></li>
+                                       href="#facebookPost">Posts</a></li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookPictures">Facebook
-                                    Pictures</a></li>
+                                       href="#facebookPictures">Pictures</a></li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookVideos">Facebook Videos</a>
+                                       href="#facebookVideos">Videos</a>
                                 </li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
-                                       href="#facebookEvents">Facebook Events</a>
+                                       href="#facebookEvents">Events</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- start facebook tab-content  -->
                         <div class="tab-content">
                             <!-- end of facbook user profiles tabs  -->
-                            <div id="facebookUsers" class="tab-pane fade ">
+                            <div id="facebookUsers" class="tab-pane fade in active show">
                                 <!-- row start  -->
                                 <div class="row  ">
                                     {% for i in resp.data %}
@@ -332,14 +342,14 @@
 
                                             {% endif %}
                                         {% endif %}
-                                        <div class="col-md-12 mt-2">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                             <!-- faceboo users block -->
                                             <div class="row">
                                                 <!-- loop2 -->
                                                 {% for x in i.data.users %}
                                                     {% if i.site == 'facebook' %}
                                                         <!-- facebook usernames  -->
-                                                        <div class="col-md-4">
+                                                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4">
                                                             <div class="card">
                                                                 <div class="card-header text-center ">
                                                                     <span class="btn btn-dark"> <i
@@ -1339,7 +1349,7 @@
                             </div>
                             <!-- facebook pictures tab end  -->
                             <!-- facebook videos tab -->
-                            <div id="facebookVideos" class="tab-pane fade in active show">
+                            <div id="facebookVideos" class="tab-pane fade">
 
 
                                 <!-- row start  -->
@@ -1489,8 +1499,6 @@
 
                             </div>
                             <!-- facebook videos tab end  -->
-
-
                             <!-- facebook events tab -->
                             <div id="facebookEvents" class="tab-pane fade">
                                 <!-- row start  -->
