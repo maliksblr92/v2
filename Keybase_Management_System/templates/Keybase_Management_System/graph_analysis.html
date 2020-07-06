@@ -1,0 +1,524 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <title>Facebook Person Graph Analysis</title>
+      <style>
+         body { 
+         font: 14px helvetica neue, helvetica, arial, sans-serif;
+         overflow: auto;;
+         }
+         #chartdiv {
+         height: 100%;
+         width: 100%;
+         position: absolute;
+         left: 0;
+         top: 0;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="chartdiv" ></div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      <script src="//www.amcharts.com/lib/4/core.js"></script>
+      <script src="//www.amcharts.com/lib/4/charts.js"></script>
+      <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+      <script src="//www.amcharts.com/lib/4/plugins/forceDirected.js"></script>
+      <script src="{% static 'OSINT_System_Core/amcharts/plugins/bullets.js' %}"></script>
+      <script>
+         /**
+         * ---------------------------------------
+         * This demo was created using amCharts 4.
+         *
+         * For more information visit:
+         * https://www.amcharts.com/
+         *
+         * Documentation is available at:
+         * https://www.amcharts.com/docs/v4/
+         * ---------------------------------------
+         */
+         
+         am4core.useTheme(am4themes_animated);
+         
+         // Create chart
+         var chart = am4core.create("chartdiv", am4plugins_forceDirected.ForceDirectedTree);
+         chart.responsive.enabled = true;
+         // Create series
+         var series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries());
+         
+         // Icons
+         {% for i in resp.data %}
+         {% for x in i.data %}
+         {% if i.site == 'search_engines' %}
+         {% if forloop.counter < 11 %}
+        console.log("{{x.serp_domain|safe}}");
+        {% endif  %}
+      
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+
+         // Set data
+         series.data = [{
+         "name": "Keybase Target",
+         "image":"{% static 'Keybase_Management_System/images/key.png'%}",
+         "children": [
+         
+         //start of youtube
+{
+
+    "name":"Youtube",
+    "value":10,
+    "image":"{% static 'Keybase_Management_System/images/youtube.png'%}",
+    "children":[//start of youtube parent node
+    
+    //start of youtube children 
+    {% for i in resp.data %}
+    {% if i.site == 'youtube' %}
+    {% for yt in i.data %}
+    {% if forloop.counter < 11 %}
+    {
+        "name":"{{ yt.title|safe }}",
+        "value":"",
+        {% if yt.thumbnail_url %}
+        "image":"{{ yt.thumbnail_url|safe }}",
+        {% else %}
+        "image":"{% static 'Keybase_Management_System/images/youtube_person.jpeg'%}",
+        {% endif %}
+    },
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    //end of youtube children 
+    ]
+    
+    
+    },    //end of youtube
+
+    //start of linkedin 
+    {
+
+        "name":"Linkedin",
+        "value":10,
+        "image":"{% static 'Keybase_Management_System/images/linkedin.png'%}",
+        "children":[//start of linkedin parent node
+        
+        //start of linkedin children 
+        {% for i in resp.data %}
+        {% for x in i.data %}
+        {% if i.site == 'linkedin' %}
+        {% for linkedin in i.data.data %}
+        {% if forloop.counter < 11 %}
+        {
+            "name":"{{ linkedin.username|safe }}",
+            "value":"",
+            {% if linkedin.picture_url %}
+            "image":"{{ linkedin.picture_url|safe }}",
+            {% else %}
+            "image":"{% static 'Keybase_Management_System/images/linkdein_user.jpeg'%}",
+            {% endif %}
+        },
+    
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        //end of linkedin children 
+        ]
+        
+        
+        }, 
+    //end of linkedin 
+    
+           //start facebook
+           {
+            "name":"Facebook",
+            "value":{{ resp.data.1.data.users|length}}+{{ resp.data.1.data.pages|length}}+{{ resp.data.1.data.groups|length}}+{{ resp.data.1.data.events|length}},
+            "image":"{% static 'Keybase_Management_System/images/facebook.png' %}",
+            "children":[//start facebook childrens
+            // facebook childs
+            {
+            "name":"Users",
+            "value":{{ resp.data.1.data.users|length}},
+           "image":"{% static 'Keybase_Management_System/images/facebook_user.jpeg' %}",
+            "children":[//start facebook users list
+            
+            {% for i in resp.data %}
+            {% for x in i.data.users %}
+            {% if i.site == 'facebook' %}
+            {% if forloop.counter < 11 %}
+    
+          
+            {
+                "name":"{{x.full_name|safe}}",
+                "value":"",
+                {% if x.picture_url %}
+                "image":"{{x.picture_url|safe}}",
+                {% else %}
+                "image":"{% static 'Keybase_Management_System/images/status_404.png' %}",
+                {% endif %}
+            } ,
+            {% endif  %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            
+            
+            ]//end facebook users list
+
+        },
+
+        {
+            "name":"Pages",
+            "value":{{ resp.data.1.data.pages|length}},
+           "image":"{% static 'Keybase_Management_System/images/facebook_page.png' %}",
+            "children":[//start facebook pages list
+            
+            {% for i in resp.data %}
+            {% for x in i.data.pages %}
+            {% if i.site == 'facebook' %}
+            {% if forloop.counter < 11 %}
+    
+          
+            {
+                "name":"{{x.full_name|safe}}",
+                "value":"",
+                {% if x.picture_url %}
+                "image":"{{x.picture_url|safe}}",
+                {% else %}
+                "image":"{% static 'Keybase_Management_System/images/status_404.png' %}",
+                {% endif %}
+            } ,
+            {% endif  %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            
+            
+            ]//end facebook pages list
+
+        },
+
+
+        {
+            "name":"Events",
+            "value":{{ resp.data.1.data.events|length}},
+            "image":"{% static 'Keybase_Management_System/images/fb_event.jpg' %}",
+            "children":[//start facebook events list
+            
+            {% for i in resp.data %}
+            {% for x in i.data.events %}
+            {% if i.site == 'facebook' %}
+            {% if forloop.counter < 11 %}
+    
+          
+            {
+                "name":"{{x.event_name|safe}}",
+                "value":"{{x.event_description|safe}}",
+                "image":"{% static 'Keybase_Management_System/images/fb_event.jpg' %}",
+               
+            } ,
+            {% endif  %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            
+            
+            ]//end facebook events list
+
+        },
+
+
+        {
+            "name":"Groups",
+            "value":{{ resp.data.1.data.groups|length}},
+           "image":"{% static 'Keybase_Management_System/images/facebook_group.png' %}",
+            "children":[//start facebook pages list
+            
+            {% for i in resp.data %}
+            {% for x in i.data.groups %}
+            {% if i.site == 'facebook' %}
+            {% if forloop.counter < 11 %}
+    
+          
+            {
+                "name":"{{x.full_name|safe}}",
+                "value":"",
+                {% if x.picture_url %}
+                "image":"{{x.picture_url|safe}}",
+                {% else %}
+                "image":"{% static 'Keybase_Management_System/images/status_404.png' %}",
+                {% endif %}
+            } ,
+            {% endif  %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            
+            
+            ]//end facebook pages list
+
+        },
+                ]//end facebook childrens
+           
+     
+            },//end facebook
+
+
+             
+            {
+                
+                "name":"Instagram",
+                "value":{{ resp.data.2.data.videos.users|length}}+{{ resp.data.2.data.videos.places|length}}+{{ resp.data.2.data.videos.hashtags|length}},
+                "image":"{% static 'Keybase_Management_System/images/instagram.jpeg' %}",
+                "children":[//start of instagram childrens 
+                {//start of instagram users 
+                
+                "name":"Users",
+                "value":"",
+               "image":"{% static 'Keybase_Management_System/images/instagram_user.png' %}",
+                "children":[//start of instagram users 
+                {% for i in resp.data %}
+                {% for x in i.data.videos %}
+                {% if i.site == 'instagram' %}
+                {% for user in  i.data.videos.users %}
+                {% if forloop.counter < 3 %}
+                    {
+    
+                    
+                    "name":"{{ user.user.full_name|safe }}",
+                    "value":"",
+                    {% if user.user.profile_pic_url %}
+                    "image":"{{ user.user.profile_pic_url|safe }}",
+                    {% else %}
+                    "image":"{% static 'Keybase_Management_System/images/instagram_user_img.png' %}",
+                    {% endif %}
+                    
+                    },
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+    
+    
+                ]
+    
+                },
+    
+                //instagram hashtags 
+    {//start of instagram users 
+                
+        "name":"Hashtag",
+        "value":"",
+       "image":"{% static 'Keybase_Management_System/images/instagram_hashtag.jpeg' %}",
+        "children":[//start of instagram hashtags 
+        {% for i in resp.data %}
+        {% for x in i.data.videos %}
+        {% if i.site == 'instagram' %}
+        {% if i.data.videos.hashtags|length > 0 %}
+        {% if forloop.counter < 3 %}
+        {% for hashtag in  i.data.videos.hashtags %}
+    
+    
+            {
+    
+            
+            "name":"{{ hashtag.hashtag.name|safe }}",
+            "value":{{ forloop.counter}},
+            {% if user.user.profile_pic_url %}
+            "image":"{{ hashtag.hashtag.profile_pic_url|safe }}",
+            {% else %}
+            "image":"{% static 'Keybase_Management_System/images/instagram_user_img.png' %}",
+            {% endif %}
+            
+            },
+    
+    
+        {% endfor %}
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    
+    
+        ]
+    
+        },
+                //end instagram hashtags 
+                ]
+                },
+    
+
+         {
+            "name": "Counter",
+            "value": "{{ resp.data.0|length }}",
+            "image":"{% static 'Keybase_Management_System/images/counter.jpeg' %}",
+            "children":[
+            {
+                "name":"Search Engine",
+                "value":{{ resp.data.0.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/searchengine.png' %}",
+            },
+            {
+                "name":"Facebook Targets",
+                "value":{{ resp.data.1.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/reddit.jpeg' %}",
+            },
+            {
+                "name":"Instagram Targets",
+                "value":{{ resp.data.2.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/instagram.jpeg' %}",
+            },
+            {
+                "name":"Reddit Targets",
+                "value":{{ resp.data.3.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/reddit.jpeg' %}",
+            },
+
+
+            {
+                "name":"Youtube Targets",
+                "value":{{ resp.data.4.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/youtube1.png' %}",
+            },
+
+
+
+            {
+                "name":"LinkedIn Targets",
+                "value":{{ resp.data.5.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/linkedin.png' %}",
+            },
+
+
+
+            {
+                "name":"Twitter Targets",
+                "value":{{ resp.data.6.data|length}},
+               "image":"{% static 'Keybase_Management_System/images/counter.jpeg' %}",
+            },
+
+            ]
+        },
+        {
+        //counter end 
+        "name": "Targets",
+        "value": "{{ resp.data.0|length }}",
+        "image":"{% static 'Keybase_Management_System/images/target.png' %}",
+        "children":[
+        {
+        "name":"Search Engine",
+        "value":"",
+       "image":"{% static 'Keybase_Management_System/images/search.jpeg' %}",
+        "children":[
+        // Icons
+        {% for i in resp.data %}
+        {% for x in i.data %}
+        {% if i.site == 'search_engines' %}
+        {% if forloop.counter < 11 %}
+
+      
+        {
+            "name":"{{x.serp_domain|safe}}",
+            "value":{{x.status|safe}},
+            {% if x.status == '200' %}
+            "image":"{% static 'Keybase_Management_System/images/status_200.png' %}",
+            {% else %}
+            "image":"{% static 'Keybase_Management_System/images/status_404.png' %}",
+            {% endif %}
+        } ,
+        {% endif  %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+            ]
+       
+ 
+        },
+
+
+
+
+
+
+
+
+
+
+        ]//end targets children
+
+        
+        
+    }]
+}];;
+
+         
+         // Set up data fields
+         series.dataFields.value = "value";
+         series.dataFields.name = "name";
+         series.dataFields.id = "id";
+         series.dataFields.children = "children";
+         series.dataFields.linkWith = "link";
+         
+         // Add labels
+         series.nodes.template.label.text = "{name}";
+         series.nodes.template.label.valign = "bottom";
+         series.nodes.template.label.fill = am4core.color("#000");
+         series.nodes.template.label.dy = 10;
+         series.nodes.template.tooltipText = "{name}: [bold]{value}[/]";
+         series.fontSize = 10;
+         series.minRadius = 30;
+         series.maxRadius = 30;
+         
+         // Configure circles
+         series.nodes.template.circle.fill = am4core.color("#fff");
+         series.nodes.template.circle.fill = am4core.color("#fff");
+         
+         // Configure icons
+         //var icon = series.nodes.template.createChild(am4core.Image);
+         //icon.propertyFields.href = "image";
+         //icon.horizontalCenter = "middle";
+         //icon.verticalCenter = "middle";
+         
+         
+         // Configure icons
+         var icon = series.nodes.template.createChild(am4plugins_bullets.PinBullet);
+         icon.image = new am4core.Image();
+         icon.image.propertyFields.href = "image";
+         icon.circle.radius = am4core.percent(100);
+         icon.circle.strokeWidth = 0;
+         icon.background.pointerLength = 0;
+         icon.background.disabled = true;
+         
+         
+         
+         
+         
+         
+         series.nodes.template.outerCircle.filters.push(new am4core.DropShadowFilter());
+         series.manyBodyStrength = -50;
+         series.maxLevels = 2;
+         series.manyBodyStrength = -50;
+         series.links.template.distance = 2;
+         series.links.template.strength = 1;
+         series.nodes.template.label.hideOversized = true;
+         series.nodes.template.label.truncate = true;
+         series.links.template.tooltipText = "{name}: [bold]{value}[/]";
+         series.links.template.interactionsEnabled = true;
+      </script>
+   </body>
+</html>

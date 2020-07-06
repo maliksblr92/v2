@@ -228,3 +228,12 @@ class Keybase_Fetched_Report(View):
         return render(request,'Keybase_Management_System/Keybase_Fetched_Report.html',{'resp':resp,'target_object':target_object})
     def post(self,request,*args,**kwargs):
         pass
+class Graph_Analysis(View):
+    def get(self,request,*args,**kwargs):
+        resp=Keybase_Response_TMS.objects.all()
+        GTR_id=kwargs['GTR_id']
+        resp=acq.get_data_response_object_by_gtr_id(GTR_id)
+        target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
+        print(resp)
+        # return HttpResponse('<div>asdas</div>')
+        return render(request,'Keybase_Management_System/graph_analysis.html',{'resp':resp,'target_object':target_object})
