@@ -146,32 +146,33 @@ class Keybase_Manager(object):
         print(target_object)
 
         for item in resp_object['data']:
+            try:
+                if(item['site'] == 'facebook'):
+                    for user in item['data']['users'][0:records_limit]:
 
-            if(item['site'] == 'facebook'):
-                for user in item['data']['users'][0:records_limit]:
+                        username = user['username']
+                        if not len(username) > 0 : username = 'username missing'
+                        facebook_users.append((username, user['id'], user['url']))
 
-                    username = user['username']
-                    if not len(username) > 0 : username = 'username missing'
-                    facebook_users.append((username, user['id'], user['url']))
+                    for user in item['data']['pages'][0:records_limit]:
 
-                for user in item['data']['pages'][0:records_limit]:
+                        username = user['username']
+                        if not len(username) > 0 : username = 'username missing'
+                        facebook_pages.append((username, user['id'], user['url']))
 
-                    username = user['username']
-                    if not len(username) > 0 : username = 'username missing'
-                    facebook_pages.append((username, user['id'], user['url']))
+                    for user in item['data']['groups'][0:records_limit]:
 
-                for user in item['data']['groups'][0:records_limit]:
+                        username = user['username']
+                        if not len(username) > 0 : username = 'username missing'
+                        facebook_groups.append((username, user['id'], user['url']))
 
-                    username = user['username']
-                    if not len(username) > 0 : username = 'username missing'
-                    facebook_groups.append((username, user['id'], user['url']))
+                    for user in item['data']['posts'][0:records_limit]:
 
-                for user in item['data']['posts'][0:records_limit]:
-
-                    username = user['author']['username']
-                    if not len(username) > 0 : username = 'username missing'
-                    facebook_posts.append((username, user['author']['id'], user['post_id'],user['post_link']))
-
+                        username = user['author']['username']
+                        if not len(username) > 0 : username = 'username missing'
+                        facebook_posts.append((username, user['author']['id'], user['post_id'],user['post_link']))
+            except:
+                pass
                 # for user in item['data']['pictures'][0:records_limit]:
                 #
                 #     #username = user['username']
