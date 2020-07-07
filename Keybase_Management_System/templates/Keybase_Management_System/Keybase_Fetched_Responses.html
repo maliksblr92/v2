@@ -163,7 +163,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                                    style="margin-top:2px;"
-                                   href="http://192.168.18.20:8000/kms/keybase_processed_report/5f0045ddb244c1312caefd33/"
+                                   href="{% url 'Keybase_Management_System:keybase_processed_report' resp.GTR%}"
                                    id="download_as_pdf">Report Downlaod </a>
                                 <!-- <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                                    style="margin-top:2px;"
@@ -240,11 +240,12 @@
                                                                     <div class="col-md-3">
                                                                         <div class="float-left">
                                                                             {% if x.status == '200' %}
-                                                                                <a  target="_blank"
+                                                                                <a  href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+                                                                                    target="_blank"
                                                                                    class="btn btn-danger btn-sm"> <i
                                                                                         class="fa fa-ban mr-2"
                                                                                         aria-hidden="true"
-                                                                                         href="{% url 'Keybase_Management_System:block_keybase_url' x.serp_url|encode_url %}"
+
                                                                                         style="color: #fff !important;"></i>
                                                                                     Block</a>
                                                                             {% else %}
