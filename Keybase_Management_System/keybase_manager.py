@@ -190,31 +190,40 @@ class Keybase_Manager(object):
                 #     username = user['username']
                 #     if not len(username) > 0 : username = 'username missing'
                 #     facebook_users.append((username, user['id'], user['url']))
+            try:
+                if (item['site'] == 'search_engines'):
+                    for data in item['data']:
+                        if(data['status']=='200'):
+                            search_engine_acesseble_results.append((data['ip'], data['serp_domain'],data['serp_url']))
 
-            if (item['site'] == 'search_engines'):
-                for data in item['data']:
-                    if(data['status']=='200'):
-                        search_engine_acesseble_results.append((data['ip'], data['serp_domain'],data['serp_url']))
+            except:
+                pass
 
+            try:
 
+                if (item['site'] == 'instagram'):
+                    for data in item['data']['videos']['users'][0:records_limit]:
 
-            if (item['site'] == 'instagram'):
-                for data in item['data']['videos']['users'][0:records_limit]:
+                        highlighted_instagram_users.append((data['user']['username'], data['user']['full_name'],data['user']['is_private']))
+            except:
+                pass
 
-                    highlighted_instagram_users.append((data['user']['username'], data['user']['full_name'],data['user']['is_private']))
+            try:
+                if (item['site'] == 'linkedin'):
+                    for data in item['data']['data'][0:records_limit]:
 
+                        highlighted_linkedin_users.append((data['username'], data['full_name']))
+            except:
+                pass
 
-            if (item['site'] == 'linkedin'):
-                for data in item['data']['data'][0:records_limit]:
+            try:
+                if (item['site'] == 'twitter'):
+                    for data in item['data'][0:records_limit]:
 
-                    highlighted_linkedin_users.append((data['username'], data['full_name']))
+                        highlighted_twitter_users.append((data['username'], data['name'],data['user_id_str']))
 
-
-            if (item['site'] == 'twitter'):
-                for data in item['data'][0:records_limit]:
-
-                    highlighted_twitter_users.append((data['username'], data['name'],data['user_id_str']))
-
+            except:
+                pass
         #return facebook_users
 
 
