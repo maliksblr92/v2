@@ -217,7 +217,7 @@
                                 <!-- row start  -->
                                 <div class="container">
                                     <div class="row  ">
-                                        {% for i in resp.data %}
+                                        {% for i in resp.data|slice:"0:50" %}
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                 <!-- loop2 -->
                                                 {% for x in i.data %}
@@ -266,7 +266,7 @@
                                                                                 </a>
                                                                             {% else %}
                                                                                 <a href="#" target="_blank"
-                                                                                   class="btn btn-warning btn-sm"> <i
+                                                                                   class="btn btn-danger btn-sm"> <i
                                                                                         class="fa fa-lock mr-2"
                                                                                         aria-hidden="true"
                                                                                         style="color: #fff !important;"></i>Unaccessible
@@ -1397,10 +1397,7 @@
                                             <!-- row start  -->
                                             <div class="row  ">
                                                 {% for i in resp.data %}
-                                                    {% if forloop.counter == 1 %}
-                                                        {% if forloop.counter == 1 %}
-                                                        {% endif %}
-                                                    {% endif %}
+
                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                         <!-- faceboo videos block -->
                                                         <div class="row">
@@ -1493,10 +1490,7 @@
                                             <!-- row start  -->
                                             <div class="row  ">
                                                 {% for i in resp.data %}
-                                                    {% if forloop.counter == 1 %}
-                                                        {% if forloop.counter == 1 %}
-                                                        {% endif %}
-                                                    {% endif %}
+
                                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                         <!-- faceboo videos block -->
                                                         <div class="row">
@@ -1620,13 +1614,12 @@
                                                 <div class="row  ">
                                                     {% for i in resp.data %}
                                                         {% if forloop.counter == 1 %}
-                                                            {% if forloop.counter == 1 %}
-                                                            {% endif %}
+
                                                         {% endif %}
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                             <div class="row">
                                                                 <!-- loop2 -->
-                                                                {% for x in i.data.videos %}
+
                                                                     {% if i.site == 'instagram' %}
                                                                         {% for user in  i.data.videos.users %}
                                                                             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-3">
@@ -1703,7 +1696,7 @@
                                                                         {% endfor %}
                                                                     {% else %}
                                                                     {% endif %}
-                                                                {% endfor %}
+
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -1722,7 +1715,7 @@
                                                         <div class="col-md-12 mt-2">
                                                             <div class="row">
                                                                 <!-- loop2 -->
-                                                                {% for x in i.data.videos %}
+
                                                                     {% if i.site == 'instagram' %}
                                                                         {% if i.data.videos.places|length > 0 %}
                                                                             {% for place in  i.data.videos.places %}
@@ -1736,7 +1729,7 @@
                                                                         {% endif %}
                                                                     {% else %}
                                                                     {% endif %}
-                                                                {% endfor %}
+
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -1754,7 +1747,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                             <div class="row">
                                                                 <!-- loop2 -->
-                                                                {% for x in i.data.videos %}
+
                                                                     {% if i.site == 'instagram' %}
                                                                         {% if i.data.videos.hashtags|length > 0 %}
                                                                             {% for hashtag in  i.data.videos.hashtags %}
@@ -1831,7 +1824,7 @@
                                                                         {% endif %}
                                                                     {% else %}
                                                                     {% endif %}
-                                                                {% endfor %}
+
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -1869,7 +1862,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                             <div class="row">
                                                                 <!-- loop2 -->
-                                                                {% for x in i.data.communities %}
+
                                                                     {% if i.site == 'reddit' %}
                                                                         {% if i.data.communities.data|length > 0 %}
                                                                             {% for community in  i.data.communities.data %}
@@ -1948,7 +1941,7 @@
                                                                         {% endif %}
                                                                     {% else %}
                                                                     {% endif %}
-                                                                {% endfor %}
+
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -1966,16 +1959,16 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                             <div class="row">
                                                                 <!-- loop2 -->
-                                                                {% for x in i.data.posts %}
+
                                                                     {% if i.site == 'reddit' %}
                                                                         {% if i.data.posts.data|length > 0 %}
                                                                             {% for post in  i.data.posts.data %}
                                                                                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-3">
                                                                                     <div class="card custom_background">
                                                                                         <div class="card-header custom_header text-center">
-                                                      <span class="btn btn-outline-info">
-                                                      Reddit Post
-                                                      </span>
+                                                                  <span class="btn btn-outline-info">
+                                                                  Reddit Post
+                                                                  </span>
                                                                                             <span class="d-inline float-right "><i
                                                                                                     class="fa fa-reddit fa-2x"
                                                                                                     style="color: #fff !important;"></i></span>
@@ -2069,7 +2062,7 @@
                                                                         {% endif %}
                                                                     {% else %}
                                                                     {% endif %}
-                                                                {% endfor %}
+
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -2096,7 +2089,7 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                     <div class="row">
                                                         <!-- loop2 -->
-                                                        {% for x in i.data %}
+
                                                             {% if i.site == 'twitter' %}
             
             
@@ -2251,7 +2244,7 @@
                                                                 {% endif %}
                                                             {% else %}
                                                             {% endif %}
-                                                        {% endfor %}
+
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -2275,7 +2268,7 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                     <div class="row">
                                                         <!-- loop2 -->
-                                                        {% for x in i.data %}
+
                                                             {% if i.site == 'youtube' %}
             
             
@@ -2327,7 +2320,7 @@
                                                                 {% endif %}
                                                             {% else %}
                                                             {% endif %}
-                                                        {% endfor %}
+
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -2351,7 +2344,7 @@
                                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
                                                     <div class="row">
                                                         <!-- loop2 -->
-                                                        {% for x in i.data %}
+
                                                             {% if i.site == 'linkedin' %}
             
             
@@ -2407,7 +2400,7 @@
                                                                 {% endif %}
                                                             {% else %}
                                                             {% endif %}
-                                                        {% endfor %}
+
                                                     </div>
                                                 </div>
                                             {% endfor %}
