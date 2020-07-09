@@ -16,6 +16,10 @@
 {% endblock %}
 {% block belly %}
     <style>
+        .background-color {
+            background: linear-gradient( 90deg, rgba(0, 32, 44, 90%) 0%, rgba(0, 46, 69, 90%) 28%, rgba(0, 83, 135, 82%) 72%, rgba(0, 113, 188, 80%) 100% );
+            border-bottom: 1px solid #707070;
+            }
         tr {
             width: 100%;
             display: inline-table;
@@ -23,13 +27,13 @@
         }
 
         table {
-            height: 500px !important;
+            height:100% !important;
             display: -moz-groupbox;
         }
 
         tbody {
             overflow-y: scroll !important;
-            height: 400px !important;
+            height:100% !important;
             width: 100%;
 
         }
@@ -86,45 +90,49 @@
             }
         }
     </style>
-    <div class="row">
+    <div class="row background-color">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <table class="table table-responsive" id="logged_ips" class="display" style="width:100%">
                 <thead>
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">IP</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Region</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Isp</th>
-                    <th scope="col">Tracked On</th>
-                    <th scope="col">Useragent</th>
-                    <th scope="col">Created On</th>
-                    <th scope="col">Action</th>
+                    <th class="text-white "scope="col">Title</th>
+                    <th class="text-white "scope="col">IP</th>
+                    <th class="text-white "scope="col">Country</th>
+                    <th class="text-white "scope="col">Region</th>
+                    <th class="text-white "scope="col">City</th>
+                    <th class="text-white "scope="col">Isp</th>
+                    <th class="text-white "scope="col">Tracked On</th>
+                    <th class="text-white "scope="col">Useragent</th>
+                    <th class="text-white "scope="col">Created On</th>
+                    <th class="text-white "scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for logger in responses reversed %}
                     <tr>
-                        <th style="font-size:12px;" scope="row">{{ logger.title }}</th>
-                        <td style="font-size:12px;">{{ logger.logged_response.ip_addr }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.country }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.region }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.city }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.isp }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.timestamp }}</td>
-                        <td style="font-size:12px;">{{ logger.logged_response.user_agent|truncatechars:50 }}</td>
-                        <td style="font-size:10px;"><span class="text-truncate">{{ logger.created_on }}</span></td>
+                        <th class="text-white font-weight-bold"style="font-size:12px;" scope="row">{{ logger.title|default:"N/A" }}</th>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.ip_addr|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.country|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.region|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.city|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.isp|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.timestamp|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.user_agent|truncatechars:50|default:"N/A" }}</td>
+                        <td class="text-white font-weight-bold" style="font-size:10px;"><span class="text-truncate">{{ logger.created_on|default:"N/A" }}</span></td>
                         <td>
                             <a class="btn" href="{% url 'OSINT_System_Core:delete_ips' logger.id %}">
-                                <i class="fa fa-trash text-white"></i>
+                                <i class="fa fa-trash text-danger"></i>
                             </a>
                             {% if logger.logged_response.coordinates_of_city %}
                                 <a class="btn"
                                    href="{% url 'OSINT_System_Core:views_ip_logger_resp' logger.logged_response.coordinates_of_city|split_latlons %}"
                                    target="_blank" style="color: white">
-                                    <i class="fa fa-eye text-white"></i>
+                                    <i class="fa fa-eye text-success"></i>
                                 </a>
+                                {% else %}
+                                <div class="d-inline  text-center ">
+                                    <i class="fa fa-eye-slash  text-success ml-3"></i>
+                                  </div>
                             {% endif %}
                         </td>
                     </tr>

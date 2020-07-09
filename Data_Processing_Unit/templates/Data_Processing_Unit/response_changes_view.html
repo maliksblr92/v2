@@ -17,6 +17,10 @@
 {% endblock %}
 {% block belly %}
     <style>
+        .background-color {
+            background: linear-gradient( 90deg, rgba(0, 32, 44, 90%) 0%, rgba(0, 46, 69, 90%) 28%, rgba(0, 83, 135, 82%) 72%, rgba(0, 113, 188, 80%) 100% );
+            border-bottom: 1px solid #707070;
+            }
         tr {
             width: 100%;
             display: inline-table;
@@ -24,13 +28,13 @@
         }
 
         table {
-            height: 500px !important;
+            height: 100% !important;
             display: -moz-groupbox;
         }
 
         tbody {
             overflow-y: scroll !important;
-            height: 400px !important;
+            height: 100% !important;
             width: 100%;
 
         }
@@ -87,21 +91,21 @@
             }
         }
     </style>
-    <div class="row">
+    <div class="row background-color "style="height:100%;">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <table class="table table-responsive" id="response_changes_view" class="display"
                    style="width:100%">
                 <thead>
                 <tr>
 
-                    <th scope="col">Username/title</th>
+                    <th class="text-white"scope="col">Username/title</th>
 
-                    <th scope="col">Website</th>
-                    <th scope="col">Target Type</th>
-                    <th scope="col">CTR</th>
-                    <th scope="col">Detected On</th>
+                    <th class="text-white"scope="col">Website</th>
+                    <th class="text-white"scope="col">Target Type</th>
+                    <th class="text-white"scope="col">CTR</th>
+                    <th class="text-white"scope="col">Detected On</th>
 
-                    <th scope="col">Action</th>
+                    <th class="text-white"scope="col">Action</th>
 
                 </tr>
                 </thead>
@@ -110,7 +114,7 @@
 
                     <tr class="bg-transparent">
 
-                        <td style="font-size:12px;"> {% if change.resp_obj.username %}
+                        <td class="text-white font-weight-bold" style="font-size:12px;"> {% if change.resp_obj.username %}
                             {{ change.resp_obj.username }}
                         {% elif change.resp_obj.title %}
                             {{ change.resp_obj.title }}
@@ -119,34 +123,34 @@
                         {% endif %}
                         </td>
 
-                        <td style="font-size:12px;">{{ change.resp_obj.GTR.website.name }}</td>
-                        <td style="font-size:12px;">{{ change.resp_obj.target_type }}</td>
-                        <td style="font-size:12px;">{{ change.ctr }}</td>
-                        <td style="font-size:12px;">{{ change.detected_on }}</td>
+                        <td class="text-white font-weight-bold" style="font-size:12px;">{{ change.resp_obj.GTR.website.name }}</td>
+                        <td class="text-white font-weight-bold" style="font-size:12px;">{{ change.resp_obj.target_type }}</td>
+                        <td class="text-white font-weight-bold" style="font-size:12px;">{{ change.ctr }}</td>
+                        <td class="text-white font-weight-bold" style="font-size:12px;">{{ change.detected_on }}</td>
 
 
                         <td> {% if change.resp_obj.GTR|lower == 'facebook' %}
                             {% if change.resp_obj.target_type|lower == 'profile' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:FacebookPerson_Target_Response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
                             {% elif change.resp_obj.target_type|lower == 'page' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:FacebookPage_Target_Response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
                             {% elif change.resp_obj.target_type|lower == 'group' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:FacebookGroup_Target_Response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
                             {% endif %}
                         {% elif change.resp_obj.GTR|lower == 'twitter' %}
-                            <a class="btn btn-primary custom_icons"
+                            <a class="btn btn-primary text-white custom_icons"
                                href="{% url 'Target_Management_System:Twitter_Target_Response' change.resp_obj.GTR.id %}"
                                role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
                         {% elif change.resp_obj.GTR|lower == 'instagram' %}
-                            <a class="btn btn-primary custom_icons"
+                            <a class="btn btn-primary text-white custom_icons"
                                href="{% url 'Target_Management_System:Instagram_Target_Response' change.resp_obj.GTR.id %}"
                                role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
@@ -154,11 +158,11 @@
 
 
                             {% if change.resp_obj.target_type|lower == 'profile' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:LinkedinPerson_Target_Response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
                             {% elif change.resp_obj.target_type|lower == 'company' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:LinkedinCompany_Target_Response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
@@ -166,11 +170,11 @@
                         {% elif change.resp_obj.GTR|lower == 'reddit' %}
 
                             {% if change.resp_obj.target_type|lower == 'profile' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:reddit_target_response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
                             {% elif change.resp_obj.target_type|lower == 'subreddit' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:subreddit_target_resposne' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
@@ -179,7 +183,7 @@
                         {% elif change.resp_obj.GTR|lower == 'youtube' %}
 
                             {% if change.resp_obj.target_type|lower == 'channel' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:youtube_target_response' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
 
@@ -188,11 +192,11 @@
                         {% elif change.resp_obj.GTR|lower == 'custom' %}
 
                             {% if change.resp_obj.target_type|lower == 'keybase_crawling' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Keybase_Management_System:Keybase_Fetched_Responses' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
                             {% elif change.resp_obj.target_type|lower == 'dynamic_crawling' %}
-                                <a class="btn btn-primary custom_icons"
+                                <a class="btn btn-primary text-white custom_icons"
                                    href="{% url 'Target_Management_System:dynamic_crawling_target' change.resp_obj.GTR.id %}"
                                    role="button" target="_blank"><i class="fa fa-eye"></i></a>
 

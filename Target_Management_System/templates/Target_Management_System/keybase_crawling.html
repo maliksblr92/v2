@@ -1,5 +1,7 @@
 {% extends 'OSINT_System_Core/resp_test.html' %}
 {% load static %}
+{% load osint_custom_tags %}
+
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
@@ -7,7 +9,7 @@
 {% block smallnavbar %}
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" style="">
+        <div class="col-md-8 d-flex" >
             <div class="col-md-1">
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu  ">
@@ -40,6 +42,15 @@
     <p class="text-uppercase custom_card_title ">KEYBASE CRAWLING</p>
 {% endblock %}
 {% block belly %}
+<style>
+    input[type="text"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    input[type="date"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    
+</style>
     <style>
         .newlabeldesign {
             background: rgb(24, 72, 116);
@@ -63,6 +74,7 @@
             font-size: 16px;
         }
     </style>
+    {% now "SHORT_DATE_FORMAT"  as date %}
     <div class="row">
         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
             <form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
@@ -132,8 +144,12 @@
                                             opacity:0.9; padding:7px 9px 0 10px;">Expire On
                                         </span>
                             </div>
-                            <input type="date" id="expire_on"
-                                   class="col-md-9 form-control newinputdesign text-white" name="expire_on">
+                            <input type="date" 
+                            id="expire_on"
+                            min='{{ date|to_and }}'
+                            max='2020-31-12'
+                            value="{{ date|to_and }}"
+                            class="col-md-9 form-control newinputdesign text-white" name="expire_on">
                         </div>
 
 

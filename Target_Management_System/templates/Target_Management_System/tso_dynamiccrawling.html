@@ -40,6 +40,12 @@
     <p class="text-uppercase custom_card_title ">DYNAMIC CRAWLING</p>
 {% endblock %}
 {% block belly %}
+<style>
+    input[type="url"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    
+</style>
     <div class="row">
         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
             <!-- FORM start -->
@@ -55,7 +61,7 @@
                                                 opacity:0.9; padding:7px 9px 0 10px;">Page URL
                                             </span>
                             </div>
-                            <input type="text" class="col-md-9 form-control newinputdesign"
+                            <input type="url" class="col-md-9 form-control newinputdesign"
                                    placeholder="Please Enter URL Here" name="page_url"
                                    value="{% if url %} {{ url }} {% endif %}" aria-label="Recipient's username"
                                    aria-describedby="basic-addon2">

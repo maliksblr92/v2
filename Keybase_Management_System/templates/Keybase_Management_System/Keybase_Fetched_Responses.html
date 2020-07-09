@@ -101,12 +101,16 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                        style="margin-top:2px;"
-                       href="{% url 'Keybase_Management_System:Keybase_Fetched_Report' GTR_id=target_object.GTR.id %}"
-                       id="download_as_pdf">PDF Download </a>
-                    <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                       href="http://192.168.18.20:8000/kms/keybase_processed_report/5f0045ddb244c1312caefd33/"
+                       id="download_as_pdf">Report Downlaod </a>
+                    <!-- <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                        style="margin-top:2px;"
                        href="{% url 'Bi_Tools:dashboard_with_pivot' %}"
-                       id="">Bi Tool</a>
+                       id="">Bi Tool</a> -->
+                       <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
+                       style="margin-top:2px;"
+                       href="{% url 'Keybase_Management_System:graph_analysis' resp.GTR %}"
+                       id="">Graph Analysis</a>
                     <a type="button" class="btn btn-sm btn-success float-left mr-2 ml-2" target="_blank"
                        style="margin-top:2px;"
                        href="{% url 'Bi_Tools:visualization' content_type='keybase' %}"
@@ -1873,7 +1877,7 @@
                             <ul class="nav nav-pills d-flex flex-row justify-content-around align-items-center">
                                 <li class=""><a data-toggle="pill"
                                                 class="nav-link btn btn-primary active custom_social_icons"
-                                                href="#communities">Communities</a></li>
+                                                href="#communities">Reddit Community</a></li>
                                 <li><a data-toggle="pill" class="nav-link btn btn-primary custom_social_icons"
                                        href="#redditPosts">Reddit Post</a></li>
                             </ul>
