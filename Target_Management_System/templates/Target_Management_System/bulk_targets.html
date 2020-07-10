@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block page_title %}Bulk Targets{% endblock %}
 {% block head_dep %}
@@ -13,11 +13,11 @@
 
 
 {% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">BULK TARGETS</p>
-{% endblock %}
+
 {% block belly %}
     <style>
+
+
         .card_header_text {
             font-size: 25px;
             color: white;
@@ -37,232 +37,248 @@
         }
 
     </style>
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <form method="post" role="form"
-                  class="justify-content-center  pt-3 pb-5 pl-5 pr-3 custom_inner_background inner_form_margin_radius"
-                  action="/tms/bulk_targets/">
-                {% csrf_token %}
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+    <div class="row ">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 custom_header m-0 p-0 "
+             style="border-radius: 20px 20px 0px 0px;">
+            <h4 class="card_header_text" style="color: white">BULK TARGETS</h4>
+        </div>
+
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 custom_main_background ">
+
+            <div class="row">
+                <!-- RPW FOR SOCIAL MEDIA -->
+                <!-- Second row-->
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+
+                    <form method="post" role="form"
+                          class="justify-content-center  pt-3 pb-5 pl-5 pr-3 custom_inner_background inner_form_margin_radius"
+                          action="/tms/bulk_targets/">
+                        {% csrf_token %}
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Select Website
                                         </span>
-                    </div>
-                    <select name="website" id="website" class="col-md-9 form-control custom_input_field"
-                            required="required">
-                        <option value="">Select Website</option>
-                        {% for i in social_sites %}
-                            <p class="text-dark">  {{ i.name }}</p>
-                            <option value="{{ i.id }}">{{ i.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+                            </div>
+                            <select name="website" id="website" class="col-md-9 form-control custom_input_field"
+                                    required="required">
+                                <option value="">Select Website</option>
+                                {% for i in social_sites %}
+                                    <p class="text-dark">  {{ i.name }}</p>
+                                    <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                {#                        <div class="row form-group form-inline">#}
-                {#                            <div class="col-md-4">#}
-                {#                                <label class="newlabeldesign">Select Website</label>#}
-                {##}
-                {#                            </div>#}
-                {#                            <div class="col-md-8">#}
-                {#                                <select name="website" id="website" class="col-md-9 form-control custom_input_field" required="required">#}
-                {#                                    <option value="">Select Website</option>#}
-                {#                                    {% for i in social_sites %}#}
-                {#                                        <p class="text-dark">  {{ i.name }}</p>#}
-                {#                                        <option value="{{ i.id }}">{{ i.name }}</option>#}
-                {#                                    {% endfor %}#}
-                {#                                </select>#}
-                {#                            </div>#}
-                {#                        </div>#}
+                        {#                        <div class="row form-group form-inline">#}
+                        {#                            <div class="col-md-4">#}
+                        {#                                <label class="newlabeldesign">Select Website</label>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="col-md-8">#}
+                        {#                                <select name="website" id="website" class="col-md-9 form-control custom_input_field" required="required">#}
+                        {#                                    <option value="">Select Website</option>#}
+                        {#                                    {% for i in social_sites %}#}
+                        {#                                        <p class="text-dark">  {{ i.name }}</p>#}
+                        {#                                        <option value="{{ i.id }}">{{ i.name }}</option>#}
+                        {#                                    {% endfor %}#}
+                        {#                                </select>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
 
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Target Type
                                         </span>
-                    </div>
-                    <div class="col-md-9 form-control custom_input_field p-0" id="target_type_div">
-                        <select name="target_type" class="col-md-12 form-control custom_input_field"
-                                id="target_type"
-                                required="required">
-                            <option value="">Select Target Type</option>
+                            </div>
+                            <div class="col-md-9 form-control custom_input_field p-0" id="target_type_div">
+                                <select name="target_type" class="col-md-12 form-control custom_input_field"
+                                        id="target_type"
+                                        required="required">
+                                    <option value="">Select Target Type</option>
 
-                        </select>
-                    </div>
+                                </select>
+                            </div>
 
-                </div>
+                        </div>
 
-                {#                        <div class="row form-group form-inline">#}
-                {#                            <div class="col-md-4"><label class="newlabeldesign">Target Type</label>#}
-                {##}
-                {#                            </div>#}
-                {#                            <div class="col-md-8 " id="target_type_div">#}
-                {#                                <select name="target_type" id="target_type"#}
-                {#                                        class="col-md-9 form-control custom_input_field"#}
-                {#                                        required="required">#}
-                {#                                    <option value="">Select Target Type</option>#}
-                {##}
-                {#                                </select>#}
-                {#                            </div>#}
-                {#                        </div>#}
+                        {#                        <div class="row form-group form-inline">#}
+                        {#                            <div class="col-md-4"><label class="newlabeldesign">Target Type</label>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="col-md-8 " id="target_type_div">#}
+                        {#                                <select name="target_type" id="target_type"#}
+                        {#                                        class="col-md-9 form-control custom_input_field"#}
+                        {#                                        required="required">#}
+                        {#                                    <option value="">Select Target Type</option>#}
+                        {##}
+                        {#                                </select>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Periodic Interval
                                         </span>
-                    </div>
-                    <select name="interval" id="interval" class="col-md-9 form-control custom_input_field"
-                            required="required">
-                        <option value="">Select Interval</option>
-                        {% for interval in intervals.0 %}
-                            <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+                            </div>
+                            <select name="interval" id="interval" class="col-md-9 form-control custom_input_field"
+                                    required="required">
+                                <option value="">Select Interval</option>
+                                {% for interval in intervals.0 %}
+                                    <option value="{{ interval.0 }}">{{ interval.1 }}</option>
 
-                        {% endfor %}
-                    </select>
-                </div>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                {#                        <div class="row form-group form-inline">#}
-                {#                            <div class="col-md-4"><label class="newlabeldesign">Periodic Interval</label>#}
-                {##}
-                {#                            </div>#}
-                {#                            <div class="col-md-8">#}
-                {#                                <select name="interval" id="interval" class="col-md-9 form-control custom_input_field" required="required">#}
-                {#                                    <option value="">Select Interval</option>#}
-                {#                                    {% for interval in intervals.0 %}#}
-                {#                                        <option value="{{ interval.0 }}">{{ interval.1 }}</option>#}
-                {##}
-                {#                                    {% endfor %}#}
-                {#                                </select>#}
-                {#                            </div>#}
-                {#                        </div>#}
+                        {#                        <div class="row form-group form-inline">#}
+                        {#                            <div class="col-md-4"><label class="newlabeldesign">Periodic Interval</label>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="col-md-8">#}
+                        {#                                <select name="interval" id="interval" class="col-md-9 form-control custom_input_field" required="required">#}
+                        {#                                    <option value="">Select Interval</option>#}
+                        {#                                    {% for interval in intervals.0 %}#}
+                        {#                                        <option value="{{ interval.0 }}">{{ interval.1 }}</option>#}
+                        {##}
+                        {#                                    {% endfor %}#}
+                        {#                                </select>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">User Names
                                         </span>
-                    </div>
+                            </div>
 
-                    <div class="col-md-9 form-control custom_input_field p-0">
-                        <input type="text" data-role="tagsinput" value=""
-                               class="custom_input_field"
-                               required="required"
-                               id="usernames" name="usernames"/>
-                    </div>
+                            <div class="col-md-9 form-control custom_input_field p-0">
+                                <input type="text" data-role="tagsinput" value=""
+                                       class="custom_input_field"
+                                       required="required"
+                                       id="usernames" name="usernames"/>
+                            </div>
 
 
-                </div>
+                        </div>
 
-                {#                        <div class="row form-group form-inline">#}
-                {#                            <div class="col-md-4"><label class="newlabeldesign">User Names</label>#}
-                {##}
-                {#                            </div>#}
-                {#                            <div class="col-md-8">#}
-                {#                                <input type="text" data-role="tagsinput" value=""#}
-                {#                                       class="col-md-9 form-control custom_input_field"#}
-                {#                                       required="required"#}
-                {#                                       id="usernames" name="usernames"/>#}
-                {#                            </div>#}
-                {#                        </div>#}
+                        {#                        <div class="row form-group form-inline">#}
+                        {#                            <div class="col-md-4"><label class="newlabeldesign">User Names</label>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="col-md-8">#}
+                        {#                                <input type="text" data-role="tagsinput" value=""#}
+                        {#                                       class="col-md-9 form-control custom_input_field"#}
+                        {#                                       required="required"#}
+                        {#                                       id="usernames" name="usernames"/>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Expired On
                                         </span>
-                    </div>
-                    <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on"
-                           name="expired_on"
-                           required="required"/>
-                </div>
+                            </div>
+                            <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on"
+                                   name="expired_on"
+                                   required="required"/>
+                        </div>
 
-                {#                        <div class=" row form-group form-inline">#}
-                {#                            <div class="col-md-4"><label class="newlabeldesign">Expired On</label>#}
-                {##}
-                {#                            </div>#}
-                {#                            <div class="col-md-8">#}
-                {#                                <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on" name="expired_on"#}
-                {#                                       required="required"/>#}
-                {#                            </div>#}
-                {#                        </div>#}
+                        {#                        <div class=" row form-group form-inline">#}
+                        {#                            <div class="col-md-4"><label class="newlabeldesign">Expired On</label>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="col-md-8">#}
+                        {#                                <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on" name="expired_on"#}
+                        {#                                       required="required"/>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
-                <div class="row input-group mt-4 mb-3">
-                    <div class="col-md-3 p-0 input-group-prepend">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Screenshots
                                         </span>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-6 mt-2">
-                                <label class="d-flex flex-row justify-content-center align-items-center">
-                                    <input type="checkbox"
-                                           id="screenshots"
-                                           name="screenshots"
-                                           value="1"/>
-                                    <span class="badge badge-success ml-2">   Yes</span>
-                                </label>
                             </div>
 
-                            <div class="col-md-6 mt-2">
-                                <label class="d-flex flex-row justify-content-center align-items-center ">
-                                    <input type="checkbox"
-                                           id="screenshots"
-                                           name="screenshots"
-                                           value="0"/>
-                                    <span class="badge badge-danger ml-2">          No</span>
-                                </label>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 mt-2">
+                                        <label class="d-flex flex-row justify-content-center align-items-center">
+                                            <input type="checkbox"
+                                                   id="screenshots"
+                                                   name="screenshots"
+                                                   value="1"/>
+                                            <span class="badge badge-success ml-2">   Yes</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label class="d-flex flex-row justify-content-center align-items-center ">
+                                            <input type="checkbox"
+                                                   id="screenshots"
+                                                   name="screenshots"
+                                                   value="0"/>
+                                            <span class="badge badge-danger ml-2">          No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+
+
+                        </div>
+
+                        {#                        <div class="row form-group   form-inline">#}
+                        {##}
+                        {#                            <div class="col-md-4"><label class="newlabeldesign">Screenshots</label></div>#}
+                        {#                            <div class="radio-group d-flex flex-row justify-content-around align-items-center">#}
+                        {#                                <label class="text-success">Yes <input type="checkbox" id="screenshots"#}
+                        {#                                                                       name="screenshots"#}
+                        {#                                                                       value="1"/></label>#}
+                        {#                                <label class="text-success">No <input type="checkbox" id="screenshots"#}
+                        {#                                                                      name="screenshots"#}
+                        {#                                                                      value="0"/></label>#}
+                        {#                            </div>#}
+                        {##}
+                        {##}
+                        {#                        </div>#}
+
+                        <!-- Button -->
+                        <div class="row input_wrapper_row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <input type="submit"
+                                       class="btn border font-weight-bold btn-sm w-100  text-white"
+                                       value="submit"
+                                       name="submit" id="submit">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
 
-                    </div>
+                        {#                        <div class="row form-group   form-inline">#}
+                        {#                            <div class="col-md-8"></div>#}
+                        {#                            <div class="col-md-4  radio-group d-flex flex-row justify-content-around align-items-center">#}
+                        {#                                <input type="submit" class="btn btn-success" id="submit" value="submit" name="submit"/>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
+
+                    </form>
 
                 </div>
-
-                {#                        <div class="row form-group   form-inline">#}
-                {##}
-                {#                            <div class="col-md-4"><label class="newlabeldesign">Screenshots</label></div>#}
-                {#                            <div class="radio-group d-flex flex-row justify-content-around align-items-center">#}
-                {#                                <label class="text-success">Yes <input type="checkbox" id="screenshots"#}
-                {#                                                                       name="screenshots"#}
-                {#                                                                       value="1"/></label>#}
-                {#                                <label class="text-success">No <input type="checkbox" id="screenshots"#}
-                {#                                                                      name="screenshots"#}
-                {#                                                                      value="0"/></label>#}
-                {#                            </div>#}
-                {##}
-                {##}
-                {#                        </div>#}
-
-                <!-- Button -->
-                <div class="row input_wrapper_row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-2">
-                        <input type="submit"
-                               class="btn border font-weight-bold btn-sm w-100  text-white"
-                               value="submit"
-                               name="submit" id="submit">
-                    </div>
-                </div>
-
-                {#                        <div class="row form-group   form-inline">#}
-                {#                            <div class="col-md-8"></div>#}
-                {#                            <div class="col-md-4  radio-group d-flex flex-row justify-content-around align-items-center">#}
-                {#                                <input type="submit" class="btn btn-success" id="submit" value="submit" name="submit"/>#}
-                {#                            </div>#}
-                {#                        </div>#}
-
-
-            </form>
+            </div>
         </div>
+
     </div>
+
 
 {% endblock %}
 {% block foot_dep %}

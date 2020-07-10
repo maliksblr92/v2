@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
@@ -17,27 +17,20 @@
                 <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
-                    IDENTIFY</a>
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
-                    SURVEY</a>
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu glowing_border"><!-- secondnavactive -->
-                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
-                    CRAWLING</a>
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
-                    KEYBASE</a>
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems "> KEYBASE</a>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
-{% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">DYNAMIC CRAWLING</p>
 {% endblock %}
 {% block belly %}
 <style>
@@ -71,48 +64,51 @@
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-12 p-0 input-group-prepend">
                                             <span class="newlabeldesign"
-                                                  style="padding:0.2em 15.5em;border-radius:8px;">Select The Following </span>
-                            </div>
-                        </div>
-                        <div class="row mt-4" style="margin-left:-2%;">
-                            <div class="w-100 d-flex flex-row justify-content-around align-items-center">
-                                <label for="" class="crawlingLabel btn btn-primary mr-2 ">
-                                    <input type="checkbox" name="links" value="1" autocomplete="off"> Links
-                                </label>
-                                <label for="" class="crawlingLabel btn btn-primary mr-2 ">
-                                    <input type="checkbox" name="headings" value="1" autocomplete="off"> Headings
-                                </label>
-                                <label for="" class="btn btn-primary mr-2 crawlingLabel">
-                                    <input type="checkbox" name="paragraphs" value="1" autocomplete="off"> Paragraphs
-                                </label>
-                                <label for="" class="btn btn-primary mr-2 crawlingLabel">
-                                    <input type="checkbox" name="pictures" value="1" autocomplete="off"> Pictures
-                                </label>
-                                <label for="" class="btn btn-primary mr-2 crawlingLabel">
-                                    <input type="checkbox" name="videos" value="1" autocomplete="off"> Videos
-                                </label>
-                            </div>
-                        </div>
-                        <!--Tetfield 4 -->
-                        <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
+                                            style="padding:0.2em 15.5em;border-radius:8px;">Select The Following </span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4" style="margin-left:-2%;">
+                                        <div class="w-100 d-flex flex-row justify-content-around align-items-center">
+                                            <label for="" class="crawlingLabel btn btn-primary mr-2 ">
+                                                <input type="checkbox"  name="links" value="1" autocomplete="off"> Links
+                                            </label>
+                                            <label for="" class="crawlingLabel btn btn-primary mr-2 ">
+                                                <input type="checkbox" name="headings" value="1" autocomplete="off"> Headings
+                                            </label>
+                                            <label for="" class="btn btn-primary mr-2 crawlingLabel">
+                                                <input type="checkbox" name="paragraphs" value="1" autocomplete="off"> Paragraphs
+                                            </label>
+                                            <label for="" class="btn btn-primary mr-2 crawlingLabel">
+                                                <input type="checkbox" name="pictures" value="1" autocomplete="off"> Pictures
+                                            </label>
+                                            <label for="" class="btn btn-primary mr-2 crawlingLabel">
+                                                <input type="checkbox" name="videos" value="1" autocomplete="off"> Videos
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--Tetfield 4 -->
+                                    <div class="row input-group mt-4 mb-3">
+                                        <div class="col-md-3 p-0 input-group-prepend">
                                             <span class="myformlabel" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:5px 9px 0 10px;">IP Address </span>
+                                        </div>
+                                        <label for="" class="col-md-3 m-0 btn btn-primary mr-2 crawlingLabel">
+                                            <input type="checkbox" autocomplete="off" name="ip" value="1"> Yes
+                                        </label>
+                                    </div>
+                                    <button type="submit" style="float:right"
+                                    class="btn btn-secondary mainbutton">submit</button>
+                                </div>
                             </div>
-                            <label for="" class="col-md-3 m-0 btn btn-primary mr-2 crawlingLabel">
-                                <input type="checkbox" autocomplete="off" name="ip" value="1"> Yes
-                            </label>
-                        </div>
-                        <button type="submit" style="float:right"
-                                class="btn btn-secondary mainbutton">submit
-                        </button>
+                        </form>
+                        <!--FORM END-->
                     </div>
                 </div>
-            </form>
-            <!--FORM END-->
+                <!-- Second row-->
+                <!-- END OF second row-->
+            </div>
         </div>
     </div>
-
 {% endblock %}
 {% block base_js %}
     <script>

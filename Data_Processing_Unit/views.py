@@ -299,23 +299,15 @@ class Twitter(View):
             print(phrase, location)
             geolocator = Nominatim()
             location1 = geolocator.geocode(location)
-            if hasattr(location1, 'latitude'):
-                lat=str(location1.latitude)
-                lon=str(location1.longitude)
-               
-            else:
-               location1 = geolocator.geocode("pakistan")
-               lat=str(location1.latitude)
-               lon=str(location1.longitude)  
-                
+            lat=str(location1.latitude)
+            lon=str(location1.longitude)
             rad=str(radius)
             dic=LocationSearchTweets(phrase,limit,lat,lon,rad)
             print(dic)
             if(len(dic) > 0 ):
                 # messages.success(
                 #     request, 'Query Executed Successfully --Location Search With Phrase and  Radius ')
-                type=" Phrase near location  "
-                return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic,'type':type})
+                return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
             else:
                 # messages.error(request, 'Query execution failed')
                
@@ -328,22 +320,15 @@ class Twitter(View):
             distance = request.POST['distance']
             limit = request.POST['limit']
             geolocator = Nominatim()
-            location1 = geolocator.geocode(location)
-            if hasattr(location1, 'latitude'):
-                lat=str(location1.latitude)
-                lon=str(location1.longitude)
-               
-            else:
-               location1 = geolocator.geocode("pakistan")
-               lat=str(location1.latitude)
-               lon=str(location1.longitude)  
-            
+            location = geolocator.geocode(location)
+            print(location.latitude, location.longitude)
             asyncio.set_event_loop(asyncio.new_event_loop())
             c = twint.Config()
             c.Limit =limit
-            
+            lat=str(location.latitude)
+            long=str(location.longitude)
             dist=str(distance)
-            c.Geo=""+lat+","+lon+","+dist+"km"
+            c.Geo=""+lat+","+long+","+dist+"km"
             # c.Output = False
             c.Store_object = True
             c.Images = True
@@ -466,8 +451,7 @@ class Twitter(View):
             if(len(dic) > 0 ):
                 # messages.success(
                 #     request, 'Query Executed Successfully --Location Search With Radius ')
-                type=" location and distance search   "
-                return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic,'type':type})
+                return render(request, 'Data_Processing_Unit/twint_tweets.html', {'tweets_json': dic})
             else:
                 # messages.error(request, 'Query execution failed')
                

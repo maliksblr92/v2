@@ -864,7 +864,6 @@ def username_exists(username,n_data):
     return False
 
 
-
 class Graph(View):
     def get(self,request,*args,**kwargs):
         
@@ -874,5 +873,4 @@ class Graph(View):
 
          with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             profile = json.load(f)
-         return render(request,'Target_Management_System/graph2.html',{'profile':data_object})
-       
+         return render(request,'Target_Management_System/Facebook_Target_Graph.html',{'profile':data_object})

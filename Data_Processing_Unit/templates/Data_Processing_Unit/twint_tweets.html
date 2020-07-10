@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
 {% endblock %}
@@ -120,28 +120,21 @@
 </div>
 </div>
 </div>
-
-{% block belly_header %}
-<p class="text-uppercase custom_card_title ">{{ type }}</p>
-{% endblock %}
 {% block belly %}
+<style>
 
-  <style>
-      a{
-          text-decoration: none;;
-          color:white;
-
-      }
-      a:hover{
-        text-decoration: none;;
-        color:white;
-        
-    }
-  </style>
+    a { color: inherit; } 
+</style>
+    <div class="conatiner-fluid">
         <div class="row">
             <div class="col-md-12  ">
-             
-                
+                <div class="w-100 h-100 background glowing_border" id="content_div"
+                     style="border-radius: 10px 10px 0px 0px;">
+                    <div class="card-header  main_card_header m-0 p-0 ">
+                        <p class="card_header_text">TWEETS</p>
+                    </div>
+
+                    <div class="card-body main_card" style="height:600px;overflow-y:auto">
 
                         <div class="row">
                             {% for i in tweets_json %}
@@ -225,7 +218,7 @@
                                                 </a>
                                             </div>
                                         {% else %}
-                                        <div >
+                                        <div style="">
                                             <img class="d-block w-100"
                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAC6CAMAAABoQ1NAAAAAPFBMVEXLy8vJycmwsLCxsbG0tLTOzs6oqKitra3Fx8i6urrDw8O/v7/R0dG3t7fGyMm8vLykpKSdnZ2ZmZnW1tbp4WqvAAAFNklEQVR4nO3c6WKiOgCG4ayExQzY3v+9ngRc+ASqrcl0kvO9Mz+mTl14mkBQq2hjf9iSkDHBLpEDIgdEDogcEDkgckDkgMgBkQMiB0QOiBwQOSByQOSAyAGRAyIHRA6IHBA5IHJA5IDIAZEDIgdEDogcEDkgckDkgMgBkQMiB0QOiBwQOSByQOSAyAGRAyIHRA6IHBA5IHJA5IDIAeXksDnK9Fgv5eOwVvZD6vo2y2O9lY3DitFNU5M4p7o+x6O9lovDyuY8OW1Sp5XJ6ZGJI2qocRy75HnTZdz15+JwZ935kAl/kmWWv2M+jzwcdjg7n3yiLAWRfNMl0+hQk/G3h59Yw5gx/QO+lIUj7DmaWaHrE9fNN+tlruVHHo7ezXOlE6ekS7CTHXWZHGoe1Ke0D9sK7wrmGKxIfNu+KZhjxFOMBGcc9XAk2YJKOMKsGYzW4VDz3p1VwiF9M5/PhcvfWkPVwdG72/mcNsMb91cDh23d2d1OXcIB5+e3XAOH0OEMxt8X677/8dbUwNFPjYczl5+fc1TAYVfnc5fh8eOn+MrnsHLanOx/vff4YltL5XB3jmFSjxzdV1eW/ngyFcthbhzdpB849BfbY8OOVx2uTXwzH66L5NALR/iJvs5hpTk35vDp8jI52jXH2GxHx9H+IY6NZj4W7/9/BRy923CMB+e21i4ahx7lcwip3cOeVPen/SdCrPlornvbXY8KOMSg8OUn7e3n7tWsvmnM42O70TVwyA453PC5tznWhr3oalrtjY8aOETr1x6q+zztXUmoD1yv7ew/quAQ/XifKWE1sjtVhDk3Btt61MEhZD/66yZ+7mnYHY2d+bKsSkvjWK9Kr3fU9+MwDK097c8UvaOxHR9lcmxGx+Vyu49xqLHxKJMjjg6tVfe42jpai1p1bvR++HYOP39bgRx6j+Pg2+f1xgEHvr3FNypeWDNHPMIejY1Hj/o5rHQf7mhsPHpUx2FF3+PX6nimbDxq47DCn9XqDq0Me9GvNdYelXFEjUnd39wVZspzDa1uHnVxzBph668eL42NGeSy/qiKI67EJx03f3kz5KzxAkYcH+N8UzVxLGMjaqjZwwr3bC9643DVcVjrL2MjeozyhWPKmmNe3S8c5a1Kmw2HteZjGRthe+Lob5+sN6A1h9JtWRxt5FBq/YR5GBtBI1wYm8fHfExRl0uedeeIFcihgCPsRcPMWG1fGP/uRYoVh2lc/OrnbwF40l/iiBrTWiNw6G9oVMYh4xH2O5tfNcfbGjVxLKuvtzRq4ogarx5B/gcc74+NijjskECjHo6Tf3um/D2OP/lHR0cO5PjO8vMZR/x3gZMlPGp343hfYz06iuRwaw73djeOEDnq4fAFcWTblZbJwckC5R8dQr75C1+X26xkdMQtSdDlZLACjoSRA/JFcyT9DfyYmQrmML1MWCvl0BTJId0yqE2CI+y66bzcblmvwl3nuHPJPxlqziTfJ13LwxFfpJ17+1QWz2vVMtqGxB+EcS/T6BBD4mmyqvH7b05NUS4OMebxiC9lHrynPUXZOETvs4CoTuTTyPkRjHLo0n1k2LWxzzdTRHkf0Gmz7UXn8nIk/zzNrBaivNGROXJA5IDIAZEDIgdEDogcEDkgckDkgMgBkQMiB0QOiBwQOSByQOSAyAGRAyIHRA6IHBA5IHJA5IDIAZEDIgdEDogcEDkgckDkgMgBkQMiB0QOiBwQOSByQOSAyAGRAyIHRA6IHBA5IHJA5IDIAZEDkr/o8Q/+GORv9tsbv639zf78a/0HH62WwHBjAecAAAAASUVORK5CYII="
                                             style="height:200px;width:100%;"
@@ -273,6 +266,10 @@
                             {% endfor %}
                         </div>
 
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
