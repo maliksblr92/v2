@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:09 GMT -->
+<head>
+    <title>Top News</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/news_monitoring/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+            background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: 'Raleway' !important;
+        }
+
+        .background-gradient {
+            background: linear-gradient(
+                    0deg,
+                    rgba(242, 242, 242, 1) 0%,
+                    rgba(240, 240, 240, 1) 52%,
+                    rgba(221, 221, 221, 1) 77%,
+                    rgba(204, 204, 204, 1) 100%
+            );
+        }
+
+        .background-gradient-dark {
+            background: linear-gradient(
+                    90deg,
+                    rgba(0, 113, 188, 20%) 0%,
+                    rgba(65, 130, 173, 29%) 50%,
+                    rgba(0, 0, 0, 40%) 100%
+            );
+        }
+
+        .text_heading {
+            color: #06111a;
+        }
+
+        .text_paragraph {
+            color: #184874;
+        }
+
+        .custom_badge {
+            background-color: #06111a !important;
+            color: #ffffff !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+
+        {% for x in   top_news %}
+            <div class="col-md-4 mt-4">
+                <div class="card border" style="border-radius: 10px 10px 0px 0px !important;">
+                    <div class="card-header background-gradient-dark text-left"
+                         style="border-radius: 10px 10px 0px 0px !important;">
+                    <span class="font-weight-bold" style="letter-spacing:5px;font-size:20px;">
+                      Top News of 
+                      <span class="text-warning font-weight-bold">
+                        {{ x.channel }}
+                      </span>
+                      <span>
+                        {% if x.channel == 'ARY' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/ary.png' %}" alt="">
+                        {% elif x.channel == 'DAWN' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/dawn.jpg' %}" alt="">
+                        {% elif x.channel == 'NDTV' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/ndtv.png' %}" alt="">
+                        {% elif x.channel == 'INDIATODAY' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/indiatoday.jpg' %}" alt="">
+                        {% elif x.channel == 'ABP' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/abp.png' %}" alt="">
+                        {% elif x.channel == 'ZEE' %}
+                            <img class="img-fluid float-right" style="width: 45px; height: 35px;"
+                                 src="{% static 'OSINT_System_Core/zee.png' %}" alt="">
+                        {% else %}
+                        {% endif %}
+                      </span>
+                    </span>
+                    </div>
+                    <div class="card-body background-gradient">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card background-gradient border" style="height: 400px;overflow-y:auto">
+
+                                {% for y in x.news %}
+                                    {% for x in y.News %}
+                                        <div class=" text_paragraph p-2 font-weight-bold" style="font-size:14px;"
+                                             data-toggle="collapse" data-target="#{{ forloop.counter }}"
+                                             aria-expanded="true"
+                                             aria-controls="{{ forloop.counter }}">
+                                            <span class="text_heading">  {{ forloop.counter }} #</span> {{ x.HeadLine }}
+                                            <a taeget="_blank" href="{{ x.Link }}" class="float-right" target="_blank">
+                                                <i
+                                                        class="fa fa-eye text_paragraph"></i> </a>
+                                        </div>
+                                        <div>
+                                            <span class=" badge badge-success float-right">{{ x.Time|default:"--" }}</span>
+                                        </div>
+                                    {% endfor %}
+                                {% empty %}
+
+                                    <span>No News </span>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="background-gradient card-footer">
+
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/bootstrap.min.js' %}"></script>
+</body>
+<!-- Mirrored from covid.amcharts.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Mar 2020 08:31:46 GMT -->
+</html>

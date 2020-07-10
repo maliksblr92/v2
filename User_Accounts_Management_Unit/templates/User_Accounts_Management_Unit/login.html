@@ -1,93 +1,355 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>OSINT System</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{% static 'User_Accounts_Management_Unit/images/icons/favicon.ico' %}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/css/bootstrap.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/animsition/css/animsition.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/select2/select2.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/vendor/daterangepicker/daterangepicker.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/css/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'User_Accounts_Management_Unit/css/main.css' %}">
-<!--===============================================================================================-->
-</head>
-<body >
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-	<div class="limiter" >
-		<div class="container-login100" style="background-color:#4a5568!important;">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="{% url 'User_Accounts_Management_Unit:user_login' %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-					<span class="login100-form-title" style="background-color:#0E2355;">
-						Owl-Sense
-					</span>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username"  placeholder="Username">
-						<span class="focus-input100"></span>
-					</div>
+    <title>Owl Sense </title>
+  </head>
+  <style>
+    html {
+      background: url("{% static 'User_Accounts_Management_Unit/images/OSINTUILoginScreen.png' %}")
+        no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 
-					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
-						<span class="focus-input100"></span>
-					</div>
+    body {
+      background: url("{% static 'User_Accounts_Management_Unit/images/OSINTUILoginScreen.png' %}")
+        no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 
-					<div class="text-right p-t-13 p-b-23">
-						<span class="txt1">
-							Forgot
-						</span>
+    input {
+      background-color: rgb(1, 1, 1, 0.5) !important;
+      color: white !important;
+      font-size: 25px !important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-						<a href="#" class="txt2">
-							Username / Password?
-						</a>
-					</div>
+    #username {
+      height: 60px;
+      width: 341px;
+    }
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Log in
-						</button>
-					</div>
+    #password {
+      height: 60px;
+      width: 341px;
+    }
 
-					<div class="flex-col-c p-t-170 ">
+    /* Change the white to any color ;) */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: white !important;
+      -webkit-font-size: 25px !important;
+      font-size: 25px !important;
+    }
 
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    input::-webkit-input-placeholder {
+      background-color: transparent !important;
+      color: white !important;
+      font-size: 25px;
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
 
+    input:-moz-placeholder {
+      background-color: transparent !important;
+      color: white !important;
+      font-weight: bold;
+      font-size: 25px;
+    }
 
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/animsition/js/animsition.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/select2/select2.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/daterangepicker/moment.min.js' %}"></script>
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/daterangepicker/daterangepicker.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/vendor/countdowntime/countdowntime.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'User_Accounts_Management_Unit/js/main.js' %}"></script>
+    /*Change text in autofill textbox*/
+    input:-webkit-autofill {
+      -webkit-text-fill-color: white !important;
+    }
 
-</body>
+    /*.submit {
+      background-image: url("{% static 'User_Accounts_Management_Unit/images/logo_.png' %}");
+      background-size: cover;
+      background-position: center;
+      height: 60px;
+      width: 150px;
+      border: 2px solid rgb(230, 108, 108) !important;
+      border-radius: 10px;
+      padding: 0px !important;
+      margin: 0px !important;
+      background-color: rgb(57, 61, 63) !important;
+    }
+    */
+
+    #form_parent {
+      padding-top: 250px !important;
+    }
+
+    /*medai queries */
+
+    @media only screen and (max-width: 800px) {
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 20px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 40px;
+        width: 300px;
+      }
+
+      #password {
+        height: 40px;
+        width: 300px;
+      }
+
+      #form_parent {
+        padding-top: 0px !important;
+      }
+
+      /*.submit {
+        background-image: url("{% static 'User_Accounts_Management_Unit/images/logo_.png' %}");
+        background-size: cover;
+        background-position: center;
+        height: 40px;
+        width: 100px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }*/
+    }
+
+    @media only screen and (max-height: 800px) {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: white !important;
+        -webkit-font-size: 19px !important;
+        font-size: 25px !important;
+      }
+
+      input::-webkit-input-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-size: 19px;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+
+      input:-moz-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-weight: bold;
+        font-size: 19px;
+      }
+
+      /*Change text in autofill textbox*/
+      input:-webkit-autofill {
+        -webkit-text-fill-color: white !important;
+      }
+
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 15px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 40px;
+        width: 300px;
+      }
+
+      #password {
+        height: 40px;
+        width: 300px;
+      }
+
+      #form_parent {
+        margin-top: -100px !important;
+      }
+
+      /*.submit {
+        background-image: url(logo_.png);
+        background-size: cover;
+        background-position: center;
+        height: 40px;
+        width: 100px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }*/
+    }
+
+    @media only screen and (max-height: 400px) {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: white !important;
+        -webkit-font-size: 15px !important;
+        font-size: 25px !important;
+      }
+
+      input::-webkit-input-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif !important;
+      }
+
+      input:-moz-placeholder {
+        background-color: transparent !important;
+        color: white !important;
+        font-weight: bold;
+        font-size: 15px;
+      }
+
+      /*Change text in autofill textbox*/
+      input:-webkit-autofill {
+        -webkit-text-fill-color: white !important;
+      }
+
+      input {
+        background-color: rgb(1, 1, 1, 0.5) !important;
+        color: white !important;
+        font-size: 13px !important;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #username {
+        height: 25px;
+        width: 200px;
+      }
+
+      #password {
+        height: 25px;
+        width: 200px;
+      }
+
+      #form_parent {
+        margin-top: -50px !important;
+      }
+
+      /*.submit {
+        background-image: url(logo_.png);
+        background-size: cover;
+        background-position: center;
+        height: 30px;
+        width: 80px;
+        border: 2px solid rgb(230, 108, 108) !important;
+        border-radius: 10px;
+        padding: 0px !important;
+        margin: 0px !important;
+        background-color: rgb(57, 61, 63) !important;
+      }
+      */
+    }
+
+    @media only screen and (min-width: 992px) {
+      #form_parent {
+        margin-top: 0px !important;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      #form_parent {
+        margin-top: -50px !important;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="container-fluid vh-100">
+      <div class="row  vh-100">
+        <div class="col-md-4"></div>
+        <div
+          class="col-md-4 m-0 p-0  vh-100    d-flex flex-column justify-content-center align-items-center vh-100 "
+          id="form_parent"
+        >
+          <form action="/accounts/login/" method="POST">
+            {% csrf_token %}
+            {% if message %}
+              <p class="alert alert-danger"><i class="fa fa-unlock-alt mr-2 fa-2x text-danger" aria-hidden="true"></i>{{ message }}</p>
+              {% endif %}
+
+            <br />
+            <br />
+            <div class="row  mx-auto my-auto ">
+
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5 "
+              >
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="form-control"
+                  placeholder="LOGIN : _ _ _ _ _ _ _ _ "
+                  required
+                />
+              </div>
+
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5"
+              >
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="PASSWORD : _ _ _ _ _ _ _  "
+                  required
+                />
+              </div>
+              <div
+                class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5"
+              >
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+                {% endif %}
+                <input type="submit"  class=" btn btn-primary " value="Login" style="margin-top: 100px;;" />
+              </div>
+            </div>
+          </form>
+
+          <!-- <div class="login_form" >
+            <input type="text" id="username"  name="password" id="password" class="form-control" style="" placeholder="LOGIN : _ _ _ _ _ _ _ _ " required/>
+            <input type="password" id="password" name="password" id="password"  class="form-control" style="" placeholder="PASSWORD : _ _ _ _ _ _ _  "  required/> 
+        </div>          -->
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'User_Accounts_Management_Unit/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
 </html>

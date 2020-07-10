@@ -1,0 +1,1401 @@
+
+
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% load osint_custom_tags %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Avatar_Management_Unit/css/avatar.css' %}">
+<link href=" {% static 'Keybase_Management_System/tagsinput.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block smallnavbar %}
+   <!-- <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 d-flex">
+         <div class="col-md-3 col-lg-3 col-xl-3"></div>
+         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems"> AVATAR</a>
+         </div>
+         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_setting' %}" class="btn secondnavitems"> SETTING</a>
+         </div>
+         <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_report' %}" class="btn secondnavitems"> REPORT</a>
+         </div>
+      </div>
+      <div class="col-md-3 col-lg-3 col-xl-3"></div>
+   </div> -->
+{% endblock %}
+{% block belly %}
+{% now "SHORT_DATE_FORMAT"  as date %}
+<style>
+   .newlabeldesign{
+   width:150px;
+   }
+   .bootstrap-tagsinput input{
+   width: 600px!important;
+   }
+   li{
+   list-style: none!important;
+   }
+</style>
+<div class="row middlecontentdiv">
+   <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
+      <!-- Sub Menu Bar for app specific menu -->
+      <nav>
+         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link  {% if details_type == "perosnal_details" %} active      {% else %}   {% endif %}" id="nav-pinfo-tab" data-toggle="tab" href="#nav-pinfo">Personal Information</a>
+            <a class="nav-item nav-link    {% if details_type == "work_details" %} active   {% else %}   {% endif %}" id="nav-work-tab" data-toggle="tab" href="#nav-work">Work
+            Details</a>
+            <a class="nav-item nav-link  {% if details_type == "intrest" %} active {% else   %} {% endif %}" id="nav-interest-tab" data-toggle="tab" href="#nav-interest">Interest</a>
+            <a class="nav-item nav-link    {% if details_type  == "events" %} active {% else %}  {% endif %}" id="nav-events-tab" data-toggle="tab" href="#nav-events">Life
+            Events</a>
+         </div>
+      </nav>
+      <!-- end of sub menu -->
+   </div>
+   <!-- end of top row -->
+   <!-- inside main container -->
+   <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+      <div class="row">
+         <div class="col-md-12 text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+         </div>
+      </div>
+      <div class="">
+         <div class="row formbg ml-3">
+            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+               <!-- nav tab content section -->
+               <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                  <!-- personal info tab -->
+                  <div class="tab-pane fade  {% if details_type == "perosnal_details" %} active show  {% else %}  {% endif%} " id="nav-pinfo" role="tabpanel">
+                  <!-- a nav for personal information tab -->
+                  <div class="row mt-2">
+                     <!-- left side redundant navigation -->
+                     <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                        <!-- Left Image side-->
+                        <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+                           Create</a>
+                        </p>
+                        <div class="d-flex flex-column align-items-center">
+                           <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                              src="{% static 'images/testimonial.png' %}" alt="">
+                           <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                              <nav>
+                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" data-toggle="tab"
+                                       href="#nav-bio">Biography</a>
+                                    <a class="nav-item nav-link" data-toggle="tab"
+                                       href="#nav-social">Social Media</a>
+                                    <a class="nav-item nav-link" data-toggle="tab"
+                                       href="#nav-posts">Posts</a>
+                                 </div>
+                              </nav>
+                           </div>
+                        </div>
+                        <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+                           Edit</a>
+                        </p>
+                        <!-- end of left img section -->
+                     </div>
+                     <!-- end of left side redundant navigation -->
+                     <!-- Personal information form-->
+                     <div class="col-md-9 col-lg-9 col-xl-9">
+                        <form id="personal-info-form" style="padding-bottom:10px;" method="POST" action="/amu/avatar/">
+                           {% csrf_token %}
+                           <div class="form-group ">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="input-group mt-5 mb-3">
+                                       <div class="input-group-prepend">
+                                          <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                             opacity:0.9; padding:5px 9px 0 10px;">First Name
+                                          </span>
+                                       </div>
+                                       <input type="text" name="pinfo-fname" id="pinfo-fname"
+                                          class="form-control newinputdesign"
+                                          required="required" minlength="1" maxlength="50"
+                                          placeholder="First Name">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="input-group mt-5 mb-3">
+                                       <div class="input-group-prepend">
+                                          <span class="newlabeldesign">Last Name</span>
+                                       </div>
+                                       <input type="text" name="pinfo-lname" id="pinfo-lname"
+                                          class="form-control newinputdesign" required="required" minlength="1" maxlength="50" placeholder="Last Name">
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- email -->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                       opacity:0.9; padding:5px 9px 0 10px;">Email
+                                    </span>
+                                 </div>
+                                 <input type="email" name="pinfo-email" id="pinfo-email"
+                                    class="form-control newinputdesign"required="required" placeholder="Email Please"
+                                    required>
+                              </div>
+                              <!-- end of email -->
+                              <!-- phone number -->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                       opacity:0.9; padding:7px 9px 0 10px;">Phone Number
+                                    </span>
+                                 </div>
+                                 <input type="number" class="form-control newinputdesign"
+                                    name="pinfo-phone" required="required" minlength="1" maxlength="15" id="pinfo-phone" placeholder="Phone Number">
+                              </div>
+                              <!-- end of phone number -->
+                              <!--for Nationality-->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                       opacity:0.9; padding:7px 9px 0 10px;"> Nationality
+                                    </span>
+                                 </div>
+                                 <input type="text" class="form-control newinputdesign"
+                                    name="pinfo-nationality" required="required" minlength="1" maxlength="20"  id="pinfo-nationality" placeholder="Nationality">
+                              </div>
+                              <!--Address-->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                       opacity:0.9; padding:7px 9px 0 10px;">Address
+                                    </span>
+                                 </div>
+                                 <input type="text" class="form-control newinputdesign"
+                                    name="pinfo-address"required="required" minlength="1" maxlength="200" id="pinfo-address" placeholder="Permanent Address">
+                              </div>
+                              <!-- religious views -->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                       opacity:0.9; padding:7px 9px 0 10px;">Religious Views
+                                    </span>
+                                 </div>
+                                 <input type="text" class="form-control newinputdesign"
+                                    placeholder="Religious Views" required="required" id="pinfo-religious" name="pinfo-religious">
+                              </div>
+                              <!-- end of religious views -->
+                              <!-- marital status -->
+                              <div class="input-group mt-1 mb-3">
+                                 <div class="input-group-prepend">
+                                    <span class="newlabeldesign">
+                                    marital status
+                                    </span>
+                                 </div>
+                                 <input type="text" name="pinfo-marital-status" id="pinfo-married"
+                                    class="form-control newinputdesign"
+                                    placeholder="single - married - in a relationship" required="required">
+                              </div>
+                              <!-- end of marital status -->
+                              <!-- dob and gender 2 column div -->
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <!-- DOB ON SECTION-->
+                                    <div class="input-group mt-1 mb-3">
+                                       <div class="input-group-prepend">
+                                          <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                             opacity:0.9; padding:5px 9px 0 10px;">DOB
+                                          </span>
+                                       </div>
+                                       <input class="form-control newinputdesign" name="pinfo-dob"
+                                          placeholder="MM/DD/YYY" id="pinfo-dob" required="required"  type="date" value="{{date|to_and}}">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <!--Gender SECTION-->
+                                    <div class="input-group mt-1 mb-3">
+                                       <div class="input-group-prepend">
+                                          <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                             opacity:0.9; padding:5px 9px 0 10px;">Gender
+                                          </span>
+                                       </div>
+                                       <select name="pinfo-gender"
+                                          style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                          class="custom-select newinput" id="pinfo-gender" required="required">
+                                          <option selected value="">Select Gender</option>
+                                          <option  value="male">Male</option>
+                                          <option value="female">Female</option>
+                                          <option value="other">Other</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end of 2 column div for dob and gender-->
+                           </div>
+                           <!-- TWO BUTTON BOTTOM-->
+                           <div class="row d-flex flex-row">
+                              <div class="col-md-12 ml-5">
+                                 <!--LEFT BUTTON-->
+                                 <button type="reset" class="btn btn-secondary searchbutton"
+                                    id="pinfo-clear-btn">Clear
+                                 </button>
+                                 <button type="submit" style="float:right;"
+                                    class="btn btn-secondary searchbutton mr-5"
+                                    id="pinfo-submit-btn">Submit</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <!-- END of Personal information form-->
+                  </div>
+                  <div class="progress">
+                     <div class="progress-bar bg-info progress-bar-striped" style="width:30%"></div>
+                  </div>
+               </div>
+               <!-- end of personal info tab -->
+               <!-- work details tab -->
+               <div class="tab-pane fade   {% if details_type == "work_details" %} active show {% else %} {% endif %}" id="nav-work" role="tabpanel">
+               <!-- a nav for work details tab -->
+               <div class="row mt-2">
+                  <!-- left side redundant navigation -->
+                  <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                     <!-- Left Image side-->
+                     <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+                        Create</a>
+                     </p>
+                     <div class="d-flex flex-column align-items-center">
+                        <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                           src="{% static 'images/testimonial.png' %}" alt="">
+                        <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                           <nav>
+                              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                 <a class="nav-item nav-link" data-toggle="tab"
+                                    href="#nav-bio">Biography</a>
+                                 <a class="nav-item nav-link" data-toggle="tab"
+                                    href="#nav-social">Social Media</a>
+                                 <a class="nav-item nav-link" data-toggle="tab"
+                                    href="#nav-posts">Posts</a>
+                              </div>
+                           </nav>
+                        </div>
+                        <p style="text-align: center; margin-top:10%;">
+                           <a class="CreateBtn" href="#">Edit</a>
+                        </p>
+                     </div>
+                     <!-- end of left img section -->
+                  </div>
+                  <!-- end of left side redundant navigation -->
+                  <!-- Work Details form-->
+                  <div class="col-md-9 col-lg-9 col-xl-9">
+                     <form style="padding-bottom:10px;" id="work-details-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+                        {% csrf_token %}
+                        <!-- avatar id  -->
+                        <input type="hidden" value="{{avatar.id}}" id="avatar_id" name="avatar_id" />
+                        <!-- end avatar id  -->
+                        <div class="form-group ">
+                           <!-- avatar -->
+                           <div class="input-group mt-4 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign">Avatar</span>
+                              </div>
+                              <!-- <option value="{{avatar.0}}"
+                                 {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                                 </option> -->
+                              <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+                           </div>
+                           <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+                           <!-- job title -->
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign amu-work-input-font">Job title
+                                 </span>
+                              </div>
+                              <input type="text" class="form-control  newinputdesign"
+                                 placeholder="Job Title ..." name="wd-job-title" required="required" minlength="1" maxlength="50" />
+                           </div>
+                           <!-- company -->
+                           <div class="input-group   mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign amu-work-input-font">Company
+                                 </span>
+                              </div>
+                              <input type="text" name="wd-company" class="form-control newinputdesign"
+                                 placeholder="Company Name ..." required="required" minlength="1" maxlength="50"/>
+                           </div>
+                           <!--for Description-->
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign amu-work-input-font"> Description
+                                 </span>
+                              </div>
+                              <input type="text" class="form-control newinputdesign"
+                                 placeholder="Description Please ..." name="wd-desc" required="required" minlength="1" maxlength="200"/>
+                           </div>
+                           <!--Address-->
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign amu-work-input-font">Address
+                                 </span>
+                              </div>
+                              <input type="text" class="form-control  newinputdesign"
+                                 placeholder="Address Please ..." name="wd-address" required="required" minlength="1" maxlength="200"/>
+                           </div>
+                           <!-- DATE AND TIME 2 column div -->
+                           <div class="row mt-1 mb-3">
+                              <!-- job start date SECTION-->
+                              <div class="col-md-6">
+                                 <div class="input-group">
+                                    <div class="input-group-prepend">
+                                       <span class="newlabeldesign amu-work-input-font">Started
+                                       </span>
+                                    </div>
+                                    <input class="form-control newinputdesign" name="wd-start-date"
+                                       placeholder="MM/DD/YYYY" type="date" value="{{date|to_and}}" required="required" />
+                                 </div>
+                              </div>
+                              <!--job end date SECTION-->
+                              <div class="col-md-6">
+                                 <div class="input-group">
+                                    <div class="input-group-prepend">
+                                       <span class="newlabeldesign amu-work-input-font">Ended
+                                       </span>
+                                    </div>
+                                    <input class="form-control newinputdesign" name="wd-end-date"
+                                       placeholder="MM/DD/YYYY" type="date" value="{{date|to_and}}" required="required" />
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- end of 2 column div for date and time-->
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign amu-work-input-font">Current
+                                 </span>
+                              </div>
+                              <input type="checkbox" value="true" class="form-control newinputdesign"
+                                 name="wd-current-job" required="required" />
+                           </div>
+                        </div>
+                        <!-- TWO BUTTON BOTTOM-->
+                        <div class="row d-flex flex-row">
+                           <div class="col-md-12 ml-5 ">
+                              <!--LEFT BUTTON-->
+                              <button type="reset" class="btn btn-secondary searchbutton"
+                                 id="wd-clear-btn">Clear
+                              </button>
+                              <button type="submit" style="float:right; "
+                                 class="btn btn-secondary searchbutton mr-5">Submit</button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                  <!-- END of Work Details form-->
+               </div>
+               <!-- All works from databse  -->
+               <div class="col-md-12 m-0 p-0 " >
+                  <div class="card transparent glowing_border mt-3">
+                     <div class="card-header glowing_border custom_header text-white ">All Works
+                     </div>
+                     <div class="card-body custom_background"style="height:300px;overflow-y:auto;">
+                        {% if avatar.works %}
+                        {% for work in avatar.works %}
+                        <div class="accordion" id="accordionExample">
+                           <div class="card">
+                              <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                              <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#work_{{forloop.counter}}" aria-expanded="true" aria-controls="work_{{forloop.counter}}">
+                              Work ({{forloop.counter}})
+                              </button>
+                           </div>
+                           <div id="work_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                 <div class="col-md-4 my-auto no_list_style   ">
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Job Title :</span><span class="badge">{{ work.title|truncatechars:"40"|default:"N/A" }} <span> </div>
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Start Date :</span> <span class="badge">{{ work.start_date|truncatechars:"40"|default:"N/A" }}</span></div>
+                                    {% if work.current == True      %}
+                                    <div class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;">End Date : </span> <span class="badge"> Currently Wroking</span> </div>
+                                    {% else %}
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">End Date : </span><span class="badge">{{ work.end_date|truncatechars:"40"|default:"N/A" }}</span></div>
+                                    {% endif %}
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Location : </span> <span class="badge">{{ work.location|truncatechars:"40"|default:"N/A" }}</span></div>
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Description : </span> <span class="badge">{{ work.description|truncatechars:"40"|default:"N/A" }}</span></div>
+                                    <div class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Company Name : </span><span class="badge"> {{ work.company|truncatechars:"40"|default:"N/A" }}</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-white">No Work</p>
+                        {% endfor %}
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+               <!-- all works from databse end -->
+            </div>
+            <!-- end of work details tab -->
+            <!-- interests tab -->
+            <div class="tab-pane fade     {% if details_type == "intrest" %} active  show   {% else %}   {% endif %}" id="nav-interest" role="tabpanel">
+            <!-- a nav for interests tab -->
+            <div class="row mt-2">
+               <!-- left side redundant navigation -->
+               <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+                  <!-- Left Image side-->
+                  <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+                     Create</a>
+                  </p>
+                  <div class="d-flex flex-column align-items-center">
+                     <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                        src="{% static 'images/testimonial.png' %}" alt="">
+                     <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                        <nav>
+                           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link" data-toggle="tab"
+                                 href="#nav-bio">Biography</a>
+                              <a class="nav-item nav-link" data-toggle="tab"
+                                 href="#nav-social">Social Media</a>
+                              <a class="nav-item nav-link" data-toggle="tab"
+                                 href="#nav-posts">Posts</a>
+                           </div>
+                        </nav>
+                     </div>
+                     <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+                        Edit</a>
+                     </p>
+                  </div>
+                  <!-- end of left img section -->
+               </div>
+               <!-- end of left side redundant navigation -->
+               <!-- interests form -->
+               <div class="col-md-9 col-lg-9 col-xl-9"id="interests-form" >
+                  <form style="padding-bottom:10px;"  method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+                     <!-- csrf_token -->
+                     {% csrf_token %}
+                     <!-- avatar -->
+                     <div class="input-group mt-4 mb-3">
+                        <!-- avatar -->
+                        <div class="input-group mt-4 mb-3">
+                           <div class="input-group-prepend">
+                              <span class="newlabeldesign">Avatar</span>
+                           </div>
+                           <!-- <option value="{{avatar.0}}"
+                              {% if forloop.counter0 == 0 %}selected{% endif %}>{{avatar.1}}
+                              </option> -->
+                           <input type="hidden" value="{{avavat.id}}" name="avatar_id" id="avatar_id" />
+                           <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+                        </div>
+                        <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+                     </div>
+                     <div class="row d-flex flex-row justify-content-center align-items-center">
+                        <div class="col-md-3"><span class="newlabeldesign">Hobbies</span></div>
+                        <div class="col-md-9">
+                           <input type="text" data-role="tagsinput" value="" id="ihobbies" name="ihobbies" type="text" 
+                              style="width:400px!important;" required="required"/>
+                        </div>
+                     </div>
+                     <div class="row d-flex flex-row justify-content-center align-items-center">
+                        <div class="col-md-3"><span class="newlabeldesign">Movies</span></div>
+                        <div class="col-md-9">
+                           <input type="text" data-role="tagsinput" value="" id="imovies" name="imovies" type="text" 
+                              style="width:400px!important;" required="required"/>
+                        </div>
+                     </div>
+                     <div class="row d-flex flex-row justify-content-center align-items-center">
+                        <div class="col-md-3"><span class="newlabeldesign">Songs</span></div>
+                        <div class="col-md-9">
+                           <input type="text" data-role="tagsinput" value="" id="isongs" name="isongs" type="text" 
+                              style="width:400px!important;" required="required"/>
+                        </div>
+                     </div>
+                     <!-- Clear and Submit Buttons-->
+                     <div class="row d-flex flex-row mt-3">
+                        <div class="col-md-12 ml-5 ">
+                           <button type="button" class="btn btn-secondary searchbutton"
+                              id="i-clear-btn">Clear </button>
+                           <button type="submit" style="float:right;"
+                              class="btn btn-secondary searchbutton mr-5"
+                              id="i-submit-btn">Submit</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <!-- end of interests form -->
+            </div>
+            <!-- All inrtrests from database  -->
+            <div class="col-md-12">
+               <!-- all intrests  start -->
+               {% if avatar.interests %}
+               <div class="card transparent glowing_border mt-3">
+                  <div class="card-header glowing_border custom_header text-white ">All Interests
+                  </div>
+                  <div class="card-body custom_background">
+                     {% if avatar.interests|length > 0 %}
+                     {{avatar.intrests}}
+                     <div class="accordion" id="accordionExample">
+                        <div class="card">
+                           <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                           <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#intrests_{{forloop.counter}}"
+                              aria-expanded="true" aria-controls="intrests_{{forloop.counter}}">
+                           All Interests ({{avatar.interests|length}})
+                           </button>
+                        </div>
+                        <div id="intrests_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                           <div class="card-body">
+                              <div class="col-md-12 text-white">Hobbies ({{avatar.interests.hobbies|length}})</div>
+                              <div class="col-md-12 my-auto no_list_style   ">
+                                 {% for i in avatar.interests.hobbies %}
+                                 <span class="badge badge-primary">{{i}}</span>
+                                 {% empty %}
+                                 <span class="badge badge-primary text-white">No Hobbies </span>
+                                 {% endfor %}
+                              </div>
+                              <div class="col-md-12 text-white">Movies ({{avatar.interests.movies|length}})</div>
+                              <div class="col-md-12 my-auto no_list_style   ">
+                                 {% for i in avatar.interests.movies %}
+                                 <span class="badge badge-primary">{{i}}</span>
+                                 {% empty %}
+                                 <span class="badge badge-primary text-white">No Movies </span>
+                                 {% endfor %}
+                              </div>
+                              <div class="col-md-12 text-white">Songs ({{avatar.interests.songs|length}})</div>
+                              <div class="col-md-12 my-auto no_list_style   ">
+                                 {% for i in avatar.interests.songs %}
+                                 <span class="badge badge-primary">{{i}}</span>
+                                 {% empty %}
+                                 <span class="badge badge-primary text-white">No Songs </span>
+                                 {% endfor %}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     {% endif %}
+                  </div>
+               </div>
+               {% endif %}
+            </div>
+            <!-- all intrests from database  -->
+         </div>
+         <!-- end of interests tab -->
+         <!-- life events tab -->
+         <div class="tab-pane fade {% if details_type == "events" %} active show  {% else %}    {% endif %} " id="nav-events" role="tabpanel">
+         <!-- a nav for life events tab -->
+         <div class="row mt-2">
+            <!-- left side redundant navigation -->
+            <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+               <!-- Left Image side-->
+               <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+                  Create</a>
+               </p>
+               <div class="d-flex flex-column align-items-center">
+                  <img style="height: 150px; width: 150px; margin-top:20%;"
+                     src="{% static 'images/testimonial.png' %}">
+                  <div class="btn-group-vertical" role="group" style="margin:20% 10%;">
+                     <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                           <a class="nav-item nav-link" data-toggle="tab"
+                              href="#nav-bio">Biography</a>
+                           <a class="nav-item nav-link" data-toggle="tab"
+                              href="#nav-social">Social Media</a>
+                           <a class="nav-item nav-link" data-toggle="tab"
+                              href="#nav-posts">Posts</a>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+               <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+                  Edit</a>
+               </p>
+               <!-- end of left img section -->
+            </div>
+            <!-- end of left side redundant navigation -->
+            <!-- life events, education, skills form -->
+            <div class="col-md-9 col-lg-9 col-xl-9">
+               <div class="row mt-2 ">
+                  <!-- avatar -->
+                  <div class="input-group mb-3">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign">Avatar</span>
+                     </div>
+                     <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+                  </div>
+                  <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+               </div>
+               <!-- 1st education section -->
+               <form id="education-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+                  {% csrf_token %}
+                  <!-- avatar_id -->
+                  <input type="hidden" value="{{avatar.id}}" name="avatar_id" id="avatar_id" required="required" />
+                  <!-- avatar_id -->
+                  <!-- form_name -->
+                  <input type="hidden" value="education_form" name="form_name" id="form_name"  />
+                  <!-- form_name -->
+                  <div class="col-md-12 col-lg-12 col-xl-12">
+                     <!-- banner for education form -->
+                     <div class="bg-info clearfix avatorleft mb-3">
+                        <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
+                           class="fas fa-university fa-1x mt-2 ml-4">
+                        Education</i>
+                     </div>
+                     <!-- degree -->
+                     <div class="input-group mt-2 mb-3">
+                        <div class="input-group-prepend">
+                           <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">Degree
+                           </span>
+                        </div>
+                        <input type="text" class="form-control newinputdesign"
+                           placeholder="Degree Name ..." name="le-ef-degree" id="le-ef-degree" required="required" maxlength="50" />
+                     </div>
+                     <!-- institute -->
+                     <div class="input-group mt-1 mb-3">
+                        <div class="input-group-prepend">
+                           <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">institute
+                           </span>
+                        </div>
+                        <input type="text" name="le-ef-institute"
+                           class="form-control newinputdesign"
+                           placeholder="Institue Please ..." id="le-ef-institute" required="required" />
+                     </div>
+                     <!-- grades and Field of Study -->
+                     <div class="row mt-1 mb-3">
+                        <div class="col-md-4">
+                           <div class="input-group">
+                              <div class="input-group-prepend"><span
+                                 class="newlabeldesign">Grade</span></div>
+                              <input type="text" name="le-ef-grade" id="le-ef-grade"
+                                 class="form-control newinputdesign"
+                                 placeholder="Grades ...">
+                           </div>
+                        </div>
+                        <div class="col-md-8">
+                           <div class="input-group">
+                              <div class="input-group-prepend"><span
+                                 class="newlabeldesign">Field of Study</span></div>
+                              <input type="text" name="le-ef-fieldofstudy" id="le-ef-fieldofstudy"
+                                 class="form-control newinputdesign"
+                                 placeholder="Field Of Study ..." required="required"  />
+                           </div>
+                        </div>
+                     </div>
+                     <!-- dates -->
+                     <div class="row">
+                        <!-- degree 1 start date SECTION-->
+                        <div class="col-md-6">
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Started
+                                 </span>
+                              </div>
+                              <input class="form-control newinputdesign" id="date"
+                                 name="le-ef-start-date" placeholder="MM/DD/YYYY"
+                                 type="date" value="{{date|to_and}}" required="required" />
+                           </div>
+                        </div>
+                        <!-- degree 1 end date SECTION-->
+                        <div class="col-md-6">
+                           <div class="input-group   mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Ended
+                                 </span>
+                              </div>
+                              <input  type="date" value="{{date|to_and}}"  name="le-ef-end-date"
+                                 class="form-control newinputdesign"
+                                 placeholder="MM/DD/YYYY" required="required" />
+                           </div>
+                        </div>
+                     </div>
+                     <!-- clear and submit button -->
+                     <div class="row">
+                        <div class="col-md-6 text-center"><button type="reset"
+                           class="btn btn-secondary searchbutton">Clear</button></div>
+                        <div class="col-md-6 text-center"><button type="submit"
+                           id="le-ef-submit"
+                           class="btn btn-secondary searchbutton">Submit</button></div>
+                     </div>
+                  </div>
+               </form>
+               <!-- end of 1st education section -->
+               <!-- marriage section -->
+               <form id="marriage-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+                  {% csrf_token %}
+                  <input type="hidden" value="marriage_form" name="form_name" id="form_name"  />
+                  <div class="col-md-12 col-lg-12 col-xl-12 mt-3">
+                     <!-- banner for form -->
+                     <div class="bg-info clearfix avatorleft mb-3">
+                        <i style="color:white; opacity:0.8;font-size:14px;padding-bottom:2px;"
+                           class="fas fa-ring fa-1x mt-2 ml-4">
+                        Marriage</i>
+                     </div>
+                     <!-- married to -->
+                     <div class="input-group mt-2 mb-3">
+                        <div class="input-group-prepend">
+                           <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">Married to
+                           </span>
+                        </div>
+                        <input type="text" class="form-control newinputdesign"
+                           placeholder="Spouse Name ..." name="le-m-spouse" required="required"  />
+                     </div>
+                     <!-- location -->
+                     <div class="input-group mt-1 mb-3">
+                        <div class="input-group-prepend">
+                           <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                              opacity:0.9; padding:5px 9px 0 10px;">Location
+                           </span>
+                        </div>
+                        <input type="text" name="le-m-location"
+                           class="form-control newinputdesign"
+                           placeholder="wedding destination ..." required="required"  />
+                     </div>
+                     <!-- dates -->
+                     <div class="row">
+                        <!-- Wedding Date SECTION-->
+                        <div class="col-md-6">
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Wedding Date
+                                 </span>
+                              </div>
+                              <input class="form-control newinputdesign"
+                                 name="le-m-wedding-date" placeholder="MM/DD/YYY"
+                                 type="date" value="{{date|to_and}}" required="required"  />
+                           </div>
+                        </div>
+                        <!-- Divorce Date SECTION-->
+                        <div class="col-md-6">
+                           <div class="input-group mt-1 mb-3">
+                              <div class="input-group-prepend">
+                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                    opacity:0.9; padding:5px 9px 0 10px;">Divorce Date
+                                 </span>
+                              </div>
+                              <input type="date" value="{{date|to_and}}" name="le-m-divorce-date"
+                                 class="form-control newinputdesign"
+                                 placeholder="MM/DD/YYYY" required="required"  />
+                           </div>
+                        </div>
+                     </div>
+                     <!-- clear and submit button -->
+                     <div class="row">
+                        <div class="col-md-6 text-center"><button type="reset"
+                           class="btn btn-secondary searchbutton">Clear</button></div>
+                        <div class="col-md-6 text-center"><button type="submit"
+                           id="le-m-submit"
+                           class="btn btn-secondary searchbutton">Submit</button></div>
+                     </div>
+                  </div>
+                  <!-- end of marriage section -->
+               </form>
+            </div>
+         </div>
+         <!-- end of life events, education, skills form-->
+         <!-- all marriages from databse  -->
+         <div class="col-md-12">
+            {% if avatar.marriages|length > 0 %}
+            <div class="card transparent glowing_border mt-3">
+               <div class="card-header glowing_border custom_header text-white ">All Marriages
+               </div>
+               <div class="card-body custom_background">
+                  {% if avatar.marriages %}
+                  {% for marriage in avatar.marriages %}
+                  <div class="accordion" id="accordionExample">
+                     <div class="card">
+                        <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                        <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#marriage_{{forloop.counter}}" aria-expanded="true" aria-controls="marriage_{{forloop.counter}}">
+                        Marriage ({{forloop.counter}})
+                        </button>
+                     </div>
+                     <div id="marriage_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                           <div class="col-md-12 my-auto no_list_style   ">
+                              <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Spouse Name : </span><span class="badge">{{ marriage.spouse|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Location : </span><span class="badge">{{ marriage.degree|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Wedding Date : </span><span class="badge">{{ marriage.wedding_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Divorce Date : </span><span class="badge">{{ marriage.divorce_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% empty %}
+                  <p class="text-white">No Marriages</p>
+                  {% endfor %}
+                  {% endif %}
+               </div>
+            </div>
+            {% endif %}
+         </div>
+         <!-- all marriages from databse  -->
+         <!-- all educations from databse  -->
+         <div class="col-md-12">
+            {% if avatar.educations|length > 0 %}
+            <div class="card transparent glowing_border mt-3">
+               <div class="card-header glowing_border custom_header text-white ">All Educations
+               </div>
+               <div class="card-body custom_background">
+                  {% if avatar.educations %}
+                  {% for education in avatar.educations %}
+                  <div class="accordion" id="accordionExample">
+                     <div class="card">
+                        <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                        <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#education_{{forloop.counter}}" aria-expanded="true" aria-controls="education_{{forloop.counter}}">
+                        Education ({{forloop.counter}})
+                        </button>
+                     </div>
+                     <div id="education_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                           <div class="col-md-4 my-auto no_list_style   ">
+                              <li class="text-white w-100 "><span class="badge badge-light text-left"style="width:100px;"> Institution :</span> <span class="badge"> {{education.institution|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "> <span class="badge badge-light text-left"style="width:100px;">Degree :</span> <span class="badge"> {{ education.degree|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "><span class="badge      badge-light text-left"style="width:100px;"> Grade :</span> <span class="badge"> {{ education.grades|truncatechars:"20"|default:"N/A" }}</span></li>
+                              <li class="text-white w-100 "> <span class="badge      badge-light text-left"style="width:100px;"> Field :</span> <span class="badge"> {{education.field_of_study|truncatechars:"20"|default:"N/A" }}</span></li>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% empty %}
+                  <p class="text-white">No Educations</p>
+                  {% endfor %}
+                  {% endif %}
+               </div>
+            </div>
+            {% endif %}
+         </div>
+         <!-- all educations from databse  -->
+      </div>
+      <!-- end of life events tab -->
+      <!-- biography tab -->
+      <div class="tab-pane fade {% if details_type == 'biography' %} active show {% else %} {% endif %}" id="nav-bio" role="tabpanel">
+         <!--  -->
+         <div class="row mt-2">
+            <!-- left side redundant navigation -->
+            <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+               <!-- Left Image side-->
+               <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+                  Create</a>
+               </p>
+               <div class="d-flex flex-column align-items-center">
+                  <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                     src="{% static 'images/testimonial.png' %}" alt="">
+                  <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                     <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                           <a class="nav-item nav-link" data-toggle="tab"
+                              href="#nav-bio">Biography</a>
+                           <a class="nav-item nav-link active" data-toggle="tab"
+                              href="#nav-social">Social Media</a>
+                           <a class="nav-item nav-link" data-toggle="tab"
+                              href="#nav-posts">Posts</a>
+                        </div>
+                     </nav>
+                  </div>
+                  <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+                     Edit</a>
+                  </p>
+               </div>
+               <!-- end of left img section -->
+            </div>
+            <!-- end of left side redundant navigation -->
+            <div class="col-md-9 col-lg-9 col-xl-9">
+               <form id="biography-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="form_name" value="biography_form" id="form_name" />
+                  <input type="hidden" value="{{avatar.id}}" name="avatar_id" id="avatar_id" required="required" />
+                  <!-- avatar -->
+                  <div class="input-group mt-4 mb-3">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign">Avatar</span>
+                     </div>
+                     <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+                  </div>
+                  <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+                  <div class="input-group mt-2 mb-3">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign pt-auto" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9;">Enter Biography text
+                        </span>
+                     </div>
+                     <textarea class="form-control" rows="5" cols="5" name="b-biography" required="required"></textarea>
+                  </div>
+                  <div class="row d-flex flex-row mt-3">
+                     <div class="col-md-12 ml-5 ">
+                        <!--LEFT BUTTON-->
+                        <button type="reset" class="btn btn-secondary searchbutton">Clear
+                        </button>
+                        <button type="submit" style="float:right; "
+                           class="btn btn-secondary searchbutton mr-5">Submit</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- END of Personal information form-->
+         <!-- all bio graphies from databse  -->
+         {% if avatar.biography|length > 0 %}
+         <div class="col-md-12">
+            <div class="card transparent glowing_border mt-3">
+               <div class="card-header glowing_border custom_header text-white ">All biography
+               </div>
+               <div class="card-body custom_background">
+                  {% if avatar.biography %}
+                  {% for bio in avatar.biography %}
+                  <div class="accordion" id="accordionExample">
+                     <div class="card">
+                        <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                        <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#bio_{{forloop.counter}}" aria-expanded="true" aria-controls="bio_{{forloop.counter}}">
+                        Biography ({{forloop.counter}})
+                        </button>
+                     </div>
+                     <div id="bio_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                           <div class="col-md-12 my-auto no_list_style   ">
+                              <p class="text-white w-100 font-weight-bold"style="font-size:12px">  {{ bio }}</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% empty %}
+                  <p class="text-white">No Biographies</p>
+                  {% endfor %}
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+         {% endif %}
+         <!-- end all bio graphies from databse  -->
+      </div>
+      <!-- end of biography tab -->
+      <!-- social media tab -->
+      <div class="tab-pane fade {% if details_type == "social_account" %} show active {% else %} {% endif %}" id="nav-social" role="tabpanel">
+      <div class="row mt-2">
+         <!-- redundant navigation -->
+         <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+            <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+               Create</a>
+            </p>
+            <div class="d-flex flex-column align-items-center">
+               <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+                  src="{% static 'images/testimonial.png' %}" alt="">
+               <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+                  <nav>
+                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link" data-toggle="tab"
+                           href="#nav-bio">Biography</a>
+                        <a class="nav-item nav-link" data-toggle="tab"
+                           href="#nav-social">Social Media</a>
+                        <a class="nav-item nav-link active" data-toggle="tab"
+                           href="#nav-posts">Posts</a>
+                     </div>
+                  </nav>
+               </div>
+               <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+                  Edit</a>
+               </p>
+            </div>
+         </div>
+         <!-- end of redundant navigation -->
+         <!-- form container -->
+         <form class="col-md-9 col-lg-9 col-xl-9" id="socialaccount-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+            {% csrf_token %}
+            <!-- sma platform -->
+            <input type="hidden" name="form_name" value="social_account_form" id="form_name" />
+            <input type="hidden" value="{{avatar.id}}" name="avatar_id" id="avatar_id" required="required" />
+            <!-- avatar -->
+            <div class="row">
+               <div class="col-md-12 col-lg-12 col-xl-12 ">
+                  <div class="row mt-5 ml-auto text-center">
+                     <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                     <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                        <div class="iconbg">
+                           <i style="color:white; opacity:0.8;"
+                              class="fab fa-reddit fa-2x"></i>
+                           <input type="radio" name="sma-platform" required="required"value="reddit">
+                        </div>
+                     </div>
+                     <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                        <div class="iconbg">
+                           <i style="color:white; opacity:0.8;"
+                              class="fab fa-linkedin fa-2x"></i>
+                           <input type="radio" name="sma-platform" required="required"value="linkedin">
+                        </div>
+                     </div>
+                     <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                        <div class="iconbg">
+                           <i style="color:white; opacity:0.8;"
+                              class="fab fa-instagram fa-2x"></i>
+                           <input type="radio" name="sma-platform" required="required"value="instagram">
+                        </div>
+                     </div>
+                     <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                        <div class="iconbg">
+                           <i style="color:white; opacity:0.8;"
+                              class="fab fa-facebook fa-2x"></i>
+                           <input type="radio" name="sma-platform" required="required"value="facebook">
+                        </div>
+                     </div>
+                     <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                        <div class="iconbg">
+                           <i style="color:white; opacity:0.8;"
+                              class="fab fa-twitter-square fa-2x"></i>
+                           <input type="radio" name="sma-platform" required="required"value="twitter">
+                        </div>
+                     </div>
+                     <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                  </div>
+               </div>
+            </div>
+            <!-- avatar -->
+            <div class="input-group mt-4 mb-3">
+               <div class="input-group mt-4 mb-3">
+                  <div class="input-group-prepend">
+                     <span class="newlabeldesign">Avatar</span>
+                  </div>
+                  <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+               </div>
+               <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+            </div>
+            <!-- first name last name -->
+            <div class="row mt-2 mb-3">
+               <div class="col-md-6 col-lg-6 col-xl-6">
+                  <div class="input-group">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">First name
+                        </span>
+                     </div>
+                     <input name="sma-first-name" type="text"
+                        class="form-control newinputdesign" placeholder="First Name..." required="required">
+                  </div>
+               </div>
+               <div class="col-md-6 col-lg-6 col-xl-6">
+                  <div class="input-group">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Last name
+                        </span>
+                     </div>
+                     <input name="sma-last-name" type="text"
+                        class="form-control newinputdesign" placeholder="Last Name..." required="required">
+                  </div>
+               </div>
+            </div>
+            <!-- email -->
+            <div class="input-group mt-2 mb-3">
+               <div class="input-group-prepend">
+                  <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                     opacity:0.9; padding:7px 9px 0 10px;">Email
+                  </span>
+               </div>
+               <input name="sma-email" type="email" class="form-control  newinputdesign"
+                  placeholder="Email Please ..." required="required" >
+            </div>
+            <!-- email -->
+            <div class="input-group mt-2 mb-3">
+               <div class="input-group-prepend">
+                  <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                     opacity:0.9; padding:7px 9px 0 10px;">Password
+                  </span>
+               </div>
+               <input name="sma-password" type="text" minlength="8" maxlength="14" class="form-control  newinputdesign"
+                  placeholder="Password Please ..." required="required" >
+            </div>
+            <!-- phone -->
+            <div class="input-group mt-2 mb-3">
+               <div class="input-group-prepend">
+                  <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                     opacity:0.9; padding:7px 9px 0 10px;">Phone Number
+                  </span>
+               </div>
+               <input name="sma-phone" type="text" class="form-control  newinputdesign"
+                  placeholder="Phone Number ..." required="required">
+            </div>
+            <!-- username -->
+            <div class="input-group   mt-2 mb-3">
+               <div class="input-group-prepend">
+                  <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                     opacity:0.9; padding:7px 9px 0 10px;">Username
+                  </span>
+               </div>
+               <input name="sma-username" type="text" class="form-control  newinputdesign"
+                  placeholder="Please Enter text..." required="required">
+            </div>
+            <!-- date of birth and gender -->
+            <div class="row">
+               <!-- dob -->
+               <div class="col-md-6">
+                  <div class="input-group mt-1 mb-3">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">DOB
+                        </span>
+                     </div>
+                     <input class="form-control newinputdesign" name="sma-dob"
+                        placeholder="MM/DD/YYY" type="date" value="{{date|to_and}}" required="required" >
+                  </div>
+               </div>
+               <!-- gender -->
+               <div class="col-md-6">
+                  <div class="input-group mt-1 mb-3">
+                     <div class="input-group-prepend">
+                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">Gender
+                        </span>
+                     </div>
+                     <select
+                        style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                        class="custom-select newinput" name="sma-gender" required="required">
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <!-- clear and submit button -->
+            <div class="row d-flex flex-row mt-3">
+               <div class="col-md-12 ml-5 ">
+                  <button type="reset" class="btn btn-secondary searchbutton">Clear </button>
+                  <button type="submit" style="float:right; "
+                     class="btn btn-secondary searchbutton mr-5">Submit</button>
+               </div>
+            </div>
+         </form>
+         <!-- end of form form container -->
+      </div>
+      <!-- all social media accounts  -->
+      <div class="col-md-12">
+         <div class="card transparent glowing_border mt-3">
+            <div class="card-header glowing_border custom_header text-white ">All Social Accounts
+            </div>
+            <div class="card-body custom_background">
+               {% if avatar.social_media_accounts %}
+               {% for account in avatar.social_media_accounts %}
+               <div class="accordion" id="accordionExample">
+                  <div class="card">
+                     <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                     <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#account_{{forloop.counter}}"
+                        aria-expanded="true" aria-controls="account_{{forloop.counter}}">
+                     {{account.social_media_type}}    Account  ({{forloop.counter}})
+                     </button>
+                  </div>
+                  <div id="account_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                     <div class="card-body">
+                        <div class="col-md-12 my-auto no_list_style   ">
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ account.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">First Name  : </span><span class="badge">{{ account.first_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Last Name : </span><span class="badge">{{ account.last_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Email: </span><span class="badge">{{ account.email|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Password: </span><span class="badge">{{ account.password|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Phone #  : </span><span class="badge">{{ account.phone_number|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Username : </span><span class="badge">{{ account.user_name|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">DOB: </span><span class="badge">{{ account.dob|truncatechars:"20"|default:"N/A" }}</span></li>
+                           <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Gender: </span><span class="badge">{{ account.gender|truncatechars:"20"|default:"N/A" }}</span></li>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor %}
+               {% endif %}
+            </div>
+         </div>
+      </div>
+      <!-- all social media accounts -->
+   </div>
+   <!-- end of social media tab -->
+   <!-- Posts tab -->
+   <div class="tab-pane fade {% if details_type == "post" %} active show {% else %} {% endif %}" id="nav-posts" role="tabpanel">
+   <!-- Each content tab #1 for keywords-->
+   <div class="row mt-2">
+      <!-- redundant nav -->
+      <div class="col-md-3 col-lg-3 col-xl-3 columnnumberone avatorleft">
+         <!-- Left Image side-->
+         <p style="text-align: center; margin-top:30%;"> <a class="CreateBtn" href="#">
+            Create</a>
+         </p>
+         <div class="d-flex flex-column align-items-center">
+            <img class="" style="height: 150px; width: 150px; margin-top:20%;"
+               src="{% static 'images/testimonial.png' %}" alt="">
+            <div class="btn-group-vertical " role="group" style="margin:20% 10%;">
+               <nav>
+                  <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                     <a class="nav-item nav-link" data-toggle="tab"
+                        href="#nav-bio">Biography</a>
+                     <a class="nav-item nav-link active" data-toggle="tab"
+                        href="#nav-social">Social Media</a>
+                     <a class="nav-item nav-link" data-toggle="tab"
+                        href="#nav-posts">Posts</a>
+                  </div>
+               </nav>
+            </div>
+            <p style="text-align: center; margin-top:10%;"> <a class="CreateBtn" href="#">
+               Edit</a>
+            </p>
+         </div>
+         <!-- end of left img section -->
+      </div>
+      <!-- end of redundant nav -->
+      <form class="col-md-9 col-lg-9 col-xl-9" id="socialpost-form" method="POST" action="{% url 'Avatar_Management_Unit:amu_add_work' details_type=details_type avatar_id=avatar.id %}">
+         <p class="paratext mt-2"> Select the social media below</p>
+         <!-- csrf token -->
+         {% csrf_token %}
+         <!-- platform type radio buttons -->
+         <input type="hidden" name="form_name" value="social_post_form" id="form_name" />
+         <input type="hidden" value="{{avatar.id}}" name="avatar_id" id="avatar_id" required="required" />
+         <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-12 ">
+               <div class="row mt-2 ml-auto text-center">
+                  <div class="col-md-1 col-lg-1 col-xl-1"></div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                     <div class="iconbg">
+                        <i style="color:white; opacity:0.8;"
+                           class="fab fa-reddit fa-2x"></i>
+                        <input type="radio" name="smp-platform" required="required" value="reddit">
+                     </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                     <div class="iconbg">
+                        <i style="color:white; opacity:0.8;"
+                           class="fab fa-linkedin fa-2x"></i>
+                        <input type="radio" name="smp-platform" required="required" value="linkedin">
+                     </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                     <div class="iconbg">
+                        <i style="color:white; opacity:0.8;"
+                           class="fab fa-instagram fa-2x"></i>
+                        <input type="radio" name="smp-platform" required="required" value="instagram">
+                     </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                     <div class="iconbg">
+                        <i style="color:white; opacity:0.8;"
+                           class="fab fa-facebook fa-2x"></i>
+                        <input type="radio" name="smp-platform" required="required" value="facebook">
+                     </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                     <div class="iconbg">
+                        <i style="color:white; opacity:0.8;"
+                           class="fab fa-twitter-square fa-2x"></i>
+                        <input type="radio" name="smp-platform" required="required" value="twitter">
+                     </div>
+                  </div>
+                  <div class="col-md-1 col-lg-1 col-xl-1"></div>
+               </div>
+            </div>
+         </div>
+         <!-- avatar id section -->
+         <!-- avatar -->
+         <div class="input-group mt-4 mb-3">
+            <div class="input-group mt-4 mb-3">
+               <div class="input-group-prepend">
+                  <span class="newlabeldesign">Avatar</span>
+               </div>
+               <input type="text" class="form-control newinputdesign" readonly="readonly" value="{{avatar.email}}" name="avatar_name" id="avatar_name" required="required"/>
+            </div>
+            <div class="text-primary font-weight-bold"style="padding-left:15%;">You are submitting work details for the given avatar</div>
+         </div>
+         <!-- post text section -->
+         <div class="row">
+            <div class="col-md-12 col-xl-12 col-lg-12">
+               <div class="input-group   mt-2 mb-3">
+                  <div class="input-group-prepend">
+                     <span class="newlabeldesign pt-auto" style="font-size:13px;letter-spacing:0.1em;
+                        opacity:0.9;">Enter Posts Texts
+                     </span>
+                  </div>
+                  <textarea class="form-control" rows="5" name="smp-text" required="required"></textarea>
+               </div>
+            </div>
+         </div>
+         <!-- post date section -->
+         <div class="row mt-2">
+            <div class="col-md-12">
+               <div class="input-group mt-1 mb-3">
+                  <div class="input-group-prepend">
+                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                        opacity:0.9; padding:5px 9px 0 10px;">Post Date
+                     </span>
+                  </div>
+                  <input class="form-control newinputdesign" type="date" value="{{date|to_and}}" name="smp-date"
+                     placeholder="MM/DD/YYYY" required="required">
+               </div>
+            </div>
+         </div>
+         <div class="row d-flex flex-row mt-3">
+            <div class="col-md-12 ml-5 ">
+               <button type="reset"  class="btn btn-secondary searchbutton">Clear </button>
+               <button type="submit" style="float:right; "
+                  class="btn btn-secondary searchbutton mr-5">Submit</button>
+            </div>
+         </div>
+      </form>
+   </div>
+   <!-- all databse posts  -->
+   <div class="col-md-12">
+      <div class="card transparent glowing_border mt-3">
+         <div class="card-header glowing_border custom_header text-white ">All Posts
+         </div>
+         <div class="card-body custom_background">
+            {% if avatar.social_media_posts %}
+            {% for post in avatar.social_media_posts %}
+            <div class="accordion" id="accordionExample">
+               <div class="card">
+                  <div class="card-header m-0 p-0  text-left" id="headingOne"></div>
+                  <button class=" d-inline-flex btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#posts_{{forloop.counter}}"
+                     aria-expanded="true" aria-controls="posts_{{forloop.counter}}">
+                  Posts ({{forloop.counter}})
+                  </button>
+               </div>
+               <div id="posts_{{forloop.counter}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                     <div class="col-md-12 my-auto no_list_style   ">
+                        <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Platform Name  : </span><span class="badge">{{ post.social_media_type|truncatechars:"20"|default:"N/A" }}</span></li>
+                        <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Text : </span><span class="badge">{{ post.post_text|truncatechars:"20"|default:"N/A" }}</span></li>
+                        <li class="text-white w-100 "><span class=" badge badge-light text-left "style="width:100px;">Post Date: </span><span class="badge">{{ post.post_date|truncatechars:"20"|default:"N/A" }}</span></li>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+         </div>
+      </div>
+   </div>
+   <!-- all databse posts  -->
+</div>
+<!-- end of posts tab -->
+</div>
+<!-- end of nav tab content -->
+</div>
+</div>
+<!-- END OF second row-->
+</div>
+</div>
+<!-- end of main container -->
+</div>
+{% endblock %}
+{% block foot_dep %}
+<!-- <script defer src="{% static 'Avatar_Management_Unit/js/avatar.js' %}"></script> -->
+{% endblock %}
+{% block base_js %}
+<script src=" {% static 'Keybase_Management_System/tagsinput.js' %}"></script>
+{% if details_type == 'work_details'%}
+<script>
+   window.document.title = "Work Details";
+</script>
+{% endif %}
+{% if details_type == 'intrest' %}
+<script>
+   window.document.title = "Intrest Details";
+</script>
+{% endif %}
+{% if details_type == 'events' %}
+<script>
+   window.document.title = "Events Details";
+</script>
+{% endif %}
+{% endblock %}
+

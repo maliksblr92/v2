@@ -1,0 +1,219 @@
+{% load static %}
+
+<style>
+#chartdiv {
+  width: 100%;
+  height: 2000px;
+}
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/forceDirected.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chartdiv", am4plugins_forceDirected.ForceDirectedTree);
+var networkSeries = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries())
+
+var data = []
+for(var i = 0; i < 5; i++){
+  data.push({name: "Node " + i, value:Math.random() * 50 + 10});
+
+
+
+}
+
+
+//chart.dataSource.parser = new am4core.JSONParser();
+console.log('{{ data }}')
+//chart.data = data;
+
+
+networkSeries.dataFields.value = "value";
+networkSeries.dataFields.name = "name";
+networkSeries.dataFields.children = "children";
+networkSeries.nodes.template.tooltipText = "{name}:{value}";
+networkSeries.nodes.template.fillOpacity = 1;
+networkSeries.dataFields.id = "name";
+//networkSeries.dataFields.fixed = "fixed"
+networkSeries.dataFields.linkWith = "linkWith";
+networkSeries.links.template.strokeWidth = 3;
+networkSeries.links.template.strokeOpacity = 1;
+
+networkSeries.nodes.template.label.text = "{name}"
+networkSeries.fontSize = 30;
+
+networkSeries.manyBodyStrength = -50;
+networkSeries.links.template.distance = 1;
+networkSeries.links.template.strength = 0.1;  // maximum should be 1
+
+
+
+
+
+
+var selectedNode;
+
+var label = chart.createChild(am4core.Label);
+label.text = "Click on nodes to link"
+label.x = 50;
+label.y = 50;
+label.isMeasured = false;
+
+networkSeries.events.on("over", function (event) {
+    var dataItem = event.target.dataItem;
+    dataItem.childLinks.each(function (link) {
+        link.isHover = true;
+    })
+})
+
+networkSeries.events.on("out", function (event) {
+
+        console.log('in hover out event')
+
+    var dataItem = event.target.dataItem;
+    dataItem.childLinks.each(function (link) {
+        link.isHover = false;
+    })
+})
+
+    var mouse_x;
+    var mouse_y;
+
+onmousemove = function(e){
+    mouse_x = e.clientX;
+    mouse_y = e.clientY;
+    //console.log("mouse location:", e.clientX, e.clientY)
+     }
+
+
+/*
+networkSeries.nodes.template.events.on("dragstop", function (event) {
+
+    var node = event.target;
+    console.log(node.group._x,node.group._y);
+    node.fixed = false;
+    console.log(node.fx,node.fy);
+
+    node.fx = node.group._x;
+    node.fy = node.group._y;
+    node.fixed = false;
+
+})
+*/
+/*
+networkSeries.nodes.template.events.on("rightclick", function (event) {
+    console.log('in linkevent')
+  var node = event.target;
+  if (!selectedNode) {
+    node.outerCircle.disabled = false;
+    node.outerCircle.strokeDasharray = "12,12";
+    selectedNode = node;
+  }
+  else if (selectedNode == node) {
+    node.outerCircle.disabled = true;
+    node.outerCircle.strokeDasharray = "";
+    selectedNode = undefined;
+  }
+  else {
+    var node = event.target;
+
+    var link = node.linksWith.getKey(selectedNode.uid);
+
+    if (link) {
+      node.unlinkWith(selectedNode);
+    }
+    else {
+      node.linkWith(selectedNode, 0.00001);
+    }
+  }
+})
+*/
+// Configure icons
+var icon = networkSeries.nodes.template.createChild(am4core.Image);
+icon.propertyFields.href = "image";
+icon.horizontalCenter = "middle";
+icon.verticalCenter = "middle";
+icon.width = 60;
+icon.height = 60;
+
+networkSeries.data = JSON.parse('{{ data | escapejs }}');
+
+
+/*
+networkSeries.data = [
+   {
+      "name":"Joey",
+      "fixed":true,
+       "collapsed":false,
+       "value":88,
+       "image": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_chrome.svg",
+
+      "linkWith":[
+         "Phoebe",
+         "Janice",
+         "Mrs Green",
+         "Kathy",
+         "Emily",
+         "Charlie"
+      ],
+      "children":[
+         {
+            "name":"Lorraine",
+            "value":2
+         },
+         {
+            "name":"Melanie",
+            "value":2
+         },
+         {
+            "name":"Erica",
+            "value":2
+         },
+         {
+            "name":"Kate",
+            "value":4
+         },
+         {
+            "name":"Lauren",
+            "value":2
+         },
+         {
+            "name":"Estelle",
+            "value":1
+         },
+         {
+            "name":"Katie",
+            "value":2
+         },
+         {
+            "name":"Janine",
+            "value":9
+         },
+         {
+            "name":"Erin",
+            "value":1
+         },
+         {
+            "name":"Cecilia",
+            "value":3
+         }
+      ]
+   }
+];
+*/
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>

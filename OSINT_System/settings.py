@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from huey import RedisHuey
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,44 +24,61 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wk@z!^we^q_-l_j6h+l4xq%vweos9tc^(_w1j!wwi35ud2$g8*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 
+
+#ESS_IP = '58.65.160.148'
+#UIS_IP = '192.168.18.27'
+#FILE_SERVER = '58.65.160.148'
+#AIS_IP = '58.65.160.148'
+#MONGO_DB = '192.168.18.20'
+
+
+
 ESS_IP = '192.168.18.19'
-UIS_IP = '192.168.18.27'
+UIS_IP = '192.168.18.77'
+FILE_SERVER = '192.168.18.33'
+AIS_IP = '192.168.18.13'
+MONGO_DB = '192.168.18.20'
 
-#mongoDb setting variables for public access
-db='OSINT_System'
-host='192.168.18.20'
-port=27017
-user = ''
-password = ''
 
+# mongoDb setting variables for public access
+# db='OSINT_System'
+# host='192.168.18.20'
+# port=27017
+#user = ''
+#password = ''
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
-    'channels',
-    'django_eventstream',
-    'background_task',
-    'rest_framework',
-    'OSINT_System_Core.apps.OsintSystemCoreConfig',
-    'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
-    'Data_Processing_Unit.apps.DataProcessingUnitConfig',
-    'Public_Data_Acquisition_Unit.apps.PublicDataAcquisitionUnitConfig',
-    'System_Log_Management_Unit.apps.SystemLogManagementUnitConfig',
-    'User_Accounts_Management_Unit.apps.UserAccountsManagementUnitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+    'channels',
+    'background_task',
+    'django_eventstream',
     'huey.contrib.djhuey',
+    'User_Accounts_Management_Unit.apps.UserAccountsManagementUnitConfig',
+    'OSINT_System_Core.apps.OsintSystemCoreConfig',
+    'Public_Data_Acquisition_Unit.apps.PublicDataAcquisitionUnitConfig',
+    'Data_Processing_Unit.apps.DataProcessingUnitConfig',
+    'System_Log_Management_Unit.apps.SystemLogManagementUnitConfig',
+    'Target_Management_System.apps.TargetManagementSystemConfig',
+    'Portfolio_Management_System.apps.PortfolioManagementSystemConfig',
+    'Case_Management_System.apps.CaseManagementSystemConfig',
+    'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
+    'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
+    'Bi_Tools.apps.BiToolsConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +98,7 @@ ROOT_URLCONF = 'OSINT_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,6 +109,7 @@ TEMPLATES = [
                 'Data_Processing_Unit.context_processors.ess_ip',
                 'Data_Processing_Unit.context_processors.uis_ip',
             ],
+           
         },
     },
 ]
@@ -181,7 +199,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -216,7 +233,6 @@ LOGGING = {
 }
 
 
-from huey import RedisHuey
 #from redis import ConnectionPool
 
 #pool = ConnectionPool(host='my.redis.host', port=6379, max_connections=20)
@@ -226,16 +242,28 @@ HUEY = RedisHuey('my-app')
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-STATIC_URL ='/static/'
+STATIC_SERVER_BASE_PATH = 'http://{0}/osint_system'.format(FILE_SERVER)
+if(DEBUG):
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+else:
+    STATIC_URL = STATIC_SERVER_BASE_PATH+'/static_files/'
+    STATICFILES_DIRS = (os.path.join(STATIC_SERVER_BASE_PATH, "static_files"),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
+
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 """
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "sfiles"), )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = '/media/'
-ADMIN_MEDIA_PREFIX = '/media/admin/'
+
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 TEMPLATE_LOADERS = (
@@ -243,4 +271,3 @@ TEMPLATE_LOADERS = (
 'django.template.loaders.app_directories.Loader',)
 
 """
-

@@ -1,10 +1,239 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'OSINT_System_Core/project_base.html' %}
+{% load static %}
+{% block page_title %}TSO Dashboard{% endblock %}
+<!-- left sidebar -->
+{% block leftsidebar %}
+    <div class="col-lg-2 col-sm-12 col-xs-12 ">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <!-- start of bars -->
 
-</body>
-</html>
+                <div class="left_nav text-white">
+                    <div class="" id="notification-box">
+
+                    </div>
+                </div>
+                <!-- end of bars -->
+            </div>
+        </div>
+
+        <div class="row mt-4  ">
+            <div class="col-lg-12 pt-3 pb-3">
+                <!-- first button left  -->
+                <div class="left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                        <div class="  w-25 custom_center   h-100 ">
+                            <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>
+                        </div>
+
+                        <div class="  w-25 custom_center  h-100 ">
+                            <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "
+                               style="font-size:1vw;">Targets</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end first button left  -->
+
+                <!-- first button left  -->
+                <div class="left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                        <div class="  w-25 custom_center  h-100 ">
+                            <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>
+                        </div>
+
+                        <div class="  w-25 custom_center  h-100 ">
+                            <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "
+                               style="font-size:1vw;">Timeline</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end first button left  -->
+
+                <!-- first button left  -->
+                <div class="left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                        <div class="  w-25 custom_center   h-100 ">
+                            <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>
+                        </div>
+
+                        <div class="  w-25 custom_center   h-100 ">
+                            <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end first button left  -->
+
+                <!-- first button left  -->
+                <div class="left_buttons m-2">
+                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                        <div class="  w-25 custom_center  h-100 ">
+                            <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>
+                        </div>
+
+                        <div class="  w-25 custom_center  h-100 ">
+                            <a href="{% url 'OSINT_System_Core:topNews' %}" class=" secondnavitems ">Top News</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end first button left  -->
+            </div>
+        </div>
+    </div>
+    <!-- left sidebar script -->
+
+    <!-- end of left sidebar script -->
+{% endblock %}
+<!-- end left sidebar -->
+{% block belly %} {% endblock %}
+<!-- right sidebar -->
+{% block rightsidebar %}
+    <div class="col-lg-2 custom_div_3 ">
+        <!-- row 1 start -->
+        <div class="row ">
+            <div class="col-lg-12 w-100">
+                <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">
+                    <input class="form-control input_rightside" placeholder="Enter Name Here"/>
+                </div>
+            </div>
+        </div>
+        <!-- row 1 end -->
+
+        <!-- start row 2 -->
+        <div class="row ">
+            <div class="col-lg-12 w-100 ">
+                <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">
+                    <div class="text-white  target_mark_text">
+                        <div class="h-100 w-100 text-white w-100 h-100 p-1  text-center "
+                             style="font-size:10px;overflow:hidden">
+                            <p clas class="font-weight-bold m-0 p-0 ">Logged-User</p>
+                            <a class="badge mt-1 text-white" href="/core/tsodash" target="_blank"
+                               style="font-size:12px"><i class="fas fa-user text-white mr-1"
+                                                         style="color: #1F79B4 !important;"></i>{{ request.user.username }}
+                            </a>
+                            <a href="/accounts/logout/" class="badge mt-1 text-white" style="font-size:12px"><i
+                                    class="fas fa-sign-out-alt text-white mr-1" style="color: #1F79B4 !important;"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="  ml-2  target_mark_icon">
+                        <img src="{% static 'images/target_mark.svg' %}" height="60" width="60"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- start row 3 -->
+        <div class="row mt-2">
+            <div class="col-lg-12 ">
+                <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">
+                    <div class="text-white   right_globe_icon ">
+                        <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">
+                            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40"/>
+                        </div>
+                    </div>
+                    <div class=" text-white  globe_icon_text_wrapper">
+                        <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">
+                            No object selected
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row 3 -->
+
+        <!-- start row 4 -->
+        <div class="row mt-2">
+            <div class="col-lg-12 ">
+                <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">
+                    <!-- <div class="progress ">
+                      <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"
+                        aria-valuemin="0" aria-valuemax="100">
+                        60% Complete (warning)
+                      </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- start of row 5 -->
+        <div class="row  m-0 p-0  mt-1">
+            <div class="col-lg-12  m-0 p-0 custom_center alert_1">
+                <div class="alert_1_wrapper m-0 p-0 ">
+                    <div class="text-danger font-weight-bold    alert_1_text_header ">
+                        Alerts:
+                        <div class="text-white  alert_1_text_wrapper  " id="alert-box" style="overflow-y:auto;">
+                            new_alert
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end row 5 -->
+
+        <!-- start of row 5 -->
+        <div class="row " style="margin-top:-5px;">
+            <div class="col-lg-12  m-0 p-0 alert_2">
+                <div class=" alert_2_wrapper h-100  ml-auto mr-auto">
+                    <div class="text-danger font-weight-bold  alert_2_text_header  ">
+                        <span class="alert-2_text"> Tools:</span>
+                        <div class="text-white  alert_2_text_wrapper  p-1" id="prev-alert">
+                            <div class="">
+                                <p class="mt-0"><a href="{% url 'Keybase_Management_System:block_url' %}"
+                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>Blocked URLs</a></p>
+                                <p class="mt-0"><a href="/core/periodic_target" target="_blank"
+                                                   class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>Periodic_Target</a></p>
+                                <p class="mt-0"><a href="/core/newsmonitoring" target="_blank"
+                                                   class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>News</a></p>
+                                <p class="mt-0"><a href="{% url 'OSINT_System_Core:logged_ips' %}" target="_blank"
+                                                   class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>Ip Logger</a></p>
+                                <p class="mt-0"><a href="{% url 'Target_Management_System:bulk_targets' %}"
+                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>Bulk Targets</a></p>
+
+                                <p class="mt-0"><a href="{% url 'Data_Processing_Unit:response_changes_view' %}"
+                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i
+                                        class="fas fa-hand-pointer text-white mr-1"
+                                        style="color: #1F79B4 !important;"></i>Detected Changed</a></p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end row 5 -->
+
+    <!-- start of rigt sidebar script -->
+
+    <script>
+        /*
+        // jquery ready function
+        document.addEventListener("DOMContentLoaded", function () {
+          let rightRES = new ReconnectingEventSource("/events/");
+          rightRES.addEventListener("alert", event => {
+            const alert_data = JSON.parse(event.data);
+            console.log(alert_data);
+            const alert1 = $('#new-alert')
+            const alert2 = $('#prev-alert')
+            alert1.text(alert_data['new'])
+            alert2.text(alert_data['prev1'])
+          });
+        }); // end of jquery ready
+         */
+
+    </script>
+
+    <!-- end of right sidebar script -->
+{% endblock %}
+<!-- end right sidebar -->

@@ -1,0 +1,643 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Case_Management_System/css/case_create.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex">
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu secondnavactive">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems">CREATE</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_avatar' %}" class="btn secondnavitems">INSPECT</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_setting' %}" class="btn secondnavitems">STATUS</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu">
+            <a href="{% url 'Avatar_Management_Unit:amu_report' %}" class="btn secondnavitems">ARCHIVE</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xl-3"></div>
+</div>
+{% endblock %}
+{% block belly %}
+<div class="row middlecontentdiv">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topbar">
+        <!-- Sub Menu Bar for app specific menu -->
+        <nav>
+            <div class="nav nav-tabs nav-fill">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#create-case-tab">Create
+                    Case</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#location-details-tab">Location</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#virtual-evidence-tab">Virtual Evidence</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#physical-evidence-tab">Physical Evidence</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#poi-tab">Person Of Interest</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#languages-tab">Languages</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#investigator-tab">Investigators</a>
+            </div>
+        </nav>
+        <!-- end of sub menu -->
+    </div>
+    <!-- end of top row -->
+    <!-- inside main container -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 othercontainer">
+        <div class="">
+            <div class="row formbg ml-3">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                    <!-- nav tab content section -->
+                    <div class="tab-content">
+                        <!-- case creation tab -->
+                        <div class="tab-pane fade active show" id="create-case-tab" role="tabpanel">
+                            <div class="row mt-2">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="case-creation-form">
+                                        {% csrf_token %}
+                                        <div class="form-group ">
+                                            <!-- case number -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">Case Number
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="cc-case-number"
+                                                    class="form-control newinputdesign"
+                                                    placeholder="Case Number Please ..." required>
+                                            </div>
+                                            <!-- end of case number -->
+                                            <!-- case title -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:5px 9px 0 10px;">Case Title
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="cc-case-title"
+                                                    class="form-control newinputdesign" placeholder="Case Title Please"
+                                                    required>
+                                            </div>
+                                            <!-- end of case title -->
+                                            <!-- Incident Date time -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Incident Date Time
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="cc-incident-dt" placeholder="MM/DD/YYYY HH:MM:SS ...">
+                                            </div>
+                                            <!-- end of incident date time -->
+                                            <!--for Case Type-->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;"> Case Type
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control newinputdesign"
+                                                    name="cc-case-type" placeholder="Case Type ...">
+                                            </div>
+                                            <!-- end of case type -->
+                                            <!-- Case State -->
+                                            <div class="input-group mt-1 mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                           opacity:0.9; padding:7px 9px 0 10px;">Case State
+                                                    </span>
+                                                </div>
+                                                <select name="cc-case-state" class="custom-select newinput"
+                                                    style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;">
+                                                    <option value="p">Pending</option>
+                                                    <option value="ui">Under Investigation</option>
+                                                    <option value="cr">Case Resolved</option>
+                                                    <option value="cu">Case Unresolved</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-4 mb-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of case creation tab -->
+                        <!-- location details tab -->
+                        <div class="tab-pane fade" id="location-details-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="location-details-form">
+                                        {% csrf_token %}
+                                        <!-- associated case -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="ld-case" class="custom-select newinput">
+                                                <option value="">None</option>
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}">{{case.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- location coordinates -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span
+                                                    class="newlabeldesign">CoOrdinates</span></div>
+                                            <input type="text" name="ld-coordinates" class="form-control newinputdesign"
+                                                placeholder="23.5434523627 43.45555653">
+                                        </div>
+                                        <!-- end of location coordinates -->
+                                        <!-- address -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Address</span>
+                                            </div>
+                                            <input type="text" name="ld-address" class="form-control newinputdesign"
+                                                placeholder="431 James Street ...">
+                                        </div>
+                                        <!-- end of address -->
+                                        <!-- description -->
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"><span
+                                                    class="newlabeldesign">Description</span></div>
+                                            <textarea name="ld-description" class="form-control" rows="5"></textarea>
+                                        </div>
+                                        <!-- end of description -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-4 mb-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of location details tab -->
+                        <!-- virtual evidence tab -->
+                        <div class="tab-pane fade" id="virtual-evidence-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="virtual-evidence-form">
+                                        {% csrf_token %}
+                                        <!-- radio buttons for case files, picture, video -->
+                                        <div class="row mt-2">
+                                            <div class="col-centered">
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                    <label class="btn btn-secondary active">
+                                                        <input type="radio" name="ve-category" checked
+                                                            value="document">Documents
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="ve-category" value="picture">Picture
+                                                    </label>
+                                                    <label class="btn btn-secondary">
+                                                        <input type="radio" name="ve-category" value="video">Video
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of radio buttons -->
+                                        <!-- associated case -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="ve-case" class="custom-select newinput">
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- name of evidence -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Name</span>
+                                            </div>
+                                            <input type="text" name="ve-name" class="form-control newinputdesign"
+                                                placeholder="FIR Report for Shakeel">
+                                        </div>
+                                        <!-- end of name of evidence -->
+                                        <!-- evidence location -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Server
+                                                    Location</span>
+                                            </div>
+                                            <input type="url" name="ve-location" class="form-control newinputdesign"
+                                                placeholder="http://www.hello.com/files/shakeel.pdf">
+                                        </div>
+                                        <!-- end of evidence location -->
+                                        <!-- evidence description -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Evidence
+                                                    Description</span>
+                                            </div>
+                                            <textarea name="ve-description" class="form-control" rows="5"></textarea>
+                                        </div>
+                                        <!-- end of evidence description -->
+                                        <!-- evidence source -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Evidence
+                                                    Source</span>
+                                            </div>
+                                            <input type="text" name="ve-source" class="form-control newinputdesign"
+                                                placeholder="Crime Scene">
+                                        </div>
+                                        <!-- end of evidence source -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of virtual evidence tab -->
+                        <!-- physical evidence tab -->
+                        <div class="tab-pane fade" id="physical-evidence-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="physical-evidence-form">
+                                        {% csrf_token %}
+                                        <!-- associated case -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="pe-case" class="custom-select newinput">
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{case.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- object name -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Object
+                                                    Name</span>
+                                            </div>
+                                            <input type="text" name="pe-name" class="form-control newinputdesign"
+                                                placeholder="Object Name ...">
+                                        </div>
+                                        <!-- end of object name -->
+                                        <!-- object description -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Object
+                                                    Description</span>
+                                            </div>
+                                            <textarea name="pe-description" class="form-control" rows="4"></textarea>
+                                        </div>
+                                        <!-- end of object description -->
+                                        <!-- object storage location -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Storage
+                                                    Location</span>
+                                            </div>
+                                            <input type="text" name="pe-storage-location"
+                                                class="form-control newinputdesign"
+                                                placeholder="Compartment 44 Rack 4 ...">
+                                        </div>
+                                        <!-- end of object storage location -->
+                                        <!-- collection date and time -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend"><span class="newlabeldesign">Evidence
+                                                    Collection Time</span>
+                                            </div>
+                                            <input type="text" name="pe-collection-dt"
+                                                class="form-control newinputdesign" placeholder="MM/DD/YY HH:MM:SS">
+                                        </div>
+                                        <!-- end of collection date and time -->
+                                        <!-- extraction location -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Extraction Location</span>
+                                            </div>
+                                            <select name="pe-extraction-location" class="custom-select newinput">
+                                                {% for location in loi %}
+                                                <option value="{{location.0}}"
+                                                    {% if forloop.counter0 == 0 %}selected{% endif %}>{{location.1}}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of extraction location -->
+                                        <!-- associated pictures -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Pictures</span>
+                                            </div>
+                                            <select name="pe-pictures" class="custom-select newinput" multiple>
+                                                {% for pic in pictures %}
+                                                <option value="{{pic.0}}">{{pic.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated pictures -->
+                                        <!-- associated videos if any -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Videos</span>
+                                            </div>
+                                            <select name="pe-videos" class="custom-select newinput" multiple>
+                                                {% for vid in videos %}
+                                                <option value="{{vid.0}}">{{vid.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated videos -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of physical evidence tab -->
+                        <!-- person of interest tab -->
+                        <div class="tab-pane fade" id="poi-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="poi-form">
+                                        {% csrf_token %}
+                                        <!-- associated case -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Case</span>
+                                            </div>
+                                            <select name="poi-case" class="custom-select newinput">
+                                                <option value="" selected>None</option>
+                                                {% for case in cases %}
+                                                <option value="{{case.0}}">{{case.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated case -->
+                                        <!-- first and middle name -->
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's first name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend"><span class="newlabeldesign">First
+                                                            Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-first-name"
+                                                        class="form-control newinputdesign" placeholder="First Name ..."
+                                                        required>
+                                                </div>
+                                                <!-- end of person's first name -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's middle name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Middle Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-middle-name"
+                                                        class="form-control newinputdesign"
+                                                        placeholder="Middle Name ...">
+                                                </div>
+                                                <!-- end of person's middle name -->
+                                            </div>
+                                        </div>
+                                        <!-- last name and phone -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's last name -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Last Name</span>
+                                                    </div>
+                                                    <input type="text" name="poi-last-name"
+                                                        class="form-control newinputdesign" placeholder="Last Name ..."
+                                                        required>
+                                                </div>
+                                                <!-- end of person's last name -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- phone number -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Phone</span>
+                                                    </div>
+                                                    <input type="text" name="poi-phone"
+                                                        class="form-control newinputdesign"
+                                                        placeholder="Phoe Number ...">
+                                                </div>
+                                                <!-- end of phone number -->
+                                            </div>
+                                        </div>
+                                        <!-- end of last name and phone -->
+                                        <!-- person of interest category -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Category</span>
+                                            </div>
+                                            <select name="poi-category" class="custom-select newinput" multiple>
+                                                <option value="r">Case Reporter</option>
+                                                <option value="w">Witness</option>
+                                                <option value="a">Accused</option>
+                                                <option value="s">Suspect</option>
+                                                <option value="g">Guilty</option>
+                                                <option value="i">Innocent</option>
+                                            </select>
+                                        </div>
+                                        <!-- end of poi category -->
+                                        <!-- email and gender -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- person's email -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Email</span>
+                                                    </div>
+                                                    <input type="email" name="poi-email"
+                                                        class="form-control newinputdesign" placeholder="xyz@gmail.com"
+                                                        required>
+                                                </div>
+                                                <!-- end of person's email -->
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                                <!-- gender -->
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="newlabeldesign">Gender</span>
+                                                    </div>
+                                                    <select name="poi-gender" class="custom-select newinput">
+                                                        <option value="m" selected>Male</option>
+                                                        <option value="f">Female</option>
+                                                        <option value="t">Transgender</option>
+                                                        <option value="o">Other</option>
+                                                    </select>
+                                                </div>
+                                                <!-- end of gender -->
+                                            </div>
+                                        </div>
+                                        <!-- end of email and gender -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of person of interest tab -->
+                        <!-- languages tab -->
+                        <div class="tab-pane fade" id="languages-tab">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-9 col-xl-9">
+                                    <form id="languages-form">
+                                        {% csrf_token %}
+                                        <!-- associated person of interest -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Person of Interest</span>
+                                            </div>
+                                            <select name="ls-poi" class="custom-select newinput">
+                                                {% for poi in pois %}
+                                                <option value="{{poi.0}}">{{poi.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of associated person of interest -->
+                                        <!-- name of the language -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Language</span>
+                                            </div>
+                                            <select name="ls-language-name" class="custom-select newinput">
+                                                {% for language in languages %}
+                                                <option value="{{language.0}}">{{language.1}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <!-- end of language name -->
+                                        <!-- accent -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Accent</span>
+                                            </div>
+                                            <input type="text" class="form-control newinputdesign" name="ls-accent"
+                                                placeholder="Accent Please ...">
+                                        </div>
+                                        <!-- end of accent -->
+                                        <!-- can read -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Read</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-read">
+                                        </div>
+                                        <!-- end of can read -->
+                                        <!-- can write -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Write</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-write">
+                                        </div>
+                                        <!-- end of can write -->
+                                        <!-- can speak -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Can Speak</span>
+                                            </div>
+                                            <input type="checkbox" class="form-control" name="ls-can-speak">
+                                        </div>
+                                        <!-- end of can speak -->
+                                        <!-- fluency -->
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="newlabeldesign">Level</span>
+                                            </div>
+                                            <select name="ls-fluency" class="custom-select newinput">
+                                                <option value="b" selected>Beginner</option>
+                                                <option value="e">Elementary</option>
+                                                <option value="i">Intermediate</option>
+                                                <option value="ui">Upper Intermediate</option>
+                                                <option value="a">Advanced</option>
+                                                <option value="p">Proficient</option>
+                                            </select>
+                                        </div>
+                                        <!-- end of fluency -->
+                                        <!-- reset and submit button -->
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="reset">Reset</button>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-xl-6 text-center">
+                                                <button class="btn btn-secondary searchbutton"
+                                                    type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        <!-- end of reset and submit button -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of languages tab -->
+                    </div>
+                    <!-- end of nav tab content -->
+                </div>
+            </div>
+            <!-- END OF second row-->
+        </div>
+    </div>
+    <!-- end of main container -->
+
+</div>
+{% endblock %}
+{% block foot_dep %}
+<script defer src="{% static 'Case_Management_System/js/case_create.js' %}"></script>
+{% endblock %}

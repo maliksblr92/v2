@@ -1,0 +1,349 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css'%}">
+  <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css'%}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <!-- heatmap -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <style>
+        
+
+        .ghbtns {
+            position: relative;
+            top: 4px;
+            margin-left: 5px;
+        }
+
+        a {
+            color: #0077ff;
+        }
+    </style>
+    <!-- heat map  -->
+</head>
+<style>
+
+</style>
+
+<body class="bg-dark">
+  <div class="container-fluid" id="cover">
+    <div class="row ">
+
+      <div class="col-lg-12 pl-5 pr-5">
+        <nav class="navbar navbar-expand-lg " id="header">
+          <button class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon ">
+              <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 ">
+              <div class="row">
+
+                <div class="col-lg-4 p-3">
+                  <div class="row">
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  font-weight-bold nav_btn" href="#" >DASHBOARD</a>
+                      </li>
+                    </div>
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  font-weight-bold nav_btn" href="#" >MONITOR</a>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 custom_center">
+                  <img src="{% static 'Additional_assets/main/images/logo.svg' %}" height="120" width="250" class=" m-0 p-0" />
+                </div>
+                <div class="col-lg-4 p-3">
+                  <div class="row">
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  font-weight-bold nav_btn" href="#" >FETCH</a>
+                      </li>
+                    </div>
+                    <div class="col-lg-6  list list-inline custom_center "
+                      style="border-right:2px solid white;border-left:2px solid white;padding-top:35px;padding-bottom:20px;">
+                      <li class="nav-item">
+                        <a class="   btn  font-weight-bold nav_btn" href="#" >RETRIEVE</a>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-2 "></div>
+
+
+
+
+
+          </div>
+        </nav>
+      </div>
+    </div>
+
+
+    <div class="row mt-5">
+      <div class="col-lg-2 col-sm-12 col-xs-12 ">
+
+        <div class="row">
+          <div class="col-lg-12 ">
+
+            <!-- start of bars -->
+
+            <div class="left_nav text-white  ">
+
+              <p class="left_nav_text w-100 h-100 d-block">This is sample dynamic text This is sample dynamic text This
+                is sample dynamic text This is sample dynamic text
+
+                This is sample dynamic text This is sample dynamic text This is sample dynamic text This is sample
+                dynamic text
+                This is sample dynamic text This is sample dynamic text This is sample dynamic text This is sample
+                dynamic text
+
+                This is sample dynamic text This is sample dynamic text This is sample dynamic text This is sample
+                dynamic text
+                This is sample dynamic text This is sample dynamic text This is sample dynamic text This is sample
+                dynamic text
+
+                This is sample dynamic text This is sample dynamic text This is sample dynamic text This is sample
+                dynamic text</p>
+
+            </div>
+            <!-- end of bars -->
+          </div>
+        </div>
+
+
+
+
+        <div class="row mt-4  ">
+          <div class="col-lg-12 pt-3 pb-3">
+            <!-- first button left  -->
+            <div class="left_buttons m-2">
+              <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="  w-25 custom_center   h-100 ">
+                  <img src="{% static 'Additional_assets/main/images/fetch icon.svg' %}" class="left_buttons_icons" />
+                </div>
+
+                <div class="  w-25 custom_center  h-100 ">
+                  <a href="#"  class=" secondnavitems ">Fetch</a>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- end first button left  -->
+
+
+            <!-- first button left  -->
+            <div class="left_buttons m-2">
+              <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="  w-25 custom_center   h-100 ">
+                  <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons" />
+                </div>
+
+                <div class="  w-25 custom_center  h-100 ">
+                  <a href="#"  class=" secondnavitems ">Analyze</a>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- end first button left  -->
+
+
+            <!-- first button left  -->
+            <div class="left_buttons m-2">
+              <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="  w-25 custom_center   h-100 ">
+                  <img src="{% static 'Additional_assets/main/images/search icon.svg' %}" class="left_buttons_icons" />
+                </div>
+
+                <div class="  w-25 custom_center   h-100 ">
+                  <a href="#"  class=" secondnavitems ">Search</a>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- end first button left  -->
+
+
+
+            <!-- first button left  -->
+            <div class="left_buttons m-2">
+              <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+                <div class="  w-25 custom_center  h-100 ">
+                  <img src="{% static 'Additional_assets/main/images/generate icon.svg' %}" class="left_buttons_icons" />
+                </div>
+
+                <div class="  w-25 custom_center  h-100 ">
+                  <a href="{% url 'OSINT_System_Core:topNews' %}"   class=" secondnavitems ">News</a>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- end first button left  -->
+          </div>
+        </div>
+
+
+
+      </div>
+      <!-- end of header  -->
+
+    
+
+
+
+
+
+
+{% block content%}
+
+{% endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-lg-2 custom_div_3 ">
+  <!-- row 1 start -->
+  <div class="row ">
+    <div class="col-lg-12 w-100">
+      <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">
+        <input class="form-control input_rightside" placeholder="enter name here" />
+      </div>
+    </div>
+  </div>
+  <!-- row 1 end -->
+
+  <!-- start row 2 -->
+  <div class="row ">
+    <div class="col-lg-12 w-100 ">
+      <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">
+        <div class="text-white  target_mark_text">
+          <div class="h-100 w-100 text-white w-100 h-100 p-1  " style="font-size:10px;overflow:hidden">
+            sadasdads
+          </div>
+        </div>
+        <div class="  ml-2  target_mark_icon">
+          <img src="{% static 'images/target_mark.svg' %}" height="60" width="60" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- start row 3 -->
+  <div class="row mt-2">
+    <div class="col-lg-12 ">
+      <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">
+        <div class="text-white   right_globe_icon ">
+          <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">
+            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40" />
+          </div>
+        </div>
+        <div class=" text-white  globe_icon_text_wrapper">
+          <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">
+            sadasdadsasdasdsadadasdassadasdsadadasd asdasdsadsad
+            asdasdsadsad
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row 3 -->
+
+  <!-- start row 4 -->
+  <div class="row mt-2">
+    <div class="col-lg-12 ">
+      <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">
+        <div class="progress ">
+          <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"
+            aria-valuemin="0" aria-valuemax="100">
+            60% Complete (warning)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- start of row 5 -->
+  <div class="row mt-2">
+    <div class="col-lg-12  custom_center alert_1">
+      <div class="alert_1_wrapper">
+        <div class="text-danger font-weight-bold  p-2 alert_1_text_header ">
+          Alert:
+          <div class="text-white  alert_1_text_wrapper" id="new-alert">
+            asdsadsadsadaasdasdasddsad
+            asdsadsadsadaasdasdasddsadasdsad
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end row 5 -->
+
+  <!-- start of row 5 -->
+  <div class="row mt-2">
+    <div class="col-lg-12  m-0 p-0 alert_2">
+      <div class=" alert_2_wrapper h-100  ml-auto mr-auto">
+        <div class="text-danger font-weight-bold alert_2_text_header  ">
+          Alert:
+          <div class="text-white  alert_2_text_wrapper" id="prev-alert">
+            asdsadsadsadaasdasdasddsad
+            asdsadsadsadaasdasdasddsadasdsad
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end row 5 -->
+</div>
+
+
+    </div>
+</div>
+
+
+
+  
+
+
+   
+  
+  </body>
+  
+  </html>

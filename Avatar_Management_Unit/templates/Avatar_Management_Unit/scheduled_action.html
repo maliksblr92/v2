@@ -1,0 +1,289 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+{% endblock %}
+{% block smallnavbar %}
+
+    <!-- <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3 m-0 p-0  "><a
+                class="nav-link secondmidnavmenu w-100 h-100 text-white glowing_border"
+                href="{% url 'Portfolio_Management_System:create_portfolio' %}">Create</a></div>
+
+        <div class="col-md-3 m-0 p-0  ">
+            <a
+                    class="nav-link secondmidnavmenu w-100 h-100 text-white active"
+                    href="/pms/archive">Archive</a></div>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+
+    </div>{% endblock %} -->
+
+{% block belly %}
+<style>
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+        color: rgba(0, 0, 0, 0);
+        opacity: 1;
+        display: block;
+        background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+        width: 20px;
+        height: 20px;
+        border-width: thin;
+    }
+
+</style>
+    <div class="row">
+        <div class="col-md-12  ">
+            <!-- start of card  -->
+            <div class="w-100 h-100" id="content_div">
+                <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
+                    <p class="card_header_text">SCHEDULE ACTIONS (<span class="text-uppercase">{{action_type}})</span> </p>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
+                    <div class="">
+                        <!-- RPW FOR SOCIAL MEDIA -->
+                        <!-- Second row-->
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
+                           
+                            <form name="portfolio_create_form"
+                                  class="justify-content-center  pt-3 pb-5 custom_inner_background inner_form_margin_radius"
+                                  id="portfolio_create_form"
+                                  action="{% url 'Avatar_Management_Unit:schedule_action' action_type=action_type avatar_id=avatar.id %}" method="POST">
+                                {% csrf_token %}
+                                <div style="width:80%;" class="container input1">
+                                    <!-- Radio Buttons Start -->
+                                    <div class="row">
+                                        <!-- start of button grp -->
+                                        <div class="col-md-12  ">
+                                            
+                                        </div>
+                                      
+                                        <!-- end of button grp  -->
+                                    </div>
+                                    <!-- Radio Buttons End -->
+                                    
+                                   
+<input type="hidden" id="action-type" name="action-type" value="{{action_type}}" />
+
+{% if    action_type == 'reaction'  %}
+                                    <!-- reaction type -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Reaction Type
+                                        </span>
+                                        </div>
+                                        <!-- <input type="date" class="col-md-9 form-control custom_input_field" id="dob"
+                                               name="dob" required="required"/> -->
+                                               <select name="reaction-type" id="reaction-type" class="form-control custom_input_field" required="required">
+                                                <option value="">Select Reaction Type</option>
+                                                <option value="love">Love</option>
+                                                <option value="hate">Hate</option>
+                                            </select>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Specify Reaction Type
+                                        </small>
+                                    </div>
+{% endif %}
+
+                                    {% if avatar.social_media_accounts|length > 0 %}
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Select Social Account :
+                                        </span>
+                                        </div>
+                                        <select name="account-platform-type" id="account-platform-type" class="form-control custom_input_field" required="required">
+                                            <option value="">Select Social Account</option>
+                                           {% for acc in avatar.social_media_accounts%}
+                                            <option value="{{acc.social_media_type}}">{{acc.social_media_type}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                        style="padding-left:180px;"><i
+                                         class="fas fa-info mr-2"></i>Avatar all avalible media accounts
+                                 </small>
+                                        
+                                    </div>
+                                    
+                                    {% endif %}
+                                    
+                                    
+                                    
+                                   
+
+                          
+{% if action_type == 'post'   or action_type == 'message' %}                                 
+<div class="row input-group ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Title :
+    </span>
+    </div>
+    <input type="text" class="col-md-9 form-control custom_input_field"
+    id="title" name="title" required="required">
+ 
+</div>
+
+
+{% endif %}  
+
+
+{% if  action_type == 'message' %}
+<!-- inputfield 4 -->
+<div class="row input-group mt-3 ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Description
+    </span>
+    </div>
+   <textarea name="action-description" id="action-description" class="form-control" cols="30" rows="3" required="required"></textarea>
+    <small class=" col-md-9 font-weight-bold text_paragraph "
+           style="padding-left:180px;"><i
+            class="fas fa-info mr-2"></i>Provide action description
+    </small>
+</div>   
+{% endif %}
+
+
+                                    
+
+<!-- reaction type -->
+{% if action_type == 'post' or action_type == 'share' %}
+                                     
+                                     <div class="row input-group mt-4">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Post Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="post-text" id="post-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide post text 
+                                        </small>
+                                    </div>
+{% endif %}
+{% if action_type == 'comment' %}
+                                     
+                                     <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Comment Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="comment-text" id="comment-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide  comment text 
+                                        </small>
+                                    </div>
+{% endif %}
+{% if action_type == 'message' %}
+                                     
+                                     <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Message Text 
+                                        </span>
+                                        </div>
+                                        <textarea name="message-text" id="message-text" class="form-control" cols="30" rows="3" required="required"></textarea>
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide  message text 
+                                        </small>
+                                    </div>
+
+
+                                    <!-- taget_username -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Target Username 
+                                        </span>
+                                        </div>
+                                        <input type="text" class="col-md-9 form-control custom_input_field"
+                                        id="target-username" name="target-username" required="required">
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Provide target username
+                                        </small>
+                                    </div>
+{% endif %}
+    <!-- end reaction type --> 
+    {% if  action_type == 'share' or action_type == 'comment' or  action_type == 'reaction'  %}                               <!-- inputfield 3 -->
+                                    <div class="row input-group ">
+                                        <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Target Post Url :
+                                        </span>
+                                        </div>
+                                        <input type="url" class="col-md-9 form-control custom_input_field"
+                                        id="target-post-url" name="target-post-url" required="required">
+                                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                                               style="padding-left:180px;"><i
+                                                class="fas fa-info mr-2"></i>Paste target post Url 
+                                        </small>
+                                    </div>
+{% endif %}
+
+
+<div class="row input-group ">
+    <div class="col-md-3 p-0 input-group-prepend">
+    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+        opacity:0.9; padding:7px 9px 0 10px;">Perform On :
+    </span>
+    </div>
+    <input type="datetime-local" class="col-md-9 form-control custom_input_field"
+    id="perform-on" name="perform-on" required="required">
+    <small class=" col-md-9 font-weight-bold text_paragraph "
+    style="padding-left:180px;"><i
+     class="fas fa-info mr-2"></i>Example 06/05/2020,07:45 PM
+</small>
+</div>                    
+
+                                    <!-- Button -->
+                                    <div class="row input_wrapper_row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2">
+                                            <input type="submit"
+                                                   class="btn border custom_input_field font-weight-bold btn-sm w-100  text-white"
+                                                   {% if action_type == 'post' %}
+                                                   value=" POST"
+                                                   {% endif %}
+                                                   {% if action_type == 'comment' %}
+                                                   value=" COMMENT"
+                                                   {% endif %}
+                                                   {% if action_type == 'reaction' %}
+                                                   value=" REACT"
+                                                   {% endif %}
+                                                   {% if action_type == 'share' %}
+                                                   value=" SHARE"
+                                                   {% endif %}
+                                                  id="submit">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                          
+                        </div>
+                    </div>
+                </div>
+                <!-- end of card  -->
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "AMU Schedule Actions";
+    </script>
+{% endblock %}

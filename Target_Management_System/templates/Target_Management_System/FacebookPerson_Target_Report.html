@@ -1,0 +1,1113 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Additional_assets/main/css/style.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+
+    <!--        <script type="text/javascript">
+    $(document).ready(function() {
+    $('.accordion-item-1 .accordion-content').show();
+    });
+    </script> -->
+    <!-- facebook person target css start -->
+
+    <style>
+        .wrapper {
+            background: transparent !important;
+        }
+
+        .background-gradient {
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+        }
+
+        .background-gradient-dark {
+            background: linear-gradient(to bottom, #06578c 0%, #999999 100%);
+        }
+
+        .circle-dot1 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f35d5b;
+        }
+
+        .circle-dot2 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #f6bd3a;
+        }
+
+        .circle-dot3 {
+            width: 15px;
+            height: 15px;
+            float: left;
+            margin: 6px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #44cc45;
+        }
+
+        .fb-cover-img {
+            /*background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;*/
+            background: linear-gradient(to bottom, #0071bc 0%, #999999 100%);
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 300px;
+            /* background: linear-gradient(rgba(0,0,0,0) 71%, rgba(0,0,0, .53)); */
+            /* z-index: 1; */
+        }
+
+        .profile-image-wrapper {
+            height: 150px;
+            width: 150px;
+            margin-top: -120px;;
+            border: 5px solid #FEC134;
+            border-radius: 10px;
+            background: url(/static/images/VIaL8H.jpg) no-repeat center center fixed;;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .profile-image-name {
+            font-size: 25px;
+            font-weight: bold;;
+            color: black;
+            margin-top: -50px;
+            letter-spacing: 3px;;
+        }
+
+        .custom-1 {
+            height: 200px;
+            width: 100%;
+            border: 1px solid red;
+            background-color: white;
+            padding: 20px;;
+        }
+
+        .small-txt {
+            font-size: 11px !important;
+        }
+
+        .smaller-txt {
+            font-size: 10px !important;
+        }
+
+        .material-icons {
+            color: #007bff;
+            font-size: 16px;;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .border-right {
+            border-right: 1px solid black;;
+        }
+
+        .border-left {
+            border-left: 1px solid black;;
+        }
+
+        .custom-center-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-start-center {
+            display: flex !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .custom-end-center {
+            display: flex !important;
+            justify-content: end !important;
+            align-items: center !important;
+        }
+
+        .custom-row-center-center {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-center-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .custom-column-start-start {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: start !important;
+        }
+
+        .custom-column-start-center {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: start !important;
+            align-items: center !important;
+        }
+
+        .custom_active_text > i {
+            color: #FEC134 !important;
+        }
+
+        .custom_active_text.active > i {
+            color: #FEC134 !important;
+        }
+
+        div.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+    </style>
+    <!-- facebook person target css end -->
+</head>
+<body>
+<div class="container-fluid wrapper "> <!-- DIV 1 SRART -->
+    <!-- start of tabs  -->
+    <div class="col-md-12 pl-5 pr-5">
+        <div class="row border border-dark mt-2 ml-1 mr-1" style="border-radius:10px 10px 10px 10px;">
+            <div class="col-md-12  p-0 ">
+
+                <!-- TABS END -->
+                <div class="background-gradient pl-4 pr-4">
+                    <!-- PROFILE START -->
+                    <h1 class="text-dark font-weight-bold">Profile</h1>
+                    <div id="profile" class="row pt-2">
+                        <div class="col-md-6">
+                            <p>GENERAL INFORMATION :</p>
+                            <p><span class="mr-2 w-25">Name  : </span><span class="font-weight-bold"
+                                                                            style="font-size:12px;">{{ profile.name|default:"N/A" }}</span>
+                            </p>
+                            <p><span class="mr-2 w-25">Birthday  : </span>
+
+                                <span class="font-weight-bold"
+                                      style="font-size:12px;">{{ profile.general_information.birthday|default:"N/A" }}</span>
+                            </p>
+                            <p>
+                                <span class="mr-2 w-25">Authro ID  : </span>
+
+                                <span class="font-weight-bold"
+                                      style="font-size:12px;">{{ profile.author_id|default:"N/A" }}</span>
+                            </p>
+                            <p><span class="mr-2 w-25">Gender  : </span>
+
+                                <span class="font-weight-bold"
+                                      style="font-size:12px;">{{ profile.general_information.gender|default:"N/A" }}</span>
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <p>GENERAL INFORMATION :</p>
+                            <p><span class="w-25 mr-2">languages  : </span><span
+                                    class="font-weight-bold"
+                                    style="font-size:12px;">{{ profile.general_information.languages|default:"N/A" }}</span>
+                            </p>
+                            <span class="w-25 mr-2">Relegion  : </span><span
+                                class="font-weight-bold"
+                                style="font-size:12px;">{{ profile.general_information.religious_views|default:"N/A" }}</span></p>
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text_heading">Profile Events </i></h3>
+                            <div class="row d-flex flex-row justify-content-center align-items-center">
+                                {% for y in profile.events %}
+                                    <div class="col-md-2 mt-3 h-100 ">
+                                        <span class="font-weight-bold">Year : {{ y.year }}</span>
+                                    </div>
+
+                                    <div class="col-md-10 h-100 mt-3">
+                                        <div class="row">
+                                            {% for event in y.events %}
+                                                <div class="col-md-12 "><span
+                                                        class="">  {{ event.event|default:"N/A" }}</span>
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                {% empty %}
+                                    <p class="ml-3 text_paragraph">N/A </p>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text-dark">Profile Overview Summary </i></h3>
+                            <p class="text-dark">{{ profile.profile_overview_summary | default:"N/A" }}</p>
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text-dark">Profile Friends Summary </i></h3>
+                            <p class="text-dark">{{ profile.profile_friends_summary | default:"N/A" }}</p>
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text-dark">Profile Intrest Summary </i></h3>
+                            <p class="text-dark">{{ profile.profile_interest_summary | default:"N/A" }}</p>
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text-dark">Profile Close Associates Summary </i></h3>
+                            <p class="text-dark">{{ profile.profile_close_associates_summary | default:"N/A" }}</p>
+                        </div>
+                        <div class="col-md-12">
+                            <h3><i class="material-icon text-dark">Profile Behaviour Summary </i></h3>
+                            <p class="text-dark">{{ profile.behaviour | default:"N/A" }}</p>
+                        </div>
+
+                    </div>
+                    <!-- PROFILE END -->
+                    <!-- WORK DETAILS START-->
+                    <div class="row mt-2 p-2">
+                        <h1 class="text-dark font-weight-bold">Personal Details</h1>
+
+                    </div>
+                    <div class="row p-1 border" id="work_details_div">
+                        <!-- start -->
+                        <div class="row col-md-12">
+                            <div class="col-md-12" id="work_details">
+                                <h3>Work Details</h3>
+                                <div class="row">
+                                    {% for work in profile.work %}
+                                        <div class="col-md-4">
+                                            <div class="row ml-2 h-75">
+                                                <div class="col-md-12"><span class="text-dark"
+                                                                             style="font-size:12px;font-weight:bold;">{{ forloop.counter }}#{{ work.organisation|default:"N/A" }}</span>
+                                                </div>
+                                                <div class="col-md-12 mt-1" style="font-size:12px;">
+                                                    <p class="font-weight-bold">{{ work.details|default:"N/A" }}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    {% empty %}
+                                        <p>No Work Details </p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- end -->
+                            <!-- start -->
+
+
+                            <div class="col-md-6" id="websites_details">
+                                <h3>Web Links</h3>
+
+                                {% for webistes in profile.web_links.websites %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class=""> {{ forloop.counter }} # ) {{ webistes }}</span>
+                                        </div>
+
+                                    </div>
+                                {% empty %}
+                                    <p>No Websites Details </p>
+                                {% endfor %}
+
+
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+
+
+                            <div class="col-md-6" id="social_links_details">
+                                <h3>Social Links</h3>
+                                <div class="p-0 m-0 ">
+
+                                    {% for social_links in profile.web_links.social_links %}
+                                        <div class="row mt-2">
+                                            <div class="col-md-4"><span class="">Name</span></div>
+                                            <div class="col-md-8">
+                                                <span class="font-weight-bold"
+                                                      style="font-size:12px;">{{ social_links.link|default:"N/A" }}</span>
+                                            </div>
+
+                                            <div class="col-md-4"><span class="">Details</span></div>
+                                            <div class="col-md-8">
+
+                                                <span class="font-weight-bold"
+                                                      style="font-size:12px;">{{ social_links.details|default:"N/A" }}</span>
+                                            </div>
+
+                                            <hr>
+
+                                        </div>
+                                    {% empty %}
+                                        <p>No Social Link Details </p>
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+
+
+                            <div class="m-2 p-2" id="family_details">
+                                <h3>Family Details</h3>
+                                <div class="row">
+                                    {% for family in profile.family %}
+                                        <div class="col-md-6">
+                                            <div class="row   mt-2">
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    Enitity Type :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <span class="font-weight-bold">{{ family.entity_type|default:"N/A" }}</span>
+                                                </div>
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    Username :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <span class="font-weight-bold">{{ family.username|default:"N/A" }}</span>
+                                                </div>
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    ID :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <span class="font-weight-bold">{{ family.id|default:"N/A" }}</span>
+                                                </div>
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    Name :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <span class="font-weight-bold">{{ family.name|default:"N/A" }}</span>
+                                                </div>
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    Profile Picture :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <img src="{{ family.media_directory }}" class="img-fluid"
+                                                         style="height:100px;;width:100px;;"/>
+                                                </div>
+                                                <div class="col-md-4"><span class=""
+                                                                            style="font-size:12px;font-weight:bold;">
+                                                    Relation :</span></div>
+                                                <div class="col-md-8" style="font-size:12px;">
+                                                    <span class="font-weight-bold">{{ family.relation|default:"N/A" }}</span>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    {% empty %}
+                                        <p>No Family Details </p>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                            <!-- end -->
+                        </div>
+                    </div>
+                    <!-- WORK DETAILS END -->
+                    <!-- FRIENDS START -->
+                    <div class="row pt-5" id="friends">
+                        <div class="col-md-12">
+                            <h1 class="text-dark font-weight-bold">Friends: {{ profile.friends | length }}</h1>
+                        </div>
+                        {% for f in profile.friends %}
+                            <div class="col-md-4  border m-0 pl-2 d-flex flex-row justify-content-start align-items-center "
+                                 style="height:130px;">
+
+                                <img src="{{ f.media_directory }}" style="height:80px;width:80px;border-radius: 50%;"
+                                     class="img-fluid"/>
+
+
+                                <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                            <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                  style="font-size: 14px;">
+                                                Name: {{ f.name|default:"N/A" }}
+                                            </span>
+                                    <span class="d-block text-dark w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                Id: {{ f.id|default:"N/A" }}
+                                            </span>
+                                    <span class="d-block text-dark w-100 h-100 text-left m-0" style="font-size: 14px;">
+                                                Score: {{ f.scrore|default:"N/A" }}
+                                            </span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- FRIENDS END -->
+                    <!-- RELATED START -->
+                    <div class="row pt-5" id="related">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h1 class="text-dark font-weight-bold">Related Information</h1>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="sports1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#sports" aria-expanded="true"
+                                                    aria-controls="sports">
+                                                Sports ({{ profile.interests.sports | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="sports" class="collapse show" aria-labelledby="sports1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.sports %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="bg-info p-1 text-dark font-weight-bold">No Sports
+                                                    Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="music1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#music" aria-expanded="true" aria-controls="music">
+                                                music ({{ profile.interests.music | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="music" class="collapse show " aria-labelledby="music1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.music %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="bg-info p-1 text-dark font-weight-bold">No Music
+                                                    Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="films1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#films" aria-expanded="true" aria-controls="films">
+                                                films ({{ profile.interests.films | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="films" class="collapse show " aria-labelledby="films1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.films %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No Films
+                                                    Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="tv_programmes_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#tv_programmes" aria-expanded="true"
+                                                    aria-controls="tv_programmes">
+                                                tv_programmes ({{ profile.interests.tv_programmes | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="tv_programmes" class="collapse show " aria-labelledby="tv_programmes_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.tv_programmes %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No Tv
+                                                    Programmes Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="books1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#books" aria-expanded="true" aria-controls="books">
+                                                books ({{ profile.interests.books | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="books" class="collapse show " aria-labelledby="books1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.books %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No Books
+                                                    Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="games_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#games" aria-expanded="true" aria-controls="games">
+                                                games ({{ profile.interests.games | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="games" class="collapse  show" aria-labelledby="games_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.games %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No Games
+                                                    Intrests</small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="likes_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#likes" aria-expanded="true" aria-controls="likes">
+                                                likes ({{ profile.interests.likes | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="likes" class="collapse  show" aria-labelledby="likes_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.likes %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No
+                                                    Likes </small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="events_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#events" aria-expanded="true"
+                                                    aria-controls="events">
+                                                events ({{ profile.interests.events | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="events" class="collapse  show" aria-labelledby="events_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.events %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No
+                                                    Events </small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="questions_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#questions" aria-expanded="true"
+                                                    aria-controls="questions">
+                                                questions ({{ profile.interests.questions | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="questions" class="collapse  show" aria-labelledby="questions_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.questions %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No
+                                                    Questions </small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="reviews_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#reviews" aria-expanded="true"
+                                                    aria-controls="reviews">
+                                                reviews ({{ profile.interests.reviews | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="reviews" class="collapse  show" aria-labelledby="reviews_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.reviews %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No
+                                                    Reviews </small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- notes  -->
+
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark" id="notes_1">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#notes" aria-expanded="true" aria-controls="notes">
+                                                notes ({{ profile.interests.notes | length }})
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="notes" class="collapse show " aria-labelledby="notes_1"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body background-gradient text-dark">
+                                            {% for i in profile.interests.notes %}
+                                                <a target="_blank" href="{{ i.link }}"
+                                                   class="text-dark">{{ i.name|linebreaks }}</a>
+                                            {% empty %}
+                                                <small class="p-1 text-dark font-weight-bold">No
+                                                    Notes </small>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- RELATED END -->
+                    <!-- POSTS START  -->
+                    <div class="row pt-5" id="posts">
+                        <h1 class="text-dark font-weight-bold">Posts</h1>
+                        {% for p in  profile.posts %}
+                            <div class="border rounded-top col-md-12 text-center text-dark">
+                                Post # {{ forloop.counter }}
+                            </div>
+                            <div class="col-md-12 border post-wrapper">
+                                <div class="row">
+                                    <div class="col-md-2 m-0 p-0 custom-center-center">
+
+                                        <img src="{{ p.author_media_directory }}"
+                                             style="height: 60px;width:60px;border-radius: 50%;;" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-5 custom-column-start-start pt-2 text-dark border-left border-right">
+                                        <span> {{ profile.name }}</span>
+                                        <span class="smaller-txt">{{ p.complete_time }}</span>
+                                    </div>
+                                    <div class="col-md-5  m-0 p-0 d-flex flex-column justify-content-around text-dark align-items-center">
+                                        <div class="smaller-txt w-100 border-bottom text-left h-100">
+                                            post_id: {{ p.post_id }}
+                                        </div>
+                                        <div class="smaller-txt w-100 text-left h-100">
+                                            author_id: {{ p.auther_id }}
+                                        </div>
+                                        <div class="smaller-txt w-100 border-top text-left h-100">
+                                            sentiment: {{ p.sentiment | default:"N/A" }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text_heading" style="font-size:20px;">
+                                            Post Text</i>
+                                    </div>
+                                    {% if p.post_text %}
+                                        <div class="col-md-12 text-center text-dark ">
+                                            <p>{{ p.post_text }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-12 text-center text-dark ">
+                                            <p class="alert text-dark">This post has no text</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">Post Pictures
+                                            ({{ p.picture_directory | length }})</i>
+                                    </div>
+                                    {% for x in p.picture_directory %}
+                                        <div class="col-md-12 text-center">
+                                            <img src="{{ x.url }}" class="img-fluid"/>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">Liked By
+                                            ({{ p.reactions.like | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.like %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                        >
+                                            <img src="{{ r.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Reacted
+                                            Loved' By ({{ p.reactions.love | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.love %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Reacted HAHA'
+                                            By ({{ p.reactions.haha | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.haha %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Reacted WOW'
+                                            By ({{ p.reactions.wow | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.wow %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Reacted
+                                            ANGRY' By ({{ p.reactions.angry | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.angry %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Reacted SAD'
+                                            By ({{ p.reactions.sad | length }})</i>
+                                    </div>
+                                    {% for r in p.reactions.sad %}
+                                        <div class="col-md-4 pl-2 border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i class="material-icon text-dark" style="font-size:20px;">'Comments' By
+                                            ({{ p.comments | length }})</i>
+                                    </div>
+                                    {% for r in p.comments %}
+                                        <div class="col-md-3  border m-0 p-0 d-flex flex-row justify-content-start align-items-center "
+                                             style="height:130px;">
+
+                                            <img src="{{ r.media_directory }}" height="40" width="40"
+                                                 class="img-fluid"/>
+                                            <div class="p-2 h-100 d-flex flex-column justify-content-start ">
+                                                        <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                              style="font-size: 14px;">
+                                                            Name: {{ r.name }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            username: {{ r.username }}
+                                                        </span>
+                                                <span class="d-block text-dark w-100 h-100 text-left m-0"
+                                                      style="font-size: 14px;">
+                                                            Id: {{ r.id }}
+                                                        </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 border text-dark custom-center-center">
+                                            {{ r.comment_text }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- POSTS END  -->
+                    <!-- CLOSE ASSOCIATES START -->
+                    <div class="row pt-5" id="close_asscoiates">
+                        <h1 class="text-dark font-weight-bold">Close Associates
+                            ({{ profile.close_associates | length }})</h1>
+                        <div class="col-md-12">
+                            <div class="accordion" id="accordionExample">
+                                {% for c in profile.close_associates %}
+                                    <div class="card">
+                                        <div class="card-header background-gradient-dark" id="custom1">
+
+                                            <img src="{{ c.media_directory }}"
+                                                 style="height: 80px;width:80px;border-radius: 50%;;" class="img-fluid">
+                                            <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                                                    data-target="#_{{ c.id }}" aria-expanded="true"
+                                                    aria-controls="_{{ c.id }}">
+                                                {{ c.name }}
+                                            </button>
+                                        </div>
+                                        <div id="_{{ c.id }}" class="collapse  show" aria-labelledby="custom1"
+                                             data-parent="#accordionExample">
+                                            <div class="card-body background-gradient">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="row text-dark">
+                                                            <div class="col-md-6"> Name:</div>
+                                                            <div class="col-md-6"> {{ c.name }}</div>
+                                                            <div class="col-md-6"> Username:</div>
+                                                            <div class="col-md-6"> {{ c.username }}</div>
+                                                            <div class="col-md-6"> is_friend:</div>
+                                                            <div class="col-md-6"> {{ c.is_friend }}</div>
+                                                            <div class="col-md-6"> post_authors:</div>
+                                                            <div class="col-md-6"> {{ c.post_authors }}</div>
+                                                            <div class="col-md-6"> post_target:</div>
+                                                            <div class="col-md-6"> {{ c.post_target }}</div>
+                                                            <div class="col-md-6"> post_tags:</div>
+                                                            <div class="col-md-6"> {{ c.post_tags }}</div>
+                                                            <div class="col-md-6"> post_comments:</div>
+                                                            <div class="col-md-6"> {{ c.post_comments }}</div>
+                                                            <div class="col-md-6"> post_replies:</div>
+                                                            <div class="col-md-6"> {{ c.post_replies }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row text-dark">
+                                                            <div class="col-md-6"> score:</div>
+                                                            <div class="col-md-6"> {{ c.score }}</div>
+                                                            <div class="col-md-6"> post_mentions:</div>
+                                                            <div class="col-md-6"> {{ c.post_mentions }}</div>
+                                                            <div class="col-md-6"> post_reactions:</div>
+                                                            <div class="col-md-6"> {{ c.post_reactions }}</div>
+                                                            <div class="col-md-6"> mentioned_by_owner:</div>
+                                                            <div class="col-md-6"> {{ c.mentioned_by_owner }}</div>
+                                                            <div class="col-md-6"> mentioned_owner:</div>
+                                                            <div class="col-md-6"> {{ c.mentioned_owner }}</div>
+                                                            <div class="col-md-6"> replied_by_owner:</div>
+                                                            <div class="col-md-6"> {{ c.replied_by_owner }}</div>
+                                                            <div class="col-md-6"> replied_owner:</div>
+                                                            <div class="col-md-6">{{ c.replied_owner }}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CLOSE ASSOCIATES END -->
+                    <!-- CHECKIN START -->
+                    <div class="row pt-5" id="checkins">
+                        <h1 class="text-dark font-weight-bold">check_ins ({{ profile.check_ins | length }})</h1>
+                        <div class="col-md-12">
+                            {% for c in profile.check_ins %}
+                                <div class="card">
+                                    <div class="card-header background-gradient-dark">
+                                        <div class="row">
+                                            <div
+                                                    class="col-md-4 d-flex flex-column justify-content-start align-items-center">
+
+                                                <img src="{{ c.media_directory }}"
+                                                     style="height: 80px;width:80px;border-radius: 50%;;"
+                                                     class="img-fluid">
+                                                <button class="btn btn-link text-dark" type="button"
+                                                        data-toggle="collapse" data-target="#_{{ c.id }}"
+                                                        aria-expanded="true" aria-controls="_{{ c.id }}">
+                                                    {{ c.name }}
+                                                </button>
+                                            </div>
+                                            <div class="col-md-8 d-flex flex-row  justify-content-center align-items-center">
+                                                <div class="row border text-dark w-100" style="border-radius: 10px;">
+                                                    <div class="col-md-4 text-left">Date</div>
+                                                    <div class="col-md-8 text-right">{{ c.details.date }}</div>
+                                                    <div class="col-md-4 text-left">Location</div>
+                                                    <div class="col-md-8 text-right">{{ c.name }}</div>
+                                                    <div class="col-md-4 text-left">View</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- CHECKIN END -->
+
+                </div>
+                <!-- end tab content -->
+            </div>
+        </div>
+    </div>
+</div> <!-- DIV 1 END -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="text/javascript" src="{% static 'Additional_assets/main/js/slim.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        window.print();
+    });
+</script>
+</body>
+</html>
