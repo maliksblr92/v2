@@ -194,15 +194,7 @@ def content_categorization_piechart(modelname):
             elif (modelname == Facebook_Page_Response_TMS):
                 posts = each_target.page_posts
             elif (modelname == Keybase_Response_TMS):
-                posts = []
-                posts_overall = each_target.data
-                for each in posts_overall:
-                    try:
-                        if (each['site'] == "search engine"):
-                            each_post = each['data']
-                            posts = each_post
-                    except:
-                        posts = []
+                posts = each_target.data
             else:
                 posts = each_target.posts
             if (len(posts) != 0):
@@ -465,18 +457,12 @@ def keywords_no_barplot(modelname):
             data = each_target.data
             if (len(data) != 0):
                 for each_data in data:
-                    try:
-                        query = each_data['query']
-                        queries.append(query)
-                    except:
-                        a = 1
+                    query = each_data['query']
+                    queries.append(query)
         d = Counter(queries)
         x = dict(d)
 
     return x
-
-
-import collections, functools, operator
 
 
 def keywords_results_barplot(modelname):
@@ -488,16 +474,26 @@ def keywords_results_barplot(modelname):
             data = each_target.data
             if (len(data) != 0):
                 for each_data in data:
-                    try:
-                        query = each_data['query']
-                        url = each_data['data']
-                        queries_record.append({query: len(url)})
-                    except:
-                        a = 1
-    result = dict(functools.reduce(operator.add,
-                                   map(collections.Counter, queries_record)))
+                    query = each_data['query']
+                    url = each_data['serp_url']
+                    if query not in check:
+                        queries.append({"query": query, "url": [url]})
+                        check.append(query)
+                    else:
+                        for each_q in queries:
+                            if (each_q['query'] == query):
+                                v = each_q['url']
+                                v.append(url)
+        queries_record = []
+        fruits = []
+        counts = []
+        for each in queries:
+            qu = each['query']
+            val = each['url']
+            val_len = len(val)
+            queries_record.append({"query": qu, "count": val_len})
 
-    return result
+    return queries_record
 
 
 def keywords_availability(modelname):
@@ -508,34 +504,26 @@ def keywords_availability(modelname):
         for each_target in modelname.objects:
             data = each_target.data
             if (len(data) != 0):
-                for each_dataa in data:
-                    try:
-                        query = each_dataa['query']
-                        if (each_dataa['site'] == 'search_engines'):
-                            status = ""
+                for each_data in data:
+                    query = each_data['query']
 
-                            data_se = each_dataa['data']
-
-                            for each_data in data_se:
-                                statuss = each_data['status']
-                                if statuss == "200":
-                                    status = 'unblocked'
-                                elif (statuss == "800"):
-                                    status = 'blocked'
-                                else:
-                                    print("200 or 800 not found")
-                                if status:
-                                    if query not in check:
-                                        queries.append({"query": query, "status": [status]})
-                                        check.append(query)
-                                    else:
-                                        for each_q in queries:
-                                            if (each_q['query'] == query):
-                                                v = each_q['status']
-                                                v.append(status)
-                    except:
-                        mnbg = 2
-
+                    status = ""
+                    statuss = each_data['status']
+                    if statuss == "200":
+                        status = 'unblocked'
+                    elif (statuss == "800"):
+                        status = 'blocked'
+                    else:
+                        print("200 or 800 not found")
+                    if status:
+                        if query not in check:
+                            queries.append({"query": query, "status": [status]})
+                            check.append(query)
+                        else:
+                            for each_q in queries:
+                                if (each_q['query'] == query):
+                                    v = each_q['status']
+                                    v.append(status)
         fruits = []
         queries_blocked = []
         queries_unblocked = []

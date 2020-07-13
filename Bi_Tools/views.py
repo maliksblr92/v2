@@ -114,10 +114,10 @@ def keybase_visualization(request,content_type):
             c_chart = Keybase_Response_TMS_visualization.keywords_results()
             d_chart = Keybase_Response_TMS_visualization.no_of_keywords()
 
-            # print(Keybase_Response_TMS_visualization.content_categorization_piechart())
-            # print(Keybase_Response_TMS_visualization.keywords_status_chart())
-            # print(Keybase_Response_TMS_visualization.keywords_results())
-            # print(Keybase_Response_TMS_visualization.no_of_keywords())
+            print(Keybase_Response_TMS_visualization.content_categorization_piechart())
+            print(Keybase_Response_TMS_visualization.keywords_status_chart())
+            print(Keybase_Response_TMS_visualization.keywords_results())
+            print(Keybase_Response_TMS_visualization.no_of_keywords())
 
             dataset_list.append(
                 create_graph_response_keybase(a_chart.keys(), [a_chart.values()], 'pie', 'a_chart', ['Count'],
@@ -134,20 +134,20 @@ def keybase_visualization(request,content_type):
             dataset_list.append(
                 create_graph_response_keybase(labels, [a_dataset, b_dataset], 'bar', 'fa_chart',
                                               ['Blocked', 'Un Blocked'],
-                                              'Blocked and Un Blocked Results'))
+                                              'Number of websites found on keywords'))
 
-            # n0_labels = []
-            # a0_dataset = []
-            #
-            # for data in c_chart:
-            #     n0_labels.append(data['query'])
-            #     a0_dataset.append(data['count'])
+            n0_labels = []
+            a0_dataset = []
 
-            #dataset_list.append(create_graph_response_keybase(c_chart.keys(), [c_chart.values()], 'bar', 'b_chart', ['Count'],
-            #                                                  'Results found on keywords'))
+            for data in c_chart:
+                n0_labels.append(data['query'])
+                a0_dataset.append(data['count'])
+
+            dataset_list.append(create_graph_response_keybase(n0_labels, [a0_dataset], 'bar', 'b_chart', ['Count'],
+                                                              'Results found on keywords'))
 
             dataset_list.append(
-                create_graph_response_keybase(d_chart.keys(), [d_chart.values()], 'bar', 'fb_chart', ['Count'],
+                create_graph_response_keybase(d_chart.keys(), [d_chart.values()], 'polarArea', 'c_chart', ['Count'],
                                               'Results found on keywords'))
 
 

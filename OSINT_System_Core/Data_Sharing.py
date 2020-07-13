@@ -120,21 +120,19 @@ class Data_Share(object):
         # index 0 is always refer to the intell object id
 
         try:
-            alpha_object = self.get_object_by_id(alpha_object_id)
+
             beta_object = self.find_object_by_id(beta_path_list[0])
             del (beta_path_list[0])
             if (self.resolve_intell_reference(beta_object, beta_path_list) is not None):
-                if(not self.gamma_class_ref.objects(Q(alpha_reference=alpha_object) & Q(beta_reference=beta_object) & Q(beta_path=beta_path_list)).__len__() > 0):
-
+                if(not self.gamma_class_ref.objects(Q(beta_reference=beta_object) & Q(beta_path=beta_path_list)).__len__() > 0):
+                    alpha_object = self.get_object_by_id(alpha_object_id)
                     print(alpha_object)
                     km = self.gamma_class_ref(alpha_object, beta_object, beta_path_list).save()
                     return km
-                else:
-                    print('found reference in gama collection')
             else:
                 print('given intells path is not correct attachment unsuccessful ')
         except Exception as e:
-            print('module : {0} , error : {1}'.format(__name__,e))
+            print(e)
             return None
 
     def find_object_by_id(self,object_id):
@@ -241,7 +239,7 @@ class Portfolio_Include(object):
             return Portfolio_Include.ds.create(alpha_object_id, beta_path_list)
 
         except Exception as e:
-            print('module : {0} , error : {1}'.format(__name__,e))
+            print(e)
             return None
 
 class Portfolio_Link(object):

@@ -109,6 +109,8 @@ urlpatterns = [
     path('report/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Report.as_view(), name="dynamic_crawling_report"),
     path('bulk_targets/',Bulk_Targets.as_view(), name="bulk_targets"),
     path('graph/<str:object_gtr_id>/',views.Graph.as_view(), name="graph"),
+    path('graph/<str:object_gtr_id>/',views.Graph.as_view(), name="graph"),
+    
    
  
    

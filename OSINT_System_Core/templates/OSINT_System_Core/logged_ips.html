@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/tso_base.html' %}
+{% extends 'OSINT_System_Core/resp_test.html' %}
 {% load static %}
 {% block page_title %}IP Logger Details{% endblock %}
 {% load osint_custom_tags %}
@@ -8,9 +8,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
 {% endblock %}
-
 {% block smallnavbar %}
 
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">IP LOGGER DETAILS</p>
 {% endblock %}
 {% block belly %}
     <style>
@@ -107,7 +109,6 @@
                 </thead>
                 <tbody>
                 {% for logger in responses reversed %}
-
                     <tr>
                         <th class="text-white font-weight-bold"style="font-size:12px;" scope="row">{{ logger.title|default:"N/A" }}</th>
                         <td class="text-white font-weight-bold"style="font-size:12px;">{{ logger.logged_response.ip_addr|default:"N/A" }}</td>

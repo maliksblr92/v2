@@ -15,7 +15,6 @@ urlpatterns = [
     path('block_url/', views.Block_URL.as_view(),name='block_url'),
     path('block_keybase_url/<str:url>/', views.Block_URL.as_view(),name='block_keybase_url'),
     path('delete_url/<str:url_id>/', views.Delete_URL.as_view(),name='delete_url'),
-    path('keybase_processed_report/<str:GTR_id>/', views.Keybase_Processed_Report.as_view(),name='keybase_processed_report'),
     path('graph/<str:GTR_id>/', views.Graph_Analysis.as_view(),name='graph_analysis'),
 
 ]
