@@ -1,589 +1,356 @@
-{% extends 'OSINT_System_Core/project_base_2.html' %}
+{% extends 'OSINT_System_Core/project_base.html' %}
 {% load static %}
 {% block page_title %}TSO Dashboard{% endblock %}
 <!-- left sidebar -->
 {% block leftsidebar %}
 <div class="col-lg-2 col-sm-12 col-xs-12 ">
-    <div class="row">
-       <div class="col-lg-12 ">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 295 344.5">
-             <defs>
-                <linearGradient id="linear-gradient" x1="0.5" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.35"/>
-                   <stop offset="0.1" stop-color="#4590c1" stop-opacity="0.33"/>
-                   <stop offset="0.23" stop-color="#81abc6" stop-opacity="0.32"/>
-                   <stop offset="0.38" stop-color="#acbeca" stop-opacity="0.31"/>
-                   <stop offset="0.57" stop-color="#c5c9cb" stop-opacity="0.3"/>
-                   <stop offset="1" stop-color="#ccc" stop-opacity="0.3"/>
-                </linearGradient>
-                <linearGradient id="linear-gradient-2" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#b3b3b3" stop-opacity="0.4"/>
-                   <stop offset="0.88" stop-color="#f2f2f2" stop-opacity="0.3"/>
-                </linearGradient>
-                <linearGradient id="linear-gradien" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#000" stop-opacity="0.4"/>
-                   <stop offset="0.88" stop-color="#000" stop-opacity="0.3"/>
-                </linearGradient>
-                <linearGradient id="linear-gradient-3" x1="244.55" y1="189" x2="294.5" y2="189" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.2"/>
-                   <stop offset="0.46" stop-color="#4182ad" stop-opacity="0.29"/>
-                   <stop offset="1" stop-color="#999" stop-opacity="0.4"/>
-                </linearGradient>
-                <linearGradient id="linear-gradient-4" x1="244.55" y1="189" x2="295" y2="189" gradientUnits="userSpaceOnUse">
-                   <stop offset="0.12" stop-color="#e6e6e6" stop-opacity="0.3"/>
-                   <stop offset="0.52" stop-color="#939393" stop-opacity="0.4"/>
-                   <stop offset="1" stop-color="#f2f2f2" stop-opacity="0.5"/>
-                </linearGradient>
-                <linearGradient id="linear-gradient-5" x1="12" y1="189.5" x2="26" y2="189.5" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-6" x1="11.5" y1="189.5" x2="26.5" y2="189.5" xlink:href="#linear-gradient-4"/>
-                <linearGradient id="linear-gradient-7" x1="26" y1="190" x2="40" y2="190" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-8" x1="25.5" y1="190" x2="40.5" y2="190" xlink:href="#linear-gradient-4"/>
-                <linearGradient id="linear-gradient-9" x1="0.5" x2="266.5" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-10" x1="0" x2="267" xlink:href="#linear-gradient-4"/>
-                <linearGradient id="linear-gradient-11" x1="230.55" x2="280.5" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-12" x1="230.55" x2="281" xlink:href="#linear-gradient-4"/>
-                <linearGradient id="linear-gradient-13" x1="99.27" y1="17.25" x2="152.23" y2="17.25" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-14" x1="99.27" y1="17.25" x2="152.23" y2="17.25" xlink:href="#linear-gradient-4"/>
-                <linearGradient id="linear-gradient-15" x1="85.27" y1="17.25" x2="138.23" y2="17.25" xlink:href="#linear-gradient-3"/>
-                <linearGradient id="linear-gradient-16" x1="85.27" y1="17.25" x2="138.23" y2="17.25" xlink:href="#linear-gradient-4"/>
-             </defs>
-             <title>
-                Notification 
-             </title>
-             <g id="Layer_2" data-name="Layer 2" >
-                <g id="SideBar">
-                   <path  d="M124.23,34H.5V7.09A6.59,6.59,0,0,1,7.09.5H85.27a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,124.23,34Z" style="opacity:.75;fill:url(#linear-gradient);stroke:url(#linear-gradient-2);stroke-miterlimit:10"/>
-                   <path d="M294.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L263.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,294.5,47Z" style="fill:url(#linear-gradient-3);stroke:url(#linear-gradient-4);opacity:.4;stroke-miterlimit:10"/>
-                   <rect x="12" y="65" width="14" height="249" style="fill:url(#linear-gradient-5);stroke:url(#linear-gradient-6);opacity:.6;stroke-miterlimit:10"/>
-                   <foreignobject x="12" y="65" width="14" height="249">
-                      <style>
-                         #notitication-box-side-bar-1{
-                         writing-mode: vertical-lr;
-                         font-size:8px;
-                         letter-spacing: 10px;
-                         }
-                      </style>
-                      <div class=" text-white h-100 w-100 font-weight-bold d-flex justify-content-center "id="notitication-box-side-bar-1">
-                         NOTIFICATION
-                      </div>
-                   </foreignobject>
-                   <!--  -->
-                   <!--  -->
-                   <rect x="26" y="65.5" width="14" height="249" style="fill:url(#linear-gradient-7);stroke:url(#linear-gradient-8);opacity:.4;stroke-miterlimit:10"/>
-                   <foreignobject  x="26" y="65.5" width="14" height="249">
-                      <style>
-                         #notitication-box-side-bar-2{
-                         writing-mode: vertical-lr;
-                         font-size:8px;
-                         letter-spacing: 10px;
-                         }
-                      </style>
-                      <div class=" text-white h-100 w-100 font-weight-bold d-flex justify-content-center  " id="notitication-box-side-bar-2">
-                         NOTIFICATION
-                      </div>
-                   </foreignobject>
-                   <path d="M253.52,34H.5V337.41A6.59,6.59,0,0,0,7.09,344H230.55a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47A13,13,0,0,0,253.52,34Zm-21,240.27a6.58,6.58,0,0,1-1.93,4.66l-33.14,33.14a6.58,6.58,0,0,1-4.66,1.93H12V65H225.91a6.59,6.59,0,0,1,6.59,6.59Z" style="opacity:.8;fill:url(#linear-gradient-9);stroke:url(#linear-gradient-10);stroke-miterlimit:10"/>
-                   <path d="M280.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L249.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,280.5,47Z" style="fill:url(#linear-gradient-11);stroke:url(#linear-gradient-12);opacity:.6;stroke-miterlimit:10" />
-                   <path d="M152.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L103.93,2.43A6.58,6.58,0,0,0,99.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,152.23,34Z" style="fill:url(#linear-gradient-13);stroke:url(#linear-gradient-14);opacity:.4;stroke-miterlimit:10"/>
-                   <path d="M138.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L89.93,2.43A6.58,6.58,0,0,0,85.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,138.23,34Z" style="fill:url(#linear-gradient-15);stroke:url(#linear-gradient-16);opacity:.6;stroke-miterlimit:10;"/>
-                </g>
-             </g>
-             <g>
-                <rect id="" style="fill:url(#fff)" x="41" y="65" width="192" height="215" />
-                <foreignobject x="40" y="65" width="192" height="248">
-                   <style>
-                      #notification-box{
-                      font-size: 12px;
-                      padding: 5px;
-                      height: 87%;;
-                      }
-                      #notification-box::-webkit-scrollbar-track {
-                      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-                      background-color: #f5f5f5;
-                      border-radius: 5px;
-                      }
-                      #notification-box::-webkit-scrollbar {
-                      width: 3px;
-                      background-color: #f5f5f5;
-                      border-radius: 5px;
-                      }
-                      #notification-box::-webkit-scrollbar-thumb {
-                      background-color: #3366ff;
-                      border-radius: 10px;
-                      background-image: -webkit-linear-gradient(
-                      0deg,
-                      rgba(255, 255, 255, 0.5) 25%,
-                      transparent 25%,
-                      transparent 50%,
-                      rgba(255, 255, 255, 0.5) 50%,
-                      rgba(255, 255, 255, 0.5) 75%,
-                      transparent 75%,
-                      transparent
-                      );
-                      }
-                   </style>
-                   <div id="notification-box" class="w-100 text-white overflow-auto ">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed odit iure id fugiat dolor error dolorem inventore earum deleniti nobis. Quidem reiciendis vero minima nobis voluptates magnam iusto soluta aspernatur.
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis dicta molestiae recusandae quibusdam, laboriosam iste impedit suscipit consequuntur et quidem ipsum ab debitis odit repudiandae ut. Eaque doloremque facere ipsum!
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis minus, distinctio rerum nemo alias earum similique, dolor eius vero praesentium inventore asperiores doloremque consectetur? Consectetur eius aliquam cumque ad perspiciatis.
-                   </div>
-                </foreignobject>
-             </g>
-          </svg>
-       </div>
-    </div>
-    <div class="row mt-5  ">
-       <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center mt-5 ">
-          <!-- first button left  -->
-          <!-- <div class="left_buttons m-2">
-             <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
-                <div class="  w-25 custom_center   h-100 ">
-                   <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>
-                </div>
-                <div class="  w-25 custom_center  h-100 ">
-                   <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "
-                      style="font-size:1vw;">Targets</a>
-                </div>
-             </div>
-             </div> -->
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03">
-             <defs>
-                <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
-                <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
-                   <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
-                   <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
-                </linearGradient>
-             </defs>
-             <title>Targets</title>
-             <g id="Layer_2" data-name="Layer 2">
-                <g id="Side_Buttons" data-name="Side Buttons">
-                   <g class="cls-1">
-                      <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
-                      <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
-                      <foreignobject  x="10" y="7" width="60" height="60">
-                         <style>
-                            #left-icon-image_1{
-                            height: 85%;
-                            width: 76%;;
-                            }
-                         </style>
-                         <div class=" text-white  " >
-                            <img src="{% static 'images/fetch_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_1"/>
-                         </div>
-                      </foreignobject>
-                      <!-- 
-                         -->
-                      <foreignobject  x="80" y="22" width="70" height="60">
-                         <style>
-                         </style>
-                         <div class=" text-white font-weight-bold  " >
-                            <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "
-                               style="font-size:1vw;">Targets</a>
-                         </div>
-                      </foreignobject>
-                   </g>
-                </g>
-             </g>
-          </svg>
-          <!-- end first button left  -->
-          <!-- first button left  -->
-          <!-- <div class="left_buttons m-2">
-             <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
-                <div class="  w-25 custom_center  h-100 ">
-                   <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>
-                </div>
-                <div class="  w-25 custom_center  h-100 ">
-                   <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "
-                      style="font-size:1vw;">Timeline</a>
-                </div>
-             </div>
-             </div> -->
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03">
-             <defs>
-                <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
-                <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
-                   <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
-                   <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
-                </linearGradient>
-             </defs>
-             <title>Timeline</title>
-             <g id="Layer_2" data-name="Layer 2">
-                <g id="Side_Buttons" data-name="Side Buttons">
-                   <g class="cls-1">
-                      <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
-                      <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
-                      <foreignobject  x="10" y="7" width="60" height="60">
-                         <style>
-                            #left-icon-image_2{
-                            height: 85%;
-                            width: 76%;;
-                            }
-                         </style>
-                         <div class=" text-white  " >
-                            <img src="{% static 'images/analyze_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_2"/>
-                         </div>
-                      </foreignobject>
-                      <!-- 
-                         -->
-                      <foreignobject  x="80" y="22" width="70" height="60">
-                         <style>
-                         </style>
-                         <div class=" text-white font-weight-bold  " >
-                            <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "
-                               style="font-size:1vw;">Timeline</a>
-                         </div>
-                      </foreignobject>
-                   </g>
-                </g>
-             </g>
-          </svg>
-          <!-- end first button left  -->
-          <!-- first button left  -->
-          <!-- <div class="left_buttons m-2">
-             <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
-                <div class="  w-25 custom_center   h-100 ">
-                   <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>
-                </div>
-                <div class="  w-25 custom_center   h-100 ">
-                   <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>
-                </div>
-             </div>
-             </div> -->
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03">
-             <defs>
-                <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
-                <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
-                   <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
-                   <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
-                </linearGradient>
-             </defs>
-             <title>Tools</title>
-             <g id="Layer_2" data-name="Layer 2">
-                <g id="Side_Buttons" data-name="Side Buttons">
-                   <g class="cls-1">
-                      <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
-                      <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
-                      <foreignobject  x="10" y="7" width="60" height="60">
-                         <style>
-                            #left-icon-image_3{
-                            height: 85%;
-                            width: 76%;;
-                            }
-                         </style>
-                         <div class=" text-white  " >
-                            <img src="{% static 'images/search_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_3"/>
-                         </div>
-                      </foreignobject>
-                      <!-- 
-                         -->
-                      <foreignobject  x="80" y="22" width="70" height="60">
-                         <style>
-                         </style>
-                         <div class=" text-white font-weight-bold  " >
-                            <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>
-                         </div>
-                      </foreignobject>
-                   </g>
-                </g>
-             </g>
-          </svg>
-          <!-- end first button left  -->
-          <!-- first button left  -->
-          <!-- <div class="left_buttons m-2">
-             <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
-                <div class="  w-25 custom_center  h-100 ">
-                   <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>
-                </div>
-                <div class="  w-25 custom_center  h-100 ">
-                   <a href="{% url 'OSINT_System_Core:topNews' %}" class=" secondnavitems ">Top News</a>
-                </div>
-             </div>
-             </div> -->
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03">
-             <defs>
-                <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
-                <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
-                   <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
-                   <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
-                   <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
-                </linearGradient>
-             </defs>
-             <title>Top News</title>
-             <g id="Layer_2" data-name="Layer 2">
-                <g id="Side_Buttons" data-name="Side Buttons">
-                   <g class="cls-1">
-                      <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
-                      <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
-                      <foreignobject  x="10" y="7" width="60" height="60">
-                         <style>
-                            #left-icon-image_4{
-                            height: 85%;
-                            width: 76%;;
-                            }
-                         </style>
-                         <div class=" text-white  " >
-                            <img src="{% static 'images/generate_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_4"/>
-                         </div>
-                      </foreignobject>
-                      <!-- 
-                         -->
-                      <foreignobject  x="80" y="22" width="70" height="60">
-                         <style>
-                         </style>
-                         <div class=" text-white font-weight-bold  " >
-                            <a href="{% url 'OSINT_System_Core:topNews' %}" class=" text-white secondnavitems ">Top News</a>
-                         </div>
-                      </foreignobject>
-                   </g>
-                </g>
-             </g>
-          </svg>
-          <!-- end first button left  -->
-         
-       </div>
-    </div>
- </div>
- <!-- left sidebar script -->
- <!-- end of left sidebar script -->
+   <div class="row">
+      <div class="col-lg-12 ">
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 295 344.5">
+            <defs>
+               <linearGradient id="linear-gradient" x1="0.5" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.35"/>
+                  <stop offset="0.1" stop-color="#4590c1" stop-opacity="0.33"/>
+                  <stop offset="0.23" stop-color="#81abc6" stop-opacity="0.32"/>
+                  <stop offset="0.38" stop-color="#acbeca" stop-opacity="0.31"/>
+                  <stop offset="0.57" stop-color="#c5c9cb" stop-opacity="0.3"/>
+                  <stop offset="1" stop-color="#ccc" stop-opacity="0.3"/>
+               </linearGradient>
+               <linearGradient id="linear-gradient-2" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#b3b3b3" stop-opacity="0.4"/>
+                  <stop offset="0.88" stop-color="#f2f2f2" stop-opacity="0.3"/>
+               </linearGradient>
+               <linearGradient id="linear-gradien" y1="17.25" x2="124.23" y2="17.25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#000" stop-opacity="0.4"/>
+                  <stop offset="0.88" stop-color="#000" stop-opacity="0.3"/>
+               </linearGradient>
+               <linearGradient id="linear-gradient-3" x1="244.55" y1="189" x2="294.5" y2="189" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.2"/>
+                  <stop offset="0.46" stop-color="#4182ad" stop-opacity="0.29"/>
+                  <stop offset="1" stop-color="#999" stop-opacity="0.4"/>
+               </linearGradient>
+               <linearGradient id="linear-gradient-4" x1="244.55" y1="189" x2="295" y2="189" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.12" stop-color="#e6e6e6" stop-opacity="0.3"/>
+                  <stop offset="0.52" stop-color="#939393" stop-opacity="0.4"/>
+                  <stop offset="1" stop-color="#f2f2f2" stop-opacity="0.5"/>
+               </linearGradient>
+               <linearGradient id="linear-gradient-5" x1="12" y1="189.5" x2="26" y2="189.5" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-6" x1="11.5" y1="189.5" x2="26.5" y2="189.5" xlink:href="#linear-gradient-4"/>
+               <linearGradient id="linear-gradient-7" x1="26" y1="190" x2="40" y2="190" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-8" x1="25.5" y1="190" x2="40.5" y2="190" xlink:href="#linear-gradient-4"/>
+               <linearGradient id="linear-gradient-9" x1="0.5" x2="266.5" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-10" x1="0" x2="267" xlink:href="#linear-gradient-4"/>
+               <linearGradient id="linear-gradient-11" x1="230.55" x2="280.5" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-12" x1="230.55" x2="281" xlink:href="#linear-gradient-4"/>
+               <linearGradient id="linear-gradient-13" x1="99.27" y1="17.25" x2="152.23" y2="17.25" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-14" x1="99.27" y1="17.25" x2="152.23" y2="17.25" xlink:href="#linear-gradient-4"/>
+               <linearGradient id="linear-gradient-15" x1="85.27" y1="17.25" x2="138.23" y2="17.25" xlink:href="#linear-gradient-3"/>
+               <linearGradient id="linear-gradient-16" x1="85.27" y1="17.25" x2="138.23" y2="17.25" xlink:href="#linear-gradient-4"/>
+            </defs>
+            <title>
+               Notification 
+            </title>
+            <g id="Layer_2" data-name="Layer 2" >
+               <g id="SideBar">
+                  <path  d="M124.23,34H.5V7.09A6.59,6.59,0,0,1,7.09.5H85.27a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,124.23,34Z" style="opacity:.75;fill:url(#linear-gradient);stroke:url(#linear-gradient-2);stroke-miterlimit:10"/>
+                  <path d="M294.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L263.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,294.5,47Z" style="fill:url(#linear-gradient-3);stroke:url(#linear-gradient-4);opacity:.4;stroke-miterlimit:10"/>
+                  <rect x="12" y="65" width="14" height="249" style="fill:url(#linear-gradient-5);stroke:url(#linear-gradient-6);opacity:.6;stroke-miterlimit:10"/>
+                  <foreignobject x="12" y="65" width="14" height="249">
+                     <style>
+                        #notitication-box-side-bar-1{
+                        writing-mode: vertical-lr;
+                        font-size:8px;
+                        letter-spacing: 10px;
+                        }
+                     </style>
+                     <div class=" text-white h-100 w-100 font-weight-bold d-flex justify-content-center "id="notitication-box-side-bar-1">
+                        NOTIFICATION
+                     </div>
+                  </foreignobject>
+                  <!--  -->
+                  <!--  -->
+                  <rect x="26" y="65.5" width="14" height="249" style="fill:url(#linear-gradient-7);stroke:url(#linear-gradient-8);opacity:.4;stroke-miterlimit:10"/>
+                  <foreignobject  x="26" y="65.5" width="14" height="249">
+                     <style>
+                        #notitication-box-side-bar-2{
+                        writing-mode: vertical-lr;
+                        font-size:8px;
+                        letter-spacing: 10px;
+                        }
+                     </style>
+                     <div class=" text-white h-100 w-100 font-weight-bold d-flex justify-content-center  " id="notitication-box-side-bar-2">
+                        NOTIFICATION
+                     </div>
+                  </foreignobject>
+                  <path d="M253.52,34H.5V337.41A6.59,6.59,0,0,0,7.09,344H230.55a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47A13,13,0,0,0,253.52,34Zm-21,240.27a6.58,6.58,0,0,1-1.93,4.66l-33.14,33.14a6.58,6.58,0,0,1-4.66,1.93H12V65H225.91a6.59,6.59,0,0,1,6.59,6.59Z" style="opacity:.8;fill:url(#linear-gradient-9);stroke:url(#linear-gradient-10);stroke-miterlimit:10"/>
+                  <path d="M280.5,47V304.49a6.63,6.63,0,0,1-1.67,4.39L249.47,341.8a6.59,6.59,0,0,1-4.92,2.2h-14a6.59,6.59,0,0,0,4.92-2.2l29.36-32.92a6.63,6.63,0,0,0,1.67-4.39V47a13,13,0,0,0-13-13h14A13,13,0,0,1,280.5,47Z" style="fill:url(#linear-gradient-11);stroke:url(#linear-gradient-12);opacity:.6;stroke-miterlimit:10" />
+                  <path d="M152.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L103.93,2.43A6.58,6.58,0,0,0,99.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,152.23,34Z" style="fill:url(#linear-gradient-13);stroke:url(#linear-gradient-14);opacity:.4;stroke-miterlimit:10"/>
+                  <path d="M138.23,34h-14a6.58,6.58,0,0,1-4.66-1.93L89.93,2.43A6.58,6.58,0,0,0,85.27.5h14a6.58,6.58,0,0,1,4.66,1.93l29.64,29.64A6.58,6.58,0,0,0,138.23,34Z" style="fill:url(#linear-gradient-15);stroke:url(#linear-gradient-16);opacity:.6;stroke-miterlimit:10;"/>
+               </g>
+            </g>
+            <g>
+               <rect id="" style="fill:url(#fff)" x="41" y="65" width="192" height="215" />
+               <foreignobject x="40" y="65" width="192" height="248">
+                  <style>
+                     #notification-box{
+                     font-size: 12px;
+                     padding: 5px;
+                     height: 87%;;
+                     }
+                     #notification-box::-webkit-scrollbar-track {
+                     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                     background-color: #f5f5f5;
+                     border-radius: 5px;
+                     }
+                     #notification-box::-webkit-scrollbar {
+                     width: 3px;
+                     background-color: #f5f5f5;
+                     border-radius: 5px;
+                     }
+                     #notification-box::-webkit-scrollbar-thumb {
+                     background-color: #3366ff;
+                     border-radius: 10px;
+                     background-image: -webkit-linear-gradient(
+                     0deg,
+                     rgba(255, 255, 255, 0.5) 25%,
+                     transparent 25%,
+                     transparent 50%,
+                     rgba(255, 255, 255, 0.5) 50%,
+                     rgba(255, 255, 255, 0.5) 75%,
+                     transparent 75%,
+                     transparent
+                     );
+                     }
+                  </style>
+                  <div id="notification-box" class="w-100 text-white overflow-auto ">
+
+                  </div>
+               </foreignobject>
+            </g>
+         </svg>
+      </div>
+   </div>
+   <div class="row mt-5  ">
+      <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center mt-5 ">
+         <!-- first button left  -->
+         <!-- <div class="left_buttons m-2">
+            <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+               <div class="  w-25 custom_center   h-100 ">
+                  <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>
+               </div>
+               <div class="  w-25 custom_center  h-100 ">
+                  <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "
+                     style="font-size:1vw;">Targets</a>
+               </div>
+            </div>
+            </div> -->
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03" class="mt-3">
+            <defs>
+               <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
+               <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
+                  <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
+                  <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
+               </linearGradient>
+            </defs>
+            <title>Targets</title>
+            <g id="Layer_2" data-name="Layer 2">
+               <g id="Side_Buttons" data-name="Side Buttons">
+                  <g class="cls-1">
+                     <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
+                     <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
+                     <foreignobject  x="10" y="7" width="60" height="60">
+                        <style>
+                           #left-icon-image_1{
+                           height: 85%;
+                           width: 76%;;
+                           }
+                        </style>
+                        <div class=" text-white  " >
+                           <img src="{% static 'images/fetch_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_1"/>
+                        </div>
+                     </foreignobject>
+                     <!-- 
+                        -->
+                     <foreignobject  x="80" y="22" width="70" height="60">
+                        <style>
+                        </style>
+                        <div class=" text-white font-weight-bold  " >
+                           <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "
+                              style="font-size:1vw;">Targets</a>
+                        </div>
+                     </foreignobject>
+                  </g>
+               </g>
+            </g>
+         </svg>
+         <!-- end first button left  -->
+         <!-- first button left  -->
+         <!-- <div class="left_buttons m-2">
+            <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+               <div class="  w-25 custom_center  h-100 ">
+                  <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>
+               </div>
+               <div class="  w-25 custom_center  h-100 ">
+                  <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "
+                     style="font-size:1vw;">Timeline</a>
+               </div>
+            </div>
+            </div> -->
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03" class="mt-3">
+            <defs>
+               <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
+               <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
+                  <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
+                  <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
+               </linearGradient>
+            </defs>
+            <title>Timeline</title>
+            <g id="Layer_2" data-name="Layer 2">
+               <g id="Side_Buttons" data-name="Side Buttons">
+                  <g class="cls-1">
+                     <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
+                     <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
+                     <foreignobject  x="10" y="7" width="60" height="60">
+                        <style>
+                           #left-icon-image_2{
+                           height: 85%;
+                           width: 76%;;
+                           }
+                        </style>
+                        <div class=" text-white  " >
+                           <img src="{% static 'images/analyze_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_2"/>
+                        </div>
+                     </foreignobject>
+                     <!-- 
+                        -->
+                     <foreignobject  x="80" y="22" width="70" height="60">
+                        <style>
+                        </style>
+                        <div class=" text-white font-weight-bold  " >
+                           <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "
+                              style="font-size:1vw;">Timeline</a>
+                        </div>
+                     </foreignobject>
+                  </g>
+               </g>
+            </g>
+         </svg>
+         <!-- end first button left  -->
+         <!-- first button left  -->
+         <!-- <div class="left_buttons m-2">
+            <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+               <div class="  w-25 custom_center   h-100 ">
+                  <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>
+               </div>
+               <div class="  w-25 custom_center   h-100 ">
+                  <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>
+               </div>
+            </div>
+            </div> -->
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03" class="mt-3">
+            <defs>
+               <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
+               <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
+                  <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
+                  <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
+               </linearGradient>
+            </defs>
+            <title>Tools</title>
+            <g id="Layer_2" data-name="Layer 2">
+               <g id="Side_Buttons" data-name="Side Buttons">
+                  <g class="cls-1">
+                     <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
+                     <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
+                     <foreignobject  x="10" y="7" width="60" height="60">
+                        <style>
+                           #left-icon-image_3{
+                           height: 85%;
+                           width: 76%;;
+                           }
+                        </style>
+                        <div class=" text-white  " >
+                           <img src="{% static 'images/search_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_3"/>
+                        </div>
+                     </foreignobject>
+                     <!-- 
+                        -->
+                     <foreignobject  x="80" y="22" width="70" height="60">
+                        <style>
+                        </style>
+                        <div class=" text-white font-weight-bold  " >
+                           <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>
+                        </div>
+                     </foreignobject>
+                  </g>
+               </g>
+            </g>
+         </svg>
+         <!-- end first button left  -->
+         <!-- first button left  -->
+         <!-- <div class="left_buttons m-2">
+            <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">
+               <div class="  w-25 custom_center  h-100 ">
+                  <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>
+               </div>
+               <div class="  w-25 custom_center  h-100 ">
+                  <a href="{% url 'OSINT_System_Core:topNews' %}" class=" secondnavitems ">Top News</a>
+               </div>
+            </div>
+            </div> -->
+         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256.11 78.03" class="mt-3">
+            <defs>
+               <style>.cls-1{opacity:0.43;}.cls-2{fill:url(#linear-gradient);}</style>
+               <linearGradient id="linear-gradient" x1="128.05" y1="77.53" x2="128.05" y2="0.5" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#0071bc" stop-opacity="0.4"/>
+                  <stop offset="0.32" stop-color="#2c7cb2" stop-opacity="0.46"/>
+                  <stop offset="1" stop-color="#999" stop-opacity="0.6"/>
+               </linearGradient>
+            </defs>
+            <title>Top News</title>
+            <g id="Layer_2" data-name="Layer 2">
+               <g id="Side_Buttons" data-name="Side Buttons">
+                  <g class="cls-1">
+                     <path class="cls-2" d="M255.61,50.76V77.53H185.93l-10.75-9.28a5.75,5.75,0,0,0-3.74-1.34H5.78c-2.91,0-5.28-2-5.28-4.56V5.06C.5,2.55,2.87.5,5.78.5H148.55a5.73,5.73,0,0,1,3.74,1.34l49.83,43a5.75,5.75,0,0,0,3.75,1.34h44.45C253.24,46.2,255.61,48.24,255.61,50.76Z"/>
+                     <image width="257" height="79" transform="translate(-0.39 -0.42)" xlink:href="data:image/png;base64,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"/>
+                     <foreignobject  x="10" y="7" width="60" height="60">
+                        <style>
+                           #left-icon-image_4{
+                           height: 85%;
+                           width: 76%;;
+                           }
+                        </style>
+                        <div class=" text-white  " >
+                           <img src="{% static 'images/generate_icon.svg' %}" class="text-white left_buttons_icons" id="left-icon-image_4"/>
+                        </div>
+                     </foreignobject>
+                     <!-- 
+                        -->
+                     <foreignobject  x="80" y="22" width="70" height="60">
+                        <style>
+                        </style>
+                        <div class=" text-white font-weight-bold  " >
+                           <a href="{% url 'OSINT_System_Core:topNews' %}" class=" text-white secondnavitems ">Top News</a>
+                        </div>
+                     </foreignobject>
+                  </g>
+               </g>
+            </g>
+         </svg>
+         <!-- end first button left  -->
+        
+      </div>
+   </div>
+</div>
+<!-- left sidebar script -->
+<!-- end of left sidebar script -->
 {% endblock %}
-{#{% block leftsidebar %}#}
-{#    <div class="col-lg-2 col-sm-12 col-xs-12 ">#}
-{#        <div class="row">#}
-{#            <div class="col-lg-12 ">#}
-{#                <!-- start of bars -->#}
-{##}
-{#                <div class="left_nav text-white">#}
-{#                    <div class="" id="notification-box">#}
-{##}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- end of bars -->#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#        <div class="row mt-4  ">#}
-{#            <div class="col-lg-12 pt-3 pb-3">#}
-{#                <!-- first button left  -->#}
-{#                <div class="left_buttons m-2">#}
-{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
-{#                        <div class="  w-25 custom_center   h-100 ">#}
-{#                            <img src="{% static 'images/fetch_icon.svg' %}" class="left_buttons_icons"/>#}
-{#                        </div>#}
-{##}
-{#                        <div class="  w-25 custom_center  h-100 ">#}
-{#                            <a href="{% url 'Target_Management_System:tms_targetscreated' %}" class=" secondnavitems "#}
-{#                               style="font-size:1vw;">Targets</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- end first button left  -->#}
-{##}
-{#                <!-- first button left  -->#}
-{#                <div class="left_buttons m-2">#}
-{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
-{#                        <div class="  w-25 custom_center  h-100 ">#}
-{#                            <img src="{% static 'images/analyze_icon.svg' %}" class="left_buttons_icons"/>#}
-{#                        </div>#}
-{##}
-{#                        <div class="  w-25 custom_center  h-100 ">#}
-{#                            <a href="{% url 'Target_Management_System:timeline' %}" class=" secondnavitems "#}
-{#                               style="font-size:1vw;">Timeline</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- end first button left  -->#}
-{##}
-{#                <!-- first button left  -->#}
-{#                <div class="left_buttons m-2">#}
-{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
-{#                        <div class="  w-25 custom_center   h-100 ">#}
-{#                            <img src="{% static 'images/search_icon.svg' %}" class="left_buttons_icons"/>#}
-{#                        </div>#}
-{##}
-{#                        <div class="  w-25 custom_center   h-100 ">#}
-{#                            <a href="{% url 'Data_Processing_Unit:index' %}" class=" secondnavitems ">Tools</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- end first button left  -->#}
-{##}
-{#                <!-- first button left  -->#}
-{#                <div class="left_buttons m-2">#}
-{#                    <div class="d-flex flex-row justify-content-lg-start align-items-center  left_buttons_wrapper">#}
-{#                        <div class="  w-25 custom_center  h-100 ">#}
-{#                            <img src="{% static 'images/generate_icon.svg' %}" class="left_buttons_icons"/>#}
-{#                        </div>#}
-{##}
-{#                        <div class="  w-25 custom_center  h-100 ">#}
-{#                            <a href="{% url 'OSINT_System_Core:topNews' %}" class=" secondnavitems ">Top News</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- end first button left  -->#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <!-- left sidebar script -->#}
-{##}
-{#    <!-- end of left sidebar script -->#}
-{#{% endblock %}#}
 <!-- end left sidebar -->
 {% block belly %} {% endblock %}
 <!-- right sidebar -->
-{#{% block rightsidebar %}#}
-{#    <div class="col-lg-2 custom_div_3 ">#}
-{#        <!-- row 1 start -->#}
-{#        <div class="row ">#}
-{#            <div class="col-lg-12 w-100">#}
-{#                <div class="d-flex flex-column  w-100 justify-content-center align-items-center input_wrapper ">#}
-{#                    <input class="form-control input_rightside" placeholder="Enter Name Here"/>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <!-- row 1 end -->#}
-{##}
-{#        <!-- start row 2 -->#}
-{#        <div class="row ">#}
-{#            <div class="col-lg-12 w-100 ">#}
-{#                <div class="d-flex flex-row  w-100 justify-content-start align-items-center target_mark_parent">#}
-{#                    <div class="text-white  target_mark_text">#}
-{#                        <div class="h-100 w-100 text-white w-100 h-100 p-1  text-center "#}
-{#                             style="font-size:10px;overflow:hidden">#}
-{#                            <p clas class="font-weight-bold m-0 p-0 ">Logged-User</p>#}
-{#                            <a class="badge mt-1 text-white" href="/core/tsodash" target="_blank"#}
-{#                               style="font-size:12px"><i class="fas fa-user text-white mr-1"#}
-{#                                                         style="color: #1F79B4 !important;"></i>{{ request.user.username }}#}
-{#                            </a>#}
-{#                            <a href="/accounts/logout/" class="badge mt-1 text-white" style="font-size:12px"><i#}
-{#                                    class="fas fa-sign-out-alt text-white mr-1" style="color: #1F79B4 !important;"></i>Logout</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="  ml-2  target_mark_icon">#}
-{#                        <img src="{% static 'images/target_mark.svg' %}" height="60" width="60"/>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#        <!-- start row 3 -->#}
-{#        <div class="row mt-2">#}
-{#            <div class="col-lg-12 ">#}
-{#                <div class="d-flex flex-row   w-100 justify-content-start align-items-center globe_wrapper ">#}
-{#                    <div class="text-white   right_globe_icon ">#}
-{#                        <div class="h-100 w-100  text-white w-100 h-100 p-1 custom_center " style="font-size:10px;">#}
-{#                            <img src="{% static 'images/glob_icon.svg' %}" class="" height="40" width="40"/>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class=" text-white  globe_icon_text_wrapper">#}
-{#                        <div class="h-100 w-100     text-white w-100 h-100  p-2 globe_icon_text">#}
-{#                            No object selected#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <!-- end row 3 -->#}
-{##}
-{#        <!-- start row 4 -->#}
-{#        <div class="row mt-2">#}
-{#            <div class="col-lg-12 ">#}
-{#                <div class="d-flex flex-row    w-100 justify-content-center align-items-center custom_progress_wrapper ">#}
-{#                    <!-- <div class="progress ">#}
-{#                      <div class="progress-bar progress-bar-secondary custom_progress" role="progressbar" aria-valuenow="60"#}
-{#                        aria-valuemin="0" aria-valuemax="100">#}
-{#                        60% Complete (warning)#}
-{#                      </div>#}
-{#                    </div> -->#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <!-- start of row 5 -->#}
-{#        <div class="row  m-0 p-0  mt-1">#}
-{#            <div class="col-lg-12  m-0 p-0 custom_center alert_1">#}
-{#                <div class="alert_1_wrapper m-0 p-0 ">#}
-{#                    <div class="text-danger font-weight-bold    alert_1_text_header ">#}
-{#                        Alerts:#}
-{#                        <div class="text-white  alert_1_text_wrapper  " id="alert-box" style="overflow-y:auto;">#}
-{#                            new_alert#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#        <!-- end row 5 -->#}
-{##}
-{#        <!-- start of row 5 -->#}
-{#        <div class="row " style="margin-top:-5px;">#}
-{#            <div class="col-lg-12  m-0 p-0 alert_2">#}
-{#                <div class=" alert_2_wrapper h-100  ml-auto mr-auto">#}
-{#                    <div class="text-danger font-weight-bold  alert_2_text_header  ">#}
-{#                        <span class="alert-2_text"> Tools:</span>#}
-{#                        <div class="text-white  alert_2_text_wrapper  p-1" id="prev-alert">#}
-{#                            <div class="">#}
-{#                                <p class="mt-0"><a href="{% url 'Keybase_Management_System:block_url' %}"#}
-{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>Blocked URLs</a></p>#}
-{#                                <p class="mt-0"><a href="/core/periodic_target" target="_blank"#}
-{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>Periodic_Target</a></p>#}
-{#                                <p class="mt-0"><a href="/core/newsmonitoring" target="_blank"#}
-{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>News</a></p>#}
-{#                                <p class="mt-0"><a href="{% url 'OSINT_System_Core:logged_ips' %}" target="_blank"#}
-{#                                                   class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>Ip Logger</a></p>#}
-{#                                <p class="mt-0"><a href="{% url 'Target_Management_System:bulk_targets' %}"#}
-{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>Bulk Targets</a></p>#}
-{##}
-{#                                <p class="mt-0"><a href="{% url 'Data_Processing_Unit:response_changes_view' %}"#}
-{#                                                   target="_blank" class="badge mt-1 text-white" style="font-size:13px"><i#}
-{#                                        class="fas fa-hand-pointer text-white mr-1"#}
-{#                                        style="color: #1F79B4 !important;"></i>Detected Changed</a></p>#}
-{##}
-{##}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <!-- end row 5 -->#}
-{##}
-{#    <!-- start of rigt sidebar script -->#}
-{##}
-{#    <script>#}
-{#        /*#}
-{#        // jquery ready function#}
-{#        document.addEventListener("DOMContentLoaded", function () {#}
-{#          let rightRES = new ReconnectingEventSource("/events/");#}
-{#          rightRES.addEventListener("alert", event => {#}
-{#            const alert_data = JSON.parse(event.data);#}
-{#            console.log(alert_data);#}
-{#            const alert1 = $('#new-alert')#}
-{#            const alert2 = $('#prev-alert')#}
-{#            alert1.text(alert_data['new'])#}
-{#            alert2.text(alert_data['prev1'])#}
-{#          });#}
-{#        }); // end of jquery ready#}
-{#         */#}
-{##}
-{#    </script>#}
-{##}
-{#    <!-- end of right sidebar script -->#}
-{#{% endblock %}#}
 {% block rightsidebar %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -735,8 +502,7 @@
                      <span class="text-danger font-weight-bold "id="alert_1">SYSTEM ALERTS</span>
                   </div>
                   <div class="col-md-12 text-left text-white  overflow-auto " id="alert-div_1">
-                     <p class="h-100  p-1"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam nemo sed in saepe reiciendis aspernatur temporibus eos perferendis, ullam accusantium laudantium id possimus odit repellat earum itaque vel, iste similique.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit quis doloremque nam veritatis voluptas labore nemo animi laboriosam officia modi? Obcaecati, tempora. Ullam, aut voluptas dolor placeat harum temporibus minus?
+                     <p class="h-100  p-1">
                      </p>
                   </div>
                </div>
