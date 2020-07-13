@@ -232,70 +232,76 @@
                     </div>
                     {% if response and query_type == 'image_reverse_lookup' %}
 
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 custom_background">
-                                    <p class="text-uppercase custom_card_title">ARTICLE LINKS</p>
-                                </div>
-                                <div class="card-body">
-                                    {% for i in  response.data.article_links %}
-                                        <div class="row  ">
-                                            <div class="col-md-2">
-                                                <span class="badge custom_bagde">Title : </span>
-                                            </div>
-                                            <div class="col-md-10 text_paragraph"
-                                                 style="font-size:13px;">
-                                                {{ i.title }}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <span class="badge custom_bagde">View / Url : </span>
-                                            </div>
-                                            <div class="col-md-10 text_paragraph"
-                                                 style="font-size:13px;">
-                                                {{ i.url }}<a href="{{ i.url }}"
-                                                              class="badge custom_bagde float-right mr-2"
-                                                              target="_blank"><i
-                                                    class="fa fa-eye text-white">View</i></a>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 custom_background">
-                                    <p class="text-uppercase custom_card_title">SIMILAR IMAGES</p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row m-1">
-                                        {% for i in  response.data.similar_images %}
-                                            <!-- small card col-md-3  -->
-                                            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3  ">
-                                                <div class=" row small_card_warpper glowing_border m-1"
-                                                     style="height: 180px">
-                                                    <div class="col-md-1 d-flex flex-row justify-content-around align-items-center glowing_border background">
-                                                        <a href="data:application/octet-stream;{{ i }}"
-                                                           class="badge
-                                                            badge-sm m-0
-                                                            p-0 rotate side_text"
-                                                        >
-                                                            <i class="fa fa-eye"></i>
-                                                            View</a>
-                                                    </div>
-                                                    <div class="col-md-10 m-0  small_card_left_wrapper">
-                                                        <img src="{{ i }}"
-                                                             class="img-fluid img-thumbnail"
-                                                             style="width: 90% !important; height: 130px !important;"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="card-header text-white  main_card_header ">
+                                                                    Article Links
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    {% for i in  response.data.article_links %}
+                                                                        <div class="row  ">
+                                                                            <div class="col-md-2">
+                                                                                <span class="badge custom_bagde">Title : </span>
+                                                                            </div>
+                                                                            <div class="col-md-10 text_paragraph"
+                                                                                 style="font-size:13px;">
+                                                                                {{ i.title }}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2">
+                                                                                <span class="badge custom_bagde">View / Url : </span>
+                                                                            </div>
+                                                                            <div class="col-md-10 text_paragraph"
+                                                                                 style="font-size:13px;">
+                                                                                {{ i.url }}<a href="{{ i.url }}"
+                                                                                              class="badge custom_bagde float-right mr-2"
+                                                                                              target="_blank"><i
+                                                                                    class="fa fa-eye">View</i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="card-header text-white  main_card_header ">
+                                                                    Simmilar Images
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row m-1">
+                                                                        {% for i in  response.data.similar_images %}
+                                                                            <!-- small card col-md-3  -->
+
+                                                                            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3  ">
+                                                                               <div class="card">
+                                                                                   <div class="card-header"></div>
+                                                                                   <div class="card-body">
+                                                                                       <div class="card-img">
+                                                                                        <img src="{{ i }}"
+                                                                                        class="img-fluid img-thumbnail img-responsive"
+                                                                                        style="width:100%;height:100px;"
+                                                                                       </div>
+                                                                                       </div>
+                                                                                   </div>
+                                                                                   <div class="card-footer text-center ">
+                                                                                    <a href="data:application/octet-stream;{{ i }}"
+                                                                                    class="btn btn-sm btn-outline-success"
+
+                                                                                     <i class="fa fa-eye"></i>
+                                                                                Download/View
+                                                                                    </a>
+                                                                                   </div>
+                                                                               </div>
+                                                                            </div>
+                                                                               {% endfor %}
+
+                                                                            </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                    {% endif %}
                 </div>
                 <div id="ip_short_end"
                      class="tab-pane {% if query_type == 'ip_shortend' or query_type|length < 1 %}in active show {% else %} fade {% endif %} ">
