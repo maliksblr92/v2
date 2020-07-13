@@ -1,4 +1,4 @@
-{% extends 'OSINT_System_Core/resp_test.html' %}
+{% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% load osint_custom_tags %}
 {% block page_title %}Keybase Create{% endblock %}
@@ -207,12 +207,12 @@
                                     <div class="card-header border custom_header text-white"
                                        style="border-radius: 10px 10px 0px 0px;">
                                        <div class="row">
-                                          <div class="col-md-3"> <span class="btn btn-outline-info"> Response # ({{ forloop.counter }})</span>
+                                          <div class="col-md-3"> <span class="btn btn-outline-info"> Response # ({{ forloop.counter }})</span>  
                                           </div>
                                           <div class="col-md-6">
                                              {% with foo_num=forloop.counter0 %}
-                                             <div class="col-md-6">
-                                                <span class="btn btn-outline-warning"> Query Keyword ({{ i.query }})</span>
+                                             <div class="col-md-6"> 
+                                                <span class="btn btn-outline-warning"> Query Keyword ({{ i.query }})</span>  
                                              </div>
                                              {% endwith %}
                                           </div>
@@ -1468,7 +1468,7 @@
                                                             class="badge badge-light text-uppercase w-100 text-left ">Video Title :</span>
                                                       </div>
                                                       <div class="col-md-8  ">
-                                                         <span
+                                                         <span 
                                                             class="badge">{{ x.video_title|default:"N/A"|truncatechars:"30" }}</span>
                                                       </div>
                                                       <!-- video title end  -->
@@ -1478,7 +1478,7 @@
                                                             class="badge badge-light text-uppercase w-100 text-left ">Video Views :</span>
                                                       </div>
                                                       <div class="col-md-8  ">
-                                                         <span
+                                                         <span 
                                                             class="badge">{{ x.num_views|default:"N/A"|truncatechars:"20" }}</span>
                                                       </div>
                                                       <!-- video title end  -->
@@ -1488,7 +1488,7 @@
                                                             class="badge badge-light text-uppercase w-100 text-left ">Timestamp :</span>
                                                       </div>
                                                       <div class="col-md-8  ">
-                                                         <span
+                                                         <span 
                                                             class="badge">{{ x.timestamp|default:"N/A"|truncatechars:"30" }}</span>
                                                       </div>
                                                       <!-- video timestamp end  -->
@@ -1778,12 +1778,12 @@
                                                            class="btn custom_social_icons mt-1"><i
                                                            class="fa fa-share "></i></a>
                                                         {% else %}
-
+                                                      
                                                         {% endif %}
                                                      </div>
                                                    <div class="card-body ">
                                                       <div class="row">
-
+                                                         
                                                          <div class="col-md-3   d-flex flex-row justify-content-center align-items-center">
                                                             <img src="{{ hashtag.hashtag.profile_pic_url }}"
                                                                class="img-fluid border"
@@ -1885,12 +1885,12 @@
                                                            class="btn custom_social_icons mt-1"><i
                                                            class="fa fa-share "></i></a>
                                                         {% else %}
-
+                                                      
                                                         {% endif %}
                                                      </div>
                                                    <div class="card-body  ">
                                                       <div class="row">
-
+                                                        
                                                          <div class="col-md-3   d-flex flex-row justify-content-center align-items-center">
                                                             {% if community.picture_url %}
                                                             <img src="{{ community.picture_url }}"
@@ -2113,22 +2113,22 @@
 <!--  -->
 
 
-
-
-
-
-
-
-
+                                                      
+                                                     
+                                                    
+                                                     
+                                                     
+                                                    
+                                                
                                              </div>
-
-                                            </div> </div>
-
-
-
-
+                                               
+                                            </div> </div>  
+                                                   
+                                                   
+                                                   
+                                                
                                                    <div class="card-footer"></div>
-
+                                               
                                              </div>
                                              {% endfor %}
                                              {% else %}
@@ -2413,7 +2413,7 @@
                                                    class="btn custom_social_icons mt-1"><i
                                                    class="fa fa-share "></i></a>
                                                 {% else %}
-
+                                              
                                                 {% endif %}
                                              </div>
                                              <div class="card-body ">
