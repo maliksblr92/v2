@@ -19,175 +19,161 @@
     <div class="col-md-3"></div>
     </div>
 
-    </div>{% endblock %}
-
+    </div>
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">CREATE PORTFOLIO</p>
+{% endblock %}
 {% block belly %}
     <div class="row">
-        <div class="col-md-12  ">
-            <!-- start of card  -->
-            <div class="w-100 h-100" id="content_div">
-                <div class="card-header  custom_header m-0 p-0 " style="border-radius: 20px 20px 0px 0px;">
-                    <p class="card_header_text">CREATE PORTFOLIO </p>
-                </div>
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
-                    <div class="">
-                        <!-- RPW FOR SOCIAL MEDIA -->
-                        <!-- Second row-->
-                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-                            <form name="portfolio_create_form"
-                                  class="justify-content-center  pt-3 pb-5 custom_inner_background inner_form_margin_radius"
-                                  id="portfolio_create_form"
-                                  action="{% url 'Portfolio_Management_System:create_portfolio' %}" method="POST">
-                                {% csrf_token %}
-                                <div style="width:80%;" class="container input1">
-                                    <!-- Radio Buttons Start -->
-                                    <div class="row">
-                                        <!-- start of button grp -->
-                                        <div class="col-md-12  ">
-                                            <div class="row ">
-                                                <div class="col-md-12 btn-group btn-group-toggle d-flex flex-row justify-content-center align-items-center"
-                                                     data-toggle="buttons">
-                                                    <div class="row col-md-4"><label
-                                                            class="btn  custom_center glowing_border radio_btns active">
-                                                        <input type="radio" class="options" name="portfolio_type"
-                                                               id="option1"
-                                                               value="individual" checked="">
-                                                        Individual </label></div>
-                                                    <div class="row col-md-4">
-                                                        <label class="btn radio_btns glowing_border custom_center">
-                                                            <input type="radio" class="options" name="portfolio_type"
-                                                                   id="option2"
-                                                                   value="group"> Group </label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <label class="btn radio_btns glowing_border custom_center">
-                                                            <input type="radio" class="options" name="portfolio_type"
-                                                                   id="option3"
-                                                                   value="event"> Event </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Please Select One Option From Above
-                                        </small>
-                                        <!-- end of button grp  -->
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <form name="portfolio_create_form"
+                  class="justify-content-center  pt-3 pb-5 custom_inner_background inner_form_margin_radius"
+                  id="portfolio_create_form"
+                  action="{% url 'Portfolio_Management_System:create_portfolio' %}" method="POST">
+                {% csrf_token %}
+                <div style="width:80%;" class="container input1">
+                    <!-- Radio Buttons Start -->
+                    <div class="row">
+                        <!-- start of button grp -->
+                        <div class="col-md-12  ">
+                            <div class="row ">
+                                <div class="col-md-12 btn-group btn-group-toggle d-flex flex-row justify-content-center align-items-center"
+                                     data-toggle="buttons">
+                                    <div class="row col-md-4"><label
+                                            class="btn  custom_center glowing_border radio_btns active">
+                                        <input type="radio" class="options" name="portfolio_type"
+                                               id="option1"
+                                               value="individual" checked="">
+                                        Individual </label></div>
+                                    <div class="row col-md-4">
+                                        <label class="btn radio_btns glowing_border custom_center">
+                                            <input type="radio" class="options" name="portfolio_type"
+                                                   id="option2"
+                                                   value="group"> Group </label>
                                     </div>
-                                    <!-- Radio Buttons End -->
-                                    <!-- inputfield 1 -->
-                                    <div class="row input-group mt-4 mb-3">
-                                        <div class="col-md-3 p-0 input-group-prepend">
+                                    <div class="row">
+                                        <label class="btn radio_btns glowing_border custom_center">
+                                            <input type="radio" class="options" name="portfolio_type"
+                                                   id="option3"
+                                                   value="event"> Event </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Please Select One Option From Above
+                        </small>
+                        <!-- end of button grp  -->
+                    </div>
+                    <!-- Radio Buttons End -->
+                    <!-- inputfield 1 -->
+                    <div class="row input-group mt-4 mb-3">
+                        <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Portfolio Name
                                         </span>
-                                        </div>
-                                        <input type="text" class="col-md-9 form-control custom_input_field"
-                                               id="portfolio_name" name="portfolio_name" required="required">
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Specify a Portfolio Name
-                                        </small>
-                                    </div>
+                        </div>
+                        <input type="text" class="col-md-9 form-control custom_input_field"
+                               id="portfolio_name" name="portfolio_name" required="required">
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Specify a Portfolio Name
+                        </small>
+                    </div>
 
-                                    <!-- inputfield 2 -->
-                                    <div class="row input-group mt-4 mb-3">
-                                        <div class="col-md-3 p-0 input-group-prepend">
+                    <!-- inputfield 2 -->
+                    <div class="row input-group mt-4 mb-3">
+                        <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Date
+                                            opacity:0.9; padding:7px 9px 0 10px;">DOB
                                         </span>
-                                        </div>
-                                        <input type="date" class="col-md-9 form-control custom_input_field" id="dob"
-                                               name="dob" required="required"/>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Specify Date of Birth
-                                        </small>
-                                    </div>
+                        </div>
+                        <input type="date" class="col-md-9 form-control custom_input_field" id="dob"
+                               name="dob" required="required"/>
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Specify Date of Birth
+                        </small>
+                    </div>
 
-                                    <!-- inputfield 3 -->
-                                    <div class="row input-group mt-4 mb-3">
-                                        <div class="col-md-3 p-0 input-group-prepend">
+                    <!-- inputfield 3 -->
+                    <div class="row input-group mt-4 mb-3">
+                        <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Gender
                                         </span>
-                                        </div>
-                                        <select type="text" class="col-md-9 form-control custom_input_field" id="gender"
-                                                name="gender" >
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
+                        </div>
+                        <select type="text" class="col-md-9 form-control custom_input_field" id="gender"
+                                name="gender" required="required">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
 
-                                        </select>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Select a Gender
-                                        </small>
-                                    </div>
+                        </select>
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Select a Gender
+                        </small>
+                    </div>
 
-                                    <!-- inputfield 4 -->
-                                    <div class="row input-group mt-4 mb-3">
-                                        <div class="col-md-3 p-0 input-group-prepend">
+                    <!-- inputfield 4 -->
+                    <div class="row input-group mt-4 mb-3">
+                        <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Religion
                                         </span>
-                                        </div>
-                                        <select type="text" class="col-md-9 form-control custom_input_field"
-                                                id="relegion" name="relegion" >
-                                            <option value="">Select Religion</option>
-                                            <option value="Islam">Islam</option>
-                                            <option value="Hinduism">Hinduism</option>
-                                            <option value="Christianity">Christianity</option>
-                                            <option value="Judaism">Judaism</option>
-                                            <option value="Buddhism">Buddhism</option>
-                                            <option value="Chinese traditional religion">Chinese
-                                                traditional
-                                                religion
-                                            </option>
-                                        </select>
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Seelct a Religion
-                                        </small>
-                                    </div>
+                        </div>
+                        <select type="text" class="col-md-9 form-control custom_input_field"
+                                id="relegion" name="relegion" required="required">
+                            <option value="">Select Religion</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Hinduism">Hinduism</option>
+                            <option value="Christianity">Christianity</option>
+                            <option value="Judaism">Judaism</option>
+                            <option value="Buddhism">Buddhism</option>
+                            <option value="Chinese traditional religion">Chinese
+                                traditional
+                                religion
+                            </option>
+                        </select>
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Seelct a Religion
+                        </small>
+                    </div>
 
-                                    <!-- inputfield 5 -->
-                                    <div class="row input-group mt-4 mb-3">
-                                        <div class="col-md-3 p-0 input-group-prepend">
+                    <!-- inputfield 5 -->
+                    <div class="row input-group mt-4 mb-3">
+                        <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Sect
                                         </span>
-                                        </div>
-                                        <input type="text" class="col-md-9 form-control custom_input_field" id="sect"
-                                               name="sect" />
-                                        <small class=" col-md-9 font-weight-bold text_paragraph "
-                                               style="padding-left:180px;"><i
-                                                class="fas fa-info mr-2"></i>Please Specify a Religious Sect If
-                                            Applicable
-                                        </small>
-                                    </div>
+                        </div>
+                        <input type="text" class="col-md-9 form-control custom_input_field" id="sect"
+                               name="sect" required="required"/>
+                        <small class=" col-md-9 font-weight-bold text_paragraph "
+                               style="padding-left:180px;"><i
+                                class="fas fa-info mr-2"></i>Please Specify a Religious Sect If
+                            Applicable
+                        </small>
+                    </div>
 
-                                    <!-- Button -->
-                                    <div class="row input_wrapper_row">
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-2">
-                                            <input type="submit"
-                                                   class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                   value="SUBMIT"
-                                                   name="submit" id="submit">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
+                    <!-- Button -->
+                    <div class="row input_wrapper_row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2">
+                            <input type="submit"
+                                   class="btn border font-weight-bold btn-sm w-100  text-white"
+                                   value="SUBMIT"
+                                   name="submit" id="submit">
                         </div>
                     </div>
+
                 </div>
-                <!-- end of card  -->
-
-            </div>
-
+            </form>
         </div>
     </div>
 {% endblock %}

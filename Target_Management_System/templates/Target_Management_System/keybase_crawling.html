@@ -1,20 +1,15 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
-{% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+{% load osint_custom_tags %}
+
 {% endblock %}
 {% block smallnavbar %}
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" style="">
+        <div class="col-md-8 d-flex" >
             <div class="col-md-1">
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu  ">
-                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+        <div class="col-md-8 d-flex" >
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
                 <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
@@ -36,18 +31,26 @@
         <div class="col-md-1"></div>
     </div>
 {% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">KEYBASE CRAWLING</p>
+{% endblock %}
 {% block belly %}
-    <style>
-        .newlabeldesign {
-            background: rgb(24, 72, 116);
-            background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
-            letter-spacing: 5px;
-            font-weight: 100;
-            text-transform: uppercase;
-            color: #fff;
-            border-bottom-left-radius: 8px;
-            border-top-left-radius: 8px;
-            /* padding: 8px 3rem 0 1rem; */
+<style>
+    input[type="text"]{
+        border-radius:0px 5px 5px 0px!important; 
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">KEYBASE CRAWLING</p>
+{% endblock %}
+{% block belly %}
+<style>
+    input[type="text"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    input[type="date"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    
+</style>
             padding: 7px 0rem 6px 0px;
         }
 
@@ -60,101 +63,103 @@
             font-size: 16px;
         }
     </style>
-    <div class="row middlecontentdiv">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-            <h4 class="topheading">Keybase Crawling</h4>
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg  ">
-            <div class="">
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
-                    <form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
-                        {% csrf_token %}
-                        <div class="form-group justify-content-center text-center  ">
-                            <div style="width:80%;" class="container input1">
-                                <div class="row input-group mt-4 mb-3">
-                                    <div class="col-md-3 p-0 input-group-prepend">
+    {% now "SHORT_DATE_FORMAT"  as date %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
+            <form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
+                {% csrf_token %}
+                <div class="form-group justify-content-center text-center  ">
+                    <div style="width:80%;" class="container input1">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
+                                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                            opacity:0.9; padding:7px 9px 0 10px;">Title
+    {% now "SHORT_DATE_FORMAT"  as date %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
+            <form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
+                {% csrf_token %}
+                <div class="form-group justify-content-center text-center  ">
+                    <div style="width:80%;" class="container input1">
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Title
                                         </span>
-                                    </div>
-                                    <input type="text" id="title" class="col-md-9 form-control newinputdesign"
-                                           placeholder="Please Enter Title Here" name="title">
-                                </div>
-                                <div class="row input-group mt-4 mb-3">
-                                    <div class="col-md-3 p-0 input-group-prepend">
+                            </div>
+                            <input type="text" id="title" class="col-md-9 form-control newinputdesign"
+                                   placeholder="Please Enter Title Here" name="title">
+                        </div>
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Choose a Keybase
                                         </span>
-                                    </div>
-                                    <select id="keybase" name="keybase" required="required"
-                                            class="col-md-9 form-control newinputdesign text-white">
-                                        <option value="">Select keybase</option>
-                                        {% for keybase in keybases %}
-                                            <option value="{{ keybase.id }}">{{ keybase }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                            </div>
+                            <select id="keybase" name="keybase" required="required"
+                                    class="col-md-9 form-control newinputdesign text-white">
+                                <option value="">Select keybase</option>
+                                {% for keybase in keybases %}
+                                    <option value="{{ keybase.id }}">{{ keybase }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
 
-
-
-                                <!--  -->
-<div class="d-flex form-row justify-content-around align-items-center">
-                             <label for="platform1">  <input type="checkbox" id="" name="fb" value="fb" > Facebook
-                             </label>
-                             <label for="platform1">  <input type="checkbox" id="" name="linkedin" value="linkedin" > Linkedin
-                             </label>
-                             <label for="platform1">  <input type="checkbox" id="" name="twitter" value="twitter" > Twitter
-                             </label>
-                             <label for="platform1">  <input type="checkbox" id="" name="instagram" value="instagram" > Instagram
-                             </label>
-                             <label for="platform1">  <input type="checkbox" id="" name="reddit" value="reddit" > Reddit
-                             </label>
-                             <label for="platform1">  <input type="checkbox" id="" name="youtube" value="youtube" > Youtube
-                             </label>
-                             </div>
-                                <!--  -->
-                                <div class="row input-group mt-4 mb-3">
-                                    <div class="col-md-3 p-0 input-group-prepend">
+                        <!--  -->
+                        <div class="d-flex form-row justify-content-around align-items-center">
+                            <label for="platform1"> <input type="checkbox" id="" name="fb" value="fb"> Facebook
+                            </label>
+                            <label for="platform1"> <input type="checkbox" id="" name="linkedin" value="linkedin">
+                                Linkedin
+                            </label>
+                            <label for="platform1"> <input type="checkbox" id="" name="twitter" value="twitter"> Twitter
+                            </label>
+                            <label for="platform1"> <input type="checkbox" id="" name="instagram" value="instagram">
+                                Instagram
+                            </label>
+                            <label for="platform1"> <input type="checkbox" id="" name="reddit" value="reddit"> Reddit
+                            </label>
+                            <label for="platform1"> <input type="checkbox" id="" name="youtube" value="youtube"> Youtube
+                            </label>
+                        </div>
+                        <!--  -->
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Select interval
                                         </span>
-                                    </div>
-                                    <select id="interval" name="interval"
-                                            class="col-md-9 form-control newinputdesign text-white">
-                                        <option value="">Select interval</option>
-                                        {% for interval in intervals %}
-                                            <option value="{{ interval.0 }}">{{ interval.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="row input-group mt-4 mb-3">
-                                    <div class="col-md-3 p-0 input-group-prepend">
+                            </div>
+                            <select id="interval" name="interval"
+                                    class="col-md-9 form-control newinputdesign text-white">
+                                <option value="">Select interval</option>
+                                {% for interval in intervals %}
+                                    <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row input-group mt-4 mb-3">
+                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign text-white" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:7px 9px 0 10px;">Expire On
                                         </span>
-                                    </div>
-                                    <input type="date" id="expire_on"
-                                           class="col-md-9 form-control newinputdesign text-white" name="expire_on">
-                                </div>
-
-
-                                <input type="submit" style="float:right" class="mr-3 btn btn-secondary searchbutton"
-                                       id="submit" name="submit"/>
-
                             </div>
+                            <input type="date" 
+                            id="expire_on"
+                            min='{{ date|to_and }}'
+                            max='2020-31-12'
+                            value="{{ date|to_and }}"
+                            class="col-md-9 form-control newinputdesign text-white" name="expire_on">
                         </div>
 
-                    </form>
+
+                        <input type="submit" style="float:right" class="mr-3 btn btn-secondary searchbutton"
+                               id="submit" name="submit"/>
+
+                    </div>
                 </div>
-            </div>
+
+            </form>
         </div>
     </div>
-{% endblock %}
-{% block base_js %}
-    <script>
-        window.document.title = "Target";
-    </script>
-{% endblock %}
+
