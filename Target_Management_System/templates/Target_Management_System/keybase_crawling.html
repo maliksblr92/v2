@@ -2,42 +2,41 @@
 {% load static %}
 {% load osint_custom_tags %}
 
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
 {% endblock %}
 {% block smallnavbar %}
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" >
-            <div class="col-md-1">
-            </div>
-        <div class="col-md-8 d-flex" >
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+        <div class="col-md-2"></div>
+        
+        
+            
+        <div class="col-md-8 " >
+            <div class="row">
+
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3 secondmidnavmenu ">
                 <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
                     IDENTIFY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3 secondmidnavmenu">
                 <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
                     SURVEY</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3 secondmidnavmenu ">
                 <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
                     CRAWLING</a>
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu glowing_border "><!-- secondnavactive -->
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3 secondlastnavmenu glowing_border "><!-- secondnavactive -->
                 <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
                     KEYBASE</a>
             </div>
         </div>
-        <div class="col-md-1"></div>
+            </div>
+
+        <div class="col-md-2"></div>
     </div>
 {% endblock %}
-{% block belly_header %}
-    <p class="text-uppercase custom_card_title ">KEYBASE CRAWLING</p>
-{% endblock %}
-{% block belly %}
-<style>
-    input[type="text"]{
-        border-radius:0px 5px 5px 0px!important; 
 {% block belly_header %}
     <p class="text-uppercase custom_card_title ">KEYBASE CRAWLING</p>
 {% endblock %}
@@ -51,6 +50,17 @@
     }
     
 </style>
+    <style>
+        .newlabeldesign {
+            background: rgb(24, 72, 116);
+            background: linear-gradient(93deg, rgba(24, 72, 116, 1) 0%, rgba(6, 17, 26, 1) 100%);
+            letter-spacing: 5px;
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #fff;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            /* padding: 8px 3rem 0 1rem; */
             padding: 7px 0rem 6px 0px;
         }
 
@@ -63,17 +73,6 @@
             font-size: 16px;
         }
     </style>
-    {% now "SHORT_DATE_FORMAT"  as date %}
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
-            <form method="post" action="{% url 'Target_Management_System:tms_keybase_crawling' %}">
-                {% csrf_token %}
-                <div class="form-group justify-content-center text-center  ">
-                    <div style="width:80%;" class="container input1">
-                        <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                                        <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                            opacity:0.9; padding:7px 9px 0 10px;">Title
     {% now "SHORT_DATE_FORMAT"  as date %}
     <div class="row">
         <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5 pb-5">
@@ -108,19 +107,19 @@
 
                         <!--  -->
                         <div class="d-flex form-row justify-content-around align-items-center">
-                            <label for="platform1"> <input type="checkbox" id="" name="fb" value="fb"> Facebook
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="fb" value="fb"> Facebook
                             </label>
-                            <label for="platform1"> <input type="checkbox" id="" name="linkedin" value="linkedin">
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="linkedin" value="linkedin">
                                 Linkedin
                             </label>
-                            <label for="platform1"> <input type="checkbox" id="" name="twitter" value="twitter"> Twitter
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="twitter" value="twitter"> Twitter
                             </label>
-                            <label for="platform1"> <input type="checkbox" id="" name="instagram" value="instagram">
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="instagram" value="instagram">
                                 Instagram
                             </label>
-                            <label for="platform1"> <input type="checkbox" id="" name="reddit" value="reddit"> Reddit
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="reddit" value="reddit"> Reddit
                             </label>
-                            <label for="platform1"> <input type="checkbox" id="" name="youtube" value="youtube"> Youtube
+                            <label class="crawlingLabel text-white btn " for="platform1"> <input type="checkbox" id="" name="youtube" value="youtube"> Youtube
                             </label>
                         </div>
                         <!--  -->
@@ -163,3 +162,9 @@
         </div>
     </div>
 
+{% endblock %}
+{% block base_js %}
+    <script>
+        window.document.title = "Target";
+    </script>
+{% endblock %}
