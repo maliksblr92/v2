@@ -1,550 +1,418 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block head_dep %}
-    <link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
-    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+<link rel="stylesheet" href="{% static 'Portfolio_Management_System/css/tso_create.css' %}">
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
 {% endblock %}
 {% block smallnavbar %}
-    <style>
-
-        select {
-            color: white !important;
-        }
-
-        .custom_pills {
-            background: linear-gradient(
-                    93deg,
-                    rgba(24, 72, 116, 1) 0%,
-                    rgba(6, 17, 26, 1) 100%
-            );
-            text-align: center;
-
-        }
-
-        #submit {
-            background: rgb(24, 72, 116);
-            background: linear-gradient(
-                    93deg,
-                    rgba(24, 72, 116, 1) 0%,
-                    rgba(6, 17, 26, 1) 100%
-            );
-            color: #fff;
-        }
-
-        .text_12 {
-            font-size: 12px !important;
-        }
-
-        .text_10 {
-            font-size: 10px !important;
-        }
-
-        .text_14 {
-            font-size: 14px !important;
-        }
-    </style>
-
-    <!--  -->
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 d-flex" style="">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
-                <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">IDENTITY GENERATOR</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border">
-                <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
-                    PROCESSING</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
-            </div>
-        </div>
-        <div class="col-md-2"></div>
-    </div>
+<style>
+   select {
+   color: white !important;
+   }
+   .custom_pills {
+   background: linear-gradient(
+   93deg,
+   rgba(24, 72, 116, 1) 0%,
+   rgba(6, 17, 26, 1) 100%
+   );
+   text-align: center;
+   }
+   #submit {
+   background: rgb(24, 72, 116);
+   background: linear-gradient(
+   93deg,
+   rgba(24, 72, 116, 1) 0%,
+   rgba(6, 17, 26, 1) 100%
+   );
+   color: #fff;
+   }
+   .text_12 {
+   font-size: 12px !important;
+   }
+   .text_10 {
+   font-size: 10px !important;
+   }
+   .text_14 {
+   font-size: 14px !important;
+   }
+</style>
+<!--  -->
+<div class="row">
+   <div class="col-lg-2"></div>
+   <div class="col-lg-8 d-flex" style="">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu ">
+         <a href="/dpu/index" class="btn secondnavitems text_12 font-weight-bold ">IDENTITY GENERATOR</a>
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+         <a href="/dpu/index_darkweb" class="btn secondnavitems text_14 font-weight-bold "> DARK WEB</a>
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+         <a href="/dpu/index_scrapper" class="btn secondnavitems text_14 font-weight-bold "> DATA SCRAPPERS</a>
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu glowing_border">
+         <a href="/dpu/index_textprocessing" class="btn secondnavitems text_14 font-weight-bold "> TEXT
+         PROCESSING</a>
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+         <a href="/dpu/twitter" class="btn secondnavitems text_14 font-weight-bold "> TWITTER</a>
+      </div>
+      <div class="col-lg-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+         <a href="/dpu/iptools" class="btn secondnavitems text_12 font-weight-bold "> LOOKUP TOOLS</a>
+      </div>
+   </div>
+   <div class="col-lg-2"></div>
+</div>
 {% endblock %}
-{% block belly %}
-    <div class="row">
-        <div class="col-md-12  ">
-            <div class="w-100 h-100 " id="content_div">
-                <div class="card-header  main_card_header m-0 p-0 ">
-                    <p class="card_header_text">TEXT PROCESSING</p>
-                </div>
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 lol  custom_main_background  ">
-                    <div class="">
-                        <!-- RPW FOR SOCIAL MEDIA -->
-                        <!-- Second row-->
-                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5">
-                            <div class="card-body m-4 main_card custom_inner_background inner_form_margin_radius">
-                                <div class="container-fluid ">
-                                    <ul class="nav nav-pills row">
-
-                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
-                                                                                     data-toggle="tab"
-                                                                                     href="#commonwords">COMMON
-                                            WORDS</a></li>
-                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
-                                                                                     data-toggle="tab"
-                                                                                     href="#mostused_hashtags">MOST USED
-                                            HASHTAGS </a></li>
-                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
-                                                                                     data-toggle="tab"
-                                                                                     href="#sentiments">SENTIMENTS</a>
-                                        </li>
-                                        <li class="custom_pills col-md-3 m-0 p-0"><a class="btn w-100 text-white "
-                                                                                     data-toggle="tab"
-                                                                                     href="#wordcloud">WORD CLOUD</a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="tab-content">
-                                                <div id="sentiments" class="tab-pane fade in active show  ">
-
-                                                    <div class="card-body m-4 main_card border-0">
-
-                                                        <form name="google_scholar" id="google_scholar"
-                                                              action="/dpu/index_textprocessing/" method="POST">
-                                                            {% csrf_token %}
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-9">
-
-                                                                    <!-- inputfield 2 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Task
-                                                                        </span>
-                                                                        </div>
-                                                                        <input type="text"
-                                                                               class="col-md-9 form-control custom_input_field"
-                                                                               id="task"
-                                                                               name="task" value="sentiments"
-                                                                               readonly required="required">
-                                                                    </div>
-
-
-                                                                    <!-- inputfield 5 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Text
-                                                                        </span>
-                                                                        </div>
-                                                                        <textarea type="text"
-                                                                                  class="col-md-9 form-control custom_input_field"
-                                                                                  id="text"
-                                                                                  name="text" rows="10"
-                                                                                  placeholder="Place Text Here "
-                                                                                  required="required"></textarea>
-                                                                    </div>
-                                                                    <!--   <div class="row">
-                                                                                                                                            <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                                                                                                <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                                                                                        class="input_text">Task </span>
-                                                                                                                                                    <input type="text"
-                                                                                                                                                           class="col-md-9 form-control custom_input_field"
-                                                                                                                                                           id="task"
-                                                                                                                                                           name="task" value="sentiments"
-                                                                                                                                                           readonly required="required">
-                                                                                                                                                </label>
-                                                                                                                                            </div>
-                                                                                                                                        </div> -->
-                                                                    <!--  <div class="row">
-                                                                          <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                              <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                      class="input_text">Text </span>
-                                                                                  <textarea type="text"
-                                                                                            class="col-md-9 form-control custom_input_field"
-                                                                                            id="text"
-                                                                                            name="text" rows="10"
-                                                                                            placeholder="Place text here "
-                                                                                            required="required"></textarea>
-                                                                              </label>
-                                                                          </div>
-                                                                      </div> -->
-
-
-                                                                </div>
-                                                                <div class="col-md-1 ">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-6"></div>
-                                                                <div class="col-md-4"></div>
-                                                                <div class="col-md-2">
-                                                                    <input type="submit"
-                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                                           value="submit"
-                                                                           name="submit" id="submit">
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    </form>
-
-                                                </div>
-
-                                                <div id="commonwords" class="tab-pane ">
-                                                    <div class="card-body m-4 main_card border-0">
-
-                                                        <form name="common_words_form" id="common_words_form"
-                                                              action="/dpu/index_textprocessing/" method="POST">
-                                                            {% csrf_token %}
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-9">
-                                                                    <!-- inputfield 2 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Task
-                                                                        </span>
-                                                                        </div>
-                                                                        <input type="text"
-                                                                                       class="col-md-9 form-control custom_input_field"
-                                                                                       id="task"
-                                                                                       name="task" value="common_words"
-                                                                                       readonly required="required">
-                                                                    </div>
-
-
-                                                                    <!-- inputfield 5 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Text
-                                                                        </span>
-                                                                        </div>
-                                                                        <textarea type="text"
-                                                                                          class="col-md-9 form-control custom_input_field"
-                                                                                          id="text"
-                                                                                          name="text" rows="10"
-                                                                                          placeholder="Place text here "
-                                                                                          required="required"></textarea>
-                                                                    </div>
-
-
-                                                                <!--    <div class="row">
-                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                    class="input_text">Task </span>
-                                                                                <input type="text"
-                                                                                       class="col-md-9 form-control custom_input_field"
-                                                                                       id="task"
-                                                                                       name="task" value="common_words"
-                                                                                       readonly required="required">
-                                                                            </label>
-                                                                        </div>
-                                                                    </div> -->
-                                                                 <!--   <div class="row">
-                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                    class="input_text">Text </span>
-                                                                                <textarea type="text"
-                                                                                          class="col-md-9 form-control custom_input_field"
-                                                                                          id="text"
-                                                                                          name="text" rows="10"
-                                                                                          placeholder="Place text here "
-                                                                                          required="required"></textarea>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div> -->
-
-
-                                                                </div>
-                                                                <div class="col-md-1 ">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-6"></div>
-                                                                <div class="col-md-4"></div>
-                                                                <div class="col-md-2">
-                                                                    <input type="submit"
-                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                                           value="submit"
-                                                                           name="submit" id="submit">
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    </form>
-                                                </div>
-
-                                                <div id="mostused_hashtags" class="tab-pane ">
-
-                                                    <div class="card-body m-4 main_card border-0">
-
-                                                        <form name="most_used_hashtags_form"
-                                                              id="most_used_hashtags_form"
-                                                              action="/dpu/index_textprocessing/" method="POST">
-                                                            {% csrf_token %}
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-9">
-
-                                                                    <!-- inputfield 2 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Task
-                                                                        </span>
-                                                                        </div>
-                                                                        <input type="text"
-                                                                                       class="col-md-9 form-control custom_input_field"
-                                                                                       id="task"
-                                                                                       name="task"
-                                                                                       value="most_used_hashtags"
-                                                                                       readonly required="required">
-                                                                    </div>
-
-
-                                                                    <!-- inputfield 5 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Text
-                                                                        </span>
-                                                                        </div>
-                                                                        <textarea type="text"
-                                                                                          class="col-md-9 form-control custom_input_field"
-                                                                                          id="text"
-                                                                                          name="text" rows="10"
-                                                                                          placeholder="Place text here "
-                                                                                          required="required"></textarea>
-                                                                    </div>
-
-                                                                 
-
-
-                                                                </div>
-                                                                <div class="col-md-1 ">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-6"></div>
-                                                                <div class="col-md-4"></div>
-                                                                <div class="col-md-2">
-                                                                    <input type="submit"
-                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                                           value="submit"
-                                                                           name="submit" id="submit">
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-
-                                                <div id="wordcloud" class="tab-pane  ">
-
-                                                    <div class="card-body m-4 main_card border-0">
-
-                                                        <form name="common_words_form" id="common_words_form"
-                                                              action="/dpu/index_textprocessing/" method="POST">
-                                                            {% csrf_token %}
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-9">
-
-                                                                    <!-- inputfield 2 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Task
-                                                                        </span>
-                                                                        </div>
-                                                                        <input type="text"
-                                                                                       class="col-md-9 form-control custom_input_field"
-                                                                                       id="task"
-                                                                                       name="task" value="wordcloud"
-                                                                                       readonly required="required">
-                                                                    </div>
-
-
-                                                                    <!-- inputfield 5 -->
-                                                                    <div class="row input-group mt-4 mb-3">
-                                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                                                        <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                                                                            opacity:0.9; padding:7px 9px 0 10px;">Text
-                                                                        </span>
-                                                                        </div>
-                                                                        <textarea type="text"
-                                                                                          class="col-md-9 form-control custom_input_field"
-                                                                                          id="text"
-                                                                                          name="text" rows="10"
-                                                                                          placeholder="Place text here "
-                                                                                          required="required"></textarea>
-                                                                    </div>
-
-                                                                 <!--   <div class="row">
-                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                    class="input_text">Task </span>
-                                                                                <input type="text"
-                                                                                       class="col-md-9 form-control custom_input_field"
-                                                                                       id="task"
-                                                                                       name="task" value="wordcloud"
-                                                                                       readonly required="required">
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12  form-group form-inline w-100 h-100 b">
-                                                                            <label class="bg-white custom_label m-0 p-0  h-100 w-100  pl-2 "><span
-                                                                                    class="input_text">Text </span>
-                                                                                <textarea type="text"
-                                                                                          class="col-md-9 form-control custom_input_field"
-                                                                                          id="text"
-                                                                                          name="text" rows="10"
-                                                                                          placeholder="Place text here "
-                                                                                          required="required"></textarea>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div> -->
-
-
-                                                                </div>
-                                                                <div class="col-md-1 ">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="row input_wrapper_row">
-                                                                <div class="col-md-6"></div>
-                                                                <div class="col-md-4"></div>
-                                                                <div class="col-md-2">
-                                                                    <input type="submit"
-                                                                           class="btn border font-weight-bold btn-sm w-100  text-white"
-                                                                           value="submit"
-                                                                           name="submit" id="submit">
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% if sentiments %}
-                    <div class="m-4 glowing_border"> <!-- col-md-12 card -->
-                        <div class="card-header custom_header text-white">
-                            Sentiments Resposne
-                        </div>
-                        <div class="card-body text-white">
-                            {{ sentiments.sentiments.0 }}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if most_used_hashtags %}
-                    <div class="m-4 glowing_border">
-                        <div class="card-header custom_header text-white">
-                            Most Used Hastags Resposne
-                        </div>
-                        <div class="card-body text-white">
-                            {{ most_used_hashtags.most_used_hashtags.0 }}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if wordcloud %}
-                    <div class="m-4 glowing_border">
-                        <div class="card-header custom_header text-white">
-                            Word Cloud Resposne
-                        </div>
-                        <div class="card-body text-white">
-                            {{ wordcloud.wordcloud }}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if common_words %}
-                    <div class="m-4 glowing_border">
-                        <div class="card-header custom_header text-white">
-                            Common Words Resposne
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        {% for i in common_words.common_words %}
-
-
-                                            <div class="col-md-6 mt-5 ">
-                                                <span class="badge custom_bagde">Keyword : </span><span
-                                                    class="badge badge-light ml-2">{{ i.keyword }}</span>
-                                            </div>
-                                            <div class="col-md-6 mt-5">
-                                                <span class="badge custom_bagde">Count : </span><span
-                                                    class="badge badge-light ml-2">{{ i.count }}</span>
-                                            </div>
-
-                                        {% endfor %}
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-8">
-                                    <div id="worldcloud" style="height:300px;width:100%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-    <script>
-        am4core.useTheme(am4themes_animated);
-        var chart = am4core.create("worldcloud", am4plugins_wordCloud.WordCloud);
-        chart.fontFamily = "Courier New";
-        var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-        series.randomness = 0.1;
-        series.rotationThreshold = 0.5;
-        var cloud = {{ common_words.common_words|safe }}
-            series.data = cloud;
-        series.dataFields.word = "keyword";
-        series.dataFields.value = "count";
-        series.heatRules.push({
-            "target": series.labels.template,
-            "property": "fill",
-            "min": am4core.color("#0000CC"),
-            "max": am4core.color("#CC00CC"),
-            "dataField": "value"
-        });
-        series.labels.template.url = "https://stackoverflow.com/questions/tagged/{word}";
-        series.labels.template.urlTarget = "_blank";
-        series.labels.template.tooltipText = "{word}:\n[bold]{value}[/]";
-
-        //var subtitle = chart.titles.create();
-        //subtitle.text = "(click to open)";
-        //var title = chart.titles.create();
-        //title.text = "Common Words ";
-        //title.fontSize = 30;
-        //title.fontWeight = "800";
-    </script>
+{% block belly_header %}
+<p class="text-uppercase custom_card_title ">TEXT PROCESSING</p>
 {% endblock %}
-   {% block base_js %}
-        <script>
-            window.document.title = "Text Processing";
-        </script>
-    {% endblock %}
+{% block belly %}  
+<style>
+    .custom_textarea{
+        height:100px;
+        overflow-y: auto;
+    }
+</style>
+<div class="row">
+   <div class="col-lg-12">
+      <ul class="nav nav-pills row">
+         <li class="custom_pills col-lg-3 m-0 p-0"><a class="btn w-100 text-white "
+            data-toggle="tab"
+            href="#commonwords">COMMON
+            WORDS</a>
+         </li>
+         <li class="custom_pills col-lg-3 m-0 p-0"><a class="btn w-100 text-white "
+            data-toggle="tab"
+            href="#mostused_hashtags">MOST USED
+            HASHTAGS </a>
+         </li>
+         <li class="custom_pills col-lg-3 m-0 p-0"><a class="btn w-100 text-white "
+            data-toggle="tab"
+            href="#sentiments">SENTIMENTS</a>
+         </li>
+         <li class="custom_pills col-lg-3 m-0 p-0"><a class="btn w-100 text-white "
+            data-toggle="tab"
+            href="#wordcloud">WORD CLOUD</a>
+         </li>
+      </ul>
+      <div class="tab-content">
+         <div id="sentiments" class="tab-pane fade in active show  ">
+             
+          
+               <form name="google_scholar" id="google_scholar"
+                  action="/dpu/index_textprocessing/" method="POST">
+                  {% csrf_token %}
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-2"></div>
+                     <div class="col-lg-9">
+                        <!-- inputfield 2 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Task
+                              </span>
+                           </div>
+                           <input type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="task"
+                              name="task" value="sentiments"
+                              readonly required="required">
+                        </div>
+                        <!-- inputfield 5 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Text
+                              </span>
+                           </div>
+                           <textarea type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="text"
+                              name="text" rows="10"
+                              placeholder="Place Text Here "
+                              required="required"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-1 ">
+                     </div>
+                  </div>
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-4"></div>
+                     <div class="col-lg-2">
+                        <input type="submit"
+                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                           value="submit"
+                           name="submit" id="submit">
+                     </div>
+                  </div>
+          
+            </form>
+         </div>
+         <div id="commonwords" class="tab-pane ">
+            <div class="card-body m-4 main_card border-0">
+               <form name="common_words_form" id="common_words_form"
+                  action="/dpu/index_textprocessing/" method="POST">
+                  {% csrf_token %}
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-2"></div>
+                     <div class="col-lg-9">
+                        <!-- inputfield 2 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Task
+                              </span>
+                           </div>
+                           <input type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="task"
+                              name="task" value="common_words"
+                              readonly required="required">
+                        </div>
+                        <!-- inputfield 5 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Text
+                              </span>
+                           </div>
+                           <textarea type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="text"
+                              name="text" rows="10"
+                              placeholder="Place text here "
+                              required="required"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-1 ">
+                     </div>
+                  </div>
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-4"></div>
+                     <div class="col-lg-2">
+                        <input type="submit"
+                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                           value="submit"
+                           name="submit" id="submit">
+                     </div>
+                  </div>
+            </div>
+            </form>
+         </div>
+         <div id="mostused_hashtags" class="tab-pane ">
+            <div class="card-body m-4 main_card border-0">
+               <form name="most_used_hashtags_form"
+                  id="most_used_hashtags_form"
+                  action="/dpu/index_textprocessing/" method="POST">
+                  {% csrf_token %}
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-2"></div>
+                     <div class="col-lg-9">
+                        <!-- inputfield 2 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Task
+                              </span>
+                           </div>
+                           <input type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="task"
+                              name="task"
+                              value="most_used_hashtags"
+                              readonly required="required">
+                        </div>
+                        <!-- inputfield 5 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Text
+                              </span>
+                           </div>
+                           <textarea type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="text"
+                              name="text" rows="10"
+                              placeholder="Place text here "
+                              required="required"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-1 ">
+                     </div>
+                  </div>
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-4"></div>
+                     <div class="col-lg-2">
+                        <input type="submit"
+                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                           value="submit"
+                           name="submit" id="submit">
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div id="wordcloud" class="tab-pane  ">
+            <div class="card-body m-4 main_card border-0">
+               <form name="common_words_form" id="common_words_form"
+                  action="/dpu/index_textprocessing/" method="POST">
+                  {% csrf_token %}
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-2"></div>
+                     <div class="col-lg-9">
+                        <!-- inputfield 2 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Task
+                              </span>
+                           </div>
+                           <input type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="task"
+                              name="task" value="wordcloud"
+                              readonly required="required">
+                        </div>
+                        <!-- inputfield 5 -->
+                        <div class="row input-group mt-4 mb-3">
+                           <div class="col-lg-3 p-0 input-group-prepend">
+                              <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                                 opacity:0.9; padding:7px 9px 0 10px;">Text
+                              </span>
+                           </div>
+                           <textarea type="text"
+                              class="col-lg-9 form-control custom_input_field"
+                              id="text"
+                              name="text" rows="10"
+                              placeholder="Place text here "
+                              required="required"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-lg-1 ">
+                     </div>
+                  </div>
+                  <div class="row input_wrapper_row">
+                     <div class="col-lg-6"></div>
+                     <div class="col-lg-4"></div>
+                     <div class="col-lg-2">
+                        <input type="submit"
+                           class="btn border font-weight-bold btn-sm w-100  text-white"
+                           value="submit"
+                           name="submit" id="submit">
+                     </div>
+                  </div>
+            </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% if sentiments %}
+<div class="row">
+    <div class="col-lg-12 text-dark text-center ">
+  
+      <span class="badge badge-primary  text-white ">Sentiments :  {{ sentiments.sentiments.0 }} </span>     
+        
+    </div>
+</div>
+
+{% endif %}
+{% if most_used_hashtags %}
+<div class="row">
+    <div class="col-lg-12 text-dark text-center ">
+  
+      <span class="badge badge-primary  text-white ">Hashtags :      </span>     
+        
+    </div>
+    <div class="col-lg-12 text-dark text-center ">
+        <textarea class="form-control custom_textarea" name="" id="" cols="10" rows="10" readonly="readonly"> {{ most_used_hashtags.most_used_hashtags.0 }}</textarea> 
+    </div>
+</div>
+
+
+{% endif %}
+{% if wordcloud %}
+<div class="row">
+    <div class="col-lg-12 text-dark text-center ">
+  
+      <span class="badge badge-primary  text-white ">Word-Cloud :         </span>     
+     
+    </div>
+    <div class="col-lg-12 text-dark text-center ">
+        <textarea class="form-control custom_textarea" name="" id="" cols="10" rows="10" readonly="readonly"> {{ wordcloud.wordcloud }}</textarea> 
+    </div>
+</div>
+
+
+{% endif %}
+{% if common_words %}
+<div class="row">
+   
+        <div class="col-lg-4">
+            <div class="row">
+               {% for i in common_words.common_words %}
+               <div class="col-lg-6 mt-2 ">
+                  <span class="badge custom_bagde">Keyword : </span><span
+                     class="badge badge-primary text-white   ml-2">{{ i.keyword }}</span>
+               </div>
+               <div class="col-lg-6 mt-2">
+                  <span class="badge custom_bagde">Count : </span><span
+                     class="badge badge-primary text-white   ml-2">{{ i.count }}</span>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="col-lg-8 border">
+            <div id="worldcloud" style="height:300px;width:100%"></div>
+         </div>
+   
+</div>
+
+{% endif %}
+</div>
+</div>
+</div>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script>
+   am4core.useTheme(am4themes_animated);
+   var chart = am4core.create("worldcloud", am4plugins_wordCloud.WordCloud);
+   chart.fontFamily = "Courier New";
+   var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+   series.randomness = 0.1;
+   series.rotationThreshold = 0.5;
+   var cloud = {{ common_words.common_words|safe }}
+       series.data = cloud;
+   series.dataFields.word = "keyword";
+   series.dataFields.value = "count";
+   series.heatRules.push({
+       "target": series.labels.template,
+       "property": "fill",
+       "min": am4core.color("#0000CC"),
+       "max": am4core.color("#CC00CC"),
+       "dataField": "value"
+   });
+   series.labels.template.url = "https://stackoverflow.com/questions/tagged/{word}";
+   series.labels.template.urlTarget = "_blank";
+   series.labels.template.tooltipText = "{word}:\n[bold]{value}[/]";
+   
+   //var subtitle = chart.titles.create();
+   //subtitle.text = "(click to open)";
+   //var title = chart.titles.create();
+   //title.text = "Common Words ";
+   //title.fontSize = 30;
+   //title.fontWeight = "800";
+</script>
+{% endblock %}
+{% block base_js %}
+<script>
+   window.document.title = "Text Processing";
+</script>
+{% endblock %}
