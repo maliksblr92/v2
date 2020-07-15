@@ -213,17 +213,17 @@ class DeleteKeybaseProperty(RequireLoginMixin, IsTSO, View):
 
 class Keybase_Fetched_Responses(View):  
     def get(self,request,*args,**kwargs):
-        resp=Keybase_Response_TMS.objects.all()
+        #resp=Keybase_Response_TMS.objects.all()
         GTR_id=kwargs['GTR_id']
         resp=acq.get_data_response_object_by_gtr_id(GTR_id)
         target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
-        print(resp,target_object)
+        #print(resp,target_object)
         # return HttpResponse('<div>asdas</div>')
         return render(request,'Keybase_Management_System/Keybase_Fetched_Responses.html',{'resp':resp,'target_object':target_object})
     
 class Keybase_Fetched_Report(View):  
     def get(self,request,*args,**kwargs):
-        resp=Keybase_Response_TMS.objects.all()
+        #resp=Keybase_Response_TMS.objects.all()
         GTR_id=kwargs['GTR_id']
         resp=acq.get_data_response_object_by_gtr_id(GTR_id)
         target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
@@ -244,13 +244,14 @@ class Keybase_Processed_Report(View):
 
 class Graph_Analysis(View):
     def get(self,request,*args,**kwargs):
-        resp=Keybase_Response_TMS.objects.all()
+        #resp=Keybase_Response_TMS.objects.all()
         GTR_id=kwargs['GTR_id']
         resp=acq.get_data_response_object_by_gtr_id(GTR_id)
         target_object=acq.get_dataobject_by_gtr(acq.get_gtr_by_id(GTR_id))
         print(resp)
         # return HttpResponse('<div>asdas</div>')
         return render(request,'Keybase_Management_System/graph_analysis.html',{'resp':resp,'target_object':target_object})
+
 
 
 
