@@ -88,7 +88,7 @@ urlpatterns = [
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
     path('design_test',views.design_test,name='design_test'),
-    path('resp_test', views.resp_test, name='resp_test'), # ahmed end
+    path('mongo/dashboard/', views.Mongo_Dashboard, name='mongo_dashboard'), # ahmed end
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)
