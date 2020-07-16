@@ -43,15 +43,24 @@
     </div>
 {% endblock %}
 <!-- style="background-color:#012847; border-radius:15px 15px 0 0;" -->
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">MARK TARGET</p>
+{% endblock %}
 {% block belly %}
-    <div class="row ">
-        <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7  topleft">
-            <h5 class=" mt-4 ml-3 toptitle">Mark Target</h5>
-        </div>
-        <div class="col-md-5 col-lg-5 col-sm-5 col-md-5 mt-4  ">
-            <!-- TOP MANU BAR -->
-            <nav>
-                <div class="nav nav-tabs nav-fill mytabs" id="nav-tab" role="tablist">
+<style>
+    input[type="text"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+    input[type="date"]{
+        border-radius:0px 5px 5px 0px!important; 
+    }
+</style>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <!-- Social Navbar Start-->
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 custom_background nav nav-tabs nav-fill mytabs"
+                     id="nav-tab" role="tablist">
                     <a class="nav-item nav-link {% if data.target_site == 'reddit' %} active {% endif %}"
                        id="nav-reddit-tab" data-toggle="tab" href="#reddit" role="tab"><i
                             style="color:white; opacity:0.8;" class="fab fa-reddit-square fa-2x"></i></a>
@@ -64,342 +73,336 @@
                     <a class="nav-item nav-link {% if data.target_site == 'facebook' or not data.target_site %} active {% endif %}"
                        id="nav-facebook-tab" data-toggle="tab" href="#facebook" role="tab">
                         <i style="color:white; opacity:0.8;" class="fab fa-facebook fa-2x"></i></a>
-                    <a class="nav-item nav-link"  {% if data.target_site == 'twitter' %} active {% endif %}
+                    <a class="nav-item nav-link  {% if data.target_site == 'twitter' %} active {% endif %}"
                        id="nav-twitter-tab" data-toggle="tab" href="#twitter" role="tab"><i
                             style="color:white; opacity:0.8;" class="fab fa-twitter-square fa-2x"></i></a>
-                    <a class="nav-item nav-link"  {% if data.target_site == 'youtube' %} active {% endif %}
+                    <a class="nav-item nav-link  {% if data.target_site == 'youtube' %} active {% endif %}"
                        id="nav-youtube-tab" data-toggle="tab" href="#youtube" role="tab"><i
-                            style="color:white; opacity:0.8;" class="fab fa-youtube-square fa-2x"></i></a>
+                            style="color:white !important; opacity:0.8;" class="fa fa-youtube-square fa-2x"></i></a>
                 </div>
-            </nav>
-            <!-- END OF TOP MANU BAR -->
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mymainbg">
-            <div class="">
-                <!-- RPW FOR SOCIAL MEDIA -->
-                <div class="row ">
-                    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 ">
-                        <!-- this is content -->
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                            {% for platform in data.social %}
-                                <div class="tab-pane fade {% if data.target_site %}
-            {% if platform.name|lower == data.target_site %}active show{% endif %}
-        {% else %}
-            {% if platform.name|lower == 'facebook' %}active show {% endif %}
-        {% endif %}
-        "
-                                     id="{{ platform.name|lower }}" role="tabpanel" aria-labelledby="nav-home-tab">
-                                    <!-- Each content tab #1 for keywords-->
-                                    <div class="row formbg">
-                                        <div class="col-md-4 d-flex flex-column justify-content-around align-items-center">
-                                            <div class="">
-                                                <img id="{{ platform.name|lower }}-profile_image" class="ml-5"
-                                                     style="height:150px; width:150px; border-radius: 50%;"
-                                                     src="{% static 'images/testimonial.png' %}" alt="">
-                                            </div>
+            </div>
+            <!-- Social Navbar End-->
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        {% for platform in data.social %}
+                            <div class="tab-pane fade {% if data.target_site %}
+                                        {% if platform.name|lower == data.target_site %}active show{% endif %}
+                                    {% else %}
+                                        {% if platform.name|lower == 'facebook' %}active show {% endif %}
+                                    {% endif %}
+                                    " id="{{ platform.name|lower }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <!-- Each content tab #1 for keywords-->
+                                <div class="row formbg">
+                                    <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3 d-flex flex-column justify-content-center align-items-center">
+                                        <div class="">
+                                            <img id="{{ platform.name|lower }}-profile_image" class=""
+                                                 style="height:150px; width:150px; border-radius: 50%;"
+                                                 src="{% static 'images/testimonial.png' %}" alt="">
                                         </div>
-                                        <!-- END OF col-md4 LEFT DIV-->
-                                        <!-- FORM DIV  RIGHT SIDE-->
-                                        <div class="col-md-8">
-                                            <!--FORMS-->
-                                            <form style="padding-bottom:10px;" id="{{ platform.name | lower }}-form"
-                                                  action="/tms/marktarget/" method="POST">
-                                                {% csrf_token %}
-                                                <div class="form-group ">
-                                                    <div class="row input-group mt-4 mb-3">
-                                                        <div class="col-md-3 p-0 input-group-prepend">
-                                <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
-                                    opacity:0.9; padding:5px 9px 0 10px;">Author Account
-                                </span>
-                                                        </div>
-                                                        <input type="text" class="form-control newinputdesign"
-                                                               name="{{ platform.name|lower }}_autheruseraccount"
-                                                               value="{{ data.prime_argument }}" required="required"/>
-                                                        <div class="input-group-append">
-                                                            <button type="button"
-                                                                    x-target-name="{{ platform.name|lower }}"
-                                                                    class="btn btn-secondary searchbutton smartsearch">
-                                                                SMART
-                                                                SEARCH <span> <i class="fas fa-spinner fa-spin"
-                                                                                 style="font-size:25px;"
-                                                                                 id="loading_icon"></i></span></button>
-                                                        </div>
+                                    </div>
+                                    <!-- END OF col-md4 LEFT DIV-->
+                                    <!-- FORM DIV  RIGHT SIDE-->
+                                    <div class="col-sm-10 col-md-10 col-lg-9 col-xl-9">
+                                        <!--FORMS-->
+                                        <form style="padding-bottom:10px;" id="{{ platform.name | lower }}-form"
+                                              action="/tms/marktarget/" method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group ">
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
+                                                    <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
+                                                        opacity:0.9; padding:5px 9px 0 10px;">Author Account
+                                                    </span>
                                                     </div>
-                                                    <div>
+                                                    <input type="text" class="col-sm-7 col-md-7 col-lg-6 col-xl-6 form-control newinputdesign"
+                                                           name="{{ platform.name|lower }}_autheruseraccount"
+                                                           value="{{ data.prime_argument }}" required="required"/>
+                                                    <div class="input-group-append col-sm-12 col-md-2 col-lg-3 col-xl-3 p-0">
+                                                        <button type="button"
+                                                                x-target-name="{{ platform.name|lower }}"
+                                                                class="btn btn-secondary searchbutton smartsearch">
+                                                            SMART
+                                                            SEARCH <span> <i class="fas fa-spinner fa-spin"
+                                                                             style="font-size:25px;"
+                                                                             id="loading_icon"></i></span></button>
+                                                    </div>
+                                                </div>
+                                                <div>
                         <span id="smart_search_response"
                               class="alert alert-info font-weight-bold "
                               style="font-size:13px;"></span></div>
 
-                                                    <div class="row input-group mt-4 mb-3">
-                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                     opacity:0.9; padding:7px 9px 0 10px;">Author Type
                                 </span>
-                                                        </div>
-                                                        <select
-                                                                style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
-                                                                class="custom-select newinput col-md-9 form-control newinputdesign"
-                                                                name="{{ platform.name|lower }}_authortype"
-                                                                id="{{ platform.name|lower }}_authortype"
-                                                                required="required">
-                                                            {% for choice in platform.target_type %}
-                                                                <option value="{{ forloop.counter0 }}">{{ choice }}</option>
-                                                            {% endfor %}
-                                                        </select>
                                                     </div>
-                                                    <!-- author user id -->
-                                                    <div class="row input-group mt-4 mb-3">
-                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                    <select
+                                                            style="font-size:13px;height:auto; width:100%;color:#fff; border:none; padding-top:-1px ;"
+                                                            class="custom-select newinput col-md-9 form-control newinputdesign"
+                                                            name="{{ platform.name|lower }}_authortype"
+                                                            id="{{ platform.name|lower }}_authortype"
+                                                            required="required">
+                                                        {% for choice in platform.target_type %}
+                                                            <option value="{{ forloop.counter0 }}">{{ choice }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <!-- author user id -->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                     opacity:0.9; padding:7px 9px 0 10px;">Author ID
                                 </span>
-                                                        </div>
-                                                        <input type="text" class="col-md-9 form-control  newinputdesign"
-                                                               placeholder="Please Enter Your Number"
-                                                               id="{{ platform.name|lower }}-authoruserid"
-                                                               name="{{ platform.name|lower }}_authoruserid"
-                                                               aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2" required="required">
-
-
                                                     </div>
+                                                    <input type="text" class="col-md-9 form-control  newinputdesign"
+                                                           placeholder="Please Enter Your Number"
+                                                           id="{{ platform.name|lower }}-authoruserid"
+                                                           name="{{ platform.name|lower }}_authoruserid"
+                                                           aria-label="Recipient's username"
+                                                           aria-describedby="basic-addon2" required="required">
 
-                                                    <input type="hidden" name="platform"
-                                                           value="{{ platform.name|lower }}">
-                                                    <!--for author name-->
-                                                    <div class="row input-group mt-4 mb-3">
-                                                        <div class="col-md-3 p-0 input-group-prepend">
+
+                                                </div>
+
+                                                <input type="hidden" name="platform"
+                                                       value="{{ platform.name|lower }}">
+                                                <!--for author name-->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                     opacity:0.9; padding:7px 9px 0 10px;">Author Name
                                 </span>
-                                                        </div>
-                                                        <input type="text" class="col-md-9 form-control  newinputdesign"
-                                                               
-                                                               id="{{ platform.name|lower }}-authorusername"
-                                                               name="{{ platform.name|lower }}_authorusername"
-                                                               aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2" {% if platform.name == 'Reddit' %} disabled placeholder="Reddit Target has no author name " {% else %} required="required" {% endif %}>
                                                     </div>
-                                                    <!--AUTHUR URL-->
-                                                    <div class="row input-group mt-4 mb-3">
-                                                        <div class="col-md-3 p-0 input-group-prepend">
+                                                    <input type="text" class="col-md-9 form-control  newinputdesign"
+
+                                                           id="{{ platform.name|lower }}-authorusername"
+                                                           name="{{ platform.name|lower }}_authorusername"
+                                                           aria-label="Recipient's username"
+                                                           aria-describedby="basic-addon2"
+                                                            {% if platform.name == 'Reddit' %} disabled
+                                                           placeholder="Reddit Target has no author name " {% else %}
+                                                           required="required" {% endif %}>
+                                                </div>
+                                                <!--AUTHUR URL-->
+                                                <div class="row input-group mt-4 mb-3">
+                                                    <div class="col-md-3 p-0 input-group-prepend">
                                 <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                     opacity:0.9; padding:7px 9px 0 10px;">Author URL
                                 </span>
-                                                        </div>
-                                                        <input type="text" class="col-md-9 form-control  newinputdesign"
-                                                            
-                                                               id="{{ platform.name|lower }}-authoruserurl"
-                                                               name="{{ platform.name|lower }}_authoruserurl"
-                                                               aria-label="Recipient's username"
-                                                               aria-describedby="basic-addon2"  {% if platform.name == 'Youtube' %} disabled placeholder="Youtube Target has no author url  " {% else %} required="required" {% endif %} >
-                                                              
                                                     </div>
-                                                    <!-- DATE AND TIME 2 column div -->
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <!-- EXPIRED ON SECTION-->
-                                                            {% now "SHORT_DATE_FORMAT"  as date %}
+                                                    <input type="text" class="col-md-9 form-control  newinputdesign"
 
-                                                            <div class="row input-group   mt-4 mb-3">
-                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                           id="{{ platform.name|lower }}-authoruserurl"
+                                                           name="{{ platform.name|lower }}_authoruserurl"
+                                                           aria-label="Recipient's username"
+                                                           aria-describedby="basic-addon2"
+                                                            {% if platform.name == 'Youtube' %} disabled
+                                                           placeholder="Youtube Target has no author url  " {% else %}
+                                                           required="required" {% endif %} >
+
+                                                </div>
+                                                <!-- DATE AND TIME 2 column div -->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- EXPIRED ON SECTION-->
+                                                        {% now "SHORT_DATE_FORMAT"  as date %}
+
+                                                        <div class="row input-group   mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:5px 9px 0 10px;">Expire on
                                         </span>
-                                                                </div>
-                                                                <input type="date" min='{{ date|to_and }}'
-                                                                       max='2020-31-12' value="{{ date|to_and }}"
-                                                                       class="col-md-9 form-control  newinputdesign"
-                                                                       id="{{ platform.name|lower }}-expirydate"
-                                                                       required="required"
-                                                                       name="{{ platform.name|lower }}_expirydate"
-                                                                >
                                                             </div>
+                                                            <input type="date" min='{{ date|to_and }}'
+                                                                   max='2020-31-12' value="{{ date|to_and }}"
+                                                                   class="col-md-9 form-control  newinputdesign"
+                                                                   id="{{ platform.name|lower }}-expirydate"
+                                                                   required="required"
+                                                                   name="{{ platform.name|lower }}_expirydate"
+                                                            >
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <!--INTERVAL SECTION-->
-                                                            <div class="row input-group   mt-4 mb-3">
-                                                                <div class="col-md-3 p-0 input-group-prepend">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <!--INTERVAL SECTION-->
+                                                        <div class="row input-group   mt-4 mb-3">
+                                                            <div class="col-md-3 p-0 input-group-prepend">
                                         <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                                             opacity:0.9; padding:5px 9px 0 10px;">Interval
                                         </span>
-                                                                </div>
-                                                                <select
-                                                                        class="custom-select newinput col-md-9 form-control  newinputdesign"
-                                                                        id="{{ platform.name|lower }}-interval"
-                                                                        name="{{ platform.name|lower }}_interval"
-                                                                        required="required">
-                                                                    {% for interval in data.intervals %}
-                                                                        <option value="{{ interval.0 }}">{{ interval.1 }}</option>
-                                                                    {% endfor %}
-                                                                </select>
                                                             </div>
+                                                            <select
+                                                                    class="custom-select newinput col-md-9 form-control  newinputdesign"
+                                                                    id="{{ platform.name|lower }}-interval"
+                                                                    name="{{ platform.name|lower }}_interval"
+                                                                    required="required">
+                                                                {% for interval in data.intervals %}
+                                                                    <option value="{{ interval.0 }}">{{ interval.1 }}</option>
+                                                                {% endfor %}
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <!-- end of 2 column div for date and time-->
-                                                    <div class="row">
-                                                        <div class="col-md-3">
-                                                            <div class="input-group-prepend">
+                                                </div>
+                                                <!-- end of 2 column div for date and time-->
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="input-group-prepend">
                                     <span class="newlabeldesign" style="font-size:13px;letter-spacing:0.1em;
                         opacity:0.9; padding:7px 9px 0 10px;height:35px;width:110px;">Screenshots
                                     </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mt-2">
+                                                                <label class="d-flex flex-row justify-content-center align-items-center">
+                                                                    <input type="radio"
+                                                                           id="{{ platform.name|lower }}-screenshot"
+                                                                           name="{{ platform.name|lower }}_screenshot"
+                                                                           value="1"
+                                                                           required="required"/>
+                                                                    <span class="badge badge-success ml-2">   Yes</span>
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-md-6 mt-2">
+                                                                <label class="d-flex flex-row justify-content-center align-items-center ">
+                                                                    <input type="radio"
+                                                                           id="{{ platform.name|lower }}-screenshot"
+                                                                           name="{{ platform.name|lower }}_screenshot"
+                                                                           value="0"
+                                                                           required="required"/>
+                                                                    <span class="badge badge-danger ml-2">          No</span>
+                                                                </label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="row">
-                                                                <div class="col-md-6 mt-2">
-                                                                    <label class="d-flex flex-row justify-content-center align-items-center">
-                                                                        <input type="radio"
-                                                                               id="{{ platform.name|lower }}-screenshot"
-                                                                               name="{{ platform.name|lower }}_screenshot"
-                                                                               value="1"
-                                                                               required="required"/>
-                                                                        <span class="badge badge-success ml-2">   Yes</span>
-                                                                    </label>
-                                                                </div>
-
-                                                                <div class="col-md-6 mt-2">
-                                                                    <label class="d-flex flex-row justify-content-center align-items-center ">
-                                                                        <input type="radio"
-                                                                               id="{{ platform.name|lower }}-screenshot"
-                                                                               name="{{ platform.name|lower }}_screenshot"
-                                                                               value="0"
-                                                                               required="required"/>
-                                                                        <span class="badge badge-danger ml-2">          No</span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-
-                                                        </div>
-                                                        <input type="hidden" name="website_id"
-                                                               value="{{ platform|mongoid:'_id' }}">
-                                                        <input type="hidden" name="portfolio_id"
-                                                               value="{{ data.portfolio_id }}">
+                                                    </div>
+                                                    <div class="col-md-3">
 
                                                     </div>
+                                                    <input type="hidden" name="website_id"
+                                                           value="{{ platform|mongoid:'_id' }}">
+                                                    <input type="hidden" name="portfolio_id"
+                                                           value="{{ data.portfolio_id }}">
+
                                                 </div>
-                                                <!-- TWO BUTTON BOTTOM-->
-                                                <div class="row d-flex flex-row">
-                                                    <div class="col-md-12 ml-5 ">
-                                                        <!--LEFT BUTTON-->
-                                                        <button type="button"
-                                                                class="btn btn-secondary searchbutton clearform-btn"
-                                                                x-parent-form="{{ platform.name|lower }}-form">
-                                                            CLEAR FORM
-                                                        </button>
-                                                        <button type="submit" style="float:right; "
-                                                                class="btn btn-secondary searchbutton mr-5">Submit
-                                                        </button>
-                                                    </div>
+                                            </div>
+                                            <!-- TWO BUTTON BOTTOM-->
+                                            <div class="row d-flex flex-row">
+                                                <div class="col-md-12 ml-5 ">
+                                                    <!--LEFT BUTTON-->
+                                                    <button type="button"
+                                                            class="btn btn-secondary searchbutton clearform-btn"
+                                                            x-parent-form="{{ platform.name|lower }}-form">
+                                                        CLEAR FORM
+                                                    </button>
+                                                    <button type="submit" style="float:right; "
+                                                            class="btn btn-secondary searchbutton mr-5">Submit
+                                                    </button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <!-- end of the first reddit tab #1 -->
                                 </div>
-                            {% endfor %}
-                            <script>
-                                function cleanForm() {
-                                    var allInputs = $(":input");
-                                    $(allInputs).val('')
-                                    console.log("formed cleaned")
-                                }
+                                <!-- end of the first reddit tab #1 -->
+                            </div>
+                        {% endfor %}
+                        <script>
+                            function cleanForm() {
+                                var allInputs = $(":input");
+                                $(allInputs).val('')
+                                console.log("formed cleaned")
+                            }
 
-                                var tabpane_name = "{{platform.name|lower}}";
-                                console.log("tab_name ==  " + tabpane_name)
-                                $(tabpane_name + " #loading_icon").hide()
-                                $(tabpane_name + ' #smart_search_response').hide()
-                                //start of document ready
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    let smartsearch = $('.smartsearch')
-                                    // smart search
-                                    smartsearch.click((event) => {
-                                        console.log("")
+                            var tabpane_name = "{{platform.name|lower}}";
+                            console.log("tab_name ==  " + tabpane_name)
+                            $(tabpane_name + " #loading_icon").hide()
+                            $(tabpane_name + ' #smart_search_response').hide()
+                            //start of document ready
+                            document.addEventListener('DOMContentLoaded', function () {
+                                let smartsearch = $('.smartsearch')
+                                // smart search
+                                smartsearch.click((event) => {
+                                    console.log("")
 
-                                        $(tabpane_name + " #loading_icon").show()
-                                        // console.log(event.target)
-                                        let website = event.target.getAttribute('x-target-name')
-                                        let author_account = event.target.parentElement.parentElement.querySelector('input').value
-                                        let target_type = "{{platform.name|lower}}"
-                                        //console.log(website)
-                                        var author_type = $(`#${website}_authortype option:selected`).val();
-                                        console.log(author_type)
-                                        let data = {
-                                            'author_account': author_account,
-                                            'search_site': website,
-                                            'target_type': author_type
-                                        }
-                                        $.ajax({
-                                            dataType: "json",
-                                            url: "/tms/smartsearch/",
-                                            data: data,
-                                            success: (response) => {
-                                                console.log("Smart Search == in success function ")
-                                                // console.log(response)
-                                                $(`#${website}-authoruserid`).val(response['author_userid'])
-                                                $(`#${website}-authorusername`).val(response['author_username'])
-                                                document.getElementById(`${website}-profile_image`).src = response[
-                                                    'profile_url']
-                                                switch (website) {
-                                                    case 'reddit':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.reddit.com/${author_account}`)
-                                                        break;
-                                                    case 'linkedin':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.linkedin.com/in/${author_account}`)
-                                                        break;
-                                                    case 'instagram':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.instagram.com/${author_account}`)
-                                                        break;
-                                                    case 'facebook':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.facebook.com/${author_account}`)
-                                                        break;
-                                                    case 'twitter':
-                                                        $(`#${website}-authoruserurl`).val(
-                                                            `http://www.twitter.com/${author_account}`)
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                $(tabpane_name + " #loading_icon").hide()
-                                                $(tabpane_name + ' #smart_search_response').show()
-                                                $(tabpane_name + ' #smart_search_response').empty().append(
-                                                    " Operation successfull   ")
-                                                $(tabpane_name + ' #smart_search_response').fadeOut(8000)
-                                            },
-                                            error: function () {
-                                                console.log("Smart Search == in error function ")
-                                                $(tabpane_name + ' #smart_search_response').show()
-                                                $(tabpane_name + ' #smart_search_response').empty().append(
-                                                    " Operation Unsuccessfull  ! Please Try Again ")
-                                                $(tabpane_name + ' #smart_search_response').fadeOut(8000)
-                                                $(tabpane_name + " #loading_icon").hide()
+                                    $(tabpane_name + " #loading_icon").show()
+                                    // console.log(event.target)
+                                    let website = event.target.getAttribute('x-target-name')
+                                    let author_account = event.target.parentElement.parentElement.querySelector('input').value
+                                    let target_type = "{{platform.name|lower}}"
+                                    //console.log(website)
+                                    var author_type = $(`#${website}_authortype option:selected`).val();
+                                    console.log(author_type)
+                                    let data = {
+                                        'author_account': author_account,
+                                        'search_site': website,
+                                        'target_type': author_type
+                                    }
+                                    $.ajax({
+                                        dataType: "json",
+                                        url: "/tms/smartsearch/",
+                                        data: data,
+                                        success: (response) => {
+                                            console.log("Smart Search == in success function ")
+                                            // console.log(response)
+                                            $(`#${website}-authoruserid`).val(response['author_userid'])
+                                            $(`#${website}-authorusername`).val(response['author_username'])
+                                            document.getElementById(`${website}-profile_image`).src = response[
+                                                'profile_url']
+                                            switch (website) {
+                                                case 'reddit':
+                                                    $(`#${website}-authoruserurl`).val(
+                                                        `http://www.reddit.com/${author_account}`)
+                                                    break;
+                                                case 'linkedin':
+                                                    $(`#${website}-authoruserurl`).val(
+                                                        `http://www.linkedin.com/in/${author_account}`)
+                                                    break;
+                                                case 'instagram':
+                                                    $(`#${website}-authoruserurl`).val(
+                                                        `http://www.instagram.com/${author_account}`)
+                                                    break;
+                                                case 'facebook':
+                                                    $(`#${website}-authoruserurl`).val(
+                                                        `http://www.facebook.com/${author_account}`)
+                                                    break;
+                                                case 'twitter':
+                                                    $(`#${website}-authoruserurl`).val(
+                                                        `http://www.twitter.com/${author_account}`)
+                                                    break;
+                                                default:
+                                                    break;
                                             }
-                                        })
+                                            $(tabpane_name + " #loading_icon").hide()
+                                            $(tabpane_name + ' #smart_search_response').show()
+                                            $(tabpane_name + ' #smart_search_response').empty().append(
+                                                " Operation successfull   ")
+                                            $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                                        },
+                                        error: function () {
+                                            console.log("Smart Search == in error function ")
+                                            $(tabpane_name + ' #smart_search_response').show()
+                                            $(tabpane_name + ' #smart_search_response').empty().append(
+                                                " Operation Unsuccessfull  ! Please Try Again ")
+                                            $(tabpane_name + ' #smart_search_response').fadeOut(8000)
+                                            $(tabpane_name + " #loading_icon").hide()
+                                        }
                                     })
-                                    // clear form btn functionality
-                                    let clearformbtn = $('.clearform-btn')
-                                    clearformbtn.click(event => {
-                                        // console.log('clear form clicked')
-                                        let pf = event.target.getAttribute('x-parent-form')
-                                        // console.log(pf)
-                                        $(`#${pf}`).trigger('reset')
-                                    })
-                                }) // document ready
-                            </script>
-                        </div>
-                        <!-- let me check -->
-                        <!-- end of content -->
+                                })
+                                // clear form btn functionality
+                                let clearformbtn = $('.clearform-btn')
+                                clearformbtn.click(event => {
+                                    // console.log('clear form clicked')
+                                    let pf = event.target.getAttribute('x-parent-form')
+                                    // console.log(pf)
+                                    $(`#${pf}`).trigger('reset')
+                                })
+                            }) // document ready
+                        </script>
                     </div>
                 </div>
-                <!-- END OF second row-->
             </div>
         </div>
     </div>
