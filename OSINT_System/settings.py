@@ -158,7 +158,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+# ahmed
+# AUTH_USER_MODEL='User_Accounts_Management_Unit.App_Users'
+# ahmed end 
 
 """
 REST_FRAMEWORK = {

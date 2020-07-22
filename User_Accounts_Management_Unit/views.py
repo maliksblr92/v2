@@ -23,7 +23,9 @@ from django.contrib.auth import authenticate
 
 UIS_IP = settings.UIS_IP
 # Create your views here.
-
+# ahmed
+from User_Accounts_Management_Unit.models import User_Profile
+# ahmed
 
 @csrf_exempt
 @api_view(["POST"])
@@ -111,3 +113,47 @@ class User_Logout(View):
         logout(request)
         return HttpResponseRedirect(
             reverse('User_Accounts_Management_Unit:user_login'))
+
+
+
+class Add_User_Profile(View):
+    template_name='Add_User.html'
+    def get (self,request,*args,**kwargs):
+        return render (request,'User_Accounts_Management_Unit/Add_User_Profile.html')
+    def post (self,request,*args,**kwargs):
+        first_name=request.POST.get('first-name')
+        last_name=request.POST.get('last-name')
+        current_address=request.POST.get('local-address')
+        permanent_address=request.POST.get('permanent-address')
+        profile_pic=request.POST.get('profile-pic')
+        # 
+        print(first_name);
+        print(last_name);
+        print(current_address);
+        print(permanent_address);
+        print(profile_pic);
+        # 
+        New_User_Profile =User_Profile.objects.create_user_profile(
+                first_name=first_name,
+                last_name=last_name,
+                current_address=current_address,
+                permanent_address=permanent_address,
+                profile_pic=profile_pic
+                
+        )
+        # New_User_Profile.save()
+        if New_User_Profile:
+            return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html')
+        else:
+            return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html')
+
+        
+       
+class All_User_Profile(View):
+    def get(self,request,*args,**kwargs):
+        All_User_Profiles=User_Profile.objects.all()
+        print("#############################")
+        print(All_User_Profiles.count())
+        return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html',{'All_User_Profiles':All_User_Profiles})
+    
+        

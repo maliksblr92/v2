@@ -1,5 +1,6 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
+{% load osint_custom_tags %}
 {% block page_title %}Bulk Targets{% endblock %}
 {% block head_dep %}
     <!-- Stylesheet -->
@@ -15,6 +16,7 @@
 {% endblock %}
 
 {% block belly %}
+       {% now "SHORT_DATE_FORMAT"  as date %}
     <style>
 
 
@@ -34,6 +36,9 @@
                     rgba(6, 17, 26, 1) 100%
             );
             color: #fff;
+        }
+    input[type="text"]{
+        color:black!important;
         }
 
     </style>
@@ -70,21 +75,7 @@
                             </select>
                         </div>
 
-                        {#                        <div class="row form-group form-inline">#}
-                        {#                            <div class="col-md-4">#}
-                        {#                                <label class="newlabeldesign">Select Website</label>#}
-                        {##}
-                        {#                            </div>#}
-                        {#                            <div class="col-md-8">#}
-                        {#                                <select name="website" id="website" class="col-md-9 form-control custom_input_field" required="required">#}
-                        {#                                    <option value="">Select Website</option>#}
-                        {#                                    {% for i in social_sites %}#}
-                        {#                                        <p class="text-dark">  {{ i.name }}</p>#}
-                        {#                                        <option value="{{ i.id }}">{{ i.name }}</option>#}
-                        {#                                    {% endfor %}#}
-                        {#                                </select>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
+
 
 
                         <div class="row input-group mt-4 mb-3">
@@ -104,19 +95,7 @@
 
                         </div>
 
-                        {#                        <div class="row form-group form-inline">#}
-                        {#                            <div class="col-md-4"><label class="newlabeldesign">Target Type</label>#}
-                        {##}
-                        {#                            </div>#}
-                        {#                            <div class="col-md-8 " id="target_type_div">#}
-                        {#                                <select name="target_type" id="target_type"#}
-                        {#                                        class="col-md-9 form-control custom_input_field"#}
-                        {#                                        required="required">#}
-                        {#                                    <option value="">Select Target Type</option>#}
-                        {##}
-                        {#                                </select>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
+
 
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-3 p-0 input-group-prepend">
@@ -134,20 +113,6 @@
                             </select>
                         </div>
 
-                        {#                        <div class="row form-group form-inline">#}
-                        {#                            <div class="col-md-4"><label class="newlabeldesign">Periodic Interval</label>#}
-                        {##}
-                        {#                            </div>#}
-                        {#                            <div class="col-md-8">#}
-                        {#                                <select name="interval" id="interval" class="col-md-9 form-control custom_input_field" required="required">#}
-                        {#                                    <option value="">Select Interval</option>#}
-                        {#                                    {% for interval in intervals.0 %}#}
-                        {#                                        <option value="{{ interval.0 }}">{{ interval.1 }}</option>#}
-                        {##}
-                        {#                                    {% endfor %}#}
-                        {#                                </select>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
 
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-3 p-0 input-group-prepend">
@@ -166,17 +131,7 @@
 
                         </div>
 
-                        {#                        <div class="row form-group form-inline">#}
-                        {#                            <div class="col-md-4"><label class="newlabeldesign">User Names</label>#}
-                        {##}
-                        {#                            </div>#}
-                        {#                            <div class="col-md-8">#}
-                        {#                                <input type="text" data-role="tagsinput" value=""#}
-                        {#                                       class="col-md-9 form-control custom_input_field"#}
-                        {#                                       required="required"#}
-                        {#                                       id="usernames" name="usernames"/>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
+
 
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-3 p-0 input-group-prepend">
@@ -186,18 +141,12 @@
                             </div>
                             <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on"
                                    name="expired_on"
+                                   type="date" min='{{ date|to_and }}'
+                                                                   max='2020-31-12' value="{{ date|to_and }}"
                                    required="required"/>
                         </div>
 
-                        {#                        <div class=" row form-group form-inline">#}
-                        {#                            <div class="col-md-4"><label class="newlabeldesign">Expired On</label>#}
-                        {##}
-                        {#                            </div>#}
-                        {#                            <div class="col-md-8">#}
-                        {#                                <input type="date" class="col-md-9 form-control custom_input_field" id="expired_on" name="expired_on"#}
-                        {#                                       required="required"/>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
+
 
                         <div class="row input-group mt-4 mb-3">
                             <div class="col-md-3 p-0 input-group-prepend">
@@ -236,20 +185,6 @@
 
                         </div>
 
-                        {#                        <div class="row form-group   form-inline">#}
-                        {##}
-                        {#                            <div class="col-md-4"><label class="newlabeldesign">Screenshots</label></div>#}
-                        {#                            <div class="radio-group d-flex flex-row justify-content-around align-items-center">#}
-                        {#                                <label class="text-success">Yes <input type="checkbox" id="screenshots"#}
-                        {#                                                                       name="screenshots"#}
-                        {#                                                                       value="1"/></label>#}
-                        {#                                <label class="text-success">No <input type="checkbox" id="screenshots"#}
-                        {#                                                                      name="screenshots"#}
-                        {#                                                                      value="0"/></label>#}
-                        {#                            </div>#}
-                        {##}
-                        {##}
-                        {#                        </div>#}
 
                         <!-- Button -->
                         <div class="row input_wrapper_row">
@@ -263,12 +198,6 @@
                             </div>
                         </div>
 
-                        {#                        <div class="row form-group   form-inline">#}
-                        {#                            <div class="col-md-8"></div>#}
-                        {#                            <div class="col-md-4  radio-group d-flex flex-row justify-content-around align-items-center">#}
-                        {#                                <input type="submit" class="btn btn-success" id="submit" value="submit" name="submit"/>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
 
 
                     </form>

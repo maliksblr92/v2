@@ -1,0 +1,165 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+
+{% endblock %}
+
+{% block smallnavbar %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-8 d-flex" style="">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu"> <!-- secondnavactive -->
+                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
+                    IDENTIFY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
+                    SURVEY</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
+                    CRAWLING</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
+                    KEYBASE</a>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">ALL USERS PROFIELS</p>
+{% endblock %}
+{% block belly %}
+    <style>
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
+
+        table {
+            height: 500px !important;
+            display: -moz-groupbox;
+        }
+
+        tbody {
+            overflow-y: scroll !important;
+            overflow-x: hidden;
+            height: 400px !important;
+            width: 100%;
+
+        }
+
+        @media screen and (max-width: 767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-y: hidden;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
+
+            .table-responsive > .table {
+                margin-bottom: 0;
+            }
+
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > th,
+            .table-responsive > .table > tfoot > tr > th,
+            .table-responsive > .table > thead > tr > td,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space: nowrap;
+            }
+
+            .table-responsive > .table-bordered {
+                border: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+            .table-responsive > .table-bordered > thead > tr > td:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+            .table-responsive > .table-bordered > thead > tr > td:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right: 0;
+            }
+
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom: 0;
+            }
+        }
+    </style>
+    <div class="row">
+  
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table table-responsive text-dark pt-2" id="created_targets" style="width:100%">
+                <thead>
+                <tr>
+
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Local Address</th>
+                    <th scope="col">Perm Address</th>
+                    <th scope="col">Profile Pic</th>
+                    <th scope="col">Operation</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for profiles in All_User_Profiles %}
+                    <tr>
+                        <th scope="row">{{ profiles.first_name }}</th>
+                        <td>{{ profiles.last_name }}</td>
+                        <td> {{profiles.current_address}}</td>
+                        <td>{{ profiles.permanent_address }}</td>
+                        <td>{{ profiles.expired_on }}</td>
+                        <td><img src="{{ profiles.profile_pic }}" style="" alt=""></td>
+                        <td>Include | <i class="fa fa-trash"></i></td>
+                    </tr>
+                    
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#created_targets').DataTable();
+        });
+    </script>
+    <script>
+        window.document.title = "Target";
+    </script>
+{% endblock %}

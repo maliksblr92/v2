@@ -2,124 +2,88 @@
 {% load static %}
 {% block head_dep %}
 <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
-
 {% endblock %}
 {% block smallnavbar %}
 <div class="row">
-  <div class="col-sm-0 col-md-0 col-lg-1 col-xl-2"></div>
-  <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 d-flex" style="">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 d-flex" style="">
     <div class="col-md-1">
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu">
       <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
       <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
       <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems "> IDENTIFY</a>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
       <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems "> SURVEY</a>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+    <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
       <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems "> CRAWLING</a>
     </div>
   </div>
-  <div class="col-sm-0 col-md-0 col-lg-1 col-xl-2"></div>
+  <div class="col-md-2"></div>
 </div>
 {% endblock %}
 {% block belly %}
-<style>
-    .background-color {
-        background: linear-gradient( 90deg, rgba(0, 32, 44, 90%) 0%, rgba(0, 46, 69, 90%) 28%, rgba(0, 83, 135, 82%) 72%, rgba(0, 113, 188, 80%) 100% );
-        border-bottom: 1px solid #707070;
-        }
-        .vertical-text{
-            writing-mode: vertical-lr;
-        }
-        #chart_1{
-           height: 100%;;
-            width: 100%;;
-        }
 
-        #chart_2{
-            height: 100%;;
-             width: 100%;;
-         }
+<div class="row">
+ 
+  <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
+    <div class="row">
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
+        <p class="text-white charts_header">
+          Target Overview </p>
+      </div>
+      <div class="col-lg-11 col-sm-12  glowing_border chart_container">
+        <div id="chart_1" class="m-0 p-1 height_width_100"></div>
+      </div>
 
-
-         #chart_3{
-            height: 100%;;
-             width: 100%;;
-         }
-
-
-         #chart_4{
-            height: 100%;;
-             width: 100%;;
-         }
-        .custom_border{
-            border: 1px solid #1cb5e0;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-            -webkit-box-shadow: 0px 0px 4px #1cb5e0;
-            -moz-box-shadow: 0px 0px 4px #1cb5e0;
-            box-shadow: 0px 0px 4px #1cb5e0;
-       
-        }
-</style>
-    <div class="row background-color">
-    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center m-0 p-0 "style="height:353px;">
-<div class="col-md-1 custom_border h-100 ">
-    <span class="text-white  vertical-text my-auto text-center  h-100"> Target Overview</span>
-</div>
-<div class="col-md-11 custom_border h-100">
-    <div id="chart_1" class=""></div>
-</div>
     </div>
+  </div>
+  <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
+    <div class="row">
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
+        <p class="text-white charts_header">Recent Targets </p>
+      </div>
+      <div class="col-lg-11 col-sm-12 glowing_border chart_container">
+        <div id="chart_2" class="m-0 p-1 height_width_100"></div>
+      </div>
 
-
-
-    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center m-0 p-0 "style="height:353px;">
-        <div class="col-md-1 custom_border h-100 ">
-            <span class="text-white  vertical-text my-auto text-center  h-100"> Recent Targets</span>
-        </div>
-        <div class="col-md-11 custom_border h-100">
-            <div id="chart_2" class=""></div>
-        </div>
-            </div>
-
-
-
-
-            <div class="col-md-6 d-flex flex-row justify-content-center align-items-center m-0 p-0 "style="height:353px;">
-                <div class="col-md-1 custom_border h-100 ">
-                    <span class="text-white  vertical-text my-auto text-center  h-100"> Global
-                        Targets Overview </span>
-                </div>
-                <div class="col-md-11 custom_border h-100">
-                    <div id="chart_3" class=""></div>
-                </div>
-                    </div>
-
-
-
-
-
-                    <div class="col-md-6 d-flex flex-row justify-content-center align-items-center m-0 p-0 "style="height:353px;">
-                        <div class="col-md-1 custom_border h-100 ">
-                            <span class="text-white  vertical-text my-auto text-center  h-100"> Highligted Profiles</span>
-                        </div>
-                        <div class="col-md-11 custom_border h-100">
-                            <div id="chart_4" class=""></div>
-                        </div>
-                            </div>
-
-
-
-
-       
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
+    <div class="row">
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
+        <p class="text-white charts_header">Global
+          Targets Overview </p>
+      </div>
+      <div class="col-lg-11 col-sm-12 glowing_border chart_container">
+        <div id="chart_3" class="m-0 p-1 height_width_100"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-lg-6 col-sm-12 col-lg-6 col-lg-6 col-xl-6 col-xs-12">
+    <div class="row">
+      <div class="col-lg-1 col-sm-12 custom_center glowing_border charts_parent_div">
+        <p class="text-white custom_center    charts_header">Highligted Profiles
+           </p>
+      </div>
+      <div class="col-lg-11 col-sm-12 glowing_border chart_container ">
+        <div id="chart_4" class="m-0 p-1  height_width_100"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  
+</script>
 {% endblock %}
