@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wk@z!^we^q_-l_j6h+l4xq%vweos9tc^(_w1j!wwi35ud2$g8*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -158,9 +158,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-# ahmed
-# AUTH_USER_MODEL='User_Accounts_Management_Unit.App_Users'
-# ahmed end 
+
 
 """
 REST_FRAMEWORK = {

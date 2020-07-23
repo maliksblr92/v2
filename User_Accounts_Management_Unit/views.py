@@ -152,7 +152,6 @@ class Add_User_Profile(View):
 class All_User_Profile(View):
     def get(self,request,*args,**kwargs):
         All_User_Profiles=User_Profile.objects.all()
-        print("#############################")
         print(All_User_Profiles.count())
         return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html',{'All_User_Profiles':All_User_Profiles})
     
