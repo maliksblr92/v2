@@ -7,6 +7,7 @@ import datetime
 
 
 class User_Profile_Manager(models.Manager):
+    # create a new user profile 
     def create_user_profile(self,first_name,last_name,current_address,permanent_address,profile_pic):
             user_profile = self.create(
                                first_name=first_name,
@@ -19,11 +20,30 @@ class User_Profile_Manager(models.Manager):
                 return True
             else: 
                 return False
+    # get a single user profile   by id 
     @staticmethod
     def getUserProfile(id):
-       profile_object=User_Profile.objects.filter(id=id)
-       print(profile_object)
-       return profile_object 
+       Fetched_User_Profile=User_Profile.objects.get(id=id)
+       return Fetched_User_Profile 
+      # delete a single user profile   by id 
+    @staticmethod
+    def deleteUserProfile(id):
+        Deleteable_User_Profile=User_Profile.objects.get(id=id)
+        if(Deleteable_User_Profile):
+            Deleteable_User_Profile.delete()
+            return True
+        else:
+            return False
+     # getupdate a single user profile  
+    @staticmethod
+    def getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic):
+       Update_User_Profile=User_Profile.objects.filter(id = id).update(first_name=first_name,last_name=last_name,current_address=current_address,permanent_address=permanent_address,profile_pic=profile_pic)
+       if Update_User_Profile:
+           return Update_User_Profile 
+       else:
+           return False
+           
+       
 
 
 class User_Profile(models.Model):
@@ -32,7 +52,7 @@ class User_Profile(models.Model):
     current_address=models.CharField(max_length=200)
     permanent_address=models.CharField(max_length=200)
     profile_pic=models.ImageField(null=True,blank=True)
-    objects = models.Manager()
+    objects = User_Profile_Manager()
     def __str__(self):
         return self.first_name
     

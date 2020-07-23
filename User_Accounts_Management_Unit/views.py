@@ -25,6 +25,7 @@ UIS_IP = settings.UIS_IP
 # Create your views here.
 # ahmed
 from User_Accounts_Management_Unit.models import User_Profile,User_Profile_Manager
+from django.contrib.auth.models import Group
 # ahmed
 
 @csrf_exempt
@@ -119,7 +120,9 @@ class User_Logout(View):
 class Add_User_Profile(View):
     template_name='Add_User.html'
     def get (self,request,*args,**kwargs):
-        return render (request,'User_Accounts_Management_Unit/Add_User_Profile.html')
+        User_Groups = Group.objects.all()
+        User_Profile_Fetched={}
+        return render (request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Fetched,'User_Groups':User_Groups})
     def post (self,request,*args,**kwargs):
         first_name=request.POST.get('first-name')
         last_name=request.POST.get('last-name')
@@ -141,9 +144,8 @@ class Add_User_Profile(View):
                 profile_pic=profile_pic
                 
         )
-        # New_User_Profile.save()
         if New_User_Profile:
-            return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html')
+            return redirect('/all_user_profile')
         else:
             return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html')
 
@@ -152,20 +154,80 @@ class Add_User_Profile(View):
 class All_User_Profile(View):
     def get(self,request,*args,**kwargs):
         All_User_Profiles=User_Profile.objects.all()
-        print(All_User_Profiles.count())
+        # print(All_User_Profiles.count())
         return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html',{'All_User_Profiles':All_User_Profiles})
     
 
 class Update_User_Profile(View):
     def get(self,request,*args,**kwargs):
-      id= kwargs.get('id')
-      id=int(id)
+      id= int(kwargs.get('id'))
       User_Profile_Fetched=User_Profile_Manager.getUserProfile(id)
       if(User_Profile_Fetched):
-          print("################")
-          print(User_Profile_Fetched)
-          return redirect('/add_user_profile',{'User_Profile_Fetched':User_Profile_Fetched})
+          return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Fetched})
       else:
           return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html')
     
+    def post(self,request,*args,**kwargs):
+         id= int(kwargs.get('id'))
+         first_name=request.POST.get('first-name')
+         last_name=request.POST.get('last-name')
+         current_address=request.POST.get('local-address')
+         permanent_address=request.POST.get('permanent-address')
+         profile_pic=request.POST.get('profile-pic')
+         User_Profile_Updated=User_Profile_Manager.getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic)
+         if(User_Profile_Updated):
+            return redirect('/all_user_profile')
+         else:
+            return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Updated})
 
+class Delete_User_Profile(View):
+    def get(self,request,*args,**kwargs):
+        id= int(kwargs.get('id'))
+        Delete_User_Profile=User_Profile_Manager.deleteUserProfile(id);
+        if(Delete_User_Profile):
+            return redirect('/all_user_profile')
+        else:
+            return redirect('/all_user_profile')
+        
+
+
+class Add_User_Group(View):
+    def get(self,request,*args,**kwargs):
+        pass
+    def post(self,request,*args,**kwargs):
+        group_name=request.POST.get('group_name')
+        print("############")
+        print(group_name)
+        Group_Created=Group.objects.create(name=group_name)
+        if Group_Created:
+            return redirect('/all_user_group')
+        else:
+            return redirect('/all_user_group')
+    
+class All_User_Group(View):
+    def get(self,request,*args,**kwargs):
+        All_Users_Groups=Group.objects.all()
+        All_Users=User_Profile.objects.all()
+        if( All_Users_Groups):
+            return render(request,'User_Accounts_Management_Unit/All_Users_Groups.html',{'All_Users_Groups':All_Users_Groups,'All_Users':All_Users})
+        
+class Add_Users_To_Groups(View):
+    def get(self,request,*args,**kwargs):
+        pass
+    def post(self,request,*args,**kwargs):
+        user_names=request.POST.getlist('user_names[]')
+        groupId=request.POST.get('groupId')
+        group = Group.objects.get(id=groupId)
+        if(group):
+            for name in  user_names:
+                user=User_Profile.objects.get(id=name)
+                print(user)
+                # group.user_set.add(user)
+                print("##############")
+                print("success")
+        else:
+            pass
+            return redirect('/all_user_group')
+            # g1.permissions.add(perm1, perm3, perm4)
+        
+            
