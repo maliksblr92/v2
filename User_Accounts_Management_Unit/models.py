@@ -32,7 +32,7 @@ class User_Profile(models.Model):
     current_address=models.CharField(max_length=200)
     permanent_address=models.CharField(max_length=200)
     profile_pic=models.ImageField(null=True,blank=True)
-    objects = User_Profile_Manager()
+    objects = models.Manager()
     def __str__(self):
         return self.first_name
     
