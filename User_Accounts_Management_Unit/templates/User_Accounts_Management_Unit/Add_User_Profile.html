@@ -1,16 +1,26 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block belly_header %}
+{% if User_Profile_Fetched %}
+<p class="text-uppercase custom_card_title ">UPDATE USER PROFILE</p>
+{% else %}
 <p class="text-uppercase custom_card_title ">ADD USER PROFILE</p>
+{% endif %}
 {% endblock %}
 {% block belly %}
 <div class="row ">
     <!-- RPW FOR SOCIAL MEDIA -->
     <!-- Second row-->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  ">
-        <form name="darkweb_form" id="darkweb_form" action="{% url 'User_Accounts_Management_Unit:add_user_profile'  %}" method="POST"
+        {% if User_Profile_Fetched %}
+        {{User_Profile_Fetched}}
+        <form name="Add_User_Profile" action="{% url 'User_Accounts_Management_Unit:update_user_profile'  %}" enctype="multipart/form-data" method="POST"
               class="custom_inner_background inner_form_margin_radius">
             {% csrf_token %}
+            {% else %}
+            <form name="Add_User_Profile" action="{% url 'User_Accounts_Management_Unit:add_user_profile'  %}" enctype="multipart/form-data" method="POST"
+            class="custom_inner_background inner_form_margin_radius">
+            {% endif %}
             <div class="card-body main_card border border-success">
                 <div class="row">
                     <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
@@ -35,6 +45,11 @@
                                    name="first-name"
                                    minlength="5"
                                    maxlength="20"
+                                   {% if User_Profile_Fetched %}
+                                   value="{{User_Profile_Fetched.first_name}}"
+                                   {% else %}
+                                   value=""
+                                   {% endif %}
                                    placeholder="enter firstname" required="required">
                         </div>
                         <!-- end input frirst_name -->
@@ -52,6 +67,11 @@
                                    name="last-name"
                                    minlength="5"
                                    maxlength="50"
+                                   {% if User_Profile_Fetched %}
+                                   value="{{User_Profile_Fetched.last_name}}"
+                                   {% else %}
+                                   value=""
+                                   {% endif %}
                                    placeholder="enter lastname" required="required">
                         </div>
                         <!-- end input email -->
@@ -70,6 +90,11 @@
                                    name="local-address"
                                    minlength="8"
                                    maxlength="199"
+                                   {% if User_Profile_Fetched %}
+                                   value="{{User_Profile_Fetched.current_address}}"
+                                   {% else %}
+                                   value=""
+                                   {% endif %}
                                    placeholder="enter local address" required="required">
                         </div>
                         <!-- end input local address -->
@@ -87,6 +112,11 @@
                                    name="permanent-address"
                                    minlength="8"
                                    maxlength="199"
+                                   {% if User_Profile_Fetched %}
+                                   value="{{User_Profile_Fetched.permanent_address}}"
+                                   {% else %}
+                                   value=""
+                                   {% endif %}
                                    placeholder="enter permanent address" required="required">
                         </div>
                         <!-- end input permanent -->
@@ -102,7 +132,11 @@
                                    class="col-md-9 form-control custom_input_field"
                                    id="profile-pic"
                                    name="profile-pic"
-                           
+                                   {% if User_Profile_Fetched %}
+                                   value="{{User_Profile_Fetched.profile_pic}}"
+                                   {% else %}
+                                   value=""
+                                   {% endif %}
                                    placeholder="add profile picture" required="required">
                         </div>
                         <!-- end input permanent -->

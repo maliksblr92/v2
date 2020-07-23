@@ -19,7 +19,11 @@ class User_Profile_Manager(models.Manager):
                 return True
             else: 
                 return False
-    
+    @staticmethod
+    def getUserProfile(id):
+       profile_object=User_Profile.objects.filter(id=id)
+       print(profile_object)
+       return profile_object 
 
 
 class User_Profile(models.Model):
@@ -27,9 +31,9 @@ class User_Profile(models.Model):
     last_name=models.CharField(max_length=30)
     current_address=models.CharField(max_length=200)
     permanent_address=models.CharField(max_length=200)
-    profile_pic=models.CharField(max_length=200)
+    profile_pic=models.ImageField(null=True,blank=True)
     objects = User_Profile_Manager()
     def __str__(self):
         return self.first_name
     
- 
+           

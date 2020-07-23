@@ -172,8 +172,11 @@ class PersonOfInterest(Document):
         self.email = email
         self.phone = phone
         self.poi_category.extend(poi_category)
-        self.save()
-
+        print("failed")
+        try:
+            self.save()
+        except:
+            print("failed")
     def append_language(self, language: Language):
         """
         append language to list of languages

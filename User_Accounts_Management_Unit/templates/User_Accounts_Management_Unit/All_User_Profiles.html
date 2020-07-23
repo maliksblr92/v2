@@ -136,12 +136,13 @@
                 {% for profiles in All_User_Profiles %}
                     <tr>
                         <th scope="row">{{ profiles.first_name }}</th>
-                        <td>{{ profiles.last_name }}</td>
+                        <td>{{ profiles.id }}</td>
                         <td> {{profiles.current_address}}</td>
                         <td>{{ profiles.permanent_address }}</td>
                         <td>{{ profiles.expired_on }}</td>
                         <td><img src="{{ profiles.profile_pic }}" style="" alt=""></td>
-                        <td>Include | <i class="fa fa-trash"></i></td>
+                        <td>Include | <i class="fa fa-trash"></i>
+                            <a class="badge badge-dark" href="{%  url 'User_Accounts_Management_Unit:update_user_profile' id=profiles.id %}"><i class="fa fa-eye"></i></a></td>
                     </tr>
                     
                 {% endfor %}

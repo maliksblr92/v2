@@ -24,7 +24,7 @@ from django.contrib.auth import authenticate
 UIS_IP = settings.UIS_IP
 # Create your views here.
 # ahmed
-from User_Accounts_Management_Unit.models import User_Profile
+from User_Accounts_Management_Unit.models import User_Profile,User_Profile_Manager
 # ahmed
 
 @csrf_exempt
@@ -155,4 +155,19 @@ class All_User_Profile(View):
         print(All_User_Profiles.count())
         return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html',{'All_User_Profiles':All_User_Profiles})
     
-        
+
+class Update_User_Profile(View):
+    def get(self,request,*args,**kwargs):
+      id= kwargs.get('id')
+      id=int(id)
+      manager= User_Profile_Manager()
+      User_Profile_Fetched=manager.getUserProfile(id)
+      if(User_Profile_Fetched):
+          print("################")
+          print(User_Profile_Fetched)
+          return redirect('/add_user_profile',{'User_Profile_Fetched':User_Profile_Fetched})
+      else:
+        #   return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html')
+        pass
+    
+
