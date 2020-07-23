@@ -480,6 +480,7 @@ import collections, functools, operator
 
 
 def keywords_results_barplot(modelname):
+    #commented on request to detect changes
     queries_record = []
     if (modelname.objects):
         queries = []

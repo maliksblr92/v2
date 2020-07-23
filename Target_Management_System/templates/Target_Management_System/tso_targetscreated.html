@@ -40,6 +40,9 @@
         <div class="col-md-1"></div>
     </div>
 {% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">ALREADY CREATED TARGETS</p>
+{% endblock %}
 {% block belly %}
     <style>
         tr {
@@ -113,14 +116,9 @@
             }
         }
     </style>
-    <div class="row middlecontentdiv">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12 topcontentbar ">
-            <h4 class="topheading">Already Created Targets</h4>
-        </div>
-        <!-- end of top row -->
-        <!-- inside main container -->
-        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5  ">
-            <table class="table table-responsive text-white" id="created_targets" class="display" style="width:100%">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table table-responsive text-dark pt-2" id="created_targets" style="width:100%">
                 <thead>
                 <tr>
 
@@ -136,7 +134,6 @@
                 <tbody>
                 {% for target in targets %}
                     <tr>
-
                         <th scope="row">{{ target.GTR }}</th>
                         <td>{{ target.target_type }}</td>
                         <td> {% if target.username %}
@@ -154,7 +151,6 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-            </table>
             </table>
         </div>
     </div>
