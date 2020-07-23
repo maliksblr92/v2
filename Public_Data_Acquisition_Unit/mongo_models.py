@@ -809,8 +809,6 @@ class Facebook_Group(Facebook_Target):
         return len(Facebook_Group.objects(is_expired=True))
 
 class Facebook_Search(Facebook_Target):
-
-
     url = StringField(default='null')
     target_type = StringField(default='null')
     search_phrase = StringField(default='null')

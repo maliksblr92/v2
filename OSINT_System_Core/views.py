@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from Keybase_Management_System.models import Keybase_KMS
 from Portfolio_Management_System.models import Portfolio_PMS
 from Avatar_Management_Unit.models import Avatar_AMS
+from Public_Data_Acquisition_Unit.mongo_models import *
 
 from django.http import HttpResponse, HttpResponseRedirect
 from Data_Processing_Unit.processing_manager import Processing_Manager
@@ -1156,6 +1157,3 @@ class Delete_Periodic_Target_DB(View):
 def design_test(request):
     return render(request, 'OSINT_System_Core/design_test.html')
 
-
-def resp_test(request):
-    return render(request, 'OSINT_System_Core/resp_test.html')
