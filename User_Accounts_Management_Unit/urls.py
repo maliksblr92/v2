@@ -18,6 +18,7 @@ path('',views.User_Login.as_view(),name='user_login'),
     # user-group_routes
     path('add_user_group/',views.Add_User_Group.as_view(), name='add_user_group'),
     path('all_user_group/',views.All_User_Group.as_view(), name='all_user_group'),
-    path('add_users_to_groups/',views.Add_Users_To_Groups.as_view(),name='add_users_to_groups')
+    path('add_users_to_groups/',views.Add_Users_To_Groups.as_view(),name='add_users_to_groups'),
+    path('get_all_group_users/<str:id>/',views.Get_All_Group_Users.as_view(),name='get_all_group_users')
     
 ]

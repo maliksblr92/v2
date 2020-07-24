@@ -153,7 +153,7 @@
                         <th scope="row">{{ group.id|default:"N/A"}}</th>
                         <td>{{ group.name|default:"N/A"}}</td>
                         
-                        <td><button type="button" class="btn btn-success addUsersToGroup" data-toggle="modal" data-id="{{group.id}}" data-target="#addUsersToGroup">
+                        <td><button type="button" id="addUsersToGroupsBtn" class="btn btn-success addUsersToGroup" data-toggle="modal" data-id="{{group.id}}" data-target="#addUsersToGroup">
                             <i class="fa fa-plus text-white">Add Users </i>
                            </button></td>
                         <td> <a class="badge badge-dark" href=""><i class="fa fa-trash text-danger"></i></a>
@@ -184,20 +184,23 @@
                     <div class="form-group">
                        <input type="hidden" name="groupId" id="groupId" />
                     </div>
-                <div class="d-flex flex-row justify-content-around align-items-center ">
-                   <label for="user-names">Select Users</label>
+                <div class="d-flex flex-row justify-content-around align-items-center " id="appendGroupUsers">
+                    {% comment %}<label for="user-names">Select Users</label>
                     <select name="user_names[]" id="users_names" class="selectpicker" multiple data-live-search="true" style="width:250px;" multiple required="required" >
                       
+                       
                         {% for user in All_Users %}
-                        <option value="{{user.id}}" style="color:black!important;">{{user.first_name}}</option>
+                        <option value="{{user.id}}" style="color:black!important;">{{user.username}}</option>
                         {% endfor %}
+                       
                     </select>
+                    {% endcomment %}
                 </div>
                 
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Create Group</button>
+                  <button type="submit" class="btn btn-primary">Add To Group</button>
                 </form>
                 </div>
               </div>
@@ -240,6 +243,34 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script defer type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+
+            <script>
+                
+                $(document).ready(function () {
+            console.log("addUsersToGroupsBtn");
+                    $('#addUsersToGroupsBtn').on('click',function(){
+                        $('#user_names').empty()
+                        var Group_Data_Id=$(this).data('id');
+                        $.get("{% url 'User_Accounts_Management_Unit:get_all_group_users' id=12345 %}".replace(/12345/, Group_Data_Id.toString()),function(data){   
+                            var html='<div class="dropdown bootstrap-select show-tick"><select name="user_names[]" id="users_names" class="selectpicker" multiple="" data-live-search="true" style="width:250px;" required="required" tabindex="-98"></select></select><button type="button" class="btn dropdown-toggle bs-placeholder btn-light" data-toggle="dropdown" role="button" data-id="users_names" title="Nothing selected" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Nothing selected</div></div> </div></button><div class="dropdown-menu" role="combobox" style="max-height: 364px; overflow: hidden; min-height: 46px;"></div>';
+                            data.forEach(function(user) {
+                         
+                             html+=' <option value="'+user['pk']+'" style="color:black!important;">'+user['fields']['username']+'</option>';
+                          
+                            });
+                      
+                            html+= '<div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 300px; overflow-y: auto; min-height: 0px;"><ul class="dropdown-menu inner show"><li><a role="option" class="dropdown-item" style="color: black !important;" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">ahmed</span></a></li><li><a role="option" class="dropdown-item" style="color: black !important;" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">ahmed@kabeer</span></a></li></ul></div></div></div>';
+                            $('#addUsersToGroup .modal-body #appendGroupUsers').append(html)
+                            console.log(html);
+                        });
+                    })
+                });
+                    
+             
+            </script>
+
+
     <script>
         $(document).ready(function () {
             $('#All_Users_Groups').DataTable();
@@ -248,12 +279,23 @@
         $(document).on("click", ".addUsersToGroup", function () {
             var mygroupId = $(this).data('id');
             $(".modal-body #groupId").val( mygroupId );
-            console.log($('#groupId').val(mygroupId))            
+           // console.log($('#groupId').val(mygroupId))            
          
        });
     </script>
     <script>
         window.document.title = "Target";
     </script>
+   
 
 {% endblock %}
+
+
+                      
+                       
+                        
+   
+
+    
+ 
+ 

@@ -26,6 +26,10 @@ UIS_IP = settings.UIS_IP
 # ahmed
 from User_Accounts_Management_Unit.models import User_Profile,User_Profile_Manager
 from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
+from django.core import serializers
+import json
+from django.http import JsonResponse
 # ahmed
 
 @csrf_exempt
@@ -207,7 +211,7 @@ class Add_User_Group(View):
 class All_User_Group(View):
     def get(self,request,*args,**kwargs):
         All_Users_Groups=Group.objects.all()
-        All_Users=User_Profile.objects.all()
+        All_Users=User.objects.all()
         if( All_Users_Groups):
             return render(request,'User_Accounts_Management_Unit/All_Users_Groups.html',{'All_Users_Groups':All_Users_Groups,'All_Users':All_Users})
         
@@ -220,14 +224,29 @@ class Add_Users_To_Groups(View):
         group = Group.objects.get(id=groupId)
         if(group):
             for name in  user_names:
-                user=User_Profile.objects.get(id=name)
-                print(user)
-                # group.user_set.add(user)
-                print("##############")
-                print("success")
+                user=User.objects.get(id=name)
+                # print("##############")
+                # print(user)
+                group.user_set.add(user)
+                return redirect('/all_user_group')
         else:
             pass
             return redirect('/all_user_group')
             # g1.permissions.add(perm1, perm3, perm4)
         
-            
+
+
+class Get_All_Group_Users(View):
+    def get(self,request,*args,**kwargs):
+        Group_Id= int(kwargs.get('id'))
+        group = Group.objects.get(id=Group_Id)
+        # users = group.user_set.all()
+        users=User.objects.filter(groups__name=group.name)
+        for user in users:
+            All_Users=User.objects.exclude(username=user.username)
+            qs_json = serializers.serialize('json', All_Users)
+        return HttpResponse(qs_json, content_type='application/json')
+           
+
+        
+      
