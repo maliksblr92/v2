@@ -156,6 +156,10 @@
                         <td><button type="button" id="addUsersToGroupsBtn" class="btn btn-success addUsersToGroup" data-toggle="modal" data-id="{{group.id}}" data-target="#addUsersToGroup">
                             <i class="fa fa-plus text-white">Add Users </i>
                            </button></td>
+                           <td>
+                               <select name="group_users" id="group_users">
+                                <option value=""></option>
+                           </select></td>
                         <td> <a class="badge badge-dark" href=""><i class="fa fa-trash text-danger"></i></a>
                             <a class="badge badge-success" href=""><i class="fa fa-eye text-white"></i></a>
                            
@@ -250,18 +254,17 @@
                 $(document).ready(function () {
             console.log("addUsersToGroupsBtn");
                     $('#addUsersToGroupsBtn').on('click',function(){
-                        $('#user_names').empty()
+                       // $('#user_names').empty()
+                       $('#group_users').empty()
                         var Group_Data_Id=$(this).data('id');
+                        console.log(Group_Data_Id)
+                       var html='';
                         $.get("{% url 'User_Accounts_Management_Unit:get_all_group_users' id=12345 %}".replace(/12345/, Group_Data_Id.toString()),function(data){   
-                            var html='<div class="dropdown bootstrap-select show-tick"><select name="user_names[]" id="users_names" class="selectpicker" multiple="" data-live-search="true" style="width:250px;" required="required" tabindex="-98"></select></select><button type="button" class="btn dropdown-toggle bs-placeholder btn-light" data-toggle="dropdown" role="button" data-id="users_names" title="Nothing selected" aria-expanded="false"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Nothing selected</div></div> </div></button><div class="dropdown-menu" role="combobox" style="max-height: 364px; overflow: hidden; min-height: 46px;"></div>';
                             data.forEach(function(user) {
-                         
-                             html+=' <option value="'+user['pk']+'" style="color:black!important;">'+user['fields']['username']+'</option>';
-                          
-                            });
-                      
-                            html+= '<div class="bs-searchbox"><input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search"></div><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1" style="max-height: 300px; overflow-y: auto; min-height: 0px;"><ul class="dropdown-menu inner show"><li><a role="option" class="dropdown-item" style="color: black !important;" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">ahmed</span></a></li><li><a role="option" class="dropdown-item" style="color: black !important;" aria-disabled="false" tabindex="0" aria-selected="false"><span class=" bs-ok-default check-mark"></span><span class="text">ahmed@kabeer</span></a></li></ul></div></div></div>';
-                            $('#addUsersToGroup .modal-body #appendGroupUsers').append(html)
+                             html+=' <option value="'+user['pk']+'" style="color:black!important;">'+user['fields']['username']+'</option>';                         
+                            });            
+                            //$('#addUsersToGroup .modal-body #appendGroupUsers').append(html)
+                            $('#group_users').append(html)
                             console.log(html);
                         });
                     })

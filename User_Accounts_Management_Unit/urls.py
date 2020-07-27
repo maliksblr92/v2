@@ -16,9 +16,14 @@ path('',views.User_Login.as_view(),name='user_login'),
     path('update_user_profile/<str:id>/',views.Update_User_Profile.as_view(), name='update_user_profile'),
     path('delete_user_profile/<str:id>/',views.Delete_User_Profile.as_view(), name='delete_user_profile'),
     # user-group_routes
+    
     path('add_user_group/',views.Add_User_Group.as_view(), name='add_user_group'),
     path('all_user_group/',views.All_User_Group.as_view(), name='all_user_group'),
     path('add_users_to_groups/',views.Add_Users_To_Groups.as_view(),name='add_users_to_groups'),
-    path('get_all_group_users/<str:id>/',views.Get_All_Group_Users.as_view(),name='get_all_group_users')
-    
+    path('remove_users_to_groups/',views.Remove_Users_To_Groups.as_view(),name='remove_users_to_groups'),
+    path('get_all_group_users/<str:id>/',views.Get_All_Group_Users.as_view(),name='get_all_group_users'),
+# User Routes
+    path('add_user/',views.Add_User.as_view(), name='add_user'),
+    path('all_users/',views.All_Users.as_view(), name='all_users'),
+    path('update_user/<str:id>/',views.Update_User.as_view(), name='update_user'),
 ]

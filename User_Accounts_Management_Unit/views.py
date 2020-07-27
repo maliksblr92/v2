@@ -27,6 +27,7 @@ UIS_IP = settings.UIS_IP
 from User_Accounts_Management_Unit.models import User_Profile,User_Profile_Manager
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.contrib.auth.models import UserManager
 from django.core import serializers
 import json
 from django.http import JsonResponse
@@ -219,22 +220,42 @@ class Add_Users_To_Groups(View):
     def get(self,request,*args,**kwargs):
         pass
     def post(self,request,*args,**kwargs):
-        user_names=request.POST.getlist('user_names[]')
-        groupId=request.POST.get('groupId')
-        group = Group.objects.get(id=groupId)
-        if(group):
-            for name in  user_names:
-                user=User.objects.get(id=name)
-                # print("##############")
-                # print(user)
-                group.user_set.add(user)
-                return redirect('/all_user_group')
-        else:
-            pass
-            return redirect('/all_user_group')
-            # g1.permissions.add(perm1, perm3, perm4)
+        exsist=False
+        user_name=request.POST.get('username_AddGroup')
+        Get_User=User.objects.get(username=user_name)
+        if Get_User:
+            groupId=request.POST.get('groupIdForAdd')
+            group = Group.objects.get(id=groupId)
+            if group:
+                exsist=Get_User.groups.filter(name=group).exists() 
+                if exsist:
+                    print("#########################USER ALREADY EXSIST###############")
+                    return redirect('/all_users')
+                else: 
+                    Get_User.groups.add(group)
+                    print("#########################USER ADDED###############")
+                    return redirect('/all_users')
         
-
+class Remove_Users_To_Groups(View):
+    def get(self,request,*args,**kwargs):
+        pass
+    def post(self,request,*args,**kwargs):
+        exsist=False
+        user_name=request.POST.get('username_RemoveGroup')
+        Get_User=User.objects.get(username=user_name)
+        if Get_User:
+            groupId=request.POST.get('groupIdForRemove')
+            group = Group.objects.get(id=groupId)
+            if group:
+                exsist=Get_User.groups.filter(name=group).exists() 
+                if exsist:
+                    print("######################### USER EXSIST AND REMOVED ###############")
+                    Get_User.groups.clear()
+                    return redirect('/all_users')
+                else: 
+                    print("######################### USER DOESNOT EXSIST ###############")
+                    return redirect('/all_users')
+        
 
 class Get_All_Group_Users(View):
     def get(self,request,*args,**kwargs):
@@ -248,5 +269,83 @@ class Get_All_Group_Users(View):
         return HttpResponse(qs_json, content_type='application/json')
            
 
-        
-      
+class Add_User(View):
+    def get(self,request,*args,**kwargs):
+        return render (request,'User_Accounts_Management_Unit/Add_User.html')
+    def post(self,request,*args,**kwargs):
+        is_active=False
+        is_superuser=False
+        is_staff=False
+        First_Name=request.POST.get('f-name');
+        Last_Name=request.POST.get('l-name');
+        Password=request.POST.get('password');
+        Email=request.POST.get('email')
+        User_Name=request.POST.get('user-name')
+        if 'is_active' in request.POST:
+            is_active=True
+        if 'is_superuser' in request.POST:
+            is_superuser=True
+        if 'is_staff' in request.POST:
+             is_staff=True
+        print("#####################################")
+        print(First_Name,Last_Name,Email,Password,is_staff,is_active,is_superuser)
+        New_User = User.objects.create_user(username=User_Name,
+                                 email=Email,
+                                 password=Password,
+                                 is_active=is_active,
+                                 is_staff=is_staff,
+                                 is_superuser=is_superuser,
+                                 first_name=First_Name,
+                                 last_name=Last_Name)
+        if New_User:
+            return redirect('/all_users')
+        else:
+            return redirect('all_users')
+class All_Users(View):
+    def get(self,request,*args,**kwargs):
+        All_Users=User.objects.all()
+        Groups=Group.objects.all()
+        return render(request,'User_Accounts_Management_Unit/All_Users.html',{'All_Users':All_Users,'Groups':Groups})
+
+class Update_User(View):
+    def get(self,request,*args,**kwargs):
+        id= int(kwargs.get('id'))
+        Find_User=User.objects.get(id=id)
+        if Find_User:
+            return render(request,'User_Accounts_Management_Unit/Add_User.html',{'User':Find_User})
+        else:
+          return  redirect('/all_users')
+    def post(self,request,*args,**kwargs):    
+        is_active=False
+        is_superuser=False
+        is_staff=False
+        # Id=request.POST.get('id');
+        id= int(kwargs.get('id'))
+        First_Name=request.POST.get('f-name');
+        Last_Name=request.POST.get('l-name');
+        Password=request.POST.get('password');
+        Email=request.POST.get('email')
+        User_Name=request.POST.get('user-name')
+        if 'is_active' in request.POST:
+            is_active=True
+        if 'is_superuser' in request.POST:
+            is_superuser=True
+        if 'is_staff' in request.POST:
+             is_staff=True
+        print("#####################################")
+        print(First_Name,Last_Name,Email,Password,is_staff,is_active,is_superuser)
+        Updated_User = User.objects.filter(id=id).update(
+        username=User_Name,
+        email=Email,
+        is_active=is_active,
+        is_staff=is_staff,
+        is_superuser=is_superuser,
+        first_name=First_Name,
+        last_name=Last_Name)
+        User.objects.get(id=id).set_password(Password)
+        if Updated_User:
+            print("#####################################")
+            print("success")
+            return redirect('/all_users')
+        else:
+           return  redirect('/all_users')
