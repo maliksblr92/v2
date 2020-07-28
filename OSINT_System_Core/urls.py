@@ -66,7 +66,7 @@ urlpatterns = [
     # path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('test', views.test_view, name='test'),
     path('tsodash/', views.TSO_Dashboard.as_view(), name="tso-dashboard"),
-    path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
+#     path('tmodash/', views.TMO_Dashboard.as_view(), name='tmo-dashboard'),
     path('rdodash/', views.RDO_Dashboard.as_view(), name='rdo-dashboard'),
     path('paodash/', views.PAO_Dashboard.as_view(), name='pao-dashboard'),
 
@@ -87,7 +87,8 @@ urlpatterns = [
     path('getGoogleTrends/',views.getGoogleTrends,name='getGoogleTrends'),
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
-    path('design_test',views.design_test,name='design_test'),
+    path('tmo_base/',views.TMO_Base,name='tmo_base'),
+    path('tmo_dashboard/',views.TMO_Dashboard,name='tmo_dashboard'),
        # ahmed end
 ]
 

@@ -29,6 +29,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.contrib.auth.models import UserManager
 from django.core import serializers
+from django.contrib import messages
 import json
 from django.http import JsonResponse
 # ahmed
@@ -150,6 +151,7 @@ class Add_User_Profile(View):
                 
         )
         if New_User_Profile:
+            messages.success(request,'User profile created successfully ')
             return redirect('/all_user_profile')
         else:
             return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html')
@@ -181,17 +183,20 @@ class Update_User_Profile(View):
          profile_pic=request.POST.get('profile-pic')
          User_Profile_Updated=User_Profile_Manager.getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic)
          if(User_Profile_Updated):
+            messages.success(request,'User profile updated successfully ')
             return redirect('/all_user_profile')
          else:
-            return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Updated})
+             return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Updated})
 
 class Delete_User_Profile(View):
     def get(self,request,*args,**kwargs):
         id= int(kwargs.get('id'))
         Delete_User_Profile=User_Profile_Manager.deleteUserProfile(id);
         if(Delete_User_Profile):
+            messages.success(request,'User profile deleted successfully ')
             return redirect('/all_user_profile')
         else:
+            messages.success(request,'Operation failed ! Try again ')
             return redirect('/all_user_profile')
         
 
@@ -201,12 +206,12 @@ class Add_User_Group(View):
         pass
     def post(self,request,*args,**kwargs):
         group_name=request.POST.get('group_name')
-        print("############")
-        print(group_name)
         Group_Created=Group.objects.create(name=group_name)
         if Group_Created:
+            messages.success(request,'Group created successfully ')
             return redirect('/all_user_group')
         else:
+            messages.success(request,'Operation failed ! Try again ')
             return redirect('/all_user_group')
     
 class All_User_Group(View):
@@ -221,6 +226,7 @@ class Add_Users_To_Groups(View):
         pass
     def post(self,request,*args,**kwargs):
         exsist=False
+        Page_Name=request.POST.get('page_name')
         user_name=request.POST.get('username_AddGroup')
         Get_User=User.objects.get(username=user_name)
         if Get_User:
@@ -229,12 +235,18 @@ class Add_Users_To_Groups(View):
             if group:
                 exsist=Get_User.groups.filter(name=group).exists() 
                 if exsist:
-                    print("#########################USER ALREADY EXSIST###############")
-                    return redirect('/all_users')
+                    messages.error(request,'User already exsist in group')
+                    if Page_Name == 'All_Users':
+                        return redirect('/all_users')
+                    else:
+                        return redirect('/all_user_group')                        
                 else: 
                     Get_User.groups.add(group)
-                    print("#########################USER ADDED###############")
-                    return redirect('/all_users')
+                    messages.success(request,'User added to group successfully')
+                    if Page_Name == 'All_Users':
+                        return redirect('/all_users')
+                    else:
+                        return redirect('/all_user_group')   
         
 class Remove_Users_To_Groups(View):
     def get(self,request,*args,**kwargs):
@@ -242,6 +254,7 @@ class Remove_Users_To_Groups(View):
     def post(self,request,*args,**kwargs):
         exsist=False
         user_name=request.POST.get('username_RemoveGroup')
+        Page_Name=request.POST.get('page_name')
         Get_User=User.objects.get(username=user_name)
         if Get_User:
             groupId=request.POST.get('groupIdForRemove')
@@ -249,13 +262,26 @@ class Remove_Users_To_Groups(View):
             if group:
                 exsist=Get_User.groups.filter(name=group).exists() 
                 if exsist:
-                    print("######################### USER EXSIST AND REMOVED ###############")
+                    messages.success(request,'User removed succesfully')
                     Get_User.groups.clear()
-                    return redirect('/all_users')
+                    if Page_Name == 'All_Users':
+                        return redirect('/all_users')
+                    else:
+                        return redirect('/all_user_group') 
                 else: 
-                    print("######################### USER DOESNOT EXSIST ###############")
-                    return redirect('/all_users')
-        
+                    messages.error(request,'Operation Failed ! User doesnot exsist in group ')
+                    if Page_Name == 'All_Users':
+                        return redirect('/all_users')
+                    else:
+                        return redirect('/all_user_group') 
+                   
+        else:
+            messages.error(request,'Operation Failed ! User not found ')
+            if Page_Name == 'All_Users':
+                return redirect('/all_users')
+            else:
+                return redirect('/all_user_group')   
+     
 
 class Get_All_Group_Users(View):
     def get(self,request,*args,**kwargs):
@@ -287,7 +313,6 @@ class Add_User(View):
             is_superuser=True
         if 'is_staff' in request.POST:
              is_staff=True
-        print("#####################################")
         print(First_Name,Last_Name,Email,Password,is_staff,is_active,is_superuser)
         New_User = User.objects.create_user(username=User_Name,
                                  email=Email,
@@ -298,8 +323,10 @@ class Add_User(View):
                                  first_name=First_Name,
                                  last_name=Last_Name)
         if New_User:
+            messages.success(request,'User created successfully ')
             return redirect('/all_users')
         else:
+            messages.success(request,'Operation failed ! Try again ')
             return redirect('all_users')
 class All_Users(View):
     def get(self,request,*args,**kwargs):
@@ -314,6 +341,7 @@ class Update_User(View):
         if Find_User:
             return render(request,'User_Accounts_Management_Unit/Add_User.html',{'User':Find_User})
         else:
+          messages.success(request,'Operation failed ! Try again ')  
           return  redirect('/all_users')
     def post(self,request,*args,**kwargs):    
         is_active=False
@@ -332,7 +360,6 @@ class Update_User(View):
             is_superuser=True
         if 'is_staff' in request.POST:
              is_staff=True
-        print("#####################################")
         print(First_Name,Last_Name,Email,Password,is_staff,is_active,is_superuser)
         Updated_User = User.objects.filter(id=id).update(
         username=User_Name,
@@ -344,8 +371,24 @@ class Update_User(View):
         last_name=Last_Name)
         User.objects.get(id=id).set_password(Password)
         if Updated_User:
-            print("#####################################")
-            print("success")
+            messages.success(request,'User updated successfully ')
             return redirect('/all_users')
         else:
+           messages.success(request,'Operation failed ! Try again ')
            return  redirect('/all_users')
+
+class Delete_User(View):
+    def get(self,request,*args,**kwargs):
+         id= int(kwargs.get('id'))
+         Find_User=User.objects.get(id=id)
+         if Find_User:
+             Deleted=Find_User.delete()
+             if Deleted:
+                 messages.success(request,"User deleted successfully ")
+                 return redirect('/all_users')
+             else:
+                 messages.error(request,'Operation Failed ! Try again ')
+                 return redirect('/all_users')
+         else:
+              messages.error(request,'Operation Failed ! Try again ')
+              return redirect('/all_users')

@@ -1154,6 +1154,8 @@ class Delete_Periodic_Target_DB(View):
         return redirect('/core/periodic_target')
 
 
-def design_test(request):
-    return render(request, 'OSINT_System_Core/design_test.html')
+def TMO_Base(request):
+    return render(request, 'OSINT_System_Core/tmo_base.html')
 
+def TMO_Dashboard(request):
+    return render(request,'OSINT_System_Core/tmo_dashboard.html')

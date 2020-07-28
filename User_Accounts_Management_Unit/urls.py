@@ -24,6 +24,7 @@ path('',views.User_Login.as_view(),name='user_login'),
     path('get_all_group_users/<str:id>/',views.Get_All_Group_Users.as_view(),name='get_all_group_users'),
 # User Routes
     path('add_user/',views.Add_User.as_view(), name='add_user'),
+    path('delete_user/<str:id>/',views.Delete_User.as_view(), name='delete_user'),
     path('all_users/',views.All_Users.as_view(), name='all_users'),
     path('update_user/<str:id>/',views.Update_User.as_view(), name='update_user'),
 ]

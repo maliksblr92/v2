@@ -1,5 +1,7 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
+{% load osint_custom_tags %}
+
 {% block head_dep %}
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
     <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
@@ -7,43 +9,39 @@
 
 
 {% endblock %}
-{% block head_styles %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-
-
-{% endblock %}
 {% block smallnavbar %}
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" style="">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu"> <!-- secondnavactive -->
-                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
-                    IDENTIFY</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
-                    SURVEY</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
-                    CRAWLING</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
-                    KEYBASE</a>
-            </div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+        <div class="col-md-1">
+        </div>
+        
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user' %}" class="btn secondnavitems ">
+                Add User</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_users' %}" class="btn secondnavitems ">
+                All Users</a>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_group' %}" class="btn secondnavitems ">
+                All User Groups</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user_profile' %}" class="btn secondnavitems ">
+                Add User Profile</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_profile' %}" class="btn secondnavitems ">
+               All User Profiles</a>
         </div>
         <div class="col-md-1"></div>
     </div>
+    <div class="col-md-2"></div>
+</div>
 {% endblock %}
 {% block belly_header %}
     <p class="text-uppercase custom_card_title ">ALL USERS PROFILES</p>
@@ -62,6 +60,16 @@
     }
 </style>
     <style>
+        th,td{
+            font-size: 13px;
+            font-weight: bold;;
+        }
+        a.badge{
+            font-size:13px;
+        }
+        button.badge{
+            font-size:13px;  
+        }
         tr {
             width: 100%;
             display: inline-table;
@@ -136,13 +144,16 @@
     <div class="row">
   
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <table class="table table-responsive text-dark pt-2 border table-striped" id="All_Users_Groups" style="width:100%">
+            <table class="table table-responsive text-dark pt-2 border table-striped" id="All_Groups_Table" style="width:100%">
                 <thead>
                 <tr>
 
-                    <th scope="col">Group ID</th>
+                   
                     <th scope="col">Group  Name</th>
-                    <th scope="col">Add Users</th>
+                    <th scope="col">Included Users</th>
+                    <th scope="col">Exclude User</th>
+                    <th scope="col">Excluded Users</th>
+                    <th scope="col">Add User</th>
                     <th scope="col">Operation</th>
 
                 </tr>
@@ -150,16 +161,33 @@
                 <tbody>
                 {% for group in All_Users_Groups %}
                     <tr>
-                        <th scope="row">{{ group.id|default:"N/A"}}</th>
-                        <td>{{ group.name|default:"N/A"}}</td>
                         
-                        <td><button type="button" id="addUsersToGroupsBtn" class="btn btn-success addUsersToGroup" data-toggle="modal" data-id="{{group.id}}" data-target="#addUsersToGroup">
-                            <i class="fa fa-plus text-white">Add Users </i>
+                        <td>{{ group.name|default:"N/A"}}</td>
+                        <td><select name="included_users" class="form-control included_users_list" id="included_users_list">
+                            {% for user in  All_Users %}
+                            {% if user|has_group:group.name %}
+                            <option value="{{user.username}}">{{user.username}}</option>
+                            {% else %}                          
+                            {% endif %}
+                            {% endfor %}
+                        </select></td>
+                        <td><button type="button" id="removeUsersToGroupsBtn" class="btn btn-danger removeUsersToGroupsBtn"  data-id="{{group.id}}" >
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
                            </button></td>
-                           <td>
-                               <select name="group_users" id="group_users">
-                                <option value=""></option>
-                           </select></td>
+                        <td><select name="excluded_users" class="form-control excluded_users" id="excluded_users">
+                            {% for user in  All_Users %}
+                            {% if user|has_group:group.name %}                         
+                            {% else %}                        
+                            <option value="{{user.username}}">{{user.username}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select></td>
+                        <td><button type="button" id="addUsersToGroupsBtn" class="btn btn-success addUsersToGroupsBtn
+                            "  data-id="{{group.id}}" >
+                            <i class="fa fa-plus text-white"> </i>
+                           </button></td>
+                         
+                          </td>
                         <td> <a class="badge badge-dark" href=""><i class="fa fa-trash text-danger"></i></a>
                             <a class="badge badge-success" href=""><i class="fa fa-eye text-white"></i></a>
                            
@@ -172,125 +200,155 @@
         </div>
     </div>
     <!--  -->
-        <!-- Modal ADD USER TO GROUP -->
-        <div class="modal fade " id="addUsersToGroup" tabindex="-1" role="dialog" aria-labelledby="addUsersToGroupLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addUsersToGroupModalLabel">Add Users To Group</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form method="POST"  action="{% url 'User_Accounts_Management_Unit:add_users_to_groups'%}" >
-                    {% csrf_token %}
-                    <div class="form-group">
-                       <input type="hidden" name="groupId" id="groupId" />
-                    </div>
-                <div class="d-flex flex-row justify-content-around align-items-center " id="appendGroupUsers">
-                    {% comment %}<label for="user-names">Select Users</label>
-                    <select name="user_names[]" id="users_names" class="selectpicker" multiple data-live-search="true" style="width:250px;" multiple required="required" >
-                      
-                       
-                        {% for user in All_Users %}
-                        <option value="{{user.id}}" style="color:black!important;">{{user.username}}</option>
-                        {% endfor %}
-                       
-                    </select>
-                    {% endcomment %}
-                </div>
-                
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add To Group</button>
-                </form>
-                </div>
-              </div>
-            </div>
-          </div>
-    <!-- Modal ADD GROUP -->
-<div class="modal fade" id="addUserGroupModal" tabindex="-1" role="dialog" aria-labelledby="addUserGroupModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addUserGroupModalLabel">Add User Group</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST"  action="{% url 'User_Accounts_Management_Unit:add_user_group' %}" >
-            {% csrf_token %}
-        <div class="d-flex flex-row justify-content-around align-items-center ">
-            <label for="group_name">
-               Group Name 
-            </label>
-                <input type="text" class="form-control " minlength="3" maxlength="10" name="group_name" style="width:250px;" required="required" />
-            
-        </div>
-        
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Create Group</button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- hidden form  -->
+  <form action="{% url 'User_Accounts_Management_Unit:add_users_to_groups' %}" id="add_user_to_group_form" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="username_AddGroup" id="username_AddGroup" />
+      <input type="hidden" name="groupIdForAdd" id="groupIdForAdd" />
+      <input type="hidden" name="page_name" value="All_Users_Group" id="page_name" />
+  </form>
+
+
+  <form action="{% url 'User_Accounts_Management_Unit:remove_users_to_groups' %}" id="remove_user_to_group_form" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="username_RemoveGroup" id="username_RemoveGroup" />
+    <input type="hidden" name="groupIdForRemove" id="groupIdForRemove" />
+    <input type="hidden" name="page_name" value="All_Users_Group" id="page_name" />
+</form>
 {% endblock %}>
 {% block base_js %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script defer type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
-
+            <script>
+                $(document).ready(function () {
+                    $('#All_Groups_Table').DataTable();
+                });
+                //add Group id to modal hiddeen field on click so that we can add suer by fecthing that group 
+               
+            </script>
+            <script>
+                window.document.title = "All Groups";
+            </script>
             <script>
                 
                 $(document).ready(function () {
-            console.log("addUsersToGroupsBtn");
-                    $('#addUsersToGroupsBtn').on('click',function(){
-                       // $('#user_names').empty()
-                       $('#group_users').empty()
-                        var Group_Data_Id=$(this).data('id');
-                        console.log(Group_Data_Id)
-                       var html='';
-                        $.get("{% url 'User_Accounts_Management_Unit:get_all_group_users' id=12345 %}".replace(/12345/, Group_Data_Id.toString()),function(data){   
-                            data.forEach(function(user) {
-                             html+=' <option value="'+user['pk']+'" style="color:black!important;">'+user['fields']['username']+'</option>';                         
-                            });            
-                            //$('#addUsersToGroup .modal-body #appendGroupUsers').append(html)
-                            $('#group_users').append(html)
-                            console.log(html);
-                        });
-                    })
+                    //add user to group 
+           $('.addUsersToGroupsBtn').on('click',function(){
+               var Group_Id= $(this).attr("data-id")
+              var Selected_User_Name = $(".excluded_users option:selected").val();
+              if(Selected_User_Name == '' || Selected_User_Name === '' || Selected_User_Name == 0){
+                Command: toastr["info"]("Please select a user from excluded user list .")
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+          
+              }
+              else{
+                $('#groupIdForAdd').val(Group_Id);
+                $('#username_AddGroup').val(Selected_User_Name);
+                $('#add_user_to_group_form').submit();
+              }
+           })
+           //end add user to group 
+
+           
+                    
                 });
                     
-             
             </script>
 
+<script>
 
-    <script>
-        $(document).ready(function () {
-            $('#All_Users_Groups').DataTable();
-        });
-        //add Group id to modal hiddeen field on click so that we can add suer by fecthing that group 
-        $(document).on("click", ".addUsersToGroup", function () {
-            var mygroupId = $(this).data('id');
-            $(".modal-body #groupId").val( mygroupId );
-           // console.log($('#groupId').val(mygroupId))            
-         
-       });
-    </script>
-    <script>
-        window.document.title = "Target";
-    </script>
+    $(document).ready(function(){
+        //remove uset from group 
+  $('.removeUsersToGroupsBtn').on('click',function(){
+    var Group_Id= $(this).attr("data-id")
+    var Selected_User_Name = $(".included_users_list option:selected").val();
+    console.log(Selected_User_Name)
+    if(Selected_User_Name == ''){
+    Command: toastr["info"]("Please select a user from included user list .")
+    console.log(Selected_User_Name)
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+  }
+  else{
+    console.log("if")
+     $('#groupIdForRemove').val(Group_Id);
+    $('#username_RemoveGroup').val(Selected_User_Name);
+    $('#remove_user_to_group_form').submit();
+
+  }
+})
+//end
+    })
+</script>
+  
    
+    <script>
+        {% for message in messages %}
+        $(document).ready(function() {
+           
+            Command: toastr["{{ message.tags }}"]("{{ message }} .")
 
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        });
+        {% endfor %}
+
+      
+            
+
+        </script>
 {% endblock %}
 
 

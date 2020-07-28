@@ -7,37 +7,37 @@
 
 
 {% endblock %}
-
 {% block smallnavbar %}
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-8 d-flex" style="">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
             <div class="col-md-1">
             </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondnavmenu"> <!-- secondnavactive -->
-                <a href="{% url 'Target_Management_System:tms_marktarget' %}" class="btn secondnavitems "> MARK</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_fetchtarget' %}" class="btn secondnavitems "> FETCH</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_identifytarget' %}" class="btn secondnavitems ">
-                    IDENTIFY</a>
-            </div>
-            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu">
-                <a href="{% url 'Target_Management_System:tms_internetsurvey' %}" class="btn secondnavitems ">
-                    SURVEY</a>
-            </div>
+            
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_dynamiccrawling' %}" class="btn secondnavitems ">
-                    CRAWLING</a>
+                <a href="{% url 'User_Accounts_Management_Unit:add_user' %}" class="btn secondnavitems ">
+                    Add User</a>
             </div>
             <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
-                <a href="{% url 'Target_Management_System:tms_keybase_crawling' %}" class="btn secondnavitems ">
-                    KEYBASE</a>
+                <a href="{% url 'User_Accounts_Management_Unit:all_users' %}" class="btn secondnavitems ">
+                    All Users</a>
             </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'User_Accounts_Management_Unit:all_user_group' %}" class="btn secondnavitems ">
+                    All User Groups</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'User_Accounts_Management_Unit:add_user_profile' %}" class="btn secondnavitems ">
+                    Add User Profile</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+                <a href="{% url 'User_Accounts_Management_Unit:all_user_profile' %}" class="btn secondnavitems ">
+                   All User Profiles</a>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
     </div>
 {% endblock %}
 {% block belly_header %}
@@ -46,6 +46,13 @@
 {% endblock %}
 {% block belly %}
     <style>
+        th,td{
+            font-size: 13px;
+            font-weight: bold;;
+        }
+        a.badge{
+            font-size:13px;
+        }
         tr {
             width: 100%;
             display: inline-table;
@@ -164,6 +171,36 @@
         });
     </script>
     <script>
-        window.document.title = "Target";
+        window.document.title = "All Profiles";
     </script>
+    <script>
+        {% for message in messages %}
+        $(document).ready(function() {
+            console.log("###############################################################################")
+            Command: toastr["{{ message.tags }}"]("{{ message }} .")
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        });
+        {% endfor %}
+
+      
+            
+
+        </script>
 {% endblock %}
