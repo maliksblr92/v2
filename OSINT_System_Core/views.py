@@ -81,8 +81,12 @@ ss = System_Stats()
 
 
 # FACEBOOK_AUT,TWITTER_AUT,INSTAGRAM_AUT,NEWS_AUT,PERIODIC_INT,SEARCH_TYPE_TWITTER,TWEETS_TYPE,LINKEDIN_AUT= coreDb.get_author_types_all()
-
-
+# ahmed imports 
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.utils.html import escape
+from Public_Data_Acquisition_Unit.mongo_models import *
+from table import Table
+from table.columns import Column
 class Main(View):
     def get(self, request):
         # response = fetch_instagram_profile('author','atifaslam')   #author or post
@@ -1154,8 +1158,183 @@ class Delete_Periodic_Target_DB(View):
         return redirect('/core/periodic_target')
 
 
-def TMO_Base(request):
-    return render(request, 'OSINT_System_Core/tmo_base.html')
+
 
 def TMO_Dashboard(request):
-    return render(request,'OSINT_System_Core/tmo_dashboard.html')
+    Count_Keybase_Crawling=Keybase_Crawling.objects.count()
+    # facebooks
+    Count_Facebook_Group=Facebook_Group.objects.count()
+    Count_Facebook_Page=Facebook_Page.objects.count()
+    Count_Facebook_Profile=Facebook_Profile.objects.count()
+    Count_Facebook_Search=Facebook_Search.objects.count()
+    Count_Facebook_Target=Facebook_Target.objects.count()
+    # End facebook
+    # instagram 
+    Count_Instagram_Profile=Instagram_Profile.objects.count()
+    Count_Insragram_Target=Instagram_Target.objects.count()
+    # End instagram 
+    # linkedin
+    Count_Linkedin_Profile=Linkedin_Profile.objects.count()
+    Count_Linkedin_Target=Linkedin_Target.objects.count()
+    Count_Linkedin_Company=Linkedin_Company.objects.count()
+    # End linkedin
+    # Dynamic_crawling
+    Count_Dynamic_Crawling=Dynamic_Crawling.objects.count()
+    # end Dynamic Crawling 
+    # reddit 
+    Count_Reddit_Subreddit=Reddit_Subreddit.objects.count()
+    Count_Reddit_Profile=Reddit_Profile.objects.count()
+    Count_Reddit_Target=Reddit_Target.objects.count()
+    # End reddit 
+    # Twitter
+    Count_Twitter_Profile=Twitter_Profile.objects.count()
+    Count_Twitter_Target=Twitter_Target.objects.count() 
+    # end twitter
+    # Iplogger
+    Count_Ip_Logger=Ip_Logger.objects.count() 
+    Count_Timeline_Posts=Timeline_Posts.objects.count() 
+    Count_Blocked_Urls=Blocked_Urls.objects.count() 
+    Count_Supported_Website=Supported_Website.objects.count() 
+    Count_Periodic_Targets=Periodic_Targets.objects.count() 
+    Count_Youtube_Target=Youtube_Target.objects.count() 
+    All_Targets_Count_List=[
+      {
+        "object_name": "keybase crawling",
+        "object_count": Count_Keybase_Crawling
+      },
+      {
+        "object_name": "dynamic crawling ",
+        "object_count": Count_Dynamic_Crawling
+      }, 
+      {
+        "object_name": "all facebook",
+        "object_count": Count_Facebook_Target
+      },  
+      {
+        "object_name": "facebook group",
+        "object_count": Count_Facebook_Group
+      },
+      {
+        "object_name": "facebook profile",
+        "object_count": Count_Facebook_Profile
+      },
+      {
+        "object_name": "facebook pages",
+        "object_count": Count_Facebook_Page
+      },
+      {
+        "object_name": "facebook search",
+        "object_count": Count_Facebook_Search
+      },
+      {
+        "object_name": "instagram profile",
+        "object_count": Count_Insragram_Target
+      },
+       {
+        "object_name": "all linkedin",
+        "object_count": Count_Linkedin_Target
+      },
+      {
+        "object_name": "linkedin profile",
+        "object_count": Count_Linkedin_Profile
+      },
+      {
+        "object_name": "linkedin company",
+        "object_count": Count_Linkedin_Company
+      },
+      {
+        "object_name": "all reddit",
+        "object_count": Count_Reddit_Target
+      },
+      {
+        "object_name": "reddit subreddit",
+        "object_count": Count_Reddit_Subreddit
+      },
+      {
+        "object_name": "reddit profile",
+        "object_count": Count_Reddit_Profile
+      },
+      {
+        "object_name": "twitter profile",
+        "object_count": Count_Twitter_Profile
+      }
+      ,
+      {
+        "object_name": "ip logger",
+        "object_count": Count_Ip_Logger
+      }
+      ,
+      {
+        "object_name": "blocked urls",
+        "object_count": Count_Blocked_Urls
+      },
+      {
+        "object_name": "supported website",
+        "object_count": Count_Supported_Website
+      }
+      ,
+      {
+        "object_name": "periodic targets ",
+        "object_count": Count_Periodic_Targets
+      }
+      ,
+      {
+        "object_name": "youtube targets ",
+        "object_count": Count_Youtube_Target
+      }
+    ];
+    return render(request, 'OSINT_System_Core/tmo_dashboard.html',{'All_Targets_Count_List':All_Targets_Count_List})
+    
+
+
+    #  return render(request, 'OSINT_System_Core/tmo_dashboard.html', {'labels': labels,'data': data,})
+class OrderListJson(BaseDatatableView):
+    
+    # The model we're going to show
+    model = Keybase_Crawling
+
+    # define the columns that will be returned
+    columns = ['GTR', 'is_expired', 'is_enabled', 'need_screenshots', 'target_type']
+
+    # define column names that will be used in sorting
+    # order is important and should be same as order of columns
+    # displayed by datatables. For non sortable columns use empty
+    # value like ''
+    order_columns = ['GTR', 'is_expired', 'is_enabled', '', '']
+
+    # set max limit of records returned, this is used to protect our site if someone tries to attack our site
+    # and make it return huge amount of data
+    max_display_length = 500
+
+    def render_column(self, row, column):
+        # We want to render user as a custom column
+        if column == 'user':
+            # escape HTML for security reasons
+            return escape('{0} {1}'.format(row.customer_firstname, row.customer_lastname))
+        else:
+            return super(OrderListJson, self).render_column(row, column)
+
+    def filter_queryset(self, qs):
+        # use parameters passed in GET request to filter queryset
+
+        # simple example:
+        search = self.request.GET.get('search[value]', None)
+        if search:
+            qs = qs.filter(name__istartswith=search)
+
+        # more advanced example using extra parameters
+        filter_customer = self.request.GET.get('customer', None)
+
+        if filter_customer:
+            customer_parts = filter_customer.split(' ')
+            qs_params = None
+            for part in customer_parts:
+                q = Q(customer_firstname__istartswith=part)|Q(customer_lastname__istartswith=part)
+                qs_params = qs_params | q if qs_params else q
+            qs = qs.filter(qs_params)
+        return qs
+   
+
+
+def TMO_Base(request):
+    return render(request, 'OSINT_System_Core/tmo_base.html')

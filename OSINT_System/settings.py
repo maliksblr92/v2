@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'Keybase_Management_System.apps.KeybaseManagementSystemConfig',
     'Avatar_Management_Unit.apps.AvatarManagementUnitConfig',
     'Bi_Tools.apps.BiToolsConfig',
+     'table',
 ]
 
 MIDDLEWARE = [

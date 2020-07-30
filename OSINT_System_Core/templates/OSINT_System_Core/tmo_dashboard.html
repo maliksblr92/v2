@@ -1,0 +1,65 @@
+{% extends 'OSINT_System_Core/tmo_base.html' %}
+{% load static %}
+{% block Page_Title %}TMO Dashboard{% endblock %}
+{% block Small_Navbar %}
+
+{% endblock %}
+{% block Left_Sidebar %}
+<style>
+    ul li a .active{
+        background-color :azure!important;
+    }
+</style>
+<div class="row ">
+    <div class="col-md-12 border border-warning d-flex flex-row justify-content-center align-items-center pt-2 pb-2  mt-1">
+   <div class="border bg-white p-1"style="border-radius:50%;"style="height:auto;width:auto;">
+    <img src="https://image.flaticon.com/icons/svg/3209/3209166.svg" alt=""style="height:35px;;width:35px;;">
+   </div> <div> <a href="#" class="text-white font-weight-bold nav-link"style="font-size:18px;">  TMO DASHBOARD</a></div>
+    </div>
+    <div class="col-md-12 mt-2  m-0 p-0 ">
+        <ul class="nav nav-tabs d-flex flex-column justify-content-center align-items-center p-0 m-0 ">
+            <!-- all targets  -->
+            <li class="nav-item border w-100 text-left p-1 ">
+             <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  active" data-toggle="tab" href="#All_Targets" style="text-decoration: none;;">All Targets</a>
+            </li>
+            <!-- alstargets  -->
+
+            <li class="nav-item border w-100 text-left p-1 ">
+                <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  " data-toggle="tab" href="#menu1" style="text-decoration: none;;">Home</a>
+               </li>
+
+               <li class="nav-item border w-100 text-left p-1 ">
+                <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  " data-toggle="tab" href="#menu2" style="text-decoration: none;;">Home</a>
+               </li>
+           
+           
+          </ul>
+    </div>
+</div>
+{% endblock %}
+ {% block Belly_Header %} {% endblock %}
+ {% block Belly_Body %}
+  <div class="row">
+      <div class="col-md-12">
+          <!-- START TAB PANES  -->
+  <div class="tab-content">
+    <div class="tab-pane container active" id="All_Target">...
+    <h1 class="text-white">All  Targets</h1>
+    </div>
+    <div class="tab-pane container fade" id="menu1">
+        <h1 class="text-white">MENU !</h1>
+    </div>
+    <div class="tab-pane container fade" id="menu2">
+        <h1 class="text-white">MENU 2</h1>
+    </div>
+  </div>
+  <!-- END TABP ANES  -->
+      </div>
+  </div>
+ {% endblock %}
+ {% block Footer %} {% endblock %}
+ {% block Scripts %} {% endblock %}
+
+
+  
+ 
