@@ -17,6 +17,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
       <link rel="stylesheet" href="{% static 'OSINT_System_Core/toaster/toastr.min.css' %}">
       {% include 'OSINT_System_Core/project_base_sub_template_for_css.html' %}
+
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+   
    </head>
    <style>
       body {
@@ -128,22 +131,301 @@
 
 
 <div class="row">
-   <div class="col-md-2 ">
-{% block Left_Sidebar%}
-{% endblock %}
-   </div>
-   <div class="col-md-10 ">
-<div class="row">
-   <div class="col-md-12">
-      {% block Belly_Header %}
-      {% endblock %}
-   </div>
+   <div class="col-md-12 ">
+{% block Content %}
+<style>
+   /*
+       DEMO STYLE
+   */
+   
+   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+   body {
+       font-family: 'Poppins', sans-serif;
+       background: #fafafa;
+   }
+   
+   p {
+       font-family: 'Poppins', sans-serif;
+       font-size: 1.1em;
+       font-weight: 300;
+       line-height: 1.7em;
+       color: #999;
+   }
+   
+   a,
+   a:hover,
+   a:focus {
+       color: inherit;
+       text-decoration: none;
+       transition: all 0.3s;
+   }
+   
+   .navbar {
+       padding: 15px 10px;
+       background: #fff;
+       border: none;
+       border-radius: 0;
+       margin-bottom: 40px;
+       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+   }
+   
+   .navbar-btn {
+       box-shadow: none;
+       outline: none !important;
+       border: none;
+   }
+   
+   .line {
+       width: 100%;
+       height: 1px;
+       border-bottom: 1px dashed #ddd;
+       margin: 40px 0;
+   }
+   
+   i,
+   span {
+       display: inline-block;
+   }
+   
+   /* ---------------------------------------------------
+       SIDEBAR STYLE
+   ----------------------------------------------------- */
+   
+   .wrapper {
+       display: flex;
+       align-items: stretch;
+   }
+   
+   #sidebar {
+       min-width: 250px;
+       max-width: 250px;
+       background: #7386D5;
+       color: #fff;
+       transition: all 0.3s;
+   }
+   
+   #sidebar.active {
+       min-width: 80px;
+       max-width: 80px;
+       text-align: center;
+   }
+   
+   #sidebar.active .sidebar-header h3,
+   #sidebar.active .CTAs {
+       display: none;
+   }
+   
+   #sidebar.active .sidebar-header strong {
+       display: block;
+   }
+   
+   #sidebar ul li a {
+       text-align: left;
+   }
+   
+   #sidebar.active ul li a {
+       padding: 20px 10px;
+       text-align: center;
+       font-size: 0.85em;
+   }
+   
+   #sidebar.active ul li a i {
+       margin-right: 0;
+       display: block;
+       font-size: 1.8em;
+       margin-bottom: 5px;
+   }
+   
+   #sidebar.active ul ul a {
+       padding: 10px !important;
+   }
+   
+   #sidebar.active .dropdown-toggle::after {
+       top: auto;
+       bottom: 10px;
+       right: 50%;
+       -webkit-transform: translateX(50%);
+       -ms-transform: translateX(50%);
+       transform: translateX(50%);
+   }
+   
+   #sidebar .sidebar-header {
+       padding: 20px;
+       background: #6d7fcc;
+   }
+   
+   #sidebar .sidebar-header strong {
+       display: none;
+       font-size: 1.8em;
+   }
+   
+   #sidebar ul.components {
+       padding: 20px 0;
+       border-bottom: 1px solid #47748b;
+   }
+   
+   #sidebar ul li a {
+       padding: 10px;
+       font-size: 1.1em;
+       display: block;
+   }
+   
+   #sidebar ul li a:hover {
+       color: #7386D5;
+       background: #fff;
+   }
+   
+   #sidebar ul li a i {
+       margin-right: 10px;
+   }
+   
+   #sidebar ul li.active>a,
+   a[aria-expanded="true"] {
+       color: #fff;
+       background: #6d7fcc;
+   }
+   
+   a[data-toggle="collapse"] {
+       position: relative;
+   }
+   .font-size-12{
+      font-size: 12px!important;;
+   }
+   .font-size-14{
+      font-size: 14px!important;;
+   }
+   
 
-   <div class="col-md-12">
-      {% block Belly_Body %}
-      {% endblock %}
+   </style>
+  
+   <div class="wrapper">
+       <!-- Sidebar  -->
+       <nav id="sidebar">
+           <div class="sidebar-header">
+               <h3>TMO DASHBOARD</h3>
+               <strong>TMO</strong>
+           </div>
+   
+           <ul class="list-unstyled components">
+               <li class="">
+                   <a href="#All_Targets_Collapse" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                       <i class="fas fa-home"></i>
+                       All Targets 
+                   </a>
+                   <ul class="nav nav-tabs" id="All_Targets_Collapse">
+                       <li class=" w-100">
+                        <a href="#Facebook_Targets_Collapse" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                           <i class="fab fa-facebook-square"></i>
+                           All Facebook Targets 
+                       </a>
+                       <ul  class="nav nav-tabs" id="Facebook_Targets_Collapse">
+                        <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Facebook_Group_Targets"> <i class="fab fa-facebook-square"></i>Facebook Group Targets</a></li>
+                       <li class="w-100 "> <a data-toggle="tab" class="font-size-12" href="#Facebook_Page_Targets"> <i class="fab fa-facebook-square"></i>Facebook Page Targets</a></li>
+                      <li class="w-100 ">  <a data-toggle="tab" class="font-size-12" href="#Facebook_Person_Targets"> <i class="fab fa-facebook-square"></i>Facebook Person Targets</a></li>
+                     </ul>     
+                     </li>
+                      
+                      
+                   </ul>
+               </li>
+               <li>
+                   <a href="#">
+                       <i class="fas fa-briefcase"></i>
+                       About
+                   </a>
+                   <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                       <i class="fas fa-copy"></i>
+                       Pages
+                   </a>
+                   <ul class="collapse list-unstyled" id="pageSubmenu">
+                       <li>
+                           <a href="#">Page 1</a>
+                       </li>
+                       <li>
+                           <a href="#">Page 2</a>
+                       </li>
+                       <li>
+                           <a href="#">Page 3</a>
+                       </li>
+                   </ul>
+               </li>
+               <li>
+                   <a href="#">
+                       <i class="fas fa-image"></i>
+                       Portfolio
+                   </a>
+               </li>
+               <li>
+                   <a href="#">
+                       <i class="fas fa-question"></i>
+                       FAQ
+                   </a>
+               </li>
+               <li>
+                   <a href="#">
+                       <i class="fas fa-paper-plane"></i>
+                       Contact
+                   </a>
+               </li>
+           </ul>
+   
+           <ul class="list-unstyled CTAs">
+               <li>
+                   <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+               </li>
+               <li>
+                   <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+               </li>
+           </ul>
+       </nav>
+   
+
+       <!-- Page Content  -->
+       <div id="content" class="w-100 m-0 p-0 "style="overflow-x:auto;">
+   
+           <nav class="navbar navbar-expand-lg navbar-light bg-light">
+               <div class="container-fluid">
+   
+                   <button type="button" id="sidebarCollapse" class="btn btn-info">
+                       <i class="fas fa-align-left"></i>
+                       <span>Toggle Sidebar</span>
+                   </button>
+                   <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                       <i class="fas fa-align-justify"></i>
+                   </button>
+   
+                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                       <ul class="nav navbar-nav ml-auto">
+                           <li class="nav-item active">
+                               <a class="nav-link" href="#">Page</a>
+                           </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="#">Page</a>
+                           </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="#">Page</a>
+                           </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="#">Page</a>
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+           </nav>
+           <div class="tab-content" class="w-100">
+           {% block Content_Belly %}
+          
+           
+           
+            
+          
+
+           {% endblock %}
+         </div>
+         </div>
    </div>
-</div>
+{% endblock %}
+   
    </div>
 </div>
 
@@ -154,17 +436,33 @@
       {% endblock %}
    </div>
 </div>
+
 <script src="{% static 'jquery/js/jquery-3.2.1.min.js' %}"></script>
-      <script src="{% static 'popper/js/popper.min.js' %}"></script>
-      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-      <!-- index 1 js Resources -->
-      <script src="{% static 'OSINT_System_Core/amcharts/core.js' %}"></script>
-      <script src="{% static 'OSINT_System_Core/amcharts/charts.js' %}"></script>
-      <script src="{% static 'OSINT_System_Core/amcharts/plugins/wordCloud.js' %}"></script>
-      <script src="{% static 'OSINT_System_Core/amcharts/themes/dark.js' %}"></script>
-      <script src="{% static 'OSINT_System_Core/amcharts/themes/animated.js' %}"></script>
-      <script src="{% static 'Additional_assets/main/js/chart.js' %}"></script>
-      <script src="{% static 'Additional_assets/main/js/footer_charts.js' %}"></script>
+<script src="{% static 'popper/js/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- index 1 js Resources -->
+<script src="{% static 'OSINT_System_Core/amcharts/core.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/charts.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/plugins/wordCloud.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/dark.js' %}"></script>
+<script src="{% static 'OSINT_System_Core/amcharts/themes/animated.js' %}"></script>
+<script src="{% static 'Additional_assets/main/js/chart.js' %}"></script>
+<script src="{% static 'Additional_assets/main/js/footer_charts.js' %}"></script>   
+<script>
+   $(document).ready(function () {
+
+       $('#sidebarCollapse').on('click', function () {
+           $('#sidebar').toggleClass('active');
+       });
+   
+   });
+</script> 
+<script type="text/javascript">
+   jQuery(document).ready(function ($) {
+       $('#tabs').tab();
+   });
+</script> 
 {% block Scripts %}
 {% endblock %}
 

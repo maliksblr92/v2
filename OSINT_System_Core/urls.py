@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from OSINT_System_Core import views
 
 # from rest_framework.urlpatterns import format_suffix_patterns
@@ -88,8 +88,10 @@ urlpatterns = [
     path('periodic_target/',views.Periodic_Target_DB,name='Periodic_Target_DB'),
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
     path('tmo_base/',views.TMO_Base,name='tmo_base'),
-    path('tmo_dashboard/',views.TMO_Dashboard,name='tmo_dashboard'),
-    path('my/datatable/data/', views.OrderListJson.as_view(), name='order_list_json'),
+    path('tmo_dashboard/',views.TMO,name='tmo_dashboard'),
+   
+
+
 
        # ahmed end
 ]

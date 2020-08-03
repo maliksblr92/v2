@@ -1,65 +1,214 @@
 {% extends 'OSINT_System_Core/tmo_base.html' %}
 {% load static %}
-{% block Page_Title %}TMO Dashboard{% endblock %}
-{% block Small_Navbar %}
-
+{% load table_tags %}
+{% block Page_Title %}TMO Dashboard{% endblock %} 
+{% block Small_Navbar %} 
 {% endblock %}
-{% block Left_Sidebar %}
+{% block Content_Belly %}
 <style>
-    ul li a .active{
-        background-color :azure!important;
+    td,th{
+        font-size: 13px;;
     }
+   
 </style>
-<div class="row ">
-    <div class="col-md-12 border border-warning d-flex flex-row justify-content-center align-items-center pt-2 pb-2  mt-1">
-   <div class="border bg-white p-1"style="border-radius:50%;"style="height:auto;width:auto;">
-    <img src="https://image.flaticon.com/icons/svg/3209/3209166.svg" alt=""style="height:35px;;width:35px;;">
-   </div> <div> <a href="#" class="text-white font-weight-bold nav-link"style="font-size:18px;">  TMO DASHBOARD</a></div>
+
+<div id="Facebook_Group_Targets" class="tab-pane fade show active ">
+    
+       <div class="card">
+           <div class="card-header"></div>
+           <div class="card-body">
+            <div class="table-responsive-sm">          
+                <table id="example" class="table display ">
+                  <thead>
+                    <tr>
+                     
+                      <th>Username</th>
+                      <th>Name</th>
+                      <th>URL</th>
+                      <th>Type</th>
+                      <th>Is Enabled</th>
+                      <th>Is Expired</th>
+                      <th>Expired On</th>
+                      <th>Need Screenshots</th>
+                      <th>Periodic Interval</th>
+                      <th>Created On</th>
+                      <th>Operations</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    {% for i in Facebook_Targets %}
+                    <tr>
+             <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"></i></a></td>
+             <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  </td>
+
+            </tr> 
+                    {% endfor %}
+                
+                
+                </tbody>
+                </table>
+                </div>
+           </div>
+           <div class="card-fotter"></div>
+       </div>
     </div>
-    <div class="col-md-12 mt-2  m-0 p-0 ">
-        <ul class="nav nav-tabs d-flex flex-column justify-content-center align-items-center p-0 m-0 ">
-            <!-- all targets  -->
-            <li class="nav-item border w-100 text-left p-1 ">
-             <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  active" data-toggle="tab" href="#All_Targets" style="text-decoration: none;;">All Targets</a>
-            </li>
-            <!-- alstargets  -->
 
-            <li class="nav-item border w-100 text-left p-1 ">
-                <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  " data-toggle="tab" href="#menu1" style="text-decoration: none;;">Home</a>
-               </li>
+   
+    
+</div>
+<div id="Facebook_Page_Targets" class="tab-pane fade "style="height:600px;overflow-y:auto;">
+    <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+         <div class="table-responsive-sm">          
+             <table id="example" class="table display ">
+               <thead>
+                 <tr>
+                  
+                   <th>Username</th>
+                   <th>Name</th>
+                   <th>URL</th>
+                   <th>Type</th>
+                   <th>Is Enabled</th>
+                   <th>Is Expired</th>
+                   <th>Expired On</th>
+                   <th>Need Screenshots</th>
+                   <th>Periodic Interval</th>
+                   <th>Created On</th>
+                   <th>Operations</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+                
+                 {% for i in Facebook_Targets %}
+                 <tr>
+          <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"></i></a></td>
+          <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  </td>
 
-               <li class="nav-item border w-100 text-left p-1 ">
-                <i class="fa fa-user pl-2 text-white "style="font-size:20px;"></i> <a class="text-white pl-3  " data-toggle="tab" href="#menu2" style="text-decoration: none;;">Home</a>
-               </li>
-           
-           
-          </ul>
+         </tr> 
+                 {% endfor %}
+             
+             
+             </tbody>
+             </table>
+             </div>
+        </div>
+        <div class="card-fotter"></div>
     </div>
 </div>
-{% endblock %}
- {% block Belly_Header %} {% endblock %}
- {% block Belly_Body %}
-  <div class="row">
-      <div class="col-md-12">
-          <!-- START TAB PANES  -->
-  <div class="tab-content">
-    <div class="tab-pane container active" id="All_Target">...
-    <h1 class="text-white">All  Targets</h1>
-    </div>
-    <div class="tab-pane container fade" id="menu1">
-        <h1 class="text-white">MENU !</h1>
-    </div>
-    <div class="tab-pane container fade" id="menu2">
-        <h1 class="text-white">MENU 2</h1>
-    </div>
-  </div>
-  <!-- END TABP ANES  -->
-      </div>
-  </div>
- {% endblock %}
- {% block Footer %} {% endblock %}
- {% block Scripts %} {% endblock %}
+<div id="Facebook_Person_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+    <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+         <div class="table-responsive-sm">          
+             <table id="example" class="table display ">
+               <thead>
+                 <tr>
+                  
+                   <th>Username</th>
+                   <th>Name</th>
+                   <th>URL</th>
+                   <th>Type</th>
+                   <th>Is Enabled</th>
+                   <th>Is Expired</th>
+                   <th>Expired On</th>
+                   <th>Need Screenshots</th>
+                   <th>Periodic Interval</th>
+                   <th>Created On</th>
+                   <th>Operations</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+                
+                 {% for i in Facebook_Targets %}
+                 <tr>
+          <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"></i></a></td>
+          <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  </td>
 
-
+         </tr> 
+                 {% endfor %}
+             
+             
+             </tbody>
+             </table>
+             </div>
+        </div>
+        <div class="card-fotter"></div>
+    </div>
+</div>
   
+        
+
+
+
+
+            
+
+            
+{% endblock %}
+ {% block Footer %}
  
+  {% endblock %} 
+
+{% block Scripts %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script defer type="text/javascript" charset="utf8"
+              src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+              
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            order: [[ 6, "desc" ]],
+        columnDefs: [
+            {
+                name: 'username',
+                orderable: true,
+                searchable: true,
+                targets: [0]
+            },
+            {
+                name: 'name',
+                orderable: true,
+                searchable: true,
+                targets: [1]
+            }
+        ],
+            "paging":   true,
+            "ordering": true,
+            "info":     true,
+            "pagingType": "full_numbers"
+        } );
+    } );
+</script>
+{% endblock%}
