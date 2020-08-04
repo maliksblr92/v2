@@ -10,18 +10,23 @@
       {% block head_dep %} {% endblock %}
       <!-- loading css with link does not evaluate static tag -->
       <script src="{% static 'django_eventstream/json2.js' %}"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
-         integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous"/>
+
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
       <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
       <link rel="stylesheet" href="{% static 'OSINT_System_Core/toaster/toastr.min.css' %}">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+     
       {% include 'OSINT_System_Core/project_base_sub_template_for_css.html' %}
 
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-   
+     
    </head>
    <style>
+    @font-face{
+        font-family:'digital-clock-font';
+        src: url('{% static "fonts/digital/digital-7.ttf" %}');
+       }
       body {
       background: url("{% static 'images/background_gradient.svg' %}") no-repeat center center fixed;
       -webkit-background-size: cover;
@@ -307,11 +312,19 @@
            </div>
    
            <ul class="list-unstyled components">
+
+            <li class="">
+                <li class="active w-100 " ><a data-toggle="tab" class="font-size-12" href="#Tmo_Dashboard"> <i class="fa fa-facebook" aria-hidden="true"></i>Dashboard</a></li>
+            </li>
+
                <li class="">
                    <a href="#All_Targets_Collapse" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                        <i class="fas fa-home"></i>
                        All Targets 
                    </a>
+<!-- ################################################################################################## -->
+                                <!-- FACEBOOK  -->
+<!-- ################################################################################################## -->
                    <ul class="nav nav-tabs" id="All_Targets_Collapse">
                        <li class=" w-100">
                         <a href="#Facebook_Targets_Collapse" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -319,15 +332,84 @@
                            All Facebook Targets 
                        </a>
                        <ul  class="nav nav-tabs" id="Facebook_Targets_Collapse">
-                        <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Facebook_Group_Targets"> <i class="fab fa-facebook-square"></i>Facebook Group Targets</a></li>
-                       <li class="w-100 "> <a data-toggle="tab" class="font-size-12" href="#Facebook_Page_Targets"> <i class="fab fa-facebook-square"></i>Facebook Page Targets</a></li>
-                      <li class="w-100 ">  <a data-toggle="tab" class="font-size-12" href="#Facebook_Person_Targets"> <i class="fab fa-facebook-square"></i>Facebook Person Targets</a></li>
+                        <li class="active w-100 " ><a data-toggle="tab" class="font-size-12" href="#Facebook_Group_Targets"> <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Group Targets</a></li>
+                       <li class="w-100 "> <a data-toggle="tab" class="font-size-12" href="#Facebook_Page_Targets"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Page Targets</a></li>
+                      <li class="w-100 ">  <a data-toggle="tab" class="font-size-12" href="#Facebook_Person_Targets"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Person Targets</a></li>
                      </ul>     
                      </li>
-                      
-                      
                    </ul>
-               </li>
+<!-- ################################################################################################## -->
+                                <!-- LINKEDIN  -->
+<!-- ################################################################################################## -->
+<ul class="nav nav-tabs" id="All_Targets_Collapse">
+  <li class=" w-100">
+     <a href="#Linkedin_Targets_Collpase" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+        All Linkedin Targets 
+    </a>
+    <ul  class="nav nav-tabs" id="Linkedin_Targets_Collpase">
+     <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Linkedin_Profile_Targets"> <i class="fab fa-linkedin-in"></i>Linkedin Profile Targets</a></li>
+     <li class="w-100 "> <a data-toggle="tab" class="font-size-12" href="#Linkedin_Company_Targets"> <i class="fab fa-linkedin-in"></i>Linkedin Company Targets</a></li>
+   
+   </ul>     
+  </li>
+</ul>
+<!-- ################################################################################################## -->
+                                      <!-- REDDIT  -->
+<!-- ################################################################################################## -->            
+<ul class="nav nav-tabs" id="All_Targets_Collapse">
+    <li class=" w-100">
+       <a href="#Reddit_Targets_Collpase" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fa fa-reddit-square" aria-hidden="true"></i>
+          All Reddit Targets 
+      </a>
+      <ul  class="nav nav-tabs" id="Reddit_Targets_Collpase">
+       <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Reddit_Targets"> <i class="fa fa-reddit-alien" aria-hidden="true"></i>Reddit  Targets</a></li>
+       <li class="w-100 "> <a data-toggle="tab" class="font-size-12" href="#Sub_Reddit_Targets"> <i class="fa fa-reddit" aria-hidden="true"></i>Sub Reddit Targets</a></li>
+     
+     </ul>     
+    </li>
+  </ul>
+<!-- ################################################################################################## -->
+                                      <!-- TWITTER  -->
+<!-- ################################################################################################## --> 
+<ul class="nav nav-tabs" id="All_Targets_Collapse">
+    <li class=" w-100">
+       <a href="#Twitter_Targets_Collpase" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          All Twitter Targets 
+      </a>
+      <ul  class="nav nav-tabs" id="Twitter_Targets_Collpase">
+       <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Twitter_Targets"> <i class="fa fa-reddit-alien" aria-hidden="true"></i>Twitter  Targets</a></li>
+      
+     
+     </ul>     
+    </li>
+  </ul>
+<!-- ################################################################################################## -->
+                                      <!-- CUSTOM TARGETS  -->
+<!-- ################################################################################################## --> 
+<ul class="nav nav-tabs" id="All_Targets_Collapse">
+    <li class=" w-100">
+       <a href="#Custom_Targets_Collpase" class="font-size-14" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          All Custom Targets 
+      </a>
+      <ul  class="nav nav-tabs" id="Custom_Targets_Collpase">
+       <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Keybase_Crawling_Targets"> <i class="fa fa-reddit-alien" aria-hidden="true"></i>Keybase Crawling Targets</a></li>
+       <li class=" w-100 " ><a data-toggle="tab" class="font-size-12" href="#Dynamic_Crawling_Targets"> <i class="fa fa-reddit-alien" aria-hidden="true"></i>Dynamic Crawling Targets</a></li>
+      
+     
+     </ul>     
+    </li>
+  </ul>
+<!-- ################################################################################################## --> 
+</li>
+
+
+
+
+
                <li>
                    <a href="#">
                        <i class="fas fa-briefcase"></i>

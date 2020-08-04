@@ -1293,8 +1293,47 @@ def TMO_Dashboard(request):
     
 
 def TMO(request):
-    Facebook_Targets = Facebook_Target.objects.all()
-    return render(request, "OSINT_System_Core/tmo_dashboard.html", {'Facebook_Targets': Facebook_Targets})
+    ################################################################################
+    #FACEBOOK
+    ################################################################################
+    Facebook_Profile_Targets = Facebook_Target.objects.filter(target_type="profile")
+    Facebook_Page_Targets = Facebook_Target.objects.filter(target_type="page")
+    Facebook_Group_Targets = Facebook_Target.objects.filter(target_type="group")
+    ################################################################################
+    #LINKEDIN
+    ################################################################################
+    Linkdein_Profile_Targets = Linkedin_Target.objects.filter(target_type="profile")
+    Linkdein_Company_Targets = Linkedin_Target.objects.filter(target_type="company")
+    ################################################################################
+    #REDDIT
+    ################################################################################
+    Reddit_Targets = Reddit_Target.objects.filter(target_type="profile")
+    Sub_Reddit_Targets = Reddit_Target.objects.filter(target_type="subreddit")
+    ################################################################################
+    #TWITTER
+    ################################################################################
+    Twitter_Targets = Twitter_Target.objects.filter(target_type="profile")
+    ################################################################################
+    #CUSTOM TARGETS 
+    ################################################################################
+    Keybase_Crawling_Targets = Keybase_Crawling.objects.all()
+    Dynamic_Crawling_Targets = Dynamic_Crawling.objects.all()
+    ################################################################################
+    GTR_Object=  Global_Target_Reference()
+    Targets_Added_Today=GTR_Object.targets_added_today()
+    print("@###########################################################")
+    print(Targets_Added_Today)
+    
+    return render(request, "OSINT_System_Core/tmo_dashboard.html", {'Facebook_Profile_Targets': Facebook_Profile_Targets,
+                                                                    'Facebook_Page_Targets':Facebook_Page_Targets,
+                                                                    'Facebook_Group_Targets':Facebook_Group_Targets,
+                                                                    'Linkdein_Profile_Targets':Linkdein_Profile_Targets,
+                                                                    'Linkdein_Company_Targets':Linkdein_Company_Targets,
+                                                                    'Sub_Reddit_Targets':Sub_Reddit_Targets,
+                                                                    'Reddit_Targets':Reddit_Targets,
+                                                                    'Twitter_Targets':Twitter_Targets,
+                                                                    'Keybase_Crawling_Targets':Keybase_Crawling_Targets,
+                                                                    'Dynamic_Crawling_Targets':Dynamic_Crawling_Targets,})
         
 def TMO_Base(request):
     return render(request, 'OSINT_System_Core/tmo_base.html')
