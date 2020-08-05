@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 from mongoengine import *
+from django.contrib.auth.models import User
 # Create your models here.
 import datetime 
 
@@ -8,13 +9,17 @@ import datetime
 
 class User_Profile_Manager(models.Manager):
     # create a new user profile 
-    def create_user_profile(self,first_name,last_name,current_address,permanent_address,profile_pic):
+    def create_user_profile(self,user_id,address,contact,rank,description,dob,cnic,employee_number,profile_pic):
             user_profile = self.create(
-                               first_name=first_name,
-                               last_name=last_name,
-                               current_address=current_address,
-                               permanent_address=permanent_address,
-                               profile_pic=profile_pic)
+                                user_id=user_id,
+                                address=address,
+                                rank=rank,
+                                description=description,
+                                contact=contact,
+                                dob=dob,
+                                cnic=cnic,
+                                employee_number=employee_number,
+                                profile_pic=profile_pic)
             user_profile.save()
             if user_profile:
                 return True
@@ -35,25 +40,30 @@ class User_Profile_Manager(models.Manager):
         else:
             return False
      # getupdate a single user profile  
-    @staticmethod
-    def getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic):
-       Update_User_Profile=User_Profile.objects.filter(id = id).update(first_name=first_name,last_name=last_name,current_address=current_address,permanent_address=permanent_address,profile_pic=profile_pic)
-       if Update_User_Profile:
-           return Update_User_Profile 
-       else:
-           return False
+    # @staticmethod
+    # def getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic):
+    #    Update_User_Profile=User_Profile.objects.filter(id = id).update(first_name=first_name,last_name=last_name,current_address=current_address,permanent_address=permanent_address,profile_pic=profile_pic)
+    #    if Update_User_Profile:
+    #        return Update_User_Profile 
+    #    else:
+    #        return False
            
        
 
 
 class User_Profile(models.Model):
-    first_name=models.EmailField(max_length=30)
-    last_name=models.CharField(max_length=30)
-    current_address=models.CharField(max_length=200)
-    permanent_address=models.CharField(max_length=200)
+    # user_id = models.ForeignKey('auth.User', unique=True ,on_delete=models.CASCADE,)
+    user_id=models.OneToOneField(User,unique=True ,on_delete=models.CASCADE,default='EMPTY')
+    address=models.CharField(max_length=200,null=True,blank=True)
+    rank=models.CharField(max_length=200,null=True,blank=True)
+    description=models.CharField(max_length=400,null=True,blank=True)
+    contact=models.CharField(max_length=200,null=True,blank=True)
+    dob=models.DateField(null=True,blank=True)
+    cnic=models.CharField(max_length=200,null=True,blank=True)
     profile_pic=models.ImageField(null=True,blank=True)
+    employee_number=models.CharField(max_length=200,null=True,blank=True)
     objects = User_Profile_Manager()
     def __str__(self):
-        return self.first_name
+        return self.cnic
     
            

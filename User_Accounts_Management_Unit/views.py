@@ -29,6 +29,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.contrib.auth.models import UserManager
 from django.core import serializers
+from django.db import IntegrityError
 from django.contrib import messages
 import json
 from django.http import JsonResponse
@@ -127,34 +128,54 @@ class Add_User_Profile(View):
     template_name='Add_User.html'
     def get (self,request,*args,**kwargs):
         User_Groups = Group.objects.all()
+        User_Profiles=User_Profile.objects.all()
+        # Special query to get all user that have no profile / or foreign key relationship 
+        Un_Related = User_Profile.objects.all()
+        All_Users = User.objects.exclude(id__in=Un_Related)
+        # end special query  
         User_Profile_Fetched={}
-        return render (request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Fetched,'User_Groups':User_Groups})
+        return render (request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Fetched,'User_Groups':User_Groups,'All_Users':All_Users})
+    
+    
+    
+    
     def post (self,request,*args,**kwargs):
-        first_name=request.POST.get('first-name')
-        last_name=request.POST.get('last-name')
-        current_address=request.POST.get('local-address')
-        permanent_address=request.POST.get('permanent-address')
-        profile_pic=request.POST.get('profile-pic')
-        # 
-        print(first_name);
-        print(last_name);
-        print(current_address);
-        print(permanent_address);
-        print(profile_pic);
-        # 
-        New_User_Profile =User_Profile.objects.create_user_profile(
-                first_name=first_name,
-                last_name=last_name,
-                current_address=current_address,
-                permanent_address=permanent_address,
-                profile_pic=profile_pic
+        user_id=request.POST.get('user_id')
+        rank=request.POST.get('rank')
+        description=request.POST.get('description')
+        contact=request.POST.get('contact')
+        address=request.POST.get('address')
+        profile_pic=request.POST.get('profile_pic')
+        dob=request.POST.get('dob')
+        cnic1=str(request.POST.get('cnic_1'))
+        cnic2=str(request.POST.get('cnic_2'))
+        cnic3=str(request.POST.get('cnic_3'))
+        cnic=cnic1+"-"+cnic2+"-"+cnic3
+        employee_number=request.POST.get('employee-number')
+        Get_User=User.objects.get(id=user_id)
+        try:
+            New_User_Profile =User_Profile.objects.create_user_profile(
+                user_id=Get_User,
+                address=address,
+                rank=rank,
+                description=description,
+                contact=contact,
+                dob=dob,
+                cnic=cnic,
+                employee_number=employee_number,
+                profile_pic=profile_pic,
                 
-        )
-        if New_User_Profile:
-            messages.success(request,'User profile created successfully ')
+            )
+            if New_User_Profile:
+                messages.success(request,'User profile created successfully ')
+                return redirect('/all_user_profile')
+            else:
+                messages.error(request,'Operation failed ! Try again')
+                return redirect('/all_user_profile')
+        except IntegrityError:
+            messages.error(request,'Operation failed ! Try again')
             return redirect('/all_user_profile')
-        else:
-            return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html')
+        
 
         
        

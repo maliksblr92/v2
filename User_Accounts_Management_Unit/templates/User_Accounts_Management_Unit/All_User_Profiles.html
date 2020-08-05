@@ -130,25 +130,31 @@
             <table class="table table-responsive text-dark pt-2 border table-striped" id="All_User_Profiles" style="width:100%">
                 <thead>
                 <tr>
-
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Local Address</th>
-                    <th scope="col">Perm Address</th>
-                    <th scope="col">Profile Pic</th>
-                    <th scope="col">Operation</th>
+                    <th scope="col" class="text-left font-weight-bold">Username</th>
+                    <th scope="col" class="text-left font-weight-bold">Address</th>
+                    <th scope="col" class="text-left font-weight-bold">Rank</th>
+                    <th scope="col" class="text-left font-weight-bold">Description</th>
+                    <th scope="col" class="text-left font-weight-bold">Contact</th>
+                    <th scope="col" class="text-left font-weight-bold">DOB</th>
+                    <th scope="col" class="text-left font-weight-bold">CNIC</th>
+                    <th scope="col" class="text-left font-weight-bold">EMP #</th>
+                    <th scope="col" class="text-left font-weight-bold">Profile Pic</th>
+                    <th scope="col" class="text-left font-weight-bold">Operations</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 {% for profiles in All_User_Profiles %}
                     <tr>
-                        <th scope="row">{{ profiles.first_name|default:"N/A"}}</th>
-                        <td>{{ profiles.last_name|default:"N/A"}}</td>
-                        <td> {{profiles.current_address|default:"N/A"}}</td>
-                        <td>{{ profiles.permanent_address|default:"N/A"}}</td>
-                        <td>{{ profiles.expired_on|default:"N/A"}}</td>
-                        <td><img src="{{ profiles.profile_pic|default:"N/A"}}" style="" alt=""></td>
+                        <td>{{ profiles.user_id|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.address|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.rank|default:"N/A"|truncatechars:"10"}}</td>
+                        <td> {{profiles.description|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.contact|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.dob|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.cnic|default:"N/A"|truncatechars:"10"}}</td>
+                        <td>{{ profiles.employee_number|default:"N/A"|truncatechars:"10"}}</td>
+                        <td><img src="{{ profiles.profile_pic|default:"data:image/png;base64,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"}}"  alt=""style="height:40px;width:40px;"></td>
                         <td> <a class="badge badge-dark" href="{%  url 'User_Accounts_Management_Unit:delete_user_profile' id=profiles.id %}"><i class="fa fa-trash text-danger"></i></a>
                             <a class="badge badge-success" href="{%  url 'User_Accounts_Management_Unit:update_user_profile' id=profiles.id %}"><i class="fa fa-eye text-white"></i></a>
                            
