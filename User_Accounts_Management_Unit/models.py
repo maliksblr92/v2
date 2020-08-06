@@ -39,15 +39,27 @@ class User_Profile_Manager(models.Manager):
             return True
         else:
             return False
-     # getupdate a single user profile  
-    # @staticmethod
-    # def getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic):
-    #    Update_User_Profile=User_Profile.objects.filter(id = id).update(first_name=first_name,last_name=last_name,current_address=current_address,permanent_address=permanent_address,profile_pic=profile_pic)
-    #    if Update_User_Profile:
-    #        return Update_User_Profile 
-    #    else:
-    #        return False
-           
+    #  getupdate a single user profile  
+    @staticmethod
+    def getUpdateProfile(id,address,contact,rank,description,dob,cnic,employee_number,profile_pic):
+       
+       try:
+           Update_User_Profile=User_Profile.objects.filter(id = id).update(
+           address=address,
+           contact=contact,
+           rank=rank,
+           description=description,
+           dob=dob,
+           cnic=cnic,
+           employee_number=employee_number,
+           profile_pic=profile_pic
+           )
+           if Update_User_Profile:
+                return Update_User_Profile 
+           else:
+                return False
+       except Exception as e:
+           return False
        
 
 

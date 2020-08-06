@@ -18,6 +18,8 @@ path('',views.User_Login.as_view(),name='user_login'),
     # user-group_routes
     
     path('add_user_group/',views.Add_User_Group.as_view(), name='add_user_group'),
+    path('delete_user_group/<str:id>/',views.Delete_User_Group, name='delete_user_group'),
+    path('update_user_group/',views.Update_User_Group, name='update_user_group'),
     path('all_user_group/',views.All_User_Group.as_view(), name='all_user_group'),
     path('add_users_to_groups/',views.Add_Users_To_Groups.as_view(),name='add_users_to_groups'),
     path('remove_users_to_groups/',views.Remove_Users_To_Groups.as_view(),name='remove_users_to_groups'),

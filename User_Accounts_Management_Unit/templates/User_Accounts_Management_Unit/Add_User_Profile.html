@@ -66,6 +66,7 @@
         <form name="Add_User_Profile" enctype="multipart/form-data"
             action="{% url 'User_Accounts_Management_Unit:update_user_profile' User_Profile_Fetched.id  %}"
             method="POST" class="custom_inner_background inner_form_margin_radius">
+            <input type="hidden" name="user-profile-id" id="user-profile-id" value="{{User_Profile_Fetched.id}}" />
             {% csrf_token %}
             {% else %}
             <form name="Add_User_Profile" action="{% url 'User_Accounts_Management_Unit:add_user_profile'  %}"

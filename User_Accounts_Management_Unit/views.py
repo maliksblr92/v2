@@ -33,6 +33,8 @@ from django.db import IntegrityError
 from django.contrib import messages
 import json
 from django.http import JsonResponse
+from django.contrib import admin
+from django.contrib.auth.models import Permission, ContentType
 # ahmed
 
 @csrf_exempt
@@ -196,19 +198,31 @@ class Update_User_Profile(View):
           return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html')
     
     def post(self,request,*args,**kwargs):
-         id= int(kwargs.get('id'))
-         first_name=request.POST.get('first-name')
-         last_name=request.POST.get('last-name')
-         current_address=request.POST.get('local-address')
-         permanent_address=request.POST.get('permanent-address')
-         profile_pic=request.POST.get('profile-pic')
-         User_Profile_Updated=User_Profile_Manager.getUpdateProfile(id,first_name,last_name,current_address,permanent_address,profile_pic)
-         if(User_Profile_Updated):
-            messages.success(request,'User profile updated successfully ')
+        id= int(kwargs.get('id'))
+        user_id=request.POST.get('user_id')
+        rank=request.POST.get('rank')
+        description=request.POST.get('description')
+        contact=request.POST.get('contact')
+        address=request.POST.get('address')
+        profile_pic=request.POST.get('profile_pic')
+        dob=request.POST.get('dob')
+        cnic1=str(request.POST.get('cnic_1'))
+        cnic2=str(request.POST.get('cnic_2'))
+        cnic3=str(request.POST.get('cnic_3'))
+        cnic=cnic1+"-"+cnic2+"-"+cnic3
+        employee_number=request.POST.get('employee-number')
+       
+        try:
+            User_Profile_Updated=User_Profile_Manager.getUpdateProfile(id,address,contact,rank,description,dob,cnic,employee_number,profile_pic)
+            if(User_Profile_Updated):
+                messages.success(request,'User profile updated successfully ')
+                return redirect('/all_user_profile')
+            else:
+                return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Updated})
+        except Exception as e:
+            messages.success(request,'Operation failed ! Try again ')
             return redirect('/all_user_profile')
-         else:
-             return render(request,'User_Accounts_Management_Unit/Add_User_Profile.html',{'User_Profile_Fetched':User_Profile_Updated})
-
+            
 class Delete_User_Profile(View):
     def get(self,request,*args,**kwargs):
         id= int(kwargs.get('id'))
@@ -225,16 +239,26 @@ class Delete_User_Profile(View):
 class Add_User_Group(View):
     def get(self,request,*args,**kwargs):
         pass
-    def post(self,request,*args,**kwargs):
-        group_name=request.POST.get('group_name')
-        Group_Created=Group.objects.create(name=group_name)
-        if Group_Created:
-            messages.success(request,'Group created successfully ')
-            return redirect('/all_user_group')
-        else:
-            messages.success(request,'Operation failed ! Try again ')
-            return redirect('/all_user_group')
     
+    def post(self,request,*args,**kwargs):
+        group_name=request.POST.get('group-name')
+        try:
+            Group_Created=Group.objects.create(name=group_name)
+            if 'permissions'in request.POST: 
+                permissions_list = Permission.objects.all()
+                Group_Created.permissions.set(permissions_list)     
+            else:
+                pass
+                if Group_Created:
+                    messages.success(request,'Group created successfully ')
+                    return redirect('/all_user_group')
+                else:
+                    messages.success(request,'Operation failed ! Try again ')
+                    return redirect('/all_user_group')
+        except Exception as e:
+                messages.success(request,'Operation failed ! Try again ')
+                return redirect('/all_user_group')
+            
 class All_User_Group(View):
     def get(self,request,*args,**kwargs):
         All_Users_Groups=Group.objects.all()
@@ -413,3 +437,37 @@ class Delete_User(View):
          else:
               messages.error(request,'Operation Failed ! Try again ')
               return redirect('/all_users')
+
+
+# group  productivity functions
+def Delete_User_Group(request,*args,**kwargs):
+    id=int(kwargs.get('id'))
+    try:
+        Find_Group=Group.objects.get(id=id)
+        Find_Group.delete()
+        messages.success(request,"Group deleted successfully ")
+        return redirect('/all_user_group') 
+    except Exception as e:
+         messages.success(request,"Operation Failed ! Try again ")
+         return redirect('/all_user_group') 
+     
+  
+def Update_User_Group(request,*args,**kwargs):
+    Group_Name=request.POST.get("update-group-name");
+    Old_Group_Name=request.POST.get("update-name");
+    try:
+        Updateable_Group=Group.objects.get(name=Old_Group_Name)
+        Updateable_Group.name=Group_Name
+        Updateable_Group.save()
+        if 'update-permissions'in request.POST: 
+                permissions_list = Permission.objects.all()
+                Updateable_Group.permissions.set(permissions_list)     
+        else:
+                permissions_list = Permission.objects.all()
+                Updateable_Group.permissions.clear();
+        messages.success(request,"Group updated successfully  ")
+        return redirect('/all_user_group') 
+    except Exception as e:
+         print(e)
+         messages.success(request,"Operation Failed ! Try again ")
+         return redirect('/all_user_group') 

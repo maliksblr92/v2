@@ -154,6 +154,7 @@
                     <th scope="col">Exclude User</th>
                     <th scope="col">Excluded Users</th>
                     <th scope="col">Add User</th>
+                    <th scope="col">Permissions</th>
                     <th scope="col">Operation</th>
 
                 </tr>
@@ -188,10 +189,27 @@
                            </button></td>
                          
                           </td>
-                        <td> <a class="badge badge-dark" href=""><i class="fa fa-trash text-danger"></i></a>
-                            <a class="badge badge-success" href=""><i class="fa fa-eye text-white"></i></a>
+                          <td>
+                              <!--  -->
+                            
+                            
+                            <!--  -->
+                            <select class="form-control">
+                              {% for  permission in group.permissions.all  %} 
+                             
+                              <option value="{{permission.id}}">{{permission.name}}</option>
+                          {% empty %}
+                           None
+                          
+                            {% endfor %} </select>
+                        
+                        </td>
+                        <td> <a class="badge badge-dark" href="{% url 'User_Accounts_Management_Unit:delete_user_group' id=group.id %}"><i class="fa fa-trash text-danger"></i></a>
+                            <a class="badge badge-success 
+                            Update_Group_Button" data-toggle="modal" id="Update_Group_Button" data-id="{{group.name}}"   {% if   group.permissions.all.count == 0  %} data-cmd="{{group.permissions.all.count}}" {% else %} data-cmd="{{group.permissions.all.count}}" {% endif %}  data-target="#Edit_Group_Modal"><i class="fa fa-eye text-white"></i></a>
                            
                         </td>
+                       
                     </tr>
                     
                 {% endfor %}
@@ -201,12 +219,8 @@
     </div>
     <!--  -->
   <!-- hidden form  -->
-  <form action="{% url 'User_Accounts_Management_Unit:add_users_to_groups' %}" id="add_user_to_group_form" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="username_AddGroup" id="username_AddGroup" />
-      <input type="hidden" name="groupIdForAdd" id="groupIdForAdd" />
-      <input type="hidden" name="page_name" value="All_Users_Group" id="page_name" />
-  </form>
+  
+
 
 
   <form action="{% url 'User_Accounts_Management_Unit:remove_users_to_groups' %}" id="remove_user_to_group_form" method="POST">
@@ -215,6 +229,94 @@
     <input type="hidden" name="groupIdForRemove" id="groupIdForRemove" />
     <input type="hidden" name="page_name" value="All_Users_Group" id="page_name" />
 </form>
+
+<div class="modal fade"tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="addUserGroupModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="{% url 'User_Accounts_Management_Unit:add_user_group'%}" method="POST">
+            {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+       
+            <div class="d-flex flex-row justify-content-around align-items-center">
+                <label for="" class="btn ">Group Name 
+                   
+                </label>
+                <input type="text" name="group-name" class="form-control border border-primary" maxlength="25" minlength="3" id="group-name"style="color:black!important;width:230px;" required />
+            </div>
+           <div class="row mt-2">
+               <div class="col-md-5"></div>
+               <div class="col-md-7">
+                <div class="d-flex flex-row justify-content-start align-items-center">
+                    <input type="checkbox" class="" name="permissions" value="0" id="permissions"  />
+                    <small class="text-success font-weight-bold ml-3">Allow all permissions</small>
+                </div>
+               </div>
+           </div>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+  <!-- EDIT MODAL -->
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="Edit_Group_Modal" tabindex="-1" role="dialog" aria-labelledby="Edit_Group_ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="{% url 'User_Accounts_Management_Unit:update_user_group' %}" method="POST">
+            <input type="hidden" name="update-name" id="update-name" />
+            {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Update Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+       
+            <div class="d-flex flex-row justify-content-around align-items-center">
+                <label for="" class="btn ">Group Name 
+                   
+                </label>
+                <input type="text" name="update-group-name" class="form-control border border-primary" maxlength="25" minlength="3" id="update-group-name"style="color:black!important;width:230px;" required />
+            </div>
+           <div class="row mt-2">
+               <div class="col-md-5"></div>
+               <div class="col-md-7">
+                <div class="d-flex flex-row justify-content-start align-items-center">
+                    <input type="checkbox" class="" name="update-permissions" value="0" id="update-permissions"  />
+                    <small class="text-success font-weight-bold ml-3">Allow all permissions</small>
+                </div>
+               </div>
+           </div>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+<!-- SPECIAL HIDDEN FIELD TO DETECT WHEATHER GROUP HAS PERMSIONS IN UPDATE GROUP NAME -->
+
+
 {% endblock %}>
 {% block base_js %}
 
@@ -348,6 +450,33 @@
       
             
 
+        </script>
+        <!-- Update Goup  -->
+        <script>
+            $(document).ready(function(){
+                console.log("update ready ");
+                $('.Update_Group_Button').on('click',function(){
+                  var   Get_Group_Name=$(this).attr("data-id");
+                  $('#update-name').val(Get_Group_Name)
+                  var   If_Group_Has_Permissions=$(this).attr("data-cmd");
+                  console.log(Get_Group_Name)
+                $('#update-group-name').val(Get_Group_Name);
+             
+              console.log(If_Group_Has_Permissions);
+                if(If_Group_Has_Permissions === '0'){
+                    $('#update-permissions').prop("checked", false)
+                    console.log("==0");
+                }
+                else if (If_Group_Has_Permissions > '0'){
+                  
+                    $('#update-permissions').prop("checked", true)
+                    console.log(">0");
+                }
+                else{
+                    console.log("else");
+                }
+                })
+            })
         </script>
 {% endblock %}
 
