@@ -244,17 +244,18 @@ class Add_User_Group(View):
         group_name=request.POST.get('group-name')
         try:
             Group_Created=Group.objects.create(name=group_name)
-            if 'permissions'in request.POST: 
+            if 'user-permissions'in request.POST: 
                 permissions_list = Permission.objects.all()
                 Group_Created.permissions.set(permissions_list)     
             else:
                 pass
-                if Group_Created:
-                    messages.success(request,'Group created successfully ')
-                    return redirect('/all_user_group')
-                else:
-                    messages.success(request,'Operation failed ! Try again ')
-                    return redirect('/all_user_group')
+            if Group_Created:
+                messages.success(request,'Group created successfully ')
+                return redirect('/all_user_group')
+            else:
+                messages.success(request,'Operation failed ! Try again ')
+                return redirect('/all_user_group')
+            
         except Exception as e:
                 messages.success(request,'Operation failed ! Try again ')
                 return redirect('/all_user_group')
@@ -277,17 +278,21 @@ class Add_Users_To_Groups(View):
         if Get_User:
             groupId=request.POST.get('groupIdForAdd')
             group = Group.objects.get(id=groupId)
+            
             if group:
                 exsist=Get_User.groups.filter(name=group).exists() 
                 if exsist:
-                    messages.error(request,'User already exsist in group')
+                    messages.error(request,'User already exist in group')
                     if Page_Name == 'All_Users':
                         return redirect('/all_users')
                     else:
                         return redirect('/all_user_group')                        
                 else: 
                     Get_User.groups.add(group)
-                    messages.success(request,'User added to group successfully')
+                    """ give group all permissions to user """
+                    permissions = group.permissions.all()
+                    Get_User.user_permissions.set(permissions)
+                    messages.success(request,'User added to group successfully and group permissions invoked ')
                     if Page_Name == 'All_Users':
                         return redirect('/all_users')
                     else:
@@ -307,8 +312,11 @@ class Remove_Users_To_Groups(View):
             if group:
                 exsist=Get_User.groups.filter(name=group).exists() 
                 if exsist:
-                    messages.success(request,'User removed succesfully')
-                    Get_User.groups.clear()
+                    messages.success(request,'User removed from group  succesfully and group permissions revoked')
+                    group.user_set.remove(Get_User)
+                    """ also remove group all permissions to user """
+                    permissions = group.permissions.all()
+                    Get_User.user_permissions.remove()
                     if Page_Name == 'All_Users':
                         return redirect('/all_users')
                     else:

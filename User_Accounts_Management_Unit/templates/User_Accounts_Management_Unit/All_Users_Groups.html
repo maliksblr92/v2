@@ -168,8 +168,10 @@
                             {% for user in  All_Users %}
                             {% if user|has_group:group.name %}
                             <option value="{{user.username}}">{{user.username}}</option>
-                            {% else %}                          
+                            {% else %}  
+                                                
                             {% endif %}
+                          
                             {% endfor %}
                         </select></td>
                         <td><button type="button" id="removeUsersToGroupsBtn" class="btn btn-danger removeUsersToGroupsBtn"  data-id="{{group.id}}" >
@@ -253,7 +255,7 @@
                <div class="col-md-5"></div>
                <div class="col-md-7">
                 <div class="d-flex flex-row justify-content-start align-items-center">
-                    <input type="checkbox" class="" name="permissions" value="0" id="permissions"  />
+                    <input type="checkbox" class="" name="user-permissions" value="0" id="user-permissions"  />
                     <small class="text-success font-weight-bold ml-3">Allow all permissions</small>
                 </div>
                </div>
