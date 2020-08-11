@@ -36,7 +36,7 @@ from django.http import JsonResponse
 from django.contrib import admin
 from django.contrib.auth.models import Permission, ContentType
 # ahmed
-
+from OSINT_System_Core.mixins import RequireLoginMixin, IsTSO
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -126,7 +126,7 @@ class User_Logout(View):
 
 
 
-class Add_User_Profile(View):
+class Add_User_Profile(RequireLoginMixin, IsTSO,View):
     template_name='Add_User.html'
     def get (self,request,*args,**kwargs):
         User_Groups = Group.objects.all()
@@ -181,14 +181,14 @@ class Add_User_Profile(View):
 
         
        
-class All_User_Profile(View):
+class All_User_Profile(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         All_User_Profiles=User_Profile.objects.all()
         # print(All_User_Profiles.count())
         return render(request,'User_Accounts_Management_Unit/All_User_Profiles.html',{'All_User_Profiles':All_User_Profiles})
     
 
-class Update_User_Profile(View):
+class Update_User_Profile(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
       id= int(kwargs.get('id'))
       User_Profile_Fetched=User_Profile_Manager.getUserProfile(id)
@@ -223,7 +223,7 @@ class Update_User_Profile(View):
             messages.success(request,'Operation failed ! Try again ')
             return redirect('/all_user_profile')
             
-class Delete_User_Profile(View):
+class Delete_User_Profile(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         id= int(kwargs.get('id'))
         Delete_User_Profile=User_Profile_Manager.deleteUserProfile(id);
@@ -236,7 +236,7 @@ class Delete_User_Profile(View):
         
 
 
-class Add_User_Group(View):
+class Add_User_Group(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         pass
     
@@ -260,14 +260,14 @@ class Add_User_Group(View):
                 messages.success(request,'Operation failed ! Try again ')
                 return redirect('/all_user_group')
             
-class All_User_Group(View):
+class All_User_Group(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         All_Users_Groups=Group.objects.all()
         All_Users=User.objects.all()
         if( All_Users_Groups):
             return render(request,'User_Accounts_Management_Unit/All_Users_Groups.html',{'All_Users_Groups':All_Users_Groups,'All_Users':All_Users})
         
-class Add_Users_To_Groups(View):
+class Add_Users_To_Groups(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         pass
     def post(self,request,*args,**kwargs):
@@ -298,7 +298,7 @@ class Add_Users_To_Groups(View):
                     else:
                         return redirect('/all_user_group')   
         
-class Remove_Users_To_Groups(View):
+class Remove_Users_To_Groups(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         pass
     def post(self,request,*args,**kwargs):
@@ -336,7 +336,7 @@ class Remove_Users_To_Groups(View):
                 return redirect('/all_user_group')   
      
 
-class Get_All_Group_Users(View):
+class Get_All_Group_Users(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         Group_Id= int(kwargs.get('id'))
         group = Group.objects.get(id=Group_Id)
@@ -348,7 +348,7 @@ class Get_All_Group_Users(View):
         return HttpResponse(qs_json, content_type='application/json')
            
 
-class Add_User(View):
+class Add_User(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         return render (request,'User_Accounts_Management_Unit/Add_User.html')
     def post(self,request,*args,**kwargs):
@@ -381,13 +381,13 @@ class Add_User(View):
         else:
             messages.success(request,'Operation failed ! Try again ')
             return redirect('all_users')
-class All_Users(View):
+class All_Users(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         All_Users=User.objects.all()
         Groups=Group.objects.all()
         return render(request,'User_Accounts_Management_Unit/All_Users.html',{'All_Users':All_Users,'Groups':Groups})
 
-class Update_User(View):
+class Update_User(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         id= int(kwargs.get('id'))
         Find_User=User.objects.get(id=id)
@@ -430,7 +430,7 @@ class Update_User(View):
            messages.success(request,'Operation failed ! Try again ')
            return  redirect('/all_users')
 
-class Delete_User(View):
+class Delete_User(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
          id= int(kwargs.get('id'))
          Find_User=User.objects.get(id=id)
@@ -448,34 +448,36 @@ class Delete_User(View):
 
 
 # group  productivity functions
-def Delete_User_Group(request,*args,**kwargs):
-    id=int(kwargs.get('id'))
-    try:
-        Find_Group=Group.objects.get(id=id)
-        Find_Group.delete()
-        messages.success(request,"Group deleted successfully ")
-        return redirect('/all_user_group') 
-    except Exception as e:
-         messages.success(request,"Operation Failed ! Try again ")
-         return redirect('/all_user_group') 
+class Delete_User_Group(RequireLoginMixin, IsTSO,View):
+    def get(self,request,*args,**kwargs):
+        id=int(kwargs.get('id'))
+        try:
+            Find_Group=Group.objects.get(id=id)
+            Find_Group.delete()
+            messages.success(request,"Group deleted successfully ")
+            return redirect('/all_user_group') 
+        except Exception as e:
+            messages.success(request,"Operation Failed ! Try again ")
+            return redirect('/all_user_group') 
      
   
-def Update_User_Group(request,*args,**kwargs):
-    Group_Name=request.POST.get("update-group-name");
-    Old_Group_Name=request.POST.get("update-name");
-    try:
-        Updateable_Group=Group.objects.get(name=Old_Group_Name)
-        Updateable_Group.name=Group_Name
-        Updateable_Group.save()
-        if 'update-permissions'in request.POST: 
-                permissions_list = Permission.objects.all()
-                Updateable_Group.permissions.set(permissions_list)     
-        else:
-                permissions_list = Permission.objects.all()
-                Updateable_Group.permissions.clear();
-        messages.success(request,"Group updated successfully  ")
-        return redirect('/all_user_group') 
-    except Exception as e:
-         print(e)
-         messages.success(request,"Operation Failed ! Try again ")
-         return redirect('/all_user_group') 
+class Update_User_Group(RequireLoginMixin, IsTSO,View):
+    def post(self,request,*args,**kwargs):
+        Group_Name=request.POST.get("update-group-name");
+        Old_Group_Name=request.POST.get("update-name");
+        try:
+            Updateable_Group=Group.objects.get(name=Old_Group_Name)
+            Updateable_Group.name=Group_Name
+            Updateable_Group.save()
+            if 'update-permissions'in request.POST: 
+                    permissions_list = Permission.objects.all()
+                    Updateable_Group.permissions.set(permissions_list)     
+            else:
+                    permissions_list = Permission.objects.all()
+                    Updateable_Group.permissions.clear();
+            messages.success(request,"Group updated successfully  ")
+            return redirect('/all_user_group') 
+        except Exception as e:
+            print(e)
+            messages.success(request,"Operation Failed ! Try again ")
+            return redirect('/all_user_group') 

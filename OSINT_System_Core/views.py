@@ -86,7 +86,7 @@ ss = System_Stats()
 
 from Public_Data_Acquisition_Unit.mongo_models import *
 
-class Main(View):
+class Main(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         # response = fetch_instagram_profile('author','atifaslam')   #author or post
         # response =  acq_manager.ess_add_facebook_person_target('prince.nuada.16','closeAssociates')
@@ -108,7 +108,7 @@ class Main(View):
 # ...........................................Views for Target Forms.......
 
 
-class Target_Author_Instagram(View):
+class Target_Author_Instagram(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         return render(
             request,
@@ -116,7 +116,7 @@ class Target_Author_Instagram(View):
             {})
 
 
-class Target_Author_Facebook(View):
+class Target_Author_Facebook(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         return render(
             request,
@@ -124,7 +124,7 @@ class Target_Author_Facebook(View):
             {})
 
 
-class Target_Author_Twitter(View):
+class Target_Author_Twitter(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         return render(
             request,
@@ -132,7 +132,7 @@ class Target_Author_Twitter(View):
             {})
 
 
-class Target_Author_Linkedin(View):
+class Target_Author_Linkedin(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         return render(
             request,
@@ -140,7 +140,7 @@ class Target_Author_Linkedin(View):
             {})
 
 
-class Target_Headlines_Main(View):
+class Target_Headlines_Main(RequireLoginMixin, IsTSO,View):
     def get(self, request):
         # send_event('test', 'message', {'text': 'hello world'})
 
@@ -154,7 +154,7 @@ class Target_Headlines_Main(View):
 
 #...........................................Views for Target Submission.............................................
 #@method_decorator(csrf_exempt,name='dispatch')
-class News_Target(APIView):
+class News_Target(RequireLoginMixin, IsTSO,APIView):
     #view class to submit news targets here
 
     #permission_classes = (IsAuthenticated,)
@@ -204,7 +204,7 @@ class News_Target(APIView):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class Add_Instagram_Target(APIView):
+class Add_Instagram_Target(RequireLoginMixin, IsTSO,APIView):
 
     #class to add targets of instagram to the system
 
@@ -254,7 +254,7 @@ class Add_Instagram_Target(APIView):
         else:
             return JsonResponse({'response': 'failed to submit, given author type is not supported','status':'401'})
 
-class Add_Twitter_Target(APIView):
+class Add_Twitter_Target(RequireLoginMixin, IsTSO,APIView):
     #class to add targets of twitter to the system
 
     #permission_classes = (IsAuthenticated,)
@@ -336,7 +336,7 @@ class Add_Twitter_Target(APIView):
             return JsonResponse({'response': 'failed to submit, given author type is not supported'})
 
 
-class Add_Facebook_Target(APIView):
+class Add_Facebook_Target(RequireLoginMixin, IsTSO,APIView):
 
     #class to add targets of Facebook to the system
     #it is sole class to add facebook targets for person,page,group,search,tags,
@@ -431,7 +431,7 @@ class Add_Facebook_Target(APIView):
             return Response({'response': 'failed to submit, given author type is not supported'})
 
 
-class Add_Linkedin_Target(APIView):
+class Add_Linkedin_Target(RequireLoginMixin, IsTSO,APIView):
 
     #class to add targets of instagram to the system
 
@@ -501,7 +501,7 @@ class Add_Linkedin_Target(APIView):
 
 """
 
-class Get_Facebook_Targets(APIView):
+class Get_Facebook_Targets(RequireLoginMixin, IsTSO,APIView):
     #permission_classes = (IsAuthenticated,)
 
     def get(self, request,*args,**kwargs):
@@ -510,7 +510,7 @@ class Get_Facebook_Targets(APIView):
         print(resp)
         return JsonResponse(resp,safe=False)
 
-class Get_Twitter_Targets(APIView):
+class Get_Twitter_Targets(RequireLoginMixin, IsTSO,APIView):
     #permission_classes = (IsAuthenticated,)
 
     def get(self, request,*args,**kwargs):
@@ -518,7 +518,7 @@ class Get_Twitter_Targets(APIView):
         resp = coreDb.get_twitter_targets()
         return JsonResponse(resp,safe=False)
 
-class Get_Instagram_Targets(APIView):
+class Get_Instagram_Targets(RequireLoginMixin, IsTSO,APIView):
     #permission_classes = (IsAuthenticated,)
 
     def get(self, request,*args,**kwargs):
@@ -526,7 +526,7 @@ class Get_Instagram_Targets(APIView):
         resp = coreDb.get_instagram_targets()
         return JsonResponse(resp,safe=False)
 
-class Get_Linkedin_Person_Targets(APIView):
+class Get_Linkedin_Person_Targets(RequireLoginMixin, IsTSO,APIView):
     #permission_classes = (IsAuthenticated,)
 
     def get(self, request,*args,**kwargs):
@@ -534,14 +534,14 @@ class Get_Linkedin_Person_Targets(APIView):
         resp = coreDb.get_linkedin_person_targets()
         return JsonResponse(resp,safe=False)
 
-class Dashboard(APIView):
+class Dashboard(RequireLoginMixin, IsTSO,APIView):
     #permission_classes = (IsAuthenticated,)
 
     def get(self, request):
 
         return render(request,'OSINT_System_Core/dashboard.html',{})
 
-class Supported_Social_Site_List(APIView):
+class Supported_Social_Site_List(RequireLoginMixin, IsTSO,APIView):
 
     #list of all the supported sites in OSINT CORE
 
@@ -557,7 +557,7 @@ class Supported_Social_Site_List(APIView):
 
 # ...................................................Views for General Que
 
-class Crawler_Internet_Connection(View):
+class Crawler_Internet_Connection(RequireLoginMixin, IsTSO,View):
     # permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
@@ -565,7 +565,7 @@ class Crawler_Internet_Connection(View):
         return JsonResponse(resp, safe=False)
 
 
-class Microcrawler_Status(View):
+class Microcrawler_Status(RequireLoginMixin, IsTSO,View):
     # permission_classes = (IsAuthenticated,)
     # resp = acq.mircocrawler_status()
     def get(self, request, *args, **kwargs):
@@ -575,7 +575,7 @@ class Microcrawler_Status(View):
 
 # ...................................................Views for SmartSearch
 
-class Smart_Search(APIView):
+class Smart_Search(RequireLoginMixin, IsTSO,APIView):
     # permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
@@ -588,7 +588,7 @@ class Smart_Search(APIView):
 # ...................................................Views for Graphs ....
 
 
-class Overview_Pie_Chart(APIView):
+class Overview_Pie_Chart(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -596,7 +596,7 @@ class Overview_Pie_Chart(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Extracted_All_Sites(APIView):
+class Extracted_All_Sites(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -604,7 +604,7 @@ class Extracted_All_Sites(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Extracted_All_Social_Sites(APIView):
+class Extracted_All_Social_Sites(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -612,7 +612,7 @@ class Extracted_All_Social_Sites(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Sent_To_Pco(APIView):
+class Sent_To_Pco(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -620,7 +620,7 @@ class Sent_To_Pco(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Overview_Rpo(APIView):
+class Overview_Rpo(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -628,7 +628,7 @@ class Overview_Rpo(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Article_Stat_Overview(APIView):
+class Article_Stat_Overview(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -636,7 +636,7 @@ class Article_Stat_Overview(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Article_Stat_Slo(APIView):
+class Article_Stat_Slo(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -644,7 +644,7 @@ class Article_Stat_Slo(APIView):
         return JsonResponse(res, safe=False)
 
 
-class My_Article_Stat(APIView):
+class My_Article_Stat(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -652,7 +652,7 @@ class My_Article_Stat(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Ticket_State(APIView):
+class Ticket_State(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -660,7 +660,7 @@ class Ticket_State(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Fetch_State(APIView):
+class Fetch_State(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -668,7 +668,7 @@ class Fetch_State(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Extracted_Article(APIView):
+class Extracted_Article(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -676,7 +676,7 @@ class Extracted_Article(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Processed_Article(APIView):
+class Processed_Article(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -684,7 +684,7 @@ class Processed_Article(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Article_Trend(APIView):
+class Article_Trend(RequireLoginMixin, IsTSO,APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -692,7 +692,7 @@ class Article_Trend(APIView):
         return JsonResponse(res, safe=False)
 
 
-class Dispatcher(View):
+class Dispatcher(RequireLoginMixin, IsTSO,View):
 
     def get(self, request, *args, **kwargs):
         print(
@@ -707,7 +707,7 @@ class Dispatcher(View):
 
 # ...........................................View For Object Search(awais)
 
-class Find_Object(View):
+class Find_Object(RequireLoginMixin, IsTSO,View):
 
     def get(self, request, *args, **kwargs):
 
@@ -730,7 +730,7 @@ class Find_Object(View):
         return HttpResponse('')
 
 
-class Link_Object(View):
+class Link_Object(RequireLoginMixin, IsTSO,View):
     def get(self, request):
 
         print(request.GET)
@@ -772,7 +772,7 @@ class Link_Object(View):
         return HttpResponse('this resource is already linked with this ' + type)
 
 
-class Share_Resource(View):
+class Share_Resource(RequireLoginMixin, IsTSO,View):
     ml = Mongo_Lookup()
 
     def get(self, request):
@@ -807,7 +807,7 @@ class Share_Resource(View):
         return HttpResponse('unable to share resource')
 
 
-class Rabbit_Message(View):
+class Rabbit_Message(RequireLoginMixin, IsTSO,View):
 
     def get(self, request):
         # print(request.GET)
@@ -911,7 +911,7 @@ class PAO_Dashboard(RequireLoginMixin, IsPAO, View):
 
 
 # ahmed start
-class Dashboard(APIView):
+class Dashboard(RequireLoginMixin, IsTSO,APIView):
     # permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -1148,7 +1148,7 @@ def Periodic_Target_DB(request):
                       {'Periodic_Targets_List': Periodic_Targets_List})
 
 
-class Delete_Periodic_Target_DB(View):
+class Delete_Periodic_Target_DB(RequireLoginMixin, IsTSO,View):
     def get(self, request, *args, **kwargs):
         id = kwargs['periodic_task_id']
         print(id)
