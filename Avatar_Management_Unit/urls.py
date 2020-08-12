@@ -1,5 +1,6 @@
 from django.urls import path
 from Avatar_Management_Unit import views
+# from django.contrib.auth.decorators import login_required
 app_name = 'Avatar_Management_Unit'
 
 urlpatterns = [

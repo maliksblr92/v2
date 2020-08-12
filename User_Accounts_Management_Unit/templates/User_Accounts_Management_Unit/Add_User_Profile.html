@@ -1,5 +1,41 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
+{% block head_dep %}
+<link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}" />
+{% endblock %}
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+        <div class="col-md-1">
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user' %}" class="btn secondnavitems ">
+                Add User</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_users' %}" class="btn secondnavitems ">
+                All Users</a>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_group' %}" class="btn secondnavitems ">
+                All User Groups</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user_profile' %}" class="btn secondnavitems ">
+                Add User Profile</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_profile' %}" class="btn secondnavitems ">
+                All User Profiles</a>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
 {% block belly_header %}
 {% if User_Profile_Fetched %}
 <p class="text-uppercase custom_card_title ">UPDATE USER PROFILE</p>
@@ -9,8 +45,16 @@
 {% endblock %}
 {% block belly %}
 <style>
-    input[type="text"]::placeholder{
-        font-size:16px!important;
+    input[type="text"]::placeholder {
+        font-size: 16px !important;
+    }
+
+    select {
+        color: white !important;
+    }
+
+    option {
+        background-color: #000;
     }
 </style>
 <div class="row ">
@@ -18,197 +62,215 @@
     <!-- Second row-->
     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12  ">
         {% if User_Profile_Fetched %}
-     
-        <form name="Add_User_Profile"  enctype="multipart/form-data" action="{% url 'User_Accounts_Management_Unit:update_user_profile' User_Profile_Fetched.id  %}" method="POST"
-              class="custom_inner_background inner_form_margin_radius">
+
+        <form name="Add_User_Profile" enctype="multipart/form-data"
+            action="{% url 'User_Accounts_Management_Unit:update_user_profile' User_Profile_Fetched.id  %}"
+            method="POST" class="custom_inner_background inner_form_margin_radius">
+            <input type="hidden" name="user-profile-id" id="user-profile-id" value="{{User_Profile_Fetched.id}}" />
             {% csrf_token %}
             {% else %}
-            <form name="Add_User_Profile" action="{% url 'User_Accounts_Management_Unit:add_user_profile'  %}" enctype="multipart/form-data" method="POST"
-            class="custom_inner_background inner_form_margin_radius">
-            {% csrf_token %}
-            {% endif %}
-            <div class="card-body main_card ">
-                <div class="row">
-                    <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
-                        <img src="data:image/jpeg;base64,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" style="height:180px;width:180px;border-radius:50%;" class="img-fluid border" alt="">
-                    </div>
-                </div>
-                <div class="row input_wrapper_row">
-                    <div class="col-md-2">
-                       
-                    </div>
-                    <div class="col-md-9">
-                        <!-- start input frirst_name -->
-                        <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">First Name
-                    </span>
-                            </div>
-                            <input type="text"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="first-name"
-                                   name="first-name"
-                                   minlength="5"
-                                   maxlength="20"
-                                   {% if User_Profile_Fetched %}
-                                   value="{{User_Profile_Fetched.first_name}}"
-                                   {% else %}
-                                   value=""
-                                   {% endif %}
-                                   placeholder="Enter First Name" required="required">
+            <form name="Add_User_Profile" action="{% url 'User_Accounts_Management_Unit:add_user_profile'  %}"
+                enctype="multipart/form-data" method="POST" class="custom_inner_background inner_form_margin_radius">
+                {% csrf_token %}
+                {% endif %}
+                <div class="card-body main_card ">
+                    <!-- <div class="row">
+                        <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
+                            <img src="data:image/jpeg;base64,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"
+                                style="height:180px;width:180px;border-radius:50%;" class="img-fluid border" alt="">
                         </div>
-                        <!-- end input frirst_name -->
+                    </div> -->
+                    <div class="row input_wrapper_row">
+                        <div class="col-md-2">
 
-                        <!-- start input lastname -->
-                        <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Last Name 
-                    </span>
-                            </div>
-                            <input type="text"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="last-name"
-                                   name="last-name"
-                                   minlength="5"
-                                   maxlength="50"
-                                   {% if User_Profile_Fetched %}
-                                   value="{{User_Profile_Fetched.last_name}}"
-                                   {% else %}
-                                   value=""
-                                   {% endif %}
-                                   placeholder="Enter Last Name" required="required">
                         </div>
-                        <!-- end input email -->
+                        <div class="col-md-9">
 
 
-                         <!-- start input local address -->
-                         <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Local Address
-                    </span>
-                            </div>
-                            <input type="text"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="local-address"
-                                   name="local-address"
-                                   minlength="8"
-                                   maxlength="199"
-                                   {% if User_Profile_Fetched %}
-                                   value="{{User_Profile_Fetched.current_address}}"
-                                   {% else %}
-                                   value=""
-                                   {% endif %}
-                                   placeholder="Enter Local Address " required="required">
-                        </div>
-                        <!-- end input local address -->
 
-                        <!-- start input permanent -->
-                        <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Permanent Address
-                    </span>
-                            </div>
-                            <input type="text"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="permanent-address"
-                                   name="permanent-address"
-                                   minlength="8"
-                                   maxlength="199"
-                                   {% if User_Profile_Fetched %}
-                                   value="{{User_Profile_Fetched.permanent_address}}"
-                                   {% else %}
-                                   value=""
-                                   {% endif %}
-                                   placeholder="Enter Permanent Address" required="required">
-                        </div>
-                        <!-- end input permanent -->
-
-                         <!-- start input permanent -->
-                         <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">profile Pic
-                    </span>
-                            </div>
-                            <input type="file"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="profile-pic"
-                                   name="profile-pic"
-                                   {% if User_Profile_Fetched %}
-                                   value="{{User_Profile_Fetched.profile_pic}}"
-                                   {% else %}
-                                   value=""
-                                   {% endif %}
-                                   placeholder="Add Profile Picture" required="required">
-                        </div>
-
-                        <!-- end input permanent -->
-
-<div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Add Group
-                    </span>
-                            </div>
-                            <select class="col-md-9 form-control custom_input_field" id="profile-pic" name="profile-pic" style="color:#fff!important"
-                                 >
-                                <option value="0">Add user to group </option>
-                                {% for group in User_Groups %}
-                                <option value="{{group.id}}">{{group.name}}</option>
-                                {% endfor %}
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">Select User
+                                    </span>
+                                </div>
+                                {% if User_Profile_Fetched %}
+                                <select class="custom-select custom_input_field" id="user_id" name="user_id"  required>
+                                    <option value="{{User_Profile_Fetched.user_id}}" selected >{{User_Profile_Fetched.user_id}}</option>
                                 </select>
-                        </div>
-                        
-
-                     
-                        <!-- end input password -->
-
-
-
-
-                         <!-- start input password -->
-                         <!-- <div class="row input-group mt-4 mb-3">
-                            <div class="col-md-3 p-0 input-group-prepend">
-                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
-                       opacity:0.9; padding:7px 9px 0 10px;">Add To Groups
-                    </span>
+                                {% else %}
+                                <select class="custom-select custom_input_field" id="user_id" name="user_id" required>
+                                    <option value="">Select User</option>
+                                    {% for user in All_Users %}
+                                    <option value="{{user.id}}"> {{user.username}} </option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
                             </div>
-                            <input type="password"
-                                   class="col-md-9 form-control custom_input_field"
-                                   id="user-group"
-                                   name="user-group"
-                                   minlength="8"
-                                   maxlength="14"
-                                   placeholder="enter password" required="">
-                        </div> -->
-                        <!-- end input password -->
+                            <!--  -->
+
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">User Rank
+                                    </span>
+                                </div>
+
+                                <select class="custom-select custom_input_field" id="rank" name="rank" required>
+                                    <option value="">Select Rank</option>
+                                    <option value="TMO" {% if User_Profile_Fetched.rank == 'TMO' %} selected {% else %} {% endif %} >Target Management Officer</option>
+                                    <option value="TSO"  {% if User_Profile_Fetched.rank == 'TSO' %} selected {% else %} {% endif %}>Target Supervisor Officer</option>
+
+                                </select>
+                            </div>
+                            <!--  -->
+
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend ">
+                                    <span
+                                        class="custom_label_input_field d-flex flex-row justify-content-start align-items-center"
+                                        style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">User Description
+                                    </span>
+                                </div>
+
+                                <textarea class="form-control custom_input_field text-white " id="description"
+                                    name="description" rows="5" cols="5">
+                                    {% if User_Profile_Fetched %} {{User_Profile_Fetched.description}} {% else %} {% endif %}
+                      </textarea>
+                            </div>
+                            <!--  -->
 
 
 
-                       
-                       
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;"> Address
+                                    </span>
+                                </div>
+                                <input type="text" class="col-md-9 form-control custom_input_field" id="address"
+                                    name="address" {% if User_Profile_Fetched %}
+                                    value="{{User_Profile_Fetched.address}}" {% else %} value="" {% endif %}
+                                    placeholder="Enter  Address" required="required">
+                            </div>
+                            <!--  -->
+
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;"> Contact #
+                                    </span>
+                                </div>
+                                <input type="text" class="col-md-9 form-control custom_input_field" id="contact"
+                                    minlength="11" maxlength="11" name="contact"
+                                    onkeyup="this.value=this.value.replace(/[^\d]/,'')" {% if User_Profile_Fetched %}
+                                    value="{{User_Profile_Fetched.contact}}" {% else %} value="" {% endif %}
+                                    placeholder="@ 0344-1500542" required="required">
+                            </div>
+                            <!--  -->
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;"> DOB
+                                    </span>
+                                </div>
+                                <input type="date" class="col-md-9 form-control custom_input_field" id="dob" name="dob"
+                                    {% if User_Profile_Fetched %} value="{{User_Profile_Fetched.dob|date:"Y-m-d"}}"
+                                    {% else %} value="" {% endif %} placeholder="@ 0344-1500542" required="required">
+                            </div>
+                            <!--  -->
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;"> CNIC
+                                    </span>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-3"><input type="text" {% if User_Profile_Fetched %} value="{{User_Profile_Fetched.cnic|slice:"0:5"}}"
+                                    {% else %} value="" {% endif %} name="cnic_1" placeholder="@  61101"
+                                                onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="5"
+                                                minlength="5" class="form-control custom_input_field"></div>
+                                        <div class="col-md-7"><input type="text" {% if User_Profile_Fetched %} value="{{User_Profile_Fetched.cnic|slice:"6:12"}}"
+                                    {% else %} value="" {% endif %} name="cnic_2" placeholder="@ 12678760"
+                                                onkeyup="this.value=this.value.replace(/[^\d]/,'')" minlength="7"
+                                                maxlength="7" class="form-control custom_input_field"></div>
+                                        <div class="col-md-2"><input type="text" {% if User_Profile_Fetched %} value="{{User_Profile_Fetched.cnic|slice:"14:15"}}"
+                                    {% else %} value="" {% endif %} name="cnic_3" placeholder="@  4"
+                                                onkeyup="this.value=this.value.replace(/[^\d]/,'')" minlength="1"
+                                                maxlength="1" class="form-control custom_input_field"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--  -->
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+                       opacity:0.9; padding:7px 9px 0 10px;">Profile Pic
+                                    </span>
+                                </div>
+                                <input type="file" class="col-md-9 form-control custom_input_field" id="profile-pic"
+                                    name="profile-pic" {% if User_Profile_Fetched %}
+                                    value="{{User_Profile_Fetched.profile_pic}}" {% else %} value="" {% endif %}
+                                    placeholder="Add Profile Picture" required="required">
+                            </div>
+
+                            <!--  -->
+
+
+                            <!--  -->
+                            <div class="row input-group mt-4 mb-3">
+                                <div class="col-md-3 p-0 input-group-prepend">
+                                    <span class="custom_label_input_field" style="font-size:13px;letter-spacing:0.1em;
+opacity:0.9; padding:7px 9px 0 10px;"> Employee #
+                                    </span>
+                                </div>
+                                <input type="text" class="col-md-9 form-control custom_input_field" id="employee-number"
+                                    minlength="" maxlength="" name="employee-number"
+                                    onkeyup="this.value=this.value.replace(/[^\d]/,'')" {% if User_Profile_Fetched %}
+                                    value="{{User_Profile_Fetched.employee_number}}" {% else %} value="" {% endif %}
+                                    placeholder="@ 0344-1500542" required="required">
+                            </div>
+                            <!--  -->
+
+
+
+
+
+
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+
                     </div>
-                    <div class="col-md-1">
-
+                    <div class="row input_wrapper_row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2">
+                            <input type="submit" class="custom_label_input_field btn text-white " value="Submit"
+                                name="submit" id="submit">
+                        </div>
                     </div>
-                   
                 </div>
-                <div class="row input_wrapper_row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-2">
-                        <input type="submit"
-                               class="custom_label_input_field btn text-white "
-                               value="Submit"
-                               name="submit" id="submit">
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
     </div>
 </div>
 
@@ -216,16 +278,50 @@
 
 {% block foot_dep %}
 <script>
-    $(document).ready(function() {
-        $('#user_names').css('color','gray');
-        $('#user_names').change(function() {
-           var current = $('#select').val();
-           if (current != 'null') {
-               $('#user_names').css('color','black');
-           } else {
-               $('#user_names').css('color','gray');
-           }
-        }); 
-     });
+    $(document).ready(function () {
+        $('#user_names').css('color', 'gray');
+        $('#user_names').change(function () {
+            var current = $('#select').val();
+            if (current != 'null') {
+                $('#user_names').css('color', 'black');
+            } else {
+                $('#user_names').css('color', 'gray');
+            }
+        });
+    });
+</script>
+<script>
+    window.document.title = "Add Profile";
+</script>
+<script>
+    {
+        %
+        for message in messages %
+    }
+    $(document).ready(function () {
+        console.log("###############################################################################")
+        Command: toastr["{{ message.tags }}"]("{{ message }} .")
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    }); {
+        %
+        endfor %
+    }
 </script>
 {% endblock %}

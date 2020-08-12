@@ -1,0 +1,351 @@
+{% extends 'OSINT_System_Core/tso_base.html' %}
+{% load static %}
+{% block head_dep %}
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static 'Target_Management_System/css/tso_dynamiccrawling.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+   
+
+
+{% endblock %}
+
+{% block smallnavbar %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 d-flex flex-row justify-content-center align-items-center" style="">
+        <div class="col-md-1">
+        </div>
+        
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondmidnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user' %}" class="btn secondnavitems ">
+                Add User</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_users' %}" class="btn secondnavitems ">
+                All Users</a>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_group' %}" class="btn secondnavitems ">
+                All User Groups</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:add_user_profile' %}" class="btn secondnavitems ">
+                Add User Profile</a>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2 secondlastnavmenu ">
+            <a href="{% url 'User_Accounts_Management_Unit:all_user_profile' %}" class="btn secondnavitems ">
+               All User Profiles</a>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
+{% block belly_header %}
+    <p class="text-uppercase custom_card_title ">ALL USERS </p>
+    <a class="btn btn-success float-right" href="{%  url 'User_Accounts_Management_Unit:add_user' %}"><i class="fa fa-plus text-white">Add </i></a>
+{% endblock %}
+{% block belly %}
+    <style>
+        th,td{
+            font-size: 13px;
+            font-weight: bold;;
+        }
+        a.badge{
+            font-size:13px;
+        }
+        button.badge{
+            font-size:13px;  
+        }
+        tr {
+            width: 100%;
+            display: inline-table;
+            table-layout: fixed;
+        }
+
+        table {
+            height: 500px !important;
+            display: -moz-groupbox;
+        }
+
+        tbody {
+            overflow-y: scroll !important;
+            overflow-x: hidden;
+            height: 400px !important;
+            width: 100%;
+
+        }
+
+        @media screen and (max-width: 767px) {
+            .table-responsive {
+                width: 100%;
+                margin-bottom: 15px;
+                overflow-y: hidden;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+                border: 1px solid #ddd;
+            }
+
+            .table-responsive > .table {
+                margin-bottom: 0;
+            }
+
+            .table-responsive > .table > thead > tr > th,
+            .table-responsive > .table > tbody > tr > th,
+            .table-responsive > .table > tfoot > tr > th,
+            .table-responsive > .table > thead > tr > td,
+            .table-responsive > .table > tbody > tr > td,
+            .table-responsive > .table > tfoot > tr > td {
+                white-space: nowrap;
+            }
+
+            .table-responsive > .table-bordered {
+                border: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:first-child,
+            .table-responsive > .table-bordered > tbody > tr > th:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+            .table-responsive > .table-bordered > thead > tr > td:first-child,
+            .table-responsive > .table-bordered > tbody > tr > td:first-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+                border-left: 0;
+            }
+
+            .table-responsive > .table-bordered > thead > tr > th:last-child,
+            .table-responsive > .table-bordered > tbody > tr > th:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+            .table-responsive > .table-bordered > thead > tr > td:last-child,
+            .table-responsive > .table-bordered > tbody > tr > td:last-child,
+            .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+                border-right: 0;
+            }
+
+            .table-responsive > .table-bordered > tbody > tr:last-child > th,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+            .table-responsive > .table-bordered > tbody > tr:last-child > td,
+            .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+                border-bottom: 0;
+            }
+        }
+    </style>
+    <div class="row">
+  
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table table-responsive text-dark pt-2 border table-striped" id="All_User_Profiles" style="width:100%">
+                <thead>
+                <tr>
+
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <!-- <th scope="col">Password</th> -->
+                    <th scope="col">Is Active</th>
+                    <th scope="col">Is Staff</th>
+                    <th scope="col">Is Superuser</th>
+                    <th scope="col">Date Joined</th>
+                    <!-- <th>Permissions</th> -->
+                    <th>Groups</th>
+                    <th scope="col">Operations</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in All_Users %}
+                    <tr>
+                        <th scope="row">{{ user.first_name|default:"N/A"}}</th>
+                        <td>{{ user.last_name|default:"N/A"}}</td>
+                        <td> {{user.username|default:"N/A"}}</td>
+                        <td>{{ user.email|default:"N/A"}}</td>
+                        <!-- <td>{{ user.password|default:"N/A"}}</td> -->
+                        <td>{% if user.is_active %} True {% else %} False {% endif %} </td>
+                        <td>{% if user.is_staff %} True {% else %} False {% endif %}</td>
+                        <td>{% if user.is_superuser %} True {% else %} False {% endif %}</td>
+                        <td>{{ user.date_joined|default:"N/A"}}</td>
+                       <!-- <td><select name="perms" class="form-control" id="perms">
+                        {% for perm in user.get_all_permissions %}   
+                        <option value="{{perm.id}}">{{perm}}</option>
+                        {% empty %}
+                        <option value="">No Permissions </option>
+                        {% endfor %}
+                       </select></td> -->
+                       <td><select name="perms" class="form-control" id="perms">
+                        {% for group in user.groups.all  %}   
+                        <option value="{{group.id}}">{{group.name}}</option>
+                        {% empty %}
+                        <option value="">No Groups </option>
+                        {% endfor %}
+                       </select></td>
+                        <td> <a class="badge badge-dark" data-toggle="tooltip" title="Delete  User" href="{% url 'User_Accounts_Management_Unit:delete_user' id=user.id %}"><i class="fa fa-trash text-danger"></i></a>
+                            <a  class="badge badge-success" data-toggle="tooltip" title="Update User " href="{% url 'User_Accounts_Management_Unit:update_user' id=user.id  %}"><i class="fa fa-eye text-white"></i></a>
+                            <button type="button"  class="badge badge-primary addUserBtn "  data-id="{{user.username}}" id="addUserBtn" data-toggle="modal" data-target="#addUserToGroup">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                              </button type="button">
+
+                              <button type="button"  class="badge badge-warning removeUserBtn"  data-id="{{user.username}}" id="removeUserBtn" data-toggle="modal" data-target="#removeUserToGroup">
+                                <i class="fa fa-minus-circle"></i>
+                              </button type="button">
+
+                              
+                           
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- REMOVE USER TO GROUP  -->
+<div class="modal fade" id="removeUserToGroup" tabindex="-1" role="dialog" aria-labelledby="removeUserToGroupLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="removeUserToGroupLabel">Remove < <span class="text-primary" id="UserNameToBeRemoved"></span>  >From Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      <form action="{% url 'User_Accounts_Management_Unit:remove_users_to_groups' %}" method="POST" >
+          {% csrf_token %}
+          <input type="hidden" name="page_name" value="All_Users" id="page_name" />
+          <input type="hidden" name="username_RemoveGroup" id="username_RemoveGroup" value=""  required/>
+        <div class="row">
+            <div class="col-md-4">
+                Select Group
+            </div>
+            <div class="col-md-8">
+             <select class="form-control" name="groupIdForRemove" id="groupIdForRemove" required />
+                 {% for group in Groups %}
+                 <option value="{{group.id}}">{{group.name}}</option>
+                 {% endfor %}
+     
+             </select>
+            </div>
+        </div>
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Remove </button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- ADD USER TO GROUP  -->
+<div class="modal fade" id="addUserToGroup" tabindex="-1" role="dialog" aria-labelledby="addUserToGroupLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserToGroupLabel">Add < <span class="text-primary" id="UserNameToBeAdded"></span>  >To Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      <form action="{% url 'User_Accounts_Management_Unit:add_users_to_groups' %}" method="POST" >
+          {% csrf_token %}
+          <input type="hidden" name="username_AddGroup" id="username_AddGroup" value=""  required/>
+          <input type="hidden" name="page_name" value="All_Users" id="page_name" />
+        <div class="row">
+            <div class="col-md-4">
+                Select Group
+            </div>
+            <div class="col-md-8">
+             <select class="form-control" name="groupIdForAdd" id="groupIdForAdd" required />
+                 {% for group in Groups %}
+                 <option value="{{group.id}}">{{group.name}}</option>
+                 {% endfor %}
+     
+             </select>
+            </div>
+        </div>
+        <!-- <div class="row mt-2">
+            <div class="col-md-4"></div>
+            <div class="col-md-6">
+             <div class="d-flex flex-row justify-content-start align-items-center">
+                 <input type="checkbox" class="" name="add-permissions" value="0" id="add-permissions"  />
+                 <small class="text-success font-weight-bold ml-3">Allow all permissions to user</small>
+             </div>
+            </div>
+        </div> -->
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}>
+{% block base_js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script defer type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#All_User_Profiles').DataTable();
+        });
+    </script>
+    <script>
+        window.document.title = "All Users";
+    </script>
+
+    <script>
+        
+        $(document).ready(function(){
+            //START add user to group
+$('.addUserBtn').on('click',function(){
+var UserName= $(this).attr("data-id");
+$('#UserNameToBeAdded').empty().append(UserName);
+$('#username_AddGroup').val(UserName);
+})
+//END add user to group
+
+$('.removeUserBtn').on('click',function(){
+    var UserName= $(this).attr("data-id");
+    $('#UserNameToBeRemoved').empty().append(UserName);
+    $('#username_RemoveGroup').val(UserName);
+    })
+        })
+    </script>
+
+    <script>
+        {% for message in messages %}
+        $(document).ready(function() {
+            console.log("###############################################################################")
+            Command: toastr["{{ message.tags }}"]("{{ message }} .")
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        });
+        {% endfor %}
+
+      
+            
+
+        </script>
+{% endblock %}

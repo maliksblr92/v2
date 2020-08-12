@@ -1,7 +1,7 @@
 from django.urls import path
 from Portfolio_Management_System import views
 app_name = 'Portfolio_Management_System'
-
+# from django.contrib.auth.decorators import login_required
 urlpatterns = [
 
     path('search_portfolio/',views.Search_Portfolio.as_view(),name='search_portfolio'),

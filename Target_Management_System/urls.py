@@ -1,6 +1,7 @@
 from django.urls import path
 from Target_Management_System import views
 app_name = 'Target_Management_System'
+from django.contrib.auth.decorators import login_required
 # ahmed  imports
 from .views import  Instagram_Target_Response
 from .views import Instagram_Target_Report
@@ -35,10 +36,7 @@ urlpatterns = [
     path('marktarget/', views.Add_Target.as_view(), name="tms_marktarget"),
     path('marktarget_portfolio/<str:portfolio_id>', views.Add_Target.as_view(), name="tms_marktarget_portfolio"),
     path('marktarget_prime/<str:prime_argument>/<str:target_site>', views.Add_Target.as_view(), name="tms_marktarget_prime"),
-    path(
-        'fetchtarget/',
-        views.Target_Fetched.as_view(),
-        name="tms_fetchtarget"),
+    path('fetchtarget/',views.Target_Fetched.as_view(),name="tms_fetchtarget"),
     path(
         'fetchtarget/<str:target_site>',
         views.Target_Fetched.as_view(),
@@ -109,8 +107,7 @@ urlpatterns = [
     path('report/dynmaic_crawling/<str:object_gtr_id>/',Dynamic_Crawling_Report.as_view(), name="dynamic_crawling_report"),
     path('bulk_targets/',Bulk_Targets.as_view(), name="bulk_targets"),
     path('graph/<str:object_gtr_id>/',views.Graph.as_view(), name="graph"),
-   
- 
+    # 5ec047b84202dee21e2dd8b7
    
 
 

@@ -24,7 +24,8 @@ from Data_Processing_Unit.models import Youtube_Response_TMS
 
 
 
-class Bulk_Targets(View):
+
+class Bulk_Targets(RequireLoginMixin, IsTSO,View):
     
     def get(self,request,*args,**kwargs):
       
@@ -448,7 +449,7 @@ class Facebook_Target_Response(RequireLoginMixin,IsTSO,View):
 
 
 
-class Test_View(View):
+class Test_View(RequireLoginMixin, IsTSO,View):
     def get(self, request, *args, **kwargs):
         print('send event about to be called')
         send_event('notifications', 'notification', {
@@ -456,7 +457,7 @@ class Test_View(View):
         return JsonResponse({'event_called': 1})
 
 
-class Test_View1(View):
+class Test_View1(RequireLoginMixin, IsTSO,View):
     def get(self, request, *args, **kwargs):
         print('send event about to be called')
         send_event('notifications', 'alert', {
@@ -491,7 +492,7 @@ def convert_expired_on_to_datetime(expired_on):
 
 # ahmed code
 # INSTAGRAM
-class Instagram_Target_Response(TemplateView):
+class Instagram_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
        template_name = "Target_Management_System/InstagramPerson_Target_Response.html"
        def get(self, request, *args, **kwargs):
             object_gtr_id = kwargs['object_gtr_id']
@@ -499,7 +500,7 @@ class Instagram_Target_Response(TemplateView):
             print(profile.to_mongo())
             return render(request, 'Target_Management_System/InstagramPerson_Target_Response.html', {'profile': profile})
 
-class Instagram_Target_Report(TemplateView):
+class Instagram_Target_Report(RequireLoginMixin, IsTSO, TemplateView):
        template_name = "Target_Management_System/InstagramPerson_Target_Report.html"
        def get(self, request, *args, **kwargs):
             object_gtr_id = kwargs['object_gtr_id']
@@ -511,7 +512,7 @@ class Instagram_Target_Report(TemplateView):
 
 
 # LINKEDIN
-class LinkedinCompany_Target_Response(TemplateView):
+class LinkedinCompany_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -523,7 +524,7 @@ class LinkedinCompany_Target_Response(TemplateView):
         return render(request, 'Target_Management_System/LinkedinCompany_Target_Response.html', {'company': data_object})
 
 
-class LinkedinCompany_Target_Report(TemplateView):
+class LinkedinCompany_Target_Report(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -532,7 +533,7 @@ class LinkedinCompany_Target_Report(TemplateView):
             company = json.load(f)
         return render(request, 'Target_Management_System/LinkedinCompany_Target_Report.html', {'company': data_object})
     
-class LinkedinPerson_Target_Response(TemplateView):
+class LinkedinPerson_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -541,7 +542,7 @@ class LinkedinPerson_Target_Response(TemplateView):
 
         return render(request, 'Target_Management_System/LinkedinPerson_Target_Response.html', {'profile': data_object})
 
-class LinkedinPerson_Target_Report(TemplateView):
+class LinkedinPerson_Target_Report(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -551,7 +552,7 @@ class LinkedinPerson_Target_Report(TemplateView):
         return render(request, 'Target_Management_System/LinkedinPerson_Target_Report.html', {'profile': data_object})
 
 # FACEBOOK
-class FacebookPerson_Target_Response(TemplateView):
+class FacebookPerson_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -562,7 +563,7 @@ class FacebookPerson_Target_Response(TemplateView):
             profile = json.load(f)
         return render(request, 'Target_Management_System/FacebookPerson_Target_Response.html',{'profile': data_object})
 
-class FacebookPage_Target_Response(TemplateView):
+class FacebookPage_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -573,7 +574,7 @@ class FacebookPage_Target_Response(TemplateView):
         return render(request, 'Target_Management_System/FacebookPage_Target_Response.html',{'page': data_object})
 
 
-class FacebookGroup_Target_Response(TemplateView):
+class FacebookGroup_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -582,7 +583,7 @@ class FacebookGroup_Target_Response(TemplateView):
             group = json.load(f)
         return render(request, 'Target_Management_System/FacebookGroup_Target_Response.html',{'group': data_object})
 
-class FacebookPersonReport(TemplateView):
+class FacebookPersonReport(RequireLoginMixin, IsTSO, TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -594,7 +595,7 @@ class FacebookPersonReport(TemplateView):
 
 
 
-class FacebookPageReport(TemplateView):
+class FacebookPageReport(RequireLoginMixin, IsTSO, TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -606,7 +607,7 @@ class FacebookPageReport(TemplateView):
 
 
 
-class FacebookGroupReport(TemplateView):
+class FacebookGroupReport(RequireLoginMixin, IsTSO, TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -621,7 +622,7 @@ class FacebookGroupReport(TemplateView):
 # TWITTER
 
 # this json wasnot according to format to formatted here
-class Twitter_Target_Response(TemplateView):
+class Twitter_Target_Response(RequireLoginMixin, IsTSO, TemplateView):
     def get(self, request, *args, **kwargs):
 
         object_gtr_id = kwargs['object_gtr_id']
@@ -637,7 +638,7 @@ class Twitter_Target_Response(TemplateView):
 
 
 
-class Twitter_Target_Report(TemplateView):
+class Twitter_Target_Report(RequireLoginMixin, IsTSO, TemplateView):
     def get(self,request,*args,**kwargs):
          object_gtr_id = kwargs['object_gtr_id']
          data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -654,7 +655,7 @@ class Twitter_Target_Report(TemplateView):
 
 #view for link analysis graph
 
-class Link_Analysis(View):
+class Link_Analysis(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
@@ -677,7 +678,7 @@ class Link_Analysis(View):
             return render(request, 'Target_Management_System/link_analysis_amcharts.html', {})
 
 
-class Close_Associates_Tree_Graph(View):
+class Close_Associates_Tree_Graph(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
@@ -694,7 +695,7 @@ class Close_Associates_Tree_Graph(View):
         else:
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
-class Instagram_Follower_Tree_Graph(View):
+class Instagram_Follower_Tree_Graph(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
@@ -711,7 +712,7 @@ class Instagram_Follower_Tree_Graph(View):
         else:
             return render(request, 'Target_Management_System/link_analysis.html', {})
 
-class Twitter_Follower_Tree_Graph(View):
+class Twitter_Follower_Tree_Graph(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id)).to_mongo()
@@ -730,7 +731,7 @@ class Twitter_Follower_Tree_Graph(View):
 
 
 # REDDIT 
-class Reddit_Target_Response(View):
+class Reddit_Target_Response(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -738,7 +739,7 @@ class Reddit_Target_Response(View):
         return render(request,'Target_Management_System/Reddit_Target_Response.html',{'profile':profile})
     
     
-class Reddit_Target_Report(View):
+class Reddit_Target_Report(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -746,7 +747,7 @@ class Reddit_Target_Report(View):
         return render(request,'Target_Management_System/Reddit_Target_Report.html',{'profile':profile})
     
    # YOUTUBE  
-class Youtube_Target_Response(View):
+class Youtube_Target_Response(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -754,7 +755,7 @@ class Youtube_Target_Response(View):
 
         return render(request,'Target_Management_System/Youtube_Target_Response.html',{'channel':channel})
  
-class Youtube_Target_Report(View):
+class Youtube_Target_Report(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         channel = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -763,14 +764,14 @@ class Youtube_Target_Report(View):
         return render(request,'Target_Management_System/Youtube_Target_Report.html',{'channel':channel})
   
   # DYNAMIC CRAWLING   
-class Dynamic_Crawling_Target(View):
+class Dynamic_Crawling_Target(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
         print(target.to_mongo())
         return render(request,'Target_Management_System/Dynamic_Crawling_Target.html',{'target':target})
     
-class Dynamic_Crawling_Report(View):
+class Dynamic_Crawling_Report(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         target = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -779,7 +780,7 @@ class Dynamic_Crawling_Report(View):
     
 # SUBREDDIT 
 
-class Subreddit_Target_Resposne(View):
+class Subreddit_Target_Resposne(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -789,7 +790,7 @@ class Subreddit_Target_Resposne(View):
 
 
 
-class Subreddit_Target_Report(View):
+class Subreddit_Target_Report(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         object_gtr_id = kwargs['object_gtr_id']
         subreddit_profile = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
@@ -864,7 +865,7 @@ def username_exists(username,n_data):
     return False
 
 
-class Graph(View):
+class Graph(RequireLoginMixin, IsTSO,View):
     def get(self,request,*args,**kwargs):
         
          object_gtr_id = kwargs['object_gtr_id']
@@ -874,3 +875,6 @@ class Graph(View):
          with open('static/Target_Json/facebook_group_data.json', 'r') as f:
             profile = json.load(f)
          return render(request,'Target_Management_System/Facebook_Target_Graph.html',{'profile':data_object})
+
+
+

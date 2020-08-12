@@ -1,7 +1,7 @@
 from django.urls import path
 from Case_Management_System import views
 app_name = 'Case_Management_System'
-
+# from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('create/', views.CreateCase.as_view(), name='cms_create_case'),
     path('location/', views.StoreAndRetrieveLocation.as_view(), name='cms_location'),

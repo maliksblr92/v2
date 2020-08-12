@@ -1,0 +1,1599 @@
+{% extends 'OSINT_System_Core/tmo_base.html' %}
+{% load static %}
+
+{% block Page_Title %}TMO Dashboard{% endblock %} 
+{% block Small_Navbar %} 
+{% endblock %}
+{% block Content_Belly %}
+        
+
+<style>
+    td,th{
+        font-size: 13px;;
+    }
+    #guage1 {
+      height: 250px; 
+      width: 100%;;
+      padding: 0px;
+      margin: 0px;
+    }
+    #guage2 {
+      height: 250px; 
+      width: 100%;;
+      padding: 0px;
+      margin: 0px;
+    }
+    #guage3 {
+      height: 250px; 
+      width: 100%;;
+      padding: 0px;
+      margin: 0px;
+    }
+    #guage4 {
+      height: 250px; 
+      width: 100%;;
+      padding: 0px;
+      margin: 0px;
+    }
+    
+    .highcharts-figure, .highcharts-data-table table {
+      min-width: 220px; 
+      max-width: 300;
+      margin: 1em auto;
+    }
+    
+    .highcharts-data-table table {
+      font-family: Verdana, sans-serif;
+      border-collapse: collapse;
+      border: 1px solid #EBEBEB;
+      margin: 10px auto;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+    .highcharts-data-table caption {
+      padding: 1em 0;
+      font-size: 1.2em;
+      color: #555;
+    }
+    .highcharts-data-table th {
+      font-weight: 600;
+      padding: 0.5em;
+    }
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+      padding: 0.5em;
+    }
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+      background: #f8f8f8;
+    }
+    .highcharts-data-table tr:hover {
+      background: #f1f7ff;
+    }
+</style>
+<!-- scounters styleing -->
+
+<style>
+
+  .count_container{
+
+    border-radius:3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    margin-top:20px;
+  }
+  .counter{
+    color:#f59f00;
+    font-size: 30px;;
+    margin-top: 10px;;
+    font-weight: bold;
+    font-family:'digital-clock-font'
+
+  }
+</style>
+
+<div id="Tmo_Dashbaord" class="tab-pane fade  active show">
+    
+  <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+          <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+          <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+        </ul>
+      </div>
+      <div class="card-body">
+   
+        
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active show">
+            <div class="container-fluid">
+                            <!--  -->
+<div class="row bg-dark  pt-3 pb-3"style="background-color:">
+  <div class="col-md-2"><section>
+    <div class="count_container">
+      <i class="fab fa-facebook fa-4x text-danger"></i>
+      <div  class="counter" data-target="{{Facebook_Group_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+      <span class="text-white font-weight-bold"> Fb Profile Targets </span>
+    </div>
+  </section></div>
+  <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-twitter-square fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Twitter_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Fb Group Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-reddit-square fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Reddit_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Fb Page Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-instagram fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Linkdein_Profile_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Fb Search Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-key fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Keybase_Crawling_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Keybase  Crawling Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fab fa-youtube fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Dynamic_Crawling_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Dynamic Crawling Targets </span>
+   </div>
+ </section></div>
+</div>
+
+              <!--  -->
+
+
+               <!--  -->
+<div class="row bg-dark  pt-3 pb-3"style="background-color:">
+  <div class="col-md-2"><section>
+    <div class="count_container">
+      <i class="fab fa-facebook fa-4x text-danger"></i>
+      <div  class="counter" data-target="{{Facebook_Group_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+      <span class="text-white font-weight-bold"> Reddit  Targets </span>
+    </div>
+  </section></div>
+  <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-twitter-square fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Twitter_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> SubReddit Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-reddit-square fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Reddit_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold">  </span>
+     <span class="text-white font-weight-bold"> Linkedin Profile Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-instagram fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Linkdein_Profile_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Linkedin Company Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fa fa-key fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Keybase_Crawling_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Instagram Targets </span>
+   </div>
+ </section></div>
+ <div class="col-md-2"><section>
+   <div class="count_container">
+     <i class="fab fa-youtube fa-4x text-danger"></i>
+     <div  class="counter" data-target="{{Dynamic_Crawling_Targets|length}}">0</div><span class="plus text-white"><i class="fa fa-plus text-white fa-2x" aria-hidden="true"></i></span>
+     <span class="text-white font-weight-bold"> Ip Logger Targets </span>
+   </div>
+ </section></div>
+</div>
+
+              <!--  -->
+
+
+
+
+              <div class="row ">
+                <div class="col-md-3 border text-center m-0 p-0 bg-dark ">
+                  <figure class="highcharts-figure m-0 p-0 ">
+                    <div id="guage1" class="m-0 p-0 "></div>
+                  </figure>
+                </div>
+                <div class="col-md-3 border text-center m-0 p-0 ">
+                  <figure class="highcharts-figure m-0 p-0 ">
+                    <div id="guage2" class="m-0 p-0 "></div>
+                  </figure>
+                </div>
+                <div class="col-md-3 border text-center m-0 p-0 ">
+                  <figure class="highcharts-figure m-0 p-0 ">
+                    <div id="guage3" class="m-0 p-0 "></div>
+                  </figure>
+                </div>
+                <div class="col-md-3 border text-center m-0 p-0 ">
+                  <figure class="highcharts-figure m-0 p-0 ">
+                    <div id="guage4" class="m-0 p-0 "></div>
+                  </figure>
+                </div>
+               
+              </div>
+
+
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+           <div class="container-fluid">
+             <div class="row">
+               <div class="col-md-12">
+                <figure class="highcharts-figure">
+                  <div id="container"></div>
+                  <p class="highcharts-description">
+                    This force directed graph shows an example of a network graph, where
+                    the nodes represent languages and the language families they belong to.
+                    The nodes can be dragged around and will be repositioned dynamically.
+                    Network graphs are typically used to show relations in data. In this
+                    case, we are showing a hierarchical structure.
+                  </p>
+                </figure>
+               </div>
+            
+
+             </div>
+           </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+          </div>
+        </div>
+        
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div>
+
+
+
+<!--#########################################################################################################################################  -->
+<div id="Facebook_Group_Targets" class="tab-pane fade  ">
+    
+       <div class="card">
+           <div class="card-header bg-dark"></div>
+           <div class="card-body">
+            <div class="table-responsive-sm">          
+                <table id="example" class="table display ">
+                  <thead>
+                    <tr>
+                     
+                      <th>Username</th>
+                      <th>Name</th>
+                      <th>URL</th>
+                      <th>Type</th>
+                      <th>Is Enabled</th>
+                      <th>Is Expired</th>
+                      <th>Expired On</th>
+                      <th>Need Screenshots</th>
+                      <th>Periodic Interval</th>
+                      <th>Created On</th>
+                      <th>Operations</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    {% for i in Facebook_Group_Targets %}
+                    <tr>
+             <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+             <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+             <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+             <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+             <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+              <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+              <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+            </tr> 
+                    {% endfor %}
+                
+                
+                </tbody>
+                </table>
+                </div>
+           </div>
+           <div class="card-footer bg-dark"></div>
+       </div>
+    </div>
+
+   
+<!--#########################################################################################################################################  -->  
+<!--#########################################################################################################################################  -->
+<div id="Facebook_Page_Targets" class="tab-pane fade "style="height:600px;overflow-y:auto;">
+    <div class="card">
+        <div class="card-header bg-dark"></div>
+        <div class="card-body">
+         <div class="table-responsive-sm">          
+             <table id="example" class="table display ">
+               <thead>
+                 <tr>
+                  
+                   <th>Username</th>
+                   <th>Name</th>
+                   <th>URL</th>
+                   <th>Type</th>
+                   <th>Is Enabled</th>
+                   <th>Is Expired</th>
+                   <th>Expired On</th>
+                   <th>Need Screenshots</th>
+                   <th>Periodic Interval</th>
+                   <th>Created On</th>
+                   <th>Operations</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+                
+                 {% for i in Facebook_Page_Targets %}
+                 <tr>
+          <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+          <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+            <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+            <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+         </tr> 
+                 {% endfor %}
+             
+             
+             </tbody>
+             </table>
+             </div>
+        </div>
+        <div class="card-footer bg-dark"></div>
+    </div>
+</div>
+<!--#########################################################################################################################################  -->
+<!--#########################################################################################################################################  -->
+<div id="Facebook_Person_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+    <div class="card">
+        <div class="card-header bg-dark"></div>
+        <div class="card-body">
+         <div class="table-responsive-sm">          
+             <table id="example" class="table display ">
+               <thead>
+                 <tr>
+                  
+                   <th>Username</th>
+                   <th>Name</th>
+                   <th>URL</th>
+                   <th>Type</th>
+                   <th>Is Enabled</th>
+                   <th>Is Expired</th>
+                   <th>Expired On</th>
+                   <th>Need Screenshots</th>
+                   <th>Periodic Interval</th>
+                   <th>Created On</th>
+                   <th>Operations</th>
+                   
+                 </tr>
+               </thead>
+               <tbody>
+                
+                 {% for i in Facebook_Profile_Targets %}
+                 <tr>
+          <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+          <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+          <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+          <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+          <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+            <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+            <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+         </tr> 
+                 {% endfor %}
+             
+             
+             </tbody>
+             </table>
+             </div>
+        </div>
+        <div class="card-footer bg-dark"></div>
+    </div>
+</div>
+<!--#########################################################################################################################################  --> 
+<!--#########################################################################################################################################  --> 
+<!--#########################################################################################################################################  --> 
+                                                    <!-- LINKEDIN TARGETS  -->
+<!--#########################################################################################################################################  --> 
+<div id="Facebook_Page_Targets" class="tab-pane fade "style="height:600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Facebook_Page_Targets %}
+               <tr>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div>
+<!--#########################################################################################################################################  -->
+                                              <!-- LINKEDIN TABS  -->
+<!--#########################################################################################################################################  -->
+<div id="Linkedin_Profile_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Linkdein_Profile_Targets %}
+               <tr>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div>
+<!--#########################################################################################################################################  -->
+<div id="Linkedin_Company_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Linkdein_Company_Targets %}
+               <tr>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div>
+<!--#########################################################################################################################################  -->
+                                              <!-- REDDIT TABS  -->
+<!--#########################################################################################################################################  -->
+<div id="Reddit_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Reddit_Targets %}
+               <tr>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div>       
+<!--#########################################################################################################################################  -->
+<div id="Sub_Reddit_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Sub_Reddit_Targets %}
+               <tr>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div> 
+<!--#########################################################################################################################################  -->
+                                              <!-- TWITTER TABS  -->
+<!--#########################################################################################################################################  -->
+<div id="Twitter_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                <th>User Id</th>
+                 <th>Username</th>
+                 <th>Name</th>
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Twitter_Targets %}
+               <tr>
+        <td>  {{i.id|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.username|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.name|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div> 
+<!--#########################################################################################################################################  -->          
+<!--#########################################################################################################################################  -->
+                                              <!-- CUSTOM TARGETS TABS  -->
+<!--#########################################################################################################################################  -->
+<div id="Keybase_Crawling_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                <th>Title</th> 
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Keybase_Crawling_Targets %}
+               <tr>
+                <td>  {{i.title|default:"N/A"|truncatechars:"20"}}</td>  
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div> 
+<!--#########################################################################################################################################  -->
+<div id="Dynamic_Crawling_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                <th>Title</th> 
+                
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Dynamic_Crawling_Targets %}
+               <tr>
+                <td>  {{i.title|default:"N/A"|truncatechars:"20"}}</td>
+  
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div> 
+<!--#########################################################################################################################################  -->
+<!--#########################################################################################################################################  -->
+                                              <!-- IP LOGGER TABS  -->
+<!--#########################################################################################################################################  -->
+<div id="Dynamic_Crawling_Targets" class="tab-pane fade "style="height  :600px;overflow-y:auto;">
+  <div class="card">
+      <div class="card-header bg-dark"></div>
+      <div class="card-body">
+       <div class="table-responsive-sm">          
+           <table id="example" class="table display ">
+             <thead>
+               <tr>
+                <th>Title</th> 
+                
+                 <th>URL</th>
+                 <th>Type</th>
+                 <th>Is Enabled</th>
+                 <th>Is Expired</th>
+                 <th>Expired On</th>
+                 <th>Need Screenshots</th>
+                 <th>Periodic Interval</th>
+                 <th>Created On</th>
+                 <th>Operations</th>
+                 
+               </tr>
+             </thead>
+             <tbody>
+              
+               {% for i in Dynamic_Crawling_Targets %}
+               <tr>
+                <td>  {{i.title|default:"N/A"|truncatechars:"20"}}</td>
+  
+        <td>  <a href="{{i.url}}" class="badge badge-primary "><i class="fa fa-eye"style="font-size:16px;"></i></a></td>
+        <td>  {{i.target_type|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.is_enabled %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td> {% if i.is_expired %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.expired_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {% if i.need_screenshots %} <i class="fas fa-check"></i> {% else %} <i class="fa fa-times" aria-hidden="true"></i> {% endif %}</td>
+        <td>  {{i.periodic_interval|default:"N/A"|truncatechars:"15"}}</td>
+        <td>  {{i.created_on|default:"N/A"|truncatechars:"15"}}</td>
+        <td> <a href="" class="badge badge-success"><i class="fa fa-eye"style="font-size:16px;"></i></a>
+          <a href="" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true" style="font-size:16px;"></i></i></a>
+          <a href="" class="badge badge-primary"><i class="fas fa-edit" style="font-size:16px;"></i></a> </td>
+
+       </tr> 
+               {% endfor %}
+           
+           
+           </tbody>
+           </table>
+           </div>
+      </div>
+      <div class="card-footer bg-dark"></div>
+  </div>
+</div> 
+
+{% endblock %}
+ {% block Footer %}
+ 
+  {% endblock %} 
+
+{% block Scripts %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script defer type="text/javascript" charset="utf8"
+              src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+              
+<script>
+    $(document).ready(function() {
+        $('.display').DataTable( {
+            order: [[ 6, "desc" ]],
+        columnDefs: [
+            {
+                name: 'username',
+                orderable: true,
+                searchable: true,
+                targets: [0]
+            },
+            {
+                name: 'name',
+                orderable: true,
+                searchable: true,
+                targets: [1]
+            }
+        ],
+            "paging":   true,
+            "ordering": true,
+            "info":     true,
+            "pagingType": "full_numbers"
+        } );
+    } );
+</script>
+
+<!--  -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/networkgraph.js"></script>
+
+
+<script>
+  Highcharts.chart('guage1', {
+
+    chart: {
+      type: 'gauge',
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      plotBorderWidth: 0,
+      plotShadow: false,
+      backgroundColor: {
+        linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 1,
+            y2: 1
+        },
+        stops: [
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(200, 200, 255)']
+        ]
+    }
+    },
+  
+    title: {
+      text: 'Facebook Profile Targets '
+    },
+  
+    pane: {
+      startAngle: -150,
+      endAngle: 150,
+      background: [{
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#FFF'],
+            [1, '#333']
+          ]
+        },
+        borderWidth: 0,
+        outerRadius: '109%'
+      }, {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#333'],
+            [1, '#FFF']
+          ]
+        },
+        borderWidth: 1,
+        outerRadius: '107%'
+      }, {
+        // default background
+      }, {
+        backgroundColor: '#DDD',
+        borderWidth: 0,
+        outerRadius: '105%',
+        innerRadius: '103%'
+      }]
+    },
+  
+    // the value axis
+    yAxis: {
+      min: 0,
+      max: 200,
+  
+      minorTickInterval: 'auto',
+      minorTickWidth: 1,
+      minorTickLength: 10,
+      minorTickPosition: 'inside',
+      minorTickColor: '#666',
+  
+      tickPixelInterval: 30,
+      tickWidth: 2,
+      tickPosition: 'inside',
+      tickLength: 10,
+      tickColor: '#666',
+      labels: {
+        step: 2,
+        rotation: 'auto'
+      },
+      title: {
+        text: 'Profile Targets',
+        y: 30,
+       style: { "color": "#333333", "fontSize": "13px", },
+      },
+      plotBands: [{
+        from: 0,
+        to: 120,
+        color: '#55BF3B' // green
+      }, {
+        from: 120,
+        to: 160,
+        color: '#DDDF0D' // yellow
+      }, {
+        from: 160,
+        to: 200,
+        color: '#DF5353' // red
+      }]
+    },
+  
+    series: [{
+      name: 'Speed',
+      data: [80],
+      tooltip: {
+        valueSuffix: ' Targets'
+      }
+    }]
+  
+  },
+  // Add some life
+  function (chart) {
+    if (!chart.renderer.forExport) {
+      setInterval(function () {
+        var point = chart.series[0].points[0],
+          newVal,
+          inc = Math.round((Math.random() - 0.5) * 20);
+  
+        newVal = point.y + inc;
+        if (newVal < 0 || newVal > 200) {
+          newVal = point.y - inc;
+        }
+  
+        point.update(newVal);
+  
+      }, 3000);
+    }
+  });
+</script>
+<script>
+  Highcharts.chart('guage2', {
+
+    chart: {
+      type: 'gauge',
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      plotBorderWidth: 0,
+      plotShadow: false,
+      backgroundColor: {
+        linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 1,
+            y2: 1
+        },
+        stops: [
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(200, 200, 255)']
+        ]
+    }
+    },
+  
+    title: {
+      text: 'Facebook Page Targets '
+    },
+  
+    pane: {
+      startAngle: -150,
+      endAngle: 150,
+      background: [{
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#FFF'],
+            [1, '#333']
+          ]
+        },
+        borderWidth: 0,
+        outerRadius: '109%'
+      }, {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#333'],
+            [1, '#FFF']
+          ]
+        },
+        borderWidth: 1,
+        outerRadius: '107%'
+      }, {
+        // default background
+      }, {
+        backgroundColor: '#DDD',
+        borderWidth: 0,
+        outerRadius: '105%',
+        innerRadius: '103%'
+      }]
+    },
+  
+    // the value axis
+    yAxis: {
+      min: 0,
+      max: 200,
+  
+      minorTickInterval: 'auto',
+      minorTickWidth: 1,
+      minorTickLength: 10,
+      minorTickPosition: 'inside',
+      minorTickColor: '#666',
+  
+      tickPixelInterval: 30,
+      tickWidth: 2,
+      tickPosition: 'inside',
+      tickLength: 10,
+      tickColor: '#666',
+      labels: {
+        step: 2,
+        rotation: 'auto'
+      },
+      title: {
+        text: 'Page Targets',
+        y: 30,
+       style: { "color": "#333333", "fontSize": "13px", },
+      },
+      plotBands: [{
+        from: 0,
+        to: 120,
+        color: '#55BF3B' // green
+      }, {
+        from: 120,
+        to: 160,
+        color: '#DDDF0D' // yellow
+      }, {
+        from: 160,
+        to: 200,
+        color: '#DF5353' // red
+      }]
+    },
+  
+    series: [{
+      name: 'Speed',
+      data: [80],
+      tooltip: {
+        valueSuffix: ' Targets'
+      }
+    }]
+  
+  },
+  // Add some life
+  function (chart) {
+    if (!chart.renderer.forExport) {
+      setInterval(function () {
+        var point = chart.series[0].points[0],
+          newVal,
+          inc = Math.round((Math.random() - 0.5) * 20);
+  
+        newVal = point.y + inc;
+        if (newVal < 0 || newVal > 200) {
+          newVal = point.y - inc;
+        }
+  
+        point.update(newVal);
+  
+      }, 3000);
+    }
+  });
+</script>
+<script>
+  Highcharts.chart('guage3', {
+
+    chart: {
+      type: 'gauge',
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      plotBorderWidth: 0,
+      plotShadow: false,
+      backgroundColor: {
+        linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 1,
+            y2: 1
+        },
+        stops: [
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(200, 200, 255)']
+        ]
+    }
+    },
+  
+    title: {
+      text: 'Facebook Group Targets '
+    },
+  
+    pane: {
+      startAngle: -150,
+      endAngle: 150,
+      background: [{
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#FFF'],
+            [1, '#333']
+          ]
+        },
+        borderWidth: 0,
+        outerRadius: '109%'
+      }, {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#333'],
+            [1, '#FFF']
+          ]
+        },
+        borderWidth: 1,
+        outerRadius: '107%'
+      }, {
+        // default background
+      }, {
+        backgroundColor: '#DDD',
+        borderWidth: 0,
+        outerRadius: '105%',
+        innerRadius: '103%'
+      }]
+    },
+  
+    // the value axis
+    yAxis: {
+      min: 0,
+      max: 200,
+  
+      minorTickInterval: 'auto',
+      minorTickWidth: 1,
+      minorTickLength: 10,
+      minorTickPosition: 'inside',
+      minorTickColor: '#666',
+  
+      tickPixelInterval: 30,
+      tickWidth: 2,
+      tickPosition: 'inside',
+      tickLength: 10,
+      tickColor: '#666',
+      labels: {
+        step: 2,
+        rotation: 'auto'
+      },
+      title: {
+        text: 'Group Targets',
+        y: 30,
+       style: { "color": "#333333", "fontSize": "13px", },
+      },
+      plotBands: [{
+        from: 0,
+        to: 120,
+        color: '#55BF3B' // green
+      }, {
+        from: 120,
+        to: 160,
+        color: '#DDDF0D' // yellow
+      }, {
+        from: 160,
+        to: 200,
+        color: '#DF5353' // red
+      }]
+    },
+  
+    series: [{
+      name: 'Speed',
+      data: [80],
+      tooltip: {
+        valueSuffix: ' Targets'
+      }
+    }]
+  
+  },
+  // Add some life
+  function (chart) {
+    if (!chart.renderer.forExport) {
+      setInterval(function () {
+        var point = chart.series[0].points[0],
+          newVal,
+          inc = Math.round((Math.random() - 0.5) * 20);
+  
+        newVal = point.y + inc;
+        if (newVal < 0 || newVal > 200) {
+          newVal = point.y - inc;
+        }
+  
+        point.update(newVal);
+  
+      }, 3000);
+    }
+  });
+</script>
+
+<script>
+  Highcharts.chart('guage4', {
+
+    chart: {
+      type: 'gauge',
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      plotBorderWidth: 0,
+      plotShadow: false,
+      backgroundColor: {
+        linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 1,
+            y2: 1
+        },
+        stops: [
+            [0, 'rgb(255, 255, 255)'],
+            [1, 'rgb(200, 200, 255)']
+        ]
+    }
+    },
+  
+    title: {
+      text: 'Facebook Search Targets '
+    },
+  
+    pane: {
+      startAngle: -150,
+      endAngle: 150,
+      background: [{
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#FFF'],
+            [1, '#333']
+          ]
+        },
+        borderWidth: 0,
+        outerRadius: '109%'
+      }, {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+          stops: [
+            [0, '#333'],
+            [1, '#FFF']
+          ]
+        },
+        borderWidth: 1,
+        outerRadius: '107%'
+      }, {
+        // default background
+      }, {
+        backgroundColor: '#DDD',
+        borderWidth: 0,
+        outerRadius: '105%',
+        innerRadius: '103%'
+      }]
+    },
+  
+    // the value axis
+    yAxis: {
+      min: 0,
+      max: 200,
+  
+      minorTickInterval: 'auto',
+      minorTickWidth: 1,
+      minorTickLength: 10,
+      minorTickPosition: 'inside',
+      minorTickColor: '#666',
+  
+      tickPixelInterval: 30,
+      tickWidth: 2,
+      tickPosition: 'inside',
+      tickLength: 10,
+      tickColor: '#666',
+      labels: {
+        step: 2,
+        rotation: 'auto'
+      },
+      title: {
+        text: 'Search Targets',
+        y: 30,
+       style: { "color": "#333333", "fontSize": "13px", },
+      },
+      plotBands: [{
+        from: 0,
+        to: 120,
+        color: '#55BF3B' // green
+      }, {
+        from: 120,
+        to: 160,
+        color: '#DDDF0D' // yellow
+      }, {
+        from: 160,
+        to: 200,
+        color: '#DF5353' // red
+      }]
+    },
+  
+    series: [{
+      name: 'Speed',
+      data: [80],
+      tooltip: {
+        valueSuffix: ' Targets'
+      }
+    }]
+  
+  },
+  // Add some life
+  function (chart) {
+    if (!chart.renderer.forExport) {
+      setInterval(function () {
+        var point = chart.series[0].points[0],
+          newVal,
+          inc = Math.round((Math.random() - 0.5) * 20);
+  
+        newVal = point.y + inc;
+        if (newVal < 0 || newVal > 200) {
+          newVal = point.y - inc;
+        }
+  
+        point.update(newVal);
+  
+      }, 3000);
+    }
+  });
+</script>
+<script>
+  // Add the nodes option through an event call. We want to start with the parent
+// item and apply separate colors to each child element, then the same color to
+// grandchildren.
+Highcharts.addEvent(
+  Highcharts.Series,
+  'afterSetOptions',
+  function (e) {
+    var colors = Highcharts.getOptions().colors,
+      i = 0,
+      nodes = {};
+
+    if (
+      this instanceof Highcharts.seriesTypes.networkgraph &&
+      e.options.id === 'lang-tree'
+    ) {
+      e.options.data.forEach(function (link) {
+
+        if (link[0] === 'Proto Indo-European') {
+          nodes['Proto Indo-European'] = {
+            id: 'Proto Indo-European',
+            marker: {
+              radius: 20
+            }
+          };
+          nodes[link[1]] = {
+            id: link[1],
+            marker: {
+              radius: 10
+            },
+            color: colors[i++]
+          };
+        } else if (nodes[link[0]] && nodes[link[0]].color) {
+          nodes[link[1]] = {
+            id: link[1],
+            color: nodes[link[0]].color
+          };
+        }
+      });
+
+      e.options.nodes = Object.keys(nodes).map(function (id) {
+        return nodes[id];
+      });
+    }
+  }
+);
+
+Highcharts.chart('container', {
+  chart: {
+    type: 'networkgraph',
+    height: '100%'
+  },
+  title: {
+    text: 'The Indo-European Language Tree'
+  },
+  subtitle: {
+    text: 'A Force-Directed Network Graph in Highcharts'
+  },
+  plotOptions: {
+    networkgraph: {
+      keys: ['from', 'to'],
+      layoutAlgorithm: {
+        enableSimulation: true,
+        friction: -0.9
+      }
+    }
+  },
+  series: [{
+    dataLabels: {
+      enabled: true,
+      linkFormat: ''
+    },
+    id: 'lang-tree',
+    data: [
+      {% for i in Facebook_Profile_Targets %}
+      ['{{ i.target_type }}', '{{i.name|default:"N/A"}}'],
+      {% endfor %}
+      {% for i in Facebook_Group_Targets %}
+      ['{{ i.target_type }}', '{{i.name|default:"N/A"}}'],
+      {% endfor %}
+      {% for i in Facebook_Page_Targets %}
+      ['{{ i.target_type }}', '{{i.name|default:"N/A"}}'],
+      {% endfor %}
+    
+     
+    ]
+  }]
+});
+
+</script>
+
+<script>
+
+    const counters =document.querySelectorAll('.counter');
+  const speed=200;
+  counters.forEach(counter=>{
+    const updateCount=()=>{
+      const target=+counter.getAttribute('data-target');
+      const count=+counter.innerText;
+      const inc=target/speed;
+if(count < target){
+counter.innerText=Math.ceil(count+inc);
+setTimeout(updateCount,1);
+}
+else{
+  count.innerText=target;
+}
+
+     
+    }
+    updateCount();
+  })
+
+</script>
+{% endblock%}
