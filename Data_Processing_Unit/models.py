@@ -331,7 +331,7 @@ class Facebook_Posts(EmbeddedDocument):
     reactions = DictField()
     comments = ListField()
     categorization = ListField()
-    Facebook_Posts=ListField()
+  
 
 class Page_Posts(EmbeddedDocument):
     post_id = LongField()
