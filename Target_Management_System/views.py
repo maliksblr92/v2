@@ -21,12 +21,7 @@ tl = Timeline_Manager()
 from django.views.generic import TemplateView
 from Data_Processing_Unit.models import Reddit_Profile_Response_TMS
 from Data_Processing_Unit.models import Youtube_Response_TMS
-""" PDF IMPORTS """
-from xhtml2pdf import pisa
-from django.views.generic import View
-from django_xhtml2pdf.utils import generate_pdf
-import sys
-from .utils import render_to_pdf
+
 
 
 
@@ -883,25 +878,3 @@ class Graph(RequireLoginMixin, IsTSO,View):
 
 
 
-def generatePDF(request,object_gtr_id,):
-         print("###################################")
-         print(object_gtr_id)
-         template = 'Target_Management_System/FacebookPerson_Target_Response.html'
-         object_gtr_id =object_gtr_id
-         data_object = acq.get_data_response_object_by_gtr_id(ObjectId(object_gtr_id))
-
-         context = {
-            "profile": data_object,
-
-            }
-         pdf = render_to_pdf('pdfs/template_pdf.html', context)
-         if pdf:
-            response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Invoice_%s.pdf" %("12341231")
-            content = "inline; filename='%s'" %(filename)
-            download = request.GET.get("download")
-            if download:
-                content = "attachment; filename='%s'" %(filename)
-            response['Content-Disposition'] = content
-            return response
-         return HttpResponse("Not found")
