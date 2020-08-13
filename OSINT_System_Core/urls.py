@@ -73,6 +73,8 @@ urlpatterns = [
     path('periodic_target/delete/<str:periodic_task_id>',views.Delete_Periodic_Target_DB.as_view(),name='Delete_Periodic_Target_DB'),
     path('tmo_base/',views.TMO_Base,name='tmo_base'),
     path('tmo_dashboard/',views.TMO,name='tmo_dashboard'), 
+    path('application_settings/',views.Application_Settings.as_view(),name='application_settings'), 
+    path('application_settings/news_channels/',views.News_Channels_Settings.as_view(),name='news_channels_settings'), 
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

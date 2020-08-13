@@ -1590,7 +1590,7 @@ class Timeline_Posts(Document):
         qualified_posts = []
 
         tl_objs = Timeline_Posts.objects(all_seen=False)
-        count = 0
+        count = Document
 
         for obj in tl_objs:
 
@@ -1652,3 +1652,24 @@ class Timeline_Posts(Document):
                     break
 
         return qualified_posts
+ 
+""" Author Ahmed Kabeer Shaukat """   
+class App_Settings(Document):
+    settings_for = StringField(default='info')
+    settings = ListField()
+    created_on = DateTimeField(default=datetime.datetime.utcnow())
+    updated_on = DateTimeField(default=datetime.datetime.utcnow())
+    
+    def __str__(self):
+        return self.settings_for
+    
+    @staticmethod
+    def get_all_settings():
+        return App_Settings.objects()
+    @staticmethod
+    def get_object_by_id(obj_id):
+        return App_Settings.objects(id=obj_id)
+    @staticmethod
+    def get_settings_by_name(setting_for):
+        return App_Settings.objects(setting_for=setting_for)
+""" Author Ahmed Kabeer Shaukat """

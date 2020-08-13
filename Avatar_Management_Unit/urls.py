@@ -15,11 +15,9 @@ urlpatterns = [
     path('addsocialaccount/', views.Add_Social_Account.as_view(), name='amu_add_socialaccount'),
     path('addsocialpost/', views.Add_Social_Post.as_view(), name='amu_add_socialpost'),
     path('addskill/', views.Add_Skill.as_view(), name='amu_add_skill'),
-
     # ---------------------
     # 2nd submenu
     path('setting/', views.Create_Avatar.as_view(), name='amu_setting'),
-    
     # ---------------------
     # 3rd submenu
     path('report/', views.Create_Avatar.as_view(), name='amu_report'),

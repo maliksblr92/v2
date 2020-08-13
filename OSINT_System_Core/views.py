@@ -85,6 +85,10 @@ ss = System_Stats()
 
 
 from Public_Data_Acquisition_Unit.mongo_models import *
+""" Author Ahmed Kabeer Shaukat """
+from django.contrib import messages
+""" Author Ahmed Kabeer Shaukat """
+
 
 class Main(RequireLoginMixin, IsTSO,View):
     def get(self, request):
@@ -1006,14 +1010,19 @@ def newsMonitor(request):
 
 
 def topNews(request):
-    ary = News.objects(Q(channel='ARY')).order_by('-id').first()
-    dawn = News.objects(Q(channel='DAWN')).order_by('-id').first()
-    ndtv = News.objects(Q(channel='NDTV')).order_by('-id').first()
-    india_today = News.objects(Q(channel='INDIATODAY')).order_by('-id').first()
-    abp = News.objects(Q(channel='ABP')).order_by('-id').first()
-    zee = News.objects(Q(channel='ZEE')).order_by('-id').first()
-    list1 = [ary, dawn, ndtv, india_today, abp, zee]
-    return render(request, "OSINT_System_Core/additional_templates/top_news.html", {'top_news': list1})
+    
+    status=App_Settings.objects.filter(settings_for='News_Channels').first();
+    if status != None:
+        d = {}
+        for Channel_Name in status.settings:
+            Capitalize_Name=str(Channel_Name).upper()
+            print(Capitalize_Name);
+            d["{0}".format(Channel_Name)] = News.objects(Q(channel=''+Capitalize_Name)).order_by('-id').first()
+        print(d)
+        Channel_Data = list()
+        for key, value in d.items():
+                Channel_Data.append(value)
+        return render(request, "OSINT_System_Core/additional_templates/top_news.html", {'top_news': Channel_Data})
 
 
 # get worldwide hashtags function
@@ -1321,7 +1330,6 @@ def TMO(request):
     ################################################################################
     GTR_Object=  Global_Target_Reference()
     Targets_Added_Today=GTR_Object.targets_added_today()
-    print("@###########################################################")
     print(Targets_Added_Today)
     
     return render(request, "OSINT_System_Core/tmo_dashboard.html", {'Facebook_Profile_Targets': Facebook_Profile_Targets,
@@ -1337,3 +1345,55 @@ def TMO(request):
         
 def TMO_Base(request):
     return render(request, 'OSINT_System_Core/tmo_base.html')
+
+""" Author Ahmed Kabeer Shaukat """
+
+class Application_Settings(View):
+    def get(self,request,*args,**kwargs):
+        News_Channels= (
+        ('bbc', ('BBC News')),
+        ('ary', ('ARY News')),
+        ('geo', ('GEO News')),
+        ('dawn', ('DAWN News')),
+        ('abp', ('ABP News')),
+        ('ndtv', ('NDTV News')),
+        ('itd', ('INID')),
+)       
+
+        News_Channels_Setting=App_Settings.objects.filter(settings_for='News_Channels').first();
+        return render(request,'OSINT_System_Core/Application_Settings.html',{'News_Channels':News_Channels,'News_Channels_Settings':News_Channels_Setting})
+    def post(self,request,*args,**kwargs):
+        pass
+    
+class News_Channels_Settings(View):
+    def get(self,request,*args,**kwargs):
+        pass
+    def post(self,request,*args,**kwargs):
+            New_Channels_Names =request.POST.getlist('channels_name')
+            status=App_Settings.objects.filter(settings_for='News_Channels').first();
+            if status==None:
+               
+                if len(New_Channels_Names) > 0:
+                    News_Settings = App_Settings.objects.create(
+                    settings_for='News_Channels',
+                    settings=New_Channels_Names,
+                    )
+                else:
+                    messages.error(request,'Operation failed ! No News channels selected   ')  
+                    return redirect('/core/application_settings')
+            else:
+                try:
+                    Updating_Model = App_Settings.objects.update(
+                    settings=New_Channels_Names,
+                    )
+                    messages.success(request,'New Settings updated successfully ')  
+                    return redirect('/core/application_settings')
+                except Exception as e:
+                    messages.error(request,'Operation failed ! Try again  ')  
+                    return redirect('/core/application_settings')
+            messages.error(request,'Operation failed ! Try again  ')  
+            return redirect('/core/application_settings')
+            
+
+""" Author Ahmed Kabeer Shaukat """            
+        
