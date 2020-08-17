@@ -1369,6 +1369,8 @@ class News_Channels_Settings(View):
     def get(self,request,*args,**kwargs):
         pass
     def post(self,request,*args,**kwargs):
+            print("############################################### ")
+            print("POST REQUEST ")
             New_Channels_Names =request.POST.getlist('channels_name')
             status=App_Settings.objects.filter(settings_for='News_Channels').first();
             if status==None:
