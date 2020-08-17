@@ -219,7 +219,8 @@
                   .custom_card{
                   background:none!important;
                   }
-                  .custom_card_body_inner{
+               
+                  .belly_outer_wrapper{
                   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
                   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
                   background: linear-gradient( 90deg, rgba(219, 219, 219, 1) 0%, rgba(230, 230, 230, 1) 19%, rgba(230, 230, 230, 1) 77%, rgba(219, 219, 219, 1) 100% );
@@ -228,6 +229,8 @@
                   min-height:  37vw!important;
                   max-height:   37vw!important;
                   overflow-y:auto;
+                  overflow-x:hidden!important;
+                
                   }
                   .custom_card_title{
                   font-size: 25px;
@@ -239,17 +242,17 @@
                   /*
                   *  STYLE 8
                   */
-                  #custom_card_body_inner::-webkit-scrollbar-track
+                  #belly_outer_wrapper::-webkit-scrollbar-track
                   {
                   border: 1px solid black;
                   background-color: #F5F5F5;
                   }
-                  #custom_card_body_inner::-webkit-scrollbar
+                  #belly_outer_wrapper::-webkit-scrollbar
                   {
                   width: 10px;
                   background-color: #F5F5F5;
                   }
-                  #custom_card_body_inner::-webkit-scrollbar-thumb
+                  #belly_outer_wrapper::-webkit-scrollbar-thumb
                   {
                   background-color: #000000;	
                   }
@@ -263,14 +266,12 @@
                            {% endblock %}
                         </div>
                         <div class="card-body custom_card_body" id="custom_card_body">
-                           <div class="container-fluid h-100">
-                              <div class="row h-100">
-                                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 custom_card_body_inner h-100">
+                           
+                                 <div class="container-fluid belly_outer_wrapper  w-100">
                                     {% block belly %}
                                     {% endblock %}
                                  </div>
-                              </div>
-                           </div>
+                              
                         </div>
                      </div>
                   </div>

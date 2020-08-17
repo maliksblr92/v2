@@ -1,234 +1,248 @@
 {% extends 'OSINT_System_Core/tso_base.html' %}
 {% load static %}
 {% block page_title %}Application Settings {% endblock %}
-
 {% block belly_header %}
 <p class="text-uppercase custom_card_title ">Application Settings</p>
 {% endblock %}
-
-  {% block head_styles %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-  
-     
+{% block head_styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 {% endblock %}
 {% block belly %}
 <style>
-    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-        width: 685px;
-    }
-</style>
-<div class="row">
-    <div class="col-md-12 m-0 p-0">
-        <!-- tabs start -->
-
-        <ul class="nav nav-tabs bg-dark m-0 p-0 ">
-            <li class="active "><a data-toggle="tab" class="nav-link font-weight-bold" href="#News_Settings_Tab">News Dashboard Settings </a></li>
-            <li><a data-toggle="tab" class="nav-link" href="#menu1">Menu 1</a></li>
-            <li><a data-toggle="tab" class="nav-link" href="#menu2">Menu 2</a></li>
-          </ul>
-          
-          <div class="tab-content">
-            <div id="News_Settings_Tab" class="tab-pane fade in active show">
-                
-
-<div class="container-fluid">
-    <div class="row d-flex flex-row justify-content-center align-items-center mt-2">
-       <div class="col-md-12 text-center card-header">
-       <h2 class="display-5">News Dashboard Settings  </h2>
-       </div>
-    <div class="col-md-12 card-body">
-            <div class="row">
-                <div class="col-md-2 text-center  ">
-                   <span class="badge badge-dark">Channel Name </span>
-                </div>
-                <div class="col-md-10 text-center ">
-                   <span  class="badge badge-dark"> Channel Description</span>
-                </div>
-
-
-
-                {% for i in News_Channels_Settings.settings %}
-                {% if i == 'ary' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/ary.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">ARY News is a Pakistani news channel launched on 26 September 2004. A bilingual news channel in English and Urdu, it is a part of the ARY Digital Network, which is a subsidiary of ARY Group. ARY is an acronym of Abdul Razzak Yaqoob, who was the owner of ARY Group.</p>
-                </div>
-                {% endif %}
-
-
-                {% if i == 'geo' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/geo.jpg' %}"class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">Geo News is a Pakistani pay television news channel owned by the Jang Group of Newspapers. The website of the Geo News is the top ranked website in the Pakistan with the alexa rank of 29 in the country.</p>
-                </div>
-                {% endif %}
-
-                {% if i == 'dawn' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/dawn.jpeg' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">Dawn is Pakistan's oldest, leading and most widely read English-language newspaper and is the country's newspaper of record. It is one of the country's three largest English-language dailies and the flagship of the Dawn Group of Newspapers.</p>
-                </div>
-                {% endif %}
-
-
-                {% if i == 'abp' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/abp.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">ABP News is an Indian Hindi news channel owned by ABP Group. It is a free to air TV channel founded in 1998. It was formerly known as STAR News before being acquired by ABP Group. ABP Live is an Indian English news website owned by ABP Group. It is also available on YouTube; its YouTube channel name is ABP News.</p>
-                </div>
-                {% endif %}
-
-
-
-                {% if i == 'ndtv' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/ndtv.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">New Delhi Television Limited is an Indian television media company founded in 1988 by Radhika Roy, a journalist. NDTV started off as a content provider for Doordarshan, producing the show The World This Week in November 1988.</p>
-                </div>
-                {% endif %}
-
-
-
-
-                {% if i == 'itd' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/indiatoday.jpg' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">India Today TV is India's leading English News Channel. India Today YouTube channel offers latest news videos on Politics, Business, Cricket, Bollywood, Life...</p>
-                </div>
-                {% endif %}
-
-
-                {% if i == 'bbc' %} 
-                <div class="col-md-2 mt-2 text-center">
-                    <img src="{% static 'OSINT_System_Core/bbc.jpg' %}" class="img-fluid" style="height:60px;width:80px;"/>
-                </div>
-                <div class="col-md-10 mt-2">
-                    <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.</p>
-                </div>
-                {% endif %}
-
-
-
-
-
-                {% endfor %}
-            </div>
-             
-              <div class="row">
-                  <div class="col-md-12 text-center mt-2 ">
-                       <span class="font-weight-bold btn btn-primary" style="font-size:20px;"> 
-                           <i class="fa fa-check font-weight-bold mr-2" aria-hidden="true"></i>
-                           Select Multiple Channels</span> 
-                           </div>
-                  <div class="col-md-12 text-center mt-3">
-                   
-                    <form action="{% url 'OSINT_System_Core:news_channels_settings' %}" method="POST">
-                        {% csrf_token %}
-                        <div class="form-inline form-row d-flex flex-row justify-content-center align-items-center">
-                        <select class="selectpicker" data-live-search="true" data-size="10" id="channels-select" name="channels_name" multiple>
-                          
-                            {% comment %}
-                            {% for selected_channel in News_Channels_Settings.settings %}
-                           {% for channel in News_Channels %}
-                            <option value="{{channel.0}}" {% if selected_channel == channel.0 %} selected {% else %} {% endif %}>{{channel.1}}</option>
-                            {% endfor %}
-                            {% endfor %}
-                            {% endcomment%}
-                            {% for channel in News_Channels %}
-                            <option value="{{channel.0}}" {% if selected_channel == channel.0 %} selected {% else %} {% endif %}>{{channel.1}}</option>
-                            {% endfor %}
-                          </select>
-                          <small class="text-info font-weight-bold ml-3"> * please select 6 channels  </small>
-                        </div>
-                        <div class="form-inline form-row d-flex flex-row justify-content-center align-items-center mt-5">
-                            <button type="submit" class="btn btn-success" ><i class="fa fa-pencil-square-o font-weight-bold mr-2" aria-hidden="true"></i>Update Channels </button>
-                        </div>
-                    </form>
-                  </div>
-              </div>     
-           
-        </div>
+   .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+   width: 685px;
+   }
+   .current-page-wrapper{
        
-        <div class="col-md-12 mt-5">
-         <div class="row">
-             <div class="col-md-4"></div>
-             <div class=""></div>
-         </div>
-        </div>
-    </div>
-</div>
-                 
-                  
+   }
+  
+</style>
+<div class="row current-page-wrapper" >
+   <div class="col-md-12 m-0 p-0"style=>
+      <!-- tabs start -->
+      <ul class="nav nav-tabs bg-dark m-0 p-0  ">
+         <li class="active border"><a data-toggle="tab" class="nav-link font-weight-bold text-primary" href="#News_Settings_Tab">News Dashboard Settings </a></li>
+         <!-- <li><a data-toggle="tab" class="nav-link" href="#menu1">Menu 1</a></li>
+            <li><a data-toggle="tab" class="nav-link" href="#menu2">Menu 2</a></li> -->
+      </ul>
+      <div class="tab-content">
+         <div id="News_Settings_Tab" class="tab-pane fade in active show">
+            <div class="container-fluid">
+               <div class="row d-flex flex-row justify-content-center align-items-center mt-2">
+                  <div class="row">
+                     <div class="col-md-12 text-center mt-2 ">
+                        <span class="font-weight-bold btn btn-primary" style="font-size:20px;"> 
+                        <span class="badge badge-dark d-flex flex-row justify-content-center align-items-center"><i class="fa fa-2x fa-check font-weight-bold mr-2" aria-hidden="true"></i></span>
+                        Select Multiple Channels</span> 
+                     </div>
+                     <div class="col-md-12 text-center mt-3 mb-3 ">
+                        <span  class="pull-left font-weight-bold text-info ml-5">     Following channels are already selected  </span>
+                        {% for selected_channel in News_Channels_Settings.settings %}
+                        <span class="badge badge-info mr-5"> {{forloop.counter}}#  {{selected_channel}}</span>
+                        {% endfor %}
+                     </div>
+                     <div class="col-md-12 text-center mt-3">
+                        <form action="{% url 'OSINT_System_Core:news_channels_settings' %}" id="channels_form" method="POST">
+                           {% csrf_token %}
+                           <div class="form-inline form-row d-flex flex-row justify-content-center align-items-center">
+                              <select class="selectpicker" data-live-search="true" onchange="maxAllowedMultiselect(this, 6)" data-size="10" id="channels-select" name="channels_name" multiple>
+                              {% comment %}
+                              {% for selected_channel in News_Channels_Settings.settings %}
+                              {% for channel in News_Channels %}
+                              <option value="{{channel.0}}" {% if selected_channel == channel.0 %} selected {% else %} {% endif %}>{{channel.1}}</option>
+                              {% endfor %}
+                              {% endfor %}
+                              {% endcomment%}
+                              {% for channel in News_Channels %}
+                              <option value="{{channel.0}}" {% if selected_channel == channel.0 %} selected {% else %} {% endif %}>{{channel.1}}</option>
+                              {% endfor %}
+                              </select>
+                              <small class="text-info font-weight-bold ml-3" id="msg">  </small>
+                           </div>
+                           <div class="form-inline form-row d-flex flex-row justify-content-center align-items-center mt-5">
+                              <button type="submit" id="submit" class="btn btn-success" ><i class="fa fa-pencil-square-o font-weight-bold mr-2" aria-hidden="true"></i>Update Channels </button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="col-md-12 card-body">
+                     <div class="row">
+                        <div class="col-md-2 text-center  ">
+                           <span class="badge badge-dark">Channel Name </span>
+                        </div>
+                        <div class="col-md-10 text-center ">
+                           <span  class="badge badge-dark"> Channel Description</span>
+                        </div>
+                        {% for i in News_Channels_Settings.settings %}
+                        {% if i == 'ary' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/ary.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">ARY News is a Pakistani news channel launched on 26 September 2004. A bilingual news channel in English and Urdu, it is a part of the ARY Digital Network, which is a subsidiary of ARY Group. ARY is an acronym of Abdul Razzak Yaqoob, who was the owner of ARY Group.</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'geo' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/geo.jpg' %}"class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">Geo News is a Pakistani pay television news channel owned by the Jang Group of Newspapers. The website of the Geo News is the top ranked website in the Pakistan with the alexa rank of 29 in the country.</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'dawn' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/dawn.jpeg' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">Dawn is Pakistan's oldest, leading and most widely read English-language newspaper and is the country's newspaper of record. It is one of the country's three largest English-language dailies and the flagship of the Dawn Group of Newspapers.</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'abp' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/abp.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">ABP News is an Indian Hindi news channel owned by ABP Group. It is a free to air TV channel founded in 1998. It was formerly known as STAR News before being acquired by ABP Group. ABP Live is an Indian English news website owned by ABP Group. It is also available on YouTube; its YouTube channel name is ABP News.</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'ndtv' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/ndtv.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">New Delhi Television Limited is an Indian television media company founded in 1988 by Radhika Roy, a journalist. NDTV started off as a content provider for Doordarshan, producing the show The World This Week in November 1988.</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'itd' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/indiatoday.jpg' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">India Today TV is India's leading English News Channel. India Today YouTube channel offers latest news videos on Politics, Business, Cricket, Bollywood, Life...</p>
+                        </div>
+                        {% endif %}
+                        {% if i == 'bbc' %} 
+                        <div class="col-md-2 mt-2 text-center">
+                           <img src="{% static 'OSINT_System_Core/bbc.png' %}" class="img-fluid" style="height:60px;width:80px;"/>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                           <p class="text-muted text-justify font-weight-bold"style="font-size:13px;">The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online.</p>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                     </div>
+                  </div>
+                  <div class="col-md-12 mt-5">
+                     <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class=""></div>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <div id="menu1" class="tab-pane fade">
-              <h3>Menu 1</h3>
-              <p>Some content in menu 1.</p>
+         </div>
+         <!-- <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
             </div>
             <div id="menu2" class="tab-pane fade">
-              <h3>Menu 2</h3>
-              <p>Some content in menu 2.</p>
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
             </div>
-          </div>
-
-        <!-- tabs end  -->
-    </div>
+            </div> -->
+         <!-- tabs end  -->
+      </div>
+   </div>
 </div>
-
-
-{% endblock %}
-
-{% block base_js %}
-
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js">
-    $('select').selectpicker();</script>
 <script>
-   
-
+   function maxAllowedMultiselect(obj, maxAllowedCount) {
+       var selectedOptions = jQuery('#'+obj.id+" option[value!=\'\']:selected");
+       if (selectedOptions.length >= maxAllowedCount) {
+           if (selectedOptions.length > maxAllowedCount) {
+               selectedOptions.each(function(i) {
+                   if (i >= maxAllowedCount) {
+                       jQuery(this).prop("selected",false);                       
+                   }
+               });
+           }
+           jQuery('#'+obj.id+' option[value!=\'\']').not(':selected').prop("disabled",true);
+       } else {
+           jQuery('#'+obj.id+' option[value!=\'\']').prop("disabled",false);
+       }
+   }
 </script>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script>
-        {% for message in messages %}
-        $(document).ready(function() {
-            console.log("###############################################################################")
-            Command: toastr["{{ message.tags }}"]("{{ message }} .")
-
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-        });
-        {% endfor %}
-
-      
-            
-
-        </script>
+{% endblock %}
+{% block base_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js">
+   $('select').selectpicker();
+   
+   
+   
+   //#############################################
+   
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+   {% for message in messages %}
+   $(document).ready(function() {
+       console.log("###############################################################################")
+       Command: toastr["{{ message.tags }}"]("{{ message }} .")
+   
+       toastr.options = {
+           "closeButton": true,
+           "debug": false,
+           "newestOnTop": false,
+           "progressBar": true,
+           "positionClass": "toast-top-right",
+           "preventDuplicates": false,
+           "onclick": null,
+           "showDuration": "300",
+           "hideDuration": "1000",
+           "timeOut": "5000",
+           "extendedTimeOut": "1000",
+           "showEasing": "swing",
+           "hideEasing": "linear",
+           "showMethod": "fadeIn",
+           "hideMethod": "fadeOut"
+       }
+   });
+   {% endfor %}
+   
+   
        
+   
+</script>
+<script>
+   $(document).ready(function(){
+       $('#submit').on('click',function(e){
+           var count = $('#channels-select option:selected').length;
+           console.log(count)
+           if(count >= 6){  
+           }
+           else {
+               e.preventDefault();
+               Command: toastr["error"]("Please select atleast six channels.")
+               toastr.options = {
+                   "closeButton": true,
+                   "debug": false,
+                   "newestOnTop": false,
+                   "progressBar": true,
+                   "positionClass": "toast-top-right",
+                   "preventDuplicates": false,
+                   "onclick": null,
+                   "showDuration": "300",
+                   "hideDuration": "1000",
+                   "timeOut": "5000",
+                   "extendedTimeOut": "1000",
+                   "showEasing": "swing",
+                   "hideEasing": "linear",
+                   "showMethod": "fadeIn",
+                   "hideMethod": "fadeOut"
+               }
+           }
+           
+       })
+   })
+</script>
 {% endblock %}
